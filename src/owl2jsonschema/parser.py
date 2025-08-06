@@ -7,6 +7,8 @@ This module implements the parser for loading OWL/RDF ontologies into the object
 from typing import Optional, Dict, Any, List
 from rdflib import Graph, Namespace, URIRef, Literal, BNode
 from rdflib.namespace import RDF, RDFS, OWL, XSD
+import ssl
+import urllib.request
 from .model import (
     OntologyModel,
     OntologyClass,
@@ -39,6 +41,9 @@ class OntologyParser:
         Returns:
             The parsed ontology model
         """
+        # Configure SSL for rdflib (for JSON-LD context fetching)
+        self._configure_ssl_for_rdflib()
+        
         # Parse the file into an RDF graph
         self.graph = Graph()
         self.graph.parse(file_path, format=format)
@@ -72,6 +77,9 @@ class OntologyParser:
         Returns:
             The parsed ontology model
         """
+        # Configure SSL for rdflib (for JSON-LD context fetching)
+        self._configure_ssl_for_rdflib()
+        
         # Parse the string into an RDF graph
         self.graph = Graph()
         self.graph.parse(data=data, format=format)
@@ -443,3 +451,36 @@ class OntologyParser:
             return uri.split('/')[-1]
         
         return uri
+    
+    def _configure_ssl_for_rdflib(self):
+        """Configure SSL context for rdflib's URL fetching (especially for JSON-LD contexts)."""
+        try:
+            # Create a custom SSL context
+            ssl_context = ssl.create_default_context()
+            
+            # Try to use certifi for certificates
+            try:
+                import certifi
+                ssl_context.load_verify_locations(certifi.where())
+            except ImportError:
+                pass
+            
+            # Install a custom opener with the SSL context
+            https_handler = urllib.request.HTTPSHandler(context=ssl_context)
+            opener = urllib.request.build_opener(https_handler)
+            urllib.request.install_opener(opener)
+            
+        except Exception:
+            # If SSL configuration fails, try to create a more permissive context
+            # This is less secure but may work for development
+            try:
+                ssl_context = ssl.create_default_context()
+                ssl_context.check_hostname = False
+                ssl_context.verify_mode = ssl.CERT_NONE
+                
+                https_handler = urllib.request.HTTPSHandler(context=ssl_context)
+                opener = urllib.request.build_opener(https_handler)
+                urllib.request.install_opener(opener)
+            except Exception:
+                # If all else fails, continue without custom SSL configuration
+                pass

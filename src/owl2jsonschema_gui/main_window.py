@@ -30,17 +30,204 @@ class TransformationWorker(QThread):
     error = pyqtSignal(str)
     finished = pyqtSignal(dict)
     
-    def __init__(self, input_file: str, config: Dict[str, Any]):
+    def __init__(self, input_source: str, config: Dict[str, Any]):
         super().__init__()
-        self.input_file = input_file
+        self.input_source = input_source.strip()
         self.config = config
     
     def run(self):
         """Run the transformation in a separate thread."""
         try:
-            self.progress.emit("Parsing ontology...")
-            parser = OntologyParser()
-            ontology = parser.parse(self.input_file)
+            # Check if input is a URL
+            is_url = self.input_source.startswith(('http://', 'https://', 'ftp://'))
+            
+            if is_url:
+                self.progress.emit(f"Loading ontology from URL: {self.input_source}")
+                
+                # Try using requests library first (better SSL handling)
+                try:
+                    import requests
+                    self.progress.emit("Downloading with requests library...")
+                    import tempfile
+                    
+                    # Download with requests (handles SSL better)
+                    # Request RDF/XML or other RDF formats via content negotiation
+                    headers = {
+                        'Accept': 'application/rdf+xml, text/turtle, application/ld+json, application/n-triples, text/n3;q=0.9, application/xml;q=0.8, */*;q=0.5'
+                    }
+                    response = requests.get(self.input_source, headers=headers, verify=True, timeout=30)
+                    response.raise_for_status()
+                    
+                    # Detect format from content type
+                    content_type = response.headers.get('Content-Type', '').lower()
+                    self.progress.emit(f"Content-Type: {content_type}")
+                    
+                    # Check if we got HTML (common for schema.org and similar sites)
+                    content_str = response.content[:1000].decode('utf-8', errors='ignore').lower()
+                    
+                    # Determine RDF format based on content type or content inspection
+                    rdf_format = None
+                    suffix = '.rdf'
+                    
+                    if 'html' in content_type or '<!doctype html' in content_str or '<html' in content_str:
+                        # HTML page - might contain embedded JSON-LD
+                        self.progress.emit("Detected HTML page, extracting JSON-LD...")
+                        
+                        # Try to extract JSON-LD from HTML
+                        import re
+                        json_ld_pattern = r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>'
+                        matches = re.findall(json_ld_pattern, response.text, re.DOTALL | re.IGNORECASE)
+                        
+                        if matches:
+                            # Use the first JSON-LD block found
+                            json_ld_content = matches[0]
+                            response_content = json_ld_content.encode('utf-8')
+                            rdf_format = 'json-ld'
+                            suffix = '.jsonld'
+                            self.progress.emit(f"Extracted JSON-LD from HTML ({len(json_ld_content)} characters)")
+                        else:
+                            # No JSON-LD found in HTML
+                            raise ValueError(f"The URL {self.input_source} returned HTML without embedded RDF data. "
+                                           "Please provide a direct link to an RDF/OWL file.")
+                    elif 'json-ld' in content_type or 'application/ld+json' in content_type:
+                        rdf_format = 'json-ld'
+                        suffix = '.jsonld'
+                        response_content = response.content
+                    elif 'turtle' in content_type or 'text/turtle' in content_type:
+                        rdf_format = 'turtle'
+                        suffix = '.ttl'
+                        response_content = response.content
+                    elif 'n-triples' in content_type:
+                        rdf_format = 'nt'
+                        suffix = '.nt'
+                        response_content = response.content
+                    elif 'n3' in content_type or 'text/n3' in content_type:
+                        rdf_format = 'n3'
+                        suffix = '.n3'
+                        response_content = response.content
+                    elif 'rdf+xml' in content_type or 'application/rdf+xml' in content_type:
+                        rdf_format = 'xml'
+                        suffix = '.rdf'
+                        response_content = response.content
+                    elif 'xml' in content_type and not 'html' in content_type:
+                        # Try as RDF/XML
+                        rdf_format = 'xml'
+                        suffix = '.rdf'
+                        response_content = response.content
+                    else:
+                        # Try to guess from content
+                        if content_str.strip().startswith('{') or content_str.strip().startswith('['):
+                            # Likely JSON-LD
+                            rdf_format = 'json-ld'
+                            suffix = '.jsonld'
+                        elif content_str.strip().startswith('@'):
+                            # Likely Turtle
+                            rdf_format = 'turtle'
+                            suffix = '.ttl'
+                        elif content_str.strip().startswith('<?xml'):
+                            # XML - could be RDF/XML
+                            rdf_format = 'xml'
+                            suffix = '.rdf'
+                        else:
+                            # Try to guess from URL
+                            if self.input_source.endswith('.ttl'):
+                                rdf_format = 'turtle'
+                                suffix = '.ttl'
+                            elif self.input_source.endswith('.jsonld') or self.input_source.endswith('.json'):
+                                rdf_format = 'json-ld'
+                                suffix = '.jsonld'
+                            elif self.input_source.endswith('.nt'):
+                                rdf_format = 'nt'
+                                suffix = '.nt'
+                            elif self.input_source.endswith('.n3'):
+                                rdf_format = 'n3'
+                                suffix = '.n3'
+                        response_content = response.content
+                    
+                    # Save to temporary file with appropriate extension
+                    with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp_file:
+                        tmp_file.write(response_content)
+                        tmp_path = tmp_file.name
+                    
+                    self.progress.emit(f"Parsing ontology (format: {rdf_format or 'auto-detect'})...")
+                    parser = OntologyParser()
+                    ontology = parser.parse(tmp_path, format=rdf_format)
+                    
+                    # Clean up temp file
+                    import os
+                    os.unlink(tmp_path)
+                    
+                except ImportError:
+                    # Requests not available, try urllib with SSL context
+                    self.progress.emit("Using urllib with SSL context...")
+                    import tempfile
+                    import urllib.request
+                    import ssl
+                    
+                    # Create SSL context that handles certificates better
+                    ssl_context = ssl.create_default_context()
+                    
+                    # On macOS, you might need to use system certificates
+                    try:
+                        import certifi
+                        ssl_context.load_verify_locations(certifi.where())
+                    except ImportError:
+                        # If certifi is not available, try unverified as last resort
+                        # (with user warning)
+                        if self.input_source.startswith('https://'):
+                            self.progress.emit("Warning: SSL certificate verification may be limited")
+                            ssl_context.check_hostname = False
+                            ssl_context.verify_mode = ssl.CERT_NONE
+                    
+                    try:
+                        # Try downloading with SSL context
+                        # Add content negotiation headers
+                        req = urllib.request.Request(self.input_source)
+                        req.add_header('Accept', 'application/rdf+xml, text/turtle, application/ld+json, application/n-triples, text/n3;q=0.9, application/xml;q=0.8, */*;q=0.5')
+                        
+                        with urllib.request.urlopen(req, context=ssl_context) as response:
+                            content = response.read()
+                            content_type = response.headers.get('Content-Type', '').lower()
+                            
+                        self.progress.emit(f"Content-Type: {content_type}")
+                        
+                        # Determine format
+                        rdf_format = None
+                        suffix = '.rdf'
+                        
+                        if 'json-ld' in content_type or 'application/ld+json' in content_type:
+                            rdf_format = 'json-ld'
+                            suffix = '.jsonld'
+                        elif 'turtle' in content_type or 'text/turtle' in content_type:
+                            rdf_format = 'turtle'
+                            suffix = '.ttl'
+                        elif 'n-triples' in content_type:
+                            rdf_format = 'nt'
+                            suffix = '.nt'
+                        elif 'n3' in content_type:
+                            rdf_format = 'n3'
+                            suffix = '.n3'
+                        
+                        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp_file:
+                            tmp_file.write(content)
+                            tmp_path = tmp_file.name
+                        
+                        self.progress.emit(f"Parsing ontology (format: {rdf_format or 'auto-detect'})...")
+                        parser = OntologyParser()
+                        ontology = parser.parse(tmp_path, format=rdf_format)
+                        
+                        # Clean up temp file
+                        import os
+                        os.unlink(tmp_path)
+                    except Exception as download_error:
+                        # As a last resort, try letting rdflib handle it directly
+                        self.progress.emit("Attempting direct parsing with rdflib...")
+                        parser = OntologyParser()
+                        ontology = parser.parse(self.input_source)
+            else:
+                self.progress.emit(f"Parsing ontology from file: {self.input_source}")
+                parser = OntologyParser()
+                ontology = parser.parse(self.input_source)
             
             self.progress.emit(f"Parsed {len(ontology.classes)} classes, "
                              f"{len(ontology.object_properties)} object properties, "
@@ -198,8 +385,10 @@ class MainWindow(QMainWindow):
         input_layout.addWidget(QLabel("Input Ontology:"))
         
         self.input_file_label = QLineEdit()
-        self.input_file_label.setReadOnly(True)
-        self.input_file_label.setPlaceholderText("Select an OWL/RDF file...")
+        self.input_file_label.setReadOnly(False)  # Allow manual input for URLs
+        self.input_file_label.setPlaceholderText("Enter URL or file path, or browse for file...")
+        self.input_file_label.setToolTip("Enter a URL (http://...) or file path, or use Browse button")
+        self.input_file_label.textChanged.connect(self.on_input_changed)
         input_layout.addWidget(self.input_file_label)
         
         browse_button = QPushButton("Browse...")
@@ -443,6 +632,22 @@ class MainWindow(QMainWindow):
             self.transform_button.setEnabled(True)
             self.log_message(f"Selected input file: {file_path}")
     
+    def on_input_changed(self, text: str):
+        """Handle changes to the input field."""
+        text = text.strip()
+        if text:
+            self.input_file = text
+            self.transform_button.setEnabled(True)
+            
+            # Log whether it's a URL or file path
+            if text.startswith(('http://', 'https://', 'ftp://')):
+                self.log_message(f"Input URL: {text}")
+            else:
+                self.log_message(f"Input path: {text}")
+        else:
+            self.input_file = None
+            self.transform_button.setEnabled(False)
+    
     def browse_output_folder(self):
         """Browse for output folder."""
         folder_path = QFileDialog.getExistingDirectory(
@@ -495,10 +700,21 @@ class MainWindow(QMainWindow):
     def run_transformation(self):
         """Run the transformation."""
         if not self.input_file:
-            QMessageBox.warning(self, "Warning", "Please select an input file first.")
+            QMessageBox.warning(self, "Warning", "Please enter a URL or select an input file first.")
             return
         
-        self.log_message("Starting transformation...")
+        # Validate URL if it looks like one
+        input_source = self.input_file.strip()
+        if input_source.startswith(('http://', 'https://', 'ftp://')):
+            self.log_message(f"Starting transformation from URL: {input_source}")
+        else:
+            # Check if local file exists
+            from pathlib import Path
+            if not Path(input_source).exists():
+                QMessageBox.warning(self, "Warning", f"File not found: {input_source}")
+                return
+            self.log_message(f"Starting transformation from file: {input_source}")
+        
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate progress
         self.transform_button.setEnabled(False)
@@ -633,5 +849,6 @@ class MainWindow(QMainWindow):
             self,
             "About OWL to JSON Schema Converter",
             "Version 0.1\n\n"
-            "© Airy Magnien"
+            "© Airy Magnien (Airy59 on GitHub)\n\n"
+            "https://github.com/airymagnien/owl2jsonschema"
         )

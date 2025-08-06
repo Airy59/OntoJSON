@@ -33,6 +33,8 @@ dependencies = [
 [project.optional-dependencies]
 gui = [
     "PyQt6>=6.0.0",
+    "requests>=2.25.0",  # Better URL handling
+    "certifi>=2021.0.0",  # SSL certificates
 ]
 
 dev = [
