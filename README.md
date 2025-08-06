@@ -1,0 +1,183 @@
+# OWL to JSON Schema Transformation Engine
+
+A configurable transformation engine for converting RDF/OWL ontologies to JSON Schema with support for rule-based transformations using the visitor pattern.
+
+## Features
+
+- **Configurable Transformation Rules**: Enable or disable specific transformation rules based on your needs
+- **Visitor Pattern Architecture**: Clean separation of concerns with extensible rule-based transformations
+- **Comprehensive Rule Set**: Supports a wide range of OWL constructs and their JSON Schema equivalents
+- **Extensible Design**: Easy to add custom transformation rules and extend functionality
+
+## Installation
+
+### Basic Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd OWLtoJSONschema
+
+# Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install the package
+pip install -e .
+```
+
+### Installation with GUI Support
+
+```bash
+# Install with Qt6 GUI support
+pip install -e ".[gui]"
+```
+
+### Development Installation
+
+```bash
+# Install with all development dependencies
+pip install -e ".[dev,gui]"
+```
+
+## Usage
+
+### Graphical User Interface (GUI)
+
+The project includes a standalone Qt6-based GUI application for easy interaction:
+
+```bash
+# Launch the GUI application
+python owl2jsonschema_gui.py
+
+# Or if installed via pip
+owl2jsonschema-gui
+```
+
+**GUI Features:**
+- **File Selection**: Browse and select OWL/RDF input files and output folders
+- **Rule Configuration**: Enable/disable individual transformation rules via checkboxes
+- **Organized Rule Categories**: Rules grouped into tabs (Classes, Properties, Annotations, Advanced, Structural)
+- **Options**: Configure language, indentation, and output format
+- **Live Preview**: See the generated JSON Schema immediately after transformation
+- **Statistics**: View transformation statistics
+- **Logging**: Monitor the transformation process with detailed logs
+- **Save Options**: Save results as JSON or YAML files
+- **Threading**: Non-blocking UI during transformation
+
+### Command Line Interface
+
+```bash
+# Basic usage
+owl2jsonschema input.owl -o output.json
+
+# With custom configuration
+owl2jsonschema input.owl -o output.json --config config.yaml
+
+# Enable specific rules
+owl2jsonschema input.owl -o output.json --enable-rule class_to_object --enable-rule property_cardinality
+
+# Disable specific rules
+owl2jsonschema input.owl -o output.json --disable-rule annotations_to_metadata
+```
+
+### Python API
+
+```python
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+
+# Parse the ontology
+parser = OntologyParser()
+ontology = parser.parse("input.owl")
+
+# Configure the transformation
+config = TransformationConfig({
+    "rules": {
+        "class_to_object": {"enabled": True},
+        "property_cardinality": {"enabled": True},
+        "annotations_to_metadata": {"enabled": False}
+    }
+})
+
+# Run the transformation
+engine = TransformationEngine(config)
+json_schema = engine.transform(ontology)
+
+# Save the result
+with open("output.json", "w") as f:
+    json.dump(json_schema, f, indent=2)
+```
+
+## Configuration
+
+Create a `config.yaml` file to customize the transformation:
+
+```yaml
+# Transformation configuration
+rules:
+  class_to_object:
+    enabled: true
+  class_hierarchy:
+    enabled: true
+  property_cardinality:
+    enabled: true
+    options:
+      use_arrays: true
+  labels_to_titles:
+    enabled: true
+    options:
+      language: "en"
+  comments_to_descriptions:
+    enabled: true
+    options:
+      language: "en"
+
+output:
+  format: "json-schema-draft-07"
+  indent: 2
+  include_metadata: true
+```
+
+## Transformation Rules
+
+See [transformation_rules.md](transformation_rules.md) for a complete list of available transformation rules.
+
+## Architecture
+
+See [architecture.md](architecture.md) for details on the system architecture and design patterns.
+
+## Development
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=owl2jsonschema
+
+# Run specific test file
+pytest tests/test_engine.py
+```
+
+### Code Quality
+
+```bash
+# Format code
+black src tests
+
+# Check linting
+flake8 src tests
+
+# Type checking
+mypy src
+```
+
+## License
+
+MIT License - see LICENSE file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
