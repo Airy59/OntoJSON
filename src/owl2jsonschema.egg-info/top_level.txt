@@ -1,0 +1,2 @@
+owl2jsonschema
+owl2jsonschema_gui

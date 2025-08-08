@@ -848,7 +848,7 @@ class MainWindow(QMainWindow):
         QMessageBox.about(
             self,
             "About OWL to JSON Schema Converter",
-            "Version 0.1\n\n"
+            "Version 0.1 - August 2025\n\n"
             "© Airy Magnien (Airy59 on GitHub)\n\n"
             "https://github.com/airymagnien/owl2jsonschema"
         )

@@ -1,0 +1,3 @@
+[console_scripts]
+owl2jsonschema = owl2jsonschema.cli:main
+owl2jsonschema-gui = owl2jsonschema_gui.app:main
