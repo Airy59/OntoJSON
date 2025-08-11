@@ -13,13 +13,14 @@ from PyQt6.QtWidgets import (
     QPushButton, QLabel, QFileDialog, QTextEdit,
     QGroupBox, QCheckBox, QScrollArea, QMessageBox,
     QTabWidget, QComboBox, QSpinBox, QLineEdit,
-    QSplitter, QProgressBar, QStatusBar, QFrame
+    QSplitter, QProgressBar, QStatusBar, QFrame, QApplication
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont, QAction, QIcon
 
 # Import the transformation engine and A-box generator
 from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser, ABoxGenerator
+from owl2jsonschema.reasoner import ABoxValidator
 
 
 class TransformationWorker(QThread):
@@ -441,6 +442,7 @@ class MainWindow(QMainWindow):
         
         self.validate_btn = QPushButton("Validate with Reasoner")
         self.validate_btn.setEnabled(False)
+        self.validate_btn.clicked.connect(self.validate_abox)
         validation_layout.addWidget(self.validate_btn)
         
         self.validation_status = QLabel("Not validated")
@@ -899,6 +901,7 @@ class MainWindow(QMainWindow):
             
             # Update UI
             self.generate_abox_btn.setEnabled(True)
+            self.validate_btn.setEnabled(True)
             self.validation_status.setText("Not validated")
             self.validation_status.setStyleSheet("color: gray;")
             self.status_message.setText("A-box generated successfully!")
@@ -960,3 +963,66 @@ class MainWindow(QMainWindow):
             "with T-box/A-box workflow support.\n\n"
             "© 2024 All rights reserved."
         )
+    
+    def validate_abox(self):
+        """Validate the A-box against the T-box using OWL-RL reasoner."""
+        if not self.abox_data:
+            QMessageBox.warning(self, "Warning", "No A-box to validate. Please generate an A-box first.")
+            return
+        
+        if not self.input_file:
+            QMessageBox.warning(self, "Warning", "No T-box loaded. Please load an ontology first.")
+            return
+        
+        try:
+            # Update status
+            self.validation_status.setText("Validating...")
+            self.validation_status.setStyleSheet("color: blue;")
+            QApplication.processEvents()  # Update UI
+            
+            # Create validator with T-box
+            validator = ABoxValidator(tbox_path=self.input_file)
+            
+            # Validate A-box
+            is_consistent, issues = validator.validate(self.abox_data)
+            
+            # Get validation report
+            report = validator.get_validation_report()
+            
+            # Update validation status
+            if is_consistent:
+                self.validation_status.setText("✅ Consistent")
+                self.validation_status.setStyleSheet("color: green; font-weight: bold;")
+                
+                # Show success message
+                QMessageBox.information(
+                    self,
+                    "Validation Successful",
+                    "✅ The A-box is consistent with the T-box.\n\n" +
+                    "No constraint violations were found."
+                )
+            else:
+                self.validation_status.setText("❌ Inconsistent")
+                self.validation_status.setStyleSheet("color: red; font-weight: bold;")
+                
+                # Show detailed error report
+                msg = QMessageBox(self)
+                msg.setWindowTitle("Validation Failed")
+                msg.setIcon(QMessageBox.Icon.Warning)
+                msg.setText("❌ The A-box is inconsistent with the T-box.")
+                msg.setDetailedText(report)
+                msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+                
+                # Make the detailed text area larger
+                msg.setStyleSheet("QTextEdit { min-width: 600px; min-height: 400px; }")
+                
+                msg.exec()
+            
+        except Exception as e:
+            self.validation_status.setText("⚠️ Error")
+            self.validation_status.setStyleSheet("color: orange;")
+            QMessageBox.critical(
+                self,
+                "Validation Error",
+                f"An error occurred during validation:\n\n{str(e)}"
+            )
