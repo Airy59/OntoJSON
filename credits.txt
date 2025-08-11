@@ -1,0 +1,55 @@
+OWL to JSON Schema Converter - Third-Party Credits
+===================================================
+
+This software uses the following open-source libraries:
+
+RDFLib
+------
+A Python library for working with RDF
+License: BSD 3-Clause License
+URL: https://github.com/RDFLib/rdflib
+
+PyQt6
+-----
+Python bindings for Qt6 framework
+License: GPL v3 / Commercial License
+URL: https://www.riverbankcomputing.com/software/pyqt/
+
+Click
+-----
+Python package for creating command line interfaces
+License: BSD 3-Clause License
+URL: https://github.com/pallets/click
+
+PyYAML
+------
+YAML parser and emitter for Python
+License: MIT License
+URL: https://github.com/yaml/pyyaml
+
+Faker
+-----
+Python package that generates fake data
+License: MIT License
+URL: https://github.com/joke2k/faker
+
+OWL-RL
+------
+OWL 2 RL reasoner in Python
+License: BSD 3-Clause License
+URL: https://github.com/RDFLib/OWL-RL
+
+Python Standard Library
+-----------------------
+Various modules from Python's standard library including:
+- json, pathlib, dataclasses, typing, abc, random, string, datetime
+License: Python Software Foundation License
+URL: https://www.python.org/
+
+Icons and Resources
+-------------------
+[Add any icon attributions here if applicable]
+
+Special Thanks
+--------------
+To all contributors and maintainers of these excellent libraries.

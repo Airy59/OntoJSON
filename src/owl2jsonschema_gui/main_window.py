@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import (
     QPushButton, QLabel, QFileDialog, QTextEdit,
     QGroupBox, QCheckBox, QScrollArea, QMessageBox,
     QTabWidget, QComboBox, QSpinBox, QLineEdit,
-    QSplitter, QProgressBar, QStatusBar, QFrame, QApplication
+    QSplitter, QProgressBar, QStatusBar, QFrame, QApplication, QDialog
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont, QAction, QIcon
@@ -240,6 +240,10 @@ class MainWindow(QMainWindow):
         about_action = QAction("&About", self)
         about_action.triggered.connect(self.show_about)
         help_menu.addAction(about_action)
+        
+        credits_action = QAction("&Credits", self)
+        credits_action.triggered.connect(self.show_credits)
+        help_menu.addAction(credits_action)
     
     def create_workflow_area(self, parent_layout):
         """Create the three-step workflow area."""
@@ -964,6 +968,72 @@ class MainWindow(QMainWindow):
             "© 2024 Airy Magnien\n"
             "Licensed under the European Union Public Licence (EUPL) v1.2"
         )
+    
+    def show_credits(self):
+        """Show credits dialog."""
+        # Try to read the credits file from multiple possible locations
+        credits_text = ""
+        credits_file = None
+        
+        # Try multiple locations for the credits file
+        possible_locations = [
+            Path("credits.txt"),  # Current working directory
+            Path(__file__).parent.parent.parent / "credits.txt",  # Project root (relative to this file)
+            Path(__file__).parent / "credits.txt",  # Same directory as this file
+            Path.cwd() / "credits.txt",  # Explicit current working directory
+        ]
+        
+        # Find the first existing credits file
+        for location in possible_locations:
+            if location.exists():
+                credits_file = location
+                break
+        
+        if credits_file and credits_file.exists():
+            try:
+                with open(credits_file, 'r', encoding='utf-8') as f:
+                    credits_text = f.read()
+            except Exception as e:
+                credits_text = f"Error reading credits file: {str(e)}\n\n"
+                credits_text += f"Attempted to read from: {credits_file}\n"
+                credits_text += "Please ensure credits.txt is accessible."
+        else:
+            credits_text = "Credits file not found.\n\n"
+            credits_text += "Searched in the following locations:\n"
+            for location in possible_locations:
+                credits_text += f"  - {location.resolve()}\n"
+            credits_text += "\nPlease ensure credits.txt exists in one of these locations\n"
+            credits_text += "with the following information:\n\n"
+            credits_text += "- Third-party libraries and their licenses\n"
+            credits_text += "- Contributors and acknowledgments\n"
+            credits_text += "- Any other relevant credits"
+        
+        # Create a scrollable dialog for credits
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Credits")
+        dialog.setMinimumSize(600, 400)
+        
+        layout = QVBoxLayout()
+        
+        # Create a text edit widget for displaying credits
+        text_edit = QTextEdit()
+        text_edit.setReadOnly(True)
+        text_edit.setPlainText(credits_text)
+        text_edit.setFont(QFont("Courier", 10))
+        
+        layout.addWidget(text_edit)
+        
+        # Add a close button
+        button_layout = QHBoxLayout()
+        button_layout.addStretch()
+        close_button = QPushButton("Close")
+        close_button.clicked.connect(dialog.close)
+        button_layout.addWidget(close_button)
+        
+        layout.addLayout(button_layout)
+        
+        dialog.setLayout(layout)
+        dialog.exec()
     
     def validate_abox(self):
         """Validate the A-box against the T-box using OWL-RL reasoner."""
