@@ -961,7 +961,8 @@ class MainWindow(QMainWindow):
             "Version 1.0\n\n"
             "A tool for transforming OWL ontologies to JSON Schema\n"
             "with T-box/A-box workflow support.\n\n"
-            "© 2024 All rights reserved."
+            "© 2024 Airy Magnien\n"
+            "Licensed under the European Union Public Licence (EUPL) v1.2"
         )
     
     def validate_abox(self):
