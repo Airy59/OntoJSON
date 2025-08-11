@@ -67,14 +67,61 @@ class ObjectPropertyRule(TransformationRule):
         prop_name = self._get_property_name(property.uri)
         results = []
         
+        # Determine domain - either explicit or inferred from inverse
+        domains = list(property.domain) if property.domain else []
+        
+        # If no explicit domain and has an inverse, infer domain from inverse's range
+        if not domains and property.inverse_of:
+            inverse_prop = self._find_property_by_uri(property.inverse_of, ontology)
+            if inverse_prop and inverse_prop.range:
+                # The domain of a property is the range of its inverse
+                domains = inverse_prop.range
+        
+        # Determine if property is functional
+        is_functional = property.functional
+        
+        # If not explicitly functional but has an inverse that is inverse-functional,
+        # then this property is functional
+        if not is_functional and property.inverse_of:
+            inverse_prop = self._find_property_by_uri(property.inverse_of, ontology)
+            if inverse_prop and inverse_prop.inverse_functional:
+                is_functional = True
+        
+        # Similarly, if this property is inverse-functional and has an inverse,
+        # then the inverse is functional
+        if property.inverse_functional and property.inverse_of:
+            # This will be handled when processing the inverse property
+            pass
+        
         # Create the property schema
         if property.range:
             # If there's a specific range, reference it
             range_class = self._get_property_name(property.range[0])
             schema = {"$ref": f"#/definitions/{range_class}"}
         else:
-            # Generic object reference
-            schema = {"type": "object"}
+            # If no explicit range and has an inverse, try to infer range
+            if property.inverse_of:
+                inverse_prop = self._find_property_by_uri(property.inverse_of, ontology)
+                if inverse_prop:
+                    if inverse_prop.domain:
+                        # The range of a property is the domain of its inverse
+                        range_class = self._get_property_name(inverse_prop.domain[0])
+                        schema = {"$ref": f"#/definitions/{range_class}"}
+                    else:
+                        # Try to infer from usage - check which classes use the inverse property
+                        inferred_domain = self._infer_property_domain_from_usage(inverse_prop, ontology)
+                        if inferred_domain:
+                            range_class = self._get_property_name(inferred_domain[0])
+                            schema = {"$ref": f"#/definitions/{range_class}"}
+                        else:
+                            # Generic object reference
+                            schema = {"type": "object"}
+                else:
+                    # Generic object reference
+                    schema = {"type": "object"}
+            else:
+                # Generic object reference
+                schema = {"type": "object"}
         
         # Add title and description if available
         if property.label:
@@ -84,20 +131,20 @@ class ObjectPropertyRule(TransformationRule):
             schema["description"] = property.get_comment(self.get_option("language", "en"))
         
         # Handle functional properties (max cardinality 1)
-        if property.functional:
-            # Functional properties have at most one value
-            pass  # Single value is the default
+        if is_functional:
+            # Functional properties have at most one value - keep as single object
+            pass
         else:
-            # Non-functional properties can have multiple values
-            if self.get_option("arrays_for_non_functional", True):
-                schema = {
-                    "type": "array",
-                    "items": schema
-                }
+            # Non-functional properties have indeterminate multiplicity (0..*) by default in OWL
+            # So we should use arrays unless explicitly disabled
+            schema = {
+                "type": "array",
+                "items": schema
+            }
         
         # Assign to domain classes
-        if property.domain:
-            for domain_uri in property.domain:
+        if domains:
+            for domain_uri in domains:
                 domain_name = self._get_property_name(domain_uri)
                 results.append({
                     "class": domain_name,
@@ -107,7 +154,7 @@ class ObjectPropertyRule(TransformationRule):
                     }
                 })
         else:
-            # If no domain specified, could be a global property
+            # If no domain specified or inferred, could be a global property
             if self.get_option("include_global_properties", False):
                 results.append({
                     "class": "_global",
@@ -118,6 +165,28 @@ class ObjectPropertyRule(TransformationRule):
                 })
         
         return results
+    
+    def _find_property_by_uri(self, uri: str, ontology: OntologyModel) -> Optional[ObjectProperty]:
+        """Find an object property by its URI."""
+        for prop in ontology.object_properties:
+            if prop.uri == uri:
+                return prop
+        return None
+    
+    def _infer_property_domain_from_usage(self, property: ObjectProperty, ontology: OntologyModel) -> List[str]:
+        """Infer the domain of a property from its usage in class restrictions."""
+        domains = []
+        prop_uri = property.uri
+        
+        # Check all classes for restrictions using this property
+        for owl_class in ontology.classes:
+            for restriction in owl_class.restrictions:
+                if restriction.property_uri == prop_uri:
+                    # This class uses the property, so it's part of the domain
+                    if owl_class.uri not in domains:
+                        domains.append(owl_class.uri)
+        
+        return domains
     
     def _get_property_name(self, uri: str) -> str:
         """Extract property name from URI."""
@@ -183,15 +252,15 @@ class DatatypePropertyRule(TransformationRule):
         
         # Handle functional properties
         if property.functional:
-            # Functional properties have at most one value
-            pass  # Single value is the default
+            # Functional properties have at most one value - keep as single value
+            pass
         else:
-            # Non-functional properties can have multiple values
-            if self.get_option("arrays_for_non_functional", False):
-                schema = {
-                    "type": "array",
-                    "items": schema
-                }
+            # Non-functional datatype properties have indeterminate multiplicity (0..*) by default
+            # Use arrays for non-functional properties
+            schema = {
+                "type": "array",
+                "items": schema
+            }
         
         # Assign to domain classes
         if property.domain:

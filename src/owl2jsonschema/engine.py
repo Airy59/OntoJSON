@@ -29,7 +29,7 @@ class TransformationEngine:
     def _initialize_rules(self):
         """Initialize transformation rules based on configuration."""
         # Import rule implementations
-        from .rules.class_rules import ClassToObjectRule, ClassHierarchyRule
+        from .rules.class_rules import ClassToObjectRule, ClassHierarchyRule, ClassRestrictionsRule
         from .rules.property_rules import ObjectPropertyRule, DatatypePropertyRule, PropertyCardinalityRule
         from .rules.annotation_rules import LabelsToTitlesRule, CommentsToDescriptionsRule
         from .rules.advanced_rules import EnumerationToEnumRule, UnionToAnyOfRule, IntersectionToAllOfRule
@@ -39,6 +39,7 @@ class TransformationEngine:
         rule_classes = {
             "class_to_object": ClassToObjectRule,
             "class_hierarchy": ClassHierarchyRule,
+            "class_restrictions": ClassRestrictionsRule,  # Added this!
             "object_property": ObjectPropertyRule,
             "datatype_property": DatatypePropertyRule,
             "property_cardinality": PropertyCardinalityRule,
@@ -140,11 +141,73 @@ class TransformationEngine:
                     for name, schema in result["definitions"].items():
                         self.schema_builder.add_definition(name, schema)
         
+        elif rule_id == "class_restrictions":
+            # Class restrictions add properties to existing class definitions
+            if isinstance(result, list):
+                # Result is a list of restrictions per class
+                for class_restrictions in result:
+                    if isinstance(class_restrictions, dict) and "class" in class_restrictions:
+                        class_name = class_restrictions["class"]
+                        if "properties" in class_restrictions:
+                            for prop_name, prop_schema in class_restrictions["properties"].items():
+                                self.schema_builder.add_property_to_class(class_name, prop_name, prop_schema)
+                        if "required" in class_restrictions:
+                            for prop_name in class_restrictions["required"]:
+                                self.schema_builder.add_required_to_class(class_name, prop_name)
+            elif isinstance(result, dict) and "class" in result:
+                # Result is a single class's restrictions with class context
+                class_name = result["class"]
+                if "properties" in result:
+                    for prop_name, prop_schema in result["properties"].items():
+                        self.schema_builder.add_property_to_class(class_name, prop_name, prop_schema)
+                if "required" in result:
+                    for prop_name in result["required"]:
+                        self.schema_builder.add_required_to_class(class_name, prop_name)
+        
+        elif rule_id == "class_hierarchy":
+            # Class hierarchy updates modify existing definitions with allOf
+            if isinstance(result, dict) and "hierarchy_updates" in result:
+                for class_name, hierarchy_info in result["hierarchy_updates"].items():
+                    # Merge hierarchy information into existing definition
+                    clean_name = self.schema_builder._clean_definition_name(class_name)
+                    if clean_name in self.schema_builder.definitions:
+                        # Merge the hierarchy info (typically allOf) with existing definition
+                        for key, value in hierarchy_info.items():
+                            self.schema_builder.definitions[clean_name][key] = value
+                    else:
+                        # Create new definition with hierarchy info
+                        self.schema_builder.add_definition(class_name, hierarchy_info)
+        
+        elif rule_id == "labels_to_titles":
+            # Title updates add titles to existing definitions
+            if isinstance(result, dict) and "title_updates" in result:
+                for key, title_info in result["title_updates"].items():
+                    if key.startswith("class:"):
+                        class_name = key[6:]  # Remove "class:" prefix
+                        clean_name = self.schema_builder._clean_definition_name(class_name)
+                        if clean_name in self.schema_builder.definitions:
+                            if "title" in title_info:
+                                self.schema_builder.definitions[clean_name]["title"] = title_info["title"]
+                    # Property titles are handled within their definitions
+        
+        elif rule_id == "enumeration_to_enum":
+            # Enumerations replace class definitions with enum schemas
+            if isinstance(result, dict) and "enum_updates" in result:
+                for class_name, enum_schema in result["enum_updates"].items():
+                    # Replace the class definition with the enum schema
+                    self.schema_builder.add_definition(class_name, enum_schema)
+        
         elif rule_id == "ontology_metadata":
             # Metadata goes into the root schema
             if isinstance(result, dict):
+                # Only add valid JSON Schema root properties
+                valid_root_properties = {
+                    "title", "description", "$id", "$comment",
+                    "$defs", "additionalProperties", "type"
+                }
                 for key, value in result.items():
-                    self.schema_builder.add_to_root(key, value)
+                    if key in valid_root_properties:
+                        self.schema_builder.add_to_root(key, value)
         
         elif rule_id in ["object_property", "datatype_property"]:
             # Properties are added to their respective classes
@@ -157,11 +220,8 @@ class TransformationEngine:
                             prop_def["property"]["schema"]
                         )
         
-        else:
-            # Generic handling for other rules
-            if isinstance(result, dict):
-                for key, value in result.items():
-                    self.schema_builder.add_to_schema(key, value)
+        # Note: We don't have a generic else clause that adds arbitrary results
+        # All rule results must be explicitly handled to ensure valid JSON Schema output
     
     def transform_with_composite(self, ontology: OntologyModel) -> Dict[str, Any]:
         """

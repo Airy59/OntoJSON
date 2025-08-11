@@ -140,16 +140,38 @@ class ClassHierarchyRule(TransformationRule):
 class ClassRestrictionsRule(TransformationRule):
     """Transform OWL class restrictions to JSON Schema constraints."""
     
-    def visit_class(self, owl_class: OntologyClass) -> Dict[str, Any]:
-        """Process restrictions for a class."""
+    def visit_ontology(self, ontology: OntologyModel) -> List[Dict[str, Any]]:
+        """Process restrictions for all classes in the ontology."""
         if not self.is_enabled():
             return None
         
+        results = []
+        
+        for owl_class in ontology.classes:
+            class_result = self._process_class_restrictions(owl_class)
+            if class_result:
+                results.append(class_result)
+        
+        return results if results else None
+    
+    def visit_class(self, owl_class: OntologyClass) -> Dict[str, Any]:
+        """Process restrictions for a single class."""
+        if not self.is_enabled():
+            return None
+        
+        return self._process_class_restrictions(owl_class)
+    
+    def _process_class_restrictions(self, owl_class: OntologyClass) -> Optional[Dict[str, Any]]:
+        """Process restrictions for a class and return with class context."""
         if not owl_class.restrictions:
             return None
         
-        constraints = {}
-        required = []
+        class_name = self._get_class_name(owl_class.uri)
+        constraints = {
+            "class": class_name,
+            "properties": {},
+            "required": []
+        }
         
         for restriction in owl_class.restrictions:
             constraint = self._process_restriction(restriction)
@@ -157,17 +179,29 @@ class ClassRestrictionsRule(TransformationRule):
                 if "property" in constraint:
                     prop_name = constraint["property"]
                     if "schema" in constraint:
-                        if "properties" not in constraints:
-                            constraints["properties"] = {}
-                        constraints["properties"][prop_name] = constraint["schema"]
+                        # If the property already exists, merge the constraints
+                        if prop_name in constraints["properties"]:
+                            existing = constraints["properties"][prop_name]
+                            # Merge schemas (prefer the more specific one)
+                            if isinstance(existing, dict) and isinstance(constraint["schema"], dict):
+                                constraints["properties"][prop_name] = {**existing, **constraint["schema"]}
+                            else:
+                                constraints["properties"][prop_name] = constraint["schema"]
+                        else:
+                            constraints["properties"][prop_name] = constraint["schema"]
                     
                     if constraint.get("required", False):
-                        required.append(prop_name)
+                        if prop_name not in constraints["required"]:
+                            constraints["required"].append(prop_name)
         
-        if required:
-            constraints["required"] = required
+        # Only return if we have properties
+        if constraints["properties"]:
+            # Remove empty required array
+            if not constraints["required"]:
+                del constraints["required"]
+            return constraints
         
-        return constraints if constraints else None
+        return None
     
     def _process_restriction(self, restriction: OntologyRestriction) -> Optional[Dict[str, Any]]:
         """Process a single restriction."""
@@ -212,11 +246,12 @@ class ClassRestrictionsRule(TransformationRule):
             if restriction.restriction_type == "allValuesFrom":
                 # All values must be from the specified class/type
                 filler_ref = self._create_type_reference(restriction.filler)
-                if self.get_option("use_arrays_for_restrictions", False):
-                    schema["type"] = "array"
-                    schema["items"] = filler_ref
-                else:
-                    schema = filler_ref
+                
+                # In OWL, without explicit cardinality, properties have indeterminate multiplicity (0..*)
+                # So we should default to arrays unless explicitly set to single value
+                schema["type"] = "array"
+                schema["items"] = filler_ref
+                schema["description"] = f"Array of {self._get_property_name(restriction.filler)}"
             
             elif restriction.restriction_type == "someValuesFrom":
                 # At least one value must be from the specified class/type
@@ -233,6 +268,14 @@ class ClassRestrictionsRule(TransformationRule):
                 result["schema"] = schema
         
         return result
+    
+    def _get_class_name(self, uri: str) -> str:
+        """Extract class name from URI."""
+        if '#' in uri:
+            return uri.split('#')[-1]
+        elif '/' in uri:
+            return uri.split('/')[-1]
+        return uri
     
     def _get_property_name(self, uri: str) -> str:
         """Extract property name from URI."""

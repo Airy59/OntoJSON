@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphol version="3">
+  <project name="test ontology for OWL to JSON schema transformation" version="1.0">
+    <ontology addLabelFromSimpleName="0" addLabelFromUserInput="0" prefix="tojs" iri="https://cdm.ovh/test/owl_to_json_schema" lang="en">
+      <imports/>
+      <prefixes>
+        <prefix>
+          <value>owl</value>
+          <namespace>http://www.w3.org/2002/07/owl#</namespace>
+        </prefix>
+        <prefix>
+          <value>rdf</value>
+          <namespace>http://www.w3.org/1999/02/22-rdf-syntax-ns#</namespace>
+        </prefix>
+        <prefix>
+          <value>rdfs</value>
+          <namespace>http://www.w3.org/2000/01/rdf-schema#</namespace>
+        </prefix>
+        <prefix>
+          <value>tojs</value>
+          <namespace>https://cdm.ovh/test/owl_to_json_schema#</namespace>
+        </prefix>
+        <prefix>
+          <value>xml</value>
+          <namespace>http://www.w3.org/XML/1998/namespace</namespace>
+        </prefix>
+        <prefix>
+          <value>xsd</value>
+          <namespace>http://www.w3.org/2001/XMLSchema#</namespace>
+        </prefix>
+      </prefixes>
+      <datatypes>
+        <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</datatype>
+        <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</datatype>
+        <datatype>http://www.w3.org/2000/01/rdf-schema#Literal</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#NCName</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#NMTOKEN</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#Name</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#anyURI</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#base64Binary</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#boolean</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#byte</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#dateTime</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#dateTimeStamp</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#decimal</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#double</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#float</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#hexBinary</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#int</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#integer</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#language</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#long</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#negativeInteger</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#nonNegativeInteger</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#nonPositiveInteger</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#normalizedString</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#positiveInteger</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#short</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#string</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#token</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#unsignedByte</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#unsignedInt</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#unsignedLong</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#unsignedShort</datatype>
+        <datatype>http://www.w3.org/2002/07/owl#rational</datatype>
+        <datatype>http://www.w3.org/2002/07/owl#real</datatype>
+      </datatypes>
+      <languages>
+        <language>de</language>
+        <language>en</language>
+        <language>es</language>
+        <language>fr</language>
+        <language>it</language>
+      </languages>
+      <facets>
+        <facet>http://www.w3.org/2001/XMLSchema#langRange</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#length</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#maxExclusive</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#maxInclusive</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#maxLength</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#minExclusive</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#minInclusive</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#minLength</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#pattern</facet>
+      </facets>
+      <annotationProperties>
+        <annotationProperty>http://www.w3.org/2000/01/rdf-schema#backwardCompatibleWith</annotationProperty>
+        <annotationProperty>http://www.w3.org/2000/01/rdf-schema#comment</annotationProperty>
+        <annotationProperty>http://www.w3.org/2000/01/rdf-schema#isDefinedBy</annotationProperty>
+        <annotationProperty>http://www.w3.org/2000/01/rdf-schema#label</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#backwardCompatibleWith</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#deprecated</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#fetchedFrom</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#incompatibleWith</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#priorVersion</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#versionInfo</annotationProperty>
+      </annotationProperties>
+      <iris>
+        <iri>
+          <value>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#Literal</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#backwardCompatibleWith</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#comment</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#isDefinedBy</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#label</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#NCName</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#NMTOKEN</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#Name</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#anyURI</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#base64Binary</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#boolean</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#byte</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#dateTime</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#dateTimeStamp</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#decimal</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#double</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#float</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#hexBinary</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#int</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#integer</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#langRange</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#language</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#length</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#long</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#maxExclusive</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#maxInclusive</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#maxLength</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#minExclusive</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#minInclusive</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#minLength</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#negativeInteger</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#nonNegativeInteger</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#nonPositiveInteger</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#normalizedString</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#pattern</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#positiveInteger</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#short</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#string</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#token</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#unsignedByte</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#unsignedInt</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#unsignedLong</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#unsignedShort</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#Nothing</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#Thing</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#backwardCompatibleWith</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#bottomDataProperty</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#bottomObjectProperty</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#deprecated</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#fetchedFrom</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#incompatibleWith</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#priorVersion</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#rational</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#real</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#topDataProperty</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#topObjectProperty</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#versionInfo</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#CateringCompany</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#CateringCompany</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Catering company</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#Company</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#Company</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Company</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#Formation</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#Formation</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Formation</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#InfrastructureManager</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#InfrastructureManager</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Infrastructure manager</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#LegalEntity</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#LegalEntity</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Legal entity</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#Locomotive</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#Locomotive</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Locomotive</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#RailwayUndertaking</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#RailwayUndertaking</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Railway undertaking</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#RollingStock</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#RollingStock</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Rolling stock</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#Stakeholder</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#Stakeholder</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Stakeholder</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#Vehicle</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#Vehicle</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Vehicle</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#VehicleType</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#VehicleType</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Vehicle type</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#Wagon</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#composedOf</value>
+          <inverseFunctional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#composedOf</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>composed of</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#creationDate</value>
+          <functional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#creationDate</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>creation date</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#my_formation</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#my_formation</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>my formation</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#my_locomotive</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#my_locomotive</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>my locomotive</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#my_wagon_1</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#my_wagon_1</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>my wagon 1</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#my_wagon_2</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#ofType</value>
+          <functional/>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/test/owl_to_json_schema#partOf</value>
+          <functional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/test/owl_to_json_schema#partOf</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>part of</lexicalForm>
+                <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</datatype>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>urn:x-graphol:origin</value>
+        </iri>
+      </iris>
+    </ontology>
+    <diagrams>
+      <diagram name="owl_for_jsonSchema" width="5000" height="5000">
+        <node id="n0" type="concept" color="#fcfcfc">
+          <geometry width="110" x="190" height="50" y="230"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#Vehicle</iri>
+          <label customSize="0" size="12" width="110" x="190" height="23" y="230"/>
+        </node>
+        <node id="n1" type="concept" color="#fcfcfc">
+          <geometry width="110" x="-40" height="55" y="230"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#Formation</iri>
+          <label customSize="0" size="12" width="110" x="-40" height="23" y="230"/>
+        </node>
+        <node id="n10" type="concept" color="#fcfcfc">
+          <geometry width="110" x="540" height="50" y="230"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#VehicleType</iri>
+          <label customSize="0" size="12" width="110" x="540" height="23" y="230"/>
+        </node>
+        <node id="n11" type="role" color="#fcfcfc">
+          <geometry width="70" x="360" height="50" y="230"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#ofType</iri>
+          <label customSize="0" size="12" width="67" x="360" height="23" y="200"/>
+        </node>
+        <node id="n13" type="domain-restriction" color="#fcfcfc">
+          <geometry width="20" x="290" height="20" y="230"/>
+          <label customSize="0" size="12" width="39" x="290" height="23" y="208">exists</label>
+        </node>
+        <node id="n14" type="enumeration" color="#fcfcfc">
+          <geometry width="50" x="540" height="30" y="320"/>
+          <label customSize="0" size="12" width="40" x="540" height="23" y="320"/>
+        </node>
+        <node id="n15" type="individual" color="#fcfcfc">
+          <geometry width="60" x="480" height="60" y="400"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#Locomotive</iri>
+          <label customSize="0" size="12" width="60" x="480" height="38" y="400"/>
+        </node>
+        <node id="n16" type="individual" color="#fcfcfc">
+          <geometry width="60" x="600" height="60" y="400"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#Wagon</iri>
+          <label customSize="0" size="12" width="60" x="600" height="38" y="400"/>
+        </node>
+        <node id="n19" type="range-restriction" color="#000000">
+          <geometry width="20" x="430" height="20" y="230"/>
+          <label customSize="0" size="12" width="39" x="430" height="23" y="208">exists</label>
+        </node>
+        <node id="n2" type="disjoint-union" color="#000000">
+          <geometry width="50" x="190" height="30" y="-60"/>
+        </node>
+        <node id="n21" type="individual" color="#fcfcfc">
+          <geometry width="60" x="120" height="60" y="360"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#my_locomotive</iri>
+          <label customSize="0" size="12" width="60" x="120" height="53" y="360"/>
+        </node>
+        <node id="n22" type="individual" color="#fcfcfc">
+          <geometry width="60" x="190" height="60" y="360"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#my_wagon_1</iri>
+          <label customSize="0" size="12" width="60" x="190" height="38" y="360"/>
+        </node>
+        <node id="n23" type="individual" color="#fcfcfc">
+          <geometry width="60" x="260" height="60" y="360"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#my_wagon_2</iri>
+          <label customSize="0" size="12" width="60" x="260" height="38" y="360"/>
+        </node>
+        <node id="n24" type="individual" color="#fcfcfc">
+          <geometry width="60" x="-40" height="60" y="360"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#my_formation</iri>
+          <label customSize="0" size="12" width="60" x="-40" height="53" y="360"/>
+        </node>
+        <node id="n25" type="concept" color="#fcfcfc">
+          <geometry width="110" x="480" height="50" y="-30"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#Company</iri>
+          <label customSize="0" size="12" width="110" x="480" height="23" y="-30"/>
+        </node>
+        <node id="n29" type="concept" color="#fcfcfc">
+          <geometry width="110" x="550" height="50" y="120"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#InfrastructureManager</iri>
+          <label customSize="0" size="12" width="110" x="550" height="38" y="120"/>
+        </node>
+        <node id="n3" type="concept" color="#fcfcfc">
+          <geometry width="110" x="190" height="50" y="-140"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#RollingStock</iri>
+          <label customSize="0" size="12" width="110" x="190" height="23" y="-140"/>
+        </node>
+        <node id="n30" type="concept" color="#fcfcfc">
+          <geometry width="110" x="720" height="50" y="-30"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#Stakeholder</iri>
+          <label customSize="0" size="12" width="110" x="720" height="23" y="-30"/>
+        </node>
+        <node id="n31" type="concept" color="#fcfcfc">
+          <geometry width="110" x="700" height="50" y="120"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#RailwayUndertaking</iri>
+          <label customSize="0" size="12" width="110" x="700" height="38" y="120"/>
+        </node>
+        <node id="n32" type="concept" color="#fcfcfc">
+          <geometry width="110" x="410" height="50" y="120"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#CateringCompany</iri>
+          <label customSize="0" size="12" width="110" x="410" height="23" y="120"/>
+        </node>
+        <node id="n33" type="concept" color="#fcfcfc">
+          <geometry width="110" x="480" height="50" y="-140"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#LegalEntity</iri>
+          <label customSize="0" size="12" width="110" x="480" height="23" y="-140"/>
+        </node>
+        <node id="n34" type="attribute" color="#fcfcfc">
+          <geometry width="20" x="660" height="20" y="-140"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#creationDate</iri>
+          <label customSize="0" size="12" width="77" x="660" height="23" y="-162"/>
+        </node>
+        <node id="n35" type="value-domain" color="#fcfcfc">
+          <geometry width="90" x="840" height="40" y="-140"/>
+          <iri>http://www.w3.org/2001/XMLSchema#dateTime</iri>
+          <label customSize="0" size="12" width="90" x="840" height="23" y="-140"/>
+        </node>
+        <node id="n36" type="domain-restriction" color="#fcfcfc">
+          <geometry width="20" x="580" height="20" y="-140"/>
+          <label customSize="0" size="12" width="39" x="580" height="23" y="-162">exists</label>
+        </node>
+        <node id="n37" type="range-restriction" color="#000000">
+          <geometry width="20" x="740" height="20" y="-140"/>
+          <label customSize="0" size="12" width="39" x="740" height="23" y="-162">exists</label>
+        </node>
+        <node id="n4" type="role" color="#fcfcfc">
+          <geometry width="70" x="-40" height="50" y="-140"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#composedOf</iri>
+          <label customSize="0" size="12" width="78" x="-40" height="23" y="-170"/>
+        </node>
+        <node id="n40" type="role" color="#fcfcfc">
+          <geometry width="70" x="-240" height="50" y="-140"/>
+          <iri>https://cdm.ovh/test/owl_to_json_schema#partOf</iri>
+          <label customSize="0" size="12" width="43" x="-240" height="23" y="-170"/>
+        </node>
+        <node id="n41" type="role-inverse" color="#fcfcfc">
+          <geometry width="50" x="-140" height="30" y="-140"/>
+          <label customSize="0" size="12" width="23" x="-140" height="23" y="-140"/>
+        </node>
+        <node id="n5" type="range-restriction" color="#000000">
+          <geometry width="20" x="70" height="20" y="-140"/>
+          <label customSize="0" size="12" width="39" x="70" height="23" y="-162">exists</label>
+        </node>
+        <node id="n6" type="domain-restriction" color="#fcfcfc">
+          <geometry width="20" x="-40" height="20" y="120"/>
+          <label customSize="0" size="12" width="39" x="-40" height="23" y="98">forall</label>
+        </node>
+        <edge id="e0" type="inclusion" target="n3" source="n2">
+          <point x="190" y="-60"/>
+          <point x="190" y="-140"/>
+        </edge>
+        <edge id="e100" type="input" target="n36" source="n34">
+          <point x="660" y="-140"/>
+          <point x="580" y="-140"/>
+        </edge>
+        <edge id="e101" type="input" target="n37" source="n34">
+          <point x="660" y="-140"/>
+          <point x="740" y="-140"/>
+        </edge>
+        <edge id="e104" type="inclusion" target="n6" source="n1">
+          <point x="-40" y="230"/>
+          <point x="-40" y="120"/>
+        </edge>
+        <edge id="e108" type="equivalence" target="n4" source="n41">
+          <point x="-140" y="-140"/>
+          <point x="-40" y="-140"/>
+        </edge>
+        <edge id="e11" type="input" target="n14" source="n15">
+          <point x="480" y="400"/>
+          <point x="540" y="320"/>
+        </edge>
+        <edge id="e110" type="input" target="n41" source="n40">
+          <point x="-240" y="-140"/>
+          <point x="-140" y="-140"/>
+        </edge>
+        <edge id="e12" type="input" target="n14" source="n16">
+          <point x="600" y="400"/>
+          <point x="540" y="320"/>
+        </edge>
+        <edge id="e19" type="inclusion" target="n0" source="n13">
+          <point x="290" y="230"/>
+          <point x="190" y="230"/>
+        </edge>
+        <edge id="e2" type="input" target="n2" source="n1">
+          <point x="-40" y="230"/>
+          <point x="190" y="-60"/>
+        </edge>
+        <edge id="e22" type="input" target="n13" source="n11">
+          <point x="360" y="230"/>
+          <point x="290" y="230"/>
+        </edge>
+        <edge id="e24" type="inclusion" target="n10" source="n19">
+          <point x="430" y="230"/>
+          <point x="540" y="230"/>
+        </edge>
+        <edge id="e25" type="input" target="n19" source="n11">
+          <point x="360" y="230"/>
+          <point x="430" y="230"/>
+        </edge>
+        <edge id="e29" type="equivalence" target="n14" source="n10">
+          <point x="540" y="230"/>
+          <point x="540" y="270"/>
+          <point x="540" y="320"/>
+        </edge>
+        <edge id="e3" type="input" target="n2" source="n0">
+          <point x="190" y="230"/>
+          <point x="190" y="-60"/>
+        </edge>
+        <edge id="e33" type="membership" target="n0" source="n21">
+          <point x="120" y="360"/>
+          <point x="190" y="230"/>
+        </edge>
+        <edge id="e34" type="membership" target="n0" source="n22">
+          <point x="190" y="360"/>
+          <point x="190" y="230"/>
+        </edge>
+        <edge id="e35" type="membership" target="n0" source="n23">
+          <point x="260" y="360"/>
+          <point x="190" y="230"/>
+        </edge>
+        <edge id="e36" type="membership" target="n1" source="n24">
+          <point x="-40" y="360"/>
+          <point x="-40" y="230"/>
+        </edge>
+        <edge id="e7" type="input" target="n5" source="n4">
+          <point x="-40" y="-140"/>
+          <point x="70" y="-140"/>
+        </edge>
+        <edge id="e77" type="input" target="n6" source="n3">
+          <point x="190" y="-140"/>
+          <point x="-40" y="120"/>
+        </edge>
+        <edge id="e8" type="input" target="n6" source="n4">
+          <point x="-40" y="-140"/>
+          <point x="-40" y="120"/>
+        </edge>
+        <edge id="e80" type="inclusion" target="n3" source="n5">
+          <point x="70" y="-140"/>
+          <point x="190" y="-140"/>
+        </edge>
+        <edge id="e83" type="inclusion" target="n25" source="n29">
+          <point x="550" y="120"/>
+          <point x="480" y="-30"/>
+        </edge>
+        <edge id="e84" type="inclusion" target="n30" source="n29">
+          <point x="550" y="120"/>
+          <point x="720" y="-30"/>
+        </edge>
+        <edge id="e85" type="inclusion" target="n25" source="n31">
+          <point x="700" y="120"/>
+          <point x="480" y="-30"/>
+        </edge>
+        <edge id="e86" type="inclusion" target="n30" source="n31">
+          <point x="700" y="120"/>
+          <point x="720" y="-30"/>
+        </edge>
+        <edge id="e87" type="inclusion" target="n25" source="n32">
+          <point x="410" y="120"/>
+          <point x="480" y="-30"/>
+        </edge>
+        <edge id="e88" type="inclusion" target="n33" source="n25">
+          <point x="480" y="-30"/>
+          <point x="480" y="-140"/>
+        </edge>
+        <edge id="e98" type="inclusion" target="n35" source="n37">
+          <point x="740" y="-140"/>
+          <point x="840" y="-140"/>
+        </edge>
+        <edge id="e99" type="inclusion" target="n33" source="n36">
+          <point x="580" y="-140"/>
+          <point x="480" y="-140"/>
+        </edge>
+      </diagram>
+    </diagrams>
+  </project>
+</graphol>

@@ -1,5 +1,5 @@
 """
-Main window for the OWL to JSON Schema GUI application.
+Main window for the OWL to JSON Schema GUI application with T-box/A-box workflow.
 """
 
 import sys
@@ -13,8 +13,7 @@ from PyQt6.QtWidgets import (
     QPushButton, QLabel, QFileDialog, QTextEdit,
     QGroupBox, QCheckBox, QScrollArea, QMessageBox,
     QTabWidget, QComboBox, QSpinBox, QLineEdit,
-    QSplitter, QProgressBar, QTableWidget, QTableWidgetItem,
-    QHeaderView
+    QSplitter, QProgressBar, QStatusBar, QFrame
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont, QAction, QIcon
@@ -47,106 +46,30 @@ class TransformationWorker(QThread):
                 # Try using requests library first (better SSL handling)
                 try:
                     import requests
-                    self.progress.emit("Downloading with requests library...")
                     import tempfile
                     
-                    # Download with requests (handles SSL better)
-                    # Request RDF/XML or other RDF formats via content negotiation
                     headers = {
                         'Accept': 'application/rdf+xml, text/turtle, application/ld+json, application/n-triples, text/n3;q=0.9, application/xml;q=0.8, */*;q=0.5'
                     }
                     response = requests.get(self.input_source, headers=headers, verify=True, timeout=30)
                     response.raise_for_status()
                     
-                    # Detect format from content type
                     content_type = response.headers.get('Content-Type', '').lower()
                     self.progress.emit(f"Content-Type: {content_type}")
                     
-                    # Check if we got HTML (common for schema.org and similar sites)
-                    content_str = response.content[:1000].decode('utf-8', errors='ignore').lower()
-                    
-                    # Determine RDF format based on content type or content inspection
+                    # Determine format and save to temp file
                     rdf_format = None
                     suffix = '.rdf'
                     
-                    if 'html' in content_type or '<!doctype html' in content_str or '<html' in content_str:
-                        # HTML page - might contain embedded JSON-LD
-                        self.progress.emit("Detected HTML page, extracting JSON-LD...")
-                        
-                        # Try to extract JSON-LD from HTML
-                        import re
-                        json_ld_pattern = r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>'
-                        matches = re.findall(json_ld_pattern, response.text, re.DOTALL | re.IGNORECASE)
-                        
-                        if matches:
-                            # Use the first JSON-LD block found
-                            json_ld_content = matches[0]
-                            response_content = json_ld_content.encode('utf-8')
-                            rdf_format = 'json-ld'
-                            suffix = '.jsonld'
-                            self.progress.emit(f"Extracted JSON-LD from HTML ({len(json_ld_content)} characters)")
-                        else:
-                            # No JSON-LD found in HTML
-                            raise ValueError(f"The URL {self.input_source} returned HTML without embedded RDF data. "
-                                           "Please provide a direct link to an RDF/OWL file.")
-                    elif 'json-ld' in content_type or 'application/ld+json' in content_type:
-                        rdf_format = 'json-ld'
-                        suffix = '.jsonld'
-                        response_content = response.content
-                    elif 'turtle' in content_type or 'text/turtle' in content_type:
+                    if 'turtle' in content_type:
                         rdf_format = 'turtle'
                         suffix = '.ttl'
-                        response_content = response.content
-                    elif 'n-triples' in content_type:
-                        rdf_format = 'nt'
-                        suffix = '.nt'
-                        response_content = response.content
-                    elif 'n3' in content_type or 'text/n3' in content_type:
-                        rdf_format = 'n3'
-                        suffix = '.n3'
-                        response_content = response.content
-                    elif 'rdf+xml' in content_type or 'application/rdf+xml' in content_type:
-                        rdf_format = 'xml'
-                        suffix = '.rdf'
-                        response_content = response.content
-                    elif 'xml' in content_type and not 'html' in content_type:
-                        # Try as RDF/XML
-                        rdf_format = 'xml'
-                        suffix = '.rdf'
-                        response_content = response.content
-                    else:
-                        # Try to guess from content
-                        if content_str.strip().startswith('{') or content_str.strip().startswith('['):
-                            # Likely JSON-LD
-                            rdf_format = 'json-ld'
-                            suffix = '.jsonld'
-                        elif content_str.strip().startswith('@'):
-                            # Likely Turtle
-                            rdf_format = 'turtle'
-                            suffix = '.ttl'
-                        elif content_str.strip().startswith('<?xml'):
-                            # XML - could be RDF/XML
-                            rdf_format = 'xml'
-                            suffix = '.rdf'
-                        else:
-                            # Try to guess from URL
-                            if self.input_source.endswith('.ttl'):
-                                rdf_format = 'turtle'
-                                suffix = '.ttl'
-                            elif self.input_source.endswith('.jsonld') or self.input_source.endswith('.json'):
-                                rdf_format = 'json-ld'
-                                suffix = '.jsonld'
-                            elif self.input_source.endswith('.nt'):
-                                rdf_format = 'nt'
-                                suffix = '.nt'
-                            elif self.input_source.endswith('.n3'):
-                                rdf_format = 'n3'
-                                suffix = '.n3'
-                        response_content = response.content
+                    elif 'json-ld' in content_type:
+                        rdf_format = 'json-ld'
+                        suffix = '.jsonld'
                     
-                    # Save to temporary file with appropriate extension
                     with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp_file:
-                        tmp_file.write(response_content)
+                        tmp_file.write(response.content)
                         tmp_path = tmp_file.name
                     
                     self.progress.emit(f"Parsing ontology (format: {rdf_format or 'auto-detect'})...")
@@ -158,72 +81,10 @@ class TransformationWorker(QThread):
                     os.unlink(tmp_path)
                     
                 except ImportError:
-                    # Requests not available, try urllib with SSL context
-                    self.progress.emit("Using urllib with SSL context...")
-                    import tempfile
-                    import urllib.request
-                    import ssl
-                    
-                    # Create SSL context that handles certificates better
-                    ssl_context = ssl.create_default_context()
-                    
-                    # On macOS, you might need to use system certificates
-                    try:
-                        import certifi
-                        ssl_context.load_verify_locations(certifi.where())
-                    except ImportError:
-                        # If certifi is not available, try unverified as last resort
-                        # (with user warning)
-                        if self.input_source.startswith('https://'):
-                            self.progress.emit("Warning: SSL certificate verification may be limited")
-                            ssl_context.check_hostname = False
-                            ssl_context.verify_mode = ssl.CERT_NONE
-                    
-                    try:
-                        # Try downloading with SSL context
-                        # Add content negotiation headers
-                        req = urllib.request.Request(self.input_source)
-                        req.add_header('Accept', 'application/rdf+xml, text/turtle, application/ld+json, application/n-triples, text/n3;q=0.9, application/xml;q=0.8, */*;q=0.5')
-                        
-                        with urllib.request.urlopen(req, context=ssl_context) as response:
-                            content = response.read()
-                            content_type = response.headers.get('Content-Type', '').lower()
-                            
-                        self.progress.emit(f"Content-Type: {content_type}")
-                        
-                        # Determine format
-                        rdf_format = None
-                        suffix = '.rdf'
-                        
-                        if 'json-ld' in content_type or 'application/ld+json' in content_type:
-                            rdf_format = 'json-ld'
-                            suffix = '.jsonld'
-                        elif 'turtle' in content_type or 'text/turtle' in content_type:
-                            rdf_format = 'turtle'
-                            suffix = '.ttl'
-                        elif 'n-triples' in content_type:
-                            rdf_format = 'nt'
-                            suffix = '.nt'
-                        elif 'n3' in content_type:
-                            rdf_format = 'n3'
-                            suffix = '.n3'
-                        
-                        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp_file:
-                            tmp_file.write(content)
-                            tmp_path = tmp_file.name
-                        
-                        self.progress.emit(f"Parsing ontology (format: {rdf_format or 'auto-detect'})...")
-                        parser = OntologyParser()
-                        ontology = parser.parse(tmp_path, format=rdf_format)
-                        
-                        # Clean up temp file
-                        import os
-                        os.unlink(tmp_path)
-                    except Exception as download_error:
-                        # As a last resort, try letting rdflib handle it directly
-                        self.progress.emit("Attempting direct parsing with rdflib...")
-                        parser = OntologyParser()
-                        ontology = parser.parse(self.input_source)
+                    # Fallback to direct parsing
+                    self.progress.emit("Attempting direct parsing...")
+                    parser = OntologyParser()
+                    ontology = parser.parse(self.input_source)
             else:
                 self.progress.emit(f"Parsing ontology from file: {self.input_source}")
                 parser = OntologyParser()
@@ -246,23 +107,27 @@ class TransformationWorker(QThread):
 
 
 class MainWindow(QMainWindow):
-    """Main window of the OWL to JSON Schema GUI application."""
+    """Main window of the OWL to JSON Schema GUI application with T-box/A-box workflow."""
     
     def __init__(self):
         super().__init__()
         self.input_file: Optional[str] = None
-        self.output_folder: Optional[str] = None
         self.transformation_result: Optional[Dict] = None
-        self.rule_checkboxes: Dict[str, QCheckBox] = {}
+        self.ontology_model = None
+        self.abox_data = None
+        self.json_instances = None
+        
+        # Workflow state
+        self.tbox_ready = False
+        self.abox_ready = False
+        self.json_ready = False
+        
         self.init_ui()
     
     def init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("OWL to JSON Schema Converter")
-        self.setGeometry(100, 100, 1200, 800)
-        
-        # Create menu bar
-        self.create_menu_bar()
+        self.setWindowTitle("OWL to JSON Schema Transformer - T-box/A-box Workflow")
+        self.setGeometry(100, 100, 1400, 900)
         
         # Create central widget
         central_widget = QWidget()
@@ -270,31 +135,17 @@ class MainWindow(QMainWindow):
         
         # Main layout
         main_layout = QVBoxLayout()
+        main_layout.setSpacing(10)
         central_widget.setLayout(main_layout)
         
-        # File selection section
-        file_section = self.create_file_section()
-        main_layout.addWidget(file_section)
+        # Create menu bar
+        self.create_menu_bar()
         
-        # Create splitter for main content
-        splitter = QSplitter(Qt.Orientation.Horizontal)
+        # Create workflow tabs
+        self.create_workflow_area(main_layout)
         
-        # Left panel - Configuration
-        config_panel = self.create_config_panel()
-        splitter.addWidget(config_panel)
-        
-        # Right panel - Results
-        results_panel = self.create_results_panel()
-        splitter.addWidget(results_panel)
-        
-        # Set splitter sizes (40% config, 60% results)
-        splitter.setSizes([480, 720])
-        
-        main_layout.addWidget(splitter)
-        
-        # Bottom section - Actions and status
-        bottom_section = self.create_bottom_section()
-        main_layout.addWidget(bottom_section)
+        # Create status bar
+        self.create_status_bar()
         
         # Apply styles
         self.setStyleSheet("""
@@ -314,308 +165,430 @@ class MainWindow(QMainWindow):
                 padding: 0 5px 0 5px;
             }
             QPushButton {
-                padding: 5px 15px;
-                border-radius: 3px;
-                background-color: #4CAF50;
-                color: white;
+                padding: 8px 15px;
+                border-radius: 5px;
                 font-weight: bold;
             }
             QPushButton:hover {
-                background-color: #45a049;
+                opacity: 0.8;
             }
             QPushButton:disabled {
                 background-color: #cccccc;
                 color: #666666;
-            }
-            QPushButton#browseButton, QPushButton#outputButton {
-                background-color: #008CBA;
-            }
-            QPushButton#browseButton:hover, QPushButton#outputButton:hover {
-                background-color: #007399;
             }
         """)
     
     def create_menu_bar(self):
         """Create the menu bar."""
         menubar = self.menuBar()
-        # Ensure menu bar is visible (important for some platforms)
-        menubar.setNativeMenuBar(False)  # This ensures the menu bar is shown in the window
+        menubar.setNativeMenuBar(False)
         
         # File menu
         file_menu = menubar.addMenu("&File")
         
-        open_action = QAction("&Open Ontology", self)
+        open_action = QAction("&Open OWL File...", self)
         open_action.setShortcut("Ctrl+O")
-        open_action.setStatusTip("Open an OWL/RDF ontology file")
         open_action.triggered.connect(self.browse_input_file)
         file_menu.addAction(open_action)
         
-        save_action = QAction("&Save JSON Schema", self)
-        save_action.setShortcut("Ctrl+S")
-        save_action.setStatusTip("Save the generated JSON Schema")
-        save_action.triggered.connect(self.save_result)
-        file_menu.addAction(save_action)
+        open_url_action = QAction("Open from &URL...", self)
+        open_url_action.setShortcut("Ctrl+U")
+        open_url_action.triggered.connect(self.open_url)
+        file_menu.addAction(open_url_action)
+        
+        file_menu.addSeparator()
+        
+        save_schema_action = QAction("Save JSON &Schema...", self)
+        save_schema_action.setShortcut("Ctrl+S")
+        save_schema_action.triggered.connect(self.save_schema)
+        file_menu.addAction(save_schema_action)
+        
+        save_abox_action = QAction("Save &A-box...", self)
+        save_abox_action.triggered.connect(self.save_abox)
+        save_abox_action.setEnabled(False)
+        self.save_abox_action = save_abox_action
+        file_menu.addAction(save_abox_action)
+        
+        save_json_action = QAction("Save &JSON Instance...", self)
+        save_json_action.triggered.connect(self.save_json)
+        save_json_action.setEnabled(False)
+        self.save_json_action = save_json_action
+        file_menu.addAction(save_json_action)
         
         file_menu.addSeparator()
         
         exit_action = QAction("E&xit", self)
         exit_action.setShortcut("Ctrl+Q")
-        exit_action.setStatusTip("Exit the application")
         exit_action.triggered.connect(self.close)
         file_menu.addAction(exit_action)
+        
+        # Tools menu
+        tools_menu = menubar.addMenu("&Tools")
+        
+        validate_action = QAction("&Validate A-box with Reasoner", self)
+        validate_action.setEnabled(False)
+        self.validate_action = validate_action
+        tools_menu.addAction(validate_action)
         
         # Help menu
         help_menu = menubar.addMenu("&Help")
         
         about_action = QAction("&About", self)
-        about_action.setStatusTip("About this application")
         about_action.triggered.connect(self.show_about)
         help_menu.addAction(about_action)
-        
-        # Make sure the menu bar is visible
-        menubar.setVisible(True)
     
-    def create_file_section(self) -> QGroupBox:
-        """Create the file selection section."""
-        group = QGroupBox("Input/Output Files")
+    def create_workflow_area(self, parent_layout):
+        """Create the three-step workflow area."""
+        self.workflow_tabs = QTabWidget()
+        self.workflow_tabs.setTabPosition(QTabWidget.TabPosition.North)
+        
+        # Step 1: T-box Transformation
+        self.tbox_widget = self.create_tbox_step()
+        self.workflow_tabs.addTab(self.tbox_widget, "1. T-box Transformation")
+        
+        # Step 2: A-box Generation
+        self.abox_widget = self.create_abox_step()
+        self.workflow_tabs.addTab(self.abox_widget, "2. A-box Generation")
+        self.workflow_tabs.setTabEnabled(1, False)
+        
+        # Step 3: JSON Instance Generation
+        self.json_widget = self.create_json_step()
+        self.workflow_tabs.addTab(self.json_widget, "3. JSON Instance Generation")
+        self.workflow_tabs.setTabEnabled(2, False)
+        
+        parent_layout.addWidget(self.workflow_tabs)
+    
+    def create_tbox_step(self):
+        """Create the T-box transformation step widget."""
+        widget = QWidget()
         layout = QVBoxLayout()
         
-        # Input file selection
+        # Description
+        desc_label = QLabel("<b>Step 1: T-box Transformation</b><br>"
+                          "Transform OWL ontology (T-box) to JSON Schema")
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("QLabel { background-color: #e3f2fd; padding: 10px; border-radius: 5px; }")
+        layout.addWidget(desc_label)
+        
+        # Input section
+        input_group = QGroupBox("Input")
         input_layout = QHBoxLayout()
-        input_layout.addWidget(QLabel("Input Ontology:"))
         
-        self.input_file_label = QLineEdit()
-        self.input_file_label.setReadOnly(False)  # Allow manual input for URLs
-        self.input_file_label.setPlaceholderText("Enter URL or file path, or browse for file...")
-        self.input_file_label.setToolTip("Enter a URL (http://...) or file path, or use Browse button")
-        self.input_file_label.textChanged.connect(self.on_input_changed)
-        input_layout.addWidget(self.input_file_label)
+        self.file_label = QLabel("No file selected")
+        self.file_label.setMaximumWidth(400)
+        input_layout.addWidget(self.file_label)
         
-        browse_button = QPushButton("Browse...")
-        browse_button.setObjectName("browseButton")
-        browse_button.clicked.connect(self.browse_input_file)
-        input_layout.addWidget(browse_button)
+        open_btn = QPushButton("Open OWL File")
+        open_btn.clicked.connect(self.browse_input_file)
+        input_layout.addWidget(open_btn)
         
-        layout.addLayout(input_layout)
+        url_btn = QPushButton("Open from URL")
+        url_btn.clicked.connect(self.open_url)
+        input_layout.addWidget(url_btn)
         
-        # Output folder selection
-        output_layout = QHBoxLayout()
-        output_layout.addWidget(QLabel("Output Folder:"))
+        input_group.setLayout(input_layout)
+        layout.addWidget(input_group)
         
-        self.output_folder_label = QLineEdit()
-        self.output_folder_label.setReadOnly(True)
-        self.output_folder_label.setPlaceholderText("Select output folder...")
-        output_layout.addWidget(self.output_folder_label)
+        # Configuration section
+        config_group = QGroupBox("Configuration")
+        config_layout = QVBoxLayout()
         
-        output_button = QPushButton("Browse...")
-        output_button.setObjectName("outputButton")
-        output_button.clicked.connect(self.browse_output_folder)
-        output_layout.addWidget(output_button)
-        
-        layout.addLayout(output_layout)
-        
-        group.setLayout(layout)
-        return group
-    
-    def create_config_panel(self) -> QWidget:
-        """Create the configuration panel."""
-        widget = QWidget()
-        layout = QVBoxLayout()
-        
-        # Create tabs for different rule categories
-        tabs = QTabWidget()
-        
-        # Class rules tab
-        class_tab = self.create_rules_tab("Class Rules", [
-            ("class_to_object", "Transform Classes to Objects"),
-            ("class_hierarchy", "Transform Class Hierarchy"),
-            ("class_restrictions", "Transform Class Restrictions")
-        ])
-        tabs.addTab(class_tab, "Classes")
-        
-        # Property rules tab
-        property_tab = self.create_rules_tab("Property Rules", [
-            ("object_property", "Transform Object Properties"),
-            ("datatype_property", "Transform Datatype Properties"),
-            ("property_cardinality", "Transform Property Cardinality"),
-            ("property_restrictions", "Transform Property Restrictions")
-        ])
-        tabs.addTab(property_tab, "Properties")
-        
-        # Annotation rules tab
-        annotation_tab = self.create_rules_tab("Annotation Rules", [
-            ("labels_to_titles", "Labels to Titles"),
-            ("comments_to_descriptions", "Comments to Descriptions"),
-            ("annotations_to_metadata", "Annotations to Metadata")
-        ])
-        tabs.addTab(annotation_tab, "Annotations")
-        
-        # Advanced rules tab
-        advanced_tab = self.create_rules_tab("Advanced Rules", [
-            ("enumeration_to_enum", "Enumerations to Enum"),
-            ("union_to_anyOf", "Unions to anyOf"),
-            ("intersection_to_allOf", "Intersections to allOf"),
-            ("complement_to_not", "Complement to not"),
-            ("equivalent_classes", "Equivalent Classes"),
-            ("disjoint_classes", "Disjoint Classes")
-        ])
-        tabs.addTab(advanced_tab, "Advanced")
-        
-        # Structural rules tab
-        structural_tab = self.create_rules_tab("Structural Rules", [
-            ("ontology_to_document", "Ontology to Document"),
-            ("individuals_to_examples", "Individuals to Examples"),
-            ("ontology_metadata", "Ontology Metadata")
-        ])
-        tabs.addTab(structural_tab, "Structural")
-        
-        # Options tab
-        options_tab = self.create_options_tab()
-        tabs.addTab(options_tab, "Options")
-        
-        layout.addWidget(tabs)
-        
-        # Quick actions
-        actions_layout = QHBoxLayout()
-        
-        select_all_button = QPushButton("Select All")
-        select_all_button.clicked.connect(self.select_all_rules)
-        actions_layout.addWidget(select_all_button)
-        
-        deselect_all_button = QPushButton("Deselect All")
-        deselect_all_button.clicked.connect(self.deselect_all_rules)
-        actions_layout.addWidget(deselect_all_button)
-        
-        layout.addLayout(actions_layout)
-        
-        widget.setLayout(layout)
-        return widget
-    
-    def create_rules_tab(self, title: str, rules: list) -> QWidget:
-        """Create a tab for a group of transformation rules."""
-        widget = QWidget()
-        layout = QVBoxLayout()
-        
-        scroll = QScrollArea()
-        scroll_widget = QWidget()
-        scroll_layout = QVBoxLayout()
-        
-        for rule_id, rule_name in rules:
-            checkbox = QCheckBox(rule_name)
-            checkbox.setChecked(True)  # Default to enabled
-            self.rule_checkboxes[rule_id] = checkbox
-            scroll_layout.addWidget(checkbox)
-        
-        scroll_layout.addStretch()
-        scroll_widget.setLayout(scroll_layout)
-        scroll.setWidget(scroll_widget)
-        scroll.setWidgetResizable(True)
-        
-        layout.addWidget(scroll)
-        widget.setLayout(layout)
-        return widget
-    
-    def create_options_tab(self) -> QWidget:
-        """Create the options tab."""
-        widget = QWidget()
-        layout = QVBoxLayout()
-        
-        # Language option
         lang_layout = QHBoxLayout()
-        lang_layout.addWidget(QLabel("Language for labels/comments:"))
-        self.language_combo = QComboBox()
-        self.language_combo.addItems(["en", "fr", "de", "es", "it"])
-        lang_layout.addWidget(self.language_combo)
+        lang_layout.addWidget(QLabel("Language:"))
+        self.lang_combo = QComboBox()
+        self.lang_combo.addItems(["en", "fr", "de", "es"])
+        lang_layout.addWidget(self.lang_combo)
         lang_layout.addStretch()
-        layout.addLayout(lang_layout)
+        config_layout.addLayout(lang_layout)
         
-        # Indentation option
-        indent_layout = QHBoxLayout()
-        indent_layout.addWidget(QLabel("JSON indentation:"))
-        self.indent_spin = QSpinBox()
-        self.indent_spin.setRange(0, 8)
-        self.indent_spin.setValue(2)
-        indent_layout.addWidget(self.indent_spin)
-        indent_layout.addStretch()
-        layout.addLayout(indent_layout)
+        self.include_uri_check = QCheckBox("Include URI in comments")
+        config_layout.addWidget(self.include_uri_check)
         
-        # Output format
-        format_layout = QHBoxLayout()
-        format_layout.addWidget(QLabel("Output format:"))
-        self.format_combo = QComboBox()
-        self.format_combo.addItems(["JSON", "YAML"])
-        format_layout.addWidget(self.format_combo)
-        format_layout.addStretch()
-        layout.addLayout(format_layout)
+        self.use_arrays_check = QCheckBox("Use arrays for multi-valued properties")
+        self.use_arrays_check.setChecked(True)
+        config_layout.addWidget(self.use_arrays_check)
         
-        layout.addStretch()
-        widget.setLayout(layout)
-        return widget
-    
-    def create_results_panel(self) -> QWidget:
-        """Create the results panel."""
-        widget = QWidget()
-        layout = QVBoxLayout()
+        config_group.setLayout(config_layout)
+        layout.addWidget(config_group)
         
-        # Results tabs
-        self.results_tabs = QTabWidget()
+        # Transform button
+        self.transform_btn = QPushButton("Transform T-box to JSON Schema")
+        self.transform_btn.clicked.connect(self.run_transformation)
+        self.transform_btn.setEnabled(False)
+        self.transform_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;
+                color: white;
+                font-size: 14px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+            }
+        """)
+        layout.addWidget(self.transform_btn)
         
-        # JSON Schema output tab
+        # Output section
+        output_splitter = QSplitter(Qt.Orientation.Horizontal)
+        
+        # OWL Input display
+        owl_group = QGroupBox("OWL Ontology")
+        owl_layout = QVBoxLayout()
+        self.input_text = QTextEdit()
+        self.input_text.setFont(QFont("Courier", 10))
+        owl_layout.addWidget(self.input_text)
+        owl_group.setLayout(owl_layout)
+        output_splitter.addWidget(owl_group)
+        
+        # JSON Schema output
+        schema_group = QGroupBox("JSON Schema Output")
+        schema_layout = QVBoxLayout()
         self.output_text = QTextEdit()
-        self.output_text.setReadOnly(True)
         self.output_text.setFont(QFont("Courier", 10))
-        self.results_tabs.addTab(self.output_text, "JSON Schema Output")
+        self.output_text.setReadOnly(True)
+        schema_layout.addWidget(self.output_text)
+        schema_group.setLayout(schema_layout)
+        output_splitter.addWidget(schema_group)
         
-        # Statistics tab
-        self.stats_table = QTableWidget()
-        self.stats_table.setColumnCount(2)
-        self.stats_table.setHorizontalHeaderLabels(["Property", "Value"])
-        self.stats_table.horizontalHeader().setStretchLastSection(True)
-        self.results_tabs.addTab(self.stats_table, "Statistics")
-        
-        # Log tab
-        self.log_text = QTextEdit()
-        self.log_text.setReadOnly(True)
-        self.log_text.setFont(QFont("Courier", 9))
-        self.results_tabs.addTab(self.log_text, "Log")
-        
-        layout.addWidget(self.results_tabs)
+        output_splitter.setSizes([600, 600])
+        layout.addWidget(output_splitter)
         
         widget.setLayout(layout)
         return widget
     
-    def create_bottom_section(self) -> QWidget:
-        """Create the bottom section with actions and status."""
+    def create_abox_step(self):
+        """Create the A-box generation step widget."""
         widget = QWidget()
         layout = QVBoxLayout()
+        
+        # Description
+        desc_label = QLabel("<b>Step 2: A-box Generation</b><br>"
+                          "Generate random individuals and property instances that comply with the T-box")
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("QLabel { background-color: #fff3e0; padding: 10px; border-radius: 5px; }")
+        layout.addWidget(desc_label)
+        
+        # Configuration
+        config_group = QGroupBox("Generation Configuration")
+        config_layout = QVBoxLayout()
+        
+        uri_layout = QHBoxLayout()
+        uri_layout.addWidget(QLabel("Base URI:"))
+        self.base_uri_input = QLineEdit("https://example.org#")
+        self.base_uri_input.setEnabled(False)
+        uri_layout.addWidget(self.base_uri_input)
+        config_layout.addLayout(uri_layout)
+        
+        min_layout = QHBoxLayout()
+        min_layout.addWidget(QLabel("Min instances per class:"))
+        self.min_instances_spin = QSpinBox()
+        self.min_instances_spin.setMinimum(1)
+        self.min_instances_spin.setMaximum(10)
+        self.min_instances_spin.setValue(1)
+        self.min_instances_spin.setEnabled(False)
+        min_layout.addWidget(self.min_instances_spin)
+        min_layout.addStretch()
+        config_layout.addLayout(min_layout)
+        
+        max_layout = QHBoxLayout()
+        max_layout.addWidget(QLabel("Max instances per class:"))
+        self.max_instances_spin = QSpinBox()
+        self.max_instances_spin.setMinimum(1)
+        self.max_instances_spin.setMaximum(20)
+        self.max_instances_spin.setValue(3)
+        self.max_instances_spin.setEnabled(False)
+        max_layout.addWidget(self.max_instances_spin)
+        max_layout.addStretch()
+        config_layout.addLayout(max_layout)
+        
+        config_group.setLayout(config_layout)
+        layout.addWidget(config_group)
+        
+        # Generate button
+        self.generate_abox_btn = QPushButton("Generate A-box")
+        self.generate_abox_btn.setEnabled(False)
+        self.generate_abox_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #FF9800;
+                color: white;
+                font-size: 14px;
+            }
+            QPushButton:hover {
+                background-color: #F57C00;
+            }
+        """)
+        layout.addWidget(self.generate_abox_btn)
+        
+        # Validation section
+        validation_group = QGroupBox("Validation")
+        validation_layout = QHBoxLayout()
+        
+        self.validate_btn = QPushButton("Validate with Reasoner")
+        self.validate_btn.setEnabled(False)
+        validation_layout.addWidget(self.validate_btn)
+        
+        self.validation_status = QLabel("Not validated")
+        self.validation_status.setStyleSheet("color: gray;")
+        validation_layout.addWidget(self.validation_status)
+        
+        validation_layout.addStretch()
+        validation_group.setLayout(validation_layout)
+        layout.addWidget(validation_group)
+        
+        # Output
+        abox_output_group = QGroupBox("Generated A-box (RDF/OWL)")
+        abox_output_layout = QVBoxLayout()
+        self.abox_output_text = QTextEdit()
+        self.abox_output_text.setFont(QFont("Courier", 10))
+        self.abox_output_text.setReadOnly(True)
+        abox_output_layout.addWidget(self.abox_output_text)
+        abox_output_group.setLayout(abox_output_layout)
+        layout.addWidget(abox_output_group)
+        
+        widget.setLayout(layout)
+        return widget
+    
+    def create_json_step(self):
+        """Create the JSON instance generation step widget."""
+        widget = QWidget()
+        layout = QVBoxLayout()
+        
+        # Description
+        desc_label = QLabel("<b>Step 3: JSON Instance Generation</b><br>"
+                          "Transform the A-box to JSON instances conforming to the generated JSON Schema")
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("QLabel { background-color: #e8f5e9; padding: 10px; border-radius: 5px; }")
+        layout.addWidget(desc_label)
+        
+        # Transform button
+        self.transform_json_btn = QPushButton("Transform A-box to JSON")
+        self.transform_json_btn.setEnabled(False)
+        self.transform_json_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #2196F3;
+                color: white;
+                font-size: 14px;
+            }
+            QPushButton:hover {
+                background-color: #1976D2;
+            }
+        """)
+        layout.addWidget(self.transform_json_btn)
+        
+        # Validation
+        validation_group = QGroupBox("Schema Validation")
+        validation_layout = QHBoxLayout()
+        
+        self.validate_json_btn = QPushButton("Validate against Schema")
+        self.validate_json_btn.setEnabled(False)
+        validation_layout.addWidget(self.validate_json_btn)
+        
+        self.json_validation_status = QLabel("Not validated")
+        self.json_validation_status.setStyleSheet("color: gray;")
+        validation_layout.addWidget(self.json_validation_status)
+        
+        validation_layout.addStretch()
+        validation_group.setLayout(validation_layout)
+        layout.addWidget(validation_group)
+        
+        # Output
+        json_output_group = QGroupBox("JSON Instance Output")
+        json_output_layout = QVBoxLayout()
+        self.json_output_text = QTextEdit()
+        self.json_output_text.setFont(QFont("Courier", 10))
+        self.json_output_text.setReadOnly(True)
+        json_output_layout.addWidget(self.json_output_text)
+        json_output_group.setLayout(json_output_layout)
+        layout.addWidget(json_output_group)
+        
+        widget.setLayout(layout)
+        return widget
+    
+    def create_status_bar(self):
+        """Create the status bar with workflow indicators."""
+        self.status_bar = QStatusBar()
+        self.setStatusBar(self.status_bar)
         
         # Progress bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setVisible(False)
-        layout.addWidget(self.progress_bar)
+        self.status_bar.addWidget(self.progress_bar)
         
-        # Status label
-        self.status_label = QLabel("Ready")
-        layout.addWidget(self.status_label)
+        # Status message
+        self.status_message = QLabel("Ready")
+        self.status_bar.addWidget(self.status_message)
         
-        # Action buttons
-        button_layout = QHBoxLayout()
-        button_layout.addStretch()
+        # Add permanent status widgets
+        self.tbox_status = QLabel("T-box: Not Ready")
+        self.tbox_status.setStyleSheet("QLabel { color: red; font-weight: bold; }")
+        self.status_bar.addPermanentWidget(self.tbox_status)
         
-        self.transform_button = QPushButton("Transform")
-        self.transform_button.clicked.connect(self.run_transformation)
-        self.transform_button.setEnabled(False)
-        button_layout.addWidget(self.transform_button)
+        separator1 = QFrame()
+        separator1.setFrameStyle(QFrame.Shape.VLine)
+        self.status_bar.addPermanentWidget(separator1)
         
-        self.save_button = QPushButton("Save Result")
-        self.save_button.clicked.connect(self.save_result)
-        self.save_button.setEnabled(False)
-        button_layout.addWidget(self.save_button)
+        self.abox_status = QLabel("A-box: Not Generated")
+        self.abox_status.setStyleSheet("QLabel { color: gray; }")
+        self.status_bar.addPermanentWidget(self.abox_status)
         
-        layout.addLayout(button_layout)
+        separator2 = QFrame()
+        separator2.setFrameStyle(QFrame.Shape.VLine)
+        self.status_bar.addPermanentWidget(separator2)
         
-        widget.setLayout(layout)
-        return widget
+        self.json_status = QLabel("JSON: Not Available")
+        self.json_status.setStyleSheet("QLabel { color: gray; }")
+        self.status_bar.addPermanentWidget(self.json_status)
+    
+    def update_status(self):
+        """Update the status bar indicators."""
+        # T-box status
+        if self.tbox_ready:
+            self.tbox_status.setText("T-box: Ready ✓")
+            self.tbox_status.setStyleSheet("QLabel { color: green; font-weight: bold; }")
+            self.workflow_tabs.setTabEnabled(1, True)
+            self.enable_abox_controls(True)
+        else:
+            self.tbox_status.setText("T-box: Not Ready")
+            self.tbox_status.setStyleSheet("QLabel { color: red; font-weight: bold; }")
+            self.workflow_tabs.setTabEnabled(1, False)
+            self.workflow_tabs.setTabEnabled(2, False)
+        
+        # A-box status
+        if self.abox_ready:
+            self.abox_status.setText("A-box: Generated ✓")
+            self.abox_status.setStyleSheet("QLabel { color: green; font-weight: bold; }")
+            self.workflow_tabs.setTabEnabled(2, True)
+            self.save_abox_action.setEnabled(True)
+            self.validate_action.setEnabled(True)
+            self.transform_json_btn.setEnabled(True)
+        else:
+            self.abox_status.setText("A-box: Not Generated")
+            self.abox_status.setStyleSheet("QLabel { color: gray; }")
+            self.workflow_tabs.setTabEnabled(2, False)
+            self.save_abox_action.setEnabled(False)
+            self.validate_action.setEnabled(False)
+        
+        # JSON status
+        if self.json_ready:
+            self.json_status.setText("JSON: Available ✓")
+            self.json_status.setStyleSheet("QLabel { color: green; font-weight: bold; }")
+            self.save_json_action.setEnabled(True)
+            self.validate_json_btn.setEnabled(True)
+        else:
+            self.json_status.setText("JSON: Not Available")
+            self.json_status.setStyleSheet("QLabel { color: gray; }")
+            self.save_json_action.setEnabled(False)
+    
+    def enable_abox_controls(self, enabled: bool):
+        """Enable or disable A-box generation controls."""
+        self.base_uri_input.setEnabled(enabled)
+        self.min_instances_spin.setEnabled(enabled)
+        self.max_instances_spin.setEnabled(enabled)
+        self.generate_abox_btn.setEnabled(enabled)
+        
+        style = "" if enabled else "QWidget { color: gray; }"
+        self.base_uri_input.setStyleSheet(style)
+        self.min_instances_spin.setStyleSheet(style)
+        self.max_instances_spin.setStyleSheet(style)
     
     def browse_input_file(self):
         """Browse for input ontology file."""
@@ -628,100 +601,62 @@ class MainWindow(QMainWindow):
         
         if file_path:
             self.input_file = file_path
-            self.input_file_label.setText(file_path)
-            self.transform_button.setEnabled(True)
-            self.log_message(f"Selected input file: {file_path}")
-    
-    def on_input_changed(self, text: str):
-        """Handle changes to the input field."""
-        text = text.strip()
-        if text:
-            self.input_file = text
-            self.transform_button.setEnabled(True)
+            self.file_label.setText(Path(file_path).name)
+            self.transform_btn.setEnabled(True)
             
-            # Log whether it's a URL or file path
-            if text.startswith(('http://', 'https://', 'ftp://')):
-                self.log_message(f"Input URL: {text}")
-            else:
-                self.log_message(f"Input path: {text}")
-        else:
-            self.input_file = None
-            self.transform_button.setEnabled(False)
+            # Load and display file content
+            try:
+                with open(file_path, 'r') as f:
+                    content = f.read()
+                    self.input_text.setPlainText(content[:5000])  # Show first 5000 chars
+            except Exception as e:
+                self.input_text.setPlainText(f"Error loading file: {str(e)}")
     
-    def browse_output_folder(self):
-        """Browse for output folder."""
-        folder_path = QFileDialog.getExistingDirectory(
+    def open_url(self):
+        """Open ontology from URL."""
+        from PyQt6.QtWidgets import QInputDialog
+        
+        url, ok = QInputDialog.getText(
             self,
-            "Select Output Folder",
-            ""
+            "Open from URL",
+            "Enter the URL of the OWL/RDF ontology:",
+            text="https://"
         )
         
-        if folder_path:
-            self.output_folder = folder_path
-            self.output_folder_label.setText(folder_path)
-            self.log_message(f"Selected output folder: {folder_path}")
-    
-    def select_all_rules(self):
-        """Select all transformation rules."""
-        for checkbox in self.rule_checkboxes.values():
-            checkbox.setChecked(True)
-    
-    def deselect_all_rules(self):
-        """Deselect all transformation rules."""
-        for checkbox in self.rule_checkboxes.values():
-            checkbox.setChecked(False)
-    
-    def get_configuration(self) -> Dict[str, Any]:
-        """Get the current configuration from the GUI."""
-        config = {
-            "rules": {},
-            "output": {
-                "format": "json-schema-draft-07",
-                "indent": self.indent_spin.value()
-            }
-        }
-        
-        # Get rule configurations
-        for rule_id, checkbox in self.rule_checkboxes.items():
-            config["rules"][rule_id] = {
-                "enabled": checkbox.isChecked(),
-                "options": {}
-            }
-        
-        # Add language option for annotation rules
-        language = self.language_combo.currentText()
-        if "labels_to_titles" in config["rules"]:
-            config["rules"]["labels_to_titles"]["options"]["language"] = language
-        if "comments_to_descriptions" in config["rules"]:
-            config["rules"]["comments_to_descriptions"]["options"]["language"] = language
-        
-        return config
+        if ok and url:
+            self.input_file = url
+            self.file_label.setText(url)
+            self.transform_btn.setEnabled(True)
+            self.input_text.setPlainText(f"URL: {url}\n\n(Content will be loaded during transformation)")
     
     def run_transformation(self):
-        """Run the transformation."""
+        """Run the T-box transformation."""
         if not self.input_file:
-            QMessageBox.warning(self, "Warning", "Please enter a URL or select an input file first.")
+            QMessageBox.warning(self, "Warning", "Please select an input file first.")
             return
         
-        # Validate URL if it looks like one
-        input_source = self.input_file.strip()
-        if input_source.startswith(('http://', 'https://', 'ftp://')):
-            self.log_message(f"Starting transformation from URL: {input_source}")
-        else:
-            # Check if local file exists
-            from pathlib import Path
-            if not Path(input_source).exists():
-                QMessageBox.warning(self, "Warning", f"File not found: {input_source}")
-                return
-            self.log_message(f"Starting transformation from file: {input_source}")
-        
         self.progress_bar.setVisible(True)
-        self.progress_bar.setRange(0, 0)  # Indeterminate progress
-        self.transform_button.setEnabled(False)
-        self.save_button.setEnabled(False)
+        self.progress_bar.setRange(0, 0)
+        self.transform_btn.setEnabled(False)
         
         # Get configuration
-        config = self.get_configuration()
+        config = {
+            "rules": {
+                "class_to_object": {"enabled": True},
+                "class_hierarchy": {"enabled": True},
+                "class_restrictions": {"enabled": True},
+                "object_property": {"enabled": True},
+                "datatype_property": {"enabled": True},
+                "property_cardinality": {"enabled": True},
+                "labels_to_titles": {"enabled": True, "options": {"language": self.lang_combo.currentText()}},
+                "enumeration_to_enum": {"enabled": True},
+                "ontology_metadata": {"enabled": True}
+            },
+            "output": {
+                "include_uri": self.include_uri_check.isChecked(),
+                "use_arrays": self.use_arrays_check.isChecked()
+            }
+        }
         
         # Create and start worker thread
         self.worker = TransformationWorker(self.input_file, config)
@@ -732,14 +667,12 @@ class MainWindow(QMainWindow):
     
     def on_progress(self, message: str):
         """Handle progress updates."""
-        self.log_message(message)
-        self.status_label.setText(message)
+        self.status_message.setText(message)
     
     def on_error(self, error_message: str):
         """Handle transformation errors."""
-        self.log_message(f"ERROR: {error_message}")
         self.progress_bar.setVisible(False)
-        self.transform_button.setEnabled(True)
+        self.transform_btn.setEnabled(True)
         QMessageBox.critical(self, "Transformation Error", error_message)
     
     def on_transformation_complete(self, result: Dict):
@@ -747,108 +680,57 @@ class MainWindow(QMainWindow):
         self.transformation_result = result
         
         # Display result
-        if self.format_combo.currentText() == "YAML":
-            import yaml
-            output_text = yaml.dump(result, default_flow_style=False, sort_keys=False)
-        else:
-            output_text = json.dumps(result, indent=self.indent_spin.value())
-        
+        output_text = json.dumps(result, indent=2)
         self.output_text.setPlainText(output_text)
         
-        # Update statistics
-        self.update_statistics(result)
+        # Update state
+        self.tbox_ready = True
+        self.update_status()
         
         # Update UI
         self.progress_bar.setVisible(False)
-        self.transform_button.setEnabled(True)
-        self.save_button.setEnabled(True)
-        self.status_label.setText("Transformation completed successfully!")
-        self.log_message("Transformation completed!")
-        
-        # Switch to output tab
-        self.results_tabs.setCurrentIndex(0)
+        self.transform_btn.setEnabled(True)
+        self.status_message.setText("T-box transformation completed!")
     
-    def update_statistics(self, result: Dict):
-        """Update the statistics table."""
-        stats = []
-        
-        # Count definitions
-        if "definitions" in result:
-            stats.append(("Definitions", str(len(result["definitions"]))))
-        
-        # Count properties
-        if "properties" in result:
-            stats.append(("Root Properties", str(len(result["properties"]))))
-        
-        # Count examples
-        if "examples" in result:
-            stats.append(("Examples", str(len(result["examples"]))))
-        
-        # Schema version
-        if "$schema" in result:
-            stats.append(("Schema Version", result["$schema"]))
-        
-        # Update table
-        self.stats_table.setRowCount(len(stats))
-        for i, (key, value) in enumerate(stats):
-            self.stats_table.setItem(i, 0, QTableWidgetItem(key))
-            self.stats_table.setItem(i, 1, QTableWidgetItem(value))
-    
-    def save_result(self):
-        """Save the transformation result."""
+    def save_schema(self):
+        """Save the JSON Schema."""
         if not self.transformation_result:
-            QMessageBox.warning(self, "Warning", "No transformation result to save.")
+            QMessageBox.warning(self, "Warning", "No schema to save. Please run the transformation first.")
             return
-        
-        # Determine default filename
-        if self.input_file:
-            base_name = Path(self.input_file).stem
-            default_name = f"{base_name}_schema.json"
-        else:
-            default_name = "schema.json"
-        
-        # Get save location
-        if self.output_folder:
-            default_path = str(Path(self.output_folder) / default_name)
-        else:
-            default_path = default_name
         
         file_path, _ = QFileDialog.getSaveFileName(
             self,
             "Save JSON Schema",
-            default_path,
-            "JSON Files (*.json);;YAML Files (*.yaml *.yml);;All Files (*.*)"
+            "schema.json",
+            "JSON Files (*.json);;All Files (*.*)"
         )
         
         if file_path:
             try:
-                path = Path(file_path)
-                
-                if path.suffix in ['.yaml', '.yml'] or self.format_combo.currentText() == "YAML":
-                    import yaml
-                    content = yaml.dump(self.transformation_result, default_flow_style=False, sort_keys=False)
-                else:
-                    content = json.dumps(self.transformation_result, indent=self.indent_spin.value())
-                
-                path.write_text(content)
-                self.log_message(f"Saved result to: {file_path}")
+                with open(file_path, 'w') as f:
+                    json.dump(self.transformation_result, f, indent=2)
                 QMessageBox.information(self, "Success", f"Schema saved to:\n{file_path}")
-                
             except Exception as e:
                 QMessageBox.critical(self, "Save Error", f"Failed to save file:\n{str(e)}")
     
-    def log_message(self, message: str):
-        """Add a message to the log."""
-        from datetime import datetime
-        timestamp = datetime.now().strftime("%H:%M:%S")
-        self.log_text.append(f"[{timestamp}] {message}")
+    def save_abox(self):
+        """Save the generated A-box."""
+        QMessageBox.information(self, "Not Implemented", 
+                               "A-box generation functionality will be implemented in the next phase.")
+    
+    def save_json(self):
+        """Save the JSON instances."""
+        QMessageBox.information(self, "Not Implemented", 
+                               "JSON instance generation functionality will be implemented in the next phase.")
     
     def show_about(self):
         """Show about dialog."""
         QMessageBox.about(
             self,
             "About OWL to JSON Schema Converter",
-            "Version 0.1 - August 2025\n\n"
-            "© Airy Magnien (Airy59 on GitHub)\n\n"
-            "https://github.com/airymagnien/owl2jsonschema"
+            "OWL to JSON Schema Converter\n"
+            "Version 1.0\n\n"
+            "A tool for transforming OWL ontologies to JSON Schema\n"
+            "with T-box/A-box workflow support.\n\n"
+            "© 2024 All rights reserved."
         )

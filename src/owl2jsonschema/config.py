@@ -155,22 +155,32 @@ class TransformationConfig:
                 },
                 "class_restrictions": {
                     "enabled": True,
-                    "options": {}
+                    "options": {
+                        # In OWL, restrictions without explicit cardinality imply 0..*
+                        "use_arrays_for_restrictions": True
+                    }
                 },
                 
                 # Property transformations
                 "object_property": {
                     "enabled": True,
-                    "options": {}
+                    "options": {
+                        # In OWL, properties without cardinality have indeterminate multiplicity (0..*)
+                        # Only functional properties have cardinality 0..1
+                        "arrays_for_non_functional": True
+                    }
                 },
                 "datatype_property": {
                     "enabled": True,
-                    "options": {}
+                    "options": {
+                        # Same as object properties - default to arrays for non-functional properties
+                        "arrays_for_non_functional": True
+                    }
                 },
                 "property_cardinality": {
                     "enabled": True,
                     "options": {
-                        "use_arrays": True
+                        "use_arrays": True  # Default to arrays for indeterminate multiplicities
                     }
                 },
                 "property_restrictions": {

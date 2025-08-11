@@ -13,30 +13,64 @@ from ..builder import ReferenceResolver
 class EnumerationToEnumRule(TransformationRule):
     """Transform OWL enumerations (oneOf) to JSON Schema enum."""
     
+    def visit_ontology(self, ontology: OntologyModel) -> Dict[str, Any]:
+        """Process all classes in the ontology for enumerations."""
+        if not self.is_enabled():
+            return None
+        
+        enum_updates = {}
+        
+        for owl_class in ontology.classes:
+            if "enumeration" in owl_class.annotations:
+                class_name = self._get_class_name(owl_class.uri)
+                enum_schema = self._create_enum_schema(owl_class)
+                if enum_schema:
+                    enum_updates[class_name] = enum_schema
+        
+        return {"enum_updates": enum_updates} if enum_updates else None
+    
     def visit_class(self, owl_class: OntologyClass) -> Dict[str, Any]:
         """Check if a class is defined as an enumeration."""
         if not self.is_enabled():
             return None
         
-        # This would need to be detected during parsing
-        # For now, we'll check annotations for a special marker
+        # Check if the class has enumeration values in its annotations
         if "enumeration" in owl_class.annotations:
-            values = owl_class.annotations.get("enumeration", [])
-            if values:
-                use_labels = self.get_option("use_labels", True)
-                
-                if use_labels:
-                    # Try to use labels if available
-                    enum_values = []
-                    for value in values:
-                        # In a real implementation, we'd look up the label for each individual
-                        enum_values.append(value)
-                    return {"enum": enum_values}
-                else:
-                    # Use URIs directly
-                    return {"enum": values}
+            return self._create_enum_schema(owl_class)
         
         return None
+    
+    def _create_enum_schema(self, owl_class: OntologyClass) -> Dict[str, Any]:
+        """Create an enum schema for a class."""
+        values = owl_class.annotations.get("enumeration", [])
+        if not values:
+            return None
+        
+        # Create the enum schema
+        schema = {
+            "type": "string",
+            "enum": values
+        }
+        
+        # Add title from label if available
+        label = owl_class.get_label(self.get_option("language", "en"))
+        if label:
+            schema["title"] = label
+        
+        # Add description from comment if available
+        comment = owl_class.get_comment(self.get_option("language", "en"))
+        if comment:
+            schema["description"] = comment
+        
+        return schema
+    
+    def _get_class_name(self, uri: str) -> str:
+        """Extract class name from URI."""
+        if '#' in uri:
+            return uri.split('#')[-1]
+        elif '/' in uri:
+            return uri.split('/')[-1]
+        return uri
 
 
 class UnionToAnyOfRule(TransformationRule):

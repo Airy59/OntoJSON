@@ -1,0 +1,178 @@
+@prefix : <https://cdm.ovh/test/owl_to_json_schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tojs: <https://cdm.ovh/test/owl_to_json_schema#> .
+@base <https://cdm.ovh/test/owl_to_json_schema> .
+
+<https://cdm.ovh/test/owl_to_json_schema> rdf:type owl:Ontology ;
+                                           owl:versionIRI <urn:absolute:1.0> .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#dateTime
+xsd:dateTime rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://cdm.ovh/test/owl_to_json_schema#composedOf
+tojs:composedOf rdf:type owl:ObjectProperty ;
+                owl:inverseOf tojs:partOf ;
+                rdf:type owl:InverseFunctionalProperty ;
+                rdfs:range tojs:RollingStock ;
+                rdfs:label "composed of"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#ofType
+tojs:ofType rdf:type owl:ObjectProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain tojs:Vehicle ;
+            rdfs:range tojs:VehicleType .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#partOf
+tojs:partOf rdf:type owl:ObjectProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:label "part of"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://cdm.ovh/test/owl_to_json_schema#creationDate
+tojs:creationDate rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain tojs:LegalEntity ;
+                  rdfs:range xsd:dateTime ;
+                  rdfs:label "creation date"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://cdm.ovh/test/owl_to_json_schema#CateringCompany
+tojs:CateringCompany rdf:type owl:Class ;
+                     rdfs:subClassOf tojs:Company ;
+                     rdfs:label "Catering company"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#Company
+tojs:Company rdf:type owl:Class ;
+             rdfs:subClassOf tojs:LegalEntity ;
+             rdfs:label "Company"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#Formation
+tojs:Formation rdf:type owl:Class ;
+               rdfs:subClassOf tojs:RollingStock ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty tojs:composedOf ;
+                                 owl:allValuesFrom tojs:RollingStock
+                               ] ;
+               owl:disjointWith tojs:Vehicle ;
+               rdfs:label "Formation"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#InfrastructureManager
+tojs:InfrastructureManager rdf:type owl:Class ;
+                           rdfs:subClassOf tojs:Company ,
+                                           tojs:Stakeholder ;
+                           rdfs:label "Infrastructure manager"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#LegalEntity
+tojs:LegalEntity rdf:type owl:Class ;
+                 rdfs:label "Legal entity"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#RailwayUndertaking
+tojs:RailwayUndertaking rdf:type owl:Class ;
+                        rdfs:subClassOf tojs:Company ,
+                                        tojs:Stakeholder ;
+                        rdfs:label "Railway undertaking"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#RollingStock
+tojs:RollingStock rdf:type owl:Class ;
+                  rdfs:label "Rolling stock"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#Stakeholder
+tojs:Stakeholder rdf:type owl:Class ;
+                 rdfs:label "Stakeholder"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#Vehicle
+tojs:Vehicle rdf:type owl:Class ;
+             rdfs:subClassOf tojs:RollingStock ;
+             rdfs:label "Vehicle"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#VehicleType
+tojs:VehicleType rdf:type owl:Class ;
+                 rdfs:subClassOf [ rdf:type owl:Class ;
+                                   owl:oneOf ( tojs:Locomotive
+                                               tojs:Wagon
+                                             )
+                                 ] ;
+                 rdfs:label "Vehicle type"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://cdm.ovh/test/owl_to_json_schema#Locomotive
+tojs:Locomotive rdf:type owl:NamedIndividual ;
+                rdfs:label "Locomotive"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#Wagon
+tojs:Wagon rdf:type owl:NamedIndividual .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#my_formation
+tojs:my_formation rdf:type owl:NamedIndividual ,
+                           tojs:Formation ;
+                  rdfs:label "my formation"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#my_locomotive
+tojs:my_locomotive rdf:type owl:NamedIndividual ,
+                            tojs:Vehicle ;
+                   rdfs:label "my locomotive"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#my_wagon_1
+tojs:my_wagon_1 rdf:type owl:NamedIndividual ,
+                         tojs:Vehicle ;
+                rdfs:label "my wagon 1"@en .
+
+
+###  https://cdm.ovh/test/owl_to_json_schema#my_wagon_2
+tojs:my_wagon_2 rdf:type owl:NamedIndividual ,
+                         tojs:Vehicle .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:Class ;
+  owl:oneOf ( tojs:Locomotive
+              tojs:Wagon
+            ) ;
+  rdfs:subClassOf tojs:VehicleType
+] .
+
+
+###  Generated by the OWL API (version 4.5.29) https://github.com/owlcs/owlapi

@@ -46,7 +46,25 @@ class OntologyParser:
         
         # Parse the file into an RDF graph
         self.graph = Graph()
-        self.graph.parse(file_path, format=format)
+        
+        # If format not specified, try to detect it
+        if format is None:
+            format = self._detect_format(file_path)
+        
+        try:
+            self.graph.parse(file_path, format=format)
+        except Exception as e:
+            # If parsing fails and format was auto-detected, try alternative formats
+            if format == 'xml':
+                # The file might be Turtle despite .owl extension
+                try:
+                    self.graph = Graph()  # Reset graph
+                    self.graph.parse(file_path, format='turtle')
+                except:
+                    # If Turtle also fails, re-raise original error
+                    raise e
+            else:
+                raise e
         
         # Extract namespace information
         self._extract_namespaces()
@@ -138,10 +156,16 @@ class OntologyParser:
             if comments:
                 owl_class.comment = comments
             
-            # Get super classes
+            # Get super classes and check for enumerations
             for super_class in self.graph.objects(class_uri, RDFS.subClassOf):
                 if isinstance(super_class, URIRef):
                     owl_class.super_classes.append(str(super_class))
+                elif isinstance(super_class, BNode):
+                    # Check if this is an enumeration (oneOf)
+                    enum_values = self._parse_enumeration(super_class)
+                    if enum_values:
+                        # Store enumeration values in annotations for the EnumerationToEnumRule
+                        owl_class.annotations["enumeration"] = enum_values
             
             # Get equivalent classes
             for equiv_class in self.graph.objects(class_uri, OWL.equivalentClass):
@@ -157,7 +181,8 @@ class OntologyParser:
             self._parse_class_restrictions(class_uri, owl_class)
             
             # Get other annotations
-            owl_class.annotations = self._get_annotations(class_uri)
+            annotations = self._get_annotations(class_uri)
+            owl_class.annotations.update(annotations)
             
             self.ontology.classes.append(owl_class)
     
@@ -216,6 +241,21 @@ class OntologyParser:
             obj_prop.annotations = self._get_annotations(prop_uri)
             
             self.ontology.object_properties.append(obj_prop)
+        
+        # Post-process to ensure bidirectional inverse relationships
+        self._ensure_bidirectional_inverses()
+    
+    def _ensure_bidirectional_inverses(self):
+        """Ensure that inverse relationships are bidirectional."""
+        # Create a map of property URIs to properties for quick lookup
+        prop_map = {prop.uri: prop for prop in self.ontology.object_properties}
+        
+        # For each property with an inverse, ensure the inverse also points back
+        for prop in self.ontology.object_properties:
+            if prop.inverse_of:
+                inverse_prop = prop_map.get(prop.inverse_of)
+                if inverse_prop and not inverse_prop.inverse_of:
+                    inverse_prop.inverse_of = prop.uri
     
     def _parse_datatype_properties(self):
         """Parse OWL datatype properties from the graph."""
@@ -359,6 +399,55 @@ class OntologyParser:
         
         return None
     
+    def _parse_enumeration(self, node: BNode) -> Optional[List[str]]:
+        """Parse an enumeration (oneOf) from a blank node."""
+        # Check if this node has an owl:oneOf property
+        for one_of in self.graph.objects(node, OWL.oneOf):
+            # Parse the RDF list
+            enum_values = []
+            current = one_of
+            while current and current != RDF.nil:
+                # Get the first element
+                for first in self.graph.objects(current, RDF.first):
+                    if isinstance(first, URIRef):
+                        # Extract the local name for the enum value
+                        enum_values.append(self._get_enum_value(first))
+                    break
+                
+                # Move to the rest of the list
+                next_node = None
+                for rest in self.graph.objects(current, RDF.rest):
+                    next_node = rest
+                    break
+                current = next_node
+            
+            if enum_values:
+                return enum_values
+        
+        return None
+    
+    def _get_enum_value(self, uri: URIRef) -> str:
+        """Get the enum value from a URI."""
+        # First try to get label
+        labels = self._get_labels(uri)
+        if labels:
+            if isinstance(labels, str):
+                return labels
+            elif isinstance(labels, dict):
+                # Prefer English label
+                return labels.get("en", labels.get("default", self._get_local_name(str(uri))))
+        
+        # Fall back to the local name (without prefix)
+        return self._get_local_name(str(uri))
+    
+    def _get_local_name(self, uri: str) -> str:
+        """Get the local name from a URI without prefix."""
+        if '#' in uri:
+            return uri.split('#')[-1]
+        elif '/' in uri:
+            return uri.split('/')[-1]
+        return uri
+    
     def _parse_ontology_metadata(self):
         """Parse ontology-level metadata."""
         ontology_uri = URIRef(self.ontology.uri) if self.ontology.uri else None
@@ -451,6 +540,64 @@ class OntologyParser:
             return uri.split('/')[-1]
         
         return uri
+    
+    def _detect_format(self, file_path: str) -> Optional[str]:
+        """
+        Detect the RDF format from file extension or content.
+        
+        Args:
+            file_path: Path to the file
+            
+        Returns:
+            Detected format string or None
+        """
+        import os
+        
+        # First try by extension
+        ext = os.path.splitext(file_path)[1].lower()
+        
+        # Common extensions
+        extension_map = {
+            '.ttl': 'turtle',
+            '.turtle': 'turtle',
+            '.n3': 'n3',
+            '.nt': 'nt',
+            '.ntriples': 'nt',
+            '.jsonld': 'json-ld',
+            '.json': 'json-ld',
+            '.rdf': 'xml',
+            '.rdfs': 'xml',
+            '.owl': 'xml',  # Default to XML for .owl, but we'll try Turtle if it fails
+            '.xml': 'xml'
+        }
+        
+        if ext in extension_map:
+            return extension_map[ext]
+        
+        # If no extension match, try to detect from content
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                # Read first few lines
+                content = f.read(1000).strip()
+                
+                # Check for common patterns
+                if content.startswith('<?xml'):
+                    return 'xml'
+                elif content.startswith('{') or content.startswith('['):
+                    return 'json-ld'
+                elif '@prefix' in content or '@base' in content:
+                    return 'turtle'
+                elif content.startswith('<') and '>' in content and not content.startswith('<?xml'):
+                    # Could be N-Triples or Turtle with URIs
+                    if '.' in content.split('\n')[0]:
+                        return 'nt'
+                    else:
+                        return 'turtle'
+        except:
+            pass
+        
+        # Default to None (let rdflib guess)
+        return None
     
     def _configure_ssl_for_rdflib(self):
         """Configure SSL context for rdflib's URL fetching (especially for JSON-LD contexts)."""

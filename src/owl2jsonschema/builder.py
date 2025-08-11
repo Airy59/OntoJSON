@@ -159,14 +159,31 @@ class SchemaBuilder:
         if self.properties:
             self.schema["type"] = "object"
             self.schema["properties"] = self.properties
-        
-        # Add required if any
-        if self.required:
-            self.schema["required"] = self.required
+            
+            # Add required if any
+            if self.required:
+                self.schema["required"] = self.required
+        elif self.definitions:
+            # If we only have definitions and no root properties,
+            # create a schema that references one of the definitions
+            # or allows any of them
+            if not self.schema.get("type"):
+                # Make it a definitions-only schema with a default type
+                self.schema["type"] = "object"
+                self.schema["additionalProperties"] = False
+                # Optionally, we could add a oneOf to allow any of the defined types
+                # self.schema["oneOf"] = [
+                #     {"$ref": f"#/definitions/{name}"}
+                #     for name in self.definitions.keys()
+                # ]
         
         # Add examples if any
         if self.examples:
             self.schema["examples"] = self.examples
+        
+        # Ensure we have at least a basic structure
+        if "type" not in self.schema and "definitions" not in self.schema:
+            self.schema["type"] = "object"
         
         return deepcopy(self.schema)
     
