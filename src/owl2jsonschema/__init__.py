@@ -9,5 +9,6 @@ __version__ = "0.1.0"
 from .engine import TransformationEngine
 from .config import TransformationConfig
 from .parser import OntologyParser
+from .abox_generator import ABoxGenerator
 
-__all__ = ["TransformationEngine", "TransformationConfig", "OntologyParser"]
+__all__ = ["TransformationEngine", "TransformationConfig", "OntologyParser", "ABoxGenerator"]

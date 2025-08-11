@@ -18,8 +18,8 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont, QAction, QIcon
 
-# Import the transformation engine
-from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+# Import the transformation engine and A-box generator
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser, ABoxGenerator
 
 
 class TransformationWorker(QThread):
@@ -93,6 +93,9 @@ class TransformationWorker(QThread):
             self.progress.emit(f"Parsed {len(ontology.classes)} classes, "
                              f"{len(ontology.object_properties)} object properties, "
                              f"{len(ontology.datatype_properties)} datatype properties")
+            
+            # Store ontology model for A-box generation
+            self.ontology_model = ontology
             
             self.progress.emit("Running transformation...")
             config = TransformationConfig(self.config)
@@ -339,13 +342,26 @@ class MainWindow(QMainWindow):
         owl_group.setLayout(owl_layout)
         output_splitter.addWidget(owl_group)
         
-        # JSON Schema output
+        # JSON Schema output with tabs
         schema_group = QGroupBox("JSON Schema Output")
         schema_layout = QVBoxLayout()
+        
+        # Create tab widget for schema and statistics
+        self.schema_tabs = QTabWidget()
+        
+        # Schema tab
         self.output_text = QTextEdit()
         self.output_text.setFont(QFont("Courier", 10))
         self.output_text.setReadOnly(True)
-        schema_layout.addWidget(self.output_text)
+        self.schema_tabs.addTab(self.output_text, "Schema")
+        
+        # Statistics tab
+        self.stats_text = QTextEdit()
+        self.stats_text.setFont(QFont("Courier", 10))
+        self.stats_text.setReadOnly(True)
+        self.schema_tabs.addTab(self.stats_text, "Statistics")
+        
+        schema_layout.addWidget(self.schema_tabs)
         schema_group.setLayout(schema_layout)
         output_splitter.addWidget(schema_group)
         
@@ -406,6 +422,7 @@ class MainWindow(QMainWindow):
         # Generate button
         self.generate_abox_btn = QPushButton("Generate A-box")
         self.generate_abox_btn.setEnabled(False)
+        self.generate_abox_btn.clicked.connect(self.generate_abox)
         self.generate_abox_btn.setStyleSheet("""
             QPushButton {
                 background-color: #FF9800;
@@ -679,9 +696,17 @@ class MainWindow(QMainWindow):
         """Handle transformation completion."""
         self.transformation_result = result
         
+        # Store the ontology model for A-box generation
+        if hasattr(self.worker, 'ontology_model'):
+            self.ontology_model = self.worker.ontology_model
+        
         # Display result
         output_text = json.dumps(result, indent=2)
         self.output_text.setPlainText(output_text)
+        
+        # Generate and display statistics
+        stats = self.generate_statistics(result)
+        self.stats_text.setPlainText(stats)
         
         # Update state
         self.tbox_ready = True
@@ -691,6 +716,124 @@ class MainWindow(QMainWindow):
         self.progress_bar.setVisible(False)
         self.transform_btn.setEnabled(True)
         self.status_message.setText("T-box transformation completed!")
+    
+    def generate_statistics(self, schema: Dict) -> str:
+        """Generate transformation statistics from the schema."""
+        stats = []
+        stats.append("=" * 50)
+        stats.append("TRANSFORMATION STATISTICS")
+        stats.append("=" * 50)
+        stats.append("")
+        
+        # Count definitions
+        definitions = schema.get('definitions', {})
+        num_definitions = len(definitions)
+        stats.append(f"Total Definitions: {num_definitions}")
+        stats.append("")
+        
+        # Analyze each definition
+        class_count = 0
+        property_counts = {}
+        required_counts = {}
+        total_properties = 0
+        
+        for def_name, def_schema in definitions.items():
+            if def_schema.get('type') == 'object':
+                class_count += 1
+                
+                # Count properties
+                properties = def_schema.get('properties', {})
+                prop_count = len(properties)
+                property_counts[def_name] = prop_count
+                total_properties += prop_count
+                
+                # Count required properties
+                required = def_schema.get('required', [])
+                required_counts[def_name] = len(required)
+        
+        stats.append(f"Object Types: {class_count}")
+        stats.append(f"Total Properties: {total_properties}")
+        if class_count > 0:
+            avg_properties = total_properties / class_count
+            stats.append(f"Average Properties per Object: {avg_properties:.1f}")
+        stats.append("")
+        
+        # Detailed breakdown
+        stats.append("-" * 50)
+        stats.append("DETAILED BREAKDOWN")
+        stats.append("-" * 50)
+        stats.append("")
+        
+        for def_name in sorted(definitions.keys()):
+            def_schema = definitions[def_name]
+            stats.append(f"• {def_name}")
+            
+            # Type
+            if 'type' in def_schema:
+                stats.append(f"  Type: {def_schema['type']}")
+            
+            # Properties count
+            if def_name in property_counts:
+                stats.append(f"  Properties: {property_counts[def_name]}")
+                
+                # List property names
+                properties = def_schema.get('properties', {})
+                if properties:
+                    prop_names = sorted(properties.keys())
+                    for prop_name in prop_names:
+                        prop_schema = properties[prop_name]
+                        prop_type = prop_schema.get('type', 'unknown')
+                        if '$ref' in prop_schema:
+                            prop_type = f"ref to {prop_schema['$ref'].split('/')[-1]}"
+                        elif 'items' in prop_schema and '$ref' in prop_schema['items']:
+                            prop_type = f"array of {prop_schema['items']['$ref'].split('/')[-1]}"
+                        stats.append(f"    - {prop_name}: {prop_type}")
+            
+            # Required properties
+            if def_name in required_counts and required_counts[def_name] > 0:
+                stats.append(f"  Required Properties: {required_counts[def_name]}")
+                required = def_schema.get('required', [])
+                if required:
+                    stats.append(f"    {', '.join(required)}")
+            
+            # Enum values
+            if 'enum' in def_schema:
+                stats.append(f"  Enum Values: {len(def_schema['enum'])}")
+                stats.append(f"    {', '.join(str(v) for v in def_schema['enum'][:10])}")
+                if len(def_schema['enum']) > 10:
+                    stats.append(f"    ... and {len(def_schema['enum']) - 10} more")
+            
+            # AllOf references
+            if 'allOf' in def_schema:
+                refs = [item.get('$ref', '').split('/')[-1] for item in def_schema['allOf'] if '$ref' in item]
+                if refs:
+                    stats.append(f"  Inherits from: {', '.join(refs)}")
+            
+            stats.append("")
+        
+        # Summary
+        stats.append("-" * 50)
+        stats.append("SUMMARY")
+        stats.append("-" * 50)
+        
+        # Calculate complexity metrics
+        simple_types = sum(1 for d in definitions.values() if d.get('type') not in ['object', 'array'])
+        complex_types = num_definitions - simple_types
+        
+        stats.append(f"Simple Types: {simple_types}")
+        stats.append(f"Complex Types: {complex_types}")
+        
+        # Count inheritance relationships
+        inheritance_count = sum(1 for d in definitions.values() if 'allOf' in d)
+        if inheritance_count > 0:
+            stats.append(f"Inheritance Relationships: {inheritance_count}")
+        
+        # Count enumerations
+        enum_count = sum(1 for d in definitions.values() if 'enum' in d)
+        if enum_count > 0:
+            stats.append(f"Enumerations: {enum_count}")
+        
+        return "\n".join(stats)
     
     def save_schema(self):
         """Save the JSON Schema."""
@@ -713,10 +856,93 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 QMessageBox.critical(self, "Save Error", f"Failed to save file:\n{str(e)}")
     
+    def generate_abox(self):
+        """Generate the A-box based on the T-box."""
+        if not self.ontology_model:
+            QMessageBox.warning(self, "Warning", "Please transform the T-box first.")
+            return
+        
+        try:
+            # Get configuration
+            base_uri = self.base_uri_input.text().strip()
+            if not base_uri:
+                base_uri = "https://example.org#"
+            
+            min_instances = self.min_instances_spin.value()
+            max_instances = self.max_instances_spin.value()
+            
+            # Ensure min <= max
+            if min_instances > max_instances:
+                QMessageBox.warning(self, "Warning", "Minimum instances cannot be greater than maximum instances.")
+                return
+            
+            # Update status
+            self.status_message.setText("Generating A-box...")
+            self.generate_abox_btn.setEnabled(False)
+            
+            # Generate A-box
+            generator = ABoxGenerator(self.ontology_model, base_uri)
+            abox_graph = generator.generate(min_instances, max_instances)
+            
+            # Serialize to Turtle format
+            abox_content = generator.serialize(format='turtle')
+            
+            # Display in output
+            self.abox_output_text.setPlainText(abox_content)
+            
+            # Store for later use
+            self.abox_data = abox_graph
+            
+            # Update state
+            self.abox_ready = True
+            self.update_status()
+            
+            # Update UI
+            self.generate_abox_btn.setEnabled(True)
+            self.validation_status.setText("Not validated")
+            self.validation_status.setStyleSheet("color: gray;")
+            self.status_message.setText("A-box generated successfully!")
+            
+            QMessageBox.information(self, "Success",
+                                  f"A-box generated with {len(list(abox_graph.subjects(predicate=None, object=None)))} individuals.")
+            
+        except Exception as e:
+            self.generate_abox_btn.setEnabled(True)
+            QMessageBox.critical(self, "Generation Error", f"Failed to generate A-box:\n{str(e)}")
+    
     def save_abox(self):
         """Save the generated A-box."""
-        QMessageBox.information(self, "Not Implemented", 
-                               "A-box generation functionality will be implemented in the next phase.")
+        if not self.abox_data:
+            QMessageBox.warning(self, "Warning", "No A-box to save. Please generate the A-box first.")
+            return
+        
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save A-box",
+            "abox.ttl",
+            "Turtle Files (*.ttl);;RDF/XML Files (*.rdf *.xml);;N-Triples Files (*.nt);;All Files (*.*)"
+        )
+        
+        if file_path:
+            try:
+                # Determine format from file extension
+                if file_path.endswith('.ttl'):
+                    format = 'turtle'
+                elif file_path.endswith('.rdf') or file_path.endswith('.xml'):
+                    format = 'xml'
+                elif file_path.endswith('.nt'):
+                    format = 'nt'
+                else:
+                    format = 'turtle'  # Default
+                
+                # Serialize and save
+                content = self.abox_data.serialize(format=format)
+                with open(file_path, 'w') as f:
+                    f.write(content)
+                
+                QMessageBox.information(self, "Success", f"A-box saved to:\n{file_path}")
+            except Exception as e:
+                QMessageBox.critical(self, "Save Error", f"Failed to save file:\n{str(e)}")
     
     def save_json(self):
         """Save the JSON instances."""
