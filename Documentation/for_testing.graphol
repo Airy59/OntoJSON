@@ -436,6 +436,8 @@
         <iri>
           <value>https://cdm.ovh/test/owl_to_json_schema#composedOf</value>
           <inverseFunctional/>
+          <asymmetric/>
+          <irreflexive/>
           <annotations>
             <annotation>
               <subject>https://cdm.ovh/test/owl_to_json_schema#composedOf</subject>
@@ -653,9 +655,9 @@
           <label customSize="0" size="12" width="39" x="740" height="23" y="-162">exists</label>
         </node>
         <node id="n4" type="role" color="#fcfcfc">
-          <geometry width="70" x="-40" height="50" y="-140"/>
+          <geometry width="70" x="-41" height="50" y="-140"/>
           <iri>https://cdm.ovh/test/owl_to_json_schema#composedOf</iri>
-          <label customSize="0" size="12" width="78" x="-40" height="23" y="-170"/>
+          <label customSize="0" size="12" width="78" x="-41" height="23" y="-170"/>
         </node>
         <node id="n40" type="role" color="#fcfcfc">
           <geometry width="70" x="-240" height="50" y="-140"/>
@@ -692,7 +694,7 @@
         </edge>
         <edge id="e108" type="equivalence" target="n4" source="n41">
           <point x="-140" y="-140"/>
-          <point x="-40" y="-140"/>
+          <point x="-41" y="-140"/>
         </edge>
         <edge id="e11" type="input" target="n14" source="n15">
           <point x="480" y="400"/>
@@ -752,7 +754,7 @@
           <point x="-40" y="230"/>
         </edge>
         <edge id="e7" type="input" target="n5" source="n4">
-          <point x="-40" y="-140"/>
+          <point x="-41" y="-140"/>
           <point x="70" y="-140"/>
         </edge>
         <edge id="e77" type="input" target="n6" source="n3">
@@ -760,7 +762,7 @@
           <point x="-40" y="120"/>
         </edge>
         <edge id="e8" type="input" target="n6" source="n4">
-          <point x="-40" y="-140"/>
+          <point x="-41" y="-140"/>
           <point x="-40" y="120"/>
         </edge>
         <edge id="e80" type="inclusion" target="n3" source="n5">

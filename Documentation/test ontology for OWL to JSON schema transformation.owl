@@ -25,7 +25,9 @@ xsd:dateTime rdf:type rdfs:Datatype .
 ###  https://cdm.ovh/test/owl_to_json_schema#composedOf
 tojs:composedOf rdf:type owl:ObjectProperty ;
                 owl:inverseOf tojs:partOf ;
-                rdf:type owl:InverseFunctionalProperty ;
+                rdf:type owl:InverseFunctionalProperty ,
+                         owl:AsymmetricProperty ,
+                         owl:IrreflexiveProperty ;
                 rdfs:range tojs:RollingStock ;
                 rdfs:label "composed of"@en .
 

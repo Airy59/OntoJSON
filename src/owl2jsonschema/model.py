@@ -106,6 +106,9 @@ class ObjectProperty(OntologyProperty):
     inverse_functional: bool = False
     transitive: bool = False
     symmetric: bool = False
+    asymmetric: bool = False
+    irreflexive: bool = False
+    reflexive: bool = False
     
     def accept(self, visitor):
         """Accept a visitor for the visitor pattern."""

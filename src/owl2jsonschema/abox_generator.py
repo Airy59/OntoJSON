@@ -90,9 +90,33 @@ class ABoxGenerator:
     
     def _is_concrete_class(self, owl_class: OntologyClass) -> bool:
         """Check if a class is concrete (not abstract)."""
-        # For now, consider all non-Thing classes as concrete
-        # Could be enhanced to check for abstract markers
-        return owl_class.uri != "http://www.w3.org/2002/07/owl#Thing"
+        # Skip owl:Thing
+        if owl_class.uri == "http://www.w3.org/2002/07/owl#Thing":
+            return False
+        
+        # Skip enumerations (classes with oneOf restrictions - they have predefined individuals)
+        if "enumeration" in owl_class.annotations:
+            return False
+        
+        # Skip classes that are disjoint unions of other classes (abstract classes)
+        # These typically have subclasses but no direct instances
+        # Heuristic: if a class has multiple subclasses in our ontology, it's likely abstract
+        subclass_count = sum(1 for cls in self.ontology.classes
+                           if owl_class.uri in cls.super_classes)
+        
+        # If it has 2+ subclasses and they cover the class (disjoint union), skip it
+        if subclass_count >= 2:
+            # Check if subclasses are disjoint with each other
+            subclasses = [cls for cls in self.ontology.classes
+                         if owl_class.uri in cls.super_classes]
+            
+            # If any pair of subclasses are disjoint, this is likely a disjoint union
+            for i, cls1 in enumerate(subclasses):
+                for cls2 in subclasses[i+1:]:
+                    if cls2.uri in cls1.disjoint_with or cls1.uri in cls2.disjoint_with:
+                        return False  # This is an abstract disjoint union class
+        
+        return True
     
     def _generate_class_individuals(self, class_uri: str, owl_class: OntologyClass, num_instances: int):
         """Generate individuals for a specific class."""
@@ -121,10 +145,8 @@ class ABoxGenerator:
             self.individuals[class_uri].append(individual_uri)
             self.individual_classes[individual_uri] = class_uri
             
-            # Handle superclasses
-            for superclass in owl_class.super_classes:
-                if superclass != "http://www.w3.org/2002/07/owl#Thing":
-                    self.graph.add((individual_uri, RDF.type, URIRef(superclass)))
+            # Don't add redundant superclass assertions - these are inferred
+            # Only the most specific class type is needed
     
     def _generate_property_assertions(self):
         """Generate property assertions for all individuals."""
@@ -149,6 +171,10 @@ class ABoxGenerator:
             # Get cardinality constraints
             min_card, max_card = self._get_property_cardinality(owl_class, prop_uri)
             
+            # FUNCTIONAL PROPERTY CHECK - functional properties can have at most 1 value
+            if prop.functional:
+                max_card = 1
+            
             # Only generate if we have a minimum cardinality requirement or randomly decide to
             if min_card == 0 and random.random() > 0.5:  # 50% chance if not required
                 continue
@@ -160,7 +186,7 @@ class ABoxGenerator:
                 max_val = min(max_card if max_card > 0 else 3, 3)
                 num_values = random.randint(min_card, max_val)
             
-            # Generate values
+            # Generate values (but only one for functional properties)
             for _ in range(num_values):
                 value = self._generate_datatype_value(prop)
                 if value is not None:
@@ -168,31 +194,82 @@ class ABoxGenerator:
     
     def _generate_object_properties(self, individual: URIRef, owl_class: OntologyClass):
         """Generate object property assertions for an individual."""
-        # Get all applicable object properties
+        # Get all applicable object properties (already filtered by domain)
         applicable_properties = self._get_applicable_object_properties(owl_class)
         
         for prop_uri, prop in applicable_properties:
-            # Get possible target individuals first - if none exist, skip this property
+            # Get possible target individuals - must match range
             target_individuals = self._get_target_individuals(prop)
             if not target_individuals:
                 continue
             
+            # Filter out invalid targets based on property characteristics
+            valid_targets = []
+            for target in target_individuals:
+                # Check irreflexive constraint - cannot link to self
+                if hasattr(prop, 'irreflexive') and prop.irreflexive and target == individual:
+                    continue
+                
+                # Check asymmetric constraint - if A relates to B, B cannot relate to A
+                if hasattr(prop, 'asymmetric') and prop.asymmetric:
+                    # Check if target already has this property pointing to source
+                    if (target, URIRef(prop_uri), individual) in self.graph:
+                        continue
+                
+                valid_targets.append(target)
+            
+            if not valid_targets:
+                continue
+            
+            target_individuals = valid_targets
+            
             # Get cardinality constraints
             min_card, max_card = self._get_property_cardinality(owl_class, prop_uri)
             
-            # Only generate if we have a minimum cardinality requirement or randomly decide to
-            if min_card == 0 and random.random() > 0.3:  # 30% chance if not required
+            # FUNCTIONAL PROPERTY CHECK - functional properties can have at most 1 value
+            if prop.functional:
+                max_card = 1
+            
+            # Increase generation probability for structural properties
+            prop_name = self._get_local_name(prop_uri).lower()
+            is_structural = any(keyword in prop_name for keyword in ['part', 'has', 'contains', 'member', 'component', 'composed'])
+            
+            # Generate based on cardinality or probability
+            if min_card > 0:
+                # Required property - must generate
+                generate = True
+            elif is_structural:
+                # Structural properties have higher chance
+                generate = random.random() > 0.3  # 70% chance
+            else:
+                # Other properties
+                generate = random.random() > 0.7  # 30% chance
+            
+            if not generate:
                 continue
             
             # Determine number of values
             if max_card == 1:
-                num_values = 1 if min_card > 0 or random.random() > 0.5 else 0
+                num_values = 1 if min_card > 0 else (1 if random.random() > 0.3 else 0)
             else:
-                max_val = min(max_card if max_card > 0 else 2, 2)
-                num_values = random.randint(min_card, max_val)
+                # For structural properties, tend toward more connections
+                if is_structural:
+                    max_val = min(max_card if max_card > 0 else 3, 3)
+                else:
+                    max_val = min(max_card if max_card > 0 else 2, 2)
+                num_values = random.randint(max(min_card, 1), max_val)
             
             if num_values == 0:
                 continue
+            
+            # For inverse functional properties, ensure uniqueness
+            if prop.inverse_functional:
+                # Check which targets are already used for this property
+                used_targets = self._get_used_targets_for_inverse_functional(prop_uri)
+                available_targets = [t for t in target_individuals if t not in used_targets]
+                if not available_targets:
+                    continue  # No available unique targets
+                target_individuals = available_targets
             
             # Generate object property assertions
             selected_targets = random.sample(
@@ -201,19 +278,43 @@ class ABoxGenerator:
             )
             
             for target in selected_targets:
+                # Final check for irreflexive (redundant but safe)
+                if hasattr(prop, 'irreflexive') and prop.irreflexive and target == individual:
+                    continue
+                    
                 self.graph.add((individual, URIRef(prop_uri), target))
                 
                 # Handle inverse properties
                 if prop.inverse_of:
-                    self.graph.add((target, URIRef(prop.inverse_of), individual))
+                    inverse_prop = self.object_prop_map.get(prop.inverse_of)
+                    if inverse_prop:
+                        # Check irreflexive constraint on inverse
+                        if hasattr(inverse_prop, 'irreflexive') and inverse_prop.irreflexive and target == individual:
+                            continue
+                        
+                        # Check asymmetric constraint on inverse
+                        if hasattr(inverse_prop, 'asymmetric') and inverse_prop.asymmetric and (individual, URIRef(prop.inverse_of), target) in self.graph:
+                            continue
+                        
+                        # Check if inverse is functional - if so, limit to 1
+                        if inverse_prop.functional:
+                            # Check if target already has a value for the inverse property
+                            existing = list(self.graph.objects(target, URIRef(prop.inverse_of)))
+                            if not existing:  # Only add if no existing value
+                                self.graph.add((target, URIRef(prop.inverse_of), individual))
+                        else:
+                            self.graph.add((target, URIRef(prop.inverse_of), individual))
     
     def _get_applicable_datatype_properties(self, owl_class: OntologyClass) -> List[Tuple[str, DatatypeProperty]]:
         """Get all datatype properties applicable to a class."""
         applicable = []
         
         for prop_uri, prop in self.datatype_prop_map.items():
-            # Check if property domain includes this class or its superclasses
-            if self._is_property_applicable(owl_class, prop.domain):
+            # Check explicit domain
+            if prop.domain and self._is_property_applicable(owl_class, prop.domain):
+                applicable.append((prop_uri, prop))
+            # Check if property is used in restrictions of this class (inferred domain)
+            elif self._is_property_in_class_restrictions(owl_class, prop_uri):
                 applicable.append((prop_uri, prop))
         
         return applicable
@@ -223,27 +324,37 @@ class ABoxGenerator:
         applicable = []
         
         for prop_uri, prop in self.object_prop_map.items():
-            # Check if property domain includes this class or its superclasses
-            if self._is_property_applicable(owl_class, prop.domain):
+            # Check explicit domain
+            if prop.domain and self._is_property_applicable(owl_class, prop.domain):
+                applicable.append((prop_uri, prop))
+            # Check if property is used in restrictions of this class (inferred domain)
+            elif self._is_property_in_class_restrictions(owl_class, prop_uri):
                 applicable.append((prop_uri, prop))
         
         return applicable
     
+    def _is_property_in_class_restrictions(self, owl_class: OntologyClass, prop_uri: str) -> bool:
+        """Check if a property is used in any restriction of this class."""
+        for restriction in owl_class.restrictions:
+            if hasattr(restriction, 'property_uri') and restriction.property_uri == prop_uri:
+                return True
+        return False
+    
     def _is_property_applicable(self, owl_class: OntologyClass, domains: List[str]) -> bool:
-        """Check if a property is applicable to a class based on domain."""
+        """Check if a property is applicable to a class based on domain (explicit or inferred)."""
+        # No explicit domain = not applicable (conservative approach)
         if not domains:
-            # No explicit domain means it could apply to any class,
-            # but we should be conservative and not apply it randomly
             return False
-        
+            
         # Check if class or its superclasses are in domain
         class_hierarchy = {owl_class.uri} | set(owl_class.super_classes)
         
-        # Also check if any domain is owl:Thing (universal domain)
+        # Check if any domain is owl:Thing (universal domain)
         for domain in domains:
             if domain == "http://www.w3.org/2002/07/owl#Thing":
                 return True
         
+        # Strict domain checking - class must be exactly in domain or a subclass of domain
         return bool(class_hierarchy & set(domains))
     
     def _get_property_cardinality(self, owl_class: OntologyClass, prop_uri: str) -> Tuple[int, int]:
@@ -269,26 +380,60 @@ class ABoxGenerator:
         return min_card, max_card
     
     def _get_target_individuals(self, prop: ObjectProperty) -> List[URIRef]:
-        """Get possible target individuals for an object property."""
+        """Get possible target individuals for an object property - based on explicit or inferred range."""
         targets = []
         
-        if prop.range:
-            # Get individuals of range classes
-            for range_class in prop.range:
-                # Direct class match
-                if range_class in self.individuals:
-                    targets.extend(self.individuals[range_class])
-                
-                # Also check for individuals whose classes are subclasses of the range
-                for class_uri, individuals_list in self.individuals.items():
-                    if class_uri != range_class:  # Already handled direct match
-                        owl_class = self.class_map.get(class_uri)
-                        if owl_class and range_class in owl_class.super_classes:
-                            targets.extend(individuals_list)
-        # If no range specified, we should NOT link to random individuals
-        # The property simply shouldn't be used if we don't know what it can link to
+        # Get explicit range
+        explicit_range = prop.range if prop.range else []
+        
+        # Also check for inferred range from class restrictions
+        inferred_range = self._infer_property_range_from_restrictions(prop.uri)
+        
+        # Combine explicit and inferred ranges
+        all_ranges = set(explicit_range) | inferred_range
+        
+        if not all_ranges:
+            # No range (explicit or inferred) - cannot determine valid targets
+            return []
+        
+        # Get individuals of range classes
+        for range_class in all_ranges:
+            # Skip owl:Thing as range (too general)
+            if range_class == "http://www.w3.org/2002/07/owl#Thing":
+                continue
+            
+            # Direct class match
+            if range_class in self.individuals:
+                targets.extend(self.individuals[range_class])
+            
+            # Also check for individuals whose classes are subclasses of the range
+            for class_uri, individuals_list in self.individuals.items():
+                if class_uri != range_class:  # Already handled direct match
+                    owl_class = self.class_map.get(class_uri)
+                    if owl_class and range_class in owl_class.super_classes:
+                        targets.extend(individuals_list)
         
         return targets
+    
+    def _infer_property_range_from_restrictions(self, prop_uri: str) -> Set[str]:
+        """Infer the range of a property from class restrictions."""
+        from typing import Set
+        inferred_ranges = set()
+        
+        # Check all classes for restrictions using this property
+        for owl_class in self.ontology.classes:
+            for restriction in owl_class.restrictions:
+                if hasattr(restriction, 'property_uri') and restriction.property_uri == prop_uri:
+                    # Check for allValuesFrom or someValuesFrom restrictions
+                    if hasattr(restriction, 'filler'):
+                        # The filler is the inferred range
+                        inferred_ranges.add(restriction.filler)
+                    elif hasattr(restriction, 'value') and isinstance(restriction.value, str):
+                        # For other restrictions, the value might indicate range
+                        if restriction.value.startswith('http'):  # It's a URI
+                            inferred_ranges.add(restriction.value)
+        
+        return inferred_ranges
     
     def _generate_datatype_value(self, prop: DatatypeProperty) -> Optional[Literal]:
         """Generate a random value for a datatype property."""
@@ -388,6 +533,13 @@ class ABoxGenerator:
     def _generate_id(self) -> str:
         """Generate a unique ID."""
         return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+    
+    def _get_used_targets_for_inverse_functional(self, prop_uri: str) -> Set[URIRef]:
+        """Get all targets already used for an inverse functional property."""
+        used = set()
+        for s, p, o in self.graph.triples((None, URIRef(prop_uri), None)):
+            used.add(o)
+        return used
     
     def serialize(self, format: str = 'turtle') -> str:
         """

@@ -231,6 +231,15 @@ class OntologyParser:
             if (prop_uri, RDF.type, OWL.SymmetricProperty) in self.graph:
                 obj_prop.symmetric = True
             
+            if (prop_uri, RDF.type, OWL.AsymmetricProperty) in self.graph:
+                obj_prop.asymmetric = True
+            
+            if (prop_uri, RDF.type, OWL.IrreflexiveProperty) in self.graph:
+                obj_prop.irreflexive = True
+            
+            if (prop_uri, RDF.type, OWL.ReflexiveProperty) in self.graph:
+                obj_prop.reflexive = True
+            
             # Get inverse property
             for inverse in self.graph.objects(prop_uri, OWL.inverseOf):
                 if isinstance(inverse, URIRef):
