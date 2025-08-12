@@ -17,7 +17,7 @@ from PyQt6.QtWidgets import (
     QDialogButtonBox, QGridLayout
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
-from PyQt6.QtGui import QFont, QAction, QIcon
+from PyQt6.QtGui import QFont, QAction, QIcon, QPixmap
 
 # Import the transformation engine and A-box generator
 from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser, ABoxGenerator
@@ -424,6 +424,26 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("OWL to JSON Schema Transformer - T-box/A-box Workflow")
         self.setGeometry(100, 100, 1400, 900)
         
+        # Set application icon
+        try:
+            # Try to load the high-resolution icon
+            icon_path = Path("Resources/ORW_big.png")
+            if not icon_path.exists():
+                # Try alternative path (in case we're running from a different directory)
+                icon_path = Path(__file__).parent.parent.parent / "Resources" / "ORW_big.png"
+            
+            if icon_path.exists():
+                self.setWindowIcon(QIcon(str(icon_path)))
+            else:
+                # Fallback to low-res icon
+                icon_path = Path("Resources/ORW_48.png")
+                if not icon_path.exists():
+                    icon_path = Path(__file__).parent.parent.parent / "Resources" / "ORW_48.png"
+                if icon_path.exists():
+                    self.setWindowIcon(QIcon(str(icon_path)))
+        except Exception as e:
+            print(f"Could not set application icon: {e}")
+        
         # Create central widget
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
@@ -505,6 +525,8 @@ class MainWindow(QMainWindow):
         save_schema_action = QAction("Save JSON &Schema...", self)
         save_schema_action.setShortcut("Ctrl+S")
         save_schema_action.triggered.connect(self.save_schema)
+        save_schema_action.setEnabled(False)
+        self.save_schema_action = save_schema_action
         file_menu.addAction(save_schema_action)
         
         save_abox_action = QAction("Save &A-box...", self)
@@ -1111,6 +1133,7 @@ class MainWindow(QMainWindow):
         # Update UI
         self.progress_bar.setVisible(False)
         self.transform_btn.setEnabled(True)
+        self.save_schema_action.setEnabled(True)  # Enable save schema action
         self.status_message.setText("T-box transformation completed!")
     
     def generate_statistics(self, schema: Dict) -> str:

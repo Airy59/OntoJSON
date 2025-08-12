@@ -6,8 +6,10 @@ OWL ontologies to JSON Schema.
 """
 import sys
 import os
+from pathlib import Path
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon
 
 # Make the parent directory available for imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -32,6 +34,26 @@ def configure_application(app):
     app.setApplicationName(APP_NAME)
     app.setOrganizationName(ORG_NAME)
     app.setStyle(APP_STYLE)
+    
+    # Set application icon
+    try:
+        # Try to load the high-resolution icon
+        icon_path = Path("Resources/ORW_big.png")
+        if not icon_path.exists():
+            # Try alternative path (in case we're running from a different directory)
+            icon_path = Path(__file__).parent.parent.parent / "Resources" / "ORW_big.png"
+        
+        if icon_path.exists():
+            app.setWindowIcon(QIcon(str(icon_path)))
+        else:
+            # Fallback to low-res icon
+            icon_path = Path("Resources/ORW_48.png")
+            if not icon_path.exists():
+                icon_path = Path(__file__).parent.parent.parent / "Resources" / "ORW_48.png"
+            if icon_path.exists():
+                app.setWindowIcon(QIcon(str(icon_path)))
+    except Exception as e:
+        print(f"Could not set application icon: {e}")
 
 
 def main():
