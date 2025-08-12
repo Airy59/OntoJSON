@@ -247,8 +247,30 @@ class TransformationEngine:
                 for superclass_name, union_info in result["disjoint_unions"].items():
                     clean_name = self.schema_builder._clean_definition_name(superclass_name)
                     if clean_name in self.schema_builder.definitions:
-                        # Replace the superclass with a oneOf of its disjoint subclasses
+                        # Merge the disjoint union info with existing definition
+                        # Preserve existing properties while adding the oneOf constraint
+                        existing_def = self.schema_builder.definitions[clean_name]
+                        
+                        # If the existing definition has properties, preserve them
+                        preserved_properties = existing_def.get("properties", {})
+                        preserved_required = existing_def.get("required", [])
+                        
+                        # Replace with the union schema
                         self.schema_builder.definitions[clean_name] = union_info
+                        
+                        # Restore preserved properties if any
+                        if preserved_properties:
+                            # If the union_info already has a structure, we need to add properties carefully
+                            if "oneOf" in union_info or "anyOf" in union_info:
+                                # For disjoint unions, properties should be added to the wrapper, not inside oneOf
+                                if "properties" not in self.schema_builder.definitions[clean_name]:
+                                    self.schema_builder.definitions[clean_name]["properties"] = {}
+                                self.schema_builder.definitions[clean_name]["properties"].update(preserved_properties)
+                                
+                                if preserved_required:
+                                    if "required" not in self.schema_builder.definitions[clean_name]:
+                                        self.schema_builder.definitions[clean_name]["required"] = []
+                                    self.schema_builder.definitions[clean_name]["required"].extend(preserved_required)
         
         elif rule_id in ["object_property", "datatype_property"]:
             # Properties are added to their respective classes

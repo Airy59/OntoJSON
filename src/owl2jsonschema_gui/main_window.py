@@ -592,16 +592,19 @@ class MainWindow(QMainWindow):
         """Create the T-box transformation step widget."""
         widget = QWidget()
         layout = QVBoxLayout()
+        layout.setSpacing(5)  # Reduce spacing between elements
         
-        # Description
+        # Description - Fixed height
         desc_label = QLabel("<b>Step 1: T-box Transformation</b><br>"
                           "Transform OWL ontology (T-box) to JSON Schema")
         desc_label.setWordWrap(True)
         desc_label.setStyleSheet("QLabel { background-color: #e3f2fd; padding: 10px; border-radius: 5px; }")
+        desc_label.setMaximumHeight(60)  # Fixed maximum height
         layout.addWidget(desc_label)
         
-        # Input section
+        # Input section - Fixed height
         input_group = QGroupBox("Input")
+        input_group.setMaximumHeight(80)  # Fixed maximum height
         input_layout = QHBoxLayout()
         
         self.file_label = QLabel("No file selected")
@@ -659,9 +662,11 @@ class MainWindow(QMainWindow):
         input_group.setLayout(input_layout)
         layout.addWidget(input_group)
         
-        # Configuration section
+        # Configuration section - Fixed height
         config_group = QGroupBox("Configuration")
+        config_group.setMaximumHeight(120)  # Fixed maximum height
         config_layout = QVBoxLayout()
+        config_layout.setSpacing(5)  # Reduce internal spacing
         
         # Language selection
         lang_layout = QHBoxLayout()
@@ -703,10 +708,11 @@ class MainWindow(QMainWindow):
         config_group.setLayout(config_layout)
         layout.addWidget(config_group)
         
-        # Transform button
+        # Transform button - Fixed height
         self.transform_btn = QPushButton("Transform T-box to JSON Schema")
         self.transform_btn.clicked.connect(self.run_transformation)
         self.transform_btn.setEnabled(False)
+        self.transform_btn.setMaximumHeight(40)  # Fixed maximum height
         self.transform_btn.setStyleSheet("""
             QPushButton {
                 background-color: #4CAF50;
@@ -719,7 +725,7 @@ class MainWindow(QMainWindow):
         """)
         layout.addWidget(self.transform_btn)
         
-        # Output section
+        # Output section - This will expand to fill available space
         output_splitter = QSplitter(Qt.Orientation.Horizontal)
         
         # OWL Input display
@@ -755,7 +761,7 @@ class MainWindow(QMainWindow):
         output_splitter.addWidget(schema_group)
         
         output_splitter.setSizes([600, 600])
-        layout.addWidget(output_splitter)
+        layout.addWidget(output_splitter, 1)  # Add with stretch factor 1 to make it expand
         
         widget.setLayout(layout)
         return widget
