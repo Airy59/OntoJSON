@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Person": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "First Name",
+                "description": "The person's given name"
+              }
+            },
+            "lastName": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "Last Name",
+                "description": "The person's family name"
+              }
+            },
+            "hasAddress": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Address",
+                "title": "Has Address",
+                "description": "The person's postal address"
+              }
+            },
+            "age": {
+              "type": "integer",
+              "title": "Age",
+              "description": "The person's age in years"
+            },
+            "email": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "Email",
+                "description": "The person's email address"
+              }
+            }
+          },
+          "required": [
+            "firstName",
+            "lastName"
+          ]
+        }
+      ],
+      "title": "Person",
+      "description": "A human being"
+    },
+    "Employee": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "worksFor": {
+              "$ref": "#/definitions/Organization",
+              "title": "Works For",
+              "description": "The organization the employee works for"
+            },
+            "employeeId": {
+              "type": "string",
+              "title": "Employee ID",
+              "description": "The employee's unique identifier"
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/Person"
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ]
+        }
+      ],
+      "title": "Employee",
+      "description": "A person who works for an organization"
+    },
+    "Address": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "street": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "Street"
+              }
+            },
+            "city": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "City"
+              }
+            },
+            "postalCode": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "Postal Code"
+              }
+            }
+          }
+        }
+      ],
+      "title": "Address",
+      "description": "A postal address"
+    },
+    "Organization": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "hasEmployee": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Employee",
+                "title": "Has Employee",
+                "description": "The employees of the organization"
+              }
+            }
+          }
+        }
+      ],
+      "title": "Organization",
+      "description": "A company or institution"
+    },
+    "_Thing": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI identifier for this instance"
+        }
+      },
+      "required": [],
+      "description": "Base object that all classes inherit from",
+      "title": "_Thing"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

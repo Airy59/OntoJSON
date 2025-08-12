@@ -22,6 +22,7 @@ from PyQt6.QtGui import QFont, QAction, QIcon, QPixmap
 # Import the transformation engine and A-box generator
 from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser, ABoxGenerator
 from owl2jsonschema.reasoner import ABoxValidator
+from owl2jsonschema.abox_to_json import ABoxToJSONConverter
 
 
 class RulesConfigDialog(QDialog):
@@ -875,6 +876,7 @@ class MainWindow(QMainWindow):
         # Transform button
         self.transform_json_btn = QPushButton("Transform A-box to JSON")
         self.transform_json_btn.setEnabled(False)
+        self.transform_json_btn.clicked.connect(self.transform_abox_to_json)
         self.transform_json_btn.setStyleSheet("""
             QPushButton {
                 background-color: #2196F3;
@@ -893,6 +895,7 @@ class MainWindow(QMainWindow):
         
         self.validate_json_btn = QPushButton("Validate against Schema")
         self.validate_json_btn.setEnabled(False)
+        self.validate_json_btn.clicked.connect(self.validate_json_instances)
         validation_layout.addWidget(self.validate_json_btn)
         
         self.json_validation_status = QLabel("Not validated")
@@ -1370,8 +1373,192 @@ class MainWindow(QMainWindow):
     
     def save_json(self):
         """Save the JSON instances."""
-        QMessageBox.information(self, "Not Implemented", 
-                               "JSON instance generation functionality will be implemented in the next phase.")
+        if not self.json_instances:
+            QMessageBox.warning(self, "Warning", "No JSON instances to save. Please generate JSON instances first.")
+            return
+        
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save JSON Instances",
+            "instances.json",
+            "JSON Files (*.json);;JSON-LD Files (*.jsonld);;All Files (*.*)"
+        )
+        
+        if file_path:
+            try:
+                # Determine format from file extension
+                if file_path.endswith('.jsonld'):
+                    # Save as JSON-LD
+                    content = json.dumps(self.json_instances.get('jsonld', self.json_instances), indent=2)
+                else:
+                    # Save as regular JSON
+                    content = json.dumps(self.json_instances, indent=2)
+                
+                with open(file_path, 'w') as f:
+                    f.write(content)
+                
+                QMessageBox.information(self, "Success", f"JSON instances saved to:\n{file_path}")
+            except Exception as e:
+                QMessageBox.critical(self, "Save Error", f"Failed to save file:\n{str(e)}")
+    
+    def transform_abox_to_json(self):
+        """Transform the A-box to JSON instances."""
+        if not self.abox_data:
+            QMessageBox.warning(self, "Warning", "No A-box available. Please generate an A-box first.")
+            return
+        
+        if not self.transformation_result:
+            QMessageBox.warning(self, "Warning", "No JSON Schema available. Please transform the T-box first.")
+            return
+        
+        try:
+            # Update status
+            self.status_message.setText("Converting A-box to JSON...")
+            self.transform_json_btn.setEnabled(False)
+            QApplication.processEvents()
+            
+            # Get base URI from the A-box generator settings
+            base_uri = self.base_uri_input.text().strip() or "https://example.org#"
+            
+            # Create converter
+            converter = ABoxToJSONConverter(self.transformation_result, base_uri)
+            
+            # Convert to JSON
+            json_instances = converter.convert(self.abox_data)
+            
+            # Also generate JSON-LD version
+            jsonld_instances = converter.to_jsonld(json_instances)
+            
+            # Store both formats
+            self.json_instances = {
+                'instances': json_instances,
+                'jsonld': jsonld_instances
+            }
+            
+            # Display in output (pretty print the JSON)
+            output_text = "=== JSON Instances ===\n\n"
+            output_text += json.dumps(json_instances, indent=2)
+            output_text += "\n\n=== JSON-LD Format ===\n\n"
+            output_text += json.dumps(jsonld_instances, indent=2)
+            
+            self.json_output_text.setPlainText(output_text)
+            
+            # Update state
+            self.json_ready = True
+            self.update_status()
+            
+            # Update UI
+            self.transform_json_btn.setEnabled(True)
+            self.json_validation_status.setText("Not validated")
+            self.json_validation_status.setStyleSheet("color: gray;")
+            self.status_message.setText("A-box successfully converted to JSON!")
+            
+            # Show summary
+            num_instances = len(json_instances) if isinstance(json_instances, list) else 1
+            QMessageBox.information(
+                self,
+                "Conversion Successful",
+                f"Successfully converted {num_instances} instance(s) to JSON format.\n\n"
+                "The instances are ready for validation against the JSON Schema."
+            )
+            
+        except Exception as e:
+            self.transform_json_btn.setEnabled(True)
+            self.status_message.setText("Conversion failed")
+            QMessageBox.critical(
+                self,
+                "Conversion Error",
+                f"Failed to convert A-box to JSON:\n\n{str(e)}"
+            )
+    
+    def validate_json_instances(self):
+        """Validate the JSON instances against the JSON Schema."""
+        if not self.json_instances:
+            QMessageBox.warning(self, "Warning", "No JSON instances to validate. Please generate JSON instances first.")
+            return
+        
+        if not self.transformation_result:
+            QMessageBox.warning(self, "Warning", "No JSON Schema available. Please transform the T-box first.")
+            return
+        
+        try:
+            # Update status
+            self.json_validation_status.setText("Validating...")
+            self.json_validation_status.setStyleSheet("color: blue;")
+            QApplication.processEvents()
+            
+            # Get base URI from the A-box generator settings
+            base_uri = self.base_uri_input.text().strip() or "https://example.org#"
+            
+            # Create converter for validation
+            converter = ABoxToJSONConverter(self.transformation_result, base_uri)
+            
+            # Get the JSON instances (not JSON-LD)
+            json_instances = self.json_instances.get('instances', self.json_instances)
+            
+            # Validate
+            validation_results = converter.validate(json_instances)
+            
+            # Update validation status
+            if validation_results['valid']:
+                self.json_validation_status.setText("✅ Valid")
+                self.json_validation_status.setStyleSheet("color: green; font-weight: bold;")
+                
+                # Show success message
+                QMessageBox.information(
+                    self,
+                    "Validation Successful",
+                    f"✅ All JSON instances are valid according to the JSON Schema.\n\n"
+                    f"Validated {validation_results['validated_count']} instances successfully.\n"
+                    "The instances conform to all schema constraints."
+                )
+            else:
+                self.json_validation_status.setText("❌ Invalid")
+                self.json_validation_status.setStyleSheet("color: red; font-weight: bold;")
+                
+                # Format error report using the JSONInstanceFormatter
+                from owl2jsonschema.abox_to_json import JSONInstanceFormatter
+                formatter = JSONInstanceFormatter()
+                error_report = formatter.generate_validation_report(validation_results)
+                
+                # Create a custom dialog for better display
+                error_dialog = QDialog(self)
+                error_dialog.setWindowTitle("Validation Failed")
+                error_dialog.setMinimumSize(700, 500)
+                
+                layout = QVBoxLayout()
+                
+                # Summary label
+                summary_label = QLabel(f"❌ The JSON instances do not conform to the schema.\n"
+                                      f"{validation_results['validated_count']}/{validation_results['total_count']} instances passed validation.")
+                summary_label.setWordWrap(True)
+                summary_label.setStyleSheet("font-weight: bold; padding: 10px; background-color: #fff3cd; border-radius: 5px;")
+                layout.addWidget(summary_label)
+                
+                # Detailed error report in scrollable text area
+                error_text = QTextEdit()
+                error_text.setReadOnly(True)
+                error_text.setPlainText(error_report)
+                error_text.setFont(QFont("Courier", 10))
+                error_text.setStyleSheet("background-color: #f8f9fa; border: 1px solid #dee2e6;")
+                layout.addWidget(error_text)
+                
+                # OK button
+                button_box = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok)
+                button_box.accepted.connect(error_dialog.accept)
+                layout.addWidget(button_box)
+                
+                error_dialog.setLayout(layout)
+                error_dialog.exec()
+            
+        except Exception as e:
+            self.json_validation_status.setText("⚠️ Error")
+            self.json_validation_status.setStyleSheet("color: orange;")
+            QMessageBox.critical(
+                self,
+                "Validation Error",
+                f"An error occurred during validation:\n\n{str(e)}"
+            )
     
     def show_about(self):
         """Show about dialog."""

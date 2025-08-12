@@ -19,6 +19,7 @@ Requires-Dist: rdflib>=6.0.0
 Requires-Dist: pyyaml>=6.0
 Requires-Dist: jsonschema>=4.0.0
 Requires-Dist: click>=8.0.0
+Requires-Dist: faker>=19.0.0
 Provides-Extra: gui
 Requires-Dist: PyQt6>=6.0.0; extra == "gui"
 Requires-Dist: requests>=2.25.0; extra == "gui"

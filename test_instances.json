@@ -1,0 +1,43 @@
+{
+  "Person": [
+    {
+      "uri": "https://example.org/railway#Person_2_DZ5GVZ"
+    },
+    {
+      "uri": "https://example.org/railway#Person_1_F938MS"
+    }
+  ],
+  "Employee": [
+    {
+      "uri": "https://example.org/railway#Employee_3_4V481E"
+    },
+    {
+      "uri": "https://example.org/railway#Employee_2_XFYZ0I"
+    },
+    {
+      "uri": "https://example.org/railway#Employee_1_SC1LP2"
+    }
+  ],
+  "Address": [
+    {
+      "uri": "https://example.org/railway#Address_2_BIMJF9"
+    },
+    {
+      "uri": "https://example.org/railway#Address_3_3KOFJX"
+    },
+    {
+      "uri": "https://example.org/railway#Address_1_5Y4ZJF"
+    }
+  ],
+  "Organization": [
+    {
+      "uri": "https://example.org/railway#Organization_2_25V594"
+    },
+    {
+      "uri": "https://example.org/railway#Organization_3_B6QC0Z"
+    },
+    {
+      "uri": "https://example.org/railway#Organization_1_7P3UIJ"
+    }
+  ]
+}

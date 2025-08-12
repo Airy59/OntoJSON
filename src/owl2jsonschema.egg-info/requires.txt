@@ -2,6 +2,7 @@ rdflib>=6.0.0
 pyyaml>=6.0
 jsonschema>=4.0.0
 click>=8.0.0
+faker>=19.0.0
 
 [dev]
 pytest>=7.0.0
