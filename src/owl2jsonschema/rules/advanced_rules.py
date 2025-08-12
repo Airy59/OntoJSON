@@ -233,41 +233,85 @@ class DisjointClassesRule(TransformationRule):
         if not self.is_enabled():
             return None
         
-        disjoint_groups = []
+        # Build a map of disjoint groups
+        disjoint_groups = {}  # class -> set of disjoint classes
         
         for owl_class in ontology.classes:
             if owl_class.disjoint_with:
                 class_name = self._get_class_name(owl_class.uri)
                 
+                if class_name not in disjoint_groups:
+                    disjoint_groups[class_name] = set()
+                
                 for disjoint_uri in owl_class.disjoint_with:
                     disjoint_name = self._get_class_name(disjoint_uri)
+                    disjoint_groups[class_name].add(disjoint_name)
                     
-                    # Create a disjoint group
-                    group = sorted([class_name, disjoint_name])
-                    if group not in disjoint_groups:
-                        disjoint_groups.append(group)
+                    # Make relationship bidirectional
+                    if disjoint_name not in disjoint_groups:
+                        disjoint_groups[disjoint_name] = set()
+                    disjoint_groups[disjoint_name].add(class_name)
         
-        if disjoint_groups:
-            # In JSON Schema, we can't directly express disjointness
-            # We can add it as metadata or use custom validation
-            enforcement = self.get_option("enforcement", "metadata")
+        if not disjoint_groups:
+            return None
+        
+        # Find disjoint classes that share a common superclass
+        # These should be transformed into oneOf in the superclass
+        disjoint_unions = {}
+        
+        for owl_class in ontology.classes:
+            class_name = self._get_class_name(owl_class.uri)
             
-            if enforcement == "metadata":
-                # Add as metadata comment
-                return {
-                    "disjoint_metadata": {
-                        "$comment": f"Disjoint class groups: {disjoint_groups}"
+            # Check if this class has subclasses that are disjoint with each other
+            subclasses = []
+            for sub_class in ontology.classes:
+                if class_name != self._get_class_name(sub_class.uri) and \
+                   any(self._get_class_name(sc) == class_name for sc in sub_class.super_classes):
+                    subclasses.append(self._get_class_name(sub_class.uri))
+            
+            if len(subclasses) >= 2:
+                # Check if the subclasses are disjoint
+                all_disjoint = True
+                for i, sub1 in enumerate(subclasses):
+                    for sub2 in subclasses[i+1:]:
+                        if sub1 not in disjoint_groups.get(sub2, set()):
+                            all_disjoint = False
+                            break
+                    if not all_disjoint:
+                        break
+                
+                if all_disjoint:
+                    # Create a oneOf schema for this superclass
+                    resolver = ReferenceResolver()
+                    one_of = []
+                    for subclass in subclasses:
+                        one_of.append(resolver.create_ref(subclass))
+                    
+                    disjoint_unions[class_name] = {
+                        "oneOf": one_of,
+                        "title": class_name,
+                        "description": f"Disjoint union of: {', '.join(subclasses)}"
                     }
+        
+        if disjoint_unions:
+            return {"disjoint_unions": disjoint_unions}
+        
+        # Fallback to metadata if no disjoint unions found
+        groups_list = []
+        processed = set()
+        for class_name, disjoints in disjoint_groups.items():
+            if class_name not in processed:
+                group = sorted([class_name] + list(disjoints))
+                groups_list.append(group)
+                for c in group:
+                    processed.add(c)
+        
+        if groups_list:
+            return {
+                "disjoint_metadata": {
+                    "$comment": f"Disjoint class groups: {groups_list}"
                 }
-            elif enforcement == "oneOf":
-                # Create oneOf constraints where applicable
-                # This is complex and would need more sophisticated logic
-                return {
-                    "disjoint_constraints": {
-                        "type": "oneOf_constraints",
-                        "groups": disjoint_groups
-                    }
-                }
+            }
         
         return None
     

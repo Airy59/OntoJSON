@@ -214,3 +214,86 @@ class OntologyMetadataRule(TransformationRule):
                 return metadata
         
         return None
+
+
+class ThingWithUriRule(TransformationRule):
+    """Add a base '_Thing' object with URI property that all classes inherit from."""
+    
+    def visit_ontology(self, ontology: OntologyModel) -> Dict[str, Any]:
+        """Create the base _Thing object if enabled."""
+        if not self.is_enabled():
+            return None
+        
+        # Create the base _Thing object with URI property
+        thing_object = {
+            "type": "object",
+            "properties": {
+                "uri": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The URI identifier for this instance"
+                }
+            },
+            "required": self.get_option("uri_required", [])  # URI can be optional or required
+        }
+        
+        # Add additional metadata if configured
+        if self.get_option("include_description", True):
+            thing_object["description"] = "Base object that all classes inherit from"
+        
+        if self.get_option("include_title", True):
+            thing_object["title"] = "_Thing"
+        
+        # Return the _Thing definition to be added to the schema
+        return {
+            "definitions": {
+                "_Thing": thing_object
+            }
+        }
+    
+    def should_apply_to_class(self, class_schema: Dict[str, Any]) -> bool:
+        """Check if a class should inherit from _Thing."""
+        if not self.is_enabled():
+            return False
+        
+        # Don't apply to _Thing itself
+        if class_schema.get("title") == "_Thing":
+            return False
+        
+        # Check if we should skip certain classes
+        skip_patterns = self.get_option("skip_patterns", [])
+        class_title = class_schema.get("title", "")
+        
+        for pattern in skip_patterns:
+            if pattern in class_title:
+                return False
+        
+        return True
+    
+    def apply_inheritance(self, class_schema: Dict[str, Any]) -> Dict[str, Any]:
+        """Apply _Thing inheritance to a class schema."""
+        if not self.should_apply_to_class(class_schema):
+            return class_schema
+        
+        # Create a new schema with allOf inheritance
+        inherited_schema = {
+            "allOf": [
+                {"$ref": "#/definitions/_Thing"},
+                class_schema
+            ]
+        }
+        
+        # Preserve title and description at the top level if they exist
+        if "title" in class_schema:
+            inherited_schema["title"] = class_schema["title"]
+            # Remove from the inner schema to avoid duplication
+            class_schema = {k: v for k, v in class_schema.items() if k != "title"}
+            inherited_schema["allOf"][1] = class_schema
+        
+        if "description" in class_schema:
+            inherited_schema["description"] = class_schema["description"]
+            # Remove from the inner schema to avoid duplication
+            class_schema = {k: v for k, v in class_schema.items() if k != "description"}
+            inherited_schema["allOf"][1] = class_schema
+        
+        return inherited_schema

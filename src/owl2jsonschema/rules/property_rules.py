@@ -150,7 +150,8 @@ class ObjectPropertyRule(TransformationRule):
                     "class": domain_name,
                     "property": {
                         "name": prop_name,
-                        "schema": schema
+                        "schema": schema,
+                        "uri": property.uri  # Include OWL property URI
                     }
                 })
         else:
@@ -160,7 +161,8 @@ class ObjectPropertyRule(TransformationRule):
                     "class": "_global",
                     "property": {
                         "name": prop_name,
-                        "schema": schema
+                        "schema": schema,
+                        "uri": property.uri  # Include OWL property URI
                     }
                 })
         
@@ -270,7 +272,8 @@ class DatatypePropertyRule(TransformationRule):
                     "class": domain_name,
                     "property": {
                         "name": prop_name,
-                        "schema": schema
+                        "schema": schema,
+                        "uri": property.uri  # Include OWL property URI
                     }
                 })
         else:
@@ -280,7 +283,8 @@ class DatatypePropertyRule(TransformationRule):
                     "class": "_global",
                     "property": {
                         "name": prop_name,
-                        "schema": schema
+                        "schema": schema,
+                        "uri": property.uri  # Include OWL property URI
                     }
                 })
         

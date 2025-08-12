@@ -35,7 +35,8 @@ from .advanced_rules import (
 from .structural_rules import (
     OntologyToDocumentRule,
     IndividualsToExamplesRule,
-    OntologyMetadataRule
+    OntologyMetadataRule,
+    ThingWithUriRule
 )
 
 __all__ = [
@@ -66,5 +67,6 @@ __all__ = [
     # Structural rules
     "OntologyToDocumentRule",
     "IndividualsToExamplesRule",
-    "OntologyMetadataRule"
+    "OntologyMetadataRule",
+    "ThingWithUriRule"
 ]

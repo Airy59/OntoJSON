@@ -1,0 +1,102 @@
+{
+  "class_to_object": {
+    "enabled": true,
+    "name": "OWL Class to JSON Object",
+    "description": "Transform OWL classes into JSON Schema object types"
+  },
+  "class_hierarchy": {
+    "enabled": true,
+    "name": "Class Hierarchy to JSON Schema Inheritance",
+    "description": "Transform subclass relationships using allOf"
+  },
+  "class_restrictions": {
+    "enabled": true,
+    "name": "Class Restrictions to JSON Schema Constraints",
+    "description": "Transform OWL restrictions into JSON Schema constraints"
+  },
+  "object_property": {
+    "enabled": true,
+    "name": "OWL Object Property to JSON Property",
+    "description": "Transform object properties with proper references"
+  },
+  "datatype_property": {
+    "enabled": true,
+    "name": "OWL Datatype Property to JSON Property",
+    "description": "Transform datatype properties with appropriate types"
+  },
+  "property_cardinality": {
+    "enabled": true,
+    "name": "Property Cardinality to JSON Constraints",
+    "description": "Transform cardinality restrictions to minItems/maxItems"
+  },
+  "property_restrictions": {
+    "enabled": true,
+    "name": "Property Restrictions to JSON Validation",
+    "description": "Transform property restrictions to validation rules"
+  },
+  "labels_to_titles": {
+    "enabled": true,
+    "name": "RDFS Labels to JSON Schema Titles",
+    "description": "Convert rdfs:label to JSON Schema title"
+  },
+  "comments_to_descriptions": {
+    "enabled": true,
+    "name": "RDFS Comments to JSON Descriptions",
+    "description": "Convert rdfs:comment to JSON Schema description"
+  },
+  "annotations_to_metadata": {
+    "enabled": false,
+    "name": "Other Annotations to JSON Metadata",
+    "description": "Convert other annotations to custom metadata"
+  },
+  "enumeration_to_enum": {
+    "enabled": true,
+    "name": "OWL Enumeration to JSON Schema Enum",
+    "description": "Convert owl:oneOf to JSON Schema enum"
+  },
+  "union_to_anyOf": {
+    "enabled": true,
+    "name": "OWL Union to JSON Schema anyOf",
+    "description": "Convert owl:unionOf to JSON Schema anyOf"
+  },
+  "intersection_to_allOf": {
+    "enabled": true,
+    "name": "OWL Intersection to JSON Schema allOf",
+    "description": "Convert owl:intersectionOf to JSON Schema allOf"
+  },
+  "complement_to_not": {
+    "enabled": false,
+    "name": "OWL Complement to JSON Schema not",
+    "description": "Convert owl:complementOf to JSON Schema not"
+  },
+  "equivalent_classes": {
+    "enabled": true,
+    "name": "OWL Equivalent Classes to Definitions",
+    "description": "Handle equivalent class relationships"
+  },
+  "disjoint_classes": {
+    "enabled": false,
+    "name": "OWL Disjoint Classes to Validation",
+    "description": "Enforce disjoint class relationships"
+  },
+  "ontology_to_document": {
+    "enabled": true,
+    "name": "Ontology to JSON Schema Document",
+    "description": "Transform ontology structure to JSON Schema document"
+  },
+  "individuals_to_examples": {
+    "enabled": false,
+    "name": "Named Individuals to JSON Examples",
+    "description": "Convert named individuals to JSON Schema examples"
+  },
+  "ontology_metadata": {
+    "enabled": true,
+    "name": "Ontology Metadata to JSON Metadata",
+    "description": "Preserve ontology metadata in JSON Schema"
+  },
+  "thing_with_uri": {
+    "enabled": true,
+    "name": "Add Base Object with URI Property",
+    "description": "Add a base _Thing object with 'uri' property that all classes inherit from (for RDF stream compatibility)"
+  }
+}

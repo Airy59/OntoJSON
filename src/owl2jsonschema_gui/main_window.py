@@ -13,7 +13,8 @@ from PyQt6.QtWidgets import (
     QPushButton, QLabel, QFileDialog, QTextEdit,
     QGroupBox, QCheckBox, QScrollArea, QMessageBox,
     QTabWidget, QComboBox, QSpinBox, QLineEdit,
-    QSplitter, QProgressBar, QStatusBar, QFrame, QApplication, QDialog
+    QSplitter, QProgressBar, QStatusBar, QFrame, QApplication, QDialog,
+    QDialogButtonBox, QGridLayout
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont, QAction, QIcon
@@ -21,6 +22,293 @@ from PyQt6.QtGui import QFont, QAction, QIcon
 # Import the transformation engine and A-box generator
 from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser, ABoxGenerator
 from owl2jsonschema.reasoner import ABoxValidator
+
+
+class RulesConfigDialog(QDialog):
+    """Dialog for configuring transformation rules."""
+    
+    def __init__(self, parent=None, current_config=None):
+        super().__init__(parent)
+        self.setWindowTitle("Transformation Rules Configuration")
+        self.setMinimumSize(700, 600)
+        
+        # Merge current configuration with defaults to ensure all fields are present
+        default_config = self.get_default_config()
+        if current_config:
+            # Merge the enabled states from current_config into default_config
+            for rule_id, rule_settings in current_config.items():
+                if rule_id in default_config:
+                    default_config[rule_id]["enabled"] = rule_settings.get("enabled", False)
+        self.config = default_config
+        
+        # Create the UI
+        self.init_ui()
+        
+    def get_default_config(self):
+        """Get default configuration for all rules."""
+        return {
+            # Class Transformations
+            "class_to_object": {"enabled": True, "name": "OWL Class to JSON Object",
+                              "description": "Transform OWL classes into JSON Schema object types"},
+            "class_hierarchy": {"enabled": True, "name": "Class Hierarchy to JSON Schema Inheritance",
+                              "description": "Transform subclass relationships using allOf"},
+            "class_restrictions": {"enabled": True, "name": "Class Restrictions to JSON Schema Constraints",
+                                  "description": "Transform OWL restrictions into JSON Schema constraints"},
+            
+            # Property Transformations
+            "object_property": {"enabled": True, "name": "OWL Object Property to JSON Property",
+                              "description": "Transform object properties with proper references"},
+            "datatype_property": {"enabled": True, "name": "OWL Datatype Property to JSON Property",
+                                "description": "Transform datatype properties with appropriate types"},
+            "property_cardinality": {"enabled": True, "name": "Property Cardinality to JSON Constraints",
+                                   "description": "Transform cardinality restrictions to minItems/maxItems"},
+            "property_restrictions": {"enabled": True, "name": "Property Restrictions to JSON Validation",
+                                    "description": "Transform property restrictions to validation rules"},
+            
+            # Annotation Transformations
+            "labels_to_titles": {"enabled": True, "name": "RDFS Labels to JSON Schema Titles",
+                               "description": "Convert rdfs:label to JSON Schema title"},
+            "comments_to_descriptions": {"enabled": True, "name": "RDFS Comments to JSON Descriptions",
+                                        "description": "Convert rdfs:comment to JSON Schema description"},
+            "annotations_to_metadata": {"enabled": False, "name": "Other Annotations to JSON Metadata",
+                                       "description": "Convert other annotations to custom metadata"},
+            
+            # Advanced Transformations
+            "enumeration_to_enum": {"enabled": True, "name": "OWL Enumeration to JSON Schema Enum",
+                                  "description": "Convert owl:oneOf to JSON Schema enum"},
+            "union_to_anyOf": {"enabled": True, "name": "OWL Union to JSON Schema anyOf",
+                             "description": "Convert owl:unionOf to JSON Schema anyOf"},
+            "intersection_to_allOf": {"enabled": True, "name": "OWL Intersection to JSON Schema allOf",
+                                    "description": "Convert owl:intersectionOf to JSON Schema allOf"},
+            "complement_to_not": {"enabled": False, "name": "OWL Complement to JSON Schema not",
+                                "description": "Convert owl:complementOf to JSON Schema not"},
+            "equivalent_classes": {"enabled": True, "name": "OWL Equivalent Classes to Definitions",
+                                 "description": "Handle equivalent class relationships"},
+            "disjoint_classes": {"enabled": True, "name": "OWL Disjoint Union to oneOf",
+                               "description": "Transform disjoint class unions into JSON Schema oneOf constraints"},
+            
+            # Structural Transformations
+            "ontology_to_document": {"enabled": True, "name": "Ontology to JSON Schema Document",
+                                   "description": "Transform ontology structure to JSON Schema document"},
+            "individuals_to_examples": {"enabled": False, "name": "Named Individuals to JSON Examples",
+                                       "description": "Convert named individuals to JSON Schema examples"},
+            "ontology_metadata": {"enabled": True, "name": "Ontology Metadata to JSON Metadata",
+                                "description": "Preserve ontology metadata in JSON Schema"},
+            "thing_with_uri": {"enabled": True, "name": "Add Base Object with URI Property",
+                              "description": "Add a base _Thing object with 'uri' property that all classes inherit from (for RDF stream compatibility)"}
+        }
+    
+    def init_ui(self):
+        """Initialize the user interface."""
+        layout = QVBoxLayout()
+        
+        # Description
+        desc_label = QLabel("Configure which transformation rules should be applied when converting OWL to JSON Schema.")
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("padding: 10px; background-color: #f0f0f0; border-radius: 5px;")
+        layout.addWidget(desc_label)
+        
+        # Create scrollable area for rules
+        scroll_area = QScrollArea()
+        scroll_widget = QWidget()
+        scroll_layout = QVBoxLayout()
+        
+        # Group rules by category
+        categories = {
+            "Class Transformations": ["class_to_object", "class_hierarchy", "class_restrictions"],
+            "Property Transformations": ["object_property", "datatype_property", "property_cardinality", "property_restrictions"],
+            "Annotation Transformations": ["labels_to_titles", "comments_to_descriptions", "annotations_to_metadata"],
+            "Advanced Transformations": ["enumeration_to_enum", "union_to_anyOf", "intersection_to_allOf",
+                                        "complement_to_not", "equivalent_classes", "disjoint_classes"],
+            "Structural Transformations": ["ontology_to_document", "individuals_to_examples", "ontology_metadata", "thing_with_uri"]
+        }
+        
+        self.checkboxes = {}
+        
+        for category, rule_ids in categories.items():
+            # Create category group
+            group = QGroupBox(category)
+            group_layout = QVBoxLayout()
+            
+            for rule_id in rule_ids:
+                if rule_id in self.config:
+                    rule_config = self.config[rule_id]
+                    
+                    # Create checkbox with description
+                    checkbox = QCheckBox(rule_config["name"])
+                    checkbox.setChecked(rule_config.get("enabled", False))
+                    checkbox.setToolTip(rule_config.get("description", ""))
+                    
+                    # Store reference
+                    self.checkboxes[rule_id] = checkbox
+                    
+                    # Add description label
+                    desc = QLabel(f"  {rule_config.get('description', '')}")
+                    desc.setWordWrap(True)
+                    desc.setStyleSheet("color: #666; margin-left: 20px; margin-bottom: 5px;")
+                    
+                    group_layout.addWidget(checkbox)
+                    group_layout.addWidget(desc)
+            
+            group.setLayout(group_layout)
+            scroll_layout.addWidget(group)
+        
+        scroll_widget.setLayout(scroll_layout)
+        scroll_area.setWidget(scroll_widget)
+        scroll_area.setWidgetResizable(True)
+        layout.addWidget(scroll_area)
+        
+        # Quick action buttons
+        button_layout = QHBoxLayout()
+        
+        select_all_btn = QPushButton("Select All")
+        select_all_btn.clicked.connect(self.select_all)
+        button_layout.addWidget(select_all_btn)
+        
+        deselect_all_btn = QPushButton("Deselect All")
+        deselect_all_btn.clicked.connect(self.deselect_all)
+        button_layout.addWidget(deselect_all_btn)
+        
+        reset_btn = QPushButton("Reset to Defaults")
+        reset_btn.clicked.connect(self.reset_to_defaults)
+        button_layout.addWidget(reset_btn)
+        
+        button_layout.addStretch()
+        
+        # Save/Load configuration buttons
+        save_config_btn = QPushButton("Save Configuration")
+        save_config_btn.clicked.connect(self.save_configuration)
+        button_layout.addWidget(save_config_btn)
+        
+        load_config_btn = QPushButton("Load Configuration")
+        load_config_btn.clicked.connect(self.load_configuration)
+        button_layout.addWidget(load_config_btn)
+        
+        layout.addLayout(button_layout)
+        
+        # Dialog buttons
+        button_box = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel)
+        button_box.accepted.connect(self.accept)
+        button_box.rejected.connect(self.reject)
+        layout.addWidget(button_box)
+        
+        self.setLayout(layout)
+    
+    def select_all(self):
+        """Select all rules."""
+        for checkbox in self.checkboxes.values():
+            checkbox.setChecked(True)
+    
+    def deselect_all(self):
+        """Deselect all rules."""
+        for checkbox in self.checkboxes.values():
+            checkbox.setChecked(False)
+    
+    def reset_to_defaults(self):
+        """Reset to default configuration."""
+        default_config = self.get_default_config()
+        for rule_id, checkbox in self.checkboxes.items():
+            if rule_id in default_config:
+                checkbox.setChecked(default_config[rule_id].get("enabled", False))
+    
+    def get_configuration(self):
+        """Get the current configuration from the dialog."""
+        # Return the full configuration with all fields
+        config = {}
+        for rule_id, checkbox in self.checkboxes.items():
+            if rule_id in self.config:
+                # Copy the full configuration including name and description
+                config[rule_id] = self.config[rule_id].copy()
+                # Update the enabled state from the checkbox
+                config[rule_id]["enabled"] = checkbox.isChecked()
+            else:
+                # Fallback if the rule is not in the config
+                config[rule_id] = {"enabled": checkbox.isChecked()}
+        return config
+    
+    def save_configuration(self):
+        """Save the current configuration to a JSON file."""
+        from PyQt6.QtWidgets import QFileDialog
+        import json
+        
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save Configuration",
+            "owl2jsonschema_config.json",
+            "JSON Files (*.json);;All Files (*.*)"
+        )
+        
+        if file_path:
+            try:
+                # Get current configuration
+                config = {}
+                for rule_id, checkbox in self.checkboxes.items():
+                    if rule_id in self.config:
+                        config[rule_id] = {
+                            "enabled": checkbox.isChecked(),
+                            "name": self.config[rule_id].get("name", ""),
+                            "description": self.config[rule_id].get("description", "")
+                        }
+                
+                # Save to file
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    json.dump(config, f, indent=2)
+                
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    f"Configuration saved to:\n{file_path}"
+                )
+            except Exception as e:
+                QMessageBox.critical(
+                    self,
+                    "Save Error",
+                    f"Failed to save configuration:\n{str(e)}"
+                )
+    
+    def load_configuration(self):
+        """Load configuration from a JSON file."""
+        from PyQt6.QtWidgets import QFileDialog
+        import json
+        
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Load Configuration",
+            "",
+            "JSON Files (*.json);;All Files (*.*)"
+        )
+        
+        if file_path:
+            try:
+                # Load configuration from file
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    loaded_config = json.load(f)
+                
+                # Update checkboxes based on loaded configuration
+                for rule_id, rule_settings in loaded_config.items():
+                    if rule_id in self.checkboxes:
+                        self.checkboxes[rule_id].setChecked(rule_settings.get("enabled", False))
+                        
+                        # Update the internal config with loaded values
+                        if rule_id in self.config:
+                            self.config[rule_id]["enabled"] = rule_settings.get("enabled", False)
+                            # Optionally update name and description if they exist
+                            if "name" in rule_settings:
+                                self.config[rule_id]["name"] = rule_settings["name"]
+                            if "description" in rule_settings:
+                                self.config[rule_id]["description"] = rule_settings["description"]
+                
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    f"Configuration loaded from:\n{file_path}"
+                )
+            except Exception as e:
+                QMessageBox.critical(
+                    self,
+                    "Load Error",
+                    f"Failed to load configuration:\n{str(e)}"
+                )
 
 
 class TransformationWorker(QThread):
@@ -126,6 +414,9 @@ class MainWindow(QMainWindow):
         self.abox_ready = False
         self.json_ready = False
         
+        # Transformation rules configuration
+        self.rules_config = None
+        
         self.init_ui()
     
     def init_ui(self):
@@ -199,6 +490,15 @@ class MainWindow(QMainWindow):
         open_url_action.setShortcut("Ctrl+U")
         open_url_action.triggered.connect(self.open_url)
         file_menu.addAction(open_url_action)
+        
+        file_menu.addSeparator()
+        
+        save_ontology_action = QAction("Save &Ontology to...", self)
+        save_ontology_action.setShortcut("Ctrl+Shift+S")
+        save_ontology_action.triggered.connect(self.save_ontology_as)
+        save_ontology_action.setEnabled(False)
+        self.save_ontology_action = save_ontology_action
+        file_menu.addAction(save_ontology_action)
         
         file_menu.addSeparator()
         
@@ -284,14 +584,56 @@ class MainWindow(QMainWindow):
         
         self.file_label = QLabel("No file selected")
         self.file_label.setMaximumWidth(400)
+        self.file_label.setStyleSheet("""
+            QLabel {
+                padding: 5px;
+                background-color: #f8f8f8;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+            }
+        """)
         input_layout.addWidget(self.file_label)
         
-        open_btn = QPushButton("Open OWL File")
+        open_btn = QPushButton("📁 Open OWL File")
         open_btn.clicked.connect(self.browse_input_file)
+        open_btn.setStyleSheet("""
+            QPushButton {
+                padding: 8px 15px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+                cursor: pointer;
+            }
+            QPushButton:pressed {
+                background-color: #3d8b40;
+            }
+        """)
         input_layout.addWidget(open_btn)
         
-        url_btn = QPushButton("Open from URL")
+        url_btn = QPushButton("🌐 Open from URL")
         url_btn.clicked.connect(self.open_url)
+        url_btn.setStyleSheet("""
+            QPushButton {
+                padding: 8px 15px;
+                background-color: #2196F3;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background-color: #1976D2;
+                cursor: pointer;
+            }
+            QPushButton:pressed {
+                background-color: #1565C0;
+            }
+        """)
         input_layout.addWidget(url_btn)
         
         input_group.setLayout(input_layout)
@@ -301,6 +643,7 @@ class MainWindow(QMainWindow):
         config_group = QGroupBox("Configuration")
         config_layout = QVBoxLayout()
         
+        # Language selection
         lang_layout = QHBoxLayout()
         lang_layout.addWidget(QLabel("Language:"))
         self.lang_combo = QComboBox()
@@ -309,12 +652,33 @@ class MainWindow(QMainWindow):
         lang_layout.addStretch()
         config_layout.addLayout(lang_layout)
         
-        self.include_uri_check = QCheckBox("Include URI in comments")
+        # Output options
+        self.include_uri_check = QCheckBox("Include OWL class and property URIs in schema")
+        self.include_uri_check.setToolTip("Add OWL class and property URIs as metadata ($comment) in the JSON Schema")
         config_layout.addWidget(self.include_uri_check)
         
-        self.use_arrays_check = QCheckBox("Use arrays for multi-valued properties")
-        self.use_arrays_check.setChecked(True)
-        config_layout.addWidget(self.use_arrays_check)
+        # Rules configuration button
+        rules_btn_layout = QHBoxLayout()
+        self.rules_status_label = QLabel("20 transformation rules configured")
+        self.rules_status_label.setStyleSheet("color: #666;")
+        rules_btn_layout.addWidget(self.rules_status_label)
+        rules_btn_layout.addStretch()
+        
+        configure_rules_btn = QPushButton("Configure Transformation Rules...")
+        configure_rules_btn.clicked.connect(self.configure_rules)
+        configure_rules_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #2196F3;
+                color: white;
+                padding: 5px 10px;
+            }
+            QPushButton:hover {
+                background-color: #1976D2;
+            }
+        """)
+        rules_btn_layout.addWidget(configure_rules_btn)
+        
+        config_layout.addLayout(rules_btn_layout)
         
         config_group.setLayout(config_layout)
         layout.addWidget(config_group)
@@ -626,6 +990,7 @@ class MainWindow(QMainWindow):
             self.input_file = file_path
             self.file_label.setText(Path(file_path).name)
             self.transform_btn.setEnabled(True)
+            self.save_ontology_action.setEnabled(True)  # Enable save ontology menu item
             
             # Load and display file content
             try:
@@ -650,7 +1015,17 @@ class MainWindow(QMainWindow):
             self.input_file = url
             self.file_label.setText(url)
             self.transform_btn.setEnabled(True)
+            self.save_ontology_action.setEnabled(True)  # Enable save ontology menu item
             self.input_text.setPlainText(f"URL: {url}\n\n(Content will be loaded during transformation)")
+    
+    def configure_rules(self):
+        """Open the rules configuration dialog."""
+        dialog = RulesConfigDialog(self, self.rules_config)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            self.rules_config = dialog.get_configuration()
+            # Update status label
+            enabled_count = sum(1 for rule in self.rules_config.values() if rule.get("enabled", False))
+            self.rules_status_label.setText(f"{enabled_count} of 20 rules enabled")
     
     def run_transformation(self):
         """Run the T-box transformation."""
@@ -662,22 +1037,37 @@ class MainWindow(QMainWindow):
         self.progress_bar.setRange(0, 0)
         self.transform_btn.setEnabled(False)
         
+        # Get rules configuration (use defaults if not configured)
+        if self.rules_config is None:
+            dialog = RulesConfigDialog(self)
+            self.rules_config = dialog.get_default_config()
+            enabled_count = sum(1 for rule in self.rules_config.values() if rule.get("enabled", False))
+            self.rules_status_label.setText(f"{enabled_count} of 20 rules enabled")
+        
+        # Build configuration with all rules
+        rules_config = {}
+        for rule_id, rule_settings in self.rules_config.items():
+            if rule_id == "labels_to_titles":
+                # Special case for labels_to_titles which needs language option
+                rules_config[rule_id] = {
+                    "enabled": rule_settings.get("enabled", False),
+                    "options": {"language": self.lang_combo.currentText()}
+                }
+            elif rule_id == "disjoint_classes":
+                # Special case for disjoint_classes which needs enforcement option
+                rules_config[rule_id] = {
+                    "enabled": rule_settings.get("enabled", False),
+                    "options": {"enforcement": "oneOf"}
+                }
+            else:
+                rules_config[rule_id] = {"enabled": rule_settings.get("enabled", False)}
+        
         # Get configuration
         config = {
-            "rules": {
-                "class_to_object": {"enabled": True},
-                "class_hierarchy": {"enabled": True},
-                "class_restrictions": {"enabled": True},
-                "object_property": {"enabled": True},
-                "datatype_property": {"enabled": True},
-                "property_cardinality": {"enabled": True},
-                "labels_to_titles": {"enabled": True, "options": {"language": self.lang_combo.currentText()}},
-                "enumeration_to_enum": {"enabled": True},
-                "ontology_metadata": {"enabled": True}
-            },
+            "rules": rules_config,
             "output": {
                 "include_uri": self.include_uri_check.isChecked(),
-                "use_arrays": self.use_arrays_check.isChecked()
+                "use_arrays": True  # Always use arrays for multi-valued properties
             }
         }
         
@@ -1096,4 +1486,121 @@ class MainWindow(QMainWindow):
                 self,
                 "Validation Error",
                 f"An error occurred during validation:\n\n{str(e)}"
+            )
+    
+    def save_ontology_as(self):
+        """Save the loaded ontology in a different format."""
+        if not self.input_file:
+            QMessageBox.warning(self, "Warning", "No ontology loaded. Please open an ontology file first.")
+            return
+        
+        # Create format selection dialog
+        from PyQt6.QtWidgets import QInputDialog
+        
+        formats = [
+            "RDF/XML (.rdf, .owl)",
+            "Turtle (.ttl)",
+            "N-Triples (.nt)",
+            "JSON-LD (.jsonld)",
+            "N3 (.n3)",
+            "Functional Syntax (.ofn)",
+            "Manchester Syntax (.omn)"
+        ]
+        
+        format_choice, ok = QInputDialog.getItem(
+            self,
+            "Select Format",
+            "Choose the format to save the ontology:",
+            formats,
+            0,  # Default to RDF/XML
+            False  # Not editable
+        )
+        
+        if not ok:
+            return
+        
+        # Map user choice to format and extension
+        format_map = {
+            "RDF/XML (.rdf, .owl)": ("xml", ".rdf"),
+            "Turtle (.ttl)": ("turtle", ".ttl"),
+            "N-Triples (.nt)": ("nt", ".nt"),
+            "JSON-LD (.jsonld)": ("json-ld", ".jsonld"),
+            "N3 (.n3)": ("n3", ".n3"),
+            "Functional Syntax (.ofn)": ("xml", ".ofn"),  # Note: rdflib doesn't support OWL functional syntax directly
+            "Manchester Syntax (.omn)": ("xml", ".omn")    # Note: rdflib doesn't support Manchester syntax directly
+        }
+        
+        rdf_format, file_ext = format_map[format_choice]
+        
+        # Special handling for functional and Manchester syntax
+        if format_choice in ["Functional Syntax (.ofn)", "Manchester Syntax (.omn)"]:
+            QMessageBox.information(
+                self,
+                "Format Note",
+                f"{format_choice.split(' ')[0]} is not directly supported by the RDF library.\n"
+                "The ontology will be saved in RDF/XML format with the appropriate extension.\n"
+                "You may need to use specialized OWL tools to convert to this format."
+            )
+        
+        # Get save file path
+        suggested_name = "ontology" + file_ext
+        if isinstance(self.input_file, str) and not self.input_file.startswith(('http://', 'https://')):
+            base_name = Path(self.input_file).stem
+            suggested_name = base_name + file_ext
+        
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            f"Save Ontology as {format_choice.split(' ')[0]}",
+            suggested_name,
+            f"{format_choice.split('(')[0].strip()} (*{file_ext});;All Files (*.*)"
+        )
+        
+        if not file_path:
+            return
+        
+        try:
+            # Parse the ontology if not already parsed
+            from rdflib import Graph
+            
+            self.status_message.setText("Loading ontology for conversion...")
+            QApplication.processEvents()
+            
+            g = Graph()
+            
+            # Load the ontology
+            if self.input_file.startswith(('http://', 'https://')):
+                # Load from URL
+                g.parse(self.input_file)
+            else:
+                # Load from file
+                g.parse(self.input_file)
+            
+            self.status_message.setText(f"Saving as {format_choice.split(' ')[0]}...")
+            QApplication.processEvents()
+            
+            # Serialize in the requested format
+            serialized = g.serialize(format=rdf_format)
+            
+            # Write to file
+            if isinstance(serialized, bytes):
+                with open(file_path, 'wb') as f:
+                    f.write(serialized)
+            else:
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.write(serialized)
+            
+            self.status_message.setText("Ontology saved successfully!")
+            
+            QMessageBox.information(
+                self,
+                "Success",
+                f"Ontology saved successfully to:\n{file_path}\n\nFormat: {format_choice.split(' ')[0]}"
+            )
+            
+        except Exception as e:
+            self.status_message.setText("Failed to save ontology")
+            QMessageBox.critical(
+                self,
+                "Save Error",
+                f"Failed to save ontology:\n\n{str(e)}"
             )

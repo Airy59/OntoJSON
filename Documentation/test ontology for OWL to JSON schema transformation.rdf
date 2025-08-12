@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#RailwayUndertaking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Company"/>
+    <rdfs:subClassOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Stakeholder"/>
+    <rdfs:label xml:lang="en">Railway undertaking</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#RollingStock">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Rolling stock</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#partOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">part of</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#my_wagon_2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Vehicle"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#Locomotive">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdfs:label xml:lang="en">Locomotive</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#CateringCompany">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Company"/>
+    <rdfs:label xml:lang="en">Catering company</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#creationDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://cdm.ovh/test/owl_to_json_schema#LegalEntity"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:label xml:lang="en">creation date</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#LegalEntity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Legal entity</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#my_wagon_1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Vehicle"/>
+    <rdfs:label xml:lang="en">my wagon 1</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#dateTime">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b4">
+    <rdf:first rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Wagon"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#InfrastructureManager">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Company"/>
+    <rdfs:subClassOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Stakeholder"/>
+    <rdfs:label xml:lang="en">Infrastructure manager</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#Formation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#RollingStock"/>
+    <rdfs:subClassOf rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b1"/>
+    <owl:disjointWith rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Vehicle"/>
+    <rdfs:label xml:lang="en">Formation</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#my_formation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Formation"/>
+    <rdfs:label xml:lang="en">my formation</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b6">
+    <rdf:first rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Locomotive"/>
+    <rdf:rest rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b7"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b5">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:oneOf rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b6"/>
+    <rdfs:subClassOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#VehicleType"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="https://cdm.ovh/test/owl_to_json_schema#composedOf"/>
+    <owl:allValuesFrom rdf:resource="https://cdm.ovh/test/owl_to_json_schema#RollingStock"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#composedOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+    <owl:inverseOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#partOf"/>
+    <rdfs:range rdf:resource="https://cdm.ovh/test/owl_to_json_schema#RollingStock"/>
+    <rdfs:label xml:lang="en">composed of</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#Vehicle">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#RollingStock"/>
+    <rdfs:label xml:lang="en">Vehicle</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:versionIRI rdf:resource="urn:absolute:1.0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#VehicleType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b2"/>
+    <rdfs:label xml:lang="en">Vehicle type</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#ofType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Vehicle"/>
+    <rdfs:range rdf:resource="https://cdm.ovh/test/owl_to_json_schema#VehicleType"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#Company">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://cdm.ovh/test/owl_to_json_schema#LegalEntity"/>
+    <rdfs:label xml:lang="en">Company</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#Wagon">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#my_locomotive">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Vehicle"/>
+    <rdfs:label xml:lang="en">my locomotive</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://cdm.ovh/test/owl_to_json_schema#Stakeholder">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Stakeholder</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:oneOf rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b3">
+    <rdf:first rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Locomotive"/>
+    <rdf:rest rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n2b68f9d0708e49bb8920a97214182e64b7">
+    <rdf:first rdf:resource="https://cdm.ovh/test/owl_to_json_schema#Wagon"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+</rdf:RDF>

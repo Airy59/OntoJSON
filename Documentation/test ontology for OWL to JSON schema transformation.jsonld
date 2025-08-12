@@ -1,0 +1,387 @@
+[
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#my_formation",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#NamedIndividual",
+      "https://cdm.ovh/test/owl_to_json_schema#Formation"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "my formation"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#ofType",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2002/07/owl#FunctionalProperty"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#Vehicle"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#VehicleType"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#partOf",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2002/07/owl#FunctionalProperty"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "part of"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#LegalEntity",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Legal entity"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#RailwayUndertaking",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Railway undertaking"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#Company"
+      },
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#Stakeholder"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#composedOf",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2002/07/owl#InverseFunctionalProperty",
+      "http://www.w3.org/2002/07/owl#AsymmetricProperty",
+      "http://www.w3.org/2002/07/owl#IrreflexiveProperty"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "composed of"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#RollingStock"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#inverseOf": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#partOf"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#CateringCompany",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Catering company"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#Company"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Ontology"
+    ],
+    "http://www.w3.org/2002/07/owl#versionIRI": [
+      {
+        "@id": "urn:absolute:1.0"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#my_wagon_2",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#NamedIndividual",
+      "https://cdm.ovh/test/owl_to_json_schema#Vehicle"
+    ]
+  },
+  {
+    "@id": "_:nd11bbe9edb4d48d7aee3edb452535fb1b5",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#VehicleType"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#oneOf": [
+      {
+        "@list": [
+          {
+            "@id": "https://cdm.ovh/test/owl_to_json_schema#Locomotive"
+          },
+          {
+            "@id": "https://cdm.ovh/test/owl_to_json_schema#Wagon"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#Stakeholder",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Stakeholder"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#Vehicle",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Vehicle"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#RollingStock"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#InfrastructureManager",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Infrastructure manager"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#Company"
+      },
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#Stakeholder"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#Formation",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Formation"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#RollingStock"
+      },
+      {
+        "@id": "_:nd11bbe9edb4d48d7aee3edb452535fb1b1"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#disjointWith": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#Vehicle"
+      }
+    ]
+  },
+  {
+    "@id": "_:nd11bbe9edb4d48d7aee3edb452535fb1b1",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Restriction"
+    ],
+    "http://www.w3.org/2002/07/owl#allValuesFrom": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#RollingStock"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#onProperty": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#composedOf"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#Locomotive",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#NamedIndividual"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Locomotive"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#my_locomotive",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#NamedIndividual",
+      "https://cdm.ovh/test/owl_to_json_schema#Vehicle"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "my locomotive"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#VehicleType",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Vehicle type"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "_:nd11bbe9edb4d48d7aee3edb452535fb1b2"
+      }
+    ]
+  },
+  {
+    "@id": "_:nd11bbe9edb4d48d7aee3edb452535fb1b2",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2002/07/owl#oneOf": [
+      {
+        "@list": [
+          {
+            "@id": "https://cdm.ovh/test/owl_to_json_schema#Locomotive"
+          },
+          {
+            "@id": "https://cdm.ovh/test/owl_to_json_schema#Wagon"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#creationDate",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#DatatypeProperty",
+      "http://www.w3.org/2002/07/owl#FunctionalProperty"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#LegalEntity"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "creation date"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#Wagon",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#NamedIndividual"
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#RollingStock",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Rolling stock"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#Company",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Company"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "https://cdm.ovh/test/owl_to_json_schema#LegalEntity"
+      }
+    ]
+  },
+  {
+    "@id": "https://cdm.ovh/test/owl_to_json_schema#my_wagon_1",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#NamedIndividual",
+      "https://cdm.ovh/test/owl_to_json_schema#Vehicle"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "my wagon 1"
+      }
+    ]
+  },
+  {
+    "@id": "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Datatype"
+    ]
+  }
+]

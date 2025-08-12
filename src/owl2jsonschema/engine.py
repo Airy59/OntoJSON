@@ -32,8 +32,8 @@ class TransformationEngine:
         from .rules.class_rules import ClassToObjectRule, ClassHierarchyRule, ClassRestrictionsRule
         from .rules.property_rules import ObjectPropertyRule, DatatypePropertyRule, PropertyCardinalityRule
         from .rules.annotation_rules import LabelsToTitlesRule, CommentsToDescriptionsRule
-        from .rules.advanced_rules import EnumerationToEnumRule, UnionToAnyOfRule, IntersectionToAllOfRule
-        from .rules.structural_rules import OntologyMetadataRule
+        from .rules.advanced_rules import EnumerationToEnumRule, UnionToAnyOfRule, IntersectionToAllOfRule, DisjointClassesRule
+        from .rules.structural_rules import OntologyMetadataRule, ThingWithUriRule
         
         # Map rule IDs to rule classes
         rule_classes = {
@@ -48,7 +48,9 @@ class TransformationEngine:
             "enumeration_to_enum": EnumerationToEnumRule,
             "union_to_anyOf": UnionToAnyOfRule,
             "intersection_to_allOf": IntersectionToAllOfRule,
-            "ontology_metadata": OntologyMetadataRule
+            "disjoint_classes": DisjointClassesRule,
+            "ontology_metadata": OntologyMetadataRule,
+            "thing_with_uri": ThingWithUriRule
         }
         
         # Create and add rules based on configuration
@@ -103,6 +105,9 @@ class TransformationEngine:
         # Reset the schema builder
         self.schema_builder = SchemaBuilder()
         
+        # Check if ThingWithUriRule is enabled
+        thing_rule = self.get_rule("thing_with_uri")
+        
         # Apply each enabled rule
         for rule in self.rules:
             if rule.is_enabled():
@@ -115,6 +120,10 @@ class TransformationEngine:
                 # Process the result
                 if result is not None:
                     self._process_rule_result(rule.rule_id, result)
+        
+        # If ThingWithUriRule is enabled, apply inheritance to all class definitions
+        if thing_rule and thing_rule.is_enabled():
+            self._apply_thing_inheritance(thing_rule)
         
         # Build and return the final schema
         return self.schema_builder.build()
@@ -135,10 +144,27 @@ class TransformationEngine:
             if isinstance(result, list):
                 for schema in result:
                     if "title" in schema:
+                        # Handle OWL class URI
+                        output_config = self.config.get_output_config()
+                        if "uri" in schema:
+                            owl_uri = schema.pop("uri")  # Remove from schema
+                            if output_config.get("include_uri", False):
+                                # Add as custom metadata field in the schema
+                                schema["$comment"] = f"OWL Class URI: {owl_uri}"
+                        
+                        
                         self.schema_builder.add_definition(schema["title"], schema)
             elif isinstance(result, dict):
                 if "definitions" in result:
                     for name, schema in result["definitions"].items():
+                        # Handle OWL class URI
+                        output_config = self.config.get_output_config()
+                        if "uri" in schema:
+                            owl_uri = schema.pop("uri")  # Remove from schema
+                            if output_config.get("include_uri", False):
+                                # Add as custom metadata field in the schema
+                                schema["$comment"] = f"OWL Class URI: {owl_uri}"
+                        
                         self.schema_builder.add_definition(name, schema)
         
         elif rule_id == "class_restrictions":
@@ -209,15 +235,39 @@ class TransformationEngine:
                     if key in valid_root_properties:
                         self.schema_builder.add_to_root(key, value)
         
+        elif rule_id == "thing_with_uri":
+            # Add _Thing base object to definitions
+            if isinstance(result, dict) and "definitions" in result:
+                for name, schema in result["definitions"].items():
+                    self.schema_builder.add_definition(name, schema)
+        
+        elif rule_id == "disjoint_classes":
+            # Handle disjoint class unions
+            if isinstance(result, dict) and "disjoint_unions" in result:
+                for superclass_name, union_info in result["disjoint_unions"].items():
+                    clean_name = self.schema_builder._clean_definition_name(superclass_name)
+                    if clean_name in self.schema_builder.definitions:
+                        # Replace the superclass with a oneOf of its disjoint subclasses
+                        self.schema_builder.definitions[clean_name] = union_info
+        
         elif rule_id in ["object_property", "datatype_property"]:
             # Properties are added to their respective classes
             if isinstance(result, list):
                 for prop_def in result:
                     if "class" in prop_def and "property" in prop_def:
+                        property_schema = prop_def["property"]["schema"]
+                        
+                        # Add OWL property URI as metadata if configured
+                        output_config = self.config.get_output_config()
+                        if output_config.get("include_uri", False) and "uri" in prop_def["property"]:
+                            property_uri = prop_def["property"]["uri"]
+                            # Add the URI as a $comment in the property schema
+                            property_schema["$comment"] = f"OWL Property URI: {property_uri}"
+                        
                         self.schema_builder.add_property_to_class(
                             prop_def["class"],
                             prop_def["property"]["name"],
-                            prop_def["property"]["schema"]
+                            property_schema
                         )
         
         # Note: We don't have a generic else clause that adds arbitrary results
@@ -282,6 +332,24 @@ class TransformationEngine:
     def get_disabled_rules(self) -> List[str]:
         """Get list of disabled rule IDs."""
         return [rule.rule_id for rule in self.rules if not rule.is_enabled()]
+    
+    def _apply_thing_inheritance(self, thing_rule: TransformationRule):
+        """Apply _Thing inheritance to all class definitions."""
+        # Create a copy of definitions to modify
+        updated_definitions = {}
+        
+        for class_name, class_schema in self.schema_builder.definitions.items():
+            # Skip _Thing itself
+            if class_name == "_Thing":
+                updated_definitions[class_name] = class_schema
+                continue
+            
+            # Apply inheritance using the rule's method
+            inherited_schema = thing_rule.apply_inheritance(class_schema)
+            updated_definitions[class_name] = inherited_schema
+        
+        # Replace definitions with inherited versions
+        self.schema_builder.definitions = updated_definitions
     
     def __repr__(self) -> str:
         """String representation of the engine."""

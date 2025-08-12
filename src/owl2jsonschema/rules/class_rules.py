@@ -53,9 +53,9 @@ class ClassToObjectRule(TransformationRule):
         if comment:
             schema["description"] = comment
         
-        # Add URI as metadata if configured
-        if self.get_option("include_uri", False):
-            schema["$comment"] = f"OWL Class: {owl_class.uri}"
+        # Store the OWL class URI for later processing
+        # The engine will convert this to appropriate metadata
+        schema["uri"] = owl_class.uri
         
         return schema
     
