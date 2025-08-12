@@ -116,9 +116,18 @@ tojs:Stakeholder rdf:type owl:Class ;
 ###  https://cdm.ovh/test/owl_to_json_schema#Vehicle
 tojs:Vehicle rdf:type owl:Class ;
              rdfs:subClassOf tojs:RollingStock ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty tojs:ofType ;
-                               owl:someValuesFrom owl:Thing
+                             [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                      owl:onProperty tojs:ofType ;
+                                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                      owl:onClass tojs:VehicleType
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty tojs:ofType ;
+                                                      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                      owl:onClass tojs:VehicleType
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
                              ] ;
              rdfs:label "Vehicle"@en .
 

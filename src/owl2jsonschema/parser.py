@@ -349,6 +349,33 @@ class OntologyParser:
                     restriction = self._parse_restriction(super_class)
                     if restriction:
                         owl_class.restrictions.append(restriction)
+                # Check if this is an intersection containing restrictions
+                elif (super_class, OWL.intersectionOf, None) in self.graph:
+                    # Parse restrictions from the intersection
+                    for intersection_list in self.graph.objects(super_class, OWL.intersectionOf):
+                        self._parse_intersection_restrictions(intersection_list, owl_class)
+    
+    def _parse_intersection_restrictions(self, intersection_list, owl_class: OntologyClass):
+        """Parse restrictions from an intersection list."""
+        # Traverse the RDF list
+        current = intersection_list
+        while current and current != RDF.nil:
+            # Get the first element
+            for first in self.graph.objects(current, RDF.first):
+                if isinstance(first, BNode):
+                    # Check if this is a restriction
+                    if (first, RDF.type, OWL.Restriction) in self.graph:
+                        restriction = self._parse_restriction(first)
+                        if restriction:
+                            owl_class.restrictions.append(restriction)
+                break
+            
+            # Move to the rest of the list
+            next_node = None
+            for rest in self.graph.objects(current, RDF.rest):
+                next_node = rest
+                break
+            current = next_node
     
     def _parse_restriction(self, restriction_node: BNode) -> Optional[OntologyRestriction]:
         """Parse a restriction node."""
@@ -378,6 +405,28 @@ class OntologyParser:
                     max_cardinality=obj.value
                 )
             elif pred == OWL.cardinality:
+                return CardinalityRestriction(
+                    property_uri=prop_uri,
+                    restriction_type="cardinality",
+                    value=obj.value,
+                    exact_cardinality=obj.value
+                )
+            # Handle qualified cardinality restrictions
+            elif pred == OWL.minQualifiedCardinality:
+                return CardinalityRestriction(
+                    property_uri=prop_uri,
+                    restriction_type="cardinality",
+                    value=obj.value,
+                    min_cardinality=obj.value
+                )
+            elif pred == OWL.maxQualifiedCardinality:
+                return CardinalityRestriction(
+                    property_uri=prop_uri,
+                    restriction_type="cardinality",
+                    value=obj.value,
+                    max_cardinality=obj.value
+                )
+            elif pred == OWL.qualifiedCardinality:
                 return CardinalityRestriction(
                     property_uri=prop_uri,
                     restriction_type="cardinality",

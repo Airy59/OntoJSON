@@ -173,26 +173,40 @@ class ClassRestrictionsRule(TransformationRule):
             "required": []
         }
         
+        # First pass: collect all restrictions by property
+        property_restrictions = {}
         for restriction in owl_class.restrictions:
-            constraint = self._process_restriction(restriction)
-            if constraint:
-                if "property" in constraint:
-                    prop_name = constraint["property"]
+            prop_name = self._get_property_name(restriction.property_uri)
+            if prop_name not in property_restrictions:
+                property_restrictions[prop_name] = []
+            property_restrictions[prop_name].append(restriction)
+        
+        # Second pass: merge restrictions for each property
+        for prop_name, restrictions in property_restrictions.items():
+            merged_schema = {}
+            is_required = False
+            
+            # Process all restrictions for this property
+            for restriction in restrictions:
+                constraint = self._process_restriction(restriction)
+                if constraint:
+                    # Merge schema
                     if "schema" in constraint:
-                        # If the property already exists, merge the constraints
-                        if prop_name in constraints["properties"]:
-                            existing = constraints["properties"][prop_name]
-                            # Merge schemas (prefer the more specific one)
-                            if isinstance(existing, dict) and isinstance(constraint["schema"], dict):
-                                constraints["properties"][prop_name] = {**existing, **constraint["schema"]}
-                            else:
-                                constraints["properties"][prop_name] = constraint["schema"]
-                        else:
-                            constraints["properties"][prop_name] = constraint["schema"]
+                        merged_schema.update(constraint["schema"])
                     
+                    # If ANY restriction marks it as required, keep it required
                     if constraint.get("required", False):
-                        if prop_name not in constraints["required"]:
-                            constraints["required"].append(prop_name)
+                        is_required = True
+            
+            # Add the merged result
+            # Always add the property if it has any restrictions, even if schema is empty
+            if restrictions:  # If there were any restrictions for this property
+                # Use merged schema if available, otherwise empty object
+                constraints["properties"][prop_name] = merged_schema if merged_schema else {}
+                
+                if is_required:
+                    if prop_name not in constraints["required"]:
+                        constraints["required"].append(prop_name)
         
         # Only return if we have properties
         if constraints["properties"]:
@@ -214,11 +228,16 @@ class ClassRestrictionsRule(TransformationRule):
             schema = {}
             
             if restriction.min_cardinality is not None:
-                if restriction.min_cardinality == 1:
+                if restriction.min_cardinality >= 1:
+                    # Property is required only if min cardinality is 1 or more
                     result["required"] = True
-                elif restriction.min_cardinality > 1:
-                    schema["type"] = "array"
-                    schema["minItems"] = restriction.min_cardinality
+                    if restriction.min_cardinality == 1:
+                        # Single value required
+                        pass
+                    else:
+                        # Multiple values required
+                        schema["type"] = "array"
+                        schema["minItems"] = restriction.min_cardinality
             
             if restriction.max_cardinality is not None:
                 if restriction.max_cardinality == 1:
@@ -255,6 +274,8 @@ class ClassRestrictionsRule(TransformationRule):
             
             elif restriction.restriction_type == "someValuesFrom":
                 # At least one value must be from the specified class/type
+                # This makes the property required
+                result["required"] = True
                 filler_ref = self._create_type_reference(restriction.filler)
                 schema["type"] = "array"
                 schema["minItems"] = 1

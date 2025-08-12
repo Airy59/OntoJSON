@@ -144,18 +144,16 @@
           "$ref": "#/definitions/_Thing"
         },
         {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Formation"
-            },
-            {
-              "$ref": "#/definitions/Vehicle"
+          "type": "object",
+          "properties": {
+            "partOf": {
+              "$ref": "#/definitions/Formation",
+              "title": "part of"
             }
-          ]
+          }
         }
       ],
-      "title": "RollingStock",
-      "description": "Disjoint union of: Formation, Vehicle"
+      "title": "Rolling stock"
     },
     "Stakeholder": {
       "allOf": [

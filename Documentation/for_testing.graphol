@@ -547,36 +547,36 @@
           <label customSize="0" size="12" width="110" x="-40" height="23" y="230"/>
         </node>
         <node id="n10" type="concept" color="#fcfcfc">
-          <geometry width="110" x="540" height="50" y="230"/>
+          <geometry width="110" x="590" height="50" y="230"/>
           <iri>https://cdm.ovh/test/owl_to_json_schema#VehicleType</iri>
-          <label customSize="0" size="12" width="110" x="540" height="23" y="230"/>
+          <label customSize="0" size="12" width="110" x="590" height="23" y="230"/>
         </node>
         <node id="n11" type="role" color="#fcfcfc">
-          <geometry width="70" x="360" height="50" y="230"/>
+          <geometry width="70" x="390" height="50" y="230"/>
           <iri>https://cdm.ovh/test/owl_to_json_schema#ofType</iri>
-          <label customSize="0" size="12" width="67" x="360" height="23" y="200"/>
+          <label customSize="0" size="12" width="67" x="390" height="23" y="200"/>
         </node>
         <node id="n13" type="domain-restriction" color="#fcfcfc">
-          <geometry width="20" x="290" height="20" y="230"/>
-          <label customSize="0" size="12" width="39" x="290" height="23" y="208">exists</label>
+          <geometry width="20" x="310" height="20" y="230"/>
+          <label customSize="0" size="12" width="39" x="310" height="23" y="208">exists</label>
         </node>
         <node id="n14" type="enumeration" color="#fcfcfc">
-          <geometry width="50" x="540" height="30" y="320"/>
-          <label customSize="0" size="12" width="40" x="540" height="23" y="320"/>
+          <geometry width="50" x="590" height="30" y="310"/>
+          <label customSize="0" size="12" width="40" x="590" height="23" y="310"/>
         </node>
         <node id="n15" type="individual" color="#fcfcfc">
-          <geometry width="60" x="480" height="60" y="400"/>
+          <geometry width="60" x="530" height="60" y="390"/>
           <iri>https://cdm.ovh/test/owl_to_json_schema#Locomotive</iri>
-          <label customSize="0" size="12" width="60" x="480" height="38" y="400"/>
+          <label customSize="0" size="12" width="60" x="530" height="38" y="390"/>
         </node>
         <node id="n16" type="individual" color="#fcfcfc">
-          <geometry width="60" x="600" height="60" y="400"/>
+          <geometry width="60" x="650" height="60" y="390"/>
           <iri>https://cdm.ovh/test/owl_to_json_schema#Wagon</iri>
-          <label customSize="0" size="12" width="60" x="600" height="38" y="400"/>
+          <label customSize="0" size="12" width="60" x="650" height="38" y="390"/>
         </node>
         <node id="n19" type="range-restriction" color="#000000">
-          <geometry width="20" x="430" height="20" y="230"/>
-          <label customSize="0" size="12" width="39" x="430" height="23" y="208">exists</label>
+          <geometry width="20" x="480" height="20" y="230"/>
+          <label customSize="0" size="12" width="39" x="480" height="23" y="208">exists</label>
         </node>
         <node id="n2" type="disjoint-union" color="#000000">
           <geometry width="50" x="190" height="30" y="-60"/>
@@ -668,6 +668,10 @@
           <geometry width="50" x="-140" height="30" y="-140"/>
           <label customSize="0" size="12" width="23" x="-140" height="23" y="-140"/>
         </node>
+        <node id="n42" type="domain-restriction" color="#fcfcfc">
+          <geometry width="20" x="310" height="20" y="280"/>
+          <label customSize="0" size="12" width="39" x="310" height="23" y="258">(1,1)</label>
+        </node>
         <node id="n5" type="range-restriction" color="#000000">
           <geometry width="20" x="70" height="20" y="-140"/>
           <label customSize="0" size="12" width="39" x="70" height="23" y="-162">exists</label>
@@ -697,41 +701,54 @@
           <point x="-41" y="-140"/>
         </edge>
         <edge id="e11" type="input" target="n14" source="n15">
-          <point x="480" y="400"/>
-          <point x="540" y="320"/>
+          <point x="530" y="390"/>
+          <point x="590" y="310"/>
         </edge>
         <edge id="e110" type="input" target="n41" source="n40">
           <point x="-240" y="-140"/>
           <point x="-140" y="-140"/>
         </edge>
-        <edge id="e12" type="input" target="n14" source="n16">
-          <point x="600" y="400"/>
-          <point x="540" y="320"/>
-        </edge>
-        <edge id="e19" type="inclusion" target="n0" source="n13">
-          <point x="290" y="230"/>
+        <edge id="e113" type="inclusion" target="n0" source="n13">
+          <point x="310" y="230"/>
           <point x="190" y="230"/>
+        </edge>
+        <edge id="e117" type="inclusion" target="n42" source="n0">
+          <point x="190" y="230"/>
+          <point x="310" y="280"/>
+        </edge>
+        <edge id="e118" type="input" target="n42" source="n10">
+          <point x="590" y="230"/>
+          <point x="510" y="280"/>
+          <point x="310" y="280"/>
+        </edge>
+        <edge id="e119" type="input" target="n42" source="n11">
+          <point x="390" y="230"/>
+          <point x="310" y="280"/>
+        </edge>
+        <edge id="e12" type="input" target="n14" source="n16">
+          <point x="650" y="390"/>
+          <point x="590" y="310"/>
         </edge>
         <edge id="e2" type="input" target="n2" source="n1">
           <point x="-40" y="230"/>
           <point x="190" y="-60"/>
         </edge>
         <edge id="e22" type="input" target="n13" source="n11">
-          <point x="360" y="230"/>
-          <point x="290" y="230"/>
+          <point x="390" y="230"/>
+          <point x="310" y="230"/>
         </edge>
         <edge id="e24" type="inclusion" target="n10" source="n19">
-          <point x="430" y="230"/>
-          <point x="540" y="230"/>
+          <point x="480" y="230"/>
+          <point x="590" y="230"/>
         </edge>
         <edge id="e25" type="input" target="n19" source="n11">
-          <point x="360" y="230"/>
-          <point x="430" y="230"/>
+          <point x="390" y="230"/>
+          <point x="480" y="230"/>
         </edge>
         <edge id="e29" type="equivalence" target="n14" source="n10">
-          <point x="540" y="230"/>
-          <point x="540" y="270"/>
-          <point x="540" y="320"/>
+          <point x="590" y="230"/>
+          <point x="590" y="260"/>
+          <point x="590" y="310"/>
         </edge>
         <edge id="e3" type="input" target="n2" source="n0">
           <point x="190" y="230"/>
