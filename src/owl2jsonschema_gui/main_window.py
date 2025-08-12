@@ -629,7 +629,6 @@ class MainWindow(QMainWindow):
             }
             QPushButton:hover {
                 background-color: #45a049;
-                cursor: pointer;
             }
             QPushButton:pressed {
                 background-color: #3d8b40;
@@ -650,7 +649,6 @@ class MainWindow(QMainWindow):
             }
             QPushButton:hover {
                 background-color: #1976D2;
-                cursor: pointer;
             }
             QPushButton:pressed {
                 background-color: #1565C0;
