@@ -108,11 +108,8 @@ class ABoxToJSONConverter:
         """Convert a single individual to JSON."""
         json_obj = {}
         
-        # Add URI if schema includes it
-        if '_Thing' in self.class_definitions:
-            thing_def = self.class_definitions['_Thing']
-            if 'properties' in thing_def and 'uri' in thing_def['properties']:
-                json_obj['uri'] = str(individual_uri)
+        # Always add URI if present in any schema definition
+        json_obj['uri'] = str(individual_uri)
         
         # Get the type of the individual
         types = list(graph.objects(individual_uri, RDF.type))
@@ -122,6 +119,9 @@ class ABoxToJSONConverter:
         # Use the first type that matches our schema
         type_name = None
         for type_uri in types:
+            # Skip OWL built-in types
+            if str(type_uri) == str(OWL.NamedIndividual):
+                continue
             candidate_name = self._get_type_name(type_uri)
             if candidate_name in self.class_definitions:
                 type_name = candidate_name
@@ -133,24 +133,59 @@ class ABoxToJSONConverter:
         # Get the schema definition for this type
         class_def = self._get_full_class_definition(type_name)
         
-        # Extract properties
+        # Extract ALL properties from the RDF graph for this individual
+        # Get all predicates for this individual
+        for predicate, obj in graph.predicate_objects(individual_uri):
+            # Skip RDF type assertions and labels
+            if predicate in [RDF.type, RDFS.label, RDFS.comment]:
+                continue
+            
+            # Get the local name of the predicate
+            predicate_name = self._get_type_name(predicate)
+            
+            # Check if this property is in our schema
+            if 'properties' in class_def and predicate_name in class_def['properties']:
+                prop_schema = class_def['properties'][predicate_name]
+                
+                # Check if we already have values for this property
+                if predicate_name not in json_obj or predicate_name == 'uri':
+                    # Get all values for this property
+                    values = list(graph.objects(individual_uri, predicate))
+                    
+                    if values:
+                        # Handle single vs array values
+                        if prop_schema.get('type') == 'array':
+                            json_obj[predicate_name] = [self._convert_value(v, prop_schema.get('items', {}), graph)
+                                                       for v in values]
+                        else:
+                            # Take the first value for single-valued properties
+                            json_obj[predicate_name] = self._convert_value(values[0], prop_schema, graph)
+        
+        # Also try with different URI patterns in case properties use different namespaces
         if 'properties' in class_def:
             for prop_name, prop_schema in class_def['properties'].items():
-                if prop_name == 'uri':
+                if prop_name == 'uri' or prop_name in json_obj:
                     continue  # Already handled
                 
-                # Find corresponding RDF property
-                prop_uri = URIRef(f"{self.base_uri}{prop_name}")
-                values = list(graph.objects(individual_uri, prop_uri))
+                # Try multiple URI patterns for the property
+                possible_prop_uris = [
+                    URIRef(f"{self.base_uri}{prop_name}"),
+                    URIRef(f"{self.base_uri.rstrip('#/')}/{prop_name}"),
+                    URIRef(f"http://example.org#{prop_name}"),
+                    URIRef(f"https://example.org#{prop_name}"),
+                ]
                 
-                if values:
-                    # Handle single vs array values
-                    if prop_schema.get('type') == 'array':
-                        json_obj[prop_name] = [self._convert_value(v, prop_schema.get('items', {}), graph) 
-                                              for v in values]
-                    else:
-                        # Take the first value for single-valued properties
-                        json_obj[prop_name] = self._convert_value(values[0], prop_schema, graph)
+                for prop_uri in possible_prop_uris:
+                    values = list(graph.objects(individual_uri, prop_uri))
+                    if values:
+                        # Handle single vs array values
+                        if prop_schema.get('type') == 'array':
+                            json_obj[prop_name] = [self._convert_value(v, prop_schema.get('items', {}), graph)
+                                                  for v in values]
+                        else:
+                            # Take the first value for single-valued properties
+                            json_obj[prop_name] = self._convert_value(values[0], prop_schema, graph)
+                        break  # Found values, stop trying other URI patterns
         
         return json_obj
     

@@ -542,6 +542,12 @@ class MainWindow(QMainWindow):
         self.save_json_action = save_json_action
         file_menu.addAction(save_json_action)
         
+        save_jsonld_action = QAction("Save JSON-&LD Instance...", self)
+        save_jsonld_action.triggered.connect(self.save_jsonld)
+        save_jsonld_action.setEnabled(False)
+        self.save_jsonld_action = save_jsonld_action
+        file_menu.addAction(save_jsonld_action)
+        
         file_menu.addSeparator()
         
         exit_action = QAction("E&xit", self)
@@ -865,18 +871,21 @@ class MainWindow(QMainWindow):
         """Create the JSON instance generation step widget."""
         widget = QWidget()
         layout = QVBoxLayout()
+        layout.setSpacing(5)  # Reduce spacing between elements
         
-        # Description
+        # Description - Fixed height
         desc_label = QLabel("<b>Step 3: JSON Instance Generation</b><br>"
                           "Transform the A-box to JSON instances conforming to the generated JSON Schema")
         desc_label.setWordWrap(True)
         desc_label.setStyleSheet("QLabel { background-color: #e8f5e9; padding: 10px; border-radius: 5px; }")
+        desc_label.setMaximumHeight(60)  # Fixed maximum height
         layout.addWidget(desc_label)
         
-        # Transform button
+        # Transform button - Fixed height
         self.transform_json_btn = QPushButton("Transform A-box to JSON")
         self.transform_json_btn.setEnabled(False)
         self.transform_json_btn.clicked.connect(self.transform_abox_to_json)
+        self.transform_json_btn.setMaximumHeight(40)  # Fixed maximum height
         self.transform_json_btn.setStyleSheet("""
             QPushButton {
                 background-color: #2196F3;
@@ -889,8 +898,9 @@ class MainWindow(QMainWindow):
         """)
         layout.addWidget(self.transform_json_btn)
         
-        # Validation
+        # Validation - Fixed height
         validation_group = QGroupBox("Schema Validation")
+        validation_group.setMaximumHeight(80)  # Fixed maximum height
         validation_layout = QHBoxLayout()
         
         self.validate_json_btn = QPushButton("Validate against Schema")
@@ -906,15 +916,32 @@ class MainWindow(QMainWindow):
         validation_group.setLayout(validation_layout)
         layout.addWidget(validation_group)
         
-        # Output
-        json_output_group = QGroupBox("JSON Instance Output")
+        # Output - Split into two side-by-side panels - This will expand to fill available space
+        output_splitter = QSplitter(Qt.Orientation.Horizontal)
+        
+        # JSON output panel
+        json_output_group = QGroupBox("JSON Instance")
         json_output_layout = QVBoxLayout()
         self.json_output_text = QTextEdit()
         self.json_output_text.setFont(QFont("Courier", 10))
         self.json_output_text.setReadOnly(True)
         json_output_layout.addWidget(self.json_output_text)
         json_output_group.setLayout(json_output_layout)
-        layout.addWidget(json_output_group)
+        output_splitter.addWidget(json_output_group)
+        
+        # JSON-LD output panel
+        jsonld_output_group = QGroupBox("JSON-LD Instance")
+        jsonld_output_layout = QVBoxLayout()
+        self.jsonld_output_text = QTextEdit()
+        self.jsonld_output_text.setFont(QFont("Courier", 10))
+        self.jsonld_output_text.setReadOnly(True)
+        jsonld_output_layout.addWidget(self.jsonld_output_text)
+        jsonld_output_group.setLayout(jsonld_output_layout)
+        output_splitter.addWidget(jsonld_output_group)
+        
+        # Set equal sizes for both panels
+        output_splitter.setSizes([600, 600])
+        layout.addWidget(output_splitter, 1)  # Add with stretch factor 1 to make it expand
         
         widget.setLayout(layout)
         return widget
@@ -988,11 +1015,13 @@ class MainWindow(QMainWindow):
             self.json_status.setText("JSON: Available ✓")
             self.json_status.setStyleSheet("QLabel { color: green; font-weight: bold; }")
             self.save_json_action.setEnabled(True)
+            self.save_jsonld_action.setEnabled(True)
             self.validate_json_btn.setEnabled(True)
         else:
             self.json_status.setText("JSON: Not Available")
             self.json_status.setStyleSheet("QLabel { color: gray; }")
             self.save_json_action.setEnabled(False)
+            self.save_jsonld_action.setEnabled(False)
     
     def enable_abox_controls(self, enabled: bool):
         """Enable or disable A-box generation controls."""
@@ -1381,23 +1410,45 @@ class MainWindow(QMainWindow):
             self,
             "Save JSON Instances",
             "instances.json",
-            "JSON Files (*.json);;JSON-LD Files (*.jsonld);;All Files (*.*)"
+            "JSON Files (*.json);;All Files (*.*)"
         )
         
         if file_path:
             try:
-                # Determine format from file extension
-                if file_path.endswith('.jsonld'):
-                    # Save as JSON-LD
-                    content = json.dumps(self.json_instances.get('jsonld', self.json_instances), indent=2)
-                else:
-                    # Save as regular JSON
-                    content = json.dumps(self.json_instances, indent=2)
+                # Get the regular JSON instances (not JSON-LD)
+                json_data = self.json_instances.get('instances', self.json_instances)
+                content = json.dumps(json_data, indent=2)
                 
                 with open(file_path, 'w') as f:
                     f.write(content)
                 
                 QMessageBox.information(self, "Success", f"JSON instances saved to:\n{file_path}")
+            except Exception as e:
+                QMessageBox.critical(self, "Save Error", f"Failed to save file:\n{str(e)}")
+    
+    def save_jsonld(self):
+        """Save the JSON-LD instances."""
+        if not self.json_instances:
+            QMessageBox.warning(self, "Warning", "No JSON-LD instances to save. Please generate JSON instances first.")
+            return
+        
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save JSON-LD Instances",
+            "instances.jsonld",
+            "JSON-LD Files (*.jsonld);;All Files (*.*)"
+        )
+        
+        if file_path:
+            try:
+                # Get the JSON-LD version
+                jsonld_data = self.json_instances.get('jsonld', self.json_instances)
+                content = json.dumps(jsonld_data, indent=2)
+                
+                with open(file_path, 'w') as f:
+                    f.write(content)
+                
+                QMessageBox.information(self, "Success", f"JSON-LD instances saved to:\n{file_path}")
             except Exception as e:
                 QMessageBox.critical(self, "Save Error", f"Failed to save file:\n{str(e)}")
     
@@ -1435,13 +1486,9 @@ class MainWindow(QMainWindow):
                 'jsonld': jsonld_instances
             }
             
-            # Display in output (pretty print the JSON)
-            output_text = "=== JSON Instances ===\n\n"
-            output_text += json.dumps(json_instances, indent=2)
-            output_text += "\n\n=== JSON-LD Format ===\n\n"
-            output_text += json.dumps(jsonld_instances, indent=2)
-            
-            self.json_output_text.setPlainText(output_text)
+            # Display in separate output panels
+            self.json_output_text.setPlainText(json.dumps(json_instances, indent=2))
+            self.jsonld_output_text.setPlainText(json.dumps(jsonld_instances, indent=2))
             
             # Update state
             self.json_ready = True
