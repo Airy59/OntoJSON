@@ -72,6 +72,35 @@ def configure_application(app):
     app.setOrganizationName(ORG_NAME)
     app.setStyle(APP_STYLE)
     
+    # Force light theme to avoid Windows dark mode issues
+    from PyQt6.QtGui import QPalette, QColor
+    
+    # Create a light palette
+    light_palette = QPalette()
+    
+    # Window colors
+    light_palette.setColor(QPalette.ColorRole.Window, QColor(240, 240, 240))
+    light_palette.setColor(QPalette.ColorRole.WindowText, QColor(0, 0, 0))
+    
+    # Base colors (for input fields)
+    light_palette.setColor(QPalette.ColorRole.Base, QColor(255, 255, 255))
+    light_palette.setColor(QPalette.ColorRole.AlternateBase, QColor(245, 245, 245))
+    
+    # Text colors
+    light_palette.setColor(QPalette.ColorRole.Text, QColor(0, 0, 0))
+    light_palette.setColor(QPalette.ColorRole.BrightText, QColor(255, 0, 0))
+    
+    # Button colors
+    light_palette.setColor(QPalette.ColorRole.Button, QColor(240, 240, 240))
+    light_palette.setColor(QPalette.ColorRole.ButtonText, QColor(0, 0, 0))
+    
+    # Highlight colors
+    light_palette.setColor(QPalette.ColorRole.Highlight, QColor(76, 163, 224))
+    light_palette.setColor(QPalette.ColorRole.HighlightedText, QColor(255, 255, 255))
+    
+    # Apply the light palette
+    app.setPalette(light_palette)
+    
     # Set application icon
     try:
         # Try to load the high-resolution icon

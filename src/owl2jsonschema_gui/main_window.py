@@ -739,7 +739,7 @@ class MainWindow(QMainWindow):
         owl_group = QGroupBox("OWL Ontology")
         owl_layout = QVBoxLayout()
         self.input_text = QTextEdit()
-        self.input_text.setFont(QFont("Courier", 10))
+        self.input_text.setFont(QFont("Consolas, 'Courier New', monospace", 11))
         owl_layout.addWidget(self.input_text)
         owl_group.setLayout(owl_layout)
         output_splitter.addWidget(owl_group)
@@ -753,13 +753,13 @@ class MainWindow(QMainWindow):
         
         # Schema tab
         self.output_text = QTextEdit()
-        self.output_text.setFont(QFont("Courier", 10))
+        self.output_text.setFont(QFont("Consolas, 'Courier New', monospace", 11))
         self.output_text.setReadOnly(True)
         self.schema_tabs.addTab(self.output_text, "Schema")
         
         # Statistics tab
         self.stats_text = QTextEdit()
-        self.stats_text.setFont(QFont("Courier", 10))
+        self.stats_text.setFont(QFont("Consolas, 'Courier New', monospace", 11))
         self.stats_text.setReadOnly(True)
         self.schema_tabs.addTab(self.stats_text, "Statistics")
         
@@ -858,7 +858,7 @@ class MainWindow(QMainWindow):
         abox_output_group = QGroupBox("Generated A-box (RDF/OWL)")
         abox_output_layout = QVBoxLayout()
         self.abox_output_text = QTextEdit()
-        self.abox_output_text.setFont(QFont("Courier", 10))
+        self.abox_output_text.setFont(QFont("Consolas, 'Courier New', monospace", 11))
         self.abox_output_text.setReadOnly(True)
         abox_output_layout.addWidget(self.abox_output_text)
         abox_output_group.setLayout(abox_output_layout)
@@ -946,7 +946,7 @@ class MainWindow(QMainWindow):
         json_output_group = QGroupBox("JSON Instance")
         json_output_layout = QVBoxLayout()
         self.json_output_text = QTextEdit()
-        self.json_output_text.setFont(QFont("Courier", 10))
+        self.json_output_text.setFont(QFont("Consolas, 'Courier New', monospace", 11))
         self.json_output_text.setReadOnly(True)
         json_output_layout.addWidget(self.json_output_text)
         json_output_group.setLayout(json_output_layout)
@@ -956,7 +956,7 @@ class MainWindow(QMainWindow):
         jsonld_output_group = QGroupBox("JSON-LD Instance")
         jsonld_output_layout = QVBoxLayout()
         self.jsonld_output_text = QTextEdit()
-        self.jsonld_output_text.setFont(QFont("Courier", 10))
+        self.jsonld_output_text.setFont(QFont("Consolas, 'Courier New', monospace", 11))
         self.jsonld_output_text.setReadOnly(True)
         jsonld_output_layout.addWidget(self.jsonld_output_text)
         jsonld_output_group.setLayout(jsonld_output_layout)
@@ -1616,7 +1616,7 @@ class MainWindow(QMainWindow):
                 error_text = QTextEdit()
                 error_text.setReadOnly(True)
                 error_text.setPlainText(error_report)
-                error_text.setFont(QFont("Courier", 10))
+                error_text.setFont(QFont("Consolas, 'Courier New', monospace", 11))
                 error_text.setStyleSheet("background-color: #f8f9fa; border: 1px solid #dee2e6;")
                 layout.addWidget(error_text)
                 
@@ -1700,7 +1700,7 @@ class MainWindow(QMainWindow):
         text_edit = QTextEdit()
         text_edit.setReadOnly(True)
         text_edit.setPlainText(credits_text)
-        text_edit.setFont(QFont("Courier", 10))
+        text_edit.setFont(QFont("Consolas, 'Courier New', monospace", 11))
         
         layout.addWidget(text_edit)
         

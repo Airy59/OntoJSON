@@ -29,6 +29,7 @@ dependencies = [
     "jsonschema>=4.0.0",
     "click>=8.0.0",
     "faker>=19.0.0",
+    "owlrl>=7.1.4",
 ]
 
 [project.optional-dependencies]
