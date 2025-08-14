@@ -22,7 +22,7 @@ Download the standalone application for your platform:
   - Download from releases page
   - Or build locally: See [Build System Documentation](#build-system)
   
-- **Windows**: `OntoJSON.exe` - Windows executable
+- **Windows**: `OntoJSON.exe` - Windows executable (coming soon)
   - Download from releases page
   - Or build locally: See [Build System Documentation](#build-system)
   
