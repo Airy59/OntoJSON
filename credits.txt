@@ -48,7 +48,13 @@ URL: https://www.python.org/
 
 Icons and Resources
 -------------------
-[Add any icon attributions here if applicable]
+[N/A]
+
+OWL modeling tools
+------------------
+GRAPHOL (visual language) and EDDY 3.7 (desktop application)
+URL: https://www.diag.uniroma1.it/degiacom/papers/2022/fi2022lssd.pdf and https://github.com/obdasystems
+
 
 Special Thanks
 --------------
