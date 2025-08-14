@@ -18,9 +18,45 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from owl2jsonschema_gui.main_window import MainWindow
 
 # Application configuration constants
-APP_NAME = "OWL to JSON Schema Converter"
+APP_NAME = "OntoJSON"
+APP_DISPLAY_NAME = "OntoJSON - OWL to JSON Schema Converter"
 ORG_NAME = "OWL2JSONSchema"
 APP_STYLE = "Fusion"
+
+
+def set_macos_app_name():
+    """
+    Set the application name for macOS dock and menus.
+    This should be called before creating the QApplication.
+    """
+    if sys.platform == 'darwin':
+        # Method 1: Set process title using setproctitle
+        try:
+            import setproctitle
+            setproctitle.setproctitle(APP_NAME)
+        except ImportError:
+            pass
+        
+        # Method 2: Set environment variables for macOS
+        os.environ['__CFBundleName'] = APP_NAME
+        os.environ['__CFBundleDisplayName'] = APP_NAME
+        os.environ['__CFBundleIdentifier'] = 'com.owl2jsonschema.ontojson'
+        
+        # Method 3: Use AppKit to set the app name
+        try:
+            from AppKit import NSBundle, NSProcessInfo
+            # Set the process name
+            NSProcessInfo.processInfo().setProcessName_(APP_NAME)
+            
+            # Set bundle name
+            bundle = NSBundle.mainBundle()
+            if bundle:
+                info = bundle.localizedInfoDictionary() or bundle.infoDictionary()
+                if info:
+                    info['CFBundleName'] = APP_NAME
+                    info['CFBundleDisplayName'] = APP_NAME
+        except ImportError:
+            pass
 
 
 def configure_application(app):
@@ -32,6 +68,7 @@ def configure_application(app):
     """
     # Set application metadata
     app.setApplicationName(APP_NAME)
+    app.setApplicationDisplayName(APP_NAME)  # Important for macOS dock
     app.setOrganizationName(ORG_NAME)
     app.setStyle(APP_STYLE)
     
@@ -63,6 +100,9 @@ def main():
     Initializes the Qt application, configures it, creates the main window,
     and starts the application event loop.
     """
+    # Set macOS app name BEFORE creating QApplication
+    set_macos_app_name()
+    
     # Enable high DPI scaling - must be called BEFORE creating QApplication
     try:
         QApplication.setHighDpiScaleFactorRoundingPolicy(
@@ -80,6 +120,7 @@ def main():
 
     # Create and show main window
     window = MainWindow()
+    window.setWindowTitle(APP_NAME)  # Ensure window title is set
     window.show()
 
     # Run application

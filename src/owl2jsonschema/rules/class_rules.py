@@ -270,7 +270,7 @@ class ClassRestrictionsRule(TransformationRule):
                 # So we should default to arrays unless explicitly set to single value
                 schema["type"] = "array"
                 schema["items"] = filler_ref
-                schema["description"] = f"Array of {self._get_property_name(restriction.filler)}"
+                schema["description"] = f"Array of {self._get_property_name(restriction.filler)} or @id references"
             
             elif restriction.restriction_type == "someValuesFrom":
                 # At least one value must be from the specified class/type
@@ -322,5 +322,21 @@ class ClassRestrictionsRule(TransformationRule):
             return xsd_types[type_uri]
         
         # Otherwise, it's a reference to another class
+        # Use oneOf pattern: either a full object reference or an @id reference
         class_name = self._get_property_name(type_uri)
-        return {"$ref": f"#/definitions/{class_name}"}
+        return {
+            "oneOf": [
+                {"$ref": f"#/definitions/{class_name}"},
+                {
+                    "type": "object",
+                    "properties": {
+                        "@id": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": ["@id"],
+                    "additionalProperties": False
+                }
+            ]
+        }

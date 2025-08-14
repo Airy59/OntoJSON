@@ -38,23 +38,61 @@ class ObjectPropertyRule(TransformationRule):
             return None
         
         prop_name = self._get_property_name(property.uri)
-        schema = {}
+        range_class = None
         
         # Object properties reference other objects
         if property.range:
             # If there's a specific range, reference it
             range_class = self._get_property_name(property.range[0])
-            schema = {"$ref": f"#/definitions/{range_class}"}
-        else:
-            # Generic object reference
-            schema = {"type": "object"}
         
-        # Add title and description if available
+        # Create oneOf pattern: either a full object reference or an @id reference
+        if range_class:
+            schema = {
+                "oneOf": [
+                    {"$ref": f"#/definitions/{range_class}"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "@id": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        },
+                        "required": ["@id"],
+                        "additionalProperties": False
+                    }
+                ]
+            }
+            # Add description that clarifies the target type
+            base_description = f"Reference to {range_class} or @id"
+            if property.comment:
+                schema["description"] = property.get_comment(self.get_option("language", "en")) + f" ({base_description})"
+            else:
+                schema["description"] = base_description
+        else:
+            # Generic object reference with oneOf pattern
+            schema = {
+                "oneOf": [
+                    {"type": "object"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "@id": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        },
+                        "required": ["@id"],
+                        "additionalProperties": False
+                    }
+                ]
+            }
+            if property.comment:
+                schema["description"] = property.get_comment(self.get_option("language", "en"))
+        
+        # Add title if available
         if property.label:
             schema["title"] = property.get_label(self.get_option("language", "en"))
-        
-        if property.comment:
-            schema["description"] = property.get_comment(self.get_option("language", "en"))
         
         return {
             "property": prop_name,
@@ -93,11 +131,12 @@ class ObjectPropertyRule(TransformationRule):
             # This will be handled when processing the inverse property
             pass
         
-        # Create the property schema
+        # Create the property schema with oneOf pattern for object references
+        range_class = None
+        
         if property.range:
             # If there's a specific range, reference it
             range_class = self._get_property_name(property.range[0])
-            schema = {"$ref": f"#/definitions/{range_class}"}
         else:
             # If no explicit range and has an inverse, try to infer range
             if property.inverse_of:
@@ -106,22 +145,48 @@ class ObjectPropertyRule(TransformationRule):
                     if inverse_prop.domain:
                         # The range of a property is the domain of its inverse
                         range_class = self._get_property_name(inverse_prop.domain[0])
-                        schema = {"$ref": f"#/definitions/{range_class}"}
                     else:
                         # Try to infer from usage - check which classes use the inverse property
                         inferred_domain = self._infer_property_domain_from_usage(inverse_prop, ontology)
                         if inferred_domain:
                             range_class = self._get_property_name(inferred_domain[0])
-                            schema = {"$ref": f"#/definitions/{range_class}"}
-                        else:
-                            # Generic object reference
-                            schema = {"type": "object"}
-                else:
-                    # Generic object reference
-                    schema = {"type": "object"}
-            else:
-                # Generic object reference
-                schema = {"type": "object"}
+        
+        # Create oneOf pattern: either a full object reference or an @id reference
+        if range_class:
+            schema = {
+                "oneOf": [
+                    {"$ref": f"#/definitions/{range_class}"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "@id": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        },
+                        "required": ["@id"],
+                        "additionalProperties": False
+                    }
+                ]
+            }
+        else:
+            # Generic object reference with oneOf pattern
+            schema = {
+                "oneOf": [
+                    {"type": "object"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "@id": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        },
+                        "required": ["@id"],
+                        "additionalProperties": False
+                    }
+                ]
+            }
         
         # Add title and description if available
         if property.label:
@@ -516,5 +581,21 @@ class PropertyRestrictionsRule(TransformationRule):
             return xsd_types[type_uri]
         
         # Otherwise, it's a reference to another class
+        # Use oneOf pattern for object references
         class_name = self._get_property_name(type_uri)
-        return {"$ref": f"#/definitions/{class_name}"}
+        return {
+            "oneOf": [
+                {"$ref": f"#/definitions/{class_name}"},
+                {
+                    "type": "object",
+                    "properties": {
+                        "@id": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": ["@id"],
+                    "additionalProperties": False
+                }
+            ]
+        }

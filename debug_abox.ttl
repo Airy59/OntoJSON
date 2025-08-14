@@ -1,0 +1,61 @@
+@prefix ex: <https://example.org#> .
+@prefix ns1: <http://example.org/person#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org> a owl:Ontology .
+
+ex:Person_1_W1PBMS a ns1:Person,
+        owl:NamedIndividual ;
+    rdfs:label "Person 1"@en ;
+    ns1:firstName "Dennis"^^xsd:string ;
+    ns1:lastName "Cohen"^^xsd:string .
+
+ex:Person_2_KAIUWJ a ns1:Person,
+        owl:NamedIndividual ;
+    rdfs:label "Person 2"@en ;
+    ns1:firstName "Brittany"^^xsd:string,
+        "Jane"^^xsd:string,
+        "Sarah"^^xsd:string ;
+    ns1:lastName "Brown"^^xsd:string,
+        "Smith"^^xsd:string .
+
+ex:Address_1_LPR2V7 a ns1:Address,
+        owl:NamedIndividual ;
+    rdfs:label "Address 1"@en ;
+    ns1:postalCode "4972F002"^^xsd:string,
+        "52DC774D"^^xsd:string,
+        "B9747878"^^xsd:string .
+
+ex:Employee_2_HRCE1S a ns1:Employee,
+        owl:NamedIndividual ;
+    rdfs:label "Employee 2"@en ;
+    ns1:hasAddress ex:Address_2_94JJ4S ;
+    ns1:worksFor ex:Organization_1_V1A4CL .
+
+ex:Organization_1_V1A4CL a ns1:Organization,
+        owl:NamedIndividual ;
+    rdfs:label "Organization 1"@en ;
+    ns1:hasEmployee ex:Employee_1_5CL573,
+        ex:Employee_2_HRCE1S .
+
+ex:Organization_2_MS6GJY a ns1:Organization,
+        owl:NamedIndividual ;
+    rdfs:label "Organization 2"@en ;
+    ns1:hasEmployee ex:Employee_1_5CL573 .
+
+ex:Address_2_94JJ4S a ns1:Address,
+        owl:NamedIndividual ;
+    rdfs:label "Address 2"@en .
+
+ex:Employee_1_5CL573 a ns1:Employee,
+        owl:NamedIndividual ;
+    rdfs:label "Employee 1"@en ;
+    ns1:hasAddress ex:Address_1_LPR2V7,
+        ex:Address_2_94JJ4S ;
+    ns1:lastName "Howard"^^xsd:string,
+        "Simpson"^^xsd:string,
+        "Torres"^^xsd:string ;
+    ns1:worksFor ex:Organization_2_MS6GJY .
+

@@ -1,0 +1,6 @@
+# Build system requirements
+pyinstaller>=6.0.0
+dmgbuild>=1.6.1  # For macOS DMG creation
+Pillow>=10.0.0  # For icon handling
+py2app>=0.28  # Alternative macOS app builder
+pyqt6>=6.5.0  # GUI framework

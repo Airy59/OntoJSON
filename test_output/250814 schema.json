@@ -1,0 +1,288 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CateringCompany": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {},
+          "allOf": [
+            {
+              "$ref": "#/definitions/Company"
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ]
+        }
+      ],
+      "title": "Catering company"
+    },
+    "Company": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {},
+          "allOf": [
+            {
+              "$ref": "#/definitions/LegalEntity"
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ]
+        }
+      ],
+      "title": "Company"
+    },
+    "Formation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "composedOf": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/RollingStock"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    },
+                    "required": [
+                      "@id"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "description": "Array of RollingStock or @id references"
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/RollingStock"
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ]
+        }
+      ],
+      "title": "Formation"
+    },
+    "InfrastructureManager": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {},
+          "allOf": [
+            {
+              "$ref": "#/definitions/Company"
+            },
+            {
+              "$ref": "#/definitions/Stakeholder"
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ]
+        }
+      ],
+      "title": "Infrastructure manager"
+    },
+    "LegalEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "creationDate": {
+              "type": "string",
+              "format": "date-time",
+              "title": "creation date"
+            }
+          }
+        }
+      ],
+      "title": "Legal entity"
+    },
+    "RailwayUndertaking": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {},
+          "allOf": [
+            {
+              "$ref": "#/definitions/Company"
+            },
+            {
+              "$ref": "#/definitions/Stakeholder"
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ]
+        }
+      ],
+      "title": "Railway undertaking"
+    },
+    "RollingStock": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Formation"
+            },
+            {
+              "$ref": "#/definitions/Vehicle"
+            }
+          ],
+          "properties": {
+            "partOf": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Formation"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "@id": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "required": [
+                    "@id"
+                  ],
+                  "additionalProperties": false
+                }
+              ],
+              "title": "part of"
+            }
+          }
+        }
+      ],
+      "title": "RollingStock",
+      "description": "Disjoint union of: Formation, Vehicle"
+    },
+    "Stakeholder": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ],
+      "title": "Stakeholder"
+    },
+    "Vehicle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ofType": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/VehicleType"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "@id": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "required": [
+                    "@id"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/RollingStock"
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ],
+          "required": [
+            "ofType"
+          ]
+        }
+      ],
+      "title": "Vehicle"
+    },
+    "VehicleType": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "Locomotive",
+            "Wagon"
+          ]
+        }
+      ],
+      "title": "Vehicle type"
+    },
+    "_Thing": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI identifier for this instance"
+        }
+      },
+      "required": [],
+      "description": "Base object that all classes inherit from",
+      "title": "_Thing"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

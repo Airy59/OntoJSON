@@ -1,0 +1,18 @@
+#!/bin/bash
+# OntoJSON launcher for macOS app bundle
+
+# Get the directory of this script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Go up to the app bundle's parent directory
+APP_ROOT="$( cd "$DIR/../../.." && pwd )"
+
+# Change to the project directory
+cd "$APP_ROOT"
+
+# Set the app name for the dock
+export __CFBundleName="OntoJSON"
+export __CFBundleDisplayName="OntoJSON"
+export __CFBundleIdentifier="com.owl2jsonschema.ontojson"
+
+# Launch the application
+exec python3 launch_ontojson.py "$@"

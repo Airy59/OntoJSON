@@ -18,23 +18,31 @@ from collections import defaultdict
 class ABoxToJSONConverter:
     """Converts RDF/OWL A-box to JSON instances conforming to a JSON Schema."""
     
-    def __init__(self, json_schema: Dict[str, Any], base_uri: str = "https://example.org#"):
+    def __init__(self, json_schema: Dict[str, Any], base_uri: str = "https://example.org#",
+                 reference_style: str = "reference"):
         """
         Initialize the converter.
         
         Args:
             json_schema: The JSON Schema to conform to
             base_uri: Base URI for the ontology
+            reference_style: How to handle object references - "inline" or "reference" (default)
+                            - "inline": Follow $ref and embed full objects
+                            - "reference": Use @id references
         """
         self.json_schema = json_schema
         self.base_uri = base_uri
         self.namespace = Namespace(base_uri)
+        self.reference_style = reference_style
         
         # Extract class definitions from schema
         self.class_definitions = json_schema.get('definitions', {})
         
         # Build a mapping of RDF types to JSON schema definitions
         self.type_mapping = self._build_type_mapping()
+        
+        # Cache for converted objects (used in inline mode to avoid duplication)
+        self._converted_cache = {}
         
     def _build_type_mapping(self) -> Dict[str, str]:
         """Build a mapping from RDF class URIs to JSON schema definition names."""
@@ -59,6 +67,12 @@ class ABoxToJSONConverter:
             Dictionary containing JSON instances organized by type
         """
         instances = defaultdict(list)
+        
+        # Clear cache for new conversion
+        self._converted_cache = {}
+        
+        # Store the graph for reference in inline mode
+        self._current_graph = abox_graph
         
         # Find all individuals in the graph
         individuals = self._find_individuals(abox_graph)
@@ -253,11 +267,48 @@ class ABoxToJSONConverter:
                 return str(value)
         elif isinstance(value, URIRef):
             # Handle references to other individuals
-            if '$ref' in schema:
-                # This is a reference to another object
-                ref_type = schema['$ref'].split('/')[-1]
-                # Return the URI as a reference that can be resolved later
-                return {'$ref': str(value)}
+            # Check if schema expects a reference (has oneOf with $ref and @id patterns)
+            if 'oneOf' in schema:
+                # Schema supports both inline and reference modes
+                if self.reference_style == "inline":
+                    # Follow the reference and inline the object
+                    for option in schema['oneOf']:
+                        if '$ref' in option:
+                            # Use the inline option - convert the referenced object
+                            ref_uri = str(value)
+                            if ref_uri not in self._converted_cache:
+                                # Convert the referenced individual
+                                referenced_obj = self._convert_individual(value, graph)
+                                if referenced_obj:
+                                    self._converted_cache[ref_uri] = referenced_obj
+                                    return referenced_obj
+                            else:
+                                # Return cached version to avoid infinite recursion
+                                return self._converted_cache[ref_uri]
+                            # If conversion fails, fall back to reference
+                            return {"@id": str(value)}
+                    # No $ref option found, use @id reference
+                    return {"@id": str(value)}
+                else:
+                    # Use reference style (default)
+                    return {"@id": str(value)}
+            elif '$ref' in schema:
+                # Old style schema with just $ref
+                if self.reference_style == "inline":
+                    # Follow the reference and inline the object
+                    ref_uri = str(value)
+                    if ref_uri not in self._converted_cache:
+                        referenced_obj = self._convert_individual(value, graph)
+                        if referenced_obj:
+                            self._converted_cache[ref_uri] = referenced_obj
+                            return referenced_obj
+                    else:
+                        return self._converted_cache[ref_uri]
+                    # If conversion fails, fall back to reference
+                    return {"@id": str(value)}
+                else:
+                    # Use reference style
+                    return {"@id": str(value)}
             else:
                 # Return as string
                 return str(value)

@@ -14,7 +14,7 @@ from PyQt6.QtWidgets import (
     QGroupBox, QCheckBox, QScrollArea, QMessageBox,
     QTabWidget, QComboBox, QSpinBox, QLineEdit,
     QSplitter, QProgressBar, QStatusBar, QFrame, QApplication, QDialog,
-    QDialogButtonBox, QGridLayout
+    QDialogButtonBox, QGridLayout, QRadioButton, QButtonGroup
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont, QAction, QIcon, QPixmap
@@ -422,7 +422,7 @@ class MainWindow(QMainWindow):
     
     def init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("OWL to JSON Schema Transformer - T-box/A-box Workflow")
+        self.setWindowTitle("OntoJSON - OWL to JSON Schema Transformer")
         self.setGeometry(100, 100, 1400, 900)
         
         # Set application icon
@@ -880,6 +880,29 @@ class MainWindow(QMainWindow):
         desc_label.setStyleSheet("QLabel { background-color: #e8f5e9; padding: 10px; border-radius: 5px; }")
         desc_label.setMaximumHeight(60)  # Fixed maximum height
         layout.addWidget(desc_label)
+        
+        # Configuration - Fixed height
+        config_group = QGroupBox("Reference Style")
+        config_group.setMaximumHeight(80)  # Fixed maximum height
+        config_layout = QHBoxLayout()
+        
+        # Reference style radio buttons
+        self.reference_style_group = QButtonGroup()
+        
+        self.inline_radio = QRadioButton("Inline Objects")
+        self.inline_radio.setToolTip("Embed full object definitions inline (self-contained documents)")
+        self.reference_style_group.addButton(self.inline_radio, 0)
+        config_layout.addWidget(self.inline_radio)
+        
+        self.reference_radio = QRadioButton("URI References")
+        self.reference_radio.setToolTip("Use @id references only (linked data approach)")
+        self.reference_radio.setChecked(True)  # Default to reference style
+        self.reference_style_group.addButton(self.reference_radio, 1)
+        config_layout.addWidget(self.reference_radio)
+        
+        config_layout.addStretch()
+        config_group.setLayout(config_layout)
+        layout.addWidget(config_group)
         
         # Transform button - Fixed height
         self.transform_json_btn = QPushButton("Transform A-box to JSON")
@@ -1471,8 +1494,15 @@ class MainWindow(QMainWindow):
             # Get base URI from the A-box generator settings
             base_uri = self.base_uri_input.text().strip() or "https://example.org#"
             
-            # Create converter
-            converter = ABoxToJSONConverter(self.transformation_result, base_uri)
+            # Get selected reference style
+            reference_style = "inline" if self.inline_radio.isChecked() else "reference"
+            
+            # Create converter with selected reference style
+            converter = ABoxToJSONConverter(
+                self.transformation_result,
+                base_uri,
+                reference_style=reference_style
+            )
             
             # Convert to JSON
             json_instances = converter.convert(self.abox_data)
@@ -1611,8 +1641,8 @@ class MainWindow(QMainWindow):
         """Show about dialog."""
         QMessageBox.about(
             self,
-            "About OWL to JSON Schema Converter",
-            "OWL to JSON Schema Converter\n"
+            "About OntoJSON",
+            "OntoJSON - OWL to JSON Schema Converter\n"
             "Version 1.0\n\n"
             "A tool for transforming OWL ontologies to JSON Schema\n"
             "with T-box/A-box workflow support.\n\n"

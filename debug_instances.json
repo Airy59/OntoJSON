@@ -1,0 +1,73 @@
+{
+  "Organization": [
+    {
+      "uri": "https://example.org#Organization_1_V1A4CL",
+      "hasEmployee": [
+        {
+          "$ref": "https://example.org#Employee_2_HRCE1S"
+        },
+        {
+          "$ref": "https://example.org#Employee_1_5CL573"
+        }
+      ]
+    },
+    {
+      "uri": "https://example.org#Organization_2_MS6GJY",
+      "hasEmployee": [
+        {
+          "$ref": "https://example.org#Employee_1_5CL573"
+        }
+      ]
+    }
+  ],
+  "Employee": [
+    {
+      "uri": "https://example.org#Employee_1_5CL573",
+      "worksFor": {
+        "$ref": "https://example.org#Organization_2_MS6GJY"
+      }
+    },
+    {
+      "uri": "https://example.org#Employee_2_HRCE1S",
+      "worksFor": {
+        "$ref": "https://example.org#Organization_1_V1A4CL"
+      }
+    }
+  ],
+  "Address": [
+    {
+      "uri": "https://example.org#Address_2_94JJ4S"
+    },
+    {
+      "uri": "https://example.org#Address_1_LPR2V7",
+      "postalCode": [
+        "52DC774D",
+        "B9747878",
+        "4972F002"
+      ]
+    }
+  ],
+  "Person": [
+    {
+      "uri": "https://example.org#Person_2_KAIUWJ",
+      "firstName": [
+        "Sarah",
+        "Jane",
+        "Brittany"
+      ],
+      "lastName": [
+        "Smith",
+        "Brown"
+      ]
+    },
+    {
+      "uri": "https://example.org#Person_1_W1PBMS",
+      "firstName": [
+        "Dennis"
+      ],
+      "lastName": [
+        "Cohen"
+      ]
+    }
+  ]
+}
