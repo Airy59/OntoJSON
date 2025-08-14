@@ -335,7 +335,7 @@ See [credits.txt](credits.txt) for acknowledgments and third-party licenses.
 
 - **Issues**: Report bugs via [GitHub Issues](https://github.com/username/OntoJSON/issues)
 - **Discussions**: Ask questions in [GitHub Discussions](https://github.com/username/OntoJSON/discussions)
-- **Email**: Contact the maintainer at [email](mailto:maintainer@example.com)
+- **Email**: Contact the maintainer at [email](mailto:airy-services@hotmail.com)
 
 ## 🚦 Project Status
 
