@@ -59,3 +59,7 @@ URL: https://www.diag.uniroma1.it/degiacom/papers/2022/fi2022lssd.pdf and https:
 Special Thanks
 --------------
 To all contributors and maintainers of these excellent libraries.
+
+Apologies
+---------
+To those I forgot or misquoted (please open an issue)
