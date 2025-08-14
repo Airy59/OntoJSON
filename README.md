@@ -35,7 +35,7 @@ Download the standalone application for your platform:
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd OWLtoJSONschema
+cd OntoJSON
 
 # Create and activate a virtual environment
 python -m venv .venv
@@ -263,7 +263,7 @@ For detailed build instructions, see [build_system/README.md](build_system/READM
 ### Project Structure
 
 ```
-OWLtoJSONschema/
+OntoJSON/
 ├── src/
 │   ├── owl2jsonschema/        # Core transformation engine
 │   │   ├── rules/             # Transformation rules
@@ -333,8 +333,8 @@ See [credits.txt](credits.txt) for acknowledgments and third-party licenses.
 
 ## 🐛 Support
 
-- **Issues**: Report bugs via [GitHub Issues](https://github.com/username/OWLtoJSONschema/issues)
-- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/username/OWLtoJSONschema/discussions)
+- **Issues**: Report bugs via [GitHub Issues](https://github.com/username/OntoJSON/issues)
+- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/username/OntoJSON/discussions)
 - **Email**: Contact the maintainer at [email](mailto:maintainer@example.com)
 
 ## 🚦 Project Status
