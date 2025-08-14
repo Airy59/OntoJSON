@@ -53,6 +53,7 @@ Icons and Resources
 OWL modeling tools
 ------------------
 GRAPHOL (visual language) and EDDY 3.7 (desktop application)
+License (EDDY): GPL 3.0
 URL: https://www.diag.uniroma1.it/degiacom/papers/2022/fi2022lssd.pdf and https://github.com/obdasystems
 
 
