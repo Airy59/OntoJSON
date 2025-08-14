@@ -5,7 +5,7 @@ Test script to verify that properties are assigned to the correct classes.
 
 import json
 from pathlib import Path
-from src.owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
 
 def check_properties():
     """Check property assignments in the generated schema."""

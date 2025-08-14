@@ -1,136 +1,129 @@
 {
-  "Address": [
+  "Person": [
     {
-      "uri": "https://example.org/railway#Address_4_03ADM5",
-      "street": [
-        "Enough"
+      "uri": "https://example.org/railway#Person_3_W2KNDK",
+      "firstName": [
+        "Vincent",
+        "Debra",
+        "Kevin"
       ],
-      "city": [
-        "Port Cynthia"
+      "lastName": [
+        "Hernandez",
+        "Green"
+      ],
+      "age": 63,
+      "hasAddress": [
+        {
+          "@id": "https://example.org/railway#Address_3_02WGSA"
+        }
       ]
     },
     {
-      "uri": "https://example.org/railway#Address_2_75UFB5",
-      "street": [
-        "Effort"
+      "uri": "https://example.org/railway#Person_4_8X58P0",
+      "firstName": [
+        "Joseph",
+        "Emily",
+        "Anthony"
       ],
-      "postalCode": [
-        "0CE97925",
-        "8DB575D1"
+      "lastName": [
+        "Turner"
+      ],
+      "hasAddress": [
+        {
+          "@id": "https://example.org/railway#Address_4_KPE5L6"
+        },
+        {
+          "@id": "https://example.org/railway#Address_3_02WGSA"
+        },
+        {
+          "@id": "https://example.org/railway#Address_1_MX9A9J"
+        }
       ]
     },
     {
-      "uri": "https://example.org/railway#Address_1_3DWCRD",
-      "street": [
-        "Compare",
-        "Life",
-        "Full"
+      "uri": "https://example.org/railway#Person_1_2GEGPU",
+      "firstName": [
+        "Jodi",
+        "Kristina"
       ],
-      "city": [
-        "Stevenmouth"
+      "lastName": [
+        "Cervantes"
+      ],
+      "hasAddress": [
+        {
+          "@id": "https://example.org/railway#Address_3_02WGSA"
+        }
       ]
     },
     {
-      "uri": "https://example.org/railway#Address_3_6F1FW8",
-      "city": [
-        "Janetview",
-        "West Jenniferfort",
-        "Autumnview"
+      "uri": "https://example.org/railway#Person_2_IO2VZZ",
+      "firstName": [
+        "Ronald"
+      ],
+      "lastName": [
+        "Leon"
+      ],
+      "hasAddress": [
+        {
+          "@id": "https://example.org/railway#Address_3_02WGSA"
+        }
       ]
     }
   ],
-  "Organization": [
+  "Address": [
     {
-      "uri": "https://example.org/railway#Organization_2_J086UO",
-      "hasEmployee": [
-        {
-          "$ref": "https://example.org/railway#Employee_2_79D5Q2"
-        },
-        {
-          "$ref": "https://example.org/railway#Employee_1_PRL7DS"
-        }
+      "uri": "https://example.org/railway#Address_2_0VNKT0"
+    },
+    {
+      "uri": "https://example.org/railway#Address_3_02WGSA",
+      "street": [
+        "Require"
+      ],
+      "city": [
+        "Shawnberg",
+        "West Amanda"
       ]
     },
     {
-      "uri": "https://example.org/railway#Organization_1_O3XGS4",
-      "hasEmployee": [
-        {
-          "$ref": "https://example.org/railway#Employee_1_PRL7DS"
-        }
+      "uri": "https://example.org/railway#Address_1_MX9A9J",
+      "street": [
+        "Ahead"
+      ],
+      "postalCode": [
+        "ADA4DDDD"
+      ]
+    },
+    {
+      "uri": "https://example.org/railway#Address_4_KPE5L6",
+      "street": [
+        "Professional",
+        "Operation",
+        "A"
       ]
     }
   ],
   "Employee": [
     {
-      "uri": "https://example.org/railway#Employee_2_79D5Q2",
-      "employeeId": "B94D387A",
+      "uri": "https://example.org/railway#Employee_1_RK8517",
       "worksFor": {
-        "$ref": "https://example.org/railway#Organization_2_J086UO"
+        "@id": "https://example.org/railway#Organization_1_XNEDOW"
       }
     },
     {
-      "uri": "https://example.org/railway#Employee_3_LQU9M9"
-    },
-    {
-      "uri": "https://example.org/railway#Employee_1_PRL7DS",
-      "worksFor": {
-        "$ref": "https://example.org/railway#Organization_1_O3XGS4"
-      }
+      "uri": "https://example.org/railway#Employee_2_HGQ8L4"
     }
   ],
-  "Person": [
+  "Organization": [
     {
-      "uri": "https://example.org/railway#Person_2_C9NVGD",
-      "firstName": [
-        "Christopher",
-        "Mary",
-        "David"
-      ],
-      "lastName": [
-        "Gordon",
-        "Mccann"
-      ],
-      "hasAddress": [
+      "uri": "https://example.org/railway#Organization_1_XNEDOW",
+      "hasEmployee": [
         {
-          "$ref": "https://example.org/railway#Address_3_6F1FW8"
-        },
-        {
-          "$ref": "https://example.org/railway#Address_1_3DWCRD"
+          "@id": "https://example.org/railway#Employee_1_RK8517"
         }
       ]
     },
     {
-      "uri": "https://example.org/railway#Person_1_51T0O0",
-      "firstName": [
-        "Mark",
-        "Brian"
-      ],
-      "lastName": [
-        "Crawford"
-      ],
-      "hasAddress": [
-        {
-          "$ref": "https://example.org/railway#Address_1_3DWCRD"
-        },
-        {
-          "$ref": "https://example.org/railway#Address_2_75UFB5"
-        }
-      ]
-    },
-    {
-      "uri": "https://example.org/railway#Person_3_IEXM06",
-      "firstName": [
-        "Jason"
-      ],
-      "lastName": [
-        "Ray"
-      ],
-      "age": 87,
-      "hasAddress": [
-        {
-          "$ref": "https://example.org/railway#Address_4_03ADM5"
-        }
-      ]
+      "uri": "https://example.org/railway#Organization_2_FMI974"
     }
   ]
 }

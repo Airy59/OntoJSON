@@ -4,9 +4,9 @@ Test script for the DisjointClassesRule functionality.
 """
 
 import json
-from src.owl2jsonschema.parser import OntologyParser
-from src.owl2jsonschema.engine import TransformationEngine
-from src.owl2jsonschema.config import TransformationConfig
+from owl2jsonschema.parser import OntologyParser
+from owl2jsonschema.engine import TransformationEngine
+from owl2jsonschema.config import TransformationConfig
 
 def test_disjoint_classes():
     """Test the DisjointClassesRule with a sample ontology."""

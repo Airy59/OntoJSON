@@ -5,7 +5,7 @@ Check if properties are correctly marked as optional/required.
 
 import json
 from pathlib import Path
-from src.owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
 
 def check_required_properties():
     """Check which properties are marked as required."""

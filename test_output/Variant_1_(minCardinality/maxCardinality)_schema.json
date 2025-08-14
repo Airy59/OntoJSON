@@ -54,9 +54,26 @@
             "composedOf": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/RollingStock"
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/RollingStock"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    },
+                    "required": [
+                      "@id"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
               },
-              "description": "Array of RollingStock"
+              "description": "Array of RollingStock or @id references"
             }
           },
           "allOf": [
@@ -147,7 +164,24 @@
           "type": "object",
           "properties": {
             "partOf": {
-              "$ref": "#/definitions/Formation",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Formation"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "@id": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "required": [
+                    "@id"
+                  ],
+                  "additionalProperties": false
+                }
+              ],
               "title": "part of"
             }
           }
@@ -176,7 +210,24 @@
           "type": "object",
           "properties": {
             "ofType": {
-              "$ref": "#/definitions/VehicleType"
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/VehicleType"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "@id": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "required": [
+                    "@id"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
             }
           },
           "allOf": [

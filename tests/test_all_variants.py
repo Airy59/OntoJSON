@@ -6,7 +6,7 @@ property requirements are correctly handled.
 
 import json
 from pathlib import Path
-from src.owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
 
 def test_variant(file_path, variant_name):
     """Test a specific variant of the ontology."""

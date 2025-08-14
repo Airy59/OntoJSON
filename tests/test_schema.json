@@ -28,24 +28,7 @@
             "hasAddress": {
               "type": "array",
               "items": {
-                "oneOf": [
-                  {
-                    "$ref": "#/definitions/Address"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string",
-                        "format": "uri"
-                      }
-                    },
-                    "required": [
-                      "@id"
-                    ],
-                    "additionalProperties": false
-                  }
-                ],
+                "$ref": "#/definitions/Address",
                 "title": "Has Address",
                 "description": "The person's postal address"
               }
@@ -82,24 +65,7 @@
           "type": "object",
           "properties": {
             "worksFor": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Organization"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "@id": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  },
-                  "required": [
-                    "@id"
-                  ],
-                  "additionalProperties": false
-                }
-              ],
+              "$ref": "#/definitions/Organization",
               "title": "Works For",
               "description": "The organization the employee works for"
             },
@@ -169,24 +135,7 @@
             "hasEmployee": {
               "type": "array",
               "items": {
-                "oneOf": [
-                  {
-                    "$ref": "#/definitions/Employee"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string",
-                        "format": "uri"
-                      }
-                    },
-                    "required": [
-                      "@id"
-                    ],
-                    "additionalProperties": false
-                  }
-                ],
+                "$ref": "#/definitions/Employee",
                 "title": "Has Employee",
                 "description": "The employees of the organization"
               }

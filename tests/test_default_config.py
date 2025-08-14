@@ -5,7 +5,7 @@ Test with default configuration to reproduce the missing partOf issue.
 
 import json
 from pathlib import Path
-from src.owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
 
 def test_with_default_config():
     """Test with default configuration."""

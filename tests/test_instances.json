@@ -1,0 +1,136 @@
+{
+  "Address": [
+    {
+      "uri": "https://example.org/railway#Address_4_03ADM5",
+      "street": [
+        "Enough"
+      ],
+      "city": [
+        "Port Cynthia"
+      ]
+    },
+    {
+      "uri": "https://example.org/railway#Address_2_75UFB5",
+      "street": [
+        "Effort"
+      ],
+      "postalCode": [
+        "0CE97925",
+        "8DB575D1"
+      ]
+    },
+    {
+      "uri": "https://example.org/railway#Address_1_3DWCRD",
+      "street": [
+        "Compare",
+        "Life",
+        "Full"
+      ],
+      "city": [
+        "Stevenmouth"
+      ]
+    },
+    {
+      "uri": "https://example.org/railway#Address_3_6F1FW8",
+      "city": [
+        "Janetview",
+        "West Jenniferfort",
+        "Autumnview"
+      ]
+    }
+  ],
+  "Organization": [
+    {
+      "uri": "https://example.org/railway#Organization_2_J086UO",
+      "hasEmployee": [
+        {
+          "$ref": "https://example.org/railway#Employee_2_79D5Q2"
+        },
+        {
+          "$ref": "https://example.org/railway#Employee_1_PRL7DS"
+        }
+      ]
+    },
+    {
+      "uri": "https://example.org/railway#Organization_1_O3XGS4",
+      "hasEmployee": [
+        {
+          "$ref": "https://example.org/railway#Employee_1_PRL7DS"
+        }
+      ]
+    }
+  ],
+  "Employee": [
+    {
+      "uri": "https://example.org/railway#Employee_2_79D5Q2",
+      "employeeId": "B94D387A",
+      "worksFor": {
+        "$ref": "https://example.org/railway#Organization_2_J086UO"
+      }
+    },
+    {
+      "uri": "https://example.org/railway#Employee_3_LQU9M9"
+    },
+    {
+      "uri": "https://example.org/railway#Employee_1_PRL7DS",
+      "worksFor": {
+        "$ref": "https://example.org/railway#Organization_1_O3XGS4"
+      }
+    }
+  ],
+  "Person": [
+    {
+      "uri": "https://example.org/railway#Person_2_C9NVGD",
+      "firstName": [
+        "Christopher",
+        "Mary",
+        "David"
+      ],
+      "lastName": [
+        "Gordon",
+        "Mccann"
+      ],
+      "hasAddress": [
+        {
+          "$ref": "https://example.org/railway#Address_3_6F1FW8"
+        },
+        {
+          "$ref": "https://example.org/railway#Address_1_3DWCRD"
+        }
+      ]
+    },
+    {
+      "uri": "https://example.org/railway#Person_1_51T0O0",
+      "firstName": [
+        "Mark",
+        "Brian"
+      ],
+      "lastName": [
+        "Crawford"
+      ],
+      "hasAddress": [
+        {
+          "$ref": "https://example.org/railway#Address_1_3DWCRD"
+        },
+        {
+          "$ref": "https://example.org/railway#Address_2_75UFB5"
+        }
+      ]
+    },
+    {
+      "uri": "https://example.org/railway#Person_3_IEXM06",
+      "firstName": [
+        "Jason"
+      ],
+      "lastName": [
+        "Ray"
+      ],
+      "age": 87,
+      "hasAddress": [
+        {
+          "$ref": "https://example.org/railway#Address_4_03ADM5"
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@ unless there's an explicit minimum cardinality constraint.
 
 import json
 from pathlib import Path
-from src.owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
 
 def test_property_requirements():
     """Test that properties are handled correctly as optional/required."""

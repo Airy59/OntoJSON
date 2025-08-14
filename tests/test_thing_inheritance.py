@@ -4,9 +4,9 @@ Test script for the base object inheritance feature with ThingWithUriRule.
 """
 
 import json
-from src.owl2jsonschema.parser import OntologyParser
-from src.owl2jsonschema.engine import TransformationEngine
-from src.owl2jsonschema.config import TransformationConfig
+from owl2jsonschema.parser import OntologyParser
+from owl2jsonschema.engine import TransformationEngine
+from owl2jsonschema.config import TransformationConfig
 
 def test_thing_inheritance():
     """Test the ThingWithUriRule base object inheritance."""

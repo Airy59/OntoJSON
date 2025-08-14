@@ -5,8 +5,8 @@ Debug script to understand why cardinality restrictions aren't marking propertie
 
 import json
 from pathlib import Path
-from src.owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
-from src.owl2jsonschema.rules.class_rules import ClassRestrictionsRule
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+from owl2jsonschema.rules.class_rules import ClassRestrictionsRule
 
 def debug_restrictions(file_path, variant_name):
     """Debug restrictions processing for a specific variant."""
@@ -45,7 +45,7 @@ def debug_restrictions(file_path, variant_name):
         print(f"  Type: {type(restriction).__name__}")
         print(f"  Property: {restriction.property_uri}")
         
-        from src.owl2jsonschema.model import CardinalityRestriction
+        from owl2jsonschema.model import CardinalityRestriction
         if isinstance(restriction, CardinalityRestriction):
             print(f"  Min cardinality: {restriction.min_cardinality}")
             print(f"  Max cardinality: {restriction.max_cardinality}")

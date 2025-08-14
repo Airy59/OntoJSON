@@ -5,8 +5,8 @@ Test with GUI default configuration to reproduce the missing partOf issue.
 
 import json
 from pathlib import Path
-from src.owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
-from src.owl2jsonschema_gui.main_window import RulesConfigDialog
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+from owl2jsonschema_gui.main_window import RulesConfigDialog
 
 def test_with_default_config():
     """Test with the same default configuration as the GUI."""
