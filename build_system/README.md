@@ -24,6 +24,9 @@ python build_app.py
 # Build for macOS
 python build_app.py --macos
 
+# Build from PyCharm (uses virtual environment)
+python build_from_pycharm.py
+
 # Build for Windows (coming soon)
 python build_app.py --windows
 
@@ -48,6 +51,28 @@ python build_app.py
 The macOS builder creates:
 - **`.app` bundle**: A standard macOS application
 - **`.dmg` installer**: A distributable disk image
+
+### Building from PyCharm:
+
+If you're using PyCharm with a virtual environment:
+
+1. **Ensure packages are installed in your venv:**
+```bash
+source .venv/bin/activate  # or use PyCharm's terminal
+pip install pyinstaller pillow dmgbuild
+```
+
+2. **Run the PyCharm-specific build script:**
+   - Open `build_system/build_from_pycharm.py` in PyCharm
+   - Right-click and select "Run 'build_from_pycharm'"
+   - Or from terminal: `python build_system/build_from_pycharm.py`
+
+3. **Alternative: Configure PyCharm Run Configuration:**
+   - Go to Run → Edit Configurations
+   - Create new Python configuration
+   - Script path: `build_system/build_from_pycharm.py`
+   - Working directory: Project root
+   - Python interpreter: Project virtual environment
 
 ### Features:
 - ✅ Universal binary (Intel + Apple Silicon)

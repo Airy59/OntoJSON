@@ -39,6 +39,7 @@ PYINSTALLER_OPTIONS = {
     'add_data': [
         (str(RESOURCES_DIR), 'Resources'),
         (str(PROJECT_ROOT / 'Info.plist'), '.'),
+        (str(SRC_DIR), 'src'),  # Include entire src directory
     ],
     'hidden_imports': [
         'PyQt6',
@@ -48,6 +49,21 @@ PYINSTALLER_OPTIONS = {
         'owlready2',
         'rdflib',
         'jsonschema',
+        'owl2jsonschema_gui',
+        'owl2jsonschema_gui.app',
+        'owl2jsonschema_gui.main_window',
+        'owl2jsonschema',
+        'owl2jsonschema.cli',
+        'owl2jsonschema.builder',
+        'owl2jsonschema.config',
+        'owl2jsonschema.model',
+        'owl2jsonschema.parser',
+        'owl2jsonschema.engine',
+        'owl2jsonschema.reasoner',
+        'owl2jsonschema.visitor',
+        'owl2jsonschema.abox_generator',
+        'owl2jsonschema.abox_to_json',
+        'owl2jsonschema.rules',
     ],
     'exclude_module': [
         'matplotlib',
@@ -55,6 +71,9 @@ PYINSTALLER_OPTIONS = {
         'pandas',
         'scipy',
         'tkinter',
+    ],
+    'paths': [
+        str(SRC_DIR),  # Add src to module search path
     ],
 }
 

@@ -114,10 +114,17 @@ class MacOSBuilder:
             cmd.extend(['--icon', icns_path])
         
         # Add data files
-        cmd.extend([
-            '--add-data', f'{RESOURCES_DIR}:Resources',
-            '--add-data', f'{PROJECT_ROOT}/Info.plist:.',
-        ])
+        for data_spec in PYINSTALLER_OPTIONS['add_data']:
+            if isinstance(data_spec, tuple):
+                src, dest = data_spec
+                cmd.extend(['--add-data', f'{src}:{dest}'])
+            else:
+                cmd.extend(['--add-data', data_spec])
+        
+        # Add paths for module searching
+        if 'paths' in PYINSTALLER_OPTIONS:
+            for path in PYINSTALLER_OPTIONS['paths']:
+                cmd.extend(['--paths', path])
         
         # Add hidden imports
         for import_name in PYINSTALLER_OPTIONS['hidden_imports']:
