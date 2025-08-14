@@ -97,13 +97,54 @@ python scripts/build_macos.py --sign
 - App Bundle: `dist/OntoJSON.app`
 - DMG Installer: `dist/OntoJSON-1.0.0-macOS.dmg`
 
-## 🪟 Windows Build (Coming Soon)
+## 🪟 Windows Build
 
-Planned features:
-- Standalone `.exe` file
-- MSI installer with Start Menu integration
-- Digital signature support
-- Auto-update functionality
+The Windows builder creates:
+- **`.exe` file**: A standalone executable
+- **NSIS installer**: Optional installer with Start Menu shortcuts
+- **Portable ZIP**: No-installation-required package
+
+### Features:
+- ✅ Single executable file
+- ✅ Custom Windows icon (ICO format)
+- ✅ Version information embedded
+- ✅ NSIS installer creation (optional)
+- ✅ Portable ZIP package
+- ✅ UAC manifest for proper permissions
+
+### Build Options:
+```bash
+# Basic build (exe + ZIP)
+python scripts/build_windows.py
+
+# Executable only (no installer or ZIP)
+python scripts/build_windows.py --no-installer --no-zip
+
+# With NSIS installer (requires NSIS installed)
+python scripts/build_windows.py
+```
+
+### Requirements:
+- **PyInstaller**: Automatically installed
+- **NSIS** (optional): For creating installer
+  - Download from: https://nsis.sourceforge.io/Download
+  - Required only if you want to create an installer
+
+### Cross-Platform Building Limitations:
+**IMPORTANT:** PyInstaller can only create executables for the platform it's running on:
+- On macOS → Creates .app bundles (not .exe)
+- On Windows → Creates .exe files (not .app)
+- On Linux → Creates Linux executables
+
+To build for Windows, you need:
+1. A Windows machine or VM
+2. Or use GitHub Actions/CI for cross-platform builds
+3. Or use Wine (complex, not recommended)
+
+### Output:
+- Executable: `dist/OntoJSON.exe`
+- Installer: `dist/OntoJSON-1.0.0-Setup.exe` (if NSIS available)
+- Portable: `dist/OntoJSON-1.0.0-Windows-Portable.zip`
 
 ## 🐧 Linux Build (Coming Soon)
 

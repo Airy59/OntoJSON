@@ -108,12 +108,37 @@ class AppBuilder:
     
     def build_windows(self):
         """Build for Windows."""
-        print("\n🪟 Windows build support coming soon!")
-        print("\nPlanned features:")
-        print("  • Create standalone .exe file")
-        print("  • Generate MSI installer")
-        print("  • Digital signature support")
-        print("  • Auto-update functionality")
+        if self.current_platform != 'Windows' and self.current_platform != 'Darwin':
+            print("\n⚠️  Warning: Building Windows executables works best on Windows")
+            print("   You are currently on:", self.current_platform)
+            response = input("\nContinue anyway? (y/n): ").lower()
+            if response != 'y':
+                return
+        
+        print("\n🪟 Building for Windows...")
+        
+        # Run the Windows build script
+        script_path = Path(__file__).parent / 'scripts' / 'build_windows.py'
+        
+        if not script_path.exists():
+            print("❌ Windows build script not found!")
+            return
+        
+        # Ask about installer creation
+        create_installer = False
+        if self.current_platform == 'Windows':
+            create_installer = input("\nCreate NSIS installer? (requires NSIS) (y/n): ").lower() == 'y'
+        
+        # Ask about portable ZIP
+        create_zip = input("Create portable ZIP package? (y/n): ").lower() == 'y'
+        
+        cmd = [sys.executable, str(script_path)]
+        if not create_installer:
+            cmd.append('--no-installer')
+        if not create_zip:
+            cmd.append('--no-zip')
+        
+        subprocess.run(cmd)
     
     def build_linux(self):
         """Build for Linux."""
