@@ -19,7 +19,7 @@ APP_VERSION = "1.0.0"
 APP_IDENTIFIER = "com.owl2jsonschema.ontojson"
 APP_DESCRIPTION = "OWL to JSON Schema Converter"
 APP_AUTHOR = "Airy Magnien"
-APP_COPYRIGHT = "© 2024 Airy Magnien. Licensed under EUPL v1.2"
+APP_COPYRIGHT = "(C) 2024 Airy Magnien. Licensed under EUPL v1.2"
 
 # Entry points
 MAIN_SCRIPT = str(PROJECT_ROOT / "owl2jsonschema_gui.py")

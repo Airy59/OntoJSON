@@ -205,7 +205,8 @@ VSVersionInfo(
 )
 """
         
-        with open(version_file, 'w') as f:
+        # Write with UTF-8 encoding and BOM to ensure proper reading by PyInstaller
+        with open(version_file, 'w', encoding='utf-8-sig') as f:
             f.write(version_content)
         
         return str(version_file)
