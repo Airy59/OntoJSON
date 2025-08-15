@@ -31,7 +31,7 @@ python build_app.py  # Interactive mode
 # Build for macOS (non-interactive, uses defaults: no DMG, no signing)
 python build_app.py --macos
 
-# Build for Windows (coming soon)
+# Build for Windows
 python build_app.py --windows
 
 # Build for Linux (coming soon)
