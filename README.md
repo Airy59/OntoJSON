@@ -275,20 +275,96 @@ For detailed build instructions, see [build_system/README.md](build_system/READM
 ```
 OntoJSON/
 ├── src/
-│   ├── owl2jsonschema/        # Core transformation engine
-│   │   ├── rules/             # Transformation rules
-│   │   ├── model.py           # Data models
-│   │   ├── engine.py          # Main engine
-│   │   └── visitor.py         # Visitor pattern implementation
-│   └── owl2jsonschema_gui/    # GUI application
-│       ├── app.py             # Application entry point
-│       └── main_window.py     # Main window implementation
-├── build_system/              # Standalone app builder
-│   ├── scripts/               # Platform-specific builders
-│   └── configs/               # Build configurations
-├── tests/                     # Test suite
-├── examples/                  # Example ontologies
-└── docs/                      # Documentation
+│   ├── owl2jsonschema/           # Core transformation engine
+│   │   ├── rules/                # Transformation rules
+│   │   │   ├── __init__.py
+│   │   │   ├── advanced_rules.py
+│   │   │   ├── annotation_rules.py
+│   │   │   ├── class_rules.py
+│   │   │   ├── property_rules.py
+│   │   │   └── structural_rules.py
+│   │   ├── __init__.py
+│   │   ├── abox_generator.py     # ABox generation utilities
+│   │   ├── abox_to_json.py       # ABox to JSON conversion
+│   │   ├── builder.py             # Schema builder
+│   │   ├── cli.py                 # Command-line interface
+│   │   ├── config.py              # Configuration management
+│   │   ├── engine.py              # Main transformation engine
+│   │   ├── model.py               # Data models
+│   │   ├── parser.py              # Ontology parser
+│   │   ├── reasoner.py            # OWL reasoning utilities
+│   │   └── visitor.py             # Visitor pattern implementation
+│   └── owl2jsonschema_gui/       # GUI application
+│       ├── __init__.py
+│       ├── app.py                 # Application entry point
+│       └── main_window.py         # Main window implementation
+├── build_system/                  # Standalone app builder
+│   ├── configs/                   # Build configurations
+│   │   └── build_config.py
+│   ├── scripts/                   # Platform-specific builders
+│   │   ├── build_macos.py
+│   │   └── build_windows.py
+│   ├── build_app.py               # Main build script
+│   ├── README.md                  # Build system documentation
+│   └── requirements.txt           # Build dependencies
+├── Documentation/                 # Project documentation
+│   ├── for_testing.graphol
+│   ├── readme.md
+│   └── test ontology files...
+├── examples/                      # Example ontologies
+│   └── person_ontology.owl
+├── OntoJSON.app/                  # macOS application bundle
+│   └── Contents/
+│       ├── Info.plist
+│       ├── MacOS/
+│       │   └── OntoJSON
+│       └── Resources/
+│           └── ORW_big.png
+├── Resources/                     # Application resources
+│   ├── ORW_48.png
+│   └── ORW_big.png
+├── test_output/                   # Test output directory
+│   └── various test schemas...
+├── tests/                         # Test suite
+│   ├── __init__.py
+│   ├── test_abox_to_json.py
+│   ├── test_all_variants.py
+│   ├── test_check_required.py
+│   ├── test_circular_reference.py
+│   ├── test_debug_abox_conversion.py
+│   ├── test_debug_partof.py
+│   ├── test_debug_variants.py
+│   ├── test_default_config.py
+│   ├── test_disjoint_classes.py
+│   ├── test_engine_order.py
+│   ├── test_engine.py
+│   ├── test_final_verification.py
+│   ├── test_gui_config.py
+│   ├── test_gui_defaults.py
+│   ├── test_optional_properties.py
+│   ├── test_properties_assignment.py
+│   └── test_thing_inheritance.py
+├── .gitignore                     # Git ignore file
+├── .vscode/                       # VS Code settings
+├── .idea/                         # PyCharm/IntelliJ settings
+├── architecture.md                # Architecture documentation
+├── create_app_bundle.sh           # macOS app bundle creator
+├── credits.txt                    # Credits and acknowledgments
+├── Info.plist                     # macOS app metadata
+├── launch_from_pycharm.py         # PyCharm launcher
+├── launch_ontojson.py             # Main launcher script
+├── LAUNCHING_ONTOJSON.md          # Launch instructions
+├── OntoJSON.command               # macOS command launcher
+├── owl2jsonschema_gui.py          # GUI launcher
+├── owlrl_issue_diagnosis.md      # OWL-RL issue documentation
+├── PROPERTY_REQUIREMENTS_*.md    # Property requirement docs
+├── pyproject.toml                 # Python project configuration
+├── QUICK_START.md                 # Quick start guide
+├── README.md                      # This file
+├── run_ontojson_gui.py            # Alternative GUI launcher
+├── sample_config.json             # Sample configuration
+├── SOLUTION_GUIDE.md              # Solution documentation
+└── transformation_rules.md        # Transformation rules docs
 ```
 
 ### Running Tests
