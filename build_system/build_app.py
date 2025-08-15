@@ -2,6 +2,7 @@
 """
 Main build script for OntoJSON application.
 Supports building for macOS, Windows, and Linux platforms.
+Works with virtual environments automatically.
 """
 
 import sys
@@ -21,6 +22,32 @@ class AppBuilder:
             '2': ('Windows', 'Windows', self.build_windows),
             '3': ('Linux', 'Linux', self.build_linux),
         }
+        self.project_root = Path(__file__).parent.parent
+        self.python_cmd = self.detect_python()
+    
+    def detect_python(self):
+        """Detect the best Python interpreter to use."""
+        # First check if we're already in a virtual environment
+        if hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix):
+            print(f"🐍 Using current virtual environment: {sys.prefix}")
+            return sys.executable
+        
+        # Check for common virtual environment locations
+        venv_paths = [
+            self.project_root / '.venv' / 'bin' / 'python3',
+            self.project_root / 'venv' / 'bin' / 'python3',
+            self.project_root / '.venv' / 'Scripts' / 'python.exe',  # Windows
+            self.project_root / 'venv' / 'Scripts' / 'python.exe',  # Windows
+        ]
+        
+        for venv_python in venv_paths:
+            if venv_python.exists():
+                print(f"🐍 Found virtual environment: {venv_python}")
+                return str(venv_python)
+        
+        # Fall back to current Python
+        print(f"🐍 Using system Python: {sys.executable}")
+        return sys.executable
     
     def check_dependencies(self):
         """Check if required packages are installed."""
@@ -29,10 +56,17 @@ class AppBuilder:
         required = ['pyinstaller', 'Pillow']
         missing = []
         
+        # Use subprocess to check with the detected Python
         for package in required:
             try:
-                __import__(package.lower())
-            except ImportError:
+                result = subprocess.run(
+                    [self.python_cmd, '-c', f'import {package.lower()}'],
+                    capture_output=True,
+                    text=True
+                )
+                if result.returncode != 0:
+                    missing.append(package)
+            except:
                 missing.append(package)
         
         if missing:
@@ -52,7 +86,7 @@ class AppBuilder:
         print("\n📥 Installing dependencies...")
         
         requirements_file = Path(__file__).parent / 'requirements.txt'
-        cmd = [sys.executable, '-m', 'pip', 'install', '-r', str(requirements_file)]
+        cmd = [self.python_cmd, '-m', 'pip', 'install', '-r', str(requirements_file)]
         
         result = subprocess.run(cmd)
         if result.returncode != 0:
@@ -76,35 +110,47 @@ class AppBuilder:
         print("\n  0. Exit")
         print("\n" + "-"*60)
     
-    def build_macos(self):
+    def build_macos(self, interactive=True):
         """Build for macOS."""
         if self.current_platform != 'Darwin':
             print("\n⚠️  Warning: Cross-platform builds may not work perfectly")
             print("   Best results are achieved when building on the target platform")
-            response = input("\nContinue anyway? (y/n): ").lower()
-            if response != 'y':
-                return
+            if interactive:
+                response = input("\nContinue anyway? (y/n): ").lower()
+                if response != 'y':
+                    return
         
         print("\n🍎 Building for macOS...")
         
         # Run the macOS build script
         script_path = Path(__file__).parent / 'scripts' / 'build_macos.py'
         
-        # Ask about DMG creation
-        create_dmg = input("\nCreate DMG installer? (y/n): ").lower() == 'y'
+        # Ask about DMG creation or use defaults
+        if interactive:
+            create_dmg = input("\nCreate DMG installer? (y/n): ").lower() == 'y'
+            # Ask about code signing
+            sign_app = False
+            if self.current_platform == 'Darwin':
+                sign_app = input("Sign the application? (requires Developer ID) (y/n): ").lower() == 'y'
+        else:
+            # Non-interactive defaults
+            print("Using default options: No DMG, No signing")
+            create_dmg = False
+            sign_app = False
         
-        # Ask about code signing
-        sign_app = False
-        if self.current_platform == 'Darwin':
-            sign_app = input("Sign the application? (requires Developer ID) (y/n): ").lower() == 'y'
-        
-        cmd = [sys.executable, str(script_path)]
+        cmd = [self.python_cmd, str(script_path)]
         if not create_dmg:
             cmd.append('--no-dmg')
         if sign_app:
             cmd.append('--sign')
         
-        subprocess.run(cmd)
+        result = subprocess.run(cmd, cwd=str(self.project_root))
+        
+        if result.returncode == 0:
+            print("\n✅ Build completed successfully!")
+            print(f"📦 App location: {Path(__file__).parent}/dist/OntoJSON.app")
+            if create_dmg:
+                print(f"💿 DMG location: {Path(__file__).parent}/dist/OntoJSON-1.0.0-macOS.dmg")
     
     def build_windows(self):
         """Build for Windows."""
@@ -132,13 +178,13 @@ class AppBuilder:
         # Ask about portable ZIP
         create_zip = input("Create portable ZIP package? (y/n): ").lower() == 'y'
         
-        cmd = [sys.executable, str(script_path)]
+        cmd = [self.python_cmd, str(script_path)]
         if not create_installer:
             cmd.append('--no-installer')
         if not create_zip:
             cmd.append('--no-zip')
         
-        subprocess.run(cmd)
+        subprocess.run(cmd, cwd=str(self.project_root))
     
     def build_linux(self):
         """Build for Linux."""
@@ -183,7 +229,8 @@ def main():
     if len(sys.argv) > 1:
         arg = sys.argv[1].lower()
         if arg in ['--macos', '-m', 'macos']:
-            builder.build_macos()
+            # Non-interactive when called from command line
+            builder.build_macos(interactive=False)
         elif arg in ['--windows', '-w', 'windows']:
             builder.build_windows()
         elif arg in ['--linux', '-l', 'linux']:
@@ -191,10 +238,11 @@ def main():
         elif arg in ['--help', '-h']:
             print("Usage: python build_app.py [OPTIONS]")
             print("\nOptions:")
-            print("  --macos, -m     Build for macOS")
+            print("  --macos, -m     Build for macOS (non-interactive)")
             print("  --windows, -w   Build for Windows (coming soon)")
             print("  --linux, -l     Build for Linux (coming soon)")
             print("  --help, -h      Show this help message")
+            print("\nNote: Command line mode uses default options (no DMG, no signing)")
         else:
             print(f"Unknown option: {arg}")
             print("Use --help for available options")

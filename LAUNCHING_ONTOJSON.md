@@ -10,9 +10,14 @@ When launching Python GUI applications on macOS, the dock and menu bar often sho
 # First, create the app bundle (only needed once)
 ./create_app_bundle.sh
 
+# The app bundle is created at: /Users/airymagnien/PycharmProjects/OntoJSON/OntoJSON.app
+# (or in your project root directory)
+
 # Then launch by double-clicking OntoJSON.app
 # Or from terminal:
 open OntoJSON.app
+# Or with full path:
+open /Users/airymagnien/PycharmProjects/OntoJSON/OntoJSON.app
 ```
 This provides the most native macOS experience with proper app naming.
 
@@ -81,7 +86,8 @@ If you still see "Python" in the dock:
 3. On macOS, GUI apps work best when launched from an app bundle rather than directly from Python
 
 ## File Reference
-- `OntoJSON.app/` - macOS app bundle (created by create_app_bundle.sh)
+- `OntoJSON.app/` - macOS app bundle (created by create_app_bundle.sh in project root)
+- `create_app_bundle.sh` - Script that builds OntoJSON.app in the project root directory
 - `launch_ontojson.py` - Main launcher script with app naming support
 - `run_ontojson_gui.py` - PyCharm-compatible launcher
 - `OntoJSON.command` - Shell script launcher for Terminal

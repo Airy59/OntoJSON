@@ -13,10 +13,17 @@ This build system creates self-contained applications for OntoJSON across differ
 
 ## 🚀 Quick Start
 
-### Interactive Mode
+### Simple macOS App Bundle (Recommended)
+```bash
+# From project root - creates OntoJSON.app
+./create_app_bundle.sh
+# Output: ./OntoJSON.app (in project root)
+```
+
+### Advanced Build System
 ```bash
 cd build_system
-python build_app.py
+python build_app.py  # Interactive mode
 ```
 
 ### Command Line Mode
@@ -24,15 +31,14 @@ python build_app.py
 # Build for macOS
 python build_app.py --macos
 
-# Build from PyCharm (uses virtual environment)
-python build_from_pycharm.py
-
 # Build for Windows (coming soon)
 python build_app.py --windows
 
 # Build for Linux (coming soon)
 python build_app.py --linux
 ```
+
+**Note:** `build_app.py` automatically detects and uses virtual environments (.venv or venv) if present.
 
 ## 📦 Installation
 
@@ -52,27 +58,27 @@ The macOS builder creates:
 - **`.app` bundle**: A standard macOS application
 - **`.dmg` installer**: A distributable disk image
 
-### Building from PyCharm:
+### Building from PyCharm or any IDE:
 
-If you're using PyCharm with a virtual environment:
+The `build_app.py` script automatically detects and uses virtual environments:
 
 1. **Ensure packages are installed in your venv:**
 ```bash
-source .venv/bin/activate  # or use PyCharm's terminal
+source .venv/bin/activate  # or use your IDE's terminal
 pip install pyinstaller pillow dmgbuild
 ```
 
-2. **Run the PyCharm-specific build script:**
-   - Open `build_system/build_from_pycharm.py` in PyCharm
-   - Right-click and select "Run 'build_from_pycharm'"
-   - Or from terminal: `python build_system/build_from_pycharm.py`
+2. **Run the build script:**
+   - Open `build_system/build_app.py` in your IDE
+   - Right-click and select "Run 'build_app'"
+   - Or from terminal: `python build_system/build_app.py`
 
-3. **Alternative: Configure PyCharm Run Configuration:**
+3. **Configure IDE Run Configuration (optional):**
    - Go to Run → Edit Configurations
    - Create new Python configuration
-   - Script path: `build_system/build_from_pycharm.py`
+   - Script path: `build_system/build_app.py`
    - Working directory: Project root
-   - Python interpreter: Project virtual environment
+   - Script parameters: `--macos` (optional, for direct build)
 
 ### Features:
 - ✅ Universal binary (Intel + Apple Silicon)
@@ -94,8 +100,10 @@ python scripts/build_macos.py --sign
 ```
 
 ### Output:
-- App Bundle: `dist/OntoJSON.app`
-- DMG Installer: `dist/OntoJSON-1.0.0-macOS.dmg`
+- **Simple method** (`create_app_bundle.sh`): `./OntoJSON.app` (in project root)
+- **Advanced build system**:
+  - App Bundle: `build_system/dist/OntoJSON.app`
+  - DMG Installer: `build_system/dist/OntoJSON-1.0.0-macOS.dmg`
 
 ## 🪟 Windows Build
 
@@ -156,6 +164,15 @@ Planned features:
 
 ## 📁 Directory Structure
 
+### Project Root
+```
+OntoJSON/
+├── create_app_bundle.sh  # Simple macOS app builder (creates app in root)
+├── OntoJSON.app/         # Created by create_app_bundle.sh
+└── build_system/         # Advanced build system (below)
+```
+
+### Build System Directory
 ```
 build_system/
 ├── build_app.py          # Main build script with platform selection
@@ -167,7 +184,7 @@ build_system/
 │   ├── build_macos.py   # macOS-specific builder
 │   ├── build_windows.py # Windows builder (coming soon)
 │   └── build_linux.py   # Linux builder (coming soon)
-├── dist/                # Output directory for built applications
+├── dist/                # Output directory for built applications (when using advanced build)
 └── temp/                # Temporary build files
 ```
 

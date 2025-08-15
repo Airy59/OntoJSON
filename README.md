@@ -20,7 +20,8 @@ Download the standalone application for your platform:
 
 - **macOS**: `OntoJSON.app` - Native macOS application
   - Download from releases page
-  - Or build locally: See [Build System Documentation](#build-system)
+  - Or build locally using `./create_app_bundle.sh` (creates app in project root)
+  - Location after build: `[project-root]/OntoJSON.app`
   
 - **Windows**: `OntoJSON.exe` - Windows executable (coming soon)
   - Download from releases page
@@ -217,8 +218,18 @@ OntoJSON includes a comprehensive build system for creating standalone applicati
 
 ### Building Standalone Applications
 
+#### macOS App Bundle (Simple Method)
 ```bash
-# Navigate to build system
+# Build the app bundle in project root
+./create_app_bundle.sh
+
+# App will be created at: ./OntoJSON.app
+# Launch with: open OntoJSON.app
+```
+
+#### Advanced Build System
+```bash
+# Navigate to build system for advanced builds
 cd build_system
 
 # Interactive build menu

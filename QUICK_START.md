@@ -59,6 +59,15 @@ owl2jsonschema input.owl -o output.json \
 ```
 
 ### 4. Build Standalone App
+
+#### Simple Method (macOS)
+```bash
+# Build the app bundle in project root
+./create_app_bundle.sh
+# App created at: ./OntoJSON.app
+```
+
+#### Advanced Build System
 ```bash
 cd build_system
 python build_app.py  # Interactive menu
@@ -199,6 +208,19 @@ pip install -e ".[gui]"
 ```
 
 ### Build Fails
+
+#### For Simple App Bundle (macOS)
+```bash
+# Make sure script is executable
+chmod +x create_app_bundle.sh
+
+# Run the build script
+./create_app_bundle.sh
+
+# App will be at: ./OntoJSON.app
+```
+
+#### For Advanced Build System
 ```bash
 # Install build dependencies
 pip install pyinstaller pillow

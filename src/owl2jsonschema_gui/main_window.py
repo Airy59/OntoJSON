@@ -530,6 +530,13 @@ class MainWindow(QMainWindow):
         self.save_schema_action = save_schema_action
         file_menu.addAction(save_schema_action)
         
+        save_jsonld_ontology_action = QAction("Save Ontology as JSON-&LD...", self)
+        save_jsonld_ontology_action.setShortcut("Ctrl+L")
+        save_jsonld_ontology_action.triggered.connect(self.save_ontology_jsonld)
+        save_jsonld_ontology_action.setEnabled(False)
+        self.save_jsonld_ontology_action = save_jsonld_ontology_action
+        file_menu.addAction(save_jsonld_ontology_action)
+        
         save_abox_action = QAction("Save &A-box...", self)
         save_abox_action.triggered.connect(self.save_abox)
         save_abox_action.setEnabled(False)
@@ -735,12 +742,25 @@ class MainWindow(QMainWindow):
         # Output section - This will expand to fill available space
         output_splitter = QSplitter(Qt.Orientation.Horizontal)
         
-        # OWL Input display
+        # OWL Input display with tabs
         owl_group = QGroupBox("OWL Ontology")
         owl_layout = QVBoxLayout()
+        
+        # Create tab widget for OWL formats
+        self.owl_tabs = QTabWidget()
+        
+        # Original format tab
         self.input_text = QTextEdit()
         self.input_text.setFont(QFont("Consolas, 'Courier New', monospace", 11))
-        owl_layout.addWidget(self.input_text)
+        self.owl_tabs.addTab(self.input_text, "Original Format")
+        
+        # JSON-LD format tab
+        self.jsonld_text = QTextEdit()
+        self.jsonld_text.setFont(QFont("Consolas, 'Courier New', monospace", 11))
+        self.jsonld_text.setReadOnly(True)
+        self.owl_tabs.addTab(self.jsonld_text, "JSON-LD Format")
+        
+        owl_layout.addWidget(self.owl_tabs)
         owl_group.setLayout(owl_layout)
         output_splitter.addWidget(owl_group)
         
@@ -1184,6 +1204,9 @@ class MainWindow(QMainWindow):
         # Generate and display statistics
         stats = self.generate_statistics(result)
         self.stats_text.setPlainText(stats)
+        
+        # Generate and display JSON-LD format of the ontology
+        self.generate_and_display_jsonld()
         
         # Update state
         self.tbox_ready = True
@@ -1895,3 +1918,87 @@ class MainWindow(QMainWindow):
                 "Save Error",
                 f"Failed to save ontology:\n\n{str(e)}"
             )
+    
+    def generate_and_display_jsonld(self):
+        """Generate and display the JSON-LD version of the ontology."""
+        try:
+            from rdflib import Graph
+            
+            # Update status
+            self.status_message.setText("Converting ontology to JSON-LD...")
+            QApplication.processEvents()
+            
+            # Create a new graph and parse the ontology
+            g = Graph()
+            
+            if self.input_file:
+                if self.input_file.startswith(('http://', 'https://')):
+                    # Load from URL
+                    g.parse(self.input_file)
+                else:
+                    # Load from file
+                    g.parse(self.input_file)
+                
+                # Serialize to JSON-LD
+                jsonld_content = g.serialize(format='json-ld')
+                
+                # Parse the JSON-LD to make it pretty
+                if isinstance(jsonld_content, bytes):
+                    jsonld_content = jsonld_content.decode('utf-8')
+                
+                # Parse and pretty-print the JSON
+                jsonld_obj = json.loads(jsonld_content)
+                jsonld_pretty = json.dumps(jsonld_obj, indent=2)
+                
+                # Display in the JSON-LD tab
+                self.jsonld_text.setPlainText(jsonld_pretty)
+                
+                # Enable the save JSON-LD menu item
+                self.save_jsonld_ontology_action.setEnabled(True)
+                
+                self.status_message.setText("JSON-LD conversion complete")
+            
+        except Exception as e:
+            # If conversion fails, show error message in the JSON-LD tab
+            error_msg = f"Failed to convert ontology to JSON-LD:\n\n{str(e)}"
+            self.jsonld_text.setPlainText(error_msg)
+            print(f"JSON-LD conversion error: {e}")
+    
+    def save_ontology_jsonld(self):
+        """Save the ontology in JSON-LD format."""
+        # Get the content from the JSON-LD tab
+        jsonld_content = self.jsonld_text.toPlainText()
+        
+        if not jsonld_content or jsonld_content.startswith("Failed to convert"):
+            QMessageBox.warning(self, "Warning", "No JSON-LD content to save. Please transform the T-box first.")
+            return
+        
+        # Suggest a file name based on the input file
+        suggested_name = "ontology.jsonld"
+        if self.input_file and not self.input_file.startswith(('http://', 'https://')):
+            base_name = Path(self.input_file).stem
+            suggested_name = f"{base_name}.jsonld"
+        
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save Ontology as JSON-LD",
+            suggested_name,
+            "JSON-LD Files (*.jsonld);;JSON Files (*.json);;All Files (*.*)"
+        )
+        
+        if file_path:
+            try:
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.write(jsonld_content)
+                
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    f"Ontology saved as JSON-LD to:\n{file_path}"
+                )
+            except Exception as e:
+                QMessageBox.critical(
+                    self,
+                    "Save Error",
+                    f"Failed to save JSON-LD file:\n{str(e)}"
+                )

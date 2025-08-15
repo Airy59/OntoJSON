@@ -45,16 +45,40 @@ export __CFBundleName="OntoJSON"
 export __CFBundleDisplayName="OntoJSON"
 export __CFBundleIdentifier="com.owl2jsonschema.ontojson"
 
+# Determine which Python to use
+if [ -f "$APP_ROOT/.venv/bin/python3" ]; then
+    # Use virtual environment Python if available
+    PYTHON_CMD="$APP_ROOT/.venv/bin/python3"
+    echo "Using virtual environment Python: $PYTHON_CMD" >&2
+elif [ -f "$APP_ROOT/venv/bin/python3" ]; then
+    # Alternative venv location
+    PYTHON_CMD="$APP_ROOT/venv/bin/python3"
+    echo "Using virtual environment Python: $PYTHON_CMD" >&2
+else
+    # Fall back to system Python
+    PYTHON_CMD="python3"
+    echo "Warning: Using system Python. PyQt6 may not be available." >&2
+fi
+
 # Launch the application
-exec python3 launch_ontojson.py "$@"
+exec "$PYTHON_CMD" launch_ontojson.py "$@"
 EOF
 
 # Make the launcher executable
 chmod +x "$MACOS_DIR/OntoJSON"
 
+# Get the full path of the created app bundle
+FULL_PATH="$(pwd)/$APP_DIR"
+
+echo "=================================="
 echo "OntoJSON.app bundle created successfully!"
+echo "=================================="
+echo ""
+echo "Location: $FULL_PATH"
 echo ""
 echo "You can now:"
 echo "1. Double-click OntoJSON.app to launch the application"
 echo "2. Drag OntoJSON.app to your Applications folder"
 echo "3. Add OntoJSON.app to your dock for easy access"
+echo ""
+echo "To launch from command line: open $FULL_PATH"
