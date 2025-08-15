@@ -90,11 +90,12 @@ owl2jsonschema-gui
 - **File Management**:
   - Browse and select OWL/RDF input files
   - Choose output folders and filenames
-  - Support for multiple file formats (.owl, .rdf, .ttl)
+  - Support for multiple file formats (.owl, .rdf, .ttl, .jsonld)
 
 - **Rule Configuration**:
   - Enable/disable individual transformation rules via checkboxes
-  - Organized into categories: Classes, Properties, Annotations, Advanced, Structural
+      note: not all combinations were tested or even make sense; preferrably use default settings
+  - Rules are organized into categories: Classes, Properties, Annotations, Advanced, Structural
   - Save and load custom rule configurations
 
 - **Transformation Options**:
@@ -214,7 +215,7 @@ output:
 
 ## 🏗️ Build System
 
-OntoJSON includes a comprehensive build system for creating standalone applications:
+OntoJSON includes a comprehensive build system for creating standalone applications for macOS, Windows, or Linux (Ubuntu):
 
 ### Building Standalone Applications
 
@@ -253,7 +254,7 @@ python build_system/build_app.py
   - Portable ZIP package
   - Version information embedding
 
-- **Linux** (Coming Soon):
+- **Linux** (coming Soon):
   - AppImage for universal compatibility
   - DEB/RPM packages
   - Flatpak support
