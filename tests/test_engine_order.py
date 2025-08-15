@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """Debug the order of rule processing and property assignment."""
 
 import sys

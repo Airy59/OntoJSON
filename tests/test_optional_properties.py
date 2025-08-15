@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Test script to verify that properties are optional by default
 unless there's an explicit minimum cardinality constraint.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Main build script for OntoJSON application.
 Supports building for macOS, Windows, and Linux platforms.

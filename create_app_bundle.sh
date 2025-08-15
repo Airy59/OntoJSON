@@ -46,17 +46,17 @@ export __CFBundleDisplayName="OntoJSON"
 export __CFBundleIdentifier="com.owl2jsonschema.ontojson"
 
 # Determine which Python to use
-if [ -f "$APP_ROOT/.venv/bin/python3" ]; then
+if [ -f "$APP_ROOT/.venv/bin/python" ]; then
     # Use virtual environment Python if available
-    PYTHON_CMD="$APP_ROOT/.venv/bin/python3"
+    PYTHON_CMD="$APP_ROOT/.venv/bin/python"
     echo "Using virtual environment Python: $PYTHON_CMD" >&2
-elif [ -f "$APP_ROOT/venv/bin/python3" ]; then
+elif [ -f "$APP_ROOT/venv/bin/python" ]; then
     # Alternative venv location
-    PYTHON_CMD="$APP_ROOT/venv/bin/python3"
+    PYTHON_CMD="$APP_ROOT/venv/bin/python"
     echo "Using virtual environment Python: $PYTHON_CMD" >&2
 else
     # Fall back to system Python
-    PYTHON_CMD="python3"
+    PYTHON_CMD="python"
     echo "Warning: Using system Python. PyQt6 may not be available." >&2
 fi
 

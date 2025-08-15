@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 PyCharm-compatible launcher for OntoJSON GUI with proper macOS app naming.
 

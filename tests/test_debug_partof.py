@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """Debug why partOf is not appearing in the schema."""
 
 import sys

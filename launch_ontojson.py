@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 OntoJSON launcher script with proper macOS app naming support.
 """

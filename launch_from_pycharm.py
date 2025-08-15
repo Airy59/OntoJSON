@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Special launcher for running OntoJSON from PyCharm with proper app naming.
 This script should be used as the entry point in PyCharm run configurations.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Debug script to understand A-box to JSON conversion issues
 """

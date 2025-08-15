@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Test with default configuration to reproduce the missing partOf issue.
 """

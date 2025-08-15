@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Launcher script for the OWL to JSON Schema GUI application.
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 macOS build script for OntoJSON application.
 Creates a self-contained .app bundle and optionally a DMG installer.

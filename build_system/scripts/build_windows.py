@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Windows build script for OntoJSON application.
 Creates a self-contained .exe and optionally an installer.

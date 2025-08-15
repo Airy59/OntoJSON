@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Debug script to understand why cardinality restrictions aren't marking properties as required.
 """

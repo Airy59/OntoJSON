@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """Final verification that all issues are resolved."""
 
 import sys
