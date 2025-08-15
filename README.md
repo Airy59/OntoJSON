@@ -227,18 +227,16 @@ OntoJSON includes a comprehensive build system for creating standalone applicati
 # Launch with: open OntoJSON.app
 ```
 
-#### Advanced Build System
+#### Advanced Build System (Self-Contained Apps)
 ```bash
-# Navigate to build system for advanced builds
-cd build_system
+# For self-contained app with all dependencies (no Python required)
+# Non-interactive command-line mode (recommended for automation)
+python build_system/build_app.py --macos
 
-# Interactive build menu
-python build_app.py
+# Or interactive mode with options
+python build_system/build_app.py
 
-# Direct platform builds
-python scripts/build_macos.py     # macOS: Creates .app and .dmg
-python scripts/build_windows.py   # Windows: Creates .exe and installer
-python scripts/build_linux.py     # Linux: Coming soon
+# Output location: build_system/dist/OntoJSON.app (112MB self-contained)
 ```
 
 ### Build Features

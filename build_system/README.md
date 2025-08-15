@@ -28,7 +28,7 @@ python build_app.py  # Interactive mode
 
 ### Command Line Mode
 ```bash
-# Build for macOS
+# Build for macOS (non-interactive, uses defaults: no DMG, no signing)
 python build_app.py --macos
 
 # Build for Windows (coming soon)
@@ -38,7 +38,10 @@ python build_app.py --windows
 python build_app.py --linux
 ```
 
-**Note:** `build_app.py` automatically detects and uses virtual environments (.venv or venv) if present.
+**Note:**
+- `build_app.py` automatically detects and uses virtual environments (.venv or venv) if present
+- Command-line mode (`--macos`) runs non-interactively with default options
+- Interactive mode is available by running without arguments: `python build_app.py`
 
 ## 📦 Installation
 
@@ -64,21 +67,23 @@ The `build_app.py` script automatically detects and uses virtual environments:
 
 1. **Ensure packages are installed in your venv:**
 ```bash
-source .venv/bin/activate  # or use your IDE's terminal
-pip install pyinstaller pillow dmgbuild
+# From project root (after activating venv)
+pip install pyinstaller pillow
 ```
 
-2. **Run the build script:**
-   - Open `build_system/build_app.py` in your IDE
-   - Right-click and select "Run 'build_app'"
-   - Or from terminal: `python build_system/build_app.py`
+2. **Run the build script (non-interactive):**
+```bash
+# From project root
+python build_system/build_app.py --macos
+```
 
-3. **Configure IDE Run Configuration (optional):**
+3. **Or configure IDE Run Configuration:**
    - Go to Run → Edit Configurations
    - Create new Python configuration
    - Script path: `build_system/build_app.py`
    - Working directory: Project root
-   - Script parameters: `--macos` (optional, for direct build)
+   - Script parameters: `--macos` (for non-interactive build)
+   - Python interpreter: Project virtual environment
 
 ### Features:
 - ✅ Universal binary (Intel + Apple Silicon)
@@ -89,21 +94,23 @@ pip install pyinstaller pillow dmgbuild
 
 ### Build Options:
 ```bash
-# Basic build (app + DMG)
-python scripts/build_macos.py
+# Non-interactive build from project root (recommended)
+python build_system/build_app.py --macos
 
-# App bundle only (no DMG)
-python scripts/build_macos.py --no-dmg
-
-# With code signing
-python scripts/build_macos.py --sign
+# Interactive build with options
+cd build_system
+python build_app.py
+# Then select option 1 for macOS
 ```
 
 ### Output:
-- **Simple method** (`create_app_bundle.sh`): `./OntoJSON.app` (in project root)
-- **Advanced build system**:
-  - App Bundle: `build_system/dist/OntoJSON.app`
-  - DMG Installer: `build_system/dist/OntoJSON-1.0.0-macOS.dmg`
+- **Simple method** (`create_app_bundle.sh`):
+  - Location: `./OntoJSON.app` (in project root)
+  - Size: ~4.2MB (launcher, requires .venv)
+- **Advanced build system** (`build_app.py`):
+  - Location: `build_system/dist/OntoJSON.app`
+  - Size: ~112MB (self-contained with Python & all dependencies)
+  - DMG (if created): `build_system/dist/OntoJSON-1.0.0-macOS.dmg`
 
 ## 🪟 Windows Build
 

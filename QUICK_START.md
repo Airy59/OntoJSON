@@ -23,7 +23,7 @@
 #### Quick Install
 ```bash
 git clone <repo-url>
-cd OWLtoJSONschema
+cd OntoJSON
 pip install -e ".[gui]"
 ```
 
@@ -67,10 +67,14 @@ owl2jsonschema input.owl -o output.json \
 # App created at: ./OntoJSON.app
 ```
 
-#### Advanced Build System
+#### Advanced Build System (Self-Contained Apps)
 ```bash
-cd build_system
-python build_app.py  # Interactive menu
+# Non-interactive build (recommended)
+python build_system/build_app.py --macos
+# Creates: build_system/dist/OntoJSON.app (112MB, includes Python & all dependencies)
+
+# Or interactive mode
+python build_system/build_app.py
 ```
 
 ## 🎯 Rule Categories
@@ -222,13 +226,16 @@ chmod +x create_app_bundle.sh
 
 #### For Advanced Build System
 ```bash
-# Install build dependencies
+# Install build dependencies (if not already installed)
 pip install pyinstaller pillow
 
-# Clean and rebuild
-cd build_system
-rm -rf dist temp
-python scripts/build_macos.py  # or build_windows.py
+# Clean previous builds
+rm -rf build_system/dist build_system/temp
+
+# Run non-interactive build
+python build_system/build_app.py --macos
+
+# Output: build_system/dist/OntoJSON.app
 ```
 
 ### Import Errors
