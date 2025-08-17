@@ -19,8 +19,7 @@ A powerful, configurable transformation engine for converting RDF/OWL ontologies
 Download the standalone application for your platform:
 
 - **macOS**: `OntoJSON.app` - Native macOS application
-  - Download from /build_system/dist
-  - Or build locally using `./create_app_bundle.sh` (creates app in project root)
+  - Build locally using `./create_app_bundle.sh` (creates app in project root)
   - Location after build: `[project-root]/OntoJSON.app`
   
 - **Windows**: `OntoJSON.exe` - Windows executable
