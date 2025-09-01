@@ -25,7 +25,7 @@ Download the standalone application for your platform:
   
 - **Windows**: `OntoJSON.exe` - Windows executable
   - Download from releases page
-  - Or build locally: See [Build System Documentation](#build-system)
+  - Or build locally: See [Build System Documentation](build_system/README.md)
   
 - **Linux**: Coming soon
 
@@ -69,11 +69,13 @@ The OntoJSON GUI provides an intuitive interface for transforming ontologies:
 #### Launching the GUI
 
 **From Standalone App:**
+
 - **macOS**: Double-click `OntoJSON.app`
 - **Windows**: Double-click `OntoJSON.exe`
 - **Linux**: Run `./OntoJSON`
 
 **From Python Installation:**
+
 ```bash
 # Launch the GUI application
 python owl2jsonschema_gui.py
@@ -220,6 +222,7 @@ OntoJSON includes a comprehensive build system for creating standalone applicati
 ### Building Standalone Applications
 
 #### macOS App Bundle (Simple Method)
+
 ```bash
 # Build the app bundle in project root
 ./create_app_bundle.sh
@@ -229,6 +232,7 @@ OntoJSON includes a comprehensive build system for creating standalone applicati
 ```
 
 #### Advanced Build System (Self-Contained Apps)
+
 ```bash
 # For self-contained app with all dependencies (no Python required)
 # Non-interactive command-line mode (recommended for automation)
@@ -242,7 +246,7 @@ python build_system/build_app.py
 
 ### Build Features
 
-- **macOS**: 
+- **macOS**:
   - Native `.app` bundle
   - DMG installer with drag-to-Applications
   - Code signing support
@@ -272,7 +276,7 @@ For detailed build instructions, see [build_system/README.md](build_system/READM
 
 ### Project Structure
 
-```
+```plaintext
 OntoJSON/
 ├── src/
 │   ├── owl2jsonschema/           # Core transformation engine
