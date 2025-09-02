@@ -275,25 +275,35 @@ class ThingWithUriRule(TransformationRule):
         if not self.should_apply_to_class(class_schema):
             return class_schema
         
-        # Create a new schema with allOf inheritance
-        inherited_schema = {
-            "allOf": [
-                {"$ref": "#/definitions/_Thing"},
-                class_schema
-            ]
-        }
-        
-        # Preserve title and description at the top level if they exist
-        if "title" in class_schema:
-            inherited_schema["title"] = class_schema["title"]
-            # Remove from the inner schema to avoid duplication
-            class_schema = {k: v for k, v in class_schema.items() if k != "title"}
-            inherited_schema["allOf"][1] = class_schema
-        
-        if "description" in class_schema:
-            inherited_schema["description"] = class_schema["description"]
-            # Remove from the inner schema to avoid duplication
-            class_schema = {k: v for k, v in class_schema.items() if k != "description"}
-            inherited_schema["allOf"][1] = class_schema
-        
-        return inherited_schema
+        # Check if the class already has an allOf (from ClassHierarchyRule)
+        if "allOf" in class_schema:
+            # The class already has inheritance, we need to add _Thing to the chain
+            # Check if _Thing is already in the inheritance chain
+            thing_ref = {"$ref": "#/definitions/_Thing"}
+            if thing_ref not in class_schema["allOf"]:
+                # Insert _Thing at the beginning of the inheritance chain
+                class_schema["allOf"].insert(0, thing_ref)
+            return class_schema
+        else:
+            # No existing inheritance, create a new schema with allOf inheritance
+            inherited_schema = {
+                "allOf": [
+                    {"$ref": "#/definitions/_Thing"},
+                    class_schema
+                ]
+            }
+            
+            # Preserve title and description at the top level if they exist
+            if "title" in class_schema:
+                inherited_schema["title"] = class_schema["title"]
+                # Remove from the inner schema to avoid duplication
+                class_schema = {k: v for k, v in class_schema.items() if k != "title"}
+                inherited_schema["allOf"][1] = class_schema
+            
+            if "description" in class_schema:
+                inherited_schema["description"] = class_schema["description"]
+                # Remove from the inner schema to avoid duplication
+                class_schema = {k: v for k, v in class_schema.items() if k != "description"}
+                inherited_schema["allOf"][1] = class_schema
+            
+            return inherited_schema

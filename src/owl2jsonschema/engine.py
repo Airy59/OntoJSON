@@ -248,29 +248,63 @@ class TransformationEngine:
                     clean_name = self.schema_builder._clean_definition_name(superclass_name)
                     if clean_name in self.schema_builder.definitions:
                         # Merge the disjoint union info with existing definition
-                        # Preserve existing properties while adding the oneOf constraint
+                        # Preserve existing properties and hierarchy while adding the oneOf constraint
                         existing_def = self.schema_builder.definitions[clean_name]
                         
-                        # If the existing definition has properties, preserve them
-                        preserved_properties = existing_def.get("properties", {})
-                        preserved_required = existing_def.get("required", [])
-                        
-                        # Replace with the union schema
-                        self.schema_builder.definitions[clean_name] = union_info
-                        
-                        # Restore preserved properties if any
-                        if preserved_properties:
-                            # If the union_info already has a structure, we need to add properties carefully
-                            if "oneOf" in union_info or "anyOf" in union_info:
-                                # For disjoint unions, properties should be added to the wrapper, not inside oneOf
-                                if "properties" not in self.schema_builder.definitions[clean_name]:
-                                    self.schema_builder.definitions[clean_name]["properties"] = {}
-                                self.schema_builder.definitions[clean_name]["properties"].update(preserved_properties)
-                                
-                                if preserved_required:
-                                    if "required" not in self.schema_builder.definitions[clean_name]:
-                                        self.schema_builder.definitions[clean_name]["required"] = []
-                                    self.schema_builder.definitions[clean_name]["required"].extend(preserved_required)
+                        # If the existing definition has allOf (inheritance), merge with it
+                        if "allOf" in existing_def:
+                            # Add the oneOf constraint to the existing allOf
+                            # Extract the oneOf from union_info's allOf
+                            if "allOf" in union_info:
+                                for item in union_info["allOf"]:
+                                    if "oneOf" in item:
+                                        # Add the oneOf constraint to the existing allOf
+                                        existing_def["allOf"].append(item)
+                                        break
+                            # Preserve title and description from union_info
+                            if "title" in union_info:
+                                existing_def["title"] = union_info["title"]
+                            if "description" in union_info:
+                                existing_def["description"] = union_info["description"]
+                        else:
+                            # No existing allOf, use the union_info but preserve properties
+                            preserved_properties = existing_def.get("properties", {})
+                            preserved_required = existing_def.get("required", [])
+                            preserved_type = existing_def.get("type")
+                            preserved_title = existing_def.get("title")
+                            preserved_comment = existing_def.get("$comment")
+                            
+                            # Replace with the union schema
+                            self.schema_builder.definitions[clean_name] = union_info
+                            
+                            # Restore preserved fields
+                            if preserved_properties:
+                                # Add properties to the appropriate place in allOf
+                                if "allOf" in self.schema_builder.definitions[clean_name]:
+                                    # Find or create the properties object in allOf
+                                    found_props = False
+                                    for item in self.schema_builder.definitions[clean_name]["allOf"]:
+                                        if "type" in item and item["type"] == "object":
+                                            if "properties" not in item:
+                                                item["properties"] = {}
+                                            item["properties"].update(preserved_properties)
+                                            found_props = True
+                                            break
+                                    if not found_props:
+                                        # Add a new object with properties
+                                        self.schema_builder.definitions[clean_name]["allOf"].insert(0, {
+                                            "type": "object",
+                                            "properties": preserved_properties
+                                        })
+                            
+                            if preserved_required:
+                                self.schema_builder.definitions[clean_name]["required"] = preserved_required
+                            
+                            # Restore original title and comment if not present
+                            if preserved_title and "title" not in self.schema_builder.definitions[clean_name]:
+                                self.schema_builder.definitions[clean_name]["title"] = preserved_title
+                            if preserved_comment and "$comment" not in self.schema_builder.definitions[clean_name]:
+                                self.schema_builder.definitions[clean_name]["$comment"] = preserved_comment
         
         elif rule_id in ["object_property", "datatype_property"]:
             # Properties are added to their respective classes

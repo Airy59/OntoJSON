@@ -14,6 +14,8 @@ This document outlines the rules for transforming RDF/OWL ontologies into JSON S
 2. **Class Hierarchy to JSON Schema Inheritance** (Rule ID: `class_hierarchy`)
    - OWL subclass relationships (`rdfs:subClassOf`) are transformed into JSON Schema inheritance using `allOf`
    - A subclass schema includes its parent schema via `allOf`
+   - Multiple inheritance is supported (a class can extend multiple parent classes)
+   - Inheritance chains are properly preserved (e.g., C extends B, B extends A)
 
 3. **Class Restrictions to JSON Schema Constraints** (Rule ID: `class_restrictions`)
    - OWL class restrictions are transformed into appropriate JSON Schema constraints
@@ -76,6 +78,8 @@ This document outlines the rules for transforming RDF/OWL ontologies into JSON S
 
 16. **OWL Disjoint Classes to JSON Schema Validation** (Rule ID: `disjoint_classes`)
     - `owl:disjointWith` relationships are enforced through validation rules
+    - Disjoint subclasses of a common parent are represented using `oneOf` constraints
+    - The inheritance hierarchy is preserved alongside disjoint constraints
     - Custom validators may be required for full enforcement
 
 ### Structural Transformations
@@ -91,6 +95,12 @@ This document outlines the rules for transforming RDF/OWL ontologies into JSON S
 19. **Ontology Metadata to JSON Schema Metadata** (Rule ID: `ontology_metadata`)
     - Ontology metadata (version, creator, etc.) becomes JSON Schema metadata
     - Stored in appropriate JSON Schema fields or custom fields
+
+20. **Base Object with URI Property** (Rule ID: `thing_with_uri`)
+    - Adds a base `_Thing` object that all classes inherit from
+    - Provides a common `uri` property for RDF stream compatibility
+    - Preserves existing inheritance chains while adding the base inheritance
+    - Useful for maintaining RDF/OWL identity in JSON instances
 
 ## Configuration Options
 

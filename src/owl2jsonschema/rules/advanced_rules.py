@@ -282,13 +282,23 @@ class DisjointClassesRule(TransformationRule):
                 
                 if all_disjoint:
                     # Create a oneOf schema for this superclass
+                    # But preserve it as an allOf with the original class definition
                     resolver = ReferenceResolver()
                     one_of = []
                     for subclass in subclasses:
                         one_of.append(resolver.create_ref(subclass))
                     
+                    # Create a schema that combines the class definition with the disjoint constraint
                     disjoint_unions[class_name] = {
-                        "oneOf": one_of,
+                        "allOf": [
+                            {
+                                "type": "object",
+                                "properties": {}
+                            },
+                            {
+                                "oneOf": one_of
+                            }
+                        ],
                         "title": class_name,
                         "description": f"Disjoint union of: {', '.join(subclasses)}"
                     }

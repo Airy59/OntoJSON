@@ -11,6 +11,8 @@ A powerful, configurable transformation engine for converting RDF/OWL ontologies
 - **Standalone Distributions**: Pre-built applications for macOS, Windows, and Linux (no Python required)
 - **Extensible Design**: Easy to add custom transformation rules and extend functionality
 - **Multiple Output Formats**: Support for JSON Schema and YAML output
+- **Full Inheritance Support**: Correctly handles complex class hierarchies including multiple inheritance
+- **RDF/Turtle Support**: Import and transform RDF Turtle files (.ttl) with proper namespace handling
 
 ## 📦 Installation
 

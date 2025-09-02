@@ -1,0 +1,106 @@
+@prefix : <https://example.org/rsm#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://example.org/rsm#> .
+
+<https://example.org/rsm> rdf:type owl:Ontology ;
+                           owl:versionInfo "1.0" .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://example.org/rsm#Feature
+:Feature rdf:type owl:Class ;
+         rdfs:label "Feature"@en .
+
+###  https://example.org/rsm#NetElement
+:NetElement rdf:type owl:Class ;
+            rdfs:subClassOf :Feature ;
+            rdfs:label "Net Element"@en .
+
+###  https://example.org/rsm#LinearElement
+:LinearElement rdf:type owl:Class ;
+               rdfs:subClassOf :NetElement ;
+               rdfs:label "Linear Element"@en .
+
+###  https://example.org/rsm#BoundaryElement
+:BoundaryElement rdf:type owl:Class ;
+                 rdfs:subClassOf :LinearElement ;
+                 rdfs:label "Boundary Element"@en .
+
+###  https://example.org/rsm#NonlinearElement
+:NonlinearElement rdf:type owl:Class ;
+                  rdfs:subClassOf :NetElement ;
+                  owl:disjointWith :LinearElement ;
+                  rdfs:label "Nonlinear Element"@en .
+
+###  https://example.org/rsm#Port
+:Port rdf:type owl:Class ;
+      rdfs:subClassOf :Feature ;
+      owl:disjointWith :NetElement ;
+      rdfs:label "Port"@en .
+
+###  https://example.org/rsm#ListedPort
+:ListedPort rdf:type owl:Class ;
+            rdfs:subClassOf :Port ;
+            rdfs:label "Listed Port"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://example.org/rsm#connectedWith
+:connectedWith rdf:type owl:ObjectProperty ;
+               rdf:type owl:SymmetricProperty ;
+               rdfs:domain :Port ;
+               rdfs:range :Port ;
+               rdfs:label "connected with"@en .
+
+###  https://example.org/rsm#port
+:port rdf:type owl:ObjectProperty ;
+      rdfs:domain :NetElement ;
+      rdfs:range :Port ;
+      rdfs:label "port"@en .
+
+###  https://example.org/rsm#onElement
+:onElement rdf:type owl:ObjectProperty ;
+           owl:inverseOf :port ;
+           rdfs:domain :Port ;
+           rdfs:range :NetElement ;
+           rdfs:label "on element"@en .
+
+#################################################################
+#    Individuals (A-box examples)
+#################################################################
+
+:element1 rdf:type owl:NamedIndividual ,
+                   :LinearElement ;
+          rdfs:label "Linear Element 1"@en .
+
+:element2 rdf:type owl:NamedIndividual ,
+                   :BoundaryElement ;
+          rdfs:label "Boundary Element 1"@en .
+
+:port1 rdf:type owl:NamedIndividual ,
+               :Port ;
+       :onElement :element1 ;
+       rdfs:label "Port 1"@en .
+
+:port2 rdf:type owl:NamedIndividual ,
+               :Port ;
+       :onElement :element1 ;
+       :connectedWith :port3 ;
+       rdfs:label "Port 2"@en .
+
+:port3 rdf:type owl:NamedIndividual ,
+               :Port ;
+       :onElement :element2 ;
+       :connectedWith :port2 ;
+       rdfs:label "Port 3"@en .
+
+:element1 :port :port1 , :port2 .
+:element2 :port :port3 .
