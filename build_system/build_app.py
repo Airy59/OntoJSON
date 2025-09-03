@@ -104,8 +104,8 @@ class AppBuilder:
         print(f"\nCurrent platform: {self.current_platform}")
         print("\nSelect target platform:")
         print("\n  1. macOS   - Create .app bundle and .dmg installer")
-        print("  2. Windows - Create .exe installer (Coming soon)")
-        print("  3. Linux   - Create AppImage/deb package (Coming soon)")
+        print("  2. Windows - Create .exe installer")
+        print("  3. Linux   - Create AppImage/.deb/.rpm packages")
         print("  4. All     - Build for all platforms (Coming soon)")
         print("\n  0. Exit")
         print("\n" + "-"*60)
@@ -186,14 +186,58 @@ class AppBuilder:
         
         subprocess.run(cmd, cwd=str(self.project_root))
     
-    def build_linux(self):
+    def build_linux(self, interactive=True):
         """Build for Linux."""
-        print("\n🐧 Linux build support coming soon!")
-        print("\nPlanned features:")
-        print("  • Create AppImage for universal Linux support")
-        print("  • Generate .deb package for Debian/Ubuntu")
-        print("  • Generate .rpm package for Fedora/RHEL")
-        print("  • Create Flatpak for modern distributions")
+        if self.current_platform != 'Linux':
+            print("\n⚠️  Warning: Building Linux executables works best on Linux")
+            print("   You are currently on:", self.current_platform)
+            if interactive:
+                response = input("\nContinue anyway? (y/n): ").lower()
+                if response != 'y':
+                    return
+        
+        print("\n🐧 Building for Linux...")
+        
+        # Run the Linux build script
+        script_path = Path(__file__).parent / 'scripts' / 'build_linux.py'
+        
+        if not script_path.exists():
+            print("❌ Linux build script not found!")
+            return
+        
+        # Ask about package creation or use defaults
+        if interactive:
+            create_appimage = input("\nCreate AppImage (universal Linux)? (y/n): ").lower() == 'y'
+            create_deb = input("Create .deb package (Debian/Ubuntu)? (y/n): ").lower() == 'y'
+            create_rpm = False
+            if self.current_platform == 'Linux':
+                create_rpm = input("Create .rpm package (Fedora/RHEL)? (y/n): ").lower() == 'y'
+        else:
+            # Non-interactive defaults
+            print("Using default options: AppImage and .deb package")
+            create_appimage = True
+            create_deb = True
+            create_rpm = False
+        
+        cmd = [self.python_cmd, str(script_path)]
+        if not create_appimage:
+            cmd.append('--no-appimage')
+        if not create_deb:
+            cmd.append('--no-deb')
+        if not create_rpm:
+            cmd.append('--no-rpm')
+        
+        result = subprocess.run(cmd, cwd=str(self.project_root))
+        
+        if result.returncode == 0:
+            print("\n✅ Build completed successfully!")
+            print(f"📦 Output location: {Path(__file__).parent}/dist/")
+            if create_appimage:
+                print(f"   • AppImage: OntoJSON-1.0.0-x86_64.AppImage")
+            if create_deb:
+                print(f"   • DEB Package: ontojson_1.0.0_amd64.deb")
+            if create_rpm:
+                print(f"   • RPM Package: ontojson-1.0.0-1.x86_64.rpm")
     
     def run(self):
         """Main execution loop."""
@@ -234,13 +278,13 @@ def main():
         elif arg in ['--windows', '-w', 'windows']:
             builder.build_windows()
         elif arg in ['--linux', '-l', 'linux']:
-            builder.build_linux()
+            builder.build_linux(interactive=False)
         elif arg in ['--help', '-h']:
             print("Usage: python build_app.py [OPTIONS]")
             print("\nOptions:")
             print("  --macos, -m     Build for macOS (non-interactive)")
-            print("  --windows, -w   Build for Windows (coming soon)")
-            print("  --linux, -l     Build for Linux (coming soon)")
+            print("  --windows, -w   Build for Windows")
+            print("  --linux, -l     Build for Linux (non-interactive)")
             print("  --help, -h      Show this help message")
             print("\nNote: Command line mode uses default options (no DMG, no signing)")
         else:
