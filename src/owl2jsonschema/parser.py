@@ -30,13 +30,14 @@ class OntologyParser:
         self.ontology = None
         self.namespaces = {}
         
-    def parse(self, file_path: str, format: Optional[str] = None) -> OntologyModel:
+    def parse(self, file_path: str, format: Optional[str] = None, resolve_imports: bool = True) -> OntologyModel:
         """
         Parse an ontology file.
         
         Args:
             file_path: Path to the ontology file
             format: RDF format (e.g., 'xml', 'turtle', 'n3'). If None, will be guessed.
+            resolve_imports: Whether to resolve and load imported ontologies
         
         Returns:
             The parsed ontology model
@@ -65,6 +66,10 @@ class OntologyParser:
                     raise e
             else:
                 raise e
+        
+        # Resolve imports if requested
+        if resolve_imports:
+            self._resolve_imports()
         
         # Extract namespace information
         self._extract_namespaces()
@@ -689,3 +694,47 @@ class OntologyParser:
             except Exception:
                 # If all else fails, continue without custom SSL configuration
                 pass
+    
+    def _resolve_imports(self):
+        """Resolve and load imported ontologies into the graph."""
+        # Find all import statements
+        imports = list(self.graph.objects(None, OWL.imports))
+        
+        if not imports:
+            return
+        
+        print(f"Found {len(imports)} import(s) to resolve")
+        
+        for import_uri in imports:
+            import_str = str(import_uri)
+            print(f"Resolving import: {import_str}")
+            
+            try:
+                # Parse the imported ontology into a temporary graph
+                temp_graph = Graph()
+                
+                # Handle file:// URIs
+                if import_str.startswith('file://'):
+                    # Convert file URI to path
+                    from urllib.parse import unquote, urlparse
+                    parsed = urlparse(import_str)
+                    file_path = unquote(parsed.path)
+                    
+                    # On Windows, file URIs might have an extra slash
+                    if file_path.startswith('/') and ':' in file_path[1:3]:
+                        file_path = file_path[1:]
+                    
+                    temp_graph.parse(file_path)
+                else:
+                    # Try to parse as-is (HTTP, HTTPS, or local path)
+                    temp_graph.parse(import_str)
+                
+                # Merge the imported graph into our main graph
+                for triple in temp_graph:
+                    self.graph.add(triple)
+                
+                print(f"  Successfully loaded {len(temp_graph)} triples from {import_str}")
+                
+            except Exception as e:
+                print(f"  Warning: Could not resolve import {import_str}: {e}")
+                # Continue processing even if one import fails

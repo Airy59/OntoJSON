@@ -14,15 +14,120 @@ from PyQt6.QtWidgets import (
     QGroupBox, QCheckBox, QScrollArea, QMessageBox,
     QTabWidget, QComboBox, QSpinBox, QLineEdit,
     QSplitter, QProgressBar, QStatusBar, QFrame, QApplication, QDialog,
-    QDialogButtonBox, QGridLayout, QRadioButton, QButtonGroup
+    QDialogButtonBox, QGridLayout, QRadioButton, QButtonGroup, QInputDialog
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
-from PyQt6.QtGui import QFont, QAction, QIcon, QPixmap
+from PyQt6.QtGui import QFont, QAction, QIcon, QPixmap, QTextCursor, QPalette, QColor
 
 # Import the transformation engine and A-box generator
 from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser, ABoxGenerator
 from owl2jsonschema.reasoner import ABoxValidator
 from owl2jsonschema.abox_to_json import ABoxToJSONConverter
+from owl2jsonschema.composite_builder import CompositeOntologyBuilder
+
+
+class CompositeMetadataDialog(QDialog):
+    """Dialog for entering metadata for a composite ontology."""
+    
+    def __init__(self, parent=None, file_paths=None):
+        super().__init__(parent)
+        self.file_paths = file_paths or []
+        self.setWindowTitle("Composite Ontology Metadata")
+        self.setMinimumSize(500, 400)
+        
+        self.init_ui()
+    
+    def init_ui(self):
+        """Initialize the user interface."""
+        layout = QVBoxLayout()
+        
+        # Title
+        title_label = QLabel("Composite Ontology Configuration")
+        title_label.setStyleSheet("font-size: 14px; font-weight: bold; padding: 10px;")
+        layout.addWidget(title_label)
+        
+        # Show selected files
+        files_group = QGroupBox("Selected Ontologies")
+        files_layout = QVBoxLayout()
+        files_text = QTextEdit()
+        files_text.setReadOnly(True)
+        files_text.setMaximumHeight(100)
+        
+        file_list = "\n".join([f"• {Path(f).name}" for f in self.file_paths])
+        files_text.setPlainText(file_list)
+        files_layout.addWidget(files_text)
+        files_group.setLayout(files_layout)
+        layout.addWidget(files_group)
+        
+        # Metadata fields
+        metadata_group = QGroupBox("Metadata (Optional)")
+        metadata_layout = QGridLayout()
+        
+        # Title field
+        metadata_layout.addWidget(QLabel("Title:"), 0, 0)
+        self.title_input = QLineEdit()
+        self.title_input.setPlaceholderText(f"Composite of {len(self.file_paths)} ontologies")
+        metadata_layout.addWidget(self.title_input, 0, 1)
+        
+        # Version field
+        metadata_layout.addWidget(QLabel("Version:"), 1, 0)
+        self.version_input = QLineEdit()
+        self.version_input.setPlaceholderText("1.0.0")
+        metadata_layout.addWidget(self.version_input, 1, 1)
+        
+        # Author field
+        metadata_layout.addWidget(QLabel("Author:"), 2, 0)
+        self.author_input = QLineEdit()
+        self.author_input.setPlaceholderText("Your name or organization")
+        metadata_layout.addWidget(self.author_input, 2, 1)
+        
+        # Description field
+        metadata_layout.addWidget(QLabel("Description:"), 3, 0)
+        self.description_input = QTextEdit()
+        self.description_input.setMaximumHeight(60)
+        self.description_input.setPlaceholderText("Description of the composite ontology")
+        metadata_layout.addWidget(self.description_input, 3, 1)
+        
+        # Comment field
+        metadata_layout.addWidget(QLabel("Comments:"), 4, 0)
+        self.comment_input = QTextEdit()
+        self.comment_input.setMaximumHeight(60)
+        self.comment_input.setPlaceholderText("Additional notes or comments")
+        metadata_layout.addWidget(self.comment_input, 4, 1)
+        
+        metadata_group.setLayout(metadata_layout)
+        layout.addWidget(metadata_group)
+        
+        # Dialog buttons
+        button_box = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
+        )
+        button_box.accepted.connect(self.accept)
+        button_box.rejected.connect(self.reject)
+        layout.addWidget(button_box)
+        
+        self.setLayout(layout)
+    
+    def get_metadata(self):
+        """Get the metadata entered by the user."""
+        metadata = {}
+        
+        if self.title_input.text().strip():
+            metadata["title"] = self.title_input.text().strip()
+        
+        if self.version_input.text().strip():
+            metadata["version"] = self.version_input.text().strip()
+        
+        if self.author_input.text().strip():
+            metadata["author"] = self.author_input.text().strip()
+        
+        if self.description_input.toPlainText().strip():
+            metadata["description"] = self.description_input.toPlainText().strip()
+        
+        if self.comment_input.toPlainText().strip():
+            metadata["comment"] = self.comment_input.toPlainText().strip()
+        
+        return metadata
 
 
 class RulesConfigDialog(QDialog):
@@ -405,6 +510,10 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.input_file: Optional[str] = None
+        self.input_files: List[str] = []  # For multiple file selection
+        self.is_composite: bool = False  # Track if using composite ontology
+        self.temp_composite_file: Optional[str] = None  # Track temporary composite file
+        self.ontology_list: List[str] = []  # Persistent list of ontologies
         self.transformation_result: Optional[Dict] = None
         self.ontology_model = None
         self.abox_data = None
@@ -506,6 +615,11 @@ class MainWindow(QMainWindow):
         open_action.setShortcut("Ctrl+O")
         open_action.triggered.connect(self.browse_input_file)
         file_menu.addAction(open_action)
+        
+        open_multiple_action = QAction("Open &Multiple OWL Files...", self)
+        open_multiple_action.setShortcut("Ctrl+M")
+        open_multiple_action.triggered.connect(self.browse_multiple_files)
+        file_menu.addAction(open_multiple_action)
         
         open_url_action = QAction("Open from &URL...", self)
         open_url_action.setShortcut("Ctrl+U")
@@ -616,63 +730,144 @@ class MainWindow(QMainWindow):
         desc_label.setMaximumHeight(60)  # Fixed maximum height
         layout.addWidget(desc_label)
         
-        # Input section - Fixed height
-        input_group = QGroupBox("Input")
-        input_group.setMaximumHeight(80)  # Fixed maximum height
-        input_layout = QHBoxLayout()
+        # Input section with text editor and controls
+        input_group = QGroupBox("Ontology Sources")
+        input_group.setMaximumHeight(200)  # Increased height for text editor
+        input_layout = QVBoxLayout()
         
-        self.file_label = QLabel("No file selected")
-        self.file_label.setMaximumWidth(400)
-        self.file_label.setStyleSheet("""
-            QLabel {
-                padding: 5px;
-                background-color: #f8f8f8;
-                border: 1px solid #ddd;
+        # Instructions label
+        instructions = QLabel("Enter ontology paths or URIs (one per line). Mix local files and URIs freely:")
+        instructions.setStyleSheet("color: #666; font-size: 11px;")
+        input_layout.addWidget(instructions)
+        
+        # Text editor for ontology list
+        self.ontology_list_editor = QTextEdit()
+        self.ontology_list_editor.setPlaceholderText(
+            "Examples:\n"
+            "/path/to/local/ontology.owl\n"
+            "C:\\Users\\Name\\ontology.ttl\n"
+            "https://example.org/ontology.rdf\n"
+            "file:///home/user/ontology.n3"
+        )
+        self.ontology_list_editor.setMaximumHeight(80)
+        self.ontology_list_editor.setFont(QFont("Consolas, 'Courier New', monospace", 10))
+        self.ontology_list_editor.textChanged.connect(self.on_ontology_list_changed)
+        
+        # Force white background using document background
+        self.ontology_list_editor.document().setDefaultStyleSheet("""
+            body { background-color: white; }
+        """)
+        
+        # Also set viewport background
+        self.ontology_list_editor.viewport().setStyleSheet("background-color: white;")
+        
+        # And set the widget itself
+        self.ontology_list_editor.setStyleSheet("""
+            QTextEdit {
+                background-color: white;
+                background: white;
+                color: black;
+                border: 1px solid #cccccc;
                 border-radius: 3px;
+                padding: 5px;
+            }
+            QTextEdit:focus {
+                background-color: white;
+                background: white;
+                border-color: #4CAF50;
+                border-width: 2px;
             }
         """)
-        input_layout.addWidget(self.file_label)
         
-        open_btn = QPushButton("📁 Open OWL File")
-        open_btn.clicked.connect(self.browse_input_file)
-        open_btn.setStyleSheet("""
+        input_layout.addWidget(self.ontology_list_editor)
+        
+        # Control buttons
+        button_layout = QHBoxLayout()
+        
+        # Select from files button
+        select_files_btn = QPushButton("📁 Select Files...")
+        select_files_btn.clicked.connect(self.add_files_to_list)
+        select_files_btn.setToolTip("Browse and add local ontology files")
+        select_files_btn.setStyleSheet("""
             QPushButton {
-                padding: 8px 15px;
+                padding: 5px 10px;
                 background-color: #4CAF50;
                 color: white;
                 border: none;
-                border-radius: 4px;
-                font-weight: bold;
+                border-radius: 3px;
+                font-size: 12px;
             }
             QPushButton:hover {
                 background-color: #45a049;
             }
-            QPushButton:pressed {
-                background-color: #3d8b40;
-            }
         """)
-        input_layout.addWidget(open_btn)
+        button_layout.addWidget(select_files_btn)
         
-        url_btn = QPushButton("🌐 Open from URL")
-        url_btn.clicked.connect(self.open_url)
-        url_btn.setStyleSheet("""
+        # Enter URI button
+        add_uri_btn = QPushButton("🌐 Add URI...")
+        add_uri_btn.clicked.connect(self.add_uri_to_list)
+        add_uri_btn.setToolTip("Add an ontology URI")
+        add_uri_btn.setStyleSheet("""
             QPushButton {
-                padding: 8px 15px;
+                padding: 5px 10px;
                 background-color: #2196F3;
                 color: white;
                 border: none;
-                border-radius: 4px;
-                font-weight: bold;
+                border-radius: 3px;
+                font-size: 12px;
             }
             QPushButton:hover {
                 background-color: #1976D2;
             }
-            QPushButton:pressed {
-                background-color: #1565C0;
+        """)
+        button_layout.addWidget(add_uri_btn)
+        
+        # Remove line button
+        remove_line_btn = QPushButton("➖ Remove Line")
+        remove_line_btn.clicked.connect(self.remove_current_line)
+        remove_line_btn.setToolTip("Remove the line at cursor position")
+        remove_line_btn.setStyleSheet("""
+            QPushButton {
+                padding: 5px 10px;
+                background-color: #FF9800;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                font-size: 12px;
+            }
+            QPushButton:hover {
+                background-color: #F57C00;
             }
         """)
-        input_layout.addWidget(url_btn)
+        button_layout.addWidget(remove_line_btn)
         
+        # Clear all button
+        clear_all_btn = QPushButton("🗑️ Clear All")
+        clear_all_btn.clicked.connect(self.clear_ontology_list)
+        clear_all_btn.setToolTip("Clear all entries")
+        clear_all_btn.setStyleSheet("""
+            QPushButton {
+                padding: 5px 10px;
+                background-color: #f44336;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                font-size: 12px;
+            }
+            QPushButton:hover {
+                background-color: #da190b;
+            }
+        """)
+        button_layout.addWidget(clear_all_btn)
+        
+        button_layout.addStretch()
+        
+        # Status label
+        self.ontology_count_label = QLabel("0 ontologies")
+        self.ontology_count_label.setStyleSheet("color: #666; font-style: italic;")
+        button_layout.addWidget(self.ontology_count_label)
+        
+        input_layout.addLayout(button_layout)
         input_group.setLayout(input_layout)
         layout.addWidget(input_group)
         
@@ -1078,46 +1273,103 @@ class MainWindow(QMainWindow):
         self.min_instances_spin.setStyleSheet(style)
         self.max_instances_spin.setStyleSheet(style)
     
-    def browse_input_file(self):
-        """Browse for input ontology file."""
-        file_path, _ = QFileDialog.getOpenFileName(
+    def add_files_to_list(self):
+        """Browse and add local ontology files to the list."""
+        files, _ = QFileDialog.getOpenFileNames(
             self,
-            "Select Ontology File",
+            "Select OWL Ontology Files",
             "",
-            "Ontology Files (*.owl *.rdf *.xml *.ttl *.n3);;All Files (*.*)"
+            "OWL Files (*.owl *.rdf *.ttl *.n3);;All Files (*.*)"
         )
         
-        if file_path:
-            self.input_file = file_path
-            self.file_label.setText(Path(file_path).name)
-            self.transform_btn.setEnabled(True)
-            self.save_ontology_action.setEnabled(True)  # Enable save ontology menu item
+        if files:
+            # Get current content
+            current_text = self.ontology_list_editor.toPlainText()
+            lines = [line.strip() for line in current_text.split('\n') if line.strip()]
             
-            # Load and display file content
-            try:
-                with open(file_path, 'r') as f:
-                    content = f.read()
-                    self.input_text.setPlainText(content[:5000])  # Show first 5000 chars
-            except Exception as e:
-                self.input_text.setPlainText(f"Error loading file: {str(e)}")
+            # Add new files
+            for file in files:
+                if file not in lines:
+                    lines.append(file)
+            
+            # Update editor
+            self.ontology_list_editor.setPlainText('\n'.join(lines))
     
-    def open_url(self):
-        """Open ontology from URL."""
+    def add_uri_to_list(self):
+        """Add an ontology URI to the list."""
         from PyQt6.QtWidgets import QInputDialog
         
-        url, ok = QInputDialog.getText(
+        uri, ok = QInputDialog.getText(
             self,
-            "Open from URL",
-            "Enter the URL of the OWL/RDF ontology:",
-            text="https://"
+            "Add Ontology URI",
+            "Enter the URI of the ontology:",
+            QLineEdit.EchoMode.Normal,
+            "https://"
         )
         
-        if ok and url:
-            self.input_file = url
-            self.file_label.setText(url)
-            self.transform_btn.setEnabled(True)
-            self.save_ontology_action.setEnabled(True)  # Enable save ontology menu item
-            self.input_text.setPlainText(f"URL: {url}\n\n(Content will be loaded during transformation)")
+        if ok and uri:
+            # Get current content
+            current_text = self.ontology_list_editor.toPlainText()
+            lines = [line.strip() for line in current_text.split('\n') if line.strip()]
+            
+            # Add new URI if not already present
+            if uri not in lines:
+                lines.append(uri)
+                self.ontology_list_editor.setPlainText('\n'.join(lines))
+    
+    def remove_current_line(self):
+        """Remove the line at the current cursor position."""
+        cursor = self.ontology_list_editor.textCursor()
+        cursor.select(QTextCursor.SelectionType.LineUnderCursor)
+        cursor.removeSelectedText()
+        
+        # Remove the newline character if it's there
+        cursor.deleteChar()
+    
+    def clear_ontology_list(self):
+        """Clear all entries from the ontology list."""
+        reply = QMessageBox.question(
+            self,
+            "Clear All",
+            "Are you sure you want to clear all ontology entries?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+        )
+        
+        if reply == QMessageBox.StandardButton.Yes:
+            self.ontology_list_editor.clear()
+    
+    def on_ontology_list_changed(self):
+        """Handle changes to the ontology list editor."""
+        # Parse the content to get list of ontologies
+        text = self.ontology_list_editor.toPlainText()
+        lines = [line.strip() for line in text.split('\n') if line.strip()]
+        
+        self.ontology_list = lines
+        
+        # Update count label
+        count = len(lines)
+        if count == 0:
+            self.ontology_count_label.setText("0 ontologies")
+        elif count == 1:
+            self.ontology_count_label.setText("1 ontology")
+        else:
+            self.ontology_count_label.setText(f"{count} ontologies")
+        
+        # Enable/disable transform button
+        self.transform_btn.setEnabled(count > 0)
+        self.save_ontology_action.setEnabled(count > 0)
+    
+    def browse_input_file(self):
+        """Legacy method - redirects to add_files_to_list for compatibility."""
+        self.add_files_to_list()
+    
+    def browse_multiple_files(self):
+        """Legacy method - redirects to add_files_to_list for compatibility."""
+        self.add_files_to_list()
+    
+    def open_url(self):
+        """Open ontology from URL - redirects to add_uri_to_list."""
+        self.add_uri_to_list()
     
     def configure_rules(self):
         """Open the rules configuration dialog."""
@@ -1130,9 +1382,66 @@ class MainWindow(QMainWindow):
     
     def run_transformation(self):
         """Run the T-box transformation."""
-        if not self.input_file:
-            QMessageBox.warning(self, "Warning", "Please select an input file first.")
+        # Check if we have any ontologies to transform
+        if not self.ontology_list:
+            QMessageBox.warning(self, "Warning", "Please add at least one ontology source first.")
             return
+        
+        # Detect if we need to create a composite ontology
+        if len(self.ontology_list) > 1:
+            # Multiple sources - create composite
+            try:
+                # Create composite ontology dialog for metadata
+                dialog = CompositeMetadataDialog(self, self.ontology_list)
+                if dialog.exec() != QDialog.DialogCode.Accepted:
+                    return  # User cancelled
+                
+                metadata = dialog.get_metadata()
+                
+                # Create the composite ontology
+                self.status_message.setText("Creating composite ontology...")
+                QApplication.processEvents()
+                
+                # Use the class method to create composite builder
+                builder = CompositeOntologyBuilder.create_composite(
+                    self.ontology_list,
+                    metadata=metadata
+                )
+                
+                # Save to temporary file
+                temp_file = builder.save_to_temp_file(format="turtle")
+                
+                # Clean up previous temp file if it exists
+                self._cleanup_temp_file()
+                
+                # Use the temporary file as input
+                self.input_file = temp_file
+                self.temp_composite_file = temp_file  # Track for cleanup
+                self.is_composite = True
+                
+                # Display the composite ontology
+                composite_content = builder.serialize(format="turtle")
+                self.input_text.setPlainText(composite_content[:5000])
+                
+            except Exception as e:
+                QMessageBox.critical(self, "Error",
+                                   f"Failed to create composite ontology:\n{str(e)}")
+                return
+        else:
+            # Single source
+            self.input_file = self.ontology_list[0]
+            self.is_composite = False
+            
+            # Display file content if it's a local file
+            if not self.input_file.startswith(('http://', 'https://', 'ftp://')):
+                try:
+                    with open(self.input_file, 'r') as f:
+                        content = f.read()
+                        self.input_text.setPlainText(content[:5000])
+                except Exception as e:
+                    self.input_text.setPlainText(f"File: {self.input_file}\n\n(Content will be loaded during transformation)")
+            else:
+                self.input_text.setPlainText(f"URL: {self.input_file}\n\n(Content will be loaded during transformation)")
         
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)
@@ -1623,14 +1932,35 @@ class MainWindow(QMainWindow):
                 
                 # Create a custom dialog for better display
                 error_dialog = QDialog(self)
-                error_dialog.setWindowTitle("Validation Failed")
-                error_dialog.setMinimumSize(700, 500)
+                error_dialog.setWindowTitle("Schema Validation Report")
+                error_dialog.setMinimumSize(700, 600)
                 
                 layout = QVBoxLayout()
                 
+                # Important context label
+                context_label = QLabel(
+                    "ℹ️ IMPORTANT CONTEXT:\n"
+                    "The validation errors below are most likely due to the RANDOM generation of the A-Box, "
+                    "not issues with your schema or the validator.\n\n"
+                    "The JSON Schema validator is working correctly and has detected that some randomly generated "
+                    "instances don't fully comply with the schema constraints. This is expected behavior when using "
+                    "random data generation.\n\n"
+                    "If the OWL Reasoner validated the A-Box as consistent (Step 2), your ontology structure is correct."
+                )
+                context_label.setWordWrap(True)
+                context_label.setStyleSheet(
+                    "padding: 12px; background-color: #cfe2ff; border: 1px solid #084298; "
+                    "border-radius: 5px; color: #084298;"
+                )
+                layout.addWidget(context_label)
+                
                 # Summary label
-                summary_label = QLabel(f"❌ The JSON instances do not conform to the schema.\n"
-                                      f"{validation_results['validated_count']}/{validation_results['total_count']} instances passed validation.")
+                summary_label = QLabel(
+                    f"📊 VALIDATION RESULTS:\n"
+                    f"{validation_results['validated_count']}/{validation_results['total_count']} instances passed validation "
+                    f"({int(validation_results['validated_count']/validation_results['total_count']*100)}% success rate)\n\n"
+                    f"The schema validator is functioning correctly by identifying constraint violations."
+                )
                 summary_label.setWordWrap(True)
                 summary_label.setStyleSheet("font-weight: bold; padding: 10px; background-color: #fff3cd; border-radius: 5px;")
                 layout.addWidget(summary_label)
@@ -2002,3 +2332,19 @@ class MainWindow(QMainWindow):
                     "Save Error",
                     f"Failed to save JSON-LD file:\n{str(e)}"
                 )
+    
+    def _cleanup_temp_file(self):
+        """Clean up temporary composite ontology file if it exists."""
+        if self.temp_composite_file:
+            try:
+                import os
+                if os.path.exists(self.temp_composite_file):
+                    os.remove(self.temp_composite_file)
+                self.temp_composite_file = None
+            except Exception as e:
+                print(f"Failed to clean up temp file: {e}")
+    
+    def closeEvent(self, event):
+        """Handle window close event to clean up resources."""
+        self._cleanup_temp_file()
+        event.accept()

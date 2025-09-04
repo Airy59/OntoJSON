@@ -4,15 +4,38 @@ A powerful, configurable transformation engine for converting RDF/OWL ontologies
 
 ## 🚀 Features
 
+### Core Capabilities
 - **Configurable Transformation Rules**: Enable or disable specific transformation rules based on your needs
 - **Visitor Pattern Architecture**: Clean separation of concerns with extensible rule-based transformations
 - **Comprehensive Rule Set**: Supports a wide range of OWL constructs and their JSON Schema equivalents
-- **GUI Application**: User-friendly desktop application for easy ontology transformation
-- **Standalone Distributions**: Pre-built applications for macOS, Windows, and Linux (no Python required)
-- **Extensible Design**: Easy to add custom transformation rules and extend functionality
-- **Multiple Output Formats**: Support for JSON Schema and YAML output
 - **Full Inheritance Support**: Correctly handles complex class hierarchies including multiple inheritance
 - **RDF/Turtle Support**: Import and transform RDF Turtle files (.ttl) with proper namespace handling
+- **Import Resolution**: Automatic resolution and loading of imported ontologies
+
+### Smart Multi-Ontology Support
+- **Intelligent Workflow Detection**:
+  - Single ontology: Direct transformation without modification
+  - Multiple ontologies: Automatic composite creation with import statements
+- **Flexible Input Methods**:
+  - Text editor with mixed local/remote sources
+  - Drag-and-drop file selection
+  - URI input dialog for remote ontologies
+- **Composite Ontology Builder**:
+  - Automatic generation of `owl:imports` statements
+  - Custom metadata support (title, version, author, description)
+  - Temporary file management for processing
+  - Support for heterogeneous sources (mix local files and remote URIs)
+
+### Complete T-box/A-box Workflow
+- **Step 1 - T-box Transformation**: Convert OWL ontologies to JSON Schema
+- **Step 2 - A-box Generation**: Create random individuals conforming to T-box constraints
+- **Step 3 - JSON Instance Generation**: Transform A-box to JSON/JSON-LD instances with validation
+
+### Application Features
+- **GUI Application**: User-friendly desktop application with three-step workflow
+- **Standalone Distributions**: Pre-built applications for macOS, Windows, and Linux (no Python required)
+- **Extensible Design**: Easy to add custom transformation rules and extend functionality
+- **Multiple Output Formats**: Support for JSON Schema, YAML, JSON-LD, and more
 
 ## 📦 Installation
 
@@ -90,32 +113,67 @@ owl2jsonschema-gui
 
 #### GUI Features
 
-- **File Management**:
-  - Browse and select OWL/RDF input files
-  - Choose output folders and filenames
-  - Support for multiple file formats (.owl, .rdf, .ttl, .jsonld)
+##### Ontology Input Management
+- **Flexible Text Editor Interface**:
+  - One source per line format
+  - Mix local paths and remote URIs freely
+  - Real-time source counter
+  - Line-by-line editing with cursor control
+- **Interactive Controls**:
+  - 📁 Select Files - Browse local ontologies
+  - 🌐 Add URI - Input remote ontologies
+  - ➖ Remove Line - Delete at cursor
+  - 🗑️ Clear All - Reset the list
+- **Smart Workflow Detection**:
+  - Single source → Direct transformation
+  - Multiple sources → Composite creation dialog
 
+##### Composite Ontology Features (Auto-triggered for 2+ sources)
+- **Metadata Dialog**:
+  - Title, version, author fields
+  - Description and comments
+  - All fields are optional
+- **Automatic Processing**:
+  - Generates `owl:imports` statements
+  - Creates temporary composite file
+  - Resolves dependencies automatically
+  - Cleans up temp files after processing
+
+##### Three-Step Workflow Tabs
+
+**Tab 1: T-box Transformation**
+- Configure transformation rules
+- Select language for labels
+- Include/exclude URI metadata
+- View original and JSON-LD formats
+- Statistics and metrics panel
+
+**Tab 2: A-box Generation**
+- Set base URI for individuals
+- Configure min/max instances per class
+- Generate random compliant data
+- Validate with OWL reasoner
+- Export as Turtle/RDF/N-Triples
+
+**Tab 3: JSON Instance Generation**
+- Choose reference style (inline vs URI)
+- Transform A-box to JSON
+- Side-by-side JSON/JSON-LD view
+- Validate against generated schema
+- Export in multiple formats
+
+##### Additional Features
 - **Rule Configuration**:
-  - Enable/disable individual transformation rules via checkboxes
-      note: not all combinations were tested or even make sense; preferrably use default settings
-  - Rules are organized into categories: Classes, Properties, Annotations, Advanced, Structural
-  - Save and load custom rule configurations
-
-- **Transformation Options**:
-  - Language selection for labels and descriptions
-  - Indentation control (2, 4 spaces, or tabs)
-  - Output format selection (JSON or YAML)
-
+  - 20 configurable transformation rules
+  - Organized by category
+  - Save/load configurations
 - **Real-time Features**:
-  - Live preview of generated JSON Schema
-  - Transformation statistics and metrics
-  - Detailed logging with error reporting
-  - Progress indicators for long operations
-
+  - Live preview and statistics
+  - Progress indicators
+  - Status bar with workflow state
 - **Export Options**:
-  - Save as JSON Schema
-  - Export as YAML
-  - Copy to clipboard
+  - Multiple format support
+  - Save at any workflow step
 
 ### Command Line Interface (CLI)
 
@@ -140,6 +198,8 @@ owl2jsonschema input.owl -o output.json --language fr
 ```
 
 ### Python API
+
+#### Single Ontology Transformation
 
 ```python
 from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
@@ -170,6 +230,68 @@ json_schema = engine.transform(ontology)
 with open("output.json", "w") as f:
     json.dump(json_schema, f, indent=2)
 ```
+
+#### Multiple Ontology Transformation (Composite Creation)
+
+When transforming multiple ontologies, OntoJSON automatically creates a composite ontology:
+
+```python
+from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
+from owl2jsonschema.composite_builder import CompositeOntologyBuilder
+import json
+
+# Multiple ontology sources (local files and/or URIs)
+ontology_sources = [
+    "/path/to/ontology1.owl",
+    "https://example.org/ontology2.rdf",
+    "/path/to/ontology3.ttl"
+]
+
+# Only needed for multiple sources - single sources are processed directly
+if len(ontology_sources) > 1:
+    # Add metadata for the composite
+    metadata = {
+        "title": "Unified Domain Model",
+        "version": "1.0.0",
+        "author": "Your Organization",
+        "description": "A composite ontology combining multiple domain models"
+    }
+    
+    # Build the composite ontology with imports
+    builder = CompositeOntologyBuilder.create_composite(
+        ontology_sources,
+        metadata=metadata
+    )
+    
+    # Save composite to temporary file for processing
+    temp_file = builder.save_to_temp_file(format="turtle")
+    
+    # Parse the composite (imports are resolved automatically)
+    parser = OntologyParser()
+    ontology = parser.parse(temp_file)
+    
+    # Clean up temporary file
+    import os
+    os.remove(temp_file)
+else:
+    # Single ontology - process directly
+    parser = OntologyParser()
+    ontology = parser.parse(ontology_sources[0])
+
+# Transform to JSON Schema (same for single or composite)
+config = TransformationConfig()
+engine = TransformationEngine(config)
+json_schema = engine.transform(ontology)
+
+# Save the schema
+with open("output_schema.json", "w") as f:
+    json.dump(json_schema, f, indent=2)
+```
+
+**Key Differences:**
+- **Single ontology**: Parsed and transformed directly, preserving original structure
+- **Multiple ontologies**: Composite wrapper created with `owl:imports` statements
+- **Import resolution**: Automatic in both cases via the parser
 
 ## ⚙️ Configuration
 
@@ -293,10 +415,11 @@ OntoJSON/
 │   │   ├── abox_to_json.py       # ABox to JSON conversion
 │   │   ├── builder.py             # Schema builder
 │   │   ├── cli.py                 # Command-line interface
+│   │   ├── composite_builder.py   # Composite ontology builder
 │   │   ├── config.py              # Configuration management
 │   │   ├── engine.py              # Main transformation engine
 │   │   ├── model.py               # Data models
-│   │   ├── parser.py              # Ontology parser
+│   │   ├── parser.py              # Ontology parser with import resolution
 │   │   ├── reasoner.py            # OWL reasoning utilities
 │   │   └── visitor.py             # Visitor pattern implementation
 │   └── owl2jsonschema_gui/       # GUI application

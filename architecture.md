@@ -6,7 +6,12 @@ This document outlines the architecture for the OWL to JSON Schema transformatio
 
 The transformation engine converts RDF/OWL ontologies into JSON Schema documents. It uses a visitor pattern to traverse the ontology structure and apply transformation rules. Rules can be enabled or disabled through configuration.
 
+The system supports two primary workflows:
+1. **Single Ontology**: Direct transformation of a single OWL/RDF file
+2. **Multiple Ontologies**: Automatic creation of a composite ontology that imports multiple sources
+
 ```
+Single Ontology Flow:
 ┌─────────────┐     ┌─────────────────┐     ┌────────────────┐
 │  OWL/RDF    │────▶│  Transformation │────▶│  JSON Schema   │
 │  Ontology   │     │     Engine      │     │    Document    │
@@ -17,6 +22,24 @@ The transformation engine converts RDF/OWL ontologies into JSON Schema documents
                     │  Transformation │
                     │      Rules      │
                     └─────────────────┘
+
+Multiple Ontologies Flow:
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│ Ontology 1  │────▶│  Composite   │────▶│  Combined   │
+├─────────────┤     │   Builder    │     │  Ontology   │
+│ Ontology 2  │────▶│              │     │   (temp)    │
+├─────────────┤     └──────────────┘     └─────────────┘
+│ Ontology N  │────────────┘                     │
+└─────────────┘                                  ▼
+                                         ┌─────────────────┐
+                                         │  Transformation │
+                                         │     Engine      │
+                                         └─────────────────┘
+                                                  │
+                                                  ▼
+                                         ┌────────────────┐
+                                         │  JSON Schema   │
+                                         └────────────────┘
 ```
 
 ## Core Components
@@ -180,7 +203,43 @@ Constructs the final JSON Schema document by combining the results of individual
           return self.schema
   ```
 
+### 7. Composite Ontology Builder
+
+Creates composite ontologies that aggregate multiple source ontologies through OWL import statements.
+
+- **CompositeOntologyBuilder**: Main builder class
+  ```python
+  class CompositeOntologyBuilder:
+      def __init__(self, base_uri=None):
+          self.base_uri = base_uri or generate_uuid_uri()
+          self.graph = Graph()
+          self.ontology_uri = URIRef(self.base_uri)
+          
+      def add_metadata(self, metadata):
+          # Add title, description, version, author, etc.
+          
+      def add_imports(self, ontology_paths):
+          # Add owl:imports statements for each ontology
+          
+      def serialize(self, format="turtle"):
+          # Serialize the composite ontology
+          
+      @classmethod
+      def create_composite(cls, ontology_paths, metadata=None):
+          # Convenience method to create composite in one step
+  ```
+
+- **Features**:
+  - Automatic URI generation if not provided
+  - Support for custom metadata (title, version, author, description, comments)
+  - Handles both local file paths and remote URIs
+  - Converts local paths to file:// URIs for proper importing
+  - Serialization to various RDF formats (Turtle, RDF/XML, N3, JSON-LD)
+  - Temporary file creation for processing
+
 ## Data Flow
+
+### Single Ontology Processing
 
 1. **Parsing**: The ontology file is parsed into the ontology model
 2. **Configuration**: The transformation engine is configured with rules and settings
@@ -198,6 +257,82 @@ Constructs the final JSON Schema document by combining the results of individual
                     │Configuration│─────────────┘
                     └─────────────┘
 ```
+
+### Multiple Ontologies Processing
+
+1. **Collection**: Multiple ontology sources (files/URIs) are collected
+2. **Composite Creation**: A composite ontology is created with `owl:imports` statements
+3. **Metadata Addition**: Optional metadata is added to the composite
+4. **Temporary Storage**: Composite is saved to a temporary file
+5. **Parsing**: The composite ontology is parsed (imports are resolved automatically)
+6. **Transformation**: Standard transformation process applies
+7. **Cleanup**: Temporary composite file is removed
+
+```
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│ Sources List │────▶│  Composite   │────▶│   Temp File  │
+│              │     │   Builder    │     │   (.ttl)     │
+└──────────────┘     └──────────────┘     └──────────────┘
+       │                    │                      │
+   Metadata ────────────────┘                      │
+                                                   ▼
+                                          ┌──────────────┐
+                                          │   Parser     │
+                                          │   (imports   │
+                                          │   resolved)  │
+                                          └──────────────┘
+                                                   │
+                                                   ▼
+                                          ┌──────────────┐
+                                          │Transformation│
+                                          │   Engine     │
+                                          └──────────────┘
+```
+
+## GUI Application Workflow
+
+The OntoJSON GUI provides an intuitive interface for managing single and multiple ontology transformations:
+
+### Input Management
+
+The GUI features a flexible text editor for ontology sources:
+- **Mixed Input Types**: Supports local file paths and remote URIs in a single list
+- **Line-Based Entry**: One ontology source per line
+- **Interactive Controls**:
+  - "Select Files" - Browse and add local ontology files
+  - "Add URI" - Input remote ontology URLs
+  - "Remove Line" - Delete entry at cursor position
+  - "Clear All" - Reset the entire list
+
+### Automatic Workflow Detection
+
+The system automatically determines the appropriate workflow:
+1. **Single Source** (1 entry):
+   - Direct transformation without modification
+   - No composite creation dialog
+   - Preserves original ontology structure
+   
+2. **Multiple Sources** (2+ entries):
+   - Triggers composite metadata dialog
+   - Creates temporary composite ontology
+   - Adds `owl:imports` for all sources
+   - Resolves dependencies automatically
+
+### Three-Step Transformation Process
+
+The GUI implements a complete T-box/A-box workflow:
+
+```
+┌───────────────┐     ┌──────────────┐     ┌────────────────┐
+│   T-box       │────▶│   A-box      │────▶│     JSON       │
+│ Transformation│     │  Generation  │     │   Instances    │
+└───────────────┘     └──────────────┘     └────────────────┘
+      Step 1               Step 2               Step 3
+```
+
+1. **T-box Transformation**: Convert OWL ontology to JSON Schema
+2. **A-box Generation**: Create random individuals conforming to T-box
+3. **JSON Instance Generation**: Convert A-box to JSON/JSON-LD instances
 
 ## Rule Execution Strategy
 

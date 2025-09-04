@@ -39,15 +39,68 @@ owl2jsonschema input.owl -o output.json
 ## 📋 Common Tasks
 
 ### 1. Convert OWL to JSON Schema (GUI)
+
+#### Single Ontology
 1. Launch OntoJSON
-2. File → Open → Select your .owl file
+2. Enter path or URI in the text editor (or use "Select Files" button)
 3. Configure rules (optional)
-4. Click "Transform"
-5. File → Save As → Choose location
+4. Click "Transform T-box to JSON Schema"
+5. File → Save JSON Schema
+
+#### Multiple Ontologies (Composite Creation)
+1. Launch OntoJSON
+2. Add multiple sources to the text editor (one per line):
+   - Use "Select Files" for local files
+   - Use "Add URI" for remote ontologies
+   - Or type/paste directly in the editor
+3. When you click "Transform", a dialog appears for metadata
+4. Enter composite ontology metadata (optional)
+5. Click OK - composite is created automatically
+6. File → Save JSON Schema
+
+#### Complete T-box/A-box/JSON Workflow
+
+The GUI supports a complete three-step workflow for generating test data:
+
+**Step 1: T-box Transformation**
+1. Load ontology sources (single or multiple)
+2. Configure transformation rules
+3. Click "Transform T-box to JSON Schema"
+4. View results in the Schema tab
+5. Check Statistics tab for transformation metrics
+
+**Step 2: A-box Generation (Optional)**
+1. After T-box is ready, navigate to "A-box Generation" tab
+2. Configure generation settings:
+   - Base URI (default: https://example.org#)
+   - Min instances per class (1-10)
+   - Max instances per class (1-20)
+3. Click "Generate A-box"
+4. Optionally validate with OWL Reasoner
+5. Save A-box as Turtle, RDF/XML, or N-Triples
+
+**Step 3: JSON Instance Generation (Optional)**
+1. After A-box is generated, navigate to "JSON Instance Generation" tab
+2. Choose reference style:
+   - **Inline Objects**: Self-contained JSON documents
+   - **URI References**: Linked data approach with @id references
+3. Click "Transform A-box to JSON"
+4. View side-by-side JSON and JSON-LD outputs
+5. Validate against the generated schema
+6. Save as JSON or JSON-LD
 
 ### 2. Convert OWL to JSON Schema (CLI)
+
+#### Single Ontology
 ```bash
+# Direct transformation - no modification to the ontology
 owl2jsonschema myontology.owl -o schema.json
+```
+
+#### Multiple Ontologies
+```bash
+# Create a composite ontology first, then transform
+# (Currently requires using Python API - see below)
 ```
 
 ### 3. Convert with Specific Rules
@@ -161,7 +214,65 @@ output:
   include_metadata: true
 ```
 
-## 📊 Example Transformation
+## 🔄 Single vs. Multiple Ontologies
+
+### Single Ontology Processing
+- **Input**: One file path or URI
+- **Processing**: Direct transformation
+- **Output**: JSON Schema from the original ontology
+- **Use case**: Simple, standalone ontologies
+
+### Multiple Ontology Processing
+- **Input**: Two or more file paths/URIs
+- **Processing**:
+  1. Creates composite ontology with `owl:imports`
+  2. Adds user-provided metadata
+  3. Transforms unified ontology
+- **Output**: JSON Schema from composite ontology
+- **Use case**: Multi-domain integration, modular ontologies
+
+### GUI Input Methods
+
+The new text editor interface supports flexible input with these features:
+
+**Text Editor Controls:**
+- 📁 **Select Files**: Browse and add local ontology files
+- 🌐 **Add URI**: Input remote ontology URLs via dialog
+- ➖ **Remove Line**: Delete line at cursor position
+- 🗑️ **Clear All**: Reset the entire list
+
+**Supported Input Formats:**
+```
+# Local files (Unix/Linux/macOS)
+/path/to/ontology1.owl
+~/Documents/myontology.ttl
+./relative/path/ontology.rdf
+
+# Local files (Windows)
+C:\Users\Name\ontology2.ttl
+D:\Ontologies\domain.owl
+
+# Remote URIs
+https://example.org/ontology3.rdf
+http://purl.org/ontology4.owl
+https://raw.githubusercontent.com/user/repo/main/onto.ttl
+
+# File URIs
+file:///home/user/ontology5.n3
+file:///C:/Users/Name/Documents/onto.owl
+```
+
+**Smart Processing:**
+- **1 source**: Direct transformation, no modification
+- **2+ sources**: Automatic composite creation with imports
+- **Mixed sources**: Combine local and remote in one transformation
+
+**Live Status Indicator:**
+- Counter shows "N ontologies" at bottom right
+- Transform button enables when sources are present
+- Real-time validation as you type/paste
+
+## � Example Transformation
 
 ### Input (OWL)
 ```xml
@@ -261,3 +372,8 @@ python -c "import owl2jsonschema; print(owl2jsonschema.__file__)"
 3. **Use GUI First**: Easier to experiment with rules
 4. **Save Configs**: Export working configurations for reuse
 5. **Check Logs**: Enable verbose logging for debugging
+6. **Single vs. Multiple**:
+   - Use single ontology for quick transformations
+   - Use multiple when you need to combine domains
+7. **Mix Sources**: Combine local files and remote URIs in one transformation
+8. **Composite Benefits**: Automatic import resolution and dependency handling
