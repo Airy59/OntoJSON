@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/OntoJSON.icns</key>
 		<data>
-		/Bl8vKBegqjyoAHomwKxAv6vsWk=
+		/JAIQ8rWxRG0HEdvNlCalBh3xUM=
 		</data>
 		<key>Resources/PyQt6/Qt6/translations/qt_ar.qm</key>
 		<data>
@@ -410,7 +410,7 @@
 		</data>
 		<key>Resources/base_library.zip</key>
 		<data>
-		OK2+rC28KQfScfwsSpx+SW39eDw=
+		yCcrd8GopJZoleDARz39+Aw+o78=
 		</data>
 		<key>Resources/certifi/cacert.pem</key>
 		<data>
@@ -3336,6 +3336,10 @@
 		<data>
 		6fCd54L2Kuyk5+iJI99jPPj7yN8=
 		</data>
+		<key>Resources/src/owl2jsonschema/__pycache__/composite_builder.cpython-313.pyc</key>
+		<data>
+		32Ok07j3RN+lMBWwv/9BMp2pn6A=
+		</data>
 		<key>Resources/src/owl2jsonschema/__pycache__/config.cpython-313.pyc</key>
 		<data>
 		4afsJHqU/fJ1KPwF1k++vWeLaFY=
@@ -3350,7 +3354,7 @@
 		</data>
 		<key>Resources/src/owl2jsonschema/__pycache__/parser.cpython-313.pyc</key>
 		<data>
-		sO/1qkKwxUm40CwC+22jyxqlizk=
+		6WlA+SKkMcjcFCIKV9buf8Lq7bw=
 		</data>
 		<key>Resources/src/owl2jsonschema/__pycache__/reasoner.cpython-313.pyc</key>
 		<data>
@@ -3376,6 +3380,10 @@
 		<data>
 		qDZyi2wev1MgeZwfQgR3CJi9KQo=
 		</data>
+		<key>Resources/src/owl2jsonschema/composite_builder.py</key>
+		<data>
+		H45Ip9rRbEkra7XzHYPKNBVRl9s=
+		</data>
 		<key>Resources/src/owl2jsonschema/config.py</key>
 		<data>
 		hfOLZiI7EPISKTdMhjWZneoX32Y=
@@ -3390,7 +3398,7 @@
 		</data>
 		<key>Resources/src/owl2jsonschema/parser.py</key>
 		<data>
-		dGKFtq1CCWJTZ22ENeftA0m1nI4=
+		d+EepDESftC1athrJYpyz+sP7Rk=
 		</data>
 		<key>Resources/src/owl2jsonschema/reasoner.py</key>
 		<data>
@@ -3462,7 +3470,7 @@
 		</data>
 		<key>Resources/src/owl2jsonschema_gui/__pycache__/main_window.cpython-313.pyc</key>
 		<data>
-		QdiQIGIlIHrJGKqbqAK3r4H7ioU=
+		3Z2xY64cL3GB5AvzJFvHnQxKj5A=
 		</data>
 		<key>Resources/src/owl2jsonschema_gui/app.py</key>
 		<data>
@@ -3470,7 +3478,7 @@
 		</data>
 		<key>Resources/src/owl2jsonschema_gui/main_window.py</key>
 		<data>
-		9ioDQWMf6RdYTmCa2xDzhWPxPuw=
+		1IH0ozSDkapiUjDZ+kgPLxeD0fw=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -4744,7 +4752,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			h4hCtkPCYfTkeCQhmbsgt1eh4cRvRYCx9CjR+nFgVpo=
+			QbBkqrH8FoDHWzdRS5wCVHZdkjF21rDV/ElLSFRRBGc=
 			</data>
 		</dict>
 		<key>Resources/PIL</key>
@@ -5529,7 +5537,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lkmHHNkJpyMkxGuWNiMpRYVRPsHq3HEBFr9hX6OP9mc=
+			yR7W0sBgY8vcOyIiCgZsUkxrDfeG9YZFSjtNrYF1otM=
 			</data>
 		</dict>
 		<key>Resources/certifi/cacert.pem</key>
@@ -10769,6 +10777,13 @@
 			A4/fi+7T4agjlH9Ks49UQaY+FTX23Ci87eo2SHjuHLI=
 			</data>
 		</dict>
+		<key>Resources/src/owl2jsonschema/__pycache__/composite_builder.cpython-313.pyc</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			PdHrJvEd9zjv3zOo1YYItj6efpPx7ApNdupwFMz/Mb0=
+			</data>
+		</dict>
 		<key>Resources/src/owl2jsonschema/__pycache__/config.cpython-313.pyc</key>
 		<dict>
 			<key>hash2</key>
@@ -10794,7 +10809,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2enwlxX5buL/EBN+MU9wJI77IXe2mRo5wbX/1tiY3Gc=
+			2eSahC97llg9H7sVyQ5odxNnZAloUj4eo2B8y5CJRtw=
 			</data>
 		</dict>
 		<key>Resources/src/owl2jsonschema/__pycache__/reasoner.cpython-313.pyc</key>
@@ -10839,6 +10854,13 @@
 			aTiAg278XJZwitNwwKCb8WlnnOCgAm2KilSPuCSISTc=
 			</data>
 		</dict>
+		<key>Resources/src/owl2jsonschema/composite_builder.py</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ZA3jADsDlsESqGGQn/h5sWY8f2LUSzCXH+uYnTQOD7o=
+			</data>
+		</dict>
 		<key>Resources/src/owl2jsonschema/config.py</key>
 		<dict>
 			<key>hash2</key>
@@ -10864,7 +10886,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			IZEgZqZFqBjOfqKjvy4ASDAH6jnuawS2aD6NCJyiKuU=
+			LaB6EOHERvd34j6FtIHr+JSDju0csxAMLtCJBtR9FDA=
 			</data>
 		</dict>
 		<key>Resources/src/owl2jsonschema/reasoner.py</key>
@@ -10990,7 +11012,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9HO/9pefToBW49i0CQ3SNb8BshcEDNPtpSWBTFPiMJY=
+			NQrJDg/2HruwlsVTZnfmhGD83vwAGnlstbNyW6rBVGU=
 			</data>
 		</dict>
 		<key>Resources/src/owl2jsonschema_gui/app.py</key>
@@ -11004,7 +11026,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			UK7w1fmXPGU+6Xb82RtsKaUD8BoBux+GkoMPrAQPCS4=
+			CVH/VS9CAIWFoxHmVPz4wEeZYqHhM2Qos7RmkG6a1Ss=
 			</data>
 		</dict>
 		<key>Resources/yaml</key>
