@@ -135,9 +135,13 @@ owl2jsonschema-gui
   - All fields are optional
 - **Automatic Processing**:
   - Generates `owl:imports` statements
-  - Creates temporary composite file
+  - Creates composite ontology with metadata
   - Resolves dependencies automatically
-  - Cleans up temp files after processing
+- **Persistence Options**:
+  - Save composite ontology to file (File → Save Ontology to...)
+  - Export in multiple formats (Turtle, RDF/XML, JSON-LD, N3)
+  - Reuse saved composite as input for future transformations
+  - Preserves all metadata and import statements
 
 ##### Three-Step Workflow Tabs
 
@@ -233,7 +237,7 @@ with open("output.json", "w") as f:
 
 #### Multiple Ontology Transformation (Composite Creation)
 
-When transforming multiple ontologies, OntoJSON automatically creates a composite ontology:
+When transforming multiple ontologies, OntoJSON automatically creates a composite ontology that can be persisted:
 
 ```python
 from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
@@ -263,14 +267,17 @@ if len(ontology_sources) > 1:
         metadata=metadata
     )
     
-    # Save composite to temporary file for processing
+    # Save composite to file (both temporary and persistent options)
     temp_file = builder.save_to_temp_file(format="turtle")
+    
+    # Optionally save permanently for reuse
+    builder.save_to_file("composite_ontology.ttl", format="turtle")
     
     # Parse the composite (imports are resolved automatically)
     parser = OntologyParser()
     ontology = parser.parse(temp_file)
     
-    # Clean up temporary file
+    # Clean up temporary file (persistent file remains)
     import os
     os.remove(temp_file)
 else:

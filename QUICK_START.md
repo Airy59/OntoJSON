@@ -56,7 +56,10 @@ owl2jsonschema input.owl -o output.json
 3. When you click "Transform", a dialog appears for metadata
 4. Enter composite ontology metadata (optional)
 5. Click OK - composite is created automatically
-6. File → Save JSON Schema
+6. **Save Options**:
+   - File → Save JSON Schema (transformation result)
+   - File → Save Ontology to... (save composite ontology with metadata)
+7. The saved composite can be reused as input for future transformations
 
 #### Complete T-box/A-box/JSON Workflow
 
@@ -266,6 +269,7 @@ file:///C:/Users/Name/Documents/onto.owl
 - **1 source**: Direct transformation, no modification
 - **2+ sources**: Automatic composite creation with imports
 - **Mixed sources**: Combine local and remote in one transformation
+- **Composite Persistence**: Save composite ontology with all metadata for reuse
 
 **Live Status Indicator:**
 - Counter shows "N ontologies" at bottom right

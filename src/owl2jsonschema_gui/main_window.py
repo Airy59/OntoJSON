@@ -513,6 +513,7 @@ class MainWindow(QMainWindow):
         self.input_files: List[str] = []  # For multiple file selection
         self.is_composite: bool = False  # Track if using composite ontology
         self.temp_composite_file: Optional[str] = None  # Track temporary composite file
+        self.composite_builder: Optional[CompositeOntologyBuilder] = None  # Store composite builder for saving
         self.ontology_list: List[str] = []  # Persistent list of ontologies
         self.transformation_result: Optional[Dict] = None
         self.ontology_model = None
@@ -1408,6 +1409,9 @@ class MainWindow(QMainWindow):
                     metadata=metadata
                 )
                 
+                # Store the builder for later saving
+                self.composite_builder = builder
+                
                 # Save to temporary file
                 temp_file = builder.save_to_temp_file(format="turtle")
                 
@@ -1422,6 +1426,9 @@ class MainWindow(QMainWindow):
                 # Display the composite ontology
                 composite_content = builder.serialize(format="turtle")
                 self.input_text.setPlainText(composite_content[:5000])
+                
+                # Enable save composite ontology menu
+                self.save_ontology_action.setEnabled(True)
                 
             except Exception as e:
                 QMessageBox.critical(self, "Error",
@@ -2133,7 +2140,13 @@ class MainWindow(QMainWindow):
             )
     
     def save_ontology_as(self):
-        """Save the loaded ontology in a different format."""
+        """Save the loaded or composite ontology in a different format."""
+        # Check if we have a composite ontology to save
+        if self.is_composite and self.composite_builder:
+            # Save the composite ontology with its metadata
+            self._save_composite_ontology()
+            return
+        
         if not self.input_file:
             QMessageBox.warning(self, "Warning", "No ontology loaded. Please open an ontology file first.")
             return
@@ -2332,6 +2345,87 @@ class MainWindow(QMainWindow):
                     "Save Error",
                     f"Failed to save JSON-LD file:\n{str(e)}"
                 )
+    
+    def _save_composite_ontology(self):
+        """Save the composite ontology with its metadata to a persistent file."""
+        if not self.composite_builder:
+            QMessageBox.warning(self, "Warning", "No composite ontology to save.")
+            return
+        
+        # Create format selection dialog
+        from PyQt6.QtWidgets import QInputDialog
+        
+        formats = [
+            "Turtle (.ttl)",
+            "RDF/XML (.rdf, .owl)",
+            "N-Triples (.nt)",
+            "JSON-LD (.jsonld)",
+            "N3 (.n3)"
+        ]
+        
+        format_choice, ok = QInputDialog.getItem(
+            self,
+            "Select Format",
+            "Choose the format to save the composite ontology:",
+            formats,
+            0,  # Default to Turtle
+            False  # Not editable
+        )
+        
+        if not ok:
+            return
+        
+        # Map user choice to format and extension
+        format_map = {
+            "Turtle (.ttl)": ("turtle", ".ttl"),
+            "RDF/XML (.rdf, .owl)": ("xml", ".rdf"),
+            "N-Triples (.nt)": ("nt", ".nt"),
+            "JSON-LD (.jsonld)": ("json-ld", ".jsonld"),
+            "N3 (.n3)": ("n3", ".n3")
+        }
+        
+        rdf_format, file_ext = format_map[format_choice]
+        
+        # Get save file path
+        suggested_name = f"composite_ontology{file_ext}"
+        
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            f"Save Composite Ontology",
+            suggested_name,
+            f"{format_choice.split('(')[0].strip()} (*{file_ext});;All Files (*.*)"
+        )
+        
+        if not file_path:
+            return
+        
+        try:
+            self.status_message.setText(f"Saving composite ontology as {format_choice.split(' ')[0]}...")
+            QApplication.processEvents()
+            
+            # Save the composite ontology
+            self.composite_builder.save_to_file(file_path, format=rdf_format)
+            
+            self.status_message.setText("Composite ontology saved successfully!")
+            
+            QMessageBox.information(
+                self,
+                "Success",
+                f"Composite ontology saved successfully to:\n{file_path}\n\n"
+                f"Format: {format_choice.split(' ')[0]}\n"
+                f"This file contains:\n"
+                f"- All metadata (title, version, author, etc.)\n"
+                f"- Import statements for {len(self.ontology_list)} ontologies\n"
+                f"- Can be reused as input for future transformations"
+            )
+            
+        except Exception as e:
+            self.status_message.setText("Failed to save composite ontology")
+            QMessageBox.critical(
+                self,
+                "Save Error",
+                f"Failed to save composite ontology:\n\n{str(e)}"
+            )
     
     def _cleanup_temp_file(self):
         """Clean up temporary composite ontology file if it exists."""

@@ -25,12 +25,16 @@ Single Ontology Flow:
 
 Multiple Ontologies Flow:
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│ Ontology 1  │────▶│  Composite   │────▶│  Combined   │
+│ Ontology 1  │────▶│  Composite   │────▶│  Composite  │
 ├─────────────┤     │   Builder    │     │  Ontology   │
-│ Ontology 2  │────▶│              │     │   (temp)    │
+│ Ontology 2  │────▶│              │     │ (persisted) │
 ├─────────────┤     └──────────────┘     └─────────────┘
 │ Ontology N  │────────────┘                     │
-└─────────────┘                                  ▼
+└─────────────┘                                  │
+                                                  ├──► Save to file
+                                                  │    (Turtle, RDF/XML,
+                                                  │     JSON-LD, etc.)
+                                                  ▼
                                          ┌─────────────────┐
                                          │  Transformation │
                                          │     Engine      │
@@ -235,7 +239,8 @@ Creates composite ontologies that aggregate multiple source ontologies through O
   - Handles both local file paths and remote URIs
   - Converts local paths to file:// URIs for proper importing
   - Serialization to various RDF formats (Turtle, RDF/XML, N3, JSON-LD)
-  - Temporary file creation for processing
+  - **Persistent saving**: Composite ontology can be saved with all metadata
+  - **Reusability**: Saved composite can be used as input for future transformations
 
 ## Data Flow
 
@@ -263,18 +268,22 @@ Creates composite ontologies that aggregate multiple source ontologies through O
 1. **Collection**: Multiple ontology sources (files/URIs) are collected
 2. **Composite Creation**: A composite ontology is created with `owl:imports` statements
 3. **Metadata Addition**: Optional metadata is added to the composite
-4. **Temporary Storage**: Composite is saved to a temporary file
+4. **Persistence Options**:
+   - Temporary file for immediate processing
+   - **Save to persistent file** (Turtle, RDF/XML, JSON-LD, etc.)
+   - Reuse saved composite as input for future transformations
 5. **Parsing**: The composite ontology is parsed (imports are resolved automatically)
 6. **Transformation**: Standard transformation process applies
-7. **Cleanup**: Temporary composite file is removed
+7. **File Management**: Temporary files are cleaned up; persistent files are retained
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│ Sources List │────▶│  Composite   │────▶│   Temp File  │
-│              │     │   Builder    │     │   (.ttl)     │
+│ Sources List │────▶│  Composite   │────▶│  Composite   │
+│              │     │   Builder    │     │   Ontology   │
 └──────────────┘     └──────────────┘     └──────────────┘
        │                    │                      │
-   Metadata ────────────────┘                      │
+   Metadata ────────────────┘                      ├── Save to file
+                                                   │   (persisted)
                                                    ▼
                                           ┌──────────────┐
                                           │   Parser     │
