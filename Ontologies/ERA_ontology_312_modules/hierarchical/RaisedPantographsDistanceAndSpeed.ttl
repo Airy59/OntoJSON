@@ -1,0 +1,67 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:raisedPantographsDistance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Requirements for spacing between raised pantographs, at the given speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsDistance> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Part of the raised pantographs distance and speed of a track that corresponds to the minimum distance between pantographs, in metres."@en ;
+    rdfs:domain :RaisedPantographsDistanceAndSpeed ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:definition "The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en .
+
+:raisedPantographsNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Requirements for number of raised pantographs, at the given speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsNumber> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Part of the raised pantographs distance and speed of a track that corresponds to the number of pantographs."@en ;
+    rdfs:domain :RaisedPantographsDistanceAndSpeed ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:definition "The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en .
+
+:raisedPantographsSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Raised pantographs speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsSpeed> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date,
+        "2025-05-12"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en ;
+    rdfs:domain :RaisedPantographsDistanceAndSpeed ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:definition "The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en .
+
+:RaisedPantographsDistanceAndSpeed a owl:Class ;
+    rdfs:label "Requirements for number of raised pantographs and spacing between them, at the given speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsDistanceAndSpeedShape> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    rdfs:comment """Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed.
+Each track can have several raised pantographs per train allowed (structured) values, and each one has values for number of pantographs, minimum distance between pantographs, in metres, and speed considered in km/h."""@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """This class gives the information about the number of pantographs and the distance between them at a given speed for which the Overhead Contact Line (OCL) has been designed.
+As for different speeds different combinations of number of pantographs and distance between them may exist, so this class can be repeated to present all of them."""@en .
+

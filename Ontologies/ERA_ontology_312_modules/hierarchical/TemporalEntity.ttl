@@ -1,0 +1,33 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+
+time:hasBeginning a owl:ObjectProperty ;
+    rdfs:label "has beginning"@en,
+        "tiene principio"@es ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasBeginning> ;
+    rdfs:comment "Beginning of a temporal entity"@en,
+        "Comienzo de una entidad temporal."@es ;
+    rdfs:domain time:TemporalEntity ;
+    rdfs:range time:Instant ;
+    rdfs:subPropertyOf time:hasTime ;
+    skos:definition "Beginning of a temporal entity."@en,
+        "Comienzo de una entidad temporal."@es .
+
+time:hasEnd a owl:ObjectProperty ;
+    rdfs:label "has end"@en,
+        "tiene fin"@es ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEnd> ;
+    rdfs:comment "End of a temporal entity."@en,
+        "Final de una entidad temporal."@es ;
+    rdfs:domain time:TemporalEntity ;
+    rdfs:range time:Instant ;
+    rdfs:subPropertyOf time:hasTime ;
+    skos:definition "End of a temporal entity."@en,
+        "Final de una entidad temporal."@es .
+
+time:TemporalEntity a owl:Class ;
+    rdfs:label "Temporal entity"@en .
+

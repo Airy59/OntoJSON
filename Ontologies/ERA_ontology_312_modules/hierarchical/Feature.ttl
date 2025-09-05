@@ -1,0 +1,332 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:NetBasicReference a owl:Class ;
+    rdfs:label "Net Basic Reference"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetBasicReferenceShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Basic positioning reference within the ERA ontology. It represents different types of geographical locations. Geographical coordinates are provided according to the standard World Geodetic System (WGS84)."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "https://wiki.railtopomodel.org/wiki/Object_positioning_in_the_network"^^xsd:anyURI ;
+    rdfs:subClassOf :Feature ;
+    skos:scopeNote ""@en .
+
+:NetElement a owl:Class ;
+    rdfs:label "Net element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetElementShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-04-30"^^xsd:date ;
+    rdfs:comment "It is a representation of all building blocks of the topology. It references an associated topological network element."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "https://wiki.railtopomodel.org/wiki/Topological_structure_(network)"^^xsd:anyURI ;
+    rdfs:subClassOf :Feature ;
+    owl:disjointWith :NetRelation .
+
+:allocationCompany a owl:ObjectProperty ;
+    rdfs:label "allocation company"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AllocationCompany> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date ;
+    rdfs:comment "The organisation in charge to allocate the code for the subsidiary location."@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :OrganisationRole .
+
+:belongsTo a owl:ObjectProperty ;
+    rdfs:label "belongs to"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/BelongsTo>,
+        <http://data.europa.eu/949/shapes/BelongsToUniqueIM> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date ;
+    rdfs:comment "Indicates that an infrastructure element belongs to a certain subset that contains common characteristics."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :CommonCharacteristicsSubset ;
+    owl:inverseOf :contains .
+
+:canonicalURI a owl:AnnotationProperty ;
+    rdfs:label "Canonical URI"@en ;
+    dcterms:created "2022-12-13"^^xsd:date ;
+    dcterms:modified "2024-02-06"^^xsd:date ;
+    rdfs:comment """The canonical URI is defined for each instance of an Infrastructure element, e.g. section of line, operational point, track, tunnel, siding.
+Objects of the infrastructure generated through RML mappings include (when provided) their validity start and end dates. With its identifier, plus all identifiers of its "parent" elements, and its validity dates, a hash URI is generated.
+The canonical URI is the element's URI with its identifiers and without the validity dates. All of the hash URIs of an element point to its canonical URI.
+Additionally, SoLs point to the canonical URIs of their start OP and end OP."""@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:anyURI .
+
+:currentlyValid a owl:DatatypeProperty ;
+    rdfs:label "Currently valid"@en ;
+    dcterms:created "2022-12-13"^^xsd:date ;
+    rdfs:domain :Feature ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:hasAbstraction a owl:ObjectProperty ;
+    rdfs:label "Has abstraction"@en ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    rdfs:comment "Property that links a physical entity with its topological abstraction representation."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:hasPart a owl:IrreflexiveProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has part"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasPart>,
+        <http://data.europa.eu/949/shapes/HasPartOP> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    dcterms:replaces :siding,
+        :track ;
+    rdfs:comment """Indicates that an infrastructure element is composed of one or more other (distinct) infrastructure elements.
+This property is used to represent part-whole relationships between infrastructure elements.
+An element cannot be a part of itself."""@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :InfrastructureElement ;
+    owl:inverseOf :isPartOf .
+
+:hashSource a owl:AnnotationProperty ;
+    rdfs:label "Hash source"@en ;
+    dcterms:created "2024-02-06"^^xsd:date ;
+    rdfs:comment "This property indicates for each infrastructure element, the source, i.e. the identifier  or key that was input to the hash function in order to generate the hash value that is part of the hash URI."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:infrastructureMgr a owl:ObjectProperty ;
+    rdfs:label "Infrastructure manager"@en ;
+    dcterms:created "2022-07-07"^^xsd:date ;
+    dcterms:isReplacedBy :infrastructureManager ;
+    rdfs:comment "(deprecated) not in use. Relates any feature implemented in the European railway infrastructure with its infrastructure manager."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :InfrastructureManager ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:lineReference a owl:ObjectProperty ;
+    rdfs:label "(deprecated) Railway location of an infrastructure object"@en ;
+    dcterms:created "2021-01-29"^^xsd:date ;
+    dcterms:isReplacedBy :nationalLine ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2024-11-29"^^xsd:date,
+        "2025-01-30"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    rdfs:comment "Indicates a relationship with a national railway line at a specific kilometer point."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LineReference ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:operatingLanguage a owl:ObjectProperty ;
+    rdfs:label "Operating language"@en ;
+    :applicable "Y/NYA" ;
+    :formatNote "http://publications.europa.eu/resource/authority/language" ;
+    :inSkosConceptScheme <http://publications.europa.eu/resource/authority/language> ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.0.0.1.2",
+        "1.2.0.0.0.8" ;
+    :tsiOPEAppendixD2Index "3.5.1" ;
+    dcterms:created "2022-10-28"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "The language or languages used in daily operation by infrastructure manager and published in its Network Statement, for the communication of operational or safety related messages between the staff of the infrastructure manager and the railway undertaking."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :routeBookObjectParameter ;
+    ns1:term_status "unstable" .
+
+:primaryLocation a owl:ObjectProperty ;
+    rdfs:label "primary location"@en ;
+    :XMLName "OPTafTapCode" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Applicable only in case when a primary location exists"@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocation> ;
+    :tsiOPEAppendixD2Index "2.2.2" ;
+    dcterms:modified "2024-12-03"^^xsd:date,
+        "2025-01-30"^^xsd:date ;
+    dcterms:replaces :tafTAPCode ;
+    rdfs:comment "Primary location code developed for information exchange in accordance with the TSIs relating to the telematics applications subsystem."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :PrimaryLocation ;
+    rdfs:subPropertyOf :opGenericObjParameter .
+
+:subsidiaryLocationCode a owl:DatatypeProperty ;
+    rdfs:label "subsidiary location code"@en ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:comment "The numeric code for the subsidiary location" ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:subsidiaryLocationName a owl:DatatypeProperty ;
+    rdfs:label "subsidiary location name"@en ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:comment "The common name given to the subsidiary location"@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:subsidiaryLocationType a owl:ObjectProperty ;
+    rdfs:label "subsidiary location type"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/subsidiary-location-types/SubsidiaryLocationTypes> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SubsidiaryLocationType>,
+        <http://data.europa.eu/949/shapes/SubsidiaryLocationTypeSKOS> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    rdfs:comment "Indicates the subsidiary location type that belongs to a taxonomy."@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:validity a owl:ObjectProperty ;
+    rdfs:label "validity"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Validity> ;
+    dcterms:modified "2024-11-29"^^xsd:date ;
+    rdfs:comment "Relates a feature with a temporal feature to indicate a validity period."@en ;
+    rdfs:domain :Feature ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :TemporalFeature .
+
+:validityEndDate a owl:DatatypeProperty ;
+    rdfs:label "Validity end date"@en ;
+    dcterms:created "2022-10-19"^^xsd:date ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:date ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "To be deprecated with the introduction of temporal entity"@en .
+
+:validityStartDate a owl:DatatypeProperty ;
+    rdfs:label "Validity start date"@en ;
+    dcterms:created "2022-10-20"^^xsd:date ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:date ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "To be deprecated with the introduction of temporal entity"@en .
+
+geo:hasGeometry a owl:ObjectProperty ;
+    rdfs:label "hasGeometry"@en ;
+    :rinfIndex "1.1.0.0.1.1",
+        "1.1.1.0.1.1",
+        "1.1.1.3.14.6",
+        "1.2.0.0.0.5",
+        "1.2.1.0.8.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasGeometry> ;
+    :usedInRCCCalculations true ;
+    dcterms:contributor "Matthew Perry" ;
+    dcterms:creator "OGC GeoSPARQL 1.0 Standard Working Group" ;
+    dcterms:date "2011-06-16"^^xsd:date ;
+    rdfs:comment """
+      A spatial representation for a given feature.
+    """@en ;
+    rdfs:domain geo:Feature ;
+    rdfs:isDefinedBy <http://www.opengis.net/ont/geosparql>,
+        <http://www.opengis.net/spec/geosparql/1.0> ;
+    rdfs:range geo:Geometry ;
+    skos:definition """
+      A spatial representation for a given feature.
+    """@en ;
+    skos:prefLabel "hasGeometry"@en .
+
+:isPartOf a owl:IrreflexiveProperty,
+        owl:ObjectProperty ;
+    rdfs:label "is part of"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/IsPartOf> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date ;
+    rdfs:comment """Indicates that an infrastructure element is a part of another (distinct) infrastructure element.
+An element cannot be part of itself.
+This property is the inverse of era:hasPart and represents the partial or whole-part relationship between infrastructure elements."""@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :InfrastructureElement .
+
+geo:Feature a owl:Class ;
+    rdfs:label "Feature"@en .
+
+:SubsidiaryLocation a owl:Class ;
+    rdfs:label "Subsidiary location"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SubsidiaryLocationShape> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "Subsidiary location must be linked to a Primary Location and specifies in more detailed way part, attributes, or usage of Primary location. It may be also a non-rail point or a rail point that is not managed by an Infrastructure Manager (IM). It may be defined by entity having company code according to their needs. The Subsidiary location is optional and dependent upon business needs."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "http://taf-jsg.info/wp-content/uploads/2024/01/20231018-JGS-Handbook-3.4-with-XSD-3.4.0.0.pdf" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        :Feature .
+
+:linkedToPrimaryLocation a owl:ObjectProperty ;
+    rdfs:label "linked to primary location"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinkedToPrimaryLocation> ;
+    dcterms:created "2024-10-28"^^xsd:date ;
+    rdfs:comment "Relates a subsidiary location with a primary location."@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :PrimaryLocation .
+
+:Feature a owl:Class ;
+    rdfs:label "ERA Feature"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FeatureShape> ;
+    dcterms:created "2022-07-07"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date ;
+    rdfs:comment "Class that encompasses the features that are part of the physical infrastructure (class InfrastructureElement) and the topological objects (class TopologicalObject). It is a subclass of the geographical Feature class that has a spatial representation."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf geo:Feature ;
+    owl:disjointWith :TemporalFeature .
+
+:InfrastructureElement a owl:Class ;
+    rdfs:label "Infrastructure element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/InfrastructureElementShape> ;
+    dcterms:created "2022-07-07"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date,
+        "2024-10-28"^^xsd:date,
+        "2025-04-30"^^xsd:date ;
+    rdfs:comment """This class encompasses all those classes that represent features that are  implemented in the European railway infrastructure. It is a subclass of the ERA Feature that has a spatial representation. It covers tracks, platforms, signals, tunnels, operational points, and sections of line.
+A feature that belongs to the infrastructure can be abstracted (hasAbstraction) as a topological object. It also is related to the infrastructure manager through the property infrastructureMgr."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :Feature .
+

@@ -1,0 +1,29 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ChargesNoteAvailable a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ChargesNoteAvailable" ;
+    rdfs:domain :ChargesNote ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateOfReturn a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateOfReturn" ;
+    rdfs:comment """Date, when the
+																destination carrier sent the charges
+																note back to the contractual
+																carrier.""" ;
+    rdfs:domain :ChargesNote ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasChargesNote rdfs:range :ChargesNote .
+
+:ChargesNote a owl:Class ;
+    rdfs:label "ChargesNote" ;
+    rdfs:comment "Charges note" .
+

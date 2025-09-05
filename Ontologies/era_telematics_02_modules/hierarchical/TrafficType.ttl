@@ -1,0 +1,29 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:TrafficTypeCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrafficTypeCode" ;
+    rdfs:domain :TrafficType ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrafficTypeNetwork a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrafficTypeNetwork" ;
+    rdfs:comment """The code of the company (IM) that has planning
+							responsibilty of the network where the TrafficTypeCode applies. If
+							NetworkCode isn't used, then the TrafficTypeCode must be a value in the
+							common European list.""" ;
+    rdfs:domain :TrafficType ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTrafficType rdfs:range :TrafficType .
+
+:TrafficType a owl:Class ;
+    rdfs:label "TrafficType" ;
+    rdfs:comment """information about the type of traffic (combined, rolling highway,
+				etc). It is added here as a placeholder for coded values (e.g. from Merits)""" .
+

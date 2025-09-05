@@ -1,0 +1,28 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:documentUrl a owl:DatatypeProperty ;
+    rdfs:label "Document URL"@en ;
+    dcterms:created "2024-04-23"^^xsd:date ;
+    rdfs:comment "URL that is used to download a document, e.g. url for a reference document in RINF."@en ;
+    rdfs:domain :Document ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:anyURI ;
+    ns1:term_status "stable" .
+
+:Document a owl:Class ;
+    rdfs:label "ERA Document"@en ;
+    dcterms:created "2024-04-23"^^xsd:date ;
+    rdfs:comment "Document in any of the ERA systems, e.g. reference document in RINF."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf foaf:Document ;
+    ns1:term_status "stable" .
+
+foaf:Document a owl:Class ;
+    rdfs:label "Document"@en .
+

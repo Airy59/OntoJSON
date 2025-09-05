@@ -1,0 +1,30 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ProductRIDName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ProductRIDName" ;
+    rdfs:comment """ RID product name as
+																written on the folding panel""" ;
+    rdfs:domain :LoadTableProduct ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ProductUNCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ProductUNCode" ;
+    rdfs:comment """UN code of product if
+																product specific load table""" ;
+    rdfs:domain :LoadTableProduct ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasLoadTableProduct rdfs:range :LoadTableProduct .
+
+:LoadTableProduct a owl:Class ;
+    rdfs:label "LoadTableProduct" ;
+    rdfs:comment """Product description, only applies
+													for product-specific load tables""" .
+

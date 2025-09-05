@@ -1,0 +1,38 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:CommercialRouteCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CommercialRouteCode" ;
+    rdfs:comment """Route code (RIP) when
+																the customer agreement or the tariff
+																applied provide for it. """ ;
+    rdfs:domain :ChargingSections ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasChargingSections rdfs:range :ChargingSections .
+
+:hasEnd a owl:ObjectProperty ;
+    rdfs:label "has End" ;
+    rdfs:domain :ChargingSections ;
+    rdfs:range :End .
+
+:hasStart a owl:ObjectProperty ;
+    rdfs:label "has Start" ;
+    rdfs:domain :ChargingSections ;
+    rdfs:range :Start .
+
+:ChargingSections a owl:Class ;
+    rdfs:label "ChargingSections" ;
+    rdfs:comment "Charging section" .
+
+[] rdf:first :ChargingSections .
+
+[] rdf:first :ChargingSections .
+
+[] rdf:first :ChargingSections .
+

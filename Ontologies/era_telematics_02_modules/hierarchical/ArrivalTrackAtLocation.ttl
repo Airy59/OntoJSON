@@ -1,0 +1,11 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:ArrivalTrackAtLocation a owl:Class ;
+    rdfs:label "ArrivalTrackAtLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment """Identifies the track of the arrival of a train at a reporting point.
+				This is indicated in the LocationSubsidiaryCode in conjunction with the
+				LocationPrimaryCode. """ .
+

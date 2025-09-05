@@ -1,0 +1,106 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:phaseInfoChangeSupplySystem a owl:DatatypeProperty ;
+    rdfs:label "Phase info change supply system"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoChangeSupplySystem> ;
+    dcterms:created "2024-02-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date,
+        "2025-06-09"^^xsd:date ;
+    rdfs:comment "Part of the phase info of a track that corresponds to the single selection of Y=yes or N=no to show if the energy supply system changes"@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoDistanceType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info distance type"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoDistanceType> ;
+    dcterms:created "2024-02-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    rdfs:comment "Part of the phase info of a track that corresponds to the single selection of 'MIN=minimum' or 'MAX=maximum' to show whether the length is a minimum distance between the inner contact strips of the pantographs or a maximum distance between the outer contact strips of the pantographs. Multiple strings for this parameter are accepted."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoKm a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info Km"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoKm> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that indicates the location from the start of the line where the new value is valid."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info length"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoLength> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that corresponds to the length of the phase separation in metres."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoPantographLowered a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info pantograph lowered"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoPantographLowered> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that shows whether a pantograph has to be lowered."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoSwitchOffBreaker a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info switch off breaker"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoSwitchOffBreaker> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that shows whether the breaker has to be switched off."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:PhaseInfo a owl:Class ;
+    rdfs:label "Phase info"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoShape> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Indication of required several information on phase separation."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status :stable .
+

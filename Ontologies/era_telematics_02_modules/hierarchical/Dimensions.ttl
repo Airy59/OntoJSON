@@ -1,0 +1,33 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:LengthCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LengthCode" ;
+    rdfs:comment "CODE: UIC leaflet 592-2",
+        "Length code according to UIC leaflet 592-2" ;
+    rdfs:domain :Dimensions ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasDimensions rdfs:range :Dimensions .
+
+:hasHeight a owl:ObjectProperty ;
+    rdfs:label "has Height" ;
+    rdfs:domain :Dimensions ;
+    rdfs:range :Height .
+
+:hasWidth a owl:ObjectProperty ;
+    rdfs:label "has Width" ;
+    rdfs:domain :Dimensions ;
+    rdfs:range :Width .
+
+:Dimensions a owl:Class ;
+    rdfs:label "Dimensions" ;
+    rdfs:comment "Dimensions of the UTI." .
+
+[] rdf:first :Dimensions .
+

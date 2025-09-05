@@ -1,0 +1,29 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AirBrakedMassLoaded a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AirBrakedMassLoaded" ;
+    rdfs:comment """Braked weight in tonns loaded for change over
+										weight""" ;
+    rdfs:domain :LoadChangeDevice ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ChangeOverWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ChangeOverWeight" ;
+    rdfs:comment """Change over weight of braked weight in tonns
+										variation device""" ;
+    rdfs:domain :LoadChangeDevice ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasLoadChangeDevice rdfs:range :LoadChangeDevice .
+
+:LoadChangeDevice a owl:Class ;
+    rdfs:label "LoadChangeDevice" ;
+    rdfs:comment "Specific weights for change over air brake systems" .
+

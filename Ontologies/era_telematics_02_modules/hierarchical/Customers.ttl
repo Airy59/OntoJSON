@@ -1,0 +1,48 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AddidtionalInformation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AddidtionalInformation" ;
+    rdfs:domain :Customers ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CustomerType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CustomerType" ;
+    rdfs:comment "Type of participation" ;
+    rdfs:domain :Customers ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCustomers rdfs:range :Customers .
+
+:Customers a owl:Class ;
+    rdfs:label "Customers" ;
+    rdfs:comment "Information about the consignor, consignee and freight payers." .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+
+[] rdf:first :Customers .
+

@@ -1,0 +1,29 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasArrivalInterchangeReport a owl:ObjectProperty ;
+    rdfs:label "has ArrivalInterchangeReport" ;
+    rdfs:domain :WagonETI_ETA_Message ;
+    rdfs:range :ArrivalInterchangeReport .
+
+:hasDepartureInterchangeReport a owl:ObjectProperty ;
+    rdfs:label "has DepartureInterchangeReport" ;
+    rdfs:domain :WagonETI_ETA_Message ;
+    rdfs:range :DepartureInterchangeReport .
+
+:WagonETI_ETA_Message a owl:Class ;
+    rdfs:label "WagonETI_ETA_Message" ;
+    rdfs:comment """This message is sent by the RU to the next RU in the transport chain
+				to give him the calculation of its ETI. The last RU sends this message with ETA to
+				the Lead RU, which may inform its customer. Following the handover information from
+				the IM, the RU sends with this message also the updated ETI to the next RU and the
+				last RU sends the updated ETA to the LRU.""" .
+
+[] rdf:first :WagonETI_ETA_Message .
+
+[] rdf:first :WagonETI_ETA_Message .
+
+[] rdf:first :WagonETI_ETA_Message .
+

@@ -1,0 +1,32 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:PossibilityToPreventUseOfRegenerativeBrake a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PossibilityToPreventUseOfRegenerativeBrake" ;
+    rdfs:comment """False - not fitted, True - fitted the
+										possibility of preventing the use of the regenerative brake """ ;
+    rdfs:domain :PossibilityToPreventRegenerativeBrake ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RegenerativeBrakePreventionInUse a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RegenerativeBrakePreventionInUse" ;
+    rdfs:comment """False - Regenerative Brake Prevention not in
+										use, True Regenerative Brake Prevention in use (obligatory
+										if fitted with the possibility of preventing the use of the
+										regenerative brake)""" ;
+    rdfs:domain :PossibilityToPreventRegenerativeBrake ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasPossibilityToPreventRegenerativeBrake rdfs:range :PossibilityToPreventRegenerativeBrake .
+
+:PossibilityToPreventRegenerativeBrake a owl:Class ;
+    rdfs:label "PossibilityToPreventRegenerativeBrake" ;
+    rdfs:comment """Possibility of preventing the use of the regenerative
+							brake """ .
+

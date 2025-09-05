@@ -1,0 +1,15 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:CoordinatingIM a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CoordinatingIM" ;
+    rdfs:comment """The coordinating (leading) IM coordinates the agreement process for
+				the IMâ€™s. It is the primary point of contact for the RUâ€™s. Certain critical stages
+				in the international timetabling process are initiated by the leading IM, such as
+				transfer the path request to path elaboration to involved IMs in order to prepare
+				the offer with the partner-IMs. """ ;
+    rdfs:domain [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+

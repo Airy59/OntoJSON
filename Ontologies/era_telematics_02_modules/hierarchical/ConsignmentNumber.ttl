@@ -1,0 +1,25 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:hasConsignmentNumber rdfs:range :ConsignmentNumber .
+
+:ConsignmentNumber a owl:Class,
+        owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ConsignmentNumber" ;
+    rdfs:comment "Reference number assigned to a consignment by a lead RU",
+        """Running number and
+																check digit of the consignment
+																between Lead RU and customer.
+																Format: NNNNNC The number consists
+																of NNNNN = running number C = check
+																digit, """ ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+[] rdf:first :ConsignmentNumber .
+

@@ -1,0 +1,46 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:lineId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "line identifier"@en ;
+    :XMLName "SOLLineIdentification" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.0.0.0.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LineId> ;
+    :tsiOPEAppendixD2Index "2.2.1.1" ;
+    dcterms:modified "2024-11-18"^^xsd:date ;
+    rdfs:comment "Unique line identification or unique line number within Member State."@en ;
+    rdfs:domain :LinearPositioningSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:lrsMethod a owl:ObjectProperty ;
+    rdfs:label "type of line referencing system"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/lines/ReferenceSystems> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LrsMethod>,
+        <http://data.europa.eu/949/shapes/LrsMethodSKOS> ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    dcterms:modified "2024-11-29"^^xsd:date ;
+    rdfs:comment "The preferred line referencing system."@en ;
+    rdfs:domain :LinearPositioningSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    skos:editorialNote "TODO: provide example" .
+
+:LinearPositioningSystem a owl:Class ;
+    rdfs:label "Linear Positioning System"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearPositioningSystemShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :LineReference ;
+    rdfs:comment """Represents a linear positioning system used for referencing positions on the network.
+It can also represent a sequence of one or more sections of line, used for regular railway operations."""@en ;
+    rdfs:isDefinedBy : ;
+    owl:disjointWith :LinearPositioningSystemCoordinate .
+

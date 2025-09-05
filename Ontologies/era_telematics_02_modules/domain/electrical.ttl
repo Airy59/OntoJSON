@@ -1,0 +1,73 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Address rdfs:domain :AdministrativeContactInformation .
+
+:BrakingPowerVariationDevice a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BrakingPowerVariationDevice" ;
+    rdfs:comment "Coding in 404-2, chapter 1.8" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CurrentECMAssignedUntil a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CurrentECMAssignedUntil" ;
+    rdfs:comment """ Date until the current Entity in
+													Charge of Maintenance is assigned to the wagon""" ;
+    rdfs:domain :PlannedChangeOfECM ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CurrentSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CurrentSpeed" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PhonNumber rdfs:domain :Contacts .
+
+:PhoneNumber rdfs:domain :AdministrativeContactInformation .
+
+:TypeOfUsedHybridPowerunit a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeOfUsedHybridPowerunit" ;
+    rdfs:comment "information about the type of power unit in case of using a hybrid locomotive" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasAdministrativeContactInformation a owl:ObjectProperty ;
+    rdfs:label "has AdministrativeContactInformation" ;
+    rdfs:domain [ ] ;
+    rdfs:range :AdministrativeContactInformation .
+
+:hasContacts a owl:ObjectProperty ;
+    rdfs:label "has Contacts" ;
+    rdfs:domain :Customer ;
+    rdfs:range :Contacts .
+
+:Contacts a owl:Class ;
+    rdfs:label "Contacts" ;
+    rdfs:comment "Contact information" .
+
+:AdministrativeContactInformation a owl:Class ;
+    rdfs:label "AdministrativeContactInformation" ;
+    rdfs:comment "Used to define adminstrative contact information" .
+
+[] rdf:first :AdministrativeContactInformation .
+
+[] rdf:first :Contacts .
+
+[] rdf:first :AdministrativeContactInformation .
+
+[] rdf:first :AdministrativeContactInformation .
+
+[] rdf:first :AdministrativeContactInformation .
+
+[] rdf:first :Contacts .
+

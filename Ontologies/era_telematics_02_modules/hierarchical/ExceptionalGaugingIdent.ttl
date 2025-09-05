@@ -1,0 +1,22 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ExceptionalGaugingCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ExceptionalGaugingCode" ;
+    rdfs:comment "Acceptance agreement number, based on guidelines of IM_Partner" ;
+    rdfs:domain :ExceptionalGaugingIdent ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasExceptionalGaugingIdent rdfs:range :ExceptionalGaugingIdent .
+
+:ExceptionalGaugingIdent a owl:Class ;
+    rdfs:label "ExceptionalGaugingIdent" ;
+    rdfs:comment "Indicates that an exceptional Gauging is in the train or for the wagon " .
+
+[] rdf:first :ExceptionalGaugingIdent .
+

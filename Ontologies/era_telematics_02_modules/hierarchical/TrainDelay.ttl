@@ -1,0 +1,28 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AgainstBooked a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AgainstBooked" ;
+    rdfs:comment "Identifies the Delta delay time against the booked schedule in minutes" ;
+    rdfs:domain :TrainDelay ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AgainstReferenced a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AgainstReferenced" ;
+    rdfs:comment "Delay compared to the referenced Date/Time" ;
+    rdfs:domain :TrainDelay ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTrainDelay rdfs:range :TrainDelay .
+
+:TrainDelay a owl:Class ;
+    rdfs:label "TrainDelay" ;
+    rdfs:comment """Identifies the Delta delay time of a train against the booked schedule
+				as well as against the referenced time """ .
+

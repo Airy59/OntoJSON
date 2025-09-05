@@ -1,0 +1,137 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ActionRequiredFromCarrier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ActionRequiredFromCarrier" ;
+    rdfs:comment """Special action required by the carrier according to
+							chapter 5.4.1.2.5.2 RID""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ClassificationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ClassificationCode" ;
+    rdfs:comment "CODE: OTIF RID-Specification",
+        """The Classification Code of the dangerous good according to
+							the RID chapter 3.2, table A, column 3b. Mandatory for Class 1 -
+							optional, but possibly for all the other classes.""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DangerLabel a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DangerLabel" ;
+    rdfs:comment "All Danger Label of this dangerous good according to the RID chapter 3.2, table A, column 5, excepting the shunting labels Model 13 and 15 (CODE: OTIF RID-Specification)." ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EmptyPackingCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EmptyPackingCode" ;
+    rdfs:comment """CODE: OTIF RID-Specification, element EMPTY has been added
+							as 'dummy' until the code list has been finished and approved. """,
+        "CODE: OTIF RID-Specification, element EMPTY has been added as 'dummy' until the code list has been finished and approved. ",
+        "Code of empty packing as described in RID 5.4.1.1.6.2" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HazardIdentificationNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HazardIdentificationNumber" ;
+    rdfs:comment """This refers to RID 3.2 Table A. Definitions are in in section
+						5.3.2.3.2 of RID for classes 2 to 9. Definitions are in sections 2.2.1.1.5
+						and 2.2.1.1.6 of RID for class 1.""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Law a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Law" ;
+    rdfs:comment "The law after which the RID data are declared." ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LimitedQuantityIndicator a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LimitedQuantityIndicator" ;
+    rdfs:comment """Indicator for labelled dangerous goods in limited quantity
+							according to chapter 3.-4 RID""",
+        """Indicator for labelled dangerous goods in limited quantity
+						according to chapter 3.-4 RID""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ProperShippingName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ProperShippingName" ;
+    rdfs:comment """The official name of this dangerous good according to the
+							RID chapter 3.2, table A, column 2 Mandatory, except it concerns a
+							declaration of an empty packaging of the type "EMPTY PACKAGING", "EMPTY
+							RECEPTACLE", "EMPTY RECEPTACLE <=1000L, "EMPTY IBC" or "EMPTY LARGE
+							PACKAGING\"""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RID_Class a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RID_Class" ;
+    rdfs:comment """The Class of the dangerous good according to the RID
+							chapter 3.2, table A, column 3a.""",
+        """The Class of the dangerous good according to the RID chapter
+						3.2, table A, column 3a.""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TechnicalDescription a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TechnicalDescription" ;
+    rdfs:comment """The Technical Description is an approved chemical or
+							biological name and has to be present if the dangerous good has assigned
+							a special provision 274 according to RID chapter 3.2, table A, column 6.""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WeightNettoExplosiveMass a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WeightNettoExplosiveMass" ;
+    rdfs:comment """Special provision only necessary and allowed for Class 1
+							(kg)- the total net mass of explosive substance (RID 5.4.1.2.1).""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasRID rdfs:range :RID .
+
+:hasSpecialProvisionsRID a owl:ObjectProperty ;
+    rdfs:label "has SpecialProvisionsRID" ;
+    rdfs:domain :RID ;
+    rdfs:range :SpecialProvisionsRID .
+
+:RID a owl:Class ;
+    rdfs:label "RID" ;
+    rdfs:comment """The requirement (optional/mandatory) of the RID detail tags depend on
+				the dangerous good and the regarding RID regulations.In contrast to the element
+				"DangerousGoodsIndication" which only provides information to be provided to the IM
+				according to chapter 1.4 RID, "RID" contains all information demanded in chapter 5.4
+				RID in order tpo provide all information used for RUs""" .
+
+[] rdf:first :RID .
+
+[] rdf:first :RID .
+
+[] rdf:first :RID .
+

@@ -1,0 +1,29 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:conditionsChargingElectricEnergyStorage rdfs:subPropertyOf :contactLineSystemDataParameter .
+
+:energySupplySystemTSICompliant rdfs:subPropertyOf :contactLineSystemDataParameter .
+
+:maxCurrentStandstillPantograph rdfs:subPropertyOf :contactLineSystemDataParameter .
+
+:maxTrainCurrent rdfs:subPropertyOf :contactLineSystemDataParameter .
+
+:maximumContactWireHeight rdfs:subPropertyOf :contactLineSystemDataParameter .
+
+:minimumContactWireHeight rdfs:subPropertyOf :contactLineSystemDataParameter .
+
+:permissionChargingElectricEnergyTractionStandstill rdfs:subPropertyOf :contactLineSystemDataParameter .
+
+:umax2 rdfs:subPropertyOf :contactLineSystemDataParameter .
+
+:contactLineSystemDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Contact line system"@en ;
+    :rinfIndex "1.1.1.2.2" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :energySubsystemDataParameter .
+

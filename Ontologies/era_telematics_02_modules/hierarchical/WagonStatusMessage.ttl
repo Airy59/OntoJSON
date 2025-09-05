@@ -1,0 +1,76 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:MessageCreationDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageCreationDateTime" ;
+    rdfs:comment "Timestamp of Creation of Message",
+        """the timestamp is created by the originally
+										sending RU, it remains unchanged, when forwarded by the
+										central ISR application""" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ReportingRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ReportingRU" ;
+    rdfs:comment """Company (RICS) Code of the RU who is reporting
+										the event""" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCarriersInvolved a owl:ObjectProperty ;
+    rdfs:label "has CarriersInvolved" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :CarriersInvolved .
+
+:hasConsignmentIdentification a owl:ObjectProperty ;
+    rdfs:label "has ConsignmentIdentification" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :ConsignmentIdentification .
+
+:hasDestinationLocation a owl:ObjectProperty ;
+    rdfs:label "has DestinationLocation" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :DestinationLocation .
+
+:hasEvent a owl:ObjectProperty ;
+    rdfs:label "has Event" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :Event .
+
+:hasRouting a owl:ObjectProperty ;
+    rdfs:label "has Routing" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :Routing .
+
+:hasShippingLocation a owl:ObjectProperty ;
+    rdfs:label "has ShippingLocation" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :ShippingLocation .
+
+:hasTrain a owl:ObjectProperty ;
+    rdfs:label "has Train" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :Train .
+
+:hasWagonJourneyIrregularity a owl:ObjectProperty ;
+    rdfs:label "has WagonJourneyIrregularity" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :WagonJourneyIrregularity .
+
+:hasWagonStatusMessage rdfs:range :WagonStatusMessage .
+
+:WagonStatusMessage a owl:Class ;
+    rdfs:label "WagonStatusMessage" ;
+    rdfs:comment """used to describe one event of one wagon (all bounded
+							elements are bounded to to obligations of legacy systems)""" .
+
+[] rdf:first :WagonStatusMessage .
+
+[] rdf:first :WagonStatusMessage .
+

@@ -1,0 +1,71 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Checkdigit a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Checkdigit" ;
+    rdfs:comment "Check digit" ;
+    rdfs:domain :ITU_Details ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ITU_Type a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ITU_Type" ;
+    rdfs:comment """Type of ITU. Further information is given for each enumeration
+				element.""" ;
+    rdfs:domain :ITU_Details ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ITU_TypeDetail a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ITU_TypeDetail" ;
+    rdfs:domain :ITU_Details ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Prefix a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Prefix" ;
+    rdfs:comment "Prefix" ;
+    rdfs:domain :ITU_Details ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasITU_Details rdfs:range :ITU_Details .
+
+:ITU_Details a owl:Class ;
+    rdfs:label "ITU_Details" ;
+    rdfs:comment "Details for ITU on wagon" .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+
+[] rdf:first :ITU_Details .
+

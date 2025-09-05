@@ -1,0 +1,1044 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:ARC rdfs:subPropertyOf :dataProperties .
+
+:ATEXCertified rdfs:subPropertyOf :dataProperties .
+
+:ATEXLevel rdfs:subPropertyOf :dataProperties .
+
+:AcceptanceDate rdfs:subPropertyOf :dataProperties .
+
+:ActionRequiredFromCarrier rdfs:subPropertyOf :dataProperties .
+
+:ActualETA rdfs:subPropertyOf :dataProperties .
+
+:ActualETI rdfs:subPropertyOf :dataProperties .
+
+:ActualEndDateTime rdfs:subPropertyOf :dataProperties .
+
+:AddidtionalInformation rdfs:subPropertyOf :dataProperties .
+
+:AdditionalCode rdfs:subPropertyOf :dataProperties .
+
+:AdditionalGoodInformation rdfs:subPropertyOf :dataProperties .
+
+:AdditionalInformation rdfs:subPropertyOf :dataProperties .
+
+:AdditionalInformationILU rdfs:subPropertyOf :dataProperties .
+
+:AdditionalInstruction rdfs:subPropertyOf :dataProperties .
+
+:Address rdfs:subPropertyOf :dataProperties .
+
+:AgainstBooked rdfs:subPropertyOf :dataProperties .
+
+:AgainstReferenced rdfs:subPropertyOf :dataProperties .
+
+:AgreedTimeOfDelivery rdfs:subPropertyOf :dataProperties .
+
+:AirBrakeSpecialCharacteristic rdfs:subPropertyOf :dataProperties .
+
+:AirBrakeType rdfs:subPropertyOf :dataProperties .
+
+:AirBrakedMass rdfs:subPropertyOf :dataProperties .
+
+:AirBrakedMassLoaded rdfs:subPropertyOf :dataProperties .
+
+:AllocationCompany rdfs:subPropertyOf :dataProperties .
+
+:Altitude rdfs:subPropertyOf :dataProperties .
+
+:Amount rdfs:subPropertyOf :dataProperties .
+
+:AntennaDistanceFromFrontOfTrain rdfs:subPropertyOf :dataProperties .
+
+:ArrivalTimeAtDestination rdfs:subPropertyOf :dataProperties .
+
+:ArrivalTimeAtLocation rdfs:subPropertyOf :dataProperties .
+
+:ArrivalTimeAtLocationActual rdfs:subPropertyOf :dataProperties .
+
+:AssociatedAttachedOTN rdfs:subPropertyOf :dataProperties .
+
+:AssociatedAttachedTrainServiceNumber rdfs:subPropertyOf :dataProperties .
+
+:AuthorisationValidUntil rdfs:subPropertyOf :dataProperties .
+
+:Beginning rdfs:subPropertyOf :dataProperties .
+
+:BitmapDays rdfs:subPropertyOf :dataProperties .
+
+:BodyID rdfs:subPropertyOf :dataProperties .
+
+:BodyType rdfs:subPropertyOf :dataProperties .
+
+:BogiePitch rdfs:subPropertyOf :dataProperties .
+
+:BogiePivotPitch rdfs:subPropertyOf :dataProperties .
+
+:BogieWagonsOnly rdfs:subPropertyOf :dataProperties .
+
+:BookedLocationDateTime rdfs:subPropertyOf :dataProperties .
+
+:BookedLocationTime rdfs:subPropertyOf :dataProperties .
+
+:BookingNumber rdfs:subPropertyOf :dataProperties .
+
+:BrakeBlockName rdfs:subPropertyOf :dataProperties .
+
+:BrakeSpecialCharacteristics rdfs:subPropertyOf :dataProperties .
+
+:BrakeSystem rdfs:subPropertyOf :dataProperties .
+
+:BrakeType rdfs:subPropertyOf :dataProperties .
+
+:BrakeWeight rdfs:subPropertyOf :dataProperties .
+
+:BrakingPowerVariationDevice rdfs:subPropertyOf :dataProperties .
+
+:BrakingRatio rdfs:subPropertyOf :dataProperties .
+
+:BufferType rdfs:subPropertyOf :dataProperties .
+
+:C1 rdfs:subPropertyOf :dataProperties .
+
+:C2 rdfs:subPropertyOf :dataProperties .
+
+:CI_InstanceNumber rdfs:subPropertyOf :dataProperties .
+
+:COM_PreparationDatetime rdfs:subPropertyOf :dataProperties .
+
+:CarrierCode rdfs:subPropertyOf :dataProperties .
+
+:CarrierName rdfs:subPropertyOf :dataProperties .
+
+:CarrierStatus rdfs:subPropertyOf :dataProperties .
+
+:ChangeOverWeight rdfs:subPropertyOf :dataProperties .
+
+:ChannelTunnelPermitted rdfs:subPropertyOf :dataProperties .
+
+:CharacteristicDescriptionCode rdfs:subPropertyOf :dataProperties .
+
+:ChargesNoteAvailable rdfs:subPropertyOf :dataProperties .
+
+:Checkdigit rdfs:subPropertyOf :dataProperties .
+
+:CheckingDateTime rdfs:subPropertyOf :dataProperties .
+
+:CheckingResults rdfs:subPropertyOf :dataProperties .
+
+:CheckingType rdfs:subPropertyOf :dataProperties .
+
+:City rdfs:subPropertyOf :dataProperties .
+
+:CityTown rdfs:subPropertyOf :dataProperties .
+
+:ClassificationCode rdfs:subPropertyOf :dataProperties .
+
+:ClosingTime rdfs:subPropertyOf :dataProperties .
+
+:Coasting rdfs:subPropertyOf :dataProperties .
+
+:Code rdfs:subPropertyOf :dataProperties .
+
+:CodeOfCause rdfs:subPropertyOf :dataProperties .
+
+:Comments rdfs:subPropertyOf :dataProperties .
+
+:CommercialRouteCode rdfs:subPropertyOf :dataProperties .
+
+:CommercialSpecificationCode rdfs:subPropertyOf :dataProperties .
+
+:CommercialTrafficType rdfs:subPropertyOf :dataProperties .
+
+:CommitmentETA rdfs:subPropertyOf :dataProperties .
+
+:Company rdfs:subPropertyOf :dataProperties .
+
+:ComponentMounted rdfs:subPropertyOf :dataProperties .
+
+:CompositeBrakeBlockInstallationDate rdfs:subPropertyOf :dataProperties .
+
+:CompositeBrakeBlockRetrofitted rdfs:subPropertyOf :dataProperties .
+
+:ConsignmentNumber rdfs:subPropertyOf :dataProperties .
+
+:ConsignmentOrderType rdfs:subPropertyOf :dataProperties .
+
+:ConsignorDeclarationCode rdfs:subPropertyOf :dataProperties .
+
+:ConsignorReference rdfs:subPropertyOf :dataProperties .
+
+:ContainerHandlingFlag rdfs:subPropertyOf :dataProperties .
+
+:ContainerNumber rdfs:subPropertyOf :dataProperties .
+
+:ContractNumber rdfs:subPropertyOf :dataProperties .
+
+:ContractNumberMovement rdfs:subPropertyOf :dataProperties .
+
+:ContractualCarrierCode rdfs:subPropertyOf :dataProperties .
+
+:ControlDigit rdfs:subPropertyOf :dataProperties .
+
+:CoordinatingIM rdfs:subPropertyOf :dataProperties .
+
+:Core rdfs:subPropertyOf :dataProperties .
+
+:CounterAcreditedRecognizedBody rdfs:subPropertyOf :dataProperties .
+
+:Country rdfs:subPropertyOf :dataProperties .
+
+:CountryCode rdfs:subPropertyOf :dataProperties .
+
+:CountryCodeISO rdfs:subPropertyOf :dataProperties .
+
+:CouplingType rdfs:subPropertyOf :dataProperties .
+
+:CoversNonTankWagonsForDangerousGoods rdfs:subPropertyOf :dataProperties .
+
+:CoversTankWagonsForDangerousGoods rdfs:subPropertyOf :dataProperties .
+
+:CreateDateTime rdfs:subPropertyOf :dataProperties .
+
+:CreationDate rdfs:subPropertyOf :dataProperties .
+
+:CurrencyCode rdfs:subPropertyOf :dataProperties .
+
+:CurrentECMAssignedUntil rdfs:subPropertyOf :dataProperties .
+
+:CurrentSpeed rdfs:subPropertyOf :dataProperties .
+
+:CustomerCode rdfs:subPropertyOf :dataProperties .
+
+:CustomerNumber rdfs:subPropertyOf :dataProperties .
+
+:CustomerReference rdfs:subPropertyOf :dataProperties .
+
+:CustomerType rdfs:subPropertyOf :dataProperties .
+
+:CustomsEndorsements rdfs:subPropertyOf :dataProperties .
+
+:CustomsSurveillance rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition1 rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition2 rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition3 rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition4 rdfs:subPropertyOf :dataProperties .
+
+:DamageOldOrNew rdfs:subPropertyOf :dataProperties .
+
+:DangerLabel rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsIndicator rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsVolume rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsVolumeCubicMeters rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsVolumeLiters rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsWeight rdfs:subPropertyOf :dataProperties .
+
+:Date rdfs:subPropertyOf :dataProperties .
+
+:DateECMCertificateSuspended rdfs:subPropertyOf :dataProperties .
+
+:DateLastOverhaul rdfs:subPropertyOf :dataProperties .
+
+:DateNextOverhaul rdfs:subPropertyOf :dataProperties .
+
+:DateOfNextTankInspection rdfs:subPropertyOf :dataProperties .
+
+:DateOfReturn rdfs:subPropertyOf :dataProperties .
+
+:DatePutIntoService rdfs:subPropertyOf :dataProperties .
+
+:DateSuspensionOfAuthorisation rdfs:subPropertyOf :dataProperties .
+
+:DateTime rdfs:subPropertyOf :dataProperties .
+
+:DeclarationText rdfs:subPropertyOf :dataProperties .
+
+:DeclaringRU rdfs:subPropertyOf :dataProperties .
+
+:DelayCause rdfs:subPropertyOf :dataProperties .
+
+:DelayCodingDateTime rdfs:subPropertyOf :dataProperties .
+
+:DelayEventDateTime rdfs:subPropertyOf :dataProperties .
+
+:DelayMinutes rdfs:subPropertyOf :dataProperties .
+
+:DeliveryReference rdfs:subPropertyOf :dataProperties .
+
+:DeliveryTimeAtDestination rdfs:subPropertyOf :dataProperties .
+
+:DeliveryTimeAtInterchange rdfs:subPropertyOf :dataProperties .
+
+:DepartureCountry rdfs:subPropertyOf :dataProperties .
+
+:DepartureTimeAtLocation rdfs:subPropertyOf :dataProperties .
+
+:DerailmentDetectionDevice rdfs:subPropertyOf :dataProperties .
+
+:Description rdfs:subPropertyOf :dataProperties .
+
+:DetailedDescriptionOfLocation rdfs:subPropertyOf :dataProperties .
+
+:DeviceType rdfs:subPropertyOf :dataProperties .
+
+:DifferentAcceptanceDate rdfs:subPropertyOf :dataProperties .
+
+:DistancePrecision rdfs:subPropertyOf :dataProperties .
+
+:DocumentInformation rdfs:subPropertyOf :dataProperties .
+
+:DocumentType rdfs:subPropertyOf :dataProperties .
+
+:DocumentTypeDescription rdfs:subPropertyOf :dataProperties .
+
+:DossierNumber rdfs:subPropertyOf :dataProperties .
+
+:DriverIndication rdfs:subPropertyOf :dataProperties .
+
+:DwellTime rdfs:subPropertyOf :dataProperties .
+
+:ECM rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateSuspended rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateValidFrom rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateValidTo rdfs:subPropertyOf :dataProperties .
+
+:EINCounter rdfs:subPropertyOf :dataProperties .
+
+:EINYear rdfs:subPropertyOf :dataProperties .
+
+:EWC_Key rdfs:subPropertyOf :dataProperties .
+
+:EarliestEndDateTime rdfs:subPropertyOf :dataProperties .
+
+:EmergencyBrakeOverride rdfs:subPropertyOf :dataProperties .
+
+:EmptyPackingCode rdfs:subPropertyOf :dataProperties .
+
+:EndDate rdfs:subPropertyOf :dataProperties .
+
+:EndDateTime rdfs:subPropertyOf :dataProperties .
+
+:Ending rdfs:subPropertyOf :dataProperties .
+
+:EnvironmentalHazardous rdfs:subPropertyOf :dataProperties .
+
+:ErrorCode rdfs:subPropertyOf :dataProperties .
+
+:EstimatedEndDateTime rdfs:subPropertyOf :dataProperties .
+
+:EventDateTime rdfs:subPropertyOf :dataProperties .
+
+:EventType rdfs:subPropertyOf :dataProperties .
+
+:ExceptionTimeAtLocation rdfs:subPropertyOf :dataProperties .
+
+:ExceptionalGaugingCode rdfs:subPropertyOf :dataProperties .
+
+:ExceptionalGaugingInd rdfs:subPropertyOf :dataProperties .
+
+:ExceptionalGaugingProfile rdfs:subPropertyOf :dataProperties .
+
+:ExchangeRate rdfs:subPropertyOf :dataProperties .
+
+:FacilityTypeDescriptionCode rdfs:subPropertyOf :dataProperties .
+
+:FaxNumber rdfs:subPropertyOf :dataProperties .
+
+:Fee rdfs:subPropertyOf :dataProperties .
+
+:FerryPermittedFlag rdfs:subPropertyOf :dataProperties .
+
+:FerryRampAngle rdfs:subPropertyOf :dataProperties .
+
+:Filename rdfs:subPropertyOf :dataProperties .
+
+:FirstName rdfs:subPropertyOf :dataProperties .
+
+:Forwarding rdfs:subPropertyOf :dataProperties .
+
+:ForwardingTrainNumber rdfs:subPropertyOf :dataProperties .
+
+:FreeTextField rdfs:subPropertyOf :dataProperties .
+
+:FreightFlag rdfs:subPropertyOf :dataProperties .
+
+:GCUWagon rdfs:subPropertyOf :dataProperties .
+
+:GeographicalCoordinates rdfs:subPropertyOf :dataProperties .
+
+:GoodsDescription rdfs:subPropertyOf :dataProperties .
+
+:GrossWeight rdfs:subPropertyOf :dataProperties .
+
+:HS_Code rdfs:subPropertyOf :dataProperties .
+
+:HandBrakeBrakedWeight rdfs:subPropertyOf :dataProperties .
+
+:HandBrakeType rdfs:subPropertyOf :dataProperties .
+
+:HandBrakedWeight rdfs:subPropertyOf :dataProperties .
+
+:HandlingInstruction rdfs:subPropertyOf :dataProperties .
+
+:HandoverHarmonized rdfs:subPropertyOf :dataProperties .
+
+:HandoverPointFlag rdfs:subPropertyOf :dataProperties .
+
+:HarbourName rdfs:subPropertyOf :dataProperties .
+
+:HazardIdentificationNumber rdfs:subPropertyOf :dataProperties .
+
+:Heading rdfs:subPropertyOf :dataProperties .
+
+:HeightOfLoadingPlaneUnladen rdfs:subPropertyOf :dataProperties .
+
+:HighestPlannedSpeed rdfs:subPropertyOf :dataProperties .
+
+:ILU_Type rdfs:subPropertyOf :dataProperties .
+
+:ILU_TypeDetail rdfs:subPropertyOf :dataProperties .
+
+:IM_Partner rdfs:subPropertyOf :dataProperties .
+
+:ITU_Type rdfs:subPropertyOf :dataProperties .
+
+:ITU_TypeDetail rdfs:subPropertyOf :dataProperties .
+
+:ImpactedRU rdfs:subPropertyOf :dataProperties .
+
+:IncotermCode rdfs:subPropertyOf :dataProperties .
+
+:InfoOnGoodsShapeTypeDanger rdfs:subPropertyOf :dataProperties .
+
+:InformationConsignee rdfs:subPropertyOf :dataProperties .
+
+:InnerWheelbase rdfs:subPropertyOf :dataProperties .
+
+:InterchangeHarmonized rdfs:subPropertyOf :dataProperties .
+
+:Intermodal rdfs:subPropertyOf :dataProperties .
+
+:InternalReferenceIdentifier rdfs:subPropertyOf :dataProperties .
+
+:InteropCapability rdfs:subPropertyOf :dataProperties .
+
+:InterruptionDateTime rdfs:subPropertyOf :dataProperties .
+
+:InterruptionDescription rdfs:subPropertyOf :dataProperties .
+
+:InterruptionReason rdfs:subPropertyOf :dataProperties .
+
+:InterruptionType rdfs:subPropertyOf :dataProperties .
+
+:InvoicingCarrierCode rdfs:subPropertyOf :dataProperties .
+
+:IsAbleToRun rdfs:subPropertyOf :dataProperties .
+
+:JourneyLocationTypeCode rdfs:subPropertyOf :dataProperties .
+
+:KM rdfs:subPropertyOf :dataProperties .
+
+:KeeperShortNameVKM rdfs:subPropertyOf :dataProperties .
+
+:LastModifiedDateTime rdfs:subPropertyOf :dataProperties .
+
+:LastName rdfs:subPropertyOf :dataProperties .
+
+:LatestEndDateTime rdfs:subPropertyOf :dataProperties .
+
+:Latitude rdfs:subPropertyOf :dataProperties .
+
+:Law rdfs:subPropertyOf :dataProperties .
+
+:LeadRU rdfs:subPropertyOf :dataProperties .
+
+:LengthCode rdfs:subPropertyOf :dataProperties .
+
+:LengthOfSetOfCarriages rdfs:subPropertyOf :dataProperties .
+
+:LengthOverBuffers rdfs:subPropertyOf :dataProperties .
+
+:LetterMarking rdfs:subPropertyOf :dataProperties .
+
+:LimitedQuantityIndicator rdfs:subPropertyOf :dataProperties .
+
+:LivestockOrPeopleIndicator rdfs:subPropertyOf :dataProperties .
+
+:LoadArea rdfs:subPropertyOf :dataProperties .
+
+:LoadLimit rdfs:subPropertyOf :dataProperties .
+
+:LoadTableCountry rdfs:subPropertyOf :dataProperties .
+
+:LoadTableStars rdfs:subPropertyOf :dataProperties .
+
+:LoadUnitNumber rdfs:subPropertyOf :dataProperties .
+
+:LoadingCapacity rdfs:subPropertyOf :dataProperties .
+
+:LoadingStatus rdfs:subPropertyOf :dataProperties .
+
+:LoadingTackleType rdfs:subPropertyOf :dataProperties .
+
+:LocalisationPrecision rdfs:subPropertyOf :dataProperties .
+
+:LocationDateTime rdfs:subPropertyOf :dataProperties .
+
+:LocationPrimaryCode rdfs:subPropertyOf :dataProperties .
+
+:LocationPrimaryName rdfs:subPropertyOf :dataProperties .
+
+:LocationSubsidiaryName rdfs:subPropertyOf :dataProperties .
+
+:LocationSubsidiaryTypeCode rdfs:subPropertyOf :dataProperties .
+
+:LocoNumber rdfs:subPropertyOf :dataProperties .
+
+:Longitude rdfs:subPropertyOf :dataProperties .
+
+:MRN_Number rdfs:subPropertyOf :dataProperties .
+
+:MRN_Type rdfs:subPropertyOf :dataProperties .
+
+:ManufacturerName rdfs:subPropertyOf :dataProperties .
+
+:MarinePollutant rdfs:subPropertyOf :dataProperties .
+
+:MaxAxleWeight rdfs:subPropertyOf :dataProperties .
+
+:MaxDesignSpeed rdfs:subPropertyOf :dataProperties .
+
+:MaxGrossWeight rdfs:subPropertyOf :dataProperties .
+
+:MaxLengthOfLoad rdfs:subPropertyOf :dataProperties .
+
+:MaxPayload rdfs:subPropertyOf :dataProperties .
+
+:MaxTemp rdfs:subPropertyOf :dataProperties .
+
+:Measure rdfs:subPropertyOf :dataProperties .
+
+:MessageCreationDateTime rdfs:subPropertyOf :dataProperties .
+
+:MessageDateTime rdfs:subPropertyOf :dataProperties .
+
+:MessageDateTimeCreated rdfs:subPropertyOf :dataProperties .
+
+:MessageIdentifier rdfs:subPropertyOf :dataProperties .
+
+:MessageReferenceNumber rdfs:subPropertyOf :dataProperties .
+
+:MessageRoutingID rdfs:subPropertyOf :dataProperties .
+
+:MessageSenderReference rdfs:subPropertyOf :dataProperties .
+
+:MessageStatus rdfs:subPropertyOf :dataProperties .
+
+:MessageType rdfs:subPropertyOf :dataProperties .
+
+:MessageTypeVersion rdfs:subPropertyOf :dataProperties .
+
+:MinBrakedWeightPercent rdfs:subPropertyOf :dataProperties .
+
+:MinCurveRadius rdfs:subPropertyOf :dataProperties .
+
+:MinTemp rdfs:subPropertyOf :dataProperties .
+
+:MinVerticalRadiusYardHump rdfs:subPropertyOf :dataProperties .
+
+:ModificationReason rdfs:subPropertyOf :dataProperties .
+
+:ModificationStatusIndicator rdfs:subPropertyOf :dataProperties .
+
+:MountedPosition rdfs:subPropertyOf :dataProperties .
+
+:MultilateralAuthorisationCountries rdfs:subPropertyOf :dataProperties .
+
+:NHMCode rdfs:subPropertyOf :dataProperties .
+
+:NHM_Code rdfs:subPropertyOf :dataProperties .
+
+:NUTS_Code rdfs:subPropertyOf :dataProperties .
+
+:Name rdfs:subPropertyOf :dataProperties .
+
+:NatureOfPacking rdfs:subPropertyOf :dataProperties .
+
+:NextResponsibleRU rdfs:subPropertyOf :dataProperties .
+
+:NoGoodsOfClassX rdfs:subPropertyOf :dataProperties .
+
+:Noise rdfs:subPropertyOf :dataProperties .
+
+:NoiseByPassLimit rdfs:subPropertyOf :dataProperties .
+
+:NormalLoadingGauge rdfs:subPropertyOf :dataProperties .
+
+:Note rdfs:subPropertyOf :dataProperties .
+
+:Number rdfs:subPropertyOf :dataProperties .
+
+:NumberOfAccessorOfSpecType rdfs:subPropertyOf :dataProperties .
+
+:NumberOfAxles rdfs:subPropertyOf :dataProperties .
+
+:NumberOfBogies rdfs:subPropertyOf :dataProperties .
+
+:NumberOfBrakes rdfs:subPropertyOf :dataProperties .
+
+:NumberOfModifiedVersion rdfs:subPropertyOf :dataProperties .
+
+:NumberOfPackages rdfs:subPropertyOf :dataProperties .
+
+:NumberOfSeals rdfs:subPropertyOf :dataProperties .
+
+:NumberOfVehicles rdfs:subPropertyOf :dataProperties .
+
+:NumberOfVisibleSatellites rdfs:subPropertyOf :dataProperties .
+
+:NumberPlate rdfs:subPropertyOf :dataProperties .
+
+:ObjectType rdfs:subPropertyOf :dataProperties .
+
+:Offset rdfs:subPropertyOf :dataProperties .
+
+:OffsetToReference rdfs:subPropertyOf :dataProperties .
+
+:OnDemandPath rdfs:subPropertyOf :dataProperties .
+
+:OperationalTrainCouplingStrength rdfs:subPropertyOf :dataProperties .
+
+:OperationalTrainNumber rdfs:subPropertyOf :dataProperties .
+
+:OriginCountry rdfs:subPropertyOf :dataProperties .
+
+:OverhaulValidityPeriod rdfs:subPropertyOf :dataProperties .
+
+:P1 rdfs:subPropertyOf :dataProperties .
+
+:P2 rdfs:subPropertyOf :dataProperties .
+
+:POBox rdfs:subPropertyOf :dataProperties .
+
+:PackageIdentification rdfs:subPropertyOf :dataProperties .
+
+:PackingGroup rdfs:subPropertyOf :dataProperties .
+
+:ParkingBrakeForce rdfs:subPropertyOf :dataProperties .
+
+:PassengerFlag rdfs:subPropertyOf :dataProperties .
+
+:PermissionNumber rdfs:subPropertyOf :dataProperties .
+
+:PermittedTolerance rdfs:subPropertyOf :dataProperties .
+
+:PhonNumber rdfs:subPropertyOf :dataProperties .
+
+:PhoneNumber rdfs:subPropertyOf :dataProperties .
+
+:PickupTimeAtLocation rdfs:subPropertyOf :dataProperties .
+
+:Place rdfs:subPropertyOf :dataProperties .
+
+:PlannedDateNextOverhaul rdfs:subPropertyOf :dataProperties .
+
+:PlannedSpeed rdfs:subPropertyOf :dataProperties .
+
+:PossibilityToPreventUseOfRegenerativeBrake rdfs:subPropertyOf :dataProperties .
+
+:PostalCode rdfs:subPropertyOf :dataProperties .
+
+:PreArrangedPath rdfs:subPropertyOf :dataProperties .
+
+:Prefix rdfs:subPropertyOf :dataProperties .
+
+:Prepaid rdfs:subPropertyOf :dataProperties .
+
+:PrepaidCodeCustomer rdfs:subPropertyOf :dataProperties .
+
+:PrepaidcodeCarrier rdfs:subPropertyOf :dataProperties .
+
+:PreviousConsignmentNumber rdfs:subPropertyOf :dataProperties .
+
+:PreviousLoadedGood rdfs:subPropertyOf :dataProperties .
+
+:PreviousResponsibleRU rdfs:subPropertyOf :dataProperties .
+
+:PreviousWagonNumber rdfs:subPropertyOf :dataProperties .
+
+:PreviousWagonNumberFreight rdfs:subPropertyOf :dataProperties .
+
+:PrimaryCode rdfs:subPropertyOf :dataProperties .
+
+:PrimaryLocationName rdfs:subPropertyOf :dataProperties .
+
+:PrimaryLocationNameASCII rdfs:subPropertyOf :dataProperties .
+
+:PrincipalRU rdfs:subPropertyOf :dataProperties .
+
+:PrintForm rdfs:subPropertyOf :dataProperties .
+
+:ProcessType rdfs:subPropertyOf :dataProperties .
+
+:ProductRIDName rdfs:subPropertyOf :dataProperties .
+
+:ProductUNCode rdfs:subPropertyOf :dataProperties .
+
+:ProperShippingName rdfs:subPropertyOf :dataProperties .
+
+:ProportionOfDistanceBetweenLocations rdfs:subPropertyOf :dataProperties .
+
+:PushPullTrain rdfs:subPropertyOf :dataProperties .
+
+:Quantity rdfs:subPropertyOf :dataProperties .
+
+:QuieterRoutesExemptionCountry rdfs:subPropertyOf :dataProperties .
+
+:RID_Class rdfs:subPropertyOf :dataProperties .
+
+:RP_Code rdfs:subPropertyOf :dataProperties .
+
+:RU rdfs:subPropertyOf :dataProperties .
+
+:RU_DeclarationCode rdfs:subPropertyOf :dataProperties .
+
+:RU_Partner rdfs:subPropertyOf :dataProperties .
+
+:ReasonOfReference rdfs:subPropertyOf :dataProperties .
+
+:ReceivingRU rdfs:subPropertyOf :dataProperties .
+
+:Recipient rdfs:subPropertyOf :dataProperties .
+
+:ReferencedLocationDateTime rdfs:subPropertyOf :dataProperties .
+
+:RefusalCode rdfs:subPropertyOf :dataProperties .
+
+:RegenerativeBrakeFitted rdfs:subPropertyOf :dataProperties .
+
+:RegenerativeBrakePreventionInUse rdfs:subPropertyOf :dataProperties .
+
+:RegistrationCountry rdfs:subPropertyOf :dataProperties .
+
+:RelatedIdentifier rdfs:subPropertyOf :dataProperties .
+
+:RelatedMessageDateTime rdfs:subPropertyOf :dataProperties .
+
+:RelatedSenderReference rdfs:subPropertyOf :dataProperties .
+
+:RelatedType rdfs:subPropertyOf :dataProperties .
+
+:Remarks rdfs:subPropertyOf :dataProperties .
+
+:ReportingRU rdfs:subPropertyOf :dataProperties .
+
+:ResponsibleApplicant rdfs:subPropertyOf :dataProperties .
+
+:ResponsibleCarrierCode rdfs:subPropertyOf :dataProperties .
+
+:ResponsibleIM rdfs:subPropertyOf :dataProperties .
+
+:ResponsibleRU rdfs:subPropertyOf :dataProperties .
+
+:RestrictionsDueToLoadOrDamage rdfs:subPropertyOf :dataProperties .
+
+:Result rdfs:subPropertyOf :dataProperties .
+
+:RevisedRequest rdfs:subPropertyOf :dataProperties .
+
+:RollingRoadUnitType rdfs:subPropertyOf :dataProperties .
+
+:RouteClass rdfs:subPropertyOf :dataProperties .
+
+:RouteCode rdfs:subPropertyOf :dataProperties .
+
+:RouteInformation rdfs:subPropertyOf :dataProperties .
+
+:RouteText rdfs:subPropertyOf :dataProperties .
+
+:SRID rdfs:subPropertyOf :dataProperties .
+
+:SatelliteHDOP rdfs:subPropertyOf :dataProperties .
+
+:ScheduledDateTimeAtTransfer rdfs:subPropertyOf :dataProperties .
+
+:ScheduledTimeAtHandover rdfs:subPropertyOf :dataProperties .
+
+:ScheduledTimeAtLocation rdfs:subPropertyOf :dataProperties .
+
+:SealsDescription rdfs:subPropertyOf :dataProperties .
+
+:SectionCarrierCode rdfs:subPropertyOf :dataProperties .
+
+:Sender rdfs:subPropertyOf :dataProperties .
+
+:SenderReference rdfs:subPropertyOf :dataProperties .
+
+:SendingRU rdfs:subPropertyOf :dataProperties .
+
+:SequenceID rdfs:subPropertyOf :dataProperties .
+
+:SerialNumber rdfs:subPropertyOf :dataProperties .
+
+:SeriesNumber rdfs:subPropertyOf :dataProperties .
+
+:Severity rdfs:subPropertyOf :dataProperties .
+
+:ShipOwner rdfs:subPropertyOf :dataProperties .
+
+:ShipmentType rdfs:subPropertyOf :dataProperties .
+
+:ShippingCarrier rdfs:subPropertyOf :dataProperties .
+
+:ShippingCountry rdfs:subPropertyOf :dataProperties .
+
+:ShippingStationCode rdfs:subPropertyOf :dataProperties .
+
+:ShippingStationName rdfs:subPropertyOf :dataProperties .
+
+:ShuntingModalLabel rdfs:subPropertyOf :dataProperties .
+
+:Signature rdfs:subPropertyOf :dataProperties .
+
+:SimplifiedTransportProcedure rdfs:subPropertyOf :dataProperties .
+
+:Source rdfs:subPropertyOf :dataProperties .
+
+:SpecialProvisionRID5.4 rdfs:subPropertyOf :dataProperties .
+
+:SpecialProvisionsRID3.3 rdfs:subPropertyOf :dataProperties .
+
+:SpecialServiceDescriptionCode rdfs:subPropertyOf :dataProperties .
+
+:SpecialTreatmentCode rdfs:subPropertyOf :dataProperties .
+
+:SpecialTreatmentInformation rdfs:subPropertyOf :dataProperties .
+
+:SpecificationText rdfs:subPropertyOf :dataProperties .
+
+:SpeedCategory rdfs:subPropertyOf :dataProperties .
+
+:StartDate rdfs:subPropertyOf :dataProperties .
+
+:StartDateTime rdfs:subPropertyOf :dataProperties .
+
+:StatusOfDocument rdfs:subPropertyOf :dataProperties .
+
+:Street rdfs:subPropertyOf :dataProperties .
+
+:StreetNumber rdfs:subPropertyOf :dataProperties .
+
+:SubContractNumber_SplitContract rdfs:subPropertyOf :dataProperties .
+
+:SubsequentECM rdfs:subPropertyOf :dataProperties .
+
+:SuspensionOfAuthorisation rdfs:subPropertyOf :dataProperties .
+
+:SwapBodyCodification rdfs:subPropertyOf :dataProperties .
+
+:TagReference rdfs:subPropertyOf :dataProperties .
+
+:TankCode rdfs:subPropertyOf :dataProperties .
+
+:TareWeight rdfs:subPropertyOf :dataProperties .
+
+:TareWeightVehicle rdfs:subPropertyOf :dataProperties .
+
+:TariffNumber rdfs:subPropertyOf :dataProperties .
+
+:TechnicalDescription rdfs:subPropertyOf :dataProperties .
+
+:TechnicalForwardingRestrictions rdfs:subPropertyOf :dataProperties .
+
+:TechnicalRestrictions rdfs:subPropertyOf :dataProperties .
+
+:TelematicsOnBoard rdfs:subPropertyOf :dataProperties .
+
+:TiltingFunction rdfs:subPropertyOf :dataProperties .
+
+:Time rdfs:subPropertyOf :dataProperties .
+
+:TimetableYear rdfs:subPropertyOf :dataProperties .
+
+:TimingQualifierCode rdfs:subPropertyOf :dataProperties .
+
+:TotalLoadWeight rdfs:subPropertyOf :dataProperties .
+
+:TotalWeight rdfs:subPropertyOf :dataProperties .
+
+:TotalWeightLoadingTackles rdfs:subPropertyOf :dataProperties .
+
+:TractionMode rdfs:subPropertyOf :dataProperties .
+
+:TractionPositionInTrain rdfs:subPropertyOf :dataProperties .
+
+:TractionType rdfs:subPropertyOf :dataProperties .
+
+:TractionWeight rdfs:subPropertyOf :dataProperties .
+
+:TrafficTypeCode rdfs:subPropertyOf :dataProperties .
+
+:TrafficTypeNetwork rdfs:subPropertyOf :dataProperties .
+
+:TrainActivityType rdfs:subPropertyOf :dataProperties .
+
+:TrainCC_System rdfs:subPropertyOf :dataProperties .
+
+:TrainContactDetails rdfs:subPropertyOf :dataProperties .
+
+:TrainDepartureDate rdfs:subPropertyOf :dataProperties .
+
+:TrainInterrupted rdfs:subPropertyOf :dataProperties .
+
+:TrainJourneyModificationIndicator rdfs:subPropertyOf :dataProperties .
+
+:TrainJourneyModificationTime rdfs:subPropertyOf :dataProperties .
+
+:TrainJourneyStartTime rdfs:subPropertyOf :dataProperties .
+
+:TrainLength rdfs:subPropertyOf :dataProperties .
+
+:TrainLocationStatus rdfs:subPropertyOf :dataProperties .
+
+:TrainMaxSpeed rdfs:subPropertyOf :dataProperties .
+
+:TrainNotAtInterruptionPoint rdfs:subPropertyOf :dataProperties .
+
+:TrainNotReadyDescription rdfs:subPropertyOf :dataProperties .
+
+:TrainOperatingRU rdfs:subPropertyOf :dataProperties .
+
+:TrainRadioSystem rdfs:subPropertyOf :dataProperties .
+
+:TrainReady rdfs:subPropertyOf :dataProperties .
+
+:TrainReadyTime rdfs:subPropertyOf :dataProperties .
+
+:TrainStartTime rdfs:subPropertyOf :dataProperties .
+
+:TrainType rdfs:subPropertyOf :dataProperties .
+
+:TrainWeight rdfs:subPropertyOf :dataProperties .
+
+:TransfereeIM rdfs:subPropertyOf :dataProperties .
+
+:Transferred rdfs:subPropertyOf :dataProperties .
+
+:TransportInstruction rdfs:subPropertyOf :dataProperties .
+
+:TurnInNumber rdfs:subPropertyOf :dataProperties .
+
+:Type rdfs:subPropertyOf :dataProperties .
+
+:TypeCode1 rdfs:subPropertyOf :dataProperties .
+
+:TypeCode2 rdfs:subPropertyOf :dataProperties .
+
+:TypeDescription rdfs:subPropertyOf :dataProperties .
+
+:TypeDocumentEIN rdfs:subPropertyOf :dataProperties .
+
+:TypeOfError rdfs:subPropertyOf :dataProperties .
+
+:TypeOfIMHarmonization rdfs:subPropertyOf :dataProperties .
+
+:TypeOfInformation rdfs:subPropertyOf :dataProperties .
+
+:TypeOfLoadUnit rdfs:subPropertyOf :dataProperties .
+
+:TypeOfRUHarmonization rdfs:subPropertyOf :dataProperties .
+
+:TypeOfRemovableAccessories rdfs:subPropertyOf :dataProperties .
+
+:TypeOfRequest rdfs:subPropertyOf :dataProperties .
+
+:TypeOfUsedHybridPowerunit rdfs:subPropertyOf :dataProperties .
+
+:UN_Number rdfs:subPropertyOf :dataProperties .
+
+:UltimateDestinationCountry rdfs:subPropertyOf :dataProperties .
+
+:VAT rdfs:subPropertyOf :dataProperties .
+
+:Value rdfs:subPropertyOf :dataProperties .
+
+:VapourReturnSystem rdfs:subPropertyOf :dataProperties .
+
+:Variant rdfs:subPropertyOf :dataProperties .
+
+:VersionNumber rdfs:subPropertyOf :dataProperties .
+
+:VesselName rdfs:subPropertyOf :dataProperties .
+
+:Volume rdfs:subPropertyOf :dataProperties .
+
+:WagonEvent rdfs:subPropertyOf :dataProperties .
+
+:WagonGroupInfo rdfs:subPropertyOf :dataProperties .
+
+:WagonInfo rdfs:subPropertyOf :dataProperties .
+
+:WagonInterruptionReason rdfs:subPropertyOf :dataProperties .
+
+:WagonLength rdfs:subPropertyOf :dataProperties .
+
+:WagonLocationStatus rdfs:subPropertyOf :dataProperties .
+
+:WagonMaxSpeed rdfs:subPropertyOf :dataProperties .
+
+:WagonNumberFreight rdfs:subPropertyOf :dataProperties .
+
+:WagonNumberOfAxles rdfs:subPropertyOf :dataProperties .
+
+:WagonPreviousNumberFreight rdfs:subPropertyOf :dataProperties .
+
+:WagonTrainPosition rdfs:subPropertyOf :dataProperties .
+
+:WagonWeightEmpty rdfs:subPropertyOf :dataProperties .
+
+:Waste rdfs:subPropertyOf :dataProperties .
+
+:WeightNettoExplosiveMass rdfs:subPropertyOf :dataProperties .
+
+:WeightOfSetOfCarriages rdfs:subPropertyOf :dataProperties .
+
+:WheelDiameter rdfs:subPropertyOf :dataProperties .
+
+:WheelSetTransformationMethod rdfs:subPropertyOf :dataProperties .
+
+:WheelSetType rdfs:subPropertyOf :dataProperties .
+
+:WheelsetGauge rdfs:subPropertyOf :dataProperties .
+
+:ZIPCode rdfs:subPropertyOf :dataProperties .
+
+:Zones rdfs:subPropertyOf :dataProperties .
+
+:eMail rdfs:subPropertyOf :dataProperties .
+
+:measure rdfs:subPropertyOf :dataProperties .
+
+:sequenceID rdfs:subPropertyOf :dataProperties .
+
+:value rdfs:subPropertyOf :dataProperties .
+
+:dataProperties a owl:DatatypeProperty ;
+    rdfs:label "ERA Telematics Data Properties" ;
+    rdfs:comment "Collection of data properties for the ERA Telematics ontology" .
+

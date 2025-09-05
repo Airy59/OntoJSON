@@ -1,0 +1,28 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:IncotermCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "IncotermCode" ;
+    rdfs:comment "Incoterm (given by the client)" ;
+    rdfs:domain :PrepaymentCustomer ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrepaidCodeCustomer a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrepaidCodeCustomer" ;
+    rdfs:comment "Prepaidcode (given by the customer)" ;
+    rdfs:domain :PrepaymentCustomer ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasPrepaymentCustomer rdfs:range :PrepaymentCustomer .
+
+:PrepaymentCustomer a owl:Class ;
+    rdfs:label "PrepaymentCustomer" ;
+    rdfs:comment """Prepaidcode (given by
+																the client)""" .
+

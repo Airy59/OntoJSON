@@ -1,0 +1,20 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasAdministrativeDataSet a owl:ObjectProperty ;
+    rdfs:label "has AdministrativeDataSet" ;
+    rdfs:domain :RollingStockDataset ;
+    rdfs:range :AdministrativeDataSet .
+
+:hasDesignDataSet a owl:ObjectProperty ;
+    rdfs:label "has DesignDataSet" ;
+    rdfs:domain :RollingStockDataset ;
+    rdfs:range :DesignDataSet .
+
+:hasRollingStockDataset rdfs:range :RollingStockDataset .
+
+:RollingStockDataset a owl:Class ;
+    rdfs:label "RollingStockDataset" ;
+    rdfs:comment "Rolling Stock adminsitrative and Technical Dataset" .
+

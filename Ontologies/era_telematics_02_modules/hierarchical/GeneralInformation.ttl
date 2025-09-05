@@ -1,0 +1,43 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ConsignorReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ConsignorReference" ;
+    rdfs:comment """Consignor's reference
+																concerning the complete consignment""" ;
+    rdfs:domain :GeneralInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InformationConsignee a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InformationConsignee" ;
+    rdfs:comment """Information from the
+																consignor to the consignee relating
+																to the consignment. This information
+																is not to commit the carrier.""" ;
+    rdfs:domain :GeneralInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonGroupInfo a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonGroupInfo" ;
+    rdfs:comment """Consignor information
+																regarding the whole consignment.
+																Comparable with the element
+																WagonInfo, but for all wagons.""" ;
+    rdfs:domain :GeneralInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasGeneralInformation rdfs:range :GeneralInformation .
+
+:GeneralInformation a owl:Class ;
+    rdfs:label "GeneralInformation" ;
+    rdfs:comment """Genearal information about the
+													complete consignment""" .
+

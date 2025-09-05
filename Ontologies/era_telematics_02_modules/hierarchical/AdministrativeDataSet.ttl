@@ -1,0 +1,132 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AuthorisationValidUntil a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AuthorisationValidUntil" ;
+    rdfs:comment """End date for restricted authorisation (special
+										case)""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ChannelTunnelPermitted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ChannelTunnelPermitted" ;
+    rdfs:comment """Indication if wagon is allowed to pass the
+										Channel Tunnel - if the transport is planned between UK and
+										France and should use Eurotunnel infrastructure.""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DatePutIntoService a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DatePutIntoService" ;
+    rdfs:comment "Original Date of first operation" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateSuspensionOfAuthorisation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateSuspensionOfAuthorisation" ;
+    rdfs:comment """Date of the suspension of authorisation; must
+										be provided in case of suspension""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECM a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ECM" ;
+    rdfs:comment """ Full name of the assigned Entity in Charge of
+										Maintenance""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:GCUWagon a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GCUWagon" ;
+    rdfs:comment """Indication if wagon is operated under the GCU
+										contract""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InteropCapability a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InteropCapability" ;
+    rdfs:comment "Identification of the general interoperability capability of the wagon." ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MultilateralAuthorisationCountries a owl:DatatypeProperty ;
+    rdfs:label "MultilateralAuthorisationCountries" ;
+    rdfs:comment """ ISO country code of countries where the wagon
+										is authorised (applies only in case of limited
+										interoperability); first entry indicates the initial
+										authorisation country""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreviousWagonNumberFreight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreviousWagonNumberFreight" ;
+    rdfs:comment """For identification of a wagon after
+										renumbering""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:QuieterRoutesExemptionCountry a owl:DatatypeProperty ;
+    rdfs:label "QuieterRoutesExemptionCountry" ;
+    rdfs:comment """ISO code of country where the wagon has an
+										exemption in accordance with TSI Noise to run on quieter
+										routes although it is not TSI noise compliant""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RegistrationCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RegistrationCountry" ;
+    rdfs:comment "ISO country code of registration country" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SuspensionOfAuthorisation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SuspensionOfAuthorisation" ;
+    rdfs:comment """Information if authorisation has been
+										suspended by the authority""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasAdministrativeDataSet rdfs:range :AdministrativeDataSet .
+
+:hasECMCertificate a owl:ObjectProperty ;
+    rdfs:label "has ECMCertificate" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range :ECMCertificate .
+
+:hasPlannedChangeOfECM a owl:ObjectProperty ;
+    rdfs:label "has PlannedChangeOfECM" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range :PlannedChangeOfECM .
+
+:AdministrativeDataSet a owl:Class ;
+    rdfs:label "AdministrativeDataSet" .
+
+[] rdf:first :AdministrativeDataSet .
+
+[] rdf:first :AdministrativeDataSet .
+

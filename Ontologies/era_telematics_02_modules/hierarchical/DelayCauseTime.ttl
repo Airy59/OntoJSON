@@ -1,0 +1,43 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DelayCodingDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DelayCodingDateTime" ;
+    rdfs:comment "Date and Time of the coding of the delay" ;
+    rdfs:domain :DelayCauseTime ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DelayEventDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DelayEventDateTime" ;
+    rdfs:comment "Date and Time of delay event " ;
+    rdfs:domain :DelayCauseTime ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DelayMinutes a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DelayMinutes" ;
+    rdfs:comment "Identifieis the delay (in minutes) of a train for a specified cause" ;
+    rdfs:domain :DelayCauseTime ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasDelayCauseTime rdfs:range :DelayCauseTime .
+
+:DelayCauseTime a owl:Class ;
+    rdfs:label "DelayCauseTime" ;
+    rdfs:comment """Identifies the delay of a train due to a specified reason. In addition
+				it allows to put in a more detailed description (Changed from DelayReasonTime)""" .
+
+[] rdf:first :DelayCauseTime .
+
+[] rdf:first :DelayCauseTime .
+
+[] rdf:first :DelayCauseTime .
+

@@ -1,0 +1,54 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+
+time:hasBeginning a owl:ObjectProperty ;
+    rdfs:label "has beginning"@en,
+        "tiene principio"@es ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasBeginning> ;
+    rdfs:comment "Beginning of a temporal entity"@en,
+        "Comienzo de una entidad temporal."@es ;
+    rdfs:domain time:TemporalEntity ;
+    rdfs:range time:Instant ;
+    rdfs:subPropertyOf time:hasTime ;
+    skos:definition "Beginning of a temporal entity."@en,
+        "Comienzo de una entidad temporal."@es .
+
+time:hasEnd a owl:ObjectProperty ;
+    rdfs:label "has end"@en,
+        "tiene fin"@es ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEnd> ;
+    rdfs:comment "End of a temporal entity."@en,
+        "Final de una entidad temporal."@es ;
+    rdfs:domain time:TemporalEntity ;
+    rdfs:range time:Instant ;
+    rdfs:subPropertyOf time:hasTime ;
+    skos:definition "End of a temporal entity."@en,
+        "Final de una entidad temporal."@es .
+
+time:Instant a owl:Class ;
+    rdfs:label "Time instant"@en .
+
+time:hasTime a owl:ObjectProperty ;
+    rdfs:label "has time"@en,
+        "tiene tiempo"@es ;
+    rdfs:comment "Supports the association of a temporal entity (instant or interval) to any thing"@en,
+        "Proporciona soporte a la asociaciÃ³n de una entidad temporal (instante o intervalo) a cualquier cosa."@es ;
+    rdfs:range time:TemporalEntity ;
+    skos:definition "Supports the association of a temporal entity (instant or interval) to any thing"@en,
+        "Proporciona soporte a la asociaciÃ³n de una entidad temporal (instante o intervalo) a cualquier cosa."@es ;
+    skos:editorialNote "Feature at risk - added in 2017 revision, and not yet widely used. "@en,
+        "CaracterÃ­stica arriesgada -aÃ±adida en la revisiÃ³n del 2017 que no ha sido todavÃ­a utilizada de forma amplia."@es .
+
+time:TemporalEntity a owl:Class ;
+    rdfs:label "Temporal entity"@en .
+
+[] rdf:first time:TemporalEntity .
+
+[] rdf:first time:TemporalEntity .
+
+[] rdf:first time:TemporalEntity .
+

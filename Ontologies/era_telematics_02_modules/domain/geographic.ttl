@@ -1,0 +1,679 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AllocationCompany a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AllocationCompany" ;
+    :domain "Telematics" ;
+    rdfs:comment """Name of company who is responsible for allocation and maintenance of
+				codes""" ;
+    rdfs:domain [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Altitude rdfs:domain :GeographicCoordinates .
+
+:AntennaDistanceFromFrontOfTrain rdfs:domain :GNSS_DynamicPosition .
+
+:AssociatedAttachedLocationIdent a owl:Class ;
+    rdfs:label "AssociatedAttachedLocationIdent" ;
+    :domain "Telematics" ;
+    rdfs:comment """Location in the path of train with
+				AssociatedAttachedTrainID/AssociatedAttachedOTN, for which dependency described in
+				TrainActivityTypeCode exists """ .
+
+:BookedLocationDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BookedLocationDateTime" ;
+    rdfs:comment """Scheduled Date and Time of a train at a speciied location as defined
+				in the path contract""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BookedLocationTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BookedLocationTime" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:time ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ContainerHandlingFlag rdfs:domain :LocationPrimaryInformation .
+
+:Country a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Country" ;
+    rdfs:comment "Country Code (ISO Code)",
+        "Country Code ISO" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CountryCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CountryCode" ;
+    rdfs:comment """Country Code (ISO
+																Code)""",
+        """Invoiced
+																						section
+																						specified by
+																						country""",
+        """Numerical country code as in Part 4 of the Appendix 6 of
+							the decision 2007/756""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CurrentSpeed rdfs:domain :GNSS_DynamicPosition .
+
+:DamageCodePosition1 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition1" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition2" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition3 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition3" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition4 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition4" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DetailedDescriptionOfLocation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DetailedDescriptionOfLocation" ;
+    rdfs:domain :InterruptionPoint ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DwellTime rdfs:domain :TimingAtLocation .
+
+:EndLocation a owl:Class ;
+    rdfs:label "EndLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment "End point of a section or segment" .
+
+:ExceptionTimeAtLocation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ExceptionTimeAtLocation" ;
+    rdfs:comment """The Date and Time when something unexpected happns during the
+				transportation related to a location""" ;
+    rdfs:domain :ExceptionPoint ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ForwardingTrainNumber rdfs:domain :AcceptancePoint .
+
+:FreightFlag rdfs:domain :LocationPrimaryInformation .
+
+:GeographicalCoordinates a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GeographicalCoordinates" ;
+    rdfs:comment "Longitude and latitude as defined in UIC Leafle 920-2" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HandoverPointFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HandoverPointFlag" ;
+    rdfs:comment "Identifies if the location is a Handover Point from IM to IM" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Heading rdfs:domain :GNSS_DynamicPosition .
+
+:LoadArea a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadArea" ;
+    rdfs:comment "Payload Area - measured in M2" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadTableCountry a owl:DatatypeProperty ;
+    rdfs:label "LoadTableCountry" ;
+    rdfs:comment """ISO country code of countries for
+													additional load tables""" ;
+    rdfs:domain :LoadTable ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationDateTime" ;
+    rdfs:comment """Identifies the actual or forecasted Date / Time at a specific
+				reporting point""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationPrimaryCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationPrimaryCode" ;
+    rdfs:domain :LocationFileDatasetMessage ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationPrimaryName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationPrimaryName" ;
+    rdfs:comment """Location Name in an offication language of the Country using the ISO
+				Unicode alphabet""" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationSubsidiaryName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationSubsidiaryName" ;
+    rdfs:comment """To be completed in an official language of the Country using the ISO
+				Unicode alphabet""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationSubsidiaryTypeCode a owl:DatatypeProperty ;
+    rdfs:label "LocationSubsidiaryTypeCode" ;
+    rdfs:comment "None" ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ModificationStatusIndicator rdfs:domain :LocationModified .
+
+:MountedPosition a owl:DatatypeProperty ;
+    rdfs:label "MountedPosition" ;
+    rdfs:comment """Indication of where the telematics
+									unit is located on the component.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NUTS_Code rdfs:domain :LocationPrimaryInformation .
+
+:OriginCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OriginCountry" ;
+    rdfs:comment "CODE: ISO-3166-2",
+        "Code of origin country of the UTI." ;
+    rdfs:domain [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PassengerFlag rdfs:domain :LocationPrimaryInformation .
+
+:PickupTimeAtLocation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PickupTimeAtLocation" ;
+    rdfs:comment "The date and time of the release of a wagon at customer sidings" ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrimaryLocationName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrimaryLocationName" ;
+    :domain "Telematics" ;
+    rdfs:comment """Location Name in an offication language of the Country using the ISO
+				Unicode alphabet""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrimaryLocationNameASCII a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrimaryLocationNameASCII" ;
+    rdfs:comment "the location name in free text, using ASCII character set" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ProportionOfDistanceBetweenLocations a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ProportionOfDistanceBetweenLocations" ;
+    rdfs:comment """Percentage of the distance between the reporting location,
+							and the next location, on a scale from 0 to 100. """ ;
+    rdfs:domain :NetworkProjectedLocation ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ReferencedLocationDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ReferencedLocationDateTime" ;
+    rdfs:comment """Reference to original planned Date and Time agreed by all involved IMs
+				and RUs. """ ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RegistrationCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RegistrationCountry" ;
+    rdfs:comment "ISO country code of registration country" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SRID rdfs:domain :GeographicCoordinates .
+
+:ScheduledTimeAtLocation rdfs:domain :ExceptionPoint .
+
+:ShippingCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingCountry" ;
+    rdfs:comment """Forwarding UIC Country
+																Code""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:StartLocation a owl:Class ;
+    rdfs:label "StartLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment "Starting point of section or segment" .
+
+:UltimateDestinationCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "UltimateDestinationCountry" ;
+    rdfs:comment "Country of Ultimate Destination" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonLocationStatus rdfs:domain :ExceptionPoint .
+
+:Zones a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Zones" ;
+    rdfs:comment """Tariff
+																						distance,
+																						expressed in
+																						zones,
+																						between the
+																						stations or
+																						points
+																						corresponding
+																						to the
+																						beginning
+																						and end of
+																						the charging
+																						section.""" ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasAcceptancePoint a owl:ObjectProperty ;
+    rdfs:label "has AcceptancePoint" ;
+    rdfs:domain :COM ;
+    rdfs:range :AcceptancePoint .
+
+:hasActivityLocationIdent a owl:ObjectProperty ;
+    rdfs:label "has ActivityLocationIdent" ;
+    rdfs:domain :Activities ;
+    rdfs:range :ActivityLocationIdent .
+
+:hasAffectedLocation a owl:ObjectProperty ;
+    rdfs:label "has AffectedLocation" ;
+    rdfs:domain :ReceiptConfirmationMessage ;
+    rdfs:range :AffectedLocation .
+
+:hasCheckingLocation a owl:ObjectProperty ;
+    rdfs:label "has CheckingLocation" ;
+    rdfs:domain :RID_Checking ;
+    rdfs:range :CheckingLocation .
+
+:hasDeliveryPoint a owl:ObjectProperty ;
+    rdfs:label "has DeliveryPoint" ;
+    rdfs:domain :COM ;
+    rdfs:range :DeliveryPoint .
+
+:hasDestinationLocation a owl:ObjectProperty ;
+    rdfs:label "has DestinationLocation" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :DestinationLocation .
+
+:hasDifferentAcceptancePoint a owl:ObjectProperty ;
+    rdfs:label "has DifferentAcceptancePoint" ;
+    rdfs:domain :DifferentAcceptance ;
+    rdfs:range :DifferentAcceptancePoint .
+
+:hasEventLocation a owl:ObjectProperty ;
+    rdfs:label "has EventLocation" ;
+    rdfs:domain :EventLocationInformation ;
+    rdfs:range :EventLocation .
+
+:hasEventLocationInformation a owl:ObjectProperty ;
+    rdfs:label "has EventLocationInformation" ;
+    rdfs:domain :Event ;
+    rdfs:range :EventLocationInformation .
+
+:hasGNSS_DynamicPosition a owl:ObjectProperty ;
+    rdfs:label "has GNSS_DynamicPosition" ;
+    rdfs:domain :GeoLocalisation ;
+    rdfs:range :GNSS_DynamicPosition .
+
+:hasGeographicCoordinates a owl:ObjectProperty ;
+    rdfs:label "has GeographicCoordinates" ;
+    rdfs:domain [ ] ;
+    rdfs:range :GeographicCoordinates .
+
+:hasInterruption rdfs:domain :InterruptionPoint .
+
+:hasInterruptionDuration rdfs:domain :InterruptionPoint .
+
+:hasInterruptionPoint a owl:ObjectProperty ;
+    rdfs:label "has InterruptionPoint" ;
+    rdfs:domain :TrainRunningInterruptionMessage ;
+    rdfs:range :InterruptionPoint .
+
+:hasLocation a owl:ObjectProperty ;
+    rdfs:label "has Location" ;
+    rdfs:domain [ ] ;
+    rdfs:range :Location .
+
+:hasLocationModified a owl:ObjectProperty ;
+    rdfs:label "has LocationModified" ;
+    rdfs:domain :TrainJourneyModification ;
+    rdfs:range :LocationModified .
+
+:hasLocationPrimaryInformation a owl:ObjectProperty ;
+    rdfs:label "has LocationPrimaryInformation" ;
+    rdfs:domain :LocationFileDatasetMessage ;
+    rdfs:range :LocationPrimaryInformation .
+
+:hasLocationSubsidiaryInformation a owl:ObjectProperty ;
+    rdfs:label "has LocationSubsidiaryInformation" ;
+    rdfs:domain :LocationFileDatasetMessage ;
+    rdfs:range :LocationSubsidiaryInformation .
+
+:hasNextLocation a owl:ObjectProperty ;
+    rdfs:label "has NextLocation" ;
+    rdfs:domain :NetworkProjectedLocation ;
+    rdfs:range :NextLocation .
+
+:hasNoteLocationIdent a owl:ObjectProperty ;
+    rdfs:label "has NoteLocationIdent" ;
+    rdfs:domain :Notes ;
+    rdfs:range :NoteLocationIdent .
+
+:hasPathPlanningReferenceLocation a owl:ObjectProperty ;
+    rdfs:label "has PathPlanningReferenceLocation" ;
+    rdfs:domain :TrainInformation ;
+    rdfs:range :PathPlanningReferenceLocation .
+
+:hasPosition a owl:ObjectProperty ;
+    rdfs:label "has Position" ;
+    rdfs:domain :EventLocationInformation ;
+    rdfs:range :Position .
+
+:hasShippingLocation a owl:ObjectProperty ;
+    rdfs:label "has ShippingLocation" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :ShippingLocation .
+
+:hasSignalQuality rdfs:domain :GNSS_DynamicPosition .
+
+:hasTiming rdfs:domain :TimingAtLocation .
+
+:hasTimingAtLocation a owl:ObjectProperty ;
+    rdfs:label "has TimingAtLocation" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TimingAtLocation .
+
+:hasTransferPoint a owl:ObjectProperty ;
+    rdfs:label "has TransferPoint" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TransferPoint .
+
+:ActivityLocationIdent a owl:Class ;
+    rdfs:label "ActivityLocationIdent" ;
+    :domain "Telematics" .
+
+:AssociatedAttachedTimingAtLocation a owl:Class ;
+    rdfs:label "AssociatedAttachedTimingAtLocation" ;
+    rdfs:comment """Identifies the time at location of the associated attached train or
+    era:domain "Telematics" .
+				train service number given by AssociatedAttachedTrainID or AssociatedAttachedOTN or
+				AssociatedAttachedTrainServiceNumber. In general, the Dwell Time element of
+				structure TimingAtLocation is not provided when using TrainActivityType""" .
+
+:CheckingLocation a owl:Class ;
+    rdfs:label "CheckingLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment "The location where the check took place" .
+
+:CountryCodeISO a owl:Class,
+        owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CountryCodeISO" ;
+    rdfs:comment "Identifies a County or State by code (ISO 3166-1)" ;
+    rdfs:domain :CountryCodeISO ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DestinationLocation a owl:Class ;
+    rdfs:label "DestinationLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment """Destination Station ( TAF location code with
+										optional SLC type 42 or 36)""",
+        """use here the station code of the station the
+										wagon shall terminate its transport run """ .
+
+:DifferentAcceptancePoint a owl:Class ;
+    rdfs:label "DifferentAcceptancePoint" ;
+    :domain "Telematics" ;
+    rdfs:comment """Variance
+																			of acceptance point
+																			given in structure
+																			AcceptancePoint.""" .
+
+:EventLocation a owl:Class ;
+    rdfs:label "EventLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment """Location where the
+																event happend""" .
+
+:Location a owl:Class ;
+    rdfs:label "Location" ;
+    :domain "Telematics" ;
+    rdfs:comment "Identifies a Location using a LocationIdent" .
+
+:LocationSubsidiaryCode a owl:Class,
+        owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationSubsidiaryCode" ;
+    rdfs:comment """this element identifies a location as a part of primary location e.g.
+				a junction, a signal, a passing loop etc., It is unique when used in combination
+				with a â€œLocationPrimaryCodeâ€""" ;
+    rdfs:domain :LocationSubsidiaryCode .
+
+:NextLocation a owl:Class ;
+    rdfs:label "NextLocation" ;
+    rdfs:comment """Next location forecasted to be encountered by the train.
+							If this element isnâ€™t present, the GNSS position is considered to be
+							within the â€œboundariesâ€ of the location included in the LocationReport""" .
+
+:NoteLocationIdent a owl:Class ;
+    rdfs:label "NoteLocationIdent" ;
+    rdfs:comment "Identification of location for which is note valid" .
+
+:PathPlanningReferenceLocation a owl:Class ;
+    rdfs:label "PathPlanningReferenceLocation" ;
+    rdfs:comment """It has to be indicated whether the path planning
+							(direction of construction) is carried out at the traindeparturepoint
+							(origin), intermediate or traindestinationpoint. The operation point
+							referenced here MUST have a calendar/dayOfDeparture entry - applications
+							have to check this.""" .
+
+:ShippingLocation a owl:Class ;
+    rdfs:label "ShippingLocation" ;
+    rdfs:comment """Shipping Station ( TAF location code with
+										optional SLC type 42 or 36)""",
+        """use here the station code of the station the
+										wagon has started its transport run""" .
+
+:TransferPoint a owl:Class ;
+    rdfs:label "TransferPoint" ;
+    rdfs:comment "Transfer point or station of destination in the considered network" .
+
+:LocationSubsidiaryIdentification a owl:Class ;
+    rdfs:label "LocationSubsidiaryIdentification" ;
+    rdfs:comment "Code, Name and allocation company of Subsidiary Location" .
+
+:EventLocationInformation a owl:Class ;
+    rdfs:label "EventLocationInformation" ;
+    rdfs:comment """Information concerning the event
+													location. Optional for event types 06 and 16,
+													these events may not have a location. But for
+													all remaining event types, at least one of the
+													elements EventLocation or Position should be
+													sent""" .
+
+:Position a owl:Class ;
+    rdfs:label "Position" ;
+    rdfs:comment """Geo coordinates of the
+																wagon event location in WGS84 as
+																used in the CRD""" .
+
+:TimingAtLocation a owl:Class ;
+    rdfs:label "TimingAtLocation" ;
+    rdfs:comment """Timing at an operation point It has an attribute TimerQualifierCode
+				with the following values: PLA = Public Location Arrival ELA = Earliest Location
+				Arrival ALA = Actual Location Arival LLA = Latest Location Arrival PLD = Public
+				Location Departure ELD = Earliest Location Departure ALD = Actual Location Departure
+				LLD = Latest Location Departure ERT = Earliest Run Through ART = Actual Run Through
+				LRT = Latest Run Through """ .
+
+:AffectedLocation a owl:Class ;
+    rdfs:label "AffectedLocation" ;
+    rdfs:comment "Affected location " .
+
+:DeliveryPoint a owl:Class ;
+    rdfs:label "DeliveryPoint" ;
+    rdfs:comment """Description of location and time
+													for the hand over of the consignment""" .
+
+:ExceptionPoint a owl:Class ;
+    rdfs:label "ExceptionPoint" ;
+    rdfs:comment """Describes the interruption points with location and the time of the
+				interruption""" .
+
+:GeographicCoordinates a owl:Class ;
+    rdfs:label "GeographicCoordinates" ;
+    rdfs:comment "Latitude and Longitude of location" .
+
+:LocationModified a owl:Class ;
+    rdfs:label "LocationModified" ;
+    rdfs:comment """This element shows the Location that has been changed for the train
+				run """ .
+
+:GNSS_DynamicPosition a owl:Class ;
+    rdfs:label "GNSS_DynamicPosition" .
+
+:LocationSubsidiaryInformation a owl:Class ;
+    rdfs:label "LocationSubsidiaryInformation" ;
+    rdfs:comment """Required for Add, Update of a Location Subsidiary Code (modified to
+				global element)""" .
+
+:AcceptancePoint a owl:Class ;
+    rdfs:label "AcceptancePoint" ;
+    rdfs:comment """Description of location and time
+													for the take over of the consignment""" .
+
+:InterruptionPoint a owl:Class ;
+    rdfs:label "InterruptionPoint" ;
+    rdfs:comment """describes the interruption points with location and the reason for the
+				interruption""" .
+
+:LocationPrimaryInformation a owl:Class ;
+    rdfs:label "LocationPrimaryInformation" ;
+    rdfs:comment "Required for Primary Location Add, Update, of a Location Primary Code" .
+
+[] rdf:first :AffectedLocation .
+
+[] rdf:first :AcceptancePoint .
+
+[] rdf:first :DeliveryPoint .
+
+[] rdf:first :AcceptancePoint .
+
+[] rdf:first :DeliveryPoint .
+
+[] rdf:first :AssociatedAttachedTimingAtLocation .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :AcceptancePoint .
+
+[] rdf:first :LocationSubsidiaryIdentification .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :InterruptionPoint .
+
+[] rdf:first :LocationModified .
+
+[] rdf:first :AcceptancePoint .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :AcceptancePoint .
+
+[] rdf:first :InterruptionPoint .
+
+[] rdf:first :GNSS_DynamicPosition .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :GeographicCoordinates .
+
+[] rdf:first :Position .
+
+[] rdf:first :AffectedLocation .
+
+[] rdf:first :LocationSubsidiaryIdentification .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :GeographicCoordinates .
+
+[] rdf:first :Position .
+
+[] rdf:first :AcceptancePoint .
+
+[] rdf:first :DeliveryPoint .
+
+[] rdf:first :InterruptionPoint .
+
+[] rdf:first :InterruptionPoint .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :ExceptionPoint .
+
+[] rdf:first :LocationModified .
+
+[] rdf:first :AffectedLocation .
+
+[] rdf:first :ExceptionPoint .
+
+[] rdf:first :InterruptionPoint .
+
+[] rdf:first :LocationModified .
+

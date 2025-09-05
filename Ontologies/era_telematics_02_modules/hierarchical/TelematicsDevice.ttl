@@ -1,0 +1,63 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ATEXCertified a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ATEXCertified" ;
+    rdfs:comment """Indication if the telematics device
+									is ATEX certified.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ATEXLevel a owl:DatatypeProperty ;
+    rdfs:label "ATEXLevel" ;
+    rdfs:comment """Indication of ATEX level (gas and
+									dust if applicable) based on ATEX/IECEx standard; e.g.: II 2G Ex
+									ib IIB T4 Gb or II 2D Ex ib IIIC T135Â°C Db.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ComponentMounted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ComponentMounted" ;
+    rdfs:comment """Indication of the component to which
+									the telematics unit is attached.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DeviceType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeviceType" ;
+    rdfs:comment """Specification of type of telematics
+									device.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ManufacturerName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ManufacturerName" ;
+    rdfs:comment """Name of the manufacturer of the
+									telematics device.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MountedPosition a owl:DatatypeProperty ;
+    rdfs:label "MountedPosition" ;
+    rdfs:comment """Indication of where the telematics
+									unit is located on the component.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TelematicsDevice a owl:Class ;
+    rdfs:label "TelematicsDevice" ;
+    rdfs:comment """Detailed information about a specific telematics
+						device.""" .
+

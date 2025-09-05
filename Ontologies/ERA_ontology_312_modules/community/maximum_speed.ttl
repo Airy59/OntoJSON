@@ -1,0 +1,1154 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:altitudeRangeDetail a owl:DatatypeProperty ;
+    rdfs:label "Altitude range detail"@en ;
+    :eratvIndex "4.3.2.1" ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date ;
+    rdfs:comment "Altitude range value for 'X' if value 'AX' is selected in altitude range."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:areaBoardingAid a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Range of use of the platform boarding aid"@en ;
+    :XMLName "IPL_AreaBoardingAid" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.1.0.6.7" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AreaBoardingAid> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-02"^^xsd:date ;
+    dcterms:modified "2023-01-20"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "Information of the train access level for which the boarding aid can be used."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :platformDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Information of the train access level for which the boarding aid can be used. Data is presented as the vertical difference that is overcome by the platform boarding aid in millimetres. The value â€œ0â€ means that the platform is not equipped with a platform boarding aid."@en .
+
+:cantDefficiency a owl:DatatypeProperty ;
+    rdfs:label "Cant defficiency"@en ;
+    :eratvIndex "4.6.1" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date,
+        "2024-06-26"^^xsd:date,
+        "2025-03-05"^^xsd:date ;
+    rdfs:comment "Cant deficiency (maximum uncompensated lateral acceleration) for which the vehicle has been assessed. For dual gauge vehicles values for each gauge have to be indicated."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:cantDeficiency a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Cant deficiency"@en ;
+    :XMLName "ITP_CantDeficiency" ;
+    :applicable "Y" ;
+    :formatNote "+/-NNN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.4.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/CantDeficiency> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Maximum cant deficiency expressed in millimetres defined as difference between the applied cant and a higher equilibrium cant the line has been designed for."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso "INF TSI: 4.2.4.3" ;
+    rdfs:subPropertyOf :trackDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "In case of positive value of cant deficiency or zero symbol  '+' shall be applied. In case of negative cant deficiency symbol '-' has to be selected. Value of the cant deficiency shall be given in millimetres. In case of lateral uncompensated acceleration on a 1435 mm track gauge of 1.0 m/s2 the value of 153 mm may be published."@en .
+
+:contactStripMaterialMetallicContent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Contact strip material metallic content"@en ;
+    :XMLName "EPA_StripMaterial" ;
+    :dependencyNote "Mandatory only if impregnated carbon ([NN] % of metallic content)â€ is selected in 1.1.1.2.3.4, otherwise no value should be provided"@en ;
+    :rinfIndex "1.1.1.2.3.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ContactStripMaterialMetallicContent> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-01-25"^^xsd:date ;
+    dcterms:modified "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1302/2023-09-28> ;
+    rdfs:comment "Indication of max. percentage of contact strip material Impregnated Carbon permitted to be used." ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso "LOC&PAS TSI: 4.2.8.2.9.4.2" ;
+    rdfs:subPropertyOf :pantographDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "In case that the value of the property era:contactStripMaterial is \"impregnated carbon\", it is the metallic content in % (this value must be added). This is the maximum percentage allowed."@en .
+
+:crossSectionArea a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Cross section area"@en ;
+    :XMLName "ITU_CrossSectionArea" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if the speed of the line is equal or greater than 200km/h "@en ;
+    :formatNote "NNN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.8.8" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/CrossSectionAreaApplicability>,
+        <http://data.europa.eu/949/shapes/CrossSectionAreaT> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M2> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "Smallest cross section area in square metres of the tunnel"@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg/2014/1299/2023-09-28#:~:text=4.2.10.1.%C2%A0%C2%A0%C2%A0%20Maximum%20pressure%20variations%20in%20tunnels"^^xsd:anyURI,
+        "[4.2.10.1 of INF TSI on Maximum pressure variations in tunnels | " ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Smallest real cross section area (expressed in square metres) of the tunnel.
+
+Reference: 4.2.10.1 of INF TSI on Maximum pressure variations in tunnels."""@en .
+
+:designMassExceptionalPayload a owl:DatatypeProperty ;
+    rdfs:label "Design mass under exceptional payload"@en ;
+    :eratvIndex "4.5.2.3" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloGM> ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date,
+        "2024-06-26"^^xsd:date ;
+    rdfs:comment "Design mass under exceptional payload."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:designMassNormalPayload a owl:DatatypeProperty ;
+    rdfs:label "Design mass under normal payload"@en ;
+    :eratvIndex "4.5.2.2" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloGM> ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date,
+        "2024-06-26"^^xsd:date ;
+    rdfs:comment "Design mass under normal payload."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:designMassWorkingOrder a owl:DatatypeProperty ;
+    rdfs:label "Design mass in working order"@en ;
+    :eratvIndex "4.5.2.1" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloGM> ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date,
+        "2024-06-26"^^xsd:date ;
+    rdfs:comment "Design mass in working order."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:distSignToPhaseEnd a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Distance between signboard and phase separation ending"@en ;
+    :XMLName "EOS_DistSignToPhaseEnd" ;
+    :applicable "Y/N" ;
+    :dependencyNote "It is applicable ( Y ) only if the value  Overhead contact line (OCL)  is selected for parameter \"Type of contact line system\""@en ;
+    :formatNote "NNN" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.2.4.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/DistSignToPhaseEnd> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date ;
+    rdfs:comment "Distance between the signboard authorizing the driver to  raise pantograph  or  close the circuit breaker  after passing the phase separation and the end of the phase separation section."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :oclSeparationSectionsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Specific for route compatibility check on French network."@en .
+
+:drivingCabs a owl:DatatypeProperty ;
+    rdfs:label "Driving cabs"@en ;
+    :eratvIndex "4.1.1" ;
+    dcterms:created "2021-08-24"^^xsd:date ;
+    dcterms:modified "2021-08-24"^^xsd:date ;
+    rdfs:comment "Number of driving cabs. For wagons the number of driving cabs is to be set to zero (0)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:frequencyBandsForDetection dcterms:relation :tdsMaximumMagneticField .
+
+:gsmRSetsInDrivingCab a owl:DatatypeProperty ;
+    rdfs:label "GSM-R sets in driving cab"@en ;
+    :eratvIndex "4.13.2.2" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Number of GSM-R mobile sets in driving cab for data transmission."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:linesideDistanceIndicationFrequency rdfs:range xsd:integer .
+
+:loadingPlatformHeight a owl:DatatypeProperty ;
+    rdfs:label "Loading platform height"@en ;
+    :eratvIndex "4.8.7" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Height of loading platform (for flat wagons and combined transport), given in mm."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:massPerWheel a owl:DatatypeProperty ;
+    rdfs:label "Mass per wheel"@en ;
+    :eratvIndex "4.5.6" ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date ;
+    rdfs:comment "Mass per wheel, given in kg."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:maxCurrentStandstillPantograph a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum current at standstill per pantograph"@en ;
+    :XMLName "ECS_MaxStandstillCurrent" ;
+    :applicable "Y/N" ;
+    :dependencyNote """This parameter is applicable only the type of contact line system is 'Overhead contact line (OCL)'
+In sidings, it may be not applicable, in the following cases:
+- siding is not electrified
+- Siding is destined to freight traffic, whose trains have a low consumption in stationary (the maximum demand of energy is due to air conditioning systems, which is not significant in these trains).
+- Siding is used in access to depots or workshops."""@en ;
+    :eratvIndex "4.10.4" ;
+    :formatNote "NNN" ;
+    :legalDeadline """In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest for DC systems
+30 June 2024 for AC systems"""@en ;
+    :rinfIndex "1.1.1.2.2.3",
+        "1.2.2.0.6.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaxCurrentStandstillPantograph>,
+        <http://data.europa.eu/949/shapes/MaxCurrentStandstillPantographApplicability>,
+        <http://data.europa.eu/949/shapes/MaxCurrentStandstillPantographS> ;
+    :tsiOPEAppendixD2Index "3.3.8" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/A> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-05-16"^^xsd:date,
+        "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of the maximum allowable train current at standstill expressed in amperes."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso "ENE TSI: 4.2.5, LOC&PAS TSI: 4.2.8.2.5" ;
+    rdfs:subPropertyOf :contactLineSystemDataParameter,
+        :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Parameter related to current taken by the vehicle when it is not in a traction or regenerative mode, e.g. preheating, air-condition, etc.
+Due to operational reasons, trains can get stuck on SoL for hours, and in some cases, this parameter is even the reason the air-condition is shut down"""@en .
+
+:maxDistConsecutiveAxles a owl:DatatypeProperty ;
+    rdfs:label "Maximum permitted distance between two consecutive axles in case of TSI non-compliance"@en ;
+    :XMLName "CTD_MaxDistConsecutiveAxles" ;
+    :eratvIndex "4.14.2.1" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter. Indication of maximum permitted distance between two consecutive axles in case of TSI non-compliance, given in millimetres."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:maxDistEndTrainFirstAxle rdfs:range xsd:integer .
+
+:maxLengthVehicleNose a owl:DatatypeProperty ;
+    rdfs:label "Maximum length vehicle nose"@en ;
+    :eratvIndex "4.14.2.4" ;
+    dcterms:created "2021-09-01"^^xsd:date ;
+    dcterms:modified "2021-09-01"^^xsd:date ;
+    rdfs:comment "Maximum length of the vehicle nose."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:maxTrainCurrent rdfs:range xsd:integer .
+
+:maximumBrakeThermalEnergyCapacity a owl:DatatypeProperty ;
+    rdfs:label "Maximum brake thermal energy capacity"@en ;
+    :eratvIndex "4.7.2.1.6" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloJ> ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date,
+        "2024-06-26"^^xsd:date ;
+    rdfs:comment "Maximum brake thermal energy capacity given in kJ"@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:maximumBrakingDistance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum braking distance requested"@en ;
+    :XMLName "CBP_MaxBrakeDist" ;
+    :applicable "Y/N" ;
+    :formatNote "NNNNN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.11.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumBrakingDistance> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-06-26"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj>,
+        <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "The maximum value of the braking distance [in metres] of a train shall be given for the maximum line speed."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :brakeRelatedDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """This distance corresponds to the smallest physical distance between signals of the section of line at V max, taking into account the effect of gradient, minus the value of the safety margin used by the IM.
+
+The braking capability of a train allows it to respect this braking distance.
+
+Note that the OPE TSI provides for an exchange of detailed information between the infrastructure manager and the railway undertaking to ensure safe operation.
+
+See also:
+- OPE TSI: 4.2.2.6
+- CCS TSI: 4.2.2"""@en .
+
+:maximumDesignSpeed a owl:DatatypeProperty ;
+    rdfs:label "Maximum design speed"@en ;
+    :eratvIndex "4.1.2.1" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date,
+        "2024-06-26"^^xsd:date ;
+    rdfs:comment "Maximum design speed."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:maximumLocomotivesCoupled a owl:DatatypeProperty ;
+    rdfs:label "Maximum locomotives coupled"@en ;
+    :eratvIndex "4.1.5" ;
+    dcterms:created "2021-08-25"^^xsd:date ;
+    dcterms:modified "2021-08-25"^^xsd:date ;
+    rdfs:comment "Maximum number of trainsets or locomotives coupled together in multiple operation."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:maximumMagneticFieldDirectionX a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum magnetic field direction X"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldDirectionX> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:comment "The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band. Direction X."@en ;
+    rdfs:domain :MaximumMagneticField ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The maximumMagneticFieldDirectionX parameter is only applicable for axle counters."@en .
+
+:maximumMagneticFieldDirectionY a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum magnetic field direction Y"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldDirectionY> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:comment "The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band. Direction Y."@en ;
+    rdfs:domain :MaximumMagneticField ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The maximumMagneticFieldDirectionY parameter is only applicable for axle counters."@en .
+
+:maximumMagneticFieldDirectionZ a owl:DatatypeProperty ;
+    rdfs:label "Maximum magnetic field direction Z"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldDirectionZ> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:comment "The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band. Direction Z."@en ;
+    rdfs:domain :MaximumMagneticField ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The maximumMagneticFieldDirectionZ parameter is applicable for axle counters."@en .
+
+:maximumPermittedSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum permitted speed"@en ;
+    :XMLName "IPP_MaxSpeed" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.2.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumPermittedSpeed> ;
+    :tsiOPEAppendixD2Index "3.1.4" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-26"^^xsd:date ;
+    rdfs:comment "Nominal maximum operational speed on the line as a result of infrastructure, energy and control, command signalling subsystem characteristics expressed in kilometres/hour."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso "INF TSI, ENE TSI, CCS TSI" ;
+    rdfs:subPropertyOf :performanceDataParameter ;
+    ns1:term_status "stable" ;
+    skos:example """In case INF, ENE and/or CCS allow different speeds, the max permitted speed on this track of this section of line shall be the lowest one.
+In case the maximum permitted speed for freight and passenger trains operation are different, the max permitted speed on this track of this section of line shall be the highest one.""" ;
+    skos:scopeNote "\"Speed on the line\" shall be understood as speed on the track of the section of line in question. "@en .
+
+:maximumSpeedEmpty a owl:DatatypeProperty ;
+    rdfs:label "Maximum speed empty"@en ;
+    :eratvIndex "4.1.2.2" ;
+    dcterms:created "2021-08-24"^^xsd:date ;
+    dcterms:modified "2021-08-24"^^xsd:date ;
+    rdfs:comment "Maximum speed when empty."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:minDistConsecutiveAxles a owl:DatatypeProperty ;
+    rdfs:label "Minimum permitted distance between two consecutive axles"@en ;
+    :eratvIndex "4.14.2.2" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Indication of minimum permitted distance between two consecutive axles, given in millimetres."@en .
+
+:minDistFirstLastAxle a owl:DatatypeProperty ;
+    rdfs:label "Minimum permitted distance between first and last axle"@en ;
+    :eratvIndex "4.14.2.3" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Indication of minimum permitted distance between first and last axles, given in millimetres."@en .
+
+:minWheelDiameter a owl:DatatypeProperty ;
+    rdfs:label "Minimum permitted wheel diameter"@en ;
+    :eratvIndex "4.14.2.6" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Minimum permitted wheel diameter, given in millimetres."@en .
+
+:minimumConcaveVerticalRadius a owl:DatatypeProperty ;
+    rdfs:label "Minimum concave vertical radius"@en ;
+    :eratvIndex "4.8.6" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Minimum vertical concave curve radius capability."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:minimumConvexVerticalRadius a owl:DatatypeProperty ;
+    rdfs:label "Minimum convex vertical radius"@en ;
+    :eratvIndex "4.8.5" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Minimum vertical convex curve radius capability."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:minimumHorizontalRadius a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Minimum radius of horizontal curve"@en ;
+    :XMLName "ILL_MinRadHorzCurve" ;
+    :applicable "Y/N" ;
+    :eratvIndex "4.8.4" ;
+    :formatNote "NNNNN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.3.7",
+        "1.2.2.0.3.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumHorizontalRadius>,
+        <http://data.europa.eu/949/shapes/MinimumHorizontalRadiusS> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-03-08"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Radius of the smallest horizontal curve, expressed in metres."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso """INF TSI: 4.2.3.4
+EN 13803:2017, Tables N.A and N.2""" ;
+    rdfs:subPropertyOf :lineLayoutDataParameter,
+        :sidingDataParameter,
+        :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "To describe a straight section of line value \" 99999\" shall be used."@en .
+
+:minimumVerticalRadius a owl:ObjectProperty ;
+    rdfs:label "Minimum radius of vertical curve"@en ;
+    :XMLName "ILL_MinRadVertCurve" ;
+    :applicable "Y/N" ;
+    :formatNote """In RDF: the values points to an instance of era:MinimumVerticalRadius class with 2 properties for the crest and hollow values.
+                                                  In XML: NNN+NNN"""@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.3.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadius> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2023-04-05"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-12-12"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2019-06-16> ;
+    rdfs:comment "Radius of the smallest vertical curve expressed in metres."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :MinimumVerticalRadius ;
+    rdfs:seeAlso "INF TSI: 4.2.3.54" ;
+    rdfs:subPropertyOf :sidingObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The radius of vertical curves (except for humps in marshalling yards) shall be at least 500 m on a crest or 900 m in a hollow."@en .
+
+:minimumVerticalRadiusCrest a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Minimum radius of vertical curve crest"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadiusCrest> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    rdfs:comment "Part of the minimum radius of vertical curve that indicates the crest"@en ;
+    rdfs:domain :MinimumVerticalRadius ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:minimumVerticalRadiusHollow a owl:DatatypeProperty ;
+    rdfs:label "Minimum radius of vertical curve hollow"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadiusHollow> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    rdfs:comment "Part of the minimum radius of vertical curve that indicates the hollow"@en ;
+    rdfs:domain :MinimumVerticalRadius ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:minimumWheelDiameter a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Minimum wheel diameter for fixed obtuse crossings"@en ;
+    :XMLName "ISC_MinWheelDiaFixObtuseCrossings" ;
+    :applicable "Y" ;
+    :eratvIndex "4.8.2" ;
+    :formatNote "NNN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.5.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumWheelDiameter> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Maximum unguided length of fixed obtuse crossings is based on a minimum wheel diameter in service expressed in millimetres."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso "INF TSI:  4.2.5.3" ;
+    rdfs:subPropertyOf :switchesAndCrossingsDataParameter,
+        :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The minimum TSI value is 330 mm and this shall be used as a default value unless advised otherwise. If the value of the wheel diameter is bigger than 330 mm, it has to be specified.
+New lines are assumed to be compliant with the TSI INF. When the line is compliant to TSI the default value of 330 mm has to be presented."""@en .
+
+:numberElementsRakeFreightWagons a owl:DatatypeProperty ;
+    rdfs:label "Number elements rake freight wagons"@en ;
+    :eratvIndex "4.1.6" ;
+    dcterms:created "2021-08-25"^^xsd:date ;
+    dcterms:modified "2021-08-25"^^xsd:date ;
+    rdfs:comment "Number of elements in the rake of freight wagons (only for subcategory 'rake of freight wagons')"@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:numberOfPantographsInContactWithOCL a owl:DatatypeProperty ;
+    rdfs:label "Number of pantographs in contact with OCL"@en ;
+    :eratvIndex "4.10.7" ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2020-11-19"^^xsd:date ;
+    rdfs:comment "Number of pantographs in contact with the overhead contact line (OCL) (to be indicated for each energy supply system the vehicle is equipped for)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:numberOfToilets a owl:DatatypeProperty ;
+    rdfs:label "Number of toilets"@en ;
+    :eratvIndex "4.12.1.2" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Number of toilets."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:phaseInfoLength rdfs:range xsd:integer .
+
+:prmAccessibleToilets a owl:DatatypeProperty ;
+    rdfs:label "Prm accessible toilets"@en ;
+    :eratvIndex "4.12.2.3" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date,
+        "2024-11-25"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1300/2023-09-28> ;
+    rdfs:comment "Number of PRM accessible toilets."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:raisedPantographsDistance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Requirements for spacing between raised pantographs, at the given speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsDistance> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Part of the raised pantographs distance and speed of a track that corresponds to the minimum distance between pantographs, in metres."@en ;
+    rdfs:domain :RaisedPantographsDistanceAndSpeed ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:definition "The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en .
+
+:raisedPantographsNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Requirements for number of raised pantographs, at the given speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsNumber> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Part of the raised pantographs distance and speed of a track that corresponds to the number of pantographs."@en ;
+    rdfs:domain :RaisedPantographsDistanceAndSpeed ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:definition "The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en .
+
+:raisedPantographsSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Raised pantographs speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsSpeed> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date,
+        "2025-05-12"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en ;
+    rdfs:domain :RaisedPantographsDistanceAndSpeed ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:definition "The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en .
+
+:relativeDistanceDangerPoint rdfs:range xsd:integer .
+
+:systemSeparationInfoLength rdfs:range xsd:integer .
+
+:thermalCapacityTime a owl:DatatypeProperty ;
+    rdfs:label "Thermal capacity time"@en ;
+    :eratvIndex "4.7.2.1.5" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Thermal capacity time. If no reference case is indicated."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:totalVehicleMass a owl:DatatypeProperty ;
+    rdfs:label "Total vehicle mass"@en ;
+    :eratvIndex "4.5.5" ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date ;
+    rdfs:comment "Total vehicle mass (for each vehicle of the unit), given in kg."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:trackRaisedPantographsDistanceAndSpeed a owl:ObjectProperty ;
+    rdfs:label "Requirements for number of raised pantographs and spacing between them, at the given speed"@en ;
+    :XMLName "EPA_NumRaisedSpeed" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory only if â€œOverhead contact line (OCL)â€ is selected in 1.1.1.2.2.1.1, otherwise the parameter is not applicable."@en ;
+    :formatNote "Three values: [N] is number of pantographs; [NNN] is minimum distance between pantographs, in metres; [NNN] is the speed considered in km/h." ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.3.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrackRaisedPantographDistanceAndSpeedApplicability>,
+        <http://data.europa.eu/949/shapes/TrackRaisedPantographsDistanceAndSpeed> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1301/2023-09-28>,
+        <http://data.europa.eu/eli/reg/2014/1302/2023-09-28> ;
+    rdfs:comment "Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :RaisedPantographsDistanceAndSpeed ;
+    rdfs:seeAlso """ENE TSI: 4.2.13 ;
+LOC&PAS TSI: 4.2.8.2.9.7""" ;
+    rdfs:subPropertyOf :pantographObjParameter ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "Relates the track with the class RaisedPantographsDistanceAndSpeed." ;
+    skos:scopeNote """This parameter gives the information about the number of pantographs and the distance between them at a given speed for which the Overhead Contact Line (OCL) has been designed.
+
+As for different speeds different combinations of number of pantographs and distance between them may exist, so this parameter can be repeated to present all of them.
+
+The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed.
+
+See 4.2.13 (TSI ENE) and 4.2.8.2.9.7 (TSI LOC&PAS)"""@en .
+
+:umax2 rdfs:range xsd:integer .
+
+:vehicleContactForce a owl:DatatypeProperty ;
+    rdfs:label "Vehicle contact force"@en ;
+    :eratvIndex "4.10.15" ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Mean contact force."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:vehiclesComposingFixedFormation a owl:DatatypeProperty ;
+    rdfs:label "Vehicles composing fixed formation"@en ;
+    :eratvIndex "4.1.12" ;
+    dcterms:created "2021-08-25"^^xsd:date ;
+    dcterms:modified "2021-08-25"^^xsd:date ;
+    rdfs:comment "Number of vehicles composing the fixed formation (for fixed formation only). Note: the value is mandatory for all vehicle categories. If the vehicle is composed of only one car, the indicated value shall be '1'."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:wheelchairSpaces a owl:DatatypeProperty ;
+    rdfs:label "Wheelchair spaces"@en ;
+    :eratvIndex "4.12.2.2" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2023-01-23"^^xsd:date ;
+    rdfs:comment "Number of wheelchair spaces."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:loadCapabilityLineCategory a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Load capability line category"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/load-capability-line-categories/LoadCapabilityLineCategories> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilityLineCategory>,
+        <http://data.europa.eu/949/shapes/LoadCapabilityLineCategorySKOS> ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    rdfs:comment """Part of the load capability of a track that corresponds to the line category of the load model.
+The load capability is a value selected from the list of load models representing the line category which is amended by value of speed [km/h] permitted for a specific load model. The list of values may also be Route Availability which is amended by value of speed [miles/h] permitted for a specific load model."""@en ;
+    rdfs:domain :LoadCapability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "stable" .
+
+:loadCapabilitySpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Load capability speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilitySpeed> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Part of the load capability of a track that corresponds to the speed of the load model"@en ;
+    rdfs:domain :LoadCapability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:maximumTemperature a owl:DatatypeProperty ;
+    rdfs:label "Temperature range (maximum)"@en ;
+    :XMLName "IPP_TempRange" ;
+    :eratvIndex "4.3.1" ;
+    :rinfIndex "1.1.1.1.2.6" ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:isReplacedBy :temperatureRange ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-25"^^xsd:date ;
+    rdfs:comment "Deprecated because both RINF and ERATV define a temperature range as a set of predefined values (see https://www.era.europa.eu/system/files/2023-04/iu-eratv_application_guide_for_register_2016-797_en_0.pdf). Maximum temperature allowed for unrestricted operation access, according to European standard."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:minimumTemperature a owl:DatatypeProperty ;
+    rdfs:label "Temperature range (minimum)"@en ;
+    :XMLName "IPP_TempRange" ;
+    :eratvIndex "4.3.1" ;
+    :rinfIndex "1.1.1.1.2.6" ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:isReplacedBy :temperatureRange ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-25"^^xsd:date ;
+    rdfs:comment "Deprecated because both RINF and ERATV define a temperature range as a set of predefined values (see https://www.era.europa.eu/system/files/2023-04/iu-eratv_application_guide_for_register_2016-797_en_0.pdf). Minimum temperature allowed for unrestricted operation access, according to European standard."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tdsMaximumMagneticField a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Maximum magnetic field"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Mandatory for train detection systems based on axle counters"@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        """For train detection system compliant with TSIs, 12 months after publication of Article 7 Guide.
+For train detection system not TSI compliant: in relation to article 13 of TSI CCS"""@en ;
+    :rinfIndex "1.1.1.3.4.2.3",
+        "1.2.1.1.3.2.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TdsMaximumMagneticField>,
+        <http://data.europa.eu/949/shapes/TdsMaximumMagneticFieldApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/2023-09-08> ;
+    rdfs:comment """The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band.
+It should be provided in 3 directions."""@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :MaximumMagneticField ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Relates the Axle Counter TrainDetectionSystem with its MaximumMagneticField in (X,Y,Z). Verification of compliance with TSI includes application of notified national rules (when they exist)."@en .
+
+:trackLoadCapability a owl:ObjectProperty ;
+    rdfs:label "Load capability"@en ;
+    :XMLName "IPP_LoadCap" ;
+    :applicable "Y" ;
+    :formatNote """The value of this parameter is an instance of the era:LoadCapability class which consists of 2 properties:
+- era:loadCapabilityLineCategory - as a taxonomy of load models representing line category
+- era:loadCapabilitySpeed - integer for the value of speed [km/h] permitted for a specific load model
+
+For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, the data format is:
+[CCCC] [NNN],
+where:
+- [CCCC] is a single selection from the predefined list of load models representing line category
+- [NNN] is the value of speed [km/h] permitted for a specific load model."""@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.2.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrackLoadCapability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    rdfs:comment "Relates the track with the class LoadCapability. A combination of the line category and speed at the weakest point of the track."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LoadCapability ;
+    rdfs:seeAlso """INF TSI: 4.2.1, 4.2.7.1, 4.2.7.2, 4.2.7.4
+Annex D1 OPE TSI""" ;
+    rdfs:subPropertyOf :performanceObjParameter ;
+    ns1:term_status "stable" ;
+    skos:example """The set of selected data may include: B2-160, D4-120 and E5-100
+When classifying infrastructure lines into line categories, the following options shall be used by the infrastructure manager to optimize freight traffic:
+Option 1: determination of the line category at maximum freight traffic speed (maximum 120 Km/h)
+Option 2: determination of a line category at an associated lower speed (less than the maximum freight traffic speed)
+Example of option 1 (Annex F of EN 15528:2021): In a given track, if the traffic is mixed, the local speed of the line is 90 Km/h and the determined line category is D4 at a maximum of 90 Km/h, the information displayed should be: D4/90.
+Example of option 2 (Annex F of EN 15528:2021): In a given track, if the traffic is mixed, the local speed of the line is 120 Km/h and the determined line category is C4 at a maximum of 120 Km/h and D4 at maximum of 90 Km/h, the information displayed should be: C4/120 and D4/90.""" ;
+    skos:scopeNote """At this step, RINF does not allow to enter additional data referred to additional speed regulations and operating requirements relating to locomotives (e.g., locomotive classes and associated maximum speed) or traffic types (e.g., maximum speed of freight traffic or passenger traffic).
+
+The load capability describes the weakest point of this track within this section of line (which is normally a bridge or other sub-track structure).
+It is expressed as a combination of the line category and speed permitted for trains exerting loads defined for this line category.
+The result of the classification process is set out in EN 15528:2021 (Annex A) and referred to in that standard as Line Category.
+
+The Load capability for UK in respect of Northern Ireland consists of RA and speed in miles per hour. RA shall be applied according to UK Railway Group Standard GE/RT8006, Issue Two, September 2010.
+
+More than one combination may be published for the same track if applicable, but it has to be done by repetition of the parameter with one value selected only  that is why Y is given in line Can be repeated.
+For the following cases, it is not possible to use EN 15528:2021 categories of line classification:
+- TSI categories of line P1520 and F1520 (passenger traffic or freight traffic at any speed)
+- TSI categories of line P1600 and F1600 (passenger traffic or freight traffic at any speed)
+
+When more than one value of the parameter has to be published, then parameter has to be repeated as many times as many values of the parameter will be published."""@en .
+
+:vehicleTypeMaximumCantDeficiency a owl:DatatypeProperty ;
+    rdfs:label "Vehicle type maximum cant deficiency"@en ;
+    :eratvIndex "4.6.4" ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :maximumSpeedAndCantDeficiency ;
+    rdfs:comment "Part of the combination of maximum speed and maximum cant deficiency for which the vehicle was assessed. Corresponds to the maximum cant deficiency."@en ;
+    rdfs:domain :MaximumSpeedAndCantDeficiency ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:vehicleTypeMaximumSpeed a owl:DatatypeProperty ;
+    rdfs:label "Vehicle type maximum speed"@en ;
+    :eratvIndex "4.6.4" ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :maximumSpeedAndCantDeficiency ;
+    rdfs:comment "Part of the combination of maximum speed and maximum cant deficiency for which the vehicle was assessed. Corresponds to the maximum speed."@en ;
+    rdfs:domain :MaximumSpeedAndCantDeficiency ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:vehicleTypeMaximumSpeedAndCantDeficiency a owl:ObjectProperty ;
+    rdfs:label "Vehicle type maximum speed and cant deficiency"@en ;
+    :eratvIndex "4.6.4" ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :maximumSpeedAndCantDeficiency ;
+    rdfs:comment "Relates the vehicle type with its values of maximum speed and cant deficiency."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :MaximumSpeedAndCantDeficiency ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic ;
+    ns1:term_status "stable" .
+
+:temperatureRange dcterms:replaces :maximumTemperature,
+        :minimumTemperature .
+
+:MinimumVerticalRadius a owl:Class ;
+    rdfs:label "Minimum radius of vertical curve"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadiusShape> ;
+    dcterms:created "2021-12-12"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Presentation of parameter 1.2.2.0.3.3 'Minimum radius of vertical curve'"@en .
+
+:LoadCapability a owl:Class ;
+    rdfs:label "Load capability"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilityShape> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    rdfs:comment """A combination of the line category and speed at the weakest point of the track.
+Each track can have several load capability (structured) values, and each one has values for load model line category and load model speed."""@en,
+        "This class together with properties loadCapabilityLineCategory and loadCapabilitySpeed replaces the previous loadCapability SKOS property."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """At this step, RINF does not allow to enter additional data referred to additional speed regulations and operating requirements relating to locomotives (e.g., locomotive classes and associated maximum speed) or traffic types (e.g., maximum speed of freight traffic or passenger traffic).
+
+The load capability describes the weakest point of this track within this section of line (which is normally a bridge or other sub-track structure). It is expressed as a combination of the line category and speed permitted for trains exerting loads defined for this line category. The result of the classification process is set out in EN 15528:2021 (Annex A) and referred to in that standard as â€œLine Categoryâ€.
+
+It represents the ability of the infrastructure to withstand the vertical loads imposed by vehicles on the track for regular service as a combination of Line Category with a permitted speed according to EN 15528:2021
+
+More than one combination may be published for the same track if applicable, but it has to be done by repetition of the parameter with one value selected only - that is why 'Y' is given in line 'Can be repeated'.
+
+For the following cases, it is not possible to use EN 15528:20021categories of line classification:
+- TSI categories of line P1520 and F1520 (passenger traffic or freight traffic at any speed)
+- TSI categories of line P1600 and F1600 (passenger traffic or freight traffic at any speed)"""@en .
+
+:MaximumMagneticField a owl:Class ;
+    rdfs:label "Maximum magnetic field"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldShape> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" .
+
+:MaximumSpeedAndCantDeficiency a owl:Class ;
+    rdfs:label "Maximum speed and cant deficiency"@en ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :maximumSpeedAndCantDeficiency ;
+    rdfs:comment "Combination of maximum speed and maximum cant deficiency for which the vehicle was assessed."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" .
+
+:RaisedPantographsDistanceAndSpeed a owl:Class ;
+    rdfs:label "Requirements for number of raised pantographs and spacing between them, at the given speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsDistanceAndSpeedShape> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    rdfs:comment """Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed.
+Each track can have several raised pantographs per train allowed (structured) values, and each one has values for number of pantographs, minimum distance between pantographs, in metres, and speed considered in km/h."""@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """This class gives the information about the number of pantographs and the distance between them at a given speed for which the Overhead Contact Line (OCL) has been designed.
+As for different speeds different combinations of number of pantographs and distance between them may exist, so this class can be repeated to present all of them."""@en .
+
+:loadCapability dcterms:isReplacedBy :LoadCapability,
+        :loadCapabilityLineCategory,
+        :loadCapabilitySpeed,
+        :trackLoadCapability .
+
+:maximumSpeedAndCantDeficiency dcterms:isReplacedBy :MaximumSpeedAndCantDeficiency,
+        :vehicleTypeMaximumCantDeficiency,
+        :vehicleTypeMaximumSpeed,
+        :vehicleTypeMaximumSpeedAndCantDeficiency .
+

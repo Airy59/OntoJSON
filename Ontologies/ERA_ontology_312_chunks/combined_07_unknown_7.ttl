@@ -1,0 +1,1077 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://data.europa.eu/949/> .
+
+<http://data.europa.eu/949/> rdf:type owl:Ontology ;
+                              <http://creativecommons.org/ns#license> <http://data.europa.eu/eli/dec_impl/2017/863/oj> ;
+                              <http://purl.org/dc/terms/contributor> _:genid-nodeid-node1iuor9rtdx2 ,
+                                                                     _:genid-nodeid-node1iuor9rtdx3 ,
+                                                                     _:genid-nodeid-node1iuor9rtdx4 ,
+                                                                     _:genid-nodeid-node1iuor9rtdx5 ,
+                                                                     _:genid-nodeid-node1iuor9rtdx6 ,
+                                                                     _:genid1 ,
+                                                                     _:genid2 ,
+                                                                     _:genid3 ,
+                                                                     _:genid4 ,
+                                                                     _:genid5 ,
+                                                                     _:genid6 ;
+                              <http://purl.org/dc/terms/creator> _:genid7 ,
+                                                                 _:genid8 ;
+                              <http://purl.org/dc/terms/issued> "2024-04-18"^^xsd:date ;
+                              <http://purl.org/dc/terms/modified> "2024-04-18"^^xsd:date ,
+                                                                  "2024-05-24"^^xsd:date ,
+                                                                  "2024-06-03"^^xsd:date ,
+                                                                  "2024-06-05"^^xsd:date ,
+                                                                  "2024-07-05"^^xsd:date ,
+                                                                  "2024-08-02"^^xsd:date ,
+                                                                  "2024-08-12"^^xsd:date ,
+                                                                  "2024-08-13"^^xsd:date ,
+                                                                  "2024-09-19"^^xsd:date ,
+                                                                  "2024-09-20"^^xsd:date ,
+                                                                  "2024-09-24"^^xsd:date ,
+                                                                  "2024-09-25"^^xsd:date ,
+                                                                  "2024-10-24"^^xsd:date ,
+                                                                  "2024-10-28"^^xsd:date ,
+                                                                  "2024-10-29"^^xsd:date ,
+                                                                  "2024-10-30"^^xsd:date ,
+                                                                  "2024-10-31"^^xsd:date ,
+                                                                  "2024-11-04"^^xsd:date ,
+                                                                  "2024-11-05"^^xsd:date ,
+                                                                  "2024-11-12"^^xsd:date ,
+                                                                  "2024-11-20"^^xsd:date ,
+                                                                  "2024-11-22"^^xsd:date ,
+                                                                  "2024-11-26"^^xsd:date ,
+                                                                  "2024-11-27"^^xsd:date ,
+                                                                  "2024-12-02"^^xsd:date ,
+                                                                  "2024-12-03"^^xsd:date ,
+                                                                  "2024-12-05"^^xsd:date ,
+                                                                  "2024-12-10"^^xsd:date ,
+                                                                  "2024-12-12"^^xsd:date ,
+                                                                  "2024-12-13"^^xsd:date ,
+                                                                  "2025-01-30"^^xsd:date ,
+                                                                  "2025-02-11"^^xsd:date ,
+                                                                  "2025-02-13"^^xsd:date ,
+                                                                  "2025-02-18"^^xsd:date ,
+                                                                  "2025-02-20"^^xsd:date ,
+                                                                  "2025-03-01"^^xsd:date ,
+                                                                  "2025-03-05"^^xsd:date ,
+                                                                  "2025-03-07"^^xsd:date ,
+                                                                  "2025-03-10"^^xsd:date ,
+                                                                  "2025-03-11"^^xsd:date ,
+                                                                  "2025-03-17"^^xsd:date ,
+                                                                  "2025-03-24"^^xsd:date ,
+                                                                  "2025-03-26"^^xsd:date ,
+                                                                  "2025-04-25"^^xsd:date ,
+                                                                  "2025-05-05"^^xsd:date ,
+                                                                  "2025-05-06"^^xsd:date ,
+                                                                  "2025-05-09"^^xsd:date ,
+                                                                  "2025-05-21"^^xsd:date ,
+                                                                  "2025-05-26"^^xsd:date ,
+                                                                  "2025-06-06"^^xsd:date ,
+                                                                  "2025-06-09"^^xsd:date ,
+                                                                  "2025-06-16"^^xsd:date ;
+                              <http://purl.org/dc/terms/publisher> "European Union Agency for Railways" ;
+                              <http://purl.org/dc/terms/title> "ERA Ontology"@en ;
+                              rdfs:comment """This is the human and machine-readable Ontology governed by the European Union Agency for Railways (https://www.era.europa.eu/). It represents the concepts and relationships linked to the sectorial legal framework and the use cases under the AgencyÂ´s remit, as described in the Commission Implementing Regulation (EU) [to be updated after publication] on the common specifications for the register of railway infrastructure [to be updated after publication].
+
+
+Currently, this Ontology covers the European railway infrastructure and the vehicle types authorized to operate over it. It is a semantic/browsable representation of the RINF application guide (1) and ERATV application guide (2) that were built by domain experts in the RINF and ERATV working parties.
+
+The Ontology also includes the route book concepts described in appendix D2 \"Elements the infrastructure manager has to provide to the railway undertaking for the Route Book\" as presented in the Commission Implementing Regulation (EU) [to be updated after publication] 2019/773 of 16 May 2019 on the technical specification for interoperability relating to the operation and traffic management subsystem of the rail system within the European Union and [to be updated after publication] and the Appendix D3 [to be updated after publication]."""@en ;
+                              rdfs:label "ERA Ontology"@en ;
+                              rdfs:seeAlso "https://www.era.europa.eu/sites/default/files/registers/docs/iu-eratv_application_guide_for_register_2016-797_en.pdf"^^xsd:anyURI ,
+                                           "https://www.era.europa.eu/sites/default/files/registers/docs/rinf_application_guide_for_register_en.pdf"^^xsd:anyURI ;
+                              owl:priorVersion "https://gitlab.com/era-europa-eu/public/interoperable-data-programme/era-ontology/era-ontology/-/releases/v3.1.0"^^xsd:anyURI ;
+                              owl:versionInfo "v3.1.2" ;
+                              owl:versionURI <https://gitlab.com/era-europa-eu/public/interoperable-data-programme/era-ontology/era-ontology/-/releases/v3.1.2> ;
+                              <http://www.w3.org/2004/02/skos/core#changeNote> """
+Revision 16-06-2025
+- Added SHACL constraint for era:redLightsRequired country applicability
+
+Revision 09-06-2025
+- Updated the formatNote of era:trackPhaseInfo and era:trackSystemSeparationInfo
+- Deprecated era:phaseInfoChangeSupplySystem and era:systemSeparationInfoChangeSupplySystem
+- Fixed unitOfMeasure annotations that used https://qudt.org/vocab/unit/ (with https) instead of the defined prefix unit (which is with http)
+
+Revision 06-06-2025
+- Add missing axiom era:PrimaryLocation rdfs:subClassOf era:InfrastructureElement
+
+Revision 26-05-2025
+- Fixed the typo in the name of existanceOfIndustrialRisk (-> existenceOfIndustrialRisk) and corrected the legalDeadline according to the legislation
+
+Revision 21-05-2025
+-Removed the XMLName annotation from the new entities
+
+Revision 09-05-2025
+- Added rdfs:label, rdfs:comment, and rdfs:seeAlso to era:vehicleCategory and era:vehicleSubCategory
+
+Revision 06-05-2025
+- Removed the rdfs:subPropertyOf annotation from era:minVehicleImpedanceVoltages
+
+Revision 05-05-2025
+- Removed the RINF annotations (XMLname, rinfIndex, and legalDeadline) from etcsNationalPacket44Function
+- Added the deprecated and isReplacedBy annotations to etcsNationalPacket44 that was missing, and the respective dct:replaces annotations to etcsNationalPacket44Function and hasEtcsNationalPacket44
+- Removed the RINF annotations (XMLname, rinfIndex, and legalDeadline) from etcsRestrictionsConditionsDoc
+
+Revision 30-04-2025
+- added rdfs:subClassOf era:Feature annotation for era:InfrastructureElement and era:NetElement
+
+Revision 25-04-2025
+ - fixed double type on some properties;
+ - added SubsidiaryLocation ->subclass of era:Feature
+ - removed transitivity to fix the reasoner issue
+ - removed the parent-child relation from the era:PrimaryLocation
+
+Revision 26-03-2025
+- remove external unused external classes and properties
+- remove the wgs: prefix and include sf: prefix for the sf:Point
+
+Revision 24-03-2025
+- small revision based on the input of the internal control group
+
+Revision 17-03-2025
+- harmonize the explanation on the RINF parameters as documents
+- remove any unnecessary dcterms:description annotations.
+- overall review of general explanations, examples, following the input of ERA TSI experts
+
+Revision 11-03-2025: annotations harmonization
+- Removed dcterms:source duplicates with same URI different by https
+- Reused rdfs:seeAlso instead of dcterms:source pointing to URLs different from ELI URI legal reference
+- Simple editorial changes based on orthography review
+- Add missing levels in the parameters hierarchy and link them to properties representing RINF parameters
+- Reintroduction of rinfINndex annotations to the hierarchical properties
+
+Revision 10-03-2025
+- Changed the axiom for the era:SubsidiaryLocation
+- Fixes on the relations between kilometric posts and the linear positioning system
+- Property era:inCountry can be part of a subset with common characteristics
+- Property era:infrastructureManager was missing the domain of infrastructure elements
+- Addition of the era:connectedTo property to address a simple connectivity between tracks, as RINF parameter 'internal connectivity'.
+- Adding missing domains on the properties for the RINF parameters 1.1.1.5.x
+- Adding missing domains on the era:notApplicable and era:notYetAvailable property flags
+- Adding axioms on the NetRelation to ensure that all properties are provided
+- Removed duplicate values for era:applicable
+
+Revision 07-03-2025
+- Removed grouping Object properties without subproperties in use:
+   + era:switchesAndCrossingsObjParameter
+   + era:relatedElectromagneticInterferencesObjParameter
+   + era:energySubsystemDeclarationsVerificationTrackObjParameter
+   + era:infraSubsystemDeclarationsVerificationTrackObjParameter
+
+
+Revision 05-03-2025
+- Deprecated era:cantDefficiency
+
+Revision 01-03-2025
+- Updated disjointWith axioms in the following cases:
+  + all subclasses of era:InfrastructureElement
+  + era:Body, era:InfrastructureElement
+  + era:SubsidiaryLocation, era:PrimaryLocation
+  + era:NetRelation and era:NetElement
+  + era:LinearPositioningSystem and era:LinearPositioningSystemCoordinate
+  + era:Feature and era:TemporalFeature
+  + all subclasses of era:NetElement
+
+Revision 28-02-2025
+- General review of the RINF parameters following the comments received from the RINF Work Group and topical Working Groups members and the ERA experts.
+- Additions on the general explanations, format notes and dependency nodes, cleanup duplicate applicability flags, doubles definitions, etc.
+- Addition of missing unit of measure for era:cantDeficiencyBasicSSP
+- Change the domain of some properties to point to the correctgroup of parameters (era:ContactLineSystem)
+- Addition of explanation whenever the XML data set upload is maintained
+
+Revision 20-02-2025
+- Introduction of the era:HABD class for representing the Hot Axle Box Detector
+- Introduction of the era:tracksideHabd property for linking the InfrastructureElement with the HABD
+
+Revision 18-02-2025
+- Added era:inSKOSConceptScheme for the property standardCombinedTransportContainers
+- Updated to stable the term_status for the properties standardCombinedTransportContainers and standardCombinedTransportRollerUnits.
+
+Revision 18-02-2025
+- Added dcterms:replaces in cases where there was a dcterms:isReplacedBy pointing to an entity, but no corresponding replaces in the opposite direction, and vice versa.
+- Removed dcterms:isReplacedBy statements that pointed to entities no longer present in the ontology.
+
+Revision 13-02-2025
+- Deprecation of era:category and era:subCategory and creation of era:vehicleCategory and era:vehicleSubCategory.
+
+Revision 11-02-2025
+- Added annotations to era:etcsNationalPacket44
+- Fixed label and definition of era:linesideDistanceIndication 1.1.1.0.0.3
+- Changed the domain of era:reasonsEtcsRadioBlockCenterReject 1.1.1.3.2.15, 1.2.1.1.1.15 to era:RadioBlockCenter
+- Added axiom subpropertyOf contactLineSystemObjParameter to era:conditionsAppliedRegenerativeBraking 1.1.1.2.2.4.1
+- Deleted editorial note from era:minimumVerticalRadius 1.2.2.0.3.3
+- Added axiom subpropertyOf tunnelDataParameter to era:hasWalkway 1.1.1.1.8.12
+- Removed RINF index from properties used to represent the data format of the RINF parameters (i.e. all ObjParameter and DataParameter properties)
+
+Revision 30-01-2025
+- Fix Issue #145 - remove the era:BasicElement and era:AggregatedElement classes and move the properties with them as domain to the super-class InfrastructureElement. Update of all the classes concerned by the hierarchy of InfrastructureElement based on sub-classes.
+- Partially fix issue #148 with comment: topology is on micro level
+- Changed the range of era:startOffsetFromOrigin and era:endOffsetFromOrigin into xsd:double and the unit of measure M was added for clarification.
+- Added era:existanceOfIndustrialRisk property for defining the RINF parameter 1.1.0.0.1.1
+- Changed era:linesideDistanceIndication according to the decisions of TWG for route book
+- Added era:routeBookDataParameter for the route book parameters hierarchy
+- Added domains for era:operatingLanguage and era:operationalRegimeType
+- Added hierarchy for generic route book related parameter
+- Remove the era:SignalsGrid and all the relations, following the request during a bilateral meeting with Infrabel
+- remove redundant era:kilometerNumber and add more details on era:kilometer
+- Fix issue #104 - adding era:carrierLinearElement
+
+Revision 13-12-2024
+- Added annotations for all SHACL shapes
+
+Revision 12-12-2024:
+- deleted deprecated property http://data.europa.eu/949/signallingSystemType following review, there is no instance of it.
+- Deleted annotation XMLName from properties that are part of FrenchTrainDetectionSystemLimitation, LoadCapability, MaximumMagneticField, MinVehicleImpedance, PhaseInfo, RaisedPantographsDistanceAndSpeed, SystemSeparationInfo
+
+Revision 10-12-2024:
+ - Added the axiom era:Applicability subClassOf era:TemporalFeature
+ - Added range of era:ofParameter
+ - Renamed era:bridge property to era:hasBridge
+ - Added a property era:parameterValue(era:Applicability, rdfs:Resource)
+
+Revision 05-12-2024:
+ - Added restricted ranges for the dataproperties era:dNvovtrp, era:dNvpotrp, era:dNvroll, era:tNvcontact, era:tNvovtrp,
+era:vNvallowovtrp and era:vNvsupovtrp. This partially solves issue #135 for our needs.
+
+Revision 03-12-2024:
+- Fixed domain kmPostName to KilometricPost or LinearPositioningSystem
+- Deleted RINF index for \"parts\" of compund properties: PhaseInfo, RaisedPantographsDistanceAndSpeed, SystemSeparationInfo, MinVehicleImpedance, frenchTrainDetectionSystemLimitationApplicable, LoadCapability, MaximumMagneticField.
+- Completed some missing property and classes definitions.
+- fix explicit definition of the primary and subsidiary locations.
+- Added era:formatNote property and annotations.
+
+Revision 02-12-2024:
+  - added the Turtle file generated from excel file annotated by ERA.
+  - added annotation era:dependencyNote + language tag @en for corresponding annotations
+
+Revision 27-11-2024
+- Introduced topology and positioning classes and properties (closer to well known topological models)
+- Removed obsolete classes and properties involved in topology and positioning
+- Introduced era:parameterValueType to describe parameter applicability value meaning
+- Bug fixes
+- renamed era:tsiOPEappendixD1Index to era:tsiOPEAppendixD1Index, same for era:tsiOPEappendixD2Index to era:tsiOPEAppendixD2Index and s/era:tsiOPEappendixD3Index/era:tsiOPEAppendixD3Index
+
+Revision 26-11-2024
+- Added definitions to object properties that denote relationships among classes
+- Fixes in hierarchies of CCS, Energy and Infra subsystems
+- Added CommonCharacteristicsSubset to domain of parameterApplicability
+- Added functional property axiom to some properties with domain TrainDetectionSystem and ContactLineSystem
+- Added porperty borderPointId to the class ReferenceBorderPoint
+- Fix RINF index 1.1.1.3.14.5 to 1.1.1.3.14.6 for location
+- Added definition to class Track
+- Renamed the annotation properties era:appendixD2Index and era:appendixD3Index to the corresponding era:tsiOPEAppendixD2Index and era:tsiOPEAppendixD3Index. Created  annotation properties era:tsiOPEappendixD1Index
+
+Revision 22-11-2024
+- Added two annotation properties: era:applicable and era:legalDeadline
+
+Revision 20-11-2024
+- Fix on hierarchy transitionsBetweenSystems parameters and its subproperties
+- Fix domain etcsSytemCompatibilitiy, etcsTransmitsTrackConditions, ETCSTransmittedTrackConditions to ETCS
+- Delete property hasSetOfParameters (duplicate with belongsTo)
+- Added CommonCharacteristics subset to domain of some of the parameters of PlatformEdge, Siding, and Tunnel parameters
+- Removed CommonCharacteristicsSubset from domain of ContactLineSystem, Train DetectionSystem and ETCS
+- Fix 1.1.1.1.8 delete @en tag in RINF index
+- Removed annotation RINF index and change Domain from those RINF parameters that have been deprecated but that are maintained because there also ERATV and removed Track, CommonCharacteristicsSubset from Domain
+- Remove deprecated axiom from trainDetectionSystemSpecificCheck, 1.1.1.3.8.2
+- Added transitive axiom to subsetOf property between two CommonCharacteristicsSubset
+- Deleted datatype property NationalLineIdentification, its metadata added to object property nationalLine netween (Position or SectionOfLin)e and NationalRailwayLine. Added metadata to nationalLineId of NationalRailwayLine.
+-Added functional property axiom to: errorCorrectionsOnBoard, errorCorrectionsOnboardExplanation, conditionsSwitchClassBSystems, roleOf
+- Added CommonCharacteristicsSybset to domain of localRulesOrRestrictions, localRulesOrRestrictionsDoc
+- Modified accelerationLevelCrossing to an object property with range Document
+- Added Siding to domain maxCurrentStandstillPantograph
+- Fix on hierarchy transitionsBetweenSystems Obj and Data properties and its subProperties
+- Added functional property axiom to properties where the domain is ETCS
+- Added rbcID axiom subproperty of dcterms:identifier
+- Added VehicleType to domain in TemperatureRange
+- Divided etcsNationalPacket44 (deprecated) into boolean  hasEtcsNationalPacket44 etcsNationalPacket44Function that points to a taxonomy.
+- Create placeholder skos concept scheme forETCS national packet 44 functions.
+- Changed range hasETCSRestrictionConditions to boolean. Created an object property etcsRestrictionConditionsDoc to point to its Document.
+
+Revision 12-11-2024
+- Deprecated era:imCode. Replaced by organisationCode
+
+Revision 04-11-2024
+- Added metadata (dcterms:modified and  rdfs:isDefinedBy to all ObjParameter and DataParameter properties in the hierarchy of Energy, Infra and CCS subsystems
+- Deleted annotation properties dcterms:modifief and dcterms:modifed
+- Added annotation properties era:affectedProperty, era:affectedClass, era:scope for annotating SHACL shapes
+- Added annotation property era:shaclShapeValidationRule to point from properties to the corresponding shape.
+- Added functional axiom to properties according to RINF app guide (1.6.1) to those properties that have \"Can be repeated: N\"
+- Removed metadata from length, now a grouping property and place the relevant definitions in the corresponding subproperties. Added subproperty lengthOfVehicle
+- Imported propeties time:hasBeginning and time:hasEnd from Time ontology
+- Updated domain to the class ETCS: era:etcsInfill, era:etcsMVersion, era:etcsSystemCompatibility,  era:etcsTransmittedTrackConditions
+- Changed domain kilometer and kmPostName to Position
+- Changed data properties instructionsSwitchRadioSystems, documentRestrictionPowerConsumption, documentRestrictionPositionContactLineSeparation, conditionsSwitchClassBSystems, conditionsAppliedRegenerativeBraking to object properties with range era:Document
+
+Revision 31-10-2024
+- Added hierarchies for Vehicle and VehicleType characteristics.
+- Deprecated datatype property trainDetectionSystemSpecificCheck, as the same object property exists (points to a SKOS concept scheme)
+- Changes in network and subset with common characteristics proposal (decision meeting 31-10-2024)
+
+Revision 30-10-2024
+- Created the hierarchy of object and datatype properties for CCS system. Updated domain to Track. Added Subset of Common characteristics to domain. Deleted the class CCS subsystem
+- Changed names for classes InfrastructureObject to InfrastructureElement and also their subclasses now BasicElement and AggregatedElement.
+- Axiom for deprecation was deleted for imCode. Its domain is OrganisationRole.
+- Deleted the class TechnicalCharacteristic. Change all domain and ranges where this class appears. Delete the era:parameter property.
+- Deprecated properties certificate, state of VehicleType as the class Certificate was also deprecated. The skos concept scheme for certificate states is moved to folder of deprecated skos.
+- Deleted the property organization between InfrastructureElement and Body (now infrastructureManager is the property that relates the Infrastructure element with the organisation role)
+- Deleted RINF indexes from minAxleLoad and minDistConsecutiveAxles. Properties remain as there are also eratv properties.
+- Deleted lineNationalId as lineNationalIdentification also exists (with complete metadata)
+- Changed name of class and property ETCSLevel and etcsLevel to ETCS and etcs respectively.
+- Added deprecated axiom to property platformEdge.
+
+Revision 29-10-2024
+- Created hierarchy of properties for ccs subsystem and energy subsystem object parameters and ccs subsystem and energy subsystem data parameters. Changed domain to corresponding infrastructure object  and added SubsetWithCommonCharacteristics to domain of these properties.
+- Changed names clases InfrastructureObject, BasicObject and AggregatedObject to InfrastructureElement, BasicElement and AggregatedElement
+
+Revision 28-10-2024
+- Move company code categories SKOS to deprecated SKOS as corresponding property has been deprecated.
+- Deprecated lineNationalId, replaced by nationalLine property. Create a string datatype property nationalLineIdentfication with same annotations than lineNationalId
+- Created property hasOrientation between Signal and Orientation
+- Fixed dcterms:isReplacedBy to hasPosition in deprecated lineReference property
+
+Proposal representation of hierarchy of parameters in the RINF app guide:
+- Add RINF index 1.1.0.0.0.1 and 1.1.1.1.8.1 to the property infrastructureManager
+- Created hierarchy of properties for infrastructure subsystem object parameters and infrastructure subsystem data parameters. Changed domain to corresponding infrastructure object  and added SubsetWithCommonCharacteristics to domain of these properties.
+
+- Proposal for BaseLocation, PrimaryLocation and SubsidiaryLocation
++  Linear Location is now a subclass of BaseLocation
++ Changed domain of location from TopologicalObject to InfrstructureObject
++ Delete axiom InfrastructureObject is subclass of Feature.
++ PrimaryLocation is now a subclass of SpotLocation (no more subclass of an AggregatedObject)
++ Created linkedToPrimaryLocation between a SubsidiaryLocation and a PrimaryLocation
++ Added domain PrimaryLocation to hasPosition
+
+- Proposal on applicability
++ Changed the name of the class Applicability to ParameterApplicability.
++ Changed the name of the property applicability to parameterApplicability with domain InfrastructureObject and range ParameterApplicability
++ Created property era:ofparameter to relate the ParameterApplicability to the parameter it is denoting (a property in the ontology)
+
+
+Revision 25-10-2024
+-Changes according to agreed Organisation proposal:
++ Changed domain of property infrastructureManager to include Network or PrimaryLocation or InfrastructureObject
++ Added roleOf as an inverse property of role. Relation that goes from OrganisationRole to Organisation
++ Updated range of properties vehicleKeeper, manufacturer, allocationCompany to OrganisationRole
+
+- Changes according to agreed Border point proposal:
++ Created class ReferenceBorderPoint that will contain all the listed border points in the RINF application guide.
++ Created object property referenceBorderPoint relating an OP with a reference border point.
++ Deprecated properties opInfoPerCountry and borderPointOf
+
+- property companyCodeCategory was deprecated. companu code categories SKOS was moved to the folder of deprectaed SKOS
+- Class Certificate is deprecated, belongs to the EVR ontology.
+- Properties vehicleTypesCompatibleTrafficLoad and vehiclesCompatibleTrafficLoad are now object properties pointing to the classes VehicleType and Vehicle respectively
+
+Revision 24-10-2024
+- Fix skos:definition to rdfs:label in era:direction property
+
+- Change in Network and Network Resource proposal:
+  + Deleted class NetworkResource
+  + belongsTo has as domain InfrastructureObject
+  + added new property subNetworkOf that relates two networks.
+  + added new property infrastructureManager to relate Network with the Organisation (OrganisationRole).
+  + Add axiom Network is a subclass of AreaLocation
+
+- Change in Position layer proposal
+  + Deprecated LineReference class and lineReference property
+  + Created LinePosition and TrackPosition as subclasses of Position.
+  + Deleted the Referent class.
+  + The domain of kilometer and kmPostName is now LinePosition.
+  + Deleted the carrierObject property
+  + Changed domain of hasPosition to InfrastructureObject
+   + Changed domain of nationalLine to LinePosition
+   + Changed range of lineReferenceTunnelStart and lineReferenceTunnelEnd to LinePosition. Subproperties of hasPosition.
+  + Changed domain and range of referent property to TrackPosition and Track respectively.
+
+Revision 25-09-2024
+- Deprecated minimumTemperature and maximumTemperature as both RINF and ERATV define a temprature range with a list of predefined values.
+- Changed era:trainDetectionSystemSpecificChecks from a data property to an object property (It is a list of predefined values). Added the pointer to its SKOS Concept Scheme.
+- Fixed annotation inSKOSConceptScheme for property era:osmClass
+- Deleted from definitions (rdfs:comment) URIs referring to the source and  added them as dcterms:source annotations. Replaced all rdfs:seeAlso to dcterms:source for consistency in the annotations.
+- Removed duplicate properties appendixD2Index and appendixD3Index, fixed references to point to remaining properties.
+- Fixed 1.2.1.1.2.12 Specific constraints imposed by the GSM-R network, deleted  1.1... RINF index. Fixed 1.1.1.3.3.12 & 1.2.1.1.2.13 as the correct RINF indexes  of \"Radio Network ID\".
+- Added isReplacedBy annotations to deprecated classes era:Manufacturer and era.VehicleKeeper.
+- Fixed typo ammendment for amendment.
+- Added annotation dcterms:isReplacedBy era:errorCorrectionsOnBoard for era:gsmrErrorCorrectionsOnBoard, era:etcsErrorCorrectionsOnBoard, era:ertmsErrorCorrectionsOnBoard.
+
+Revision 24-09-2024
+- Add annotation in SKOSConceptScheme to era:operationalRegimeType, era:subsidiaryLocationType, era:conditionsUseReflectivePlates, era:standardCombinedTransportRollerUnit, era:linesideDistanceIndicationAppearance  (currently placeholder concept schemes to be developed)
+- Deleted foaf:Project, no Usage in ontology and the concept is not part of the domain.
+- Fix bug era:direction, change skos:definition to rdfs:label
+- Fix Typo definition NationalRailwayLine, Network
+- According to conceptual design import gsp:SpatialObject  sf:LineString, sf:MultiPolygon, sf:Point and also other superclasses in the hierarchy of these classes.
+
+
+Revision 20-09-2024
+- Change era:qNvdriverAdhes to an object property that points to a SKOS concept scheme   (currently a boolean data property)
+- Add era:inSkosConceptScheme for  era:hasOrganisationRole
+- Add era:inSkosConceptScheme for era:operatingLanguage: http://publications.europa.eu/resource/authority/language
+
+Revision 19-09-2024:
+- Added annotations for use of ontology as the RINF AG technical annex;
+- `dcterms:source` refers to ELI URI of the applicable reference legislation (TSI's, regulations)
+- Fixed anyURI for links using skos:seeAlso
+
+
+Revision 13-08-2024:
+- clarified the comment and label for ORG pattern as per issue #74.
+- renamed prefix qudt: to unit: to avoid confusion as per issue #47.
+- merged annexD2Index with appendixD2index as per issue #50.
+- added range and/or domain for annotation properties as per issue #56.
+- fixed label and comment for the properties era:ETCSLevel and era:ETCSLevelType as per issue #60.
+
+Revision 12-08-2024:
+- removed owl:incompatibleWith in a property as per issue #71.
+- Reduced some long labels + split off notes from definition (see issue #45)
+
+Revision 02-08-2024:
+- removed comments from wgs ontology, keeping mininal annotations (issue #51)
+- removed owl:imports axiom (issue #73)
+- Added annotations of time classes used (time:TemporalDuration and time:TemporalEntity)
+- Replaced dcterms:requires by skos:scopeNote per suggested in issue #58.
+- Fixed typos in the range of the properties era:side, era:orientation, era:lrsMethod and era:direction. (issue #69)
+
+Revision 05-07-2024:
+- removed empty prefix and base
+- Changed the reference to previous version to point to release in Github
+- changed dcterms:description with skos:changeNote.
+- removed owl:topDataProperty , owl:topObjectProperty and ^^rdfs:Literal
+
+Revision 05-06-2024:
+- linked with existing (updated) or new SKOS Concepts, related to the TWG RINF CCS;
+- included references and guidelines as in Table 5 of the RINF Application Guide.
+
+Revision 03-06-2024:
+- added properties for the primary and subsidiary locations
+- reuse the organisation ontology to address the ERA stakeholder organisations (bodies) and their roles
+- deprecated classes related to organisation
+- error corrections
+- added several definitions
+
+Revision 24-05-2024:
+- remove of the owl:FunctionalProperty from every object or data property;
+- addition of new classes for the purpose of the Topical Wrokgroup micro-level;
+- reshaping the topology layer, deprecating unused properties and renaming some of the classes
+- reuse of the time ontology for addressing the validity and applicability;
+- remove of the axiom era:TopologicalObject as subclass of era:Feature;
+- changing the domains of multiple data and object properties to subclasses of era:TechnicalCharacteristics;
+- removed some of the relations between tracks, sidings, tunnels, etc.;
+- deprecated the properties addressing the validity;
+- TODO: deprecate unused properties from version 3.0.0;
+
+Revision 18-04-2024:
+- updated as per results of the Topical Working Group RINF-CCS (Draft report 0.2);
+- include upcoming remarks from TWG members (inclusing those as documented in Report 0.3);
+- linked with existing (updated) or new SKOS Concepts, related to the TWG RINF CCS;
+- included references and guidelines as in Table 5 of the RINF Application Guide."""@en .
+
+_:genid1 <http://xmlns.com/foaf/0.1/name> "Orfeas Menis" .
+
+_:genid2 <http://xmlns.com/foaf/0.1/name> "Edna Ruckhaus" .
+
+_:genid3 <http://xmlns.com/foaf/0.1/name> "Polymnia Vasilopoulou" ;
+          <http://www.w3.org/ns/org#memberOf> <http://publications.europa.eu/resource/authority/corporate-body/ERA> .
+
+_:genid4 <http://xmlns.com/foaf/0.1/name> "Marina Aguado" ;
+          <http://www.w3.org/ns/org#memberOf> <http://publications.europa.eu/resource/authority/corporate-body/ERA> .
+
+_:genid5 <http://xmlns.com/foaf/0.1/name> "Oscar Corcho" .
+
+_:genid6 <http://xmlns.com/foaf/0.1/name> "Designated RINF Topical Working Groups"@en .
+
+_:genid7 <http://xmlns.com/foaf/0.1/name> "Ghislain Atemezing" ;
+          <http://purl.org/dc/terms/source> <https://orcid.org/0000-0003-1562-6922> ;
+          <http://www.w3.org/ns/org#memberOf> <http://publications.europa.eu/resource/authority/corporate-body/ERA> .
+
+_:genid8 <http://xmlns.com/foaf/0.1/name> "Dragos Patru" ;
+          <http://www.w3.org/ns/org#memberOf> <http://publications.europa.eu/resource/authority/corporate-body/ERA> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://data.europa.eu/949/manufacturer
+:manufacturer rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic ;
+              rdfs:domain :VehicleType ;
+              rdfs:range :OrganisationRole ;
+              <http://purl.org/dc/terms/created> "2020-07-29"^^xsd:date ;
+              <http://purl.org/dc/terms/modified> "2020-11-19"^^xsd:date ,
+                                                  "2024-06-03"^^xsd:date ,
+                                                  "2024-10-24"^^xsd:date ,
+                                                  "2025-02-18"^^xsd:date ;
+              <http://purl.org/dc/terms/replaces> :Manufacturer ;
+              rdfs:comment "Vehicle manufacturer company."@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "manufactured by"@en ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/manufacturingCountry
+:manufacturingCountry rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :vehicleTechnicalObjCharacteristic ,
+                                         :vehicleTypeTechnicalObjectCharacteristic ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( :Vehicle
+                                                  :VehicleType
+                                                )
+                                  ] ;
+                      rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                      :inSkosConceptScheme <http://publications.europa.eu/resource/authority/country> ;
+                      <http://purl.org/dc/terms/created> "2020-09-30"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2020-11-22"^^xsd:date ;
+                      rdfs:comment "Indicates the country in which a vehicle or vehicle type is manufactured."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Manufacturing country"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maxSandingOutput
+:maxSandingOutput rdf:type owl:ObjectProperty ;
+                  rdfs:domain :TrainDetectionSystem ;
+                  rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                  :XMLName "CTD_MaxSandOutput" ;
+                  :inSkosConceptScheme <http://data.europa.eu/949/concepts/max-amount-sandings/MaxAmountSandings> ;
+                  :rinfIndex "1.1.1.3.7.17" ;
+                  <http://purl.org/dc/terms/created> "2021-08-08"^^xsd:date ;
+                  <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ;
+                  rdfs:comment """Maximum amount of sand accepted on the track within value of sanding output for 30s, given in grams.
+Deprecated according to the amendment to the Regulation (EU) 2019/777."""@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "Maximum amount of sand"@en ;
+                  owl:deprecated "true"^^xsd:boolean ;
+                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/minAxleLoadVehicleCategory
+:minAxleLoadVehicleCategory rdf:type owl:ObjectProperty ;
+                            rdfs:domain :MinAxleLoadVehicleCategory ;
+                            rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                            :XMLName "CTD_MinAxleLoadByVehicleCat" ;
+                            :inSkosConceptScheme <http://data.europa.eu/949/concepts/min-axle-load-vehicle-categories/MinAxleLoadVehicleCategories> ;
+                            :rinfIndex "1.1.1.3.7.11.1" ;
+                            <http://purl.org/dc/terms/created> "2021-08-08"^^xsd:date ;
+                            <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ;
+                            rdfs:comment """Represents the category of vehicle which is amended by value of minimum permitted axle load [tons] (property minAxleLoad).
+Deprecated according to the amendment to the Regulation (EU) 2019/777."""@en ;
+                            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                            rdfs:label "Minimum axle load vehicle category"@en ;
+                            owl:deprecated "true"^^xsd:boolean ;
+                            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/minVehicleImpedance
+:minVehicleImpedance rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsObjParameter ;
+                     rdf:type owl:FunctionalProperty ;
+                     rdfs:domain :TrainDetectionSystem ;
+                     rdfs:range :MinVehicleImpedance ;
+                     :applicable "Y/N/NYA" ;
+                     :dependencyNote "Mandatory only for track circuits" ;
+                     :formatNote "The values is an instance of era:MinVehicleImpedance class with its 2 properties.	Per voltage : input Capacitance (Cin) and Input Impedance (Zin)"@en ;
+                     :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en ,
+                                    """For train detection system compliant with TSIs, 12 months after publication of Article 7 Guide.
+For train detection system not TSI compliant: in relation to article 13 of TSI CCS"""@en ;
+                     :rinfIndex "1.1.1.3.4.2.2" ,
+                                "1.2.1.1.3.2.2" ;
+                     :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleImpedance> ,
+                                               <http://data.europa.eu/949/shapes/MinVehicleImpedanceApplicability> ;
+                     :usedInRCCCalculations "true"^^xsd:boolean ;
+                     <http://purl.org/dc/terms/modified> "2025-02-28"^^xsd:date ;
+                     rdfs:comment "Impedance as defined in the specification referenced in Appendix A-1, index [D]"@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "Vehicle impedance"@en ;
+                     rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg_impl/2023/1695/oj"^^xsd:anyURI ;
+                     <http://www.w3.org/2004/02/skos/core#scopeNote> "Compatibility with track circuits. A track circuit is only able to detect rolling stock if the impedance between rails does not exceed a certain value."@en .
+
+
+###  http://data.europa.eu/949/minVehicleImpedanceVoltages
+:minVehicleImpedanceVoltages rdf:type owl:ObjectProperty ,
+                                      owl:FunctionalProperty ;
+                             rdfs:domain :MinVehicleImpedance ;
+                             rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                             :inSkosConceptScheme <http://data.europa.eu/949/concepts/energy-supply-systems/EnergySupplySystems> ;
+                             :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleImpedanceVoltages> ,
+                                                       <http://data.europa.eu/949/shapes/MinVehicleImpedanceVoltagesApplicability> ,
+                                                       <http://data.europa.eu/949/shapes/MinVehicleImpedanceVoltagesSKOS> ;
+                             <http://purl.org/dc/terms/created> "2024-05-30"^^xsd:date ;
+                             <http://purl.org/dc/terms/modified> "2024-09-19"^^xsd:date ;
+                             <http://purl.org/dc/terms/relation> :trainDetectionSystemType ;
+                             rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                             rdfs:label "minimum Vehicle Impedance (Voltage applicable)"@en ;
+                             <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/minimumVerticalRadius
+:minimumVerticalRadius rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :sidingObjParameter ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( :CommonCharacteristicsSubset
+                                                   :Siding
+                                                 )
+                                   ] ;
+                       rdfs:range :MinimumVerticalRadius ;
+                       :XMLName "ILL_MinRadVertCurve" ;
+                       :applicable "Y/N" ;
+                       :formatNote """In RDF: the values points to an instance of era:MinimumVerticalRadius class with 2 properties for the crest and hollow values.
+                                                  In XML: NNN+NNN"""@en ;
+                       :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                       :rinfIndex "1.2.2.0.3.3" ;
+                       :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadius> ;
+                       :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+                       :usedInRCCCalculations "true"^^xsd:boolean ;
+                       <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                       <http://purl.org/dc/terms/modified> "2023-04-05"^^xsd:date ,
+                                                           "2024-09-19"^^xsd:date ,
+                                                           "2024-12-12"^^xsd:date ,
+                                                           "2025-03-11"^^xsd:date ;
+                       <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1299/2019-06-16> ;
+                       rdfs:comment "Radius of the smallest vertical curve expressed in metres."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Minimum radius of vertical curve"@en ;
+                       rdfs:seeAlso "INF TSI: 4.2.3.54" ;
+                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                       <http://www.w3.org/2004/02/skos/core#scopeNote> "The radius of vertical curves (except for humps in marshalling yards) shall be at least 500 m on a crest or 900 m in a hollow."@en .
+
+
+###  http://data.europa.eu/949/nationalLine
+:nationalLine rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :solGenericObjParameter ;
+              rdfs:domain :SectionOfLine ;
+              rdfs:range :LinearPositioningSystem ;
+              :XMLName "SOLLineIdentification" ;
+              :rinfIndex "1.1.0.0.0.2" ;
+              :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NationalLineSoL> ;
+              <http://purl.org/dc/terms/created> "2024-05-24"^^xsd:date ;
+              <http://purl.org/dc/terms/modified> "2024-10-24"^^xsd:date ,
+                                                  "2024-11-18"^^xsd:date ,
+                                                  "2024-11-29"^^xsd:date ,
+                                                  "2025-02-18"^^xsd:date ,
+                                                  "2025-03-11"^^xsd:date ;
+              <http://purl.org/dc/terms/replaces> :lineNationalId ,
+                                                  :lineReference ;
+              rdfs:comment """Indicates a relationship with a national railway line at a specific kilometer point.
+For a Section of Line: unique line identification or unique line number within Member State."""@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "national line identification"@en ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+              <http://www.w3.org/2004/02/skos/core#scopeNote> """Each SoL can belong to only one national line.
+
+In case when SoL is the track connecting between OPs within big node (resulting from division of big station into several smaller) the line can be identified using the name of this track."""@en .
+
+
+###  http://data.europa.eu/949/navigability
+:navigability rdf:type owl:ObjectProperty ;
+              rdfs:domain :NetRelation ;
+              rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+              :inSkosConceptScheme <http://data.europa.eu/949/concepts/navigabilities/Navigabilities> ;
+              :rinfIndex "1.1.1.0.1.2" ,
+                         "1.2.4.1" ;
+              :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Navigability> ,
+                                        <http://data.europa.eu/949/shapes/NavigabilitySKOS> ;
+              <http://purl.org/dc/terms/created> "2021-04-01"^^xsd:date ;
+              <http://purl.org/dc/terms/modified> "2021-08-03"^^xsd:date ,
+                                                  "2024-11-29"^^xsd:date ;
+              rdfs:comment "Indicates the navigation possibilities between two related topological linear elements."@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "Navigability"@en ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+              <http://www.w3.org/2004/02/skos/core#altLabel> "Internal connection"@en ;
+              <http://www.w3.org/2004/02/skos/core#scopeNote> """â€¢	AB: Trains can move from element A to element B.
+â€¢	BA: Trains can move from element B to element A.
+â€¢	Both: Movement is bidirectional.
+â€¢	None: No movement is allowed between the two elements.
+"""@en .
+
+
+###  http://data.europa.eu/949/netElement
+:netElement rdf:type owl:ObjectProperty ;
+            <http://purl.org/dc/terms/created> "2021-04-01"^^xsd:date ;
+            <http://purl.org/dc/terms/modified> "2022-09-06"^^xsd:date ;
+            rdfs:comment """References an associated topological object.
+The reason for deprecating this property is that it is defined as \"References an associated topological object.\" and the vocabulary has already a property \"hasAbstraction\" which relates the implementation layer with the topological layer, https://citnet.tech.ec.europa.eu/CITnet/confluence/pages/viewpage.action?pageId=1122974879."""@en ;
+            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+            rdfs:label "Net element"@en ;
+            owl:deprecated "true"^^xsd:boolean ;
+            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/netReference
+:netReference rdf:type owl:ObjectProperty ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :InfrastructureElement
+                                          :LinearPositioningSystem
+                                        )
+                          ] ;
+              rdfs:range :NetBasicReference ;
+              :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetReference> ;
+              <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+              <http://purl.org/dc/terms/modified> "2025-03-10"^^xsd:date ;
+              rdfs:comment "The reference that a physical infrastructure element has it on the topology. It may be used to define the positioning or a representation as a point, line or area"@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "net reference"@en .
+
+
+###  http://data.europa.eu/949/notApplicable
+:notApplicable rdf:type owl:ObjectProperty ;
+               rdfs:range rdf:Property ;
+               :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NotApplicablePropertyShape> ;
+               <http://purl.org/dc/terms/created> "2021-09-13"^^xsd:date ;
+               <http://purl.org/dc/terms/modified> "2021-09-13"^^xsd:date ,
+                                                   "2025-03-10"^^xsd:date ;
+               rdfs:comment "Reference to a property that is not applicable."@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "Not applicable"@en ;
+               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/notYetAvailable
+:notYetAvailable rdf:type owl:ObjectProperty ;
+                 rdfs:range rdf:Property ;
+                 :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NotYetAvailablePropertyShape> ;
+                 <http://purl.org/dc/terms/created> "2021-09-13"^^xsd:date ;
+                 <http://purl.org/dc/terms/modified> "2023-10-11"^^xsd:date ,
+                                                     "2025-03-10"^^xsd:date ;
+                 rdfs:comment "Reference to a property that is not provided."@en ;
+                 rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                 rdfs:label "Not provided"@en ;
+                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/oclSeparationSectionsObjParameter
+:oclSeparationSectionsObjParameter rdf:type owl:ObjectProperty ;
+                                   rdfs:subPropertyOf :energySubsystemObjParameter ;
+                                   :rinfIndex "1.1.1.2.4" ;
+                                   <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                   rdfs:label "OCL separation sections"@en .
+
+
+###  http://data.europa.eu/949/ofParameter
+:ofParameter rdf:type owl:ObjectProperty ;
+             rdfs:domain :ParameterApplicability ;
+             rdfs:range rdf:Property ;
+             :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OfParameter> ;
+             <http://purl.org/dc/terms/created> "2024-10-28"^^xsd:date ;
+             <http://purl.org/dc/terms/modified> "2024-12-10"^^xsd:date ;
+             rdfs:comment "Indicates the parameter (object or datatype property) for which an applicability is being defined."@en ;
+             rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+             rdfs:label "of parameter"@en .
+
+
+###  http://data.europa.eu/949/onElement
+:onElement rdf:type owl:ObjectProperty ;
+           rdfs:domain :LinearElementSection ;
+           rdfs:range :LinearElement ;
+           :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OnElement> ;
+           <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+           rdfs:comment "Specifies the linear element a section belongs to."@en ;
+           rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+           rdfs:label "on element"@en .
+
+
+###  http://data.europa.eu/949/onLinearElement
+:onLinearElement rdf:type owl:ObjectProperty ;
+                 rdfs:domain :TopologicalCoordinate ;
+                 rdfs:range :LinearElement ;
+                 :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OnLinearElement> ;
+                 <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                 rdfs:comment "Specifies the linear element a coordinate is associated with."@en ;
+                 rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                 rdfs:label "on linear element"@en .
+
+
+###  http://data.europa.eu/949/opEnd
+:opEnd rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf :solGenericObjParameter ;
+       rdf:type owl:FunctionalProperty ;
+       rdfs:domain :SectionOfLine ;
+       rdfs:range :OperationalPoint ;
+       :XMLName "SOLOPEnd" ;
+       :applicable "Y" ;
+       :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+       :rinfIndex "1.1.0.0.0.4" ;
+       :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpEnd> ,
+                                 <http://data.europa.eu/949/shapes/OpEndExists> ;
+       :tsiOPEAppendixD2Index "3.1.2" ;
+       <http://purl.org/dc/terms/created> "2021-09-09"^^xsd:date ;
+       <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                           "2024-09-19"^^xsd:date ,
+                                           "2025-03-11"^^xsd:date ;
+       <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+       rdfs:comment "Operational point at the end of section of line (kilometres increasing from start OP to the end OP)."@en ;
+       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+       rdfs:label "Operational point at end of section of line"@en ;
+       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+       <http://www.w3.org/2004/02/skos/core#scopeNote> """Each SoL may have only one end OP, and each OP has unique OP ID within the MS. The â€œuniqueOPIDâ€ is defined in parameter 1.2.0.0.0.2.
+Each SoL has the principal direction of the traffic defined by increasing kilometres running from the start OP to the end OP.
+That is why the end OP is always located at highest kilometre of the line within the SoL.
+No validation will be performed by RINF application regarding which is the start and which the end OP. This requires IM's verification. """@en .
+
+
+###  http://data.europa.eu/949/opGenericObjParameter
+:opGenericObjParameter rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :rinfTechnicalObjectCharacteristic ;
+                       :rinfIndex "1.2.0.0.0" ;
+                       <http://purl.org/dc/terms/created> "2025-03-11"^^xsd:date ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Operational point generic information"@en .
+
+
+###  http://data.europa.eu/949/opInfoPerCountry
+:opInfoPerCountry rdf:type owl:ObjectProperty ;
+                  rdfs:domain :OperationalPoint ;
+                  rdfs:range :OperationalPoint ;
+                  <http://purl.org/dc/terms/created> "2023-01-20"^^xsd:date ;
+                  <http://purl.org/dc/terms/isReplacedBy> :ReferenceBorderPoint ,
+                                                          :referenceBorderPoint ;
+                  <http://purl.org/dc/terms/modified> "2024-10-24"^^xsd:date ;
+                  rdfs:comment "Relates an operational point that represents the general information of a border point to the information that each country maintains for the border point."@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "Border point information per country"@en ;
+                  owl:deprecated "true"^^xsd:boolean ;
+                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/opStart
+:opStart rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :solGenericObjParameter ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:domain :SectionOfLine ;
+         rdfs:range :OperationalPoint ;
+         :XMLName "SOLOPStart" ;
+         :applicable "Y" ;
+         :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+         :rinfIndex "1.1.0.0.0.3" ;
+         :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpStart> ,
+                                   <http://data.europa.eu/949/shapes/OpStartExists> ;
+         :tsiOPEAppendixD2Index "3.1.1" ;
+         <http://purl.org/dc/terms/created> "2021-09-09"^^xsd:date ;
+         <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                             "2024-09-19"^^xsd:date ,
+                                             "2025-03-11"^^xsd:date ;
+         <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+         rdfs:comment "Operational point at the start of section of line (kilometres increasing from start OP to the end OP)."@en ;
+         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+         rdfs:label "Operational point at start of section of line"@en ;
+         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+         <http://www.w3.org/2004/02/skos/core#scopeNote> """Each SoL may have only one start OP, and each OP has unique OP ID within the MS. The â€œuniqueOPIDâ€ is defined in parameter 1.2.0.0.0.2.
+Each SoL has the principal direction of the traffic defined by increasing kilometres running from the start OP to the end OP.
+That is why the start OP is always located at lowest kilometre of the line within the SoL.
+No validation will be performed by RINF application regarding which is the start and which the end OP. This requires IM's verification. """@en .
+
+
+###  http://data.europa.eu/949/opType
+:opType rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :opGenericObjParameter ;
+        rdfs:domain :OperationalPoint ;
+        rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+        :XMLName "OPType" ;
+        :applicable "Y" ;
+        :inSkosConceptScheme <http://data.europa.eu/949/concepts/op-types/OperationalPointTypes> ;
+        :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+        :rinfIndex "1.2.0.0.0.4" ;
+        :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpTypeP> ,
+                                  <http://data.europa.eu/949/shapes/OpTypeSKOS> ;
+        :tsiOPEAppendixD2Index "2.2.2" ,
+                               "2.3.2" ;
+        <http://purl.org/dc/terms/created> "2020-07-29"^^xsd:date ;
+        <http://purl.org/dc/terms/modified> "2021-08-03"^^xsd:date ,
+                                            "2024-09-19"^^xsd:date ,
+                                            "2025-03-11"^^xsd:date ;
+        <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+        rdfs:comment "Type of facility in relation to the dominating operational functions."@en ;
+        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+        rdfs:label "Type of operational point"@en ;
+        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+        <http://www.w3.org/2004/02/skos/core#scopeNote> """Each existing case has to be approximated to the one of the above defined types by including size, importance and dominating functions. It is most important to recognize the most important role of specific OP in the network. That is why only one type for one OP is permitted.
+
+For purpose of RINF, there were defined the following types of OPs:
+1.	Station - large or major railway node with several functions, important for international traffic, basic for national railway system;
+2.	Passenger terminal - station with dominating function of service for passenger traffic, serving as a central hub for passengers, often integrating rail operations with intermodal transport networks and large-scale passenger facilities, including ticketing, waiting areas, and other passenger services;
+3.	Freight terminal - station dominantly serving for loading and unloading of freight trains;
+4.	Depot or workshop - group of tracks used by depot or workshop for RST maintenance;
+5.	Train technical services - group of tracks for servicing trains (parking, washing, etc.);
+6.	Passenger stop - or halts - small OP consisting of at least one platform, normally serving mostly for local passenger services, without routing, dispatching, or train management facilities;
+7.	Junction - OP consisting of at least one turnout, normally used mostly for changing direction of trains, with reduced or not existing other functions;
+8.	Border point - located in the point where a border between MSs meets a railway line;
+9.	Shunting yard - group of tracks used for shunting trains, mostly related to freight traffic;
+10.	Switch - OP consisting of only one switch and the area around it, delimited and protected by entry signals, normally used for changing direction of trains, with reduced or not existing other functions;
+11.	Domestic border point - designated location on the main lines where the infrastructure responsibilities transition between IMs.
+"""@en .
+
+
+###  http://data.europa.eu/949/operatingLanguage
+:operatingLanguage rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :routeBookObjectParameter ;
+                   rdfs:domain :InfrastructureElement ;
+                   rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                   :applicable "Y/NYA" ;
+                   :formatNote "http://publications.europa.eu/resource/authority/language" ;
+                   :inSkosConceptScheme <http://publications.europa.eu/resource/authority/language> ;
+                   :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+                   :rinfIndex "1.1.0.0.1.2" ,
+                              "1.2.0.0.0.8" ;
+                   :tsiOPEAppendixD2Index "3.5.1" ;
+                   <http://purl.org/dc/terms/created> "2022-10-28"^^xsd:date ;
+                   <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ,
+                                                       "2024-09-19"^^xsd:date ;
+                   <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+                   rdfs:comment "The language or languages used in daily operation by infrastructure manager and published in its Network Statement, for the communication of operational or safety related messages between the staff of the infrastructure manager and the railway undertaking."@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "Operating language"@en ;
+                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+
+###  http://data.europa.eu/949/operationalRegimeType
+:operationalRegimeType rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :routeBookObjectParameter ;
+                       rdfs:domain :SectionOfLine ;
+                       rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                       :applicable "Y/N/NYA" ;
+                       :inSkosConceptScheme <http://data.europa.eu/949/concepts/operational-regime-types/OperationalRegimeTypes> ;
+                       :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+                       :rinfIndex "1.1.0.0.1.3" ;
+                       :tsiOPEAppendixD2Index "3.2.7" ;
+                       <http://purl.org/dc/terms/created> "2022-10-27"^^xsd:date ;
+                       <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                           "2024-09-19"^^xsd:date ,
+                                                           "2024-09-24"^^xsd:date ;
+                       <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+                       rdfs:comment "Double track type."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Operational regime"@en ;
+                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+
+###  http://data.europa.eu/949/operationalRestriction
+:operationalRestriction rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :vehicleTechnicalObjCharacteristic ;
+                        rdfs:domain :Vehicle ;
+                        rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                        :inSkosConceptScheme <http://data.europa.eu/949/concepts/restrictions/Restrictions> ;
+                        <http://purl.org/dc/terms/created> "2020-11-23"^^xsd:date ;
+                        <http://purl.org/dc/terms/modified> "2021-08-03"^^xsd:date ;
+                        rdfs:comment "Indicates an operational restriction of vehicle or wagon. Parking brake type (if the vehicle is fitted with it)."@en ;
+                        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                        rdfs:label "Operational restriction"@en ;
+                        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/orientation
+:orientation rdf:type owl:ObjectProperty ;
+             rdfs:domain :Orientation ;
+             rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+             :inSkosConceptScheme <http://data.europa.eu/949/concepts/orientations/OrientationDirections> ;
+             <http://purl.org/dc/terms/created> "2024-04-18"^^xsd:date ;
+             rdfs:comment "The orientation of the object in relation to the carrier linear element. Possible values: Normal, Opposite, Both"@en ;
+             rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+             rdfs:label "orientation"@en .
+
+
+###  http://data.europa.eu/949/osmClass
+:osmClass rdf:type owl:ObjectProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :CommonCharacteristicsSubset
+                                      :RunningTrack
+                                    )
+                      ] ;
+          rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+          :inSkosConceptScheme <http://data.europa.eu/949/concepts/osm-classes/OSMClasses> ;
+          rdfs:comment "(deprecated) not in use anymore"@en ;
+          rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+          rdfs:label "Open street map class"@en ;
+          owl:deprecated "true"^^xsd:boolean ;
+          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+          <http://www.w3.org/2004/02/skos/core#definition> "Additional concept class according to OpenStreetMap."@en .
+
+
+###  http://data.europa.eu/949/otherCantDeficiencyBasicSSP
+:otherCantDeficiencyBasicSSP rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemObjParameter ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( :CommonCharacteristicsSubset
+                                                         :RunningTrack
+                                                       )
+                                         ] ;
+                             rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                             :applicable "Y/N/NYA" ;
+                             :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+                             :inSkosConceptScheme <http://data.europa.eu/949/concepts/cant-deficiencies/CantDeficiencies> ;
+                             :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+                             :rinfIndex "1.1.1.3.2.14.1" ,
+                                        "1.2.1.1.1.14.1" ;
+                             :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OtherCantDeficiencyBasicSSP> ,
+                                                       <http://data.europa.eu/949/shapes/OtherCantDeficiencyBasicSSPApplicability> ,
+                                                       <http://data.europa.eu/949/shapes/OtherCantDeficiencyBasicSSPSKOS> ;
+                             :tsiOPEAppendixD3Index "1.3" ;
+                             :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+                             <http://purl.org/dc/terms/created> "2023-03-14"^^xsd:date ;
+                             <http://purl.org/dc/terms/modified> "2024-04-18"^^xsd:date ,
+                                                                 "2024-09-19"^^xsd:date ,
+                                                                 "2025-02-28"^^xsd:date ;
+                             <http://purl.org/dc/terms/relation> :cantDeficiencyBasicSSP ,
+                                                                 :etcsLevelType ;
+                             <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                             rdfs:comment """Essential information for drivers of trains with a worse (lower) tolerated cant deficiency than those for which the ETCS trackside provides SSP (Static Speed Profiles) in conjunction with parameter \"Cant Deficiency used for the basic SSP\".
+According to the specification referenced in Appendix A-1, index [C]"""@en ;
+                             rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                             rdfs:label "Other Cant Deficiency train categories for which the ETCS trackside is configured to provide SSP"@en ;
+                             rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+                             <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" ;
+                             <http://www.w3.org/2004/02/skos/core#scopeNote> """The values indicated in millimetres correspond to tracks with UIC gauge. For tracks with a gauge different from UIC, the values provided here are the equivalent ones for UIC gauge, as the actual physical cant deficiency values differ. Please refer to parameter 1.1.1.1.4.2 for more details.
+
+Subset-026 (3.11.3.2.1.1) definition: b) The \"other specific\" SSP categories: it groups all other specific SSP categories corresponding to the other international train categories."""@en .
+
+
+###  http://data.europa.eu/949/otherPantographHead
+:otherPantographHead rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :pantographObjParameter ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( :CommonCharacteristicsSubset
+                                                 :RunningTrack
+                                               )
+                                 ] ;
+                     rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                     :XMLName "EPA_OtherHeads" ;
+                     :applicable "Y/N" ;
+                     :dependencyNote "Mandatory only if â€œOverhead contact line (OCL)â€ is selected in 1.1.1.2.2.1.1, otherwise the parameter is not applicable."@en ;
+                     :inSkosConceptScheme <http://data.europa.eu/949/concepts/other-pantograph-heads/OtherPantographHeads> ;
+                     :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                     :rinfIndex "1.1.1.2.3.2" ;
+                     :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OtherPantographHeadApplicability> ,
+                                               <http://data.europa.eu/949/shapes/OtherPantographHeadSKOS> ;
+                     :usedInRCCCalculations "true"^^xsd:boolean ;
+                     <http://purl.org/dc/terms/created> "2022-06-03"^^xsd:date ;
+                     <http://purl.org/dc/terms/modified> "2022-06-03"^^xsd:date ,
+                                                         "2024-09-25"^^xsd:date ,
+                                                         "2025-02-28"^^xsd:date ;
+                     <http://purl.org/dc/terms/relation> :contactLineSystemType ;
+                     <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1302/2023-09-28> ;
+                     rdfs:comment "Indication of pantograph heads which are allowed to be used."@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "Accepted other pantograph heads"@en ;
+                     rdfs:seeAlso """EN 50367:2020+A1:2022: Annex B3
+LOC&PAS TSI: 7.3.2.14 (specific cases)""" ;
+                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                     <http://www.w3.org/2004/02/skos/core#scopeNote> """The parameter may contain more than one type of the pantograph head - all of them shall be indicated by repetition of the parameter with different single selections.
+Additional values than the already identified in the list above are possible. They will be introduced by the Agency on request via a process of change request."""@en .
+
+
+###  http://data.europa.eu/949/otherRadioSystemsObjParameter
+:otherRadioSystemsObjParameter rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf :ccsSubsystemObjParameter ,
+                                                  :vehicleTypeTechnicalObjectCharacteristic ;
+                               :rinfIndex "1.1.1.3.6" ,
+                                          "1.2.1.1.5" ;
+                               <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                               rdfs:label "Radio Legacy Systems" .
+
+
+###  http://data.europa.eu/949/otherTrainDetectionSystemsObjParameter

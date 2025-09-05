@@ -1,0 +1,69 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:linesideDistanceIndicationAppearance a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Lineside distance indication appearance"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/lineside-distance-indication-appearance/LinesideDistanceIndicationAppearance> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinesideDistanceIndicationAppearance>,
+        <http://data.europa.eu/949/shapes/LinesideDistanceIndicationAppearanceSKOS> ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-09-24"^^xsd:date,
+        "2025-01-30"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of types of appearance of track lineside distance indications."@en ;
+    rdfs:domain :LinesideDistanceIndication ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "unstable" .
+
+:linesideDistanceIndicationFrequency a owl:DatatypeProperty ;
+    rdfs:label "Lineside distance indication frequency"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinesideDistanceIndicationFrequency> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Frequency of track lineside distance indications."@en ;
+    rdfs:domain :LinesideDistanceIndication ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:linesideDistanceIndicationPositioning a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Lineside distance indication positioning"@en ;
+    :formatNote """A selection between 3 possible selectable values:
+- Left, or
+- Right, or
+- Left and Right"""@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinesideDistanceIndicationPositioning>,
+        <http://data.europa.eu/949/shapes/LinesideDistanceIndicationPositioningSKOS> ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-01-30"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of the side along the track where the lineside indication is positioned (left or right, or both sides)."@en ;
+    rdfs:domain :LinesideDistanceIndication ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "stable" .
+
+:LinesideDistanceIndication a owl:Class ;
+    rdfs:label "Lineside indications of distance"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinesideDistanceIndicationShape> ;
+    dcterms:created "2024-12-12"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date ;
+    rdfs:comment """Frequency, appearance and positioning of a sign indicating distance as reference post. Two types of signs are normally available: kilometre post and hectometre post.
+- A kilometre post is a lineside sign indicating the distance from a specific point, usually being the starting point of the railway line.
+- A hectometre post is a lineside sign indicating a relative distance."""@en ;
+    rdfs:isDefinedBy : .
+

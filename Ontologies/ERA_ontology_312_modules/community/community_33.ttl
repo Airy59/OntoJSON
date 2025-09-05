@@ -1,0 +1,26 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:healthSafetyAndEnvironmentObjParameter rdfs:subPropertyOf :infraSubsystemObjParameter .
+
+:lineLayoutObjParameter rdfs:subPropertyOf :infraSubsystemObjParameter .
+
+:performanceObjParameter rdfs:subPropertyOf :infraSubsystemObjParameter .
+
+:trackObjParameter rdfs:subPropertyOf :infraSubsystemObjParameter .
+
+:trackResistanceToAppliedLoadsObjParameter rdfs:subPropertyOf :infraSubsystemObjParameter .
+
+:tunnelObjParameter rdfs:subPropertyOf :infraSubsystemObjParameter .
+
+:infraSubsystemObjParameter a owl:ObjectProperty ;
+    rdfs:label "Infrastructure subsystem"@en ;
+    :rinfIndex "1.1.1.1" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    dcterms:modified "2024-10-28"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalObjectCharacteristic .
+

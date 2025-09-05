@@ -1,0 +1,420 @@
+:OrganisationRole rdf:type owl:Class ;
+                  :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OrganisationRoleShape> ;
+                  rdfs:comment "Represents an n-ary relationship between a Body and a role"@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "Organisation Role"@en .
+
+
+###  http://data.europa.eu/949/Orientation
+:Orientation rdf:type owl:Class ;
+             rdfs:comment "Represents the orientation of a railway object in relation to a carrier linear element. It can be described by direction, orientation and side."@en ;
+             rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+             rdfs:label "Orientation"@en .
+
+
+###  http://data.europa.eu/949/ParameterApplicability
+:ParameterApplicability rdf:type owl:Class ;
+                        rdfs:subClassOf :TemporalFeature ;
+                        :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ParameterApplicabilityShape> ;
+                        <http://purl.org/dc/terms/modified> "2024-10-28"^^xsd:date ;
+                        rdfs:comment "Applicability interval defines the date interval in which a characteristic of an infrastructure element is applicable. This interval can be applied for any of the technical characteristics or general information of infrastructure elements. This helps identifying planned changes applied to technical parameters over time."@en ;
+                        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                        rdfs:label "Parameter applicability"@en .
+
+
+###  http://data.europa.eu/949/PhaseInfo
+:PhaseInfo rdf:type owl:Class ;
+           :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoShape> ;
+           <http://purl.org/dc/terms/created> "2023-04-05"^^xsd:date ;
+           <http://purl.org/dc/terms/modified> "2025-02-18"^^xsd:date ;
+           <http://purl.org/dc/terms/replaces> :phaseInfo ;
+           rdfs:comment "Indication of required several information on phase separation."@en ;
+           rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+           rdfs:label "Phase info"@en ;
+           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> :stable .
+
+
+###  http://data.europa.eu/949/PlatformEdge
+:PlatformEdge rdf:type owl:Class ;
+              rdfs:subClassOf :InfrastructureElement ;
+              owl:disjointWith :PrimaryLocation ,
+                               :RadioBlockCenter ,
+                               :RunningTrack ,
+                               :SectionOfLine ,
+                               :Siding ,
+                               :Signal ,
+                               :SpecialArea ,
+                               :Switch ,
+                               :Track ,
+                               :Tunnel ;
+              :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PlatformEdgeShape> ;
+              <http://purl.org/dc/terms/created> "2021-08-02"^^xsd:date ;
+              <http://purl.org/dc/terms/modified> "2023-11-10"^^xsd:date ,
+                                                  "2025-01-30"^^xsd:date ,
+                                                  "2025-03-01"^^xsd:date ;
+              rdfs:comment "Platform for the purpose of RINF is understood as a platform edge. A platform concerns only the part of the structure neighbouring to the track (interfaced with trains)."@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "Platform edge"@en ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/PrimaryLocation
+:PrimaryLocation rdf:type owl:Class ;
+                 rdfs:subClassOf :InfrastructureElement ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :netReference ;
+                                   owl:allValuesFrom :NetPointReference
+                                 ] ;
+                 owl:disjointWith :RadioBlockCenter ,
+                                  :SectionOfLine ,
+                                  :Signal ,
+                                  :SpecialArea ,
+                                  :SubsidiaryLocation ,
+                                  :Switch ,
+                                  :Track ,
+                                  :Tunnel ;
+                 :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocationShape> ;
+                 <http://purl.org/dc/terms/modified> "2024-10-28"^^xsd:date ,
+                                                     "2025-03-01"^^xsd:date ,
+                                                     "2025-06-06"^^xsd:date ;
+                 rdfs:comment """Primary Location is a place used by IM to define a path for a train in TAF/TAP TSI framework/messages. This location is a rail point inside the rail network where train starts, ends, stops, or runs through or change line. This location must be managed by an Infrastructure Manager (IM) identified by company code.
+
+Primary locations are identified by single and unique Primary Location codes. Primary location code is allocated based on processes defined by national entity. Primary location codes are used in any kind of TAF/TAP communication.
+
+See: Handbook 9.3.3 / page 60"""@en ;
+                 rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                 rdfs:label "Primary Location"@en ;
+                 rdfs:seeAlso "http://taf-jsg.info/wp-content/uploads/2024/01/20231018-JGS-Handbook-3.4-with-XSD-3.4.0.0.pdf"^^xsd:anyURI ;
+                 <http://www.w3.org/2004/02/skos/core#example> "Primary locations are for example: stations, yards, halts, handover points, border points, open access terminals. "@en .
+
+
+###  http://data.europa.eu/949/RadioBlockCenter
+:RadioBlockCenter rdf:type owl:Class ;
+                  rdfs:subClassOf :InfrastructureElement ;
+                  owl:disjointWith :SectionOfLine ,
+                                   :Signal ,
+                                   :SpecialArea ,
+                                   :Switch ,
+                                   :Track ,
+                                   :Tunnel ;
+                  :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RadioBlockCenterShape> ;
+                  <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1693/oj> ;
+                  rdfs:comment """ETCS trackside centralised unit controlling ETCS train movements in level 2.
+
+A centralised safety unit that receives train position information via radio and sends movement authorities via radio to trains."""@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "Radio Block Center"@en ;
+                  rdfs:seeAlso "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1693&qid=1698394526534"^^xsd:anyURI ,
+                               "https://www.era.europa.eu/system/files/2023-09/index003_-_SUBSET-023_v400.pdf"^^xsd:anyURI .
+
+
+###  http://data.europa.eu/949/RaisedPantographsDistanceAndSpeed
+:RaisedPantographsDistanceAndSpeed rdf:type owl:Class ;
+                                   :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsDistanceAndSpeedShape> ;
+                                   <http://purl.org/dc/terms/created> "2023-04-05"^^xsd:date ;
+                                   rdfs:comment """Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed.
+Each track can have several raised pantographs per train allowed (structured) values, and each one has values for number of pantographs, minimum distance between pantographs, in metres, and speed considered in km/h."""@en ;
+                                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                   rdfs:label "Requirements for number of raised pantographs and spacing between them, at the given speed"@en ;
+                                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                                   <http://www.w3.org/2004/02/skos/core#scopeNote> """This class gives the information about the number of pantographs and the distance between them at a given speed for which the Overhead Contact Line (OCL) has been designed.
+As for different speeds different combinations of number of pantographs and distance between them may exist, so this class can be repeated to present all of them."""@en .
+
+
+###  http://data.europa.eu/949/ReferenceBorderPoint
+:ReferenceBorderPoint rdf:type owl:Class ;
+                      <http://purl.org/dc/terms/created> "2024-10-24"^^xsd:date ;
+                      <http://purl.org/dc/terms/replaces> :borderPointOf ,
+                                                          :opInfoPerCountry ;
+                      rdfs:comment "List of reference border points that are specified in the RINF Application Guide."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Reference border point"@en .
+
+
+###  http://data.europa.eu/949/RunningTrack
+:RunningTrack rdf:type owl:Class ;
+              rdfs:subClassOf :Track ;
+              owl:disjointWith :Siding ,
+                               :Signal ,
+                               :Switch ,
+                               :Tunnel ;
+              :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RunningTrackShape> ;
+              <http://purl.org/dc/terms/created> "2020-07-29"^^xsd:date ;
+              <http://purl.org/dc/terms/modified> "2022-07-07"^^xsd:date ,
+                                                  "2024-09-19"^^xsd:date ,
+                                                  "2024-11-20"^^xsd:date ;
+              rdfs:comment "A running track means any track used for train service movements; passing loops and meeting loops on plain line or track connections only required for train operation are not published"@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "Running track"@en ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+              <http://www.w3.org/2004/02/skos/core#scopeNote> "There might be more than one track within the Section of Line, so then the whole set of data for track has to be repeated for each track within the SoL."@en .
+
+
+###  http://data.europa.eu/949/SectionOfLine
+:SectionOfLine rdf:type owl:Class ;
+               rdfs:subClassOf :InfrastructureElement ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :nationalLine ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :LinearPositioningSystem
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :opEnd ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :OperationalPoint
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :opStart ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :OperationalPoint
+                               ] ;
+               owl:disjointWith :Signal ,
+                                :SpecialArea ,
+                                :Switch ,
+                                :Track ,
+                                :Tunnel ;
+               :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SectionOfLineShape> ;
+               <http://purl.org/dc/terms/created> "2021-04-02"^^xsd:date ;
+               <http://purl.org/dc/terms/modified> "2022-07-07"^^xsd:date ,
+                                                   "2024-09-19"^^xsd:date ,
+                                                   "2025-01-30"^^xsd:date ,
+                                                   "2025-03-01"^^xsd:date ;
+               <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+               rdfs:comment "A section of line means the part of line between adjacent operational points and may consist of several tracks."@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "Section Of Line"@en ;
+               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+               <http://www.w3.org/2004/02/skos/core#scopeNote> "Each network shall be described using as many SoLs as necessary. Each SoL   is generated and identified by OP IDs at start and at end. A SoL only belongs to one Line."@en .
+
+
+###  http://data.europa.eu/949/Siding
+:Siding rdf:type owl:Class ;
+        rdfs:subClassOf :Track ;
+        owl:disjointWith :Signal ,
+                         :Switch ,
+                         :Tunnel ;
+        :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SidingShape> ;
+        <http://purl.org/dc/terms/created> "2021-08-10"^^xsd:date ;
+        <http://purl.org/dc/terms/modified> "2022-10-27"^^xsd:date ,
+                                            "2024-09-19"^^xsd:date ,
+                                            "2024-11-20"^^xsd:date ;
+        <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/2020-06-16> ;
+        rdfs:comment "Sidings are all those tracks where running trains in service movements ends and which are not used for operational routing of a train."@en ;
+        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+        rdfs:label "Siding"@en ;
+        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Siding - Any track(s) within an operational point which is not used for operational routing of a train."@en .
+
+
+###  http://data.europa.eu/949/Signal
+:Signal rdf:type owl:Class ;
+        rdfs:subClassOf :InfrastructureElement ;
+        owl:disjointWith :SpecialArea ,
+                         :Switch ,
+                         :Track ,
+                         :Tunnel ;
+        :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SignalShape> ;
+        <http://purl.org/dc/terms/created> "2021-04-01"^^xsd:date ;
+        <http://purl.org/dc/terms/modified> "2022-10-27"^^xsd:date ,
+                                            "2024-09-19"^^xsd:date ,
+                                            "2025-01-30"^^xsd:date ,
+                                            "2025-03-01"^^xsd:date ;
+        <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/2023-09-28> ;
+        rdfs:comment "A railway signal is a visual display device (next to the tracks or via a DMI in the cabin) that conveys instructions or provides advance warning of instructions regarding the driver's authority to proceed."@en ;
+        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+        rdfs:label "Signal"@en ;
+        rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index003_-_SUBSET-023_v400.pdf"^^xsd:anyURI ;
+        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Apparatus by means of which a conventional visual or acoustic indication is given, generally concerning the movements/movement authorities of railway vehicles."@en .
+
+
+###  http://data.europa.eu/949/SpecialArea
+:SpecialArea rdf:type owl:Class ;
+             rdfs:subClassOf :InfrastructureElement ;
+             owl:disjointWith :Switch ,
+                              :Track ,
+                              :Tunnel ;
+             <http://purl.org/dc/terms/created> "2022-10-27"^^xsd:date ;
+             <http://purl.org/dc/terms/modified> "2024-04-18"^^xsd:date ,
+                                                 "2025-03-01"^^xsd:date ;
+             <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+             rdfs:comment """Encompasses all those areas (outside of the operational gauge) or sections (those in tunnels excluded) which influence operation in the gauge itself, such as
+- safe areas,
+- restricted areas (non-stopping areas or industrial risk locations).
+
+For these areas in tunnels, use era:SpecialTunnelArea."""@en ;
+             rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+             rdfs:label "Special area"@en ;
+             <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+             <http://www.w3.org/2004/02/skos/core#definition> """Non-stopping Area: Area defined by the Infrastructure Manager where it may not be safe or suitable to stop a train.
+Safe Area: Area defined by the Infrastructure Manager where it is safe or suitable to stop and evacuate a train.
+Industrial Risk Area: locations where it is dangerous for the driver to step out."""@en ;
+             <http://www.w3.org/2004/02/skos/core#editorialNote> "TODO review the definition" .
+
+
+###  http://data.europa.eu/949/SpecialTunnelArea
+:SpecialTunnelArea rdf:type owl:Class ;
+                   rdfs:subClassOf :SpecialArea ;
+                   <http://purl.org/dc/terms/created> "2022-10-27"^^xsd:date ;
+                   <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+                   rdfs:comment """Area or location within a tunnel where there are:
+- a safe area: a walkway, evacuation and rescue points;
+- a restricted area (non-stopping area or industrial risk location in a tunnel)."""@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "Special tunnel area"@en ;
+                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                   <http://www.w3.org/2004/02/skos/core#editorialNote> "TODO review the definition" .
+
+
+###  http://data.europa.eu/949/SubsidiaryLocation
+:SubsidiaryLocation rdf:type owl:Class ;
+                    rdfs:subClassOf :Feature ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :linkedToPrimaryLocation ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :PrimaryLocation
+                                    ] ;
+                    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SubsidiaryLocationShape> ;
+                    <http://purl.org/dc/terms/created> "2024-05-24"^^xsd:date ;
+                    <http://purl.org/dc/terms/modified> "2025-03-10"^^xsd:date ;
+                    rdfs:comment "Subsidiary location must be linked to a Primary Location and specifies in more detailed way part, attributes, or usage of Primary location. It may be also a non-rail point or a rail point that is not managed by an Infrastructure Manager (IM). It may be defined by entity having company code according to their needs. The Subsidiary location is optional and dependent upon business needs."@en ;
+                    rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                    rdfs:label "Subsidiary location"@en ;
+                    rdfs:seeAlso "http://taf-jsg.info/wp-content/uploads/2024/01/20231018-JGS-Handbook-3.4-with-XSD-3.4.0.0.pdf" .
+
+
+###  http://data.europa.eu/949/Switch
+:Switch rdf:type owl:Class ;
+        rdfs:subClassOf :InfrastructureElement ;
+        owl:disjointWith :Track ,
+                         :Tunnel ;
+        <http://purl.org/dc/terms/modified> "2025-01-30"^^xsd:date ,
+                                            "2025-03-01"^^xsd:date ;
+        <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/776/oj> ;
+        rdfs:comment "A unit of track comprising two fixed rails (stock rails) and two movable rails (switch rails) used to direct vehicles from one track to another track."@en ;
+        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+        rdfs:label "Switch"@en ;
+        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/SystemSeparationInfo
+:SystemSeparationInfo rdf:type owl:Class ;
+                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoShape> ;
+                      <http://purl.org/dc/terms/created> "2023-04-05"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2025-02-18"^^xsd:date ;
+                      <http://purl.org/dc/terms/replaces> :systemSeparationInfo ;
+                      rdfs:comment "Indication of required several information on system separation."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "System separation info"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/TemporalFeature
+:TemporalFeature rdf:type owl:Class ;
+                 rdfs:subClassOf [ rdf:type owl:Class ;
+                                   owl:unionOf ( <http://www.w3.org/2006/time#TemporalDuration>
+                                                 <http://www.w3.org/2006/time#TemporalEntity>
+                                               )
+                                 ] ;
+                 <http://purl.org/dc/terms/created> "2024-05-24"^^xsd:date ;
+                 rdfs:comment "The union of TemporalDuration that represents a time extent and TemporalEntity that represents a temporal interval or instant." ;
+                 rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                 rdfs:label "Temporal Feature"@en .
+
+
+###  http://data.europa.eu/949/TopologicalCoordinate
+:TopologicalCoordinate rdf:type owl:Class ;
+                       :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TopologicalCoordinateShape> ;
+                       <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                       rdfs:comment "Represents a topological coordinate."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Topological Coordinate"@en .
+
+
+###  http://data.europa.eu/949/Track
+:Track rdf:type owl:Class ;
+       rdfs:subClassOf :InfrastructureElement ;
+       owl:disjointWith :Tunnel ;
+       <http://purl.org/dc/terms/created> "2024-11-20"^^xsd:date ;
+       <http://purl.org/dc/terms/modified> "2025-01-30"^^xsd:date ,
+                                           "2025-03-01"^^xsd:date ;
+       rdfs:comment "A pair of rails over which rail borne vehicles can run."@en ;
+       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+       rdfs:label "Track"@en .
+
+
+###  http://data.europa.eu/949/TrainDetectionSystem
+:TrainDetectionSystem rdf:type owl:Class ;
+                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrainDetectionSystemShape> ;
+                      <http://purl.org/dc/terms/created> "2021-08-07"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2021-08-07"^^xsd:date ;
+                      rdfs:comment "Safety system used to detect the presence of vehicles on the railway track."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Train Detection System"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/Tunnel
+:Tunnel rdf:type owl:Class ;
+        rdfs:subClassOf :InfrastructureElement ;
+        :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TunnelShape> ;
+        <http://purl.org/dc/terms/created> "2020-07-29"^^xsd:date ;
+        <http://purl.org/dc/terms/modified> "2022-07-07"^^xsd:date ,
+                                            "2024-09-19"^^xsd:date ,
+                                            "2025-01-30"^^xsd:date ;
+        <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1303/2024-01-29> ;
+        rdfs:comment "A railway tunnel is an excavation or a construction around the track provided to allow the railway to pass for example higher land, buildings or water."@en ;
+        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+        rdfs:label "Tunnel"@en ;
+        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+        <http://www.w3.org/2004/02/skos/core#definition> """A railway tunnel is an excavation or a construction around the track provided to allow the railway to pass for example higher land, buildings or water.
+
+The length of a tunnel is defined as the length of the fully enclosed section, measured at rail level. A tunnel in the context of this TSI is 0.1 km or longer.
+Where certain requirements apply only to longer tunnels, thresholds are mentioned in the relevant clauses."""@en .
+
+
+###  http://data.europa.eu/949/Vehicle
+:Vehicle rdf:type owl:Class ;
+         owl:disjointWith :VehicleType ;
+         <http://purl.org/dc/terms/created> "2020-11-22"^^xsd:date ;
+         <http://purl.org/dc/terms/modified> "2020-11-22"^^xsd:date ;
+         rdfs:comment "A specific vehicle or wagon able and allowed to operate over railway infrastructure."@en ;
+         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+         rdfs:label "Vehicle"@en ;
+         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/VehicleKeeper
+:VehicleKeeper rdf:type owl:Class ;
+               rdfs:subClassOf <http://www.w3.org/ns/org#Organization> ;
+               <http://purl.org/dc/terms/created> "2020-11-23"^^xsd:date ;
+               <http://purl.org/dc/terms/isReplacedBy> :Body ,
+                                                       :vehicleKeeper ;
+               <http://purl.org/dc/terms/modified> "2020-11-23"^^xsd:date ,
+                                                   "2024-04-18"^^xsd:date ,
+                                                   "2024-06-03"^^xsd:date ;
+               rdfs:comment """The natural or legal person that, being the owner of a vehicle or having the right to use it,
+exploits the vehicle as a means of transport and is registered as such in a vehicle register referred to in Article 47 of (EU)2016/797."""@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "(deprecated) Vehicle Keeper"@en ;
+               owl:deprecated "true"^^xsd:boolean ;
+               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/VehicleType
+:VehicleType rdf:type owl:Class ;
+             <http://purl.org/dc/terms/created> "2020-07-29"^^xsd:date ;
+             <http://purl.org/dc/terms/modified> "2020-07-29"^^xsd:date ,
+                                                 "2024-04-18"^^xsd:date ,
+                                                 "2024-06-03"^^xsd:date ;
+             rdfs:comment """A vehicle type that has been authorized to operate on the EU railway infrastructure. Type means a vehicle type defining the basic design characteristics of the vehicle as covered by a type or design examination certificate described in the relevant verification module.
+
+Basic design characteristics means the parameters that are used to identify the vehicle type as specified in the issued vehicle type authorisation and recorded in the European Register of Authorised Vehicle Types ('ERATV').
+
+The above mentioned certificate should be documented using era:certificate.
+"""@en ;
+             rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+             rdfs:label "Vehicle Type"@en ;
+             <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+

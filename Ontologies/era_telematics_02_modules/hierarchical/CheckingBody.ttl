@@ -1,0 +1,27 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:BodyID a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BodyID" ;
+    rdfs:comment "4N Company Code" ;
+    rdfs:domain :CheckingBody ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BodyType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BodyType" ;
+    rdfs:comment """Following types of bodies are authorised (RID
+										1.4.3): 01 Carrier 02 Loader 03 Filler 04 Unloader""" ;
+    rdfs:domain :CheckingBody ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCheckingBody rdfs:range :CheckingBody .
+
+:CheckingBody a owl:Class ;
+    rdfs:label "CheckingBody" ;
+    rdfs:comment "Identification of the body which performed the RID check" .
+

@@ -1,0 +1,579 @@
+:tafTAPCode rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf <http://purl.org/dc/terms/identifier> ;
+            rdfs:domain :OperationalPoint ;
+            rdfs:range xsd:string ;
+            <http://purl.org/dc/terms/created> "2020-07-29"^^xsd:date ;
+            <http://purl.org/dc/terms/isReplacedBy> :primaryLocation ,
+                                                    :primaryLocationCode ;
+            <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                "2024-06-03"^^xsd:date ,
+                                                "2025-02-18"^^xsd:date ;
+            rdfs:comment "Not used anymore. It has been replaced by era:primaryLocationCode."@en ,
+                         "Primary location code developed for information exchange in accordance with the TSIs relating to the telematics applications subsystem"@en ;
+            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+            rdfs:label "OP primary location code"@en ;
+            owl:deprecated "true"^^xsd:boolean ;
+            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/tenGISId
+:tenGISId rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf :performanceDataParameter ;
+          rdf:type owl:FunctionalProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :CommonCharacteristicsSubset
+                                      :RunningTrack
+                                    )
+                      ] ;
+          rdfs:range xsd:string ;
+          :XMLName "IPP_TENGISID" ;
+          :applicable "Y/N" ;
+          :legalDeadline "1 January 2021"@en ;
+          :rinfIndex "1.1.1.1.2.1.2" ;
+          :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TenGISId> ,
+                                    <http://data.europa.eu/949/shapes/TenGISIdApplicability> ;
+          <http://purl.org/dc/terms/created> "2021-08-03"^^xsd:date ;
+          <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                              "2024-09-19"^^xsd:date ;
+          rdfs:comment "Indication of the GIS identity (GIS ID) of the section of TEN-T database to which the track belongs"@en ;
+          rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+          rdfs:label "TEN geographic information system identity (GIS ID)"@en ;
+          rdfs:seeAlso "http://ec.europa.eu/transport/infrastructure/tentec/tentec-portal/"^^xsd:anyURI ,
+                       "https://transport.ec.europa.eu/transport-themes/infrastructure-and-investment/trans-european-transport-network-ten-t_en"^^xsd:anyURI ;
+          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+          <http://www.w3.org/2004/02/skos/core#scopeNote> """This parameter will be deprecated in a next revision. Please use value \"Not applicable\" until the RINF regulation is aligned. The information below remains for reference only.
+
+TENtec is the European Commission's information system to coordinate and support the Trans-European Transport Network Policy (TEN-T). For more details about the system and the legal background please follow the link to the TENtec Public Portal.
+
+The list of sections of the TEN networks with their GIS IDs can be requested via MOVE-TENTEC-PUBLIC@ec.europa.eu"""@en .
+
+
+###  http://data.europa.eu/949/thermalCapacityDistance
+:thermalCapacityDistance rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                         rdfs:domain :VehicleType ;
+                         rdfs:range xsd:double ;
+                         :eratvIndex "4.7.2.1.4" ;
+                         :unitOfMeasure <http://qudt.org/vocab/unit/KiloM> ;
+                         <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                         <http://purl.org/dc/terms/modified> "2020-11-03"^^xsd:date ,
+                                                             "2024-06-26"^^xsd:date ;
+                         rdfs:comment "Thermal capacity distance. If no reference case is indicated."@en ;
+                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                         rdfs:label "Thermal capacity distance"@en ;
+                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/thermalCapacityGradient
+:thermalCapacityGradient rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                         rdfs:domain :VehicleType ;
+                         rdfs:range xsd:double ;
+                         :eratvIndex "4.7.2.1.3" ;
+                         <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                         <http://purl.org/dc/terms/modified> "2020-11-03"^^xsd:date ;
+                         rdfs:comment "Thermal capacity gradient. If no reference case is indicated."@en ;
+                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                         rdfs:label "Thermal capacity gradient"@en ;
+                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/thermalCapacitySpeed
+:thermalCapacitySpeed rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                      rdfs:domain :VehicleType ;
+                      rdfs:range xsd:double ;
+                      :eratvIndex "4.7.2.1.2" ;
+                      <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2020-11-03"^^xsd:date ;
+                      rdfs:comment "Thermal capacity speed. If no reference case is indicated."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Thermal capacity speed"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/thermalCapacityTime
+:thermalCapacityTime rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                     rdfs:domain :VehicleType ;
+                     rdfs:range xsd:integer ;
+                     :eratvIndex "4.7.2.1.5" ;
+                     <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                     <http://purl.org/dc/terms/modified> "2020-11-03"^^xsd:date ;
+                     rdfs:comment "Thermal capacity time. If no reference case is indicated."@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "Thermal capacity time"@en ;
+                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/tiltingSupported
+:tiltingSupported rdf:type owl:DatatypeProperty ;
+                  rdfs:range xsd:boolean ;
+                  :rinfIndex "1.1.1.3.12.1" ;
+                  :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TiltingSupported> ;
+                  <http://purl.org/dc/terms/created> "2021-08-09"^^xsd:date ;
+                  <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ;
+                  rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication whether tilting functions are supported by ETCS."@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "Indication whether tilting functions are supported by ETCS"@en ;
+                  owl:deprecated "true"^^xsd:boolean ;
+                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/totalVehicleMass
+:totalVehicleMass rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                  rdfs:domain :VehicleType ;
+                  rdfs:range xsd:integer ;
+                  :eratvIndex "4.5.5" ;
+                  <http://purl.org/dc/terms/created> "2021-08-26"^^xsd:date ;
+                  <http://purl.org/dc/terms/modified> "2021-08-26"^^xsd:date ;
+                  rdfs:comment "Total vehicle mass (for each vehicle of the unit), given in kg."@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "Total vehicle mass"@en ;
+                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/trackDataParameter
+:trackDataParameter rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf :infraSubsystemDataParameter ;
+                    rdf:type owl:FunctionalProperty ;
+                    :rinfIndex "1.1.1.1.4" ,
+                               "1.2.1.0.4" ;
+                    <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                    rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                    rdfs:label "Track parameters"@en .
+
+
+###  http://data.europa.eu/949/trackGenericDataParameter
+:trackGenericDataParameter rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf :rinfTechnicalDataCharacteristic ;
+                           :rinfIndex "1.1.1.0.0" ;
+                           <http://purl.org/dc/terms/created> "2025-03-11"^^xsd:date ;
+                           rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                           rdfs:label "Running track generic information"@en .
+
+
+###  http://data.europa.eu/949/trackId
+:trackId rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :trackGenericDataParameter ,
+                            <http://purl.org/dc/terms/identifier> ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:domain :RunningTrack ;
+         rdfs:range xsd:string ;
+         :XMLName "OPTrackIdentification" ,
+                  "SOLTrackIdentification" ;
+         :applicable "Y" ;
+         :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+         :rinfIndex "1.1.1.0.0.1" ,
+                    "1.2.1.0.0.2" ;
+         :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NoRepeatedTrackIdsOP> ,
+                                   <http://data.europa.eu/949/shapes/NoRepeatedTrackIdsSoL> ,
+                                   <http://data.europa.eu/949/shapes/TrackId> ;
+         :tsiOPEAppendixD2Index "2.2.1.1" ;
+         <http://purl.org/dc/terms/created> "2021-09-09"^^xsd:date ;
+         <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                             "2024-09-19"^^xsd:date ,
+                                             "2025-03-08"^^xsd:date ,
+                                             "2025-03-11"^^xsd:date ;
+         <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+         rdfs:comment "Unique track identification or unique track number within operational point or section of line"@en ;
+         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+         rdfs:label "Identification of track"@en ;
+         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+         <http://www.w3.org/2004/02/skos/core#scopeNote> """Each track shall have unique identification or number within the SoL. This number cannot be used for naming any other track in the same SoL.
+The check regarding the uniqueness of the ID within the SoL has to be done on national level (preferably by IM)."""@en .
+
+
+###  http://data.europa.eu/949/trackResistanceToAppliedLoadsDataParameter
+:trackResistanceToAppliedLoadsDataParameter rdf:type owl:DatatypeProperty ;
+                                            rdfs:subPropertyOf :infraSubsystemDataParameter ;
+                                            :rinfIndex "1.1.1.1.6" ;
+                                            <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                                            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                            rdfs:label "Track resistance to applied loads"@en .
+
+
+###  http://data.europa.eu/949/trainControlSwitchOverSpecialConditions
+:trainControlSwitchOverSpecialConditions rdf:type owl:DatatypeProperty ;
+                                         rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                                         rdfs:domain :VehicleType ;
+                                         rdfs:range xsd:string ;
+                                         :eratvIndex "4.13.1.6" ;
+                                         <http://purl.org/dc/terms/created> "2021-08-31"^^xsd:date ;
+                                         <http://purl.org/dc/terms/modified> "2021-08-31"^^xsd:date ;
+                                         rdfs:comment "Special conditions implemented on-board to switch over between different train protection control and warning systems. Given as combination of systems installed on board ('System XX'_'System YY')."@en ;
+                                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                         rdfs:label "Train control switch over special conditions"@en ;
+                                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/trainDetectionSystemBasedFrequencyBandsDataParameter
+:trainDetectionSystemBasedFrequencyBandsDataParameter rdf:type owl:DatatypeProperty ;
+                                                      rdfs:subPropertyOf :ccsSubsystemDataParameter ;
+                                                      :rinfIndex "1.1.1.3.4" ,
+                                                                 "1.2.1.1.3" ;
+                                                      <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                                                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                                      rdfs:label "Train detection systems defined based on frequency bands"@en .
+
+
+###  http://data.europa.eu/949/trainIntegrityOnBoardRequired
+:trainIntegrityOnBoardRequired rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter ;
+                               rdf:type owl:FunctionalProperty ;
+                               rdfs:domain [ rdf:type owl:Class ;
+                                             owl:unionOf ( :CommonCharacteristicsSubset
+                                                           :RunningTrack
+                                                         )
+                                           ] ;
+                               rdfs:range [ rdf:type rdfs:Datatype ;
+                                            owl:oneOf [ rdf:type rdf:List ;
+                                                        rdf:first "N" ;
+                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                   rdf:first "Optional" ;
+                                                                   rdf:rest [ rdf:type rdf:List ;
+                                                                              rdf:first "Y" ;
+                                                                              rdf:rest rdf:nil
+                                                                            ]
+                                                                 ]
+                                                      ]
+                                          ] ;
+                               :applicable "Y/N/NYA" ;
+                               :dependencyNote "A value has to be provided when ETCS Level 2 is present, ETCS Baseline > 4 MR1 and IM confirms train integrity function is required)."@en ,
+                                               "Parameter only applicable when ETCS Baseline > 4 MR1 with operation requiring train integrity."@en ;
+                               :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en ,
+                                              "16 January 2020"@en ;
+                               :rinfIndex "1.1.1.3.2.8" ,
+                                          "1.2.1.1.1.8" ;
+                               :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrainIntegrityOnBoardRequired> ;
+                               :tsiOPEAppendixD2Index "3.4.11" ;
+                               :usedInRCCCalculations "true"^^xsd:boolean ;
+                               <http://purl.org/dc/terms/created> "2020-08-31"^^xsd:date ;
+                               <http://purl.org/dc/terms/modified> "2021-09-12"^^xsd:date ,
+                                                                   "2024-04-18"^^xsd:date ,
+                                                                   "2025-02-28"^^xsd:date ,
+                                                                   "2025-03-04"^^xsd:date ;
+                               <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                               rdfs:comment "Indication whether train confirmation from on-board is required to access the line for safety reasons."@en ;
+                               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                               rdfs:label "Train integrity confirmation from on-board (not from driver) necessary for line access"@en ;
+                               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                               <http://www.w3.org/2004/02/skos/core#scopeNote> """In hybrid operation, the confirmation can be optional.
+See also: TSI CCS BDC 4.2.2 (Managing information about the completeness of the train (not from driver))"""@en .
+
+
+###  http://data.europa.eu/949/transitionsBetweenSystemsDataParameter
+:transitionsBetweenSystemsDataParameter rdf:type owl:DatatypeProperty ;
+                                        rdfs:subPropertyOf :ccsSubsystemDataParameter ;
+                                        :rinfIndex "1.1.1.3.8" ,
+                                                   "1.2.1.1.7" ;
+                                        <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                                        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                        rdfs:label "Transitions between systems"@en .
+
+
+###  http://data.europa.eu/949/transportableOnFerry
+:transportableOnFerry rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                      rdfs:domain :VehicleType ;
+                      rdfs:range xsd:boolean ;
+                      :eratvIndex "4.8.8" ;
+                      <http://purl.org/dc/terms/created> "2021-08-31"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2021-08-31"^^xsd:date ;
+                      rdfs:comment "Indicates the suitability for transport on ferries."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Transportable on ferry"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/tsiCompliant
+:tsiCompliant rdf:type owl:DatatypeProperty ;
+              rdfs:range xsd:boolean ;
+              <http://purl.org/dc/terms/created> "2020-11-03"^^xsd:date ;
+              <http://purl.org/dc/terms/modified> "2023-01-23"^^xsd:date ;
+              rdfs:comment "Indicates if a certain property is TSI compliant.The reason for deprecation is that it is used in SKOS \"OtherPantographHeads\" and \"TsiPantographHeads\" to indicate in the first case if a SKOS concept is not tsiCompliant (false) and in the second case that the concept is tsiCompliant (true). These two SKOS were originally one SKOS, \"PantographHeads\". Currently with the two SKOS the property is redundant."@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "Tsi compliant"@en ;
+              owl:deprecated "true"^^xsd:boolean ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/tsiCompliantRadioDataParameter
+:tsiCompliantRadioDataParameter rdf:type owl:DatatypeProperty ;
+                                rdfs:subPropertyOf :ccsSubsystemDataParameter ;
+                                :rinfIndex "1.1.1.3.3" ,
+                                           "1.2.1.1.2" ;
+                                <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                rdfs:label "TSI compliant radio (RMR)"@en .
+
+
+###  http://data.europa.eu/949/tsiCompliantTrainProtectionSystemDataParameter
+:tsiCompliantTrainProtectionSystemDataParameter rdf:type owl:DatatypeProperty ;
+                                                rdfs:subPropertyOf :ccsSubsystemDataParameter ;
+                                                :rinfIndex "1.1.1.3.2" ,
+                                                           "1.2.1.1.1" ;
+                                                <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                                                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                                rdfs:label "TSI compliant train protection system (ETCS)"@en .
+
+
+###  http://data.europa.eu/949/tsiMagneticFields
+:tsiMagneticFields rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :relatedElectromagneticInterferencesDataParameter ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( :CommonCharacteristicsSubset
+                                               :RunningTrack
+                                             )
+                               ] ;
+                   rdfs:range xsd:boolean ;
+                   :applicable "Y/N/NYA" ;
+                   :dependencyNote "Applicable ( Y ) only when for parameter 1.1.1.3.7.1 the selected option is wheel detector. The parameter is not applicable when the rules do not exist."@en ;
+                   :formatNote "Y/N" ;
+                   :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en ,
+                                  "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                   :rinfIndex "1.1.1.3.9.1" ,
+                              "1.2.1.1.8.1" ;
+                   :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TsiMagneticFields> ,
+                                             <http://data.europa.eu/949/shapes/TsiMagneticFieldsApplicability> ;
+                   <http://purl.org/dc/terms/created> "2024-04-18"^^xsd:date ;
+                   <http://purl.org/dc/terms/modified> "2024-09-19"^^xsd:date ,
+                                                       "2025-02-18"^^xsd:date ,
+                                                       "2025-02-28"^^xsd:date ;
+                   <http://purl.org/dc/terms/relation> :trainDetectionSystemType ;
+                   <http://purl.org/dc/terms/replaces> :TSIMagneticFields ;
+                   <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                   rdfs:comment "Indication whether rules exist and are compliant with the TSI."@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "Existence and TSI compliance of rules for magnetic fields emitted by a vehicle"@en ;
+                   rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                   <http://www.w3.org/2004/02/skos/core#scopeNote> """The electromagnetic fields generated by rolling stock can interfere with the operation of axle counters and wheel detectors.
+                      'True' means the rules exist and are compliant with the frequency management specified in the TSI.
+                      'False' means the rules exist and are not compliant with the frequency management specified in the TSI.
+
+                      Verification of compliance with TSI includes application of notified national rules (when they exist) in case of part covered by open point."""@en .
+
+
+###  http://data.europa.eu/949/tsiSwitchCrossing
+:tsiSwitchCrossing rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :switchesAndCrossingsDataParameter ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( :CommonCharacteristicsSubset
+                                               :RunningTrack
+                                             )
+                               ] ;
+                   rdfs:range xsd:boolean ;
+                   :XMLName "ISC_TSISwitchCrossing" ;
+                   :applicable "Y" ;
+                   :formatNote "in XML: Y/N" ;
+                   :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                   :rinfIndex "1.1.1.1.5.1" ;
+                   :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TSISwitchCrossing> ;
+                   <http://purl.org/dc/terms/created> "2021-08-03"^^xsd:date ;
+                   <http://purl.org/dc/terms/modified> "2021-09-10"^^xsd:date ,
+                                                       "2024-09-19"^^xsd:date ,
+                                                       "2025-02-28"^^xsd:date ;
+                   <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+                   rdfs:comment "Switches and crossings are maintained to in service limit dimension as specified in TSI."@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "TSI compliance of in-service values for switches and crossings"@en ;
+                   rdfs:seeAlso "INF TSI: 4.2.5 and 4.2.8.6" ;
+                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                   <http://www.w3.org/2004/02/skos/core#scopeNote> "If for existing track at least one parameter has less strict value than specified in the TSI, then 'N' (false) shall be selected."@en .
+
+
+###  http://data.europa.eu/949/tsiTractionHarmonics
+:tsiTractionHarmonics rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :relatedElectromagneticInterferencesDataParameter ;
+                      rdf:type owl:FunctionalProperty ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( :CommonCharacteristicsSubset
+                                                  :RunningTrack
+                                                )
+                                  ] ;
+                      rdfs:range xsd:boolean ;
+                      :applicable "Y/N/NYA" ;
+                      :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en ,
+                                     "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                      :rinfIndex "1.1.1.3.9.2" ,
+                                 "1.2.1.1.8.2" ;
+                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TsiTractionHarmonics> ,
+                                                <http://data.europa.eu/949/shapes/TsiTractionHarmonicsApplicability> ;
+                      <http://purl.org/dc/terms/created> "2024-04-18"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2024-09-19"^^xsd:date ,
+                                                          "2025-02-18"^^xsd:date ;
+                      <http://purl.org/dc/terms/relation> :trainDetectionSystemType ;
+                      <http://purl.org/dc/terms/replaces> :TSITractionHarmonics ;
+                      <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                      rdfs:comment "Indication whether rules exist and are compliant with the TSI."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Existence and TSI compliance of limits in harmonics in the traction current of vehicles"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                      <http://www.w3.org/2004/02/skos/core#scopeNote> """Compatibility with track circuits and wheel detectors of axle counters.
+
+The harmonics in the traction current in the rails can interfere with the operation of track circuits. The DC current in the rails may saturate the detectors of the axle counters, preventing their operation.
+
+'Y' means the rules exist and are compliant with the frequency management specified in the TSI.
+'N' 'means the rules exist and are not compliant with the frequency management specified in the TSI.
+
+Verification of compliance with TSI includes application of notified national rules (when they exist) in case of part covered by open point.
+LOC&PAS TSI : Appendix J-2, index 1, clause 3.2.2"""@en .
+
+
+###  http://data.europa.eu/949/tunnelDataParameter
+:tunnelDataParameter rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :infraSubsystemDataParameter ;
+                     :rinfIndex "1.1.1.1.8" ,
+                                "1.2.1.0.5" ,
+                                "1.2.2.0.5" ;
+                     <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "Tunnel"@en .
+
+
+###  http://data.europa.eu/949/tunnelIdentification
+:tunnelIdentification rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :tunnelDataParameter ,
+                                         <http://purl.org/dc/terms/identifier> ;
+                      rdf:type owl:FunctionalProperty ;
+                      rdfs:domain :Tunnel ;
+                      rdfs:range xsd:string ;
+                      :XMLName "OPSidingTunnelIdentification" ,
+                               "OPTrackTunnelIdentification" ,
+                               "SOLTunnelIdentification" ;
+                      :applicable "Y" ;
+                      :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                      :rinfIndex "1.1.1.1.8.2" ,
+                                 "1.2.1.0.5.2" ,
+                                 "1.2.2.0.5.2" ;
+                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TunnelIdentification> ;
+                      :tsiOPEAppendixD2Index "3.2.3" ;
+                      <http://purl.org/dc/terms/created> "2021-08-03"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2021-09-13"^^xsd:date ,
+                                                          "2024-09-19"^^xsd:date ,
+                                                          "2025-03-08"^^xsd:date ;
+                      <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+                      rdfs:comment "Unique tunnel identification or unique tunnel number within Member State"@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Tunnel identification"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                      <http://www.w3.org/2004/02/skos/core#scopeNote> "Here should be given the name, number, code or any other expression which is normally used for the identification of the tunnel other than mentioned in parameters 1.1.1.1.8.3   1.1.1.1.8.4. In case when tunnel does not have its own identification within the Member State, the IM should deliver it himself"@en .
+
+
+###  http://data.europa.eu/949/tunnelKilometerEnd
+:tunnelKilometerEnd rdf:type owl:DatatypeProperty ;
+                    rdfs:range xsd:double ;
+                    :XMLName "SOLTunnelEnd" ;
+                    :rinfIndex "1.1.1.1.8.4" ;
+                    <http://purl.org/dc/terms/created> "2023-03-29"^^xsd:date ;
+                    <http://purl.org/dc/terms/isReplacedBy> :lineReferenceTunnelEnd ;
+                    <http://purl.org/dc/terms/modified> "2024-02-05"^^xsd:date ,
+                                                        "2024-09-19"^^xsd:date ;
+                    rdfs:comment """Part of the End of tunnel that indicates the km of the line at the end of a tunnel.
+The End of tunnel is the Geographical coordinates in decimal degrees and km of the line at the end of a tunnel. The reason for deprecation is that the property is now a subproperty of lineReference in order to represent the kilometer in relation to a national railway line"""@en ;
+                    rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                    rdfs:label "(deprecated) End of tunnel kilometer"@en ;
+                    owl:deprecated "true"^^xsd:boolean ;
+                    <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/tunnelKilometerStart
+:tunnelKilometerStart rdf:type owl:DatatypeProperty ;
+                      rdfs:range xsd:double ;
+                      <http://purl.org/dc/terms/created> "2023-03-29"^^xsd:date ;
+                      <http://purl.org/dc/terms/isReplacedBy> :lineReferenceTunnelStart ;
+                      <http://purl.org/dc/terms/modified> "2024-02-05"^^xsd:date ,
+                                                          "2024-09-19"^^xsd:date ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "(deprecated) Start of tunnel kilometer"@en ;
+                      owl:deprecated "true"^^xsd:boolean ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/typeVersionNumber
+:typeVersionNumber rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                   rdfs:domain :VehicleType ;
+                   rdfs:range xsd:string ;
+                   <http://purl.org/dc/terms/created> "2020-11-22"^^xsd:date ;
+                   <http://purl.org/dc/terms/modified> "2020-11-22"^^xsd:date ;
+                   rdfs:comment "Serial number that identifies a vehicle type."@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "Type version number"@en ;
+                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/umax2
+:umax2 rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf :contactLineSystemDataParameter ;
+       rdf:type owl:FunctionalProperty ;
+       rdfs:domain :ContactLineSystem ;
+       rdfs:range xsd:integer ;
+       :XMLName "ECS_Umax2" ;
+       :applicable "Y/N" ;
+       :dependencyNote "When `not electrified` is chosen in parameter 1.1.1.2.2.1.1, then this parameter is not applicable."@en ;
+       :legalDeadline "16 January 2020"@en ;
+       :rinfIndex "1.1.1.2.2.1.3" ;
+       :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Umax2> ;
+       :unitOfMeasure <http://qudt.org/vocab/unit/V> ;
+       :usedInRCCCalculations "true"^^xsd:boolean ;
+       <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+       <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                           "2024-09-25"^^xsd:date ,
+                                           "2025-02-28"^^xsd:date ;
+       <http://purl.org/dc/terms/relation> :contactLineSystemType ;
+       rdfs:comment "Highest non-permanent voltage (Umax2) for France on lines not compliant with values defined in the EN50163:2004+A1:2007+A2:2020+A3:2022"@en ;
+       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+       rdfs:label "Umax2 for the French network"@en ;
+       rdfs:seeAlso "ENE TSI: 4.2.4.1"@en ;
+       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+       <http://www.w3.org/2004/02/skos/core#scopeNote> """Specific for the French network. It may concern DC 1.5kV and AC 25kV.
+
+          For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, an XML attribute called â€œSetâ€ will be used to link the value of this parameter to the parameter 1.1.1.2.2.1.1 / ECS_SystemType"""@en .
+
+
+###  http://data.europa.eu/949/uopid
+:uopid rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf :opGenericDataParameter ,
+                          <http://purl.org/dc/terms/identifier> ;
+       rdf:type owl:FunctionalProperty ;
+       rdfs:domain :OperationalPoint ;
+       rdfs:range xsd:string ;
+       :XMLName "UniqueOPID" ;
+       :applicable "Y" ;
+       :formatNote """CCAAAAAAAAAA
+The first part  CC  is the country code in two-letter system of ISO.
+The second part is alphanumeric OP code within the MS.
+For example, an OP code could be current abbreviation of name used in route books.
+In case of borders point, the code is to be selected in the corresponding list in annex 5.1""" ;
+       :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+       :rinfIndex "1.2.0.0.0.2" ;
+       :shaclShapeValidationRule <http://data.europa.eu/949/shapes/BorderPointValidCodeAndCoordinates> ,
+                                 <http://data.europa.eu/949/shapes/BorderPointValidCode> ,
+                                 <http://data.europa.eu/949/shapes/UopidMin> ,
+                                 <http://data.europa.eu/949/shapes/UopidP> ;
+       :tsiOPEAppendixD2Index "2.2.2" ;
+       <http://purl.org/dc/terms/created> "2020-07-29"^^xsd:date ;
+       <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                           "2024-09-19"^^xsd:date ,
+                                           "2025-03-11"^^xsd:date ;
+       <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+       rdfs:comment "Code composed of country code and alphanumeric operational point code."@en ;
+       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+       rdfs:label "Unique OP ID"@en ;
+       rdfs:seeAlso "ISO 3166-1 alpha 2" ;
+       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+       <http://www.w3.org/2004/02/skos/core#scopeNote> """Explanation on data presentation: The first two characters represent the country code in two-letter system of ISO.
+The second part  AAAAAAAAAA  is maximum 10 Characters String corresponding to OP code within the MS.
+'LUAB4' or 'LUAB46TH-G' or 'LUAB4/-_ERT7' are accepted by the validation process.
+In case of  borders point , the code is to be selected in the corresponding list in annex 5.1 (this first part  AA  is EU. The second part is  AAAAAAAAAA ). Any OP ID that is not referenced in the annex 5.1 will not be accepted by the validation process.
+In case of  domestic borders point , the code will be selected in the corresponding list in annex 5.2 that will be developed later.
+Any OP ID that is not referenced in the annex 5.1 will not be accepted by the validation process.
+The provided OP ID must be unique within each Member State. The validation has to be made nationally by NRE. The exceptions are  Border point  and  domestic border point  that must be referenced in annex 5.1."""@en .
+
+

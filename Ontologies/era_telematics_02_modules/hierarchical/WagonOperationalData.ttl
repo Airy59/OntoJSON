@@ -1,0 +1,67 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ExceptionalGaugingProfile a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ExceptionalGaugingProfile" ;
+    rdfs:comment """Identification of special load. Coding found in 404-2 chapter 4.9.1
+				(4AN + 3N)""" ;
+    rdfs:domain :WagonOperationalData ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InfoOnGoodsShapeTypeDanger a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InfoOnGoodsShapeTypeDanger" ;
+    rdfs:comment "Additional codified information on the load.  Coding Structures as defined in 404-2  chapter 4.1" ;
+    rdfs:domain :WagonOperationalData ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RestrictionsDueToLoadOrDamage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RestrictionsDueToLoadOrDamage" ;
+    rdfs:comment """These are possible restrictions applicable in the originating country
+				to shunting operations in stations and to main-line movements on account of the
+				nature of the load. Coding in Restriction Codes (according to UIC Leaflet 920-13) """ ;
+    rdfs:domain :WagonOperationalData ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TotalLoadWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TotalLoadWeight" ;
+    rdfs:comment """The total weight of the transportation unit on the freight wagon. This
+				is the booked or actual weight of goods including packing and carrier's equipment""" ;
+    rdfs:domain :WagonOperationalData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonMaxSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonMaxSpeed" ;
+    rdfs:comment """Maximum allowed speed of the wagon according to the load and entry in
+				the Rolling Stock Databases. In kmh""" ;
+    rdfs:domain :WagonOperationalData ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasWagonOperationalData rdfs:range :WagonOperationalData .
+
+:WagonOperationalData a owl:Class ;
+    rdfs:label "WagonOperationalData" ;
+    rdfs:comment """Actual wagon parameters, dependent on load or damage. This group and
+				its elements are optional (contract defines what IM requires). But if there is
+				dangerous goods in the train, then this group is mandatory.""" .
+
+[] rdf:first :WagonOperationalData .
+
+[] rdf:first :WagonOperationalData .
+
+[] rdf:first :WagonOperationalData .
+
+[] rdf:first :WagonOperationalData .
+

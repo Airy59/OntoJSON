@@ -1,0 +1,47 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:C1 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "C1" ;
+    rdfs:domain :CombinedTrafficLoadProfile ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:C2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "C2" ;
+    rdfs:comment "C2 requires the code in case the gauge of the swap body is greater than 2550 mm less or equal 2600 mm" ;
+    rdfs:domain :CombinedTrafficLoadProfile ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:P1 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "P1" ;
+    rdfs:comment "P1 requires the code in case the gauge of the semi-trailer is less or equal 2500 mm." ;
+    rdfs:domain :CombinedTrafficLoadProfile ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:P2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "P2" ;
+    rdfs:comment "P2 requires the code in case the gauge of the semi-trailer is greater than 2500 mm less or equal 2600 mm" ;
+    rdfs:domain :CombinedTrafficLoadProfile ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCombinedTrafficLoadProfile rdfs:range :CombinedTrafficLoadProfile .
+
+:CombinedTrafficLoadProfile a owl:Class ;
+    rdfs:label "CombinedTrafficLoadProfile" ;
+    rdfs:comment """This element does refer to combined load units that can be used for Freight Requests only.
+There are two entry options:
+â€¢ One option refers to â€œPâ€ (Semi-trailer/road semi-trailer):
+â€¢ The other option refers to â€œCâ€ (Swap body):
+The RUs may indicate the relevant values if they are familiar with the IMs line profiles. In case there is a path request for a train with combined traffic load, the IM should indicate the possible max. value for all 4 elements (P1, P2, C1, C2). Further information about Combined Traffic Load Profile can be seen in the UIC 596-6 Leaflet.
+""" .
+

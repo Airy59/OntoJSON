@@ -1,0 +1,15 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:AssociatedAttachedTimingAtLocation a owl:Class ;
+    rdfs:label "AssociatedAttachedTimingAtLocation" ;
+    rdfs:comment """Identifies the time at location of the associated attached train or
+    era:domain "Telematics" .
+				train service number given by AssociatedAttachedTrainID or AssociatedAttachedOTN or
+				AssociatedAttachedTrainServiceNumber. In general, the Dwell Time element of
+				structure TimingAtLocation is not provided when using TrainActivityType""" .
+
+[] rdf:first :AssociatedAttachedTimingAtLocation .
+

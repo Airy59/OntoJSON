@@ -6,7 +6,9 @@ import sys
 import json
 import traceback
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
+import subprocess
+import tempfile
 
 from PyQt6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
@@ -14,7 +16,8 @@ from PyQt6.QtWidgets import (
     QGroupBox, QCheckBox, QScrollArea, QMessageBox,
     QTabWidget, QComboBox, QSpinBox, QLineEdit,
     QSplitter, QProgressBar, QStatusBar, QFrame, QApplication, QDialog,
-    QDialogButtonBox, QGridLayout, QRadioButton, QButtonGroup, QInputDialog
+    QDialogButtonBox, QGridLayout, QRadioButton, QButtonGroup, QInputDialog,
+    QTreeWidget, QTreeWidgetItem
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont, QAction, QIcon, QPixmap, QTextCursor, QPalette, QColor
@@ -528,6 +531,11 @@ class MainWindow(QMainWindow):
         # Transformation rules configuration
         self.rules_config = None
         
+        # Ontology partitioning state
+        self.partitioning_ontology_path = None
+        self.partitioning_results = None
+        self.current_partition_file = None
+        
         self.init_ui()
     
     def init_ui(self):
@@ -677,6 +685,19 @@ class MainWindow(QMainWindow):
         exit_action.triggered.connect(self.close)
         file_menu.addAction(exit_action)
         
+        # Ontology Partitioning menu
+        partitioning_menu = menubar.addMenu("&Ontology Partitioning")
+        
+        load_partitioning_action = QAction("&Load Ontology", self)
+        load_partitioning_action.triggered.connect(self.load_ontology_for_partitioning)
+        partitioning_menu.addAction(load_partitioning_action)
+        
+        save_partitioned_action = QAction("&Save Partitioned Ontology", self)
+        save_partitioned_action.triggered.connect(self.save_partitioned_ontology)
+        save_partitioned_action.setEnabled(False)
+        self.save_partitioned_action = save_partitioned_action
+        partitioning_menu.addAction(save_partitioned_action)
+        
         # Tools menu
         tools_menu = menubar.addMenu("&Tools")
         
@@ -714,6 +735,10 @@ class MainWindow(QMainWindow):
         self.json_widget = self.create_json_step()
         self.workflow_tabs.addTab(self.json_widget, "3. JSON Instance Generation")
         self.workflow_tabs.setTabEnabled(2, False)
+        
+        # Step 4: Ontology Partitioning
+        self.partitioning_widget = self.create_partitioning_step()
+        self.workflow_tabs.addTab(self.partitioning_widget, "4. Ontology Partitioning")
         
         parent_layout.addWidget(self.workflow_tabs)
     
@@ -1181,6 +1206,177 @@ class MainWindow(QMainWindow):
         # Set equal sizes for both panels
         output_splitter.setSizes([600, 600])
         layout.addWidget(output_splitter, 1)  # Add with stretch factor 1 to make it expand
+        
+        widget.setLayout(layout)
+        return widget
+    
+    def create_partitioning_step(self):
+        """Create the Ontology Partitioning step widget."""
+        widget = QWidget()
+        layout = QVBoxLayout()
+        layout.setSpacing(5)
+        
+        # Description
+        desc_label = QLabel("<b>Ontology Partitioning</b><br>"
+                           "Partition large ontologies into semantically coherent modules")
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("QLabel { background-color: #f3e5f5; padding: 10px; border-radius: 5px; }")
+        desc_label.setMaximumHeight(60)
+        layout.addWidget(desc_label)
+        
+        # Load section
+        load_group = QGroupBox("Loaded Ontology")
+        load_group.setMaximumHeight(150)
+        load_layout = QVBoxLayout()
+        
+        # Ontology name and path
+        self.partitioning_ontology_label = QLabel("No ontology loaded")
+        self.partitioning_ontology_label.setStyleSheet("font-weight: bold;")
+        load_layout.addWidget(self.partitioning_ontology_label)
+        
+        # Ontology preview (read-only)
+        self.partitioning_ontology_text = QTextEdit()
+        self.partitioning_ontology_text.setReadOnly(True)
+        self.partitioning_ontology_text.setMaximumHeight(80)
+        self.partitioning_ontology_text.setFont(QFont("Consolas, 'Courier New', monospace", 10))
+        self.partitioning_ontology_text.setPlaceholderText("Load an ontology to see preview...")
+        load_layout.addWidget(self.partitioning_ontology_text)
+        
+        load_group.setLayout(load_layout)
+        layout.addWidget(load_group)
+        
+        # Configuration section
+        config_group = QGroupBox("Partitioning Configuration")
+        config_group.setMaximumHeight(120)
+        config_layout = QVBoxLayout()
+        
+        # Strategy checkboxes
+        strategy_layout = QHBoxLayout()
+        strategy_layout.addWidget(QLabel("Strategies:"))
+        
+        self.hierarchical_check = QCheckBox("Hierarchical")
+        self.hierarchical_check.setChecked(True)
+        strategy_layout.addWidget(self.hierarchical_check)
+        
+        self.community_check = QCheckBox("Community Detection")
+        self.community_check.setChecked(True)
+        strategy_layout.addWidget(self.community_check)
+        
+        self.domain_check = QCheckBox("Domain-based")
+        self.domain_check.setChecked(True)
+        strategy_layout.addWidget(self.domain_check)
+        
+        strategy_layout.addStretch()
+        config_layout.addLayout(strategy_layout)
+        
+        # Entities per chunk
+        chunk_layout = QHBoxLayout()
+        chunk_layout.addWidget(QLabel("Max entities per chunk:"))
+        self.entities_per_chunk_spin = QSpinBox()
+        self.entities_per_chunk_spin.setMinimum(10)
+        self.entities_per_chunk_spin.setMaximum(100)
+        self.entities_per_chunk_spin.setValue(30)
+        chunk_layout.addWidget(self.entities_per_chunk_spin)
+        chunk_layout.addStretch()
+        config_layout.addLayout(chunk_layout)
+        
+        config_group.setLayout(config_layout)
+        layout.addWidget(config_group)
+        
+        # Partition button
+        self.partition_btn = QPushButton("Partition Ontology")
+        self.partition_btn.setEnabled(False)
+        self.partition_btn.clicked.connect(self.run_partitioning)
+        self.partition_btn.setMaximumHeight(40)
+        self.partition_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #9C27B0;
+                color: white;
+                font-size: 14px;
+            }
+            QPushButton:hover {
+                background-color: #7B1FA2;
+            }
+        """)
+        layout.addWidget(self.partition_btn)
+        
+        # Results section
+        results_splitter = QSplitter(Qt.Orientation.Horizontal)
+        
+        # Left panel: Partition tree
+        tree_group = QGroupBox("Partition Structure")
+        tree_layout = QVBoxLayout()
+        
+        self.partition_tree = QTreeWidget()
+        self.partition_tree.setHeaderLabel("Partitions")
+        self.partition_tree.itemSelectionChanged.connect(self.on_partition_selected)
+        tree_layout.addWidget(self.partition_tree)
+        
+        tree_group.setLayout(tree_layout)
+        results_splitter.addWidget(tree_group)
+        
+        # Right panel: Details and report
+        details_tabs = QTabWidget()
+        
+        # Partition details tab with buttons
+        partition_details_widget = QWidget()
+        partition_details_layout = QVBoxLayout()
+        
+        # Button bar for partition actions
+        partition_buttons_layout = QHBoxLayout()
+        
+        self.view_full_partition_btn = QPushButton("View Full File")
+        self.view_full_partition_btn.setEnabled(False)
+        self.view_full_partition_btn.clicked.connect(self.view_full_partition)
+        self.view_full_partition_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #2196F3;
+                color: white;
+                padding: 5px 10px;
+            }
+            QPushButton:hover {
+                background-color: #1976D2;
+            }
+        """)
+        partition_buttons_layout.addWidget(self.view_full_partition_btn)
+        
+        self.open_in_editor_btn = QPushButton("Open in External Editor")
+        self.open_in_editor_btn.setEnabled(False)
+        self.open_in_editor_btn.clicked.connect(self.open_partition_in_editor)
+        self.open_in_editor_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;
+                color: white;
+                padding: 5px 10px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+            }
+        """)
+        partition_buttons_layout.addWidget(self.open_in_editor_btn)
+        
+        partition_buttons_layout.addStretch()
+        partition_details_layout.addLayout(partition_buttons_layout)
+        
+        # Partition details text
+        self.partition_details_text = QTextEdit()
+        self.partition_details_text.setReadOnly(True)
+        self.partition_details_text.setFont(QFont("Consolas, 'Courier New', monospace", 10))
+        partition_details_layout.addWidget(self.partition_details_text)
+        
+        partition_details_widget.setLayout(partition_details_layout)
+        details_tabs.addTab(partition_details_widget, "Partition Details")
+        
+        # Overall report tab
+        self.partition_report_text = QTextEdit()
+        self.partition_report_text.setReadOnly(True)
+        self.partition_report_text.setFont(QFont("Consolas, 'Courier New', monospace", 10))
+        details_tabs.addTab(self.partition_report_text, "Overall Report")
+        
+        results_splitter.addWidget(details_tabs)
+        results_splitter.setSizes([400, 800])
+        
+        layout.addWidget(results_splitter, 1)  # Add with stretch factor 1
         
         widget.setLayout(layout)
         return widget
@@ -2442,3 +2638,444 @@ class MainWindow(QMainWindow):
         """Handle window close event to clean up resources."""
         self._cleanup_temp_file()
         event.accept()
+    
+    def load_ontology_for_partitioning(self):
+        """Load an ontology file for partitioning."""
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Load Ontology for Partitioning",
+            "",
+            "OWL/RDF Files (*.owl *.rdf *.ttl *.n3);;All Files (*.*)"
+        )
+        
+        if file_path:
+            try:
+                # Store the path
+                self.partitioning_ontology_path = file_path
+                
+                # Update UI
+                ontology_name = Path(file_path).name
+                self.partitioning_ontology_label.setText(f"Ontology: {ontology_name}")
+                
+                # Load and display preview (first 1000 chars)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read(1000)
+                    if len(content) == 1000:
+                        content += "\n..."
+                    self.partitioning_ontology_text.setPlainText(content)
+                
+                # Enable partition button
+                self.partition_btn.setEnabled(True)
+                
+                # Clear previous results
+                self.partition_tree.clear()
+                self.partition_details_text.clear()
+                self.partition_report_text.clear()
+                self.partitioning_results = None
+                self.save_partitioned_action.setEnabled(False)
+                
+                QMessageBox.information(self, "Success", f"Loaded ontology: {ontology_name}")
+                
+            except Exception as e:
+                QMessageBox.critical(self, "Load Error", f"Failed to load ontology:\n{str(e)}")
+    
+    def run_partitioning(self):
+        """Run the ontology partitioning process."""
+        if not self.partitioning_ontology_path:
+            QMessageBox.warning(self, "Warning", "Please load an ontology first.")
+            return
+        
+        try:
+            # Determine which strategies to use
+            strategies = []
+            if self.hierarchical_check.isChecked():
+                strategies.append('hierarchical')
+            if self.community_check.isChecked():
+                strategies.append('community')
+            if self.domain_check.isChecked():
+                strategies.append('domain')
+            
+            if not strategies:
+                QMessageBox.warning(self, "Warning", "Please select at least one partitioning strategy.")
+                return
+            
+            # Update status
+            self.status_message.setText("Running ontology partitioning...")
+            self.partition_btn.setEnabled(False)
+            QApplication.processEvents()
+            
+            # First, run the chunker if the file is large
+            file_size = Path(self.partitioning_ontology_path).stat().st_size
+            use_chunks = file_size > 500000  # Use chunks for files > 500KB
+            
+            if use_chunks:
+                self.status_message.setText("Chunking large ontology file...")
+                QApplication.processEvents()
+                
+                # Run the chunker
+                chunker_script = Path(__file__).parent.parent.parent / "OntologyPartitioning" / "ontology_chunker.py"
+                cmd = [
+                    sys.executable,
+                    str(chunker_script),
+                    self.partitioning_ontology_path,
+                    "-n", str(self.entities_per_chunk_spin.value())
+                ]
+                
+                result = subprocess.run(cmd, capture_output=True, text=True)
+                if result.returncode != 0:
+                    raise Exception(f"Chunking failed: {result.stderr}")
+            
+            # Run the semantic partitioner
+            self.status_message.setText("Running semantic partitioning...")
+            QApplication.processEvents()
+            
+            partitioner_script = Path(__file__).parent.parent.parent / "OntologyPartitioning" / "semantic_partitioner.py"
+            cmd = [
+                sys.executable,
+                str(partitioner_script),
+                self.partitioning_ontology_path,
+                "-s"
+            ] + strategies
+            
+            if use_chunks:
+                cmd.append("--use-chunks")
+            
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode != 0:
+                raise Exception(f"Partitioning failed: {result.stderr}")
+            
+            # Run the community namer if community strategy was used
+            if 'community' in strategies:
+                self.status_message.setText("Generating meaningful names for communities...")
+                QApplication.processEvents()
+                
+                namer_script = Path(__file__).parent.parent.parent / "OntologyPartitioning" / "community_namer.py"
+                # Change to the namer script's directory
+                import os
+                old_cwd = os.getcwd()
+                os.chdir(namer_script.parent)
+                
+                cmd = [sys.executable, str(namer_script)]
+                result = subprocess.run(cmd, capture_output=True, text=True)
+                
+                # Change back to original directory
+                os.chdir(old_cwd)
+            
+            # Load and display results
+            self.load_partitioning_results()
+            
+            # Update UI
+            self.partition_btn.setEnabled(True)
+            self.save_partitioned_action.setEnabled(True)
+            self.status_message.setText("Partitioning completed successfully!")
+            
+            QMessageBox.information(self, "Success", "Ontology partitioning completed successfully!")
+            
+        except Exception as e:
+            self.partition_btn.setEnabled(True)
+            self.status_message.setText("Partitioning failed")
+            QMessageBox.critical(self, "Partitioning Error", f"Failed to partition ontology:\n{str(e)}")
+    
+    def load_partitioning_results(self):
+        """Load and display the partitioning results."""
+        try:
+            # Determine output directory
+            ontology_stem = Path(self.partitioning_ontology_path).stem
+            output_dir = Path(self.partitioning_ontology_path).parent / f"{ontology_stem}_modules"
+            
+            if not output_dir.exists():
+                raise Exception(f"Results directory not found: {output_dir}")
+            
+            # Store results path
+            self.partitioning_results = output_dir
+            
+            # Clear the report text first
+            self.partition_report_text.clear()
+            
+            # Load overall report
+            report_file = output_dir / "PARTITIONING_REPORT.md"
+            if report_file.exists():
+                with open(report_file, 'r', encoding='utf-8') as f:
+                    report_content = f.read()
+                    self.partition_report_text.setPlainText(report_content)
+            else:
+                # If no report file, create basic report
+                self.partition_report_text.setPlainText("# Partitioning Results\n\nPartitioning completed successfully.")
+            
+            # Load community names report if it exists and append
+            community_report = output_dir / "COMMUNITY_NAMES.md"
+            if community_report.exists():
+                with open(community_report, 'r', encoding='utf-8') as f:
+                    community_content = f.read()
+                    # Append to main report
+                    existing_report = self.partition_report_text.toPlainText()
+                    combined_report = existing_report + "\n\n" + "="*60 + "\n\n" + community_content
+                    self.partition_report_text.setPlainText(combined_report)
+            
+            # Load partition summary
+            summary_file = output_dir / "partitioning_summary.json"
+            if summary_file.exists():
+                with open(summary_file, 'r', encoding='utf-8') as f:
+                    summary = json.load(f)
+                    self.populate_partition_tree(output_dir, summary)
+            else:
+                # Create a basic summary from directory structure
+                self.populate_partition_tree_from_dir(output_dir)
+            
+        except Exception as e:
+            QMessageBox.warning(self, "Warning", f"Failed to load some results:\n{str(e)}")
+    
+    def populate_partition_tree_from_dir(self, output_dir: Path):
+        """Populate the partition tree from directory structure when no summary file exists."""
+        self.partition_tree.clear()
+        
+        # Add root item with ontology info
+        root = QTreeWidgetItem(self.partition_tree)
+        root.setText(0, Path(self.partitioning_ontology_path).name)
+        root.setExpanded(True)
+        
+        # Check for strategy directories
+        strategies = ['hierarchical', 'community', 'domain']
+        
+        for strategy in strategies:
+            strategy_dir = output_dir / strategy
+            if strategy_dir.exists() and strategy_dir.is_dir():
+                strategy_item = QTreeWidgetItem(root)
+                
+                # Count partition files
+                partition_files = list(strategy_dir.glob("*.ttl"))
+                strategy_item.setText(0, f"{strategy.title()} ({len(partition_files)} partitions)")
+                strategy_item.setExpanded(True)
+                strategy_item.setData(0, Qt.ItemDataRole.UserRole, str(strategy_dir))
+                
+                # Add partition files
+                for partition_file in sorted(partition_files):
+                    partition_item = QTreeWidgetItem(strategy_item)
+                    partition_item.setText(0, partition_file.stem)
+                    partition_item.setData(0, Qt.ItemDataRole.UserRole, str(partition_file))
+    
+    def populate_partition_tree(self, output_dir: Path, summary: dict):
+        """Populate the partition tree with results."""
+        self.partition_tree.clear()
+        
+        # Add root item with ontology info
+        root = QTreeWidgetItem(self.partition_tree)
+        root.setText(0, Path(self.partitioning_ontology_path).name)
+        root.setExpanded(True)
+        
+        # Add summary info
+        info_item = QTreeWidgetItem(root)
+        info_item.setText(0, f"Classes: {summary.get('total_classes', 0)}, "
+                            f"Properties: {summary.get('total_properties', 0)}")
+        
+        # Add each strategy
+        for strategy_name, strategy_data in summary.get('strategies', {}).items():
+            strategy_item = QTreeWidgetItem(root)
+            metrics = strategy_data.get('metrics', {})
+            strategy_item.setText(0, f"{strategy_name.title()} "
+                                   f"({metrics.get('partitions', 0)} partitions)")
+            strategy_item.setExpanded(True)
+            
+            # Store strategy path
+            strategy_dir = output_dir / strategy_name
+            strategy_item.setData(0, Qt.ItemDataRole.UserRole, str(strategy_dir))
+            
+            # Add metrics
+            metrics_item = QTreeWidgetItem(strategy_item)
+            cohesion = metrics.get('cohesion', 0) * 100
+            coupling = metrics.get('coupling', 0) * 100
+            metrics_item.setText(0, f"Cohesion: {cohesion:.1f}%, Coupling: {coupling:.1f}%")
+            
+            # Add partitions
+            partitions = strategy_data.get('partitions', {})
+            for partition_name, entity_count in sorted(partitions.items()):
+                partition_item = QTreeWidgetItem(strategy_item)
+                partition_item.setText(0, f"{partition_name} ({entity_count} entities)")
+                
+                # Store partition file path
+                partition_file = strategy_dir / f"{partition_name}.ttl"
+                partition_item.setData(0, Qt.ItemDataRole.UserRole, str(partition_file))
+    
+    def on_partition_selected(self):
+        """Handle partition selection in the tree."""
+        selected = self.partition_tree.selectedItems()
+        if not selected:
+            self.current_partition_file = None
+            self.view_full_partition_btn.setEnabled(False)
+            self.open_in_editor_btn.setEnabled(False)
+            return
+        
+        item = selected[0]
+        file_path = item.data(0, Qt.ItemDataRole.UserRole)
+        
+        if file_path and Path(file_path).exists():
+            try:
+                # Store current partition file
+                self.current_partition_file = file_path
+                self.view_full_partition_btn.setEnabled(True)
+                self.open_in_editor_btn.setEnabled(True)
+                
+                # Load and display partition content
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                    
+                    # Display statistics and preview
+                    lines = content.split('\n')
+                    num_lines = len(lines)
+                    
+                    # Count triples (rough estimate)
+                    num_triples = sum(1 for line in lines if line.strip() and
+                                    not line.strip().startswith(('@', '#')))
+                    
+                    details = f"File: {Path(file_path).name}\n"
+                    details += f"Path: {file_path}\n"
+                    details += f"Lines: {num_lines}\n"
+                    details += f"Estimated triples: {num_triples}\n"
+                    details += "-" * 50 + "\n\n"
+                    details += "PREVIEW (first 2000 characters):\n"
+                    details += "-" * 50 + "\n\n"
+                    
+                    # Show first 2000 characters
+                    if len(content) > 2000:
+                        details += content[:2000] + "\n\n[... Preview truncated. Click 'View Full File' to see complete content ...]"
+                    else:
+                        details += content
+                    
+                    self.partition_details_text.setPlainText(details)
+                    
+            except Exception as e:
+                self.partition_details_text.setPlainText(f"Error loading partition:\n{str(e)}")
+                self.current_partition_file = None
+                self.view_full_partition_btn.setEnabled(False)
+                self.open_in_editor_btn.setEnabled(False)
+        else:
+            # Clear details if no file associated
+            self.partition_details_text.clear()
+            self.current_partition_file = None
+            self.view_full_partition_btn.setEnabled(False)
+            self.open_in_editor_btn.setEnabled(False)
+    
+    def view_full_partition(self):
+        """View the full partition file in a dialog."""
+        if not self.current_partition_file:
+            return
+        
+        try:
+            # Read full file content
+            with open(self.current_partition_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Create dialog
+            dialog = QDialog(self)
+            dialog.setWindowTitle(f"Full Partition: {Path(self.current_partition_file).name}")
+            dialog.setMinimumSize(800, 600)
+            
+            layout = QVBoxLayout()
+            
+            # File info label
+            info_label = QLabel(f"File: {self.current_partition_file}")
+            info_label.setStyleSheet("padding: 10px; background-color: #f0f0f0;")
+            layout.addWidget(info_label)
+            
+            # Text editor with full content
+            text_editor = QTextEdit()
+            text_editor.setReadOnly(True)
+            text_editor.setFont(QFont("Consolas, 'Courier New', monospace", 10))
+            text_editor.setPlainText(content)
+            layout.addWidget(text_editor)
+            
+            # Button box
+            button_layout = QHBoxLayout()
+            
+            # Copy to clipboard button
+            copy_btn = QPushButton("Copy to Clipboard")
+            copy_btn.clicked.connect(lambda: QApplication.clipboard().setText(content))
+            button_layout.addWidget(copy_btn)
+            
+            button_layout.addStretch()
+            
+            # Close button
+            close_btn = QPushButton("Close")
+            close_btn.clicked.connect(dialog.accept)
+            button_layout.addWidget(close_btn)
+            
+            layout.addLayout(button_layout)
+            dialog.setLayout(layout)
+            
+            dialog.exec()
+            
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to load full file:\n{str(e)}")
+    
+    def open_partition_in_editor(self):
+        """Open the partition file in an external editor."""
+        if not self.current_partition_file:
+            return
+        
+        try:
+            # Use the new editor selector system
+            from .editor_selector import open_in_external_editor
+            
+            if not open_in_external_editor(self.current_partition_file, self):
+                QMessageBox.warning(self, "Warning",
+                                   f"Could not open the file. Please open manually:\n{self.current_partition_file}")
+        
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to open in external editor:\n{str(e)}")
+    
+    def save_partitioned_ontology(self):
+        """Save the partitioned ontology modules."""
+        if not self.partitioning_results:
+            QMessageBox.warning(self, "Warning", "No partitioning results to save.")
+            return
+        
+        # Ask user for target directory
+        target_dir = QFileDialog.getExistingDirectory(
+            self,
+            "Select Directory to Save Partitioned Ontology",
+            str(Path.home())
+        )
+        
+        if not target_dir:
+            return
+        
+        try:
+            import shutil
+            
+            # Create target directory structure
+            target_path = Path(target_dir)
+            ontology_name = Path(self.partitioning_ontology_path).stem
+            save_dir = target_path / f"{ontology_name}_partitioned"
+            
+            # Copy the entire results directory
+            if save_dir.exists():
+                reply = QMessageBox.question(
+                    self,
+                    "Overwrite?",
+                    f"Directory {save_dir.name} already exists. Overwrite?",
+                    QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+                )
+                if reply == QMessageBox.StandardButton.No:
+                    return
+                shutil.rmtree(save_dir)
+            
+            # Copy all partitioning results
+            shutil.copytree(self.partitioning_results, save_dir)
+            
+            # Show success message
+            QMessageBox.information(
+                self,
+                "Success",
+                f"Partitioned ontology saved to:\n{save_dir}\n\n"
+                "The directory contains:\n"
+                "- Partition modules organized by strategy\n"
+                "- Reports and visualizations\n"
+                "- Index files for programmatic access"
+            )
+            
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Save Error",
+                f"Failed to save partitioned ontology:\n{str(e)}"
+            )

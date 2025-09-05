@@ -1,0 +1,733 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:alternativeName a owl:DatatypeProperty .
+
+:altitudeRange a owl:DatatypeProperty .
+
+:altitudeRangeDetail a owl:DatatypeProperty .
+
+:appliesInBothDirections a owl:DatatypeProperty .
+
+:areaBoardingAid a owl:DatatypeProperty .
+
+:assistanceStartingTrain a owl:DatatypeProperty .
+
+:atoErrorCorrectionsOnboard a owl:DatatypeProperty .
+
+:automaticDroppingDeviceRequired a owl:DatatypeProperty .
+
+:axleSpacing a owl:DatatypeProperty .
+
+:bigMetalMass a owl:DatatypeProperty .
+
+:boardingAids a owl:DatatypeProperty .
+
+:borderPointId a owl:DatatypeProperty .
+
+:brakeRelatedDataParameter a owl:DatatypeProperty .
+
+:brakeWeightPercentage a owl:DatatypeProperty .
+
+:cantDefficiency a owl:DatatypeProperty .
+
+:cantDeficiency a owl:DatatypeProperty .
+
+:catenaryMaxRatedCurrent a owl:DatatypeProperty .
+
+:ccsSubsystemDataParameter a owl:DatatypeProperty .
+
+:ccsSubsystemDeclarationsVerificationTrackDataParameter a owl:DatatypeProperty .
+
+:complianceInfTsi a owl:DatatypeProperty .
+
+:compositeBrakeBlockRetrofitted a owl:DatatypeProperty .
+
+:conditionsChargingElectricEnergyStorage a owl:DatatypeProperty .
+
+:conditionsSwitchTrainProtectionSystems a owl:DatatypeProperty .
+
+:conditionsTrainFormation a owl:DatatypeProperty .
+
+:contactLineSystemDataParameter a owl:DatatypeProperty .
+
+:contactStripMaterialMetallicContent a owl:DatatypeProperty .
+
+:containerHandlingFlag a owl:DatatypeProperty .
+
+:crossSectionArea a owl:DatatypeProperty .
+
+:currentLimitationRequired a owl:DatatypeProperty .
+
+:currentlyValid a owl:DatatypeProperty .
+
+:dNvovtrp a owl:DatatypeProperty .
+
+:dNvpotrp a owl:DatatypeProperty .
+
+:dNvroll a owl:DatatypeProperty .
+
+:dangerousGoodsTankCode a owl:DatatypeProperty .
+
+:demonstrationENE a owl:DatatypeProperty .
+
+:demonstrationINF a owl:DatatypeProperty .
+
+:demonstrationSRT a owl:DatatypeProperty .
+
+:designMassExceptionalPayload a owl:DatatypeProperty .
+
+:designMassNormalPayload a owl:DatatypeProperty .
+
+:designMassWorkingOrder a owl:DatatypeProperty .
+
+:dieselThermalAllowed a owl:DatatypeProperty .
+
+:digitalSchematicOverview a owl:DatatypeProperty .
+
+:distSignToPhaseEnd a owl:DatatypeProperty .
+
+:documentUrl a owl:DatatypeProperty .
+
+:drivingCabs a owl:DatatypeProperty .
+
+:eddyCurrentBrakePrevention a owl:DatatypeProperty .
+
+:eddyCurrentBrakingFitted a owl:DatatypeProperty .
+
+:emergencyBrake a owl:DatatypeProperty .
+
+:endIntrinsicCoordinate a owl:DatatypeProperty .
+
+:endOffsetFromOrigin a owl:DatatypeProperty .
+
+:energyMeterInstalled a owl:DatatypeProperty .
+
+:energySubsystemDataParameter a owl:DatatypeProperty .
+
+:energySubsystemDeclarationsVerificationTrackDataParameter a owl:DatatypeProperty .
+
+:energySupplyMaxPower a owl:DatatypeProperty .
+
+:energySupplySystemTSICompliant a owl:DatatypeProperty .
+
+:errorCorrectionsOnboardExplanation a owl:DatatypeProperty .
+
+:ertmsErrorCorrectionsOnBoard a owl:DatatypeProperty .
+
+:etcsDataCommApp a owl:DatatypeProperty .
+
+:etcsErrorCorrectionsOnboard a owl:DatatypeProperty .
+
+:etcsImplementsLevelCrossingProcedure a owl:DatatypeProperty .
+
+:etcsInfillLineAccess a owl:DatatypeProperty .
+
+:etcsNationalApplications a owl:DatatypeProperty .
+
+:etcsNationalPacket44 a owl:DatatypeProperty .
+
+:etcsNationalValuesDataParameter a owl:DatatypeProperty .
+
+:etcsOnBoardImplementation a owl:DatatypeProperty .
+
+:etcsOptionalFunctions a owl:DatatypeProperty .
+
+:etcsSystemFunctionalitiesNextFiveYears a owl:DatatypeProperty .
+
+:etcsTransmitsTrackConditions a owl:DatatypeProperty .
+
+:existenceOfIndustrialRisk a owl:DatatypeProperty .
+
+:ferromagneticWheelMaterial a owl:DatatypeProperty .
+
+:fixedSeats a owl:DatatypeProperty .
+
+:flangeLubeForbidden a owl:DatatypeProperty .
+
+:flangeLubeRules a owl:DatatypeProperty .
+
+:flangeLubricationFitted a owl:DatatypeProperty .
+
+:freightFlag a owl:DatatypeProperty .
+
+:frenchTrainDetectionSystemLimitationApplicable a owl:DatatypeProperty .
+
+:gaugingCheckLocation a owl:DatatypeProperty .
+
+:gprsForETCS a owl:DatatypeProperty .
+
+:gprsImplementationArea a owl:DatatypeProperty .
+
+:gradient a owl:DatatypeProperty .
+
+:gradientProfile a owl:DatatypeProperty .
+
+:gsmRNoCoverage a owl:DatatypeProperty .
+
+:gsmRSetsInDrivingCab a owl:DatatypeProperty .
+
+:gsmrErrorCorrectionsOnboard a owl:DatatypeProperty .
+
+:gsmrForcedDeregistrationFunctionalNumber a owl:DatatypeProperty .
+
+:handoverPointFlag a owl:DatatypeProperty .
+
+:hasAdditionalBrakingInformation a owl:DatatypeProperty .
+
+:hasAutomaticDroppingDevice a owl:DatatypeProperty .
+
+:hasBallast a owl:DatatypeProperty .
+
+:hasBridge a owl:DatatypeProperty .
+
+:hasCantDefficiencyCompensation a owl:DatatypeProperty .
+
+:hasCurrentLimitation a owl:DatatypeProperty .
+
+:hasETCSRestrictionsConditions a owl:DatatypeProperty .
+
+:hasElectricShoreSupply a owl:DatatypeProperty .
+
+:hasEmergencyPlan a owl:DatatypeProperty .
+
+:hasEtcsNationalPacket44 a owl:DatatypeProperty .
+
+:hasEvacuationAndRescuePoints a owl:DatatypeProperty .
+
+:hasExternalCleaning a owl:DatatypeProperty .
+
+:hasHotAxleBoxDetector a owl:DatatypeProperty .
+
+:hasLevelCrossings a owl:DatatypeProperty .
+
+:hasLubricationDevicePrevention a owl:DatatypeProperty .
+
+:hasOtherTrainProtection a owl:DatatypeProperty .
+
+:hasParkingBrake a owl:DatatypeProperty .
+
+:hasPhaseSeparation a owl:DatatypeProperty .
+
+:hasPlatformCurvature a owl:DatatypeProperty .
+
+:hasRefuelling a owl:DatatypeProperty .
+
+:hasRegenerativeBrake a owl:DatatypeProperty .
+
+:hasSandRestocking a owl:DatatypeProperty .
+
+:hasSandingPrevention a owl:DatatypeProperty .
+
+:hasSchematicOverviewOPDigitalForm a owl:DatatypeProperty .
+
+:hasSevereWeatherConditions a owl:DatatypeProperty .
+
+:hasShuntingRestrictions a owl:DatatypeProperty .
+
+:hasSystemSeparation a owl:DatatypeProperty .
+
+:hasTSITrainDetection a owl:DatatypeProperty .
+
+:hasToiletDischarge a owl:DatatypeProperty .
+
+:hasTrainIntegrityConfirmation a owl:DatatypeProperty .
+
+:hasWalkway a owl:DatatypeProperty .
+
+:hasWaterRestocking a owl:DatatypeProperty .
+
+:hasWheelSlideProtectionSystem a owl:DatatypeProperty .
+
+:healthSafetyAndEnvironmentDataParameter a owl:DatatypeProperty .
+
+:highSpeedLoadModelCompliance a owl:DatatypeProperty .
+
+:hotAxleBoxDetectorGeneration a owl:DatatypeProperty .
+
+:hotAxleBoxDetectorIdentification a owl:DatatypeProperty .
+
+:hotAxleBoxDetectorLocation a owl:DatatypeProperty .
+
+:hotAxleBoxDetectorTSICompliant a owl:DatatypeProperty .
+
+:idPhoneErtmsRadioBlockCenter a owl:DatatypeProperty .
+
+:imCode a owl:DatatypeProperty .
+
+:infraSubsystemDataParameter a owl:DatatypeProperty .
+
+:infraSubsystemDeclarationsVerificationTrackDataParameter a owl:DatatypeProperty .
+
+:isOnOriginOfElementA a owl:DatatypeProperty .
+
+:isOnOriginOfElementB a owl:DatatypeProperty .
+
+:isQuietRoute a owl:DatatypeProperty .
+
+:kilometer a owl:DatatypeProperty .
+
+:kmPostName a owl:DatatypeProperty .
+
+:length a owl:DatatypeProperty .
+
+:lengthOfNetLinearElement a owl:DatatypeProperty .
+
+:lengthOfPlatform a owl:DatatypeProperty .
+
+:lengthOfSectionOfLine a owl:DatatypeProperty .
+
+:lengthOfSiding a owl:DatatypeProperty .
+
+:lengthOfTunnel a owl:DatatypeProperty .
+
+:lengthOfVehicle a owl:DatatypeProperty .
+
+:letterMarking a owl:DatatypeProperty .
+
+:lineId a owl:DatatypeProperty .
+
+:lineLayoutDataParameter a owl:DatatypeProperty .
+
+:linearCoordinate a owl:DatatypeProperty .
+
+:linesideDistanceIndicationFrequency a owl:DatatypeProperty .
+
+:loadCapabilitySpeed a owl:DatatypeProperty .
+
+:loadingPlatformHeight a owl:DatatypeProperty .
+
+:localRulesOrRestrictions a owl:DatatypeProperty .
+
+:mNvderun a owl:DatatypeProperty .
+
+:magneticBrakePrevention a owl:DatatypeProperty .
+
+:magneticBrakingFitted a owl:DatatypeProperty .
+
+:massPerWheel a owl:DatatypeProperty .
+
+:maxCurrentStandstillPantograph a owl:DatatypeProperty .
+
+:maxDistConsecutiveAxles a owl:DatatypeProperty .
+
+:maxDistEndTrainFirstAxle a owl:DatatypeProperty .
+
+:maxFlangeHeight a owl:DatatypeProperty .
+
+:maxImpedanceWheelset a owl:DatatypeProperty .
+
+:maxLengthVehicleNose a owl:DatatypeProperty .
+
+:maxTrainCurrent a owl:DatatypeProperty .
+
+:maximumAltitude a owl:DatatypeProperty .
+
+:maximumAverageDeceleration a owl:DatatypeProperty .
+
+:maximumBrakeThermalEnergyCapacity a owl:DatatypeProperty .
+
+:maximumBrakingDistance a owl:DatatypeProperty .
+
+:maximumContactWireHeight a owl:DatatypeProperty .
+
+:maximumDesignSpeed a owl:DatatypeProperty .
+
+:maximumInterferenceCurrent a owl:DatatypeProperty .
+
+:maximumInterferenceCurrentEvaluation a owl:DatatypeProperty .
+
+:maximumLocomotivesCoupled a owl:DatatypeProperty .
+
+:maximumMagneticFieldDirectionX a owl:DatatypeProperty .
+
+:maximumMagneticFieldDirectionY a owl:DatatypeProperty .
+
+:maximumMagneticFieldDirectionZ a owl:DatatypeProperty .
+
+:maximumPermittedSpeed a owl:DatatypeProperty .
+
+:maximumServiceBrake a owl:DatatypeProperty .
+
+:maximumSpeedAndCantDeficiency a owl:DatatypeProperty .
+
+:maximumSpeedEmpty a owl:DatatypeProperty .
+
+:maximumTemperature a owl:DatatypeProperty .
+
+:maximumTrainDeceleration a owl:DatatypeProperty .
+
+:measuredDistance a owl:DatatypeProperty .
+
+:meetsRequirementVehicleAuthorisation a owl:DatatypeProperty .
+
+:minAxleLoad a owl:DatatypeProperty .
+
+:minDistConsecutiveAxles a owl:DatatypeProperty .
+
+:minDistFirstLastAxle a owl:DatatypeProperty .
+
+:minFlangeHeight a owl:DatatypeProperty .
+
+:minFlangeThickness a owl:DatatypeProperty .
+
+:minRimWidth a owl:DatatypeProperty .
+
+:minVehicleInputCapacitance a owl:DatatypeProperty .
+
+:minVehicleInputImpedance a owl:DatatypeProperty .
+
+:minWheelDiameter a owl:DatatypeProperty .
+
+:minimumConcaveVerticalRadius a owl:DatatypeProperty .
+
+:minimumContactWireHeight a owl:DatatypeProperty .
+
+:minimumConvexVerticalRadius a owl:DatatypeProperty .
+
+:minimumHorizontalRadius a owl:DatatypeProperty .
+
+:minimumTemperature a owl:DatatypeProperty .
+
+:minimumVerticalRadiusCrest a owl:DatatypeProperty .
+
+:minimumVerticalRadiusHollow a owl:DatatypeProperty .
+
+:minimumWheelDiameter a owl:DatatypeProperty .
+
+:multipleTrainProtectionRequired a owl:DatatypeProperty .
+
+:nationalLoadCapability a owl:DatatypeProperty .
+
+:nationalRollingStockFireCategory a owl:DatatypeProperty .
+
+:nationalValuesBrakeModel a owl:DatatypeProperty .
+
+:nonCodedRestrictions a owl:DatatypeProperty .
+
+:numberElementsRakeFreightWagons a owl:DatatypeProperty .
+
+:numberOfPantographsInContactWithOCL a owl:DatatypeProperty .
+
+:numberOfToilets a owl:DatatypeProperty .
+
+:oclSeparationSectionsDataParameter a owl:DatatypeProperty .
+
+:oclType a owl:DatatypeProperty .
+
+:offsetFromKilometricPost a owl:DatatypeProperty .
+
+:offsetFromOrigin a owl:DatatypeProperty .
+
+:opGenericDataParameter a owl:DatatypeProperty .
+
+:opName a owl:DatatypeProperty .
+
+:opTypeGaugeChangeover a owl:DatatypeProperty .
+
+:organisationCode a owl:DatatypeProperty .
+
+:otherTrainDetectionSystemsDataParameter a owl:DatatypeProperty .
+
+:pantographDataParameter a owl:DatatypeProperty .
+
+:parameterValue a owl:DatatypeProperty .
+
+:parkingBrake a owl:DatatypeProperty .
+
+:parkingBrakeMandatory a owl:DatatypeProperty .
+
+:parkingBrakeMaximumGradient a owl:DatatypeProperty .
+
+:passByNoiseLevel a owl:DatatypeProperty .
+
+:performanceDataParameter a owl:DatatypeProperty .
+
+:permissiblePayload a owl:DatatypeProperty .
+
+:permissionChargingElectricEnergyTractionStandstill a owl:DatatypeProperty .
+
+:permitUseReflectivePlates a owl:DatatypeProperty .
+
+:permittedContactForce a owl:DatatypeProperty .
+
+:phaseInfo a owl:DatatypeProperty .
+
+:phaseInfoChangeSupplySystem a owl:DatatypeProperty .
+
+:phaseInfoDistanceType a owl:DatatypeProperty .
+
+:phaseInfoKm a owl:DatatypeProperty .
+
+:phaseInfoLength a owl:DatatypeProperty .
+
+:phaseInfoPantographLowered a owl:DatatypeProperty .
+
+:phaseInfoSwitchOffBreaker a owl:DatatypeProperty .
+
+:platformDataParameter a owl:DatatypeProperty .
+
+:platformId a owl:DatatypeProperty .
+
+:portableBoardingAids a owl:DatatypeProperty .
+
+:preventRegenerativeBrakeUse a owl:DatatypeProperty .
+
+:primaryLocationCode a owl:DatatypeProperty .
+
+:primaryLocationName a owl:DatatypeProperty .
+
+:prioritySeats a owl:DatatypeProperty .
+
+:prmAccessibleToilets a owl:DatatypeProperty .
+
+:publicNetworkRoaming a owl:DatatypeProperty .
+
+:publicNetworkRoamingDetails a owl:DatatypeProperty .
+
+:qNvsbtsmperm a owl:DatatypeProperty .
+
+:quasiStaticGuidingForce a owl:DatatypeProperty .
+
+:radioNetworkId a owl:DatatypeProperty .
+
+:radioSwitchOverSpecialConditions a owl:DatatypeProperty .
+
+:railSystemType a owl:DatatypeProperty .
+
+:raisedPantographsDistance a owl:DatatypeProperty .
+
+:raisedPantographsDistanceAndSpeed a owl:DatatypeProperty .
+
+:raisedPantographsNumber a owl:DatatypeProperty .
+
+:raisedPantographsSpeed a owl:DatatypeProperty .
+
+:rbcID a owl:DatatypeProperty .
+
+:rbcPhone a owl:DatatypeProperty .
+
+:redLightsRequired a owl:DatatypeProperty .
+
+:referencePassByNoiseLevel a owl:DatatypeProperty .
+
+:relatedElectromagneticInterferencesDataParameter a owl:DatatypeProperty .
+
+:relativeDistanceDangerPoint a owl:DatatypeProperty .
+
+:relativePosition a owl:DatatypeProperty .
+
+:requiredSandingOverride a owl:DatatypeProperty .
+
+:requirementsRollingStockDataParameter a owl:DatatypeProperty .
+
+:rinfTechnicalDataCharacteristic a owl:DatatypeProperty .
+
+:routeBookDataParameter a owl:DatatypeProperty .
+
+:rulesDataParameter a owl:DatatypeProperty .
+
+:schematicOverviewOP a owl:DatatypeProperty .
+
+:shortestDistanceBetweenPantographsInContactWithOCL a owl:DatatypeProperty .
+
+:sidingDataParameter a owl:DatatypeProperty .
+
+:sidingFixedInstalationsDataParameter a owl:DatatypeProperty .
+
+:sidingId a owl:DatatypeProperty .
+
+:signalDataParameter a owl:DatatypeProperty .
+
+:signalId a owl:DatatypeProperty .
+
+:sleepingPlaces a owl:DatatypeProperty .
+
+:solGenericDataParameter a owl:DatatypeProperty .
+
+:specificInformation a owl:DatatypeProperty .
+
+:startIntrinsicCoordinate a owl:DatatypeProperty .
+
+:startOffsetFromOrigin a owl:DatatypeProperty .
+
+:startingNoiseLevel a owl:DatatypeProperty .
+
+:staticAxleLoadExceptionalPayload a owl:DatatypeProperty .
+
+:staticAxleLoadNormalPayload a owl:DatatypeProperty .
+
+:staticAxleLoadWorkingOrder a owl:DatatypeProperty .
+
+:stationaryNoiseLevel a owl:DatatypeProperty .
+
+:structuralCategory a owl:DatatypeProperty .
+
+:structureCheckLocation a owl:DatatypeProperty .
+
+:subsetName a owl:DatatypeProperty .
+
+:subsidiaryLocationCode a owl:DatatypeProperty .
+
+:subsidiaryLocationName a owl:DatatypeProperty .
+
+:switchProtectControlWarning a owl:DatatypeProperty .
+
+:switchRadioSystem a owl:DatatypeProperty .
+
+:switchesAndCrossingsDataParameter a owl:DatatypeProperty .
+
+:systemSeparationInfo a owl:DatatypeProperty .
+
+:systemSeparationInfoChangeSupplySystem a owl:DatatypeProperty .
+
+:systemSeparationInfoKm a owl:DatatypeProperty .
+
+:systemSeparationInfoLength a owl:DatatypeProperty .
+
+:systemSeparationInfoPantographLowered a owl:DatatypeProperty .
+
+:systemSeparationInfoSwitchOffBreaker a owl:DatatypeProperty .
+
+:tNvcontact a owl:DatatypeProperty .
+
+:tNvovtrp a owl:DatatypeProperty .
+
+:tafTAPCode a owl:DatatypeProperty .
+
+:tenGISId a owl:DatatypeProperty .
+
+:thermalCapacityDistance a owl:DatatypeProperty .
+
+:thermalCapacityGradient a owl:DatatypeProperty .
+
+:thermalCapacitySpeed a owl:DatatypeProperty .
+
+:thermalCapacityTime a owl:DatatypeProperty .
+
+:tiltingSupported a owl:DatatypeProperty .
+
+:totalVehicleMass a owl:DatatypeProperty .
+
+:trackDataParameter a owl:DatatypeProperty .
+
+:trackGenericDataParameter a owl:DatatypeProperty .
+
+:trackId a owl:DatatypeProperty .
+
+:trackResistanceToAppliedLoadsDataParameter a owl:DatatypeProperty .
+
+:trainControlSwitchOverSpecialConditions a owl:DatatypeProperty .
+
+:trainDetectionSystemBasedFrequencyBandsDataParameter a owl:DatatypeProperty .
+
+:trainIntegrityOnBoardRequired a owl:DatatypeProperty .
+
+:transitionsBetweenSystemsDataParameter a owl:DatatypeProperty .
+
+:transportableOnFerry a owl:DatatypeProperty .
+
+:tsiCompliant a owl:DatatypeProperty .
+
+:tsiCompliantRadioDataParameter a owl:DatatypeProperty .
+
+:tsiCompliantTrainProtectionSystemDataParameter a owl:DatatypeProperty .
+
+:tsiMagneticFields a owl:DatatypeProperty .
+
+:tsiSwitchCrossing a owl:DatatypeProperty .
+
+:tsiTractionHarmonics a owl:DatatypeProperty .
+
+:tunnelDataParameter a owl:DatatypeProperty .
+
+:tunnelIdentification a owl:DatatypeProperty .
+
+:tunnelKilometerEnd a owl:DatatypeProperty .
+
+:tunnelKilometerStart a owl:DatatypeProperty .
+
+:typeVersionNumber a owl:DatatypeProperty .
+
+:umax2 a owl:DatatypeProperty .
+
+:unitOfMeasure a owl:AnnotationProperty ;
+    rdfs:label "Unit of measure"@en ;
+    dcterms:created "2024-05-16"^^xsd:date ;
+    dcterms:modified "2024-08-13"^^xsd:date ;
+    rdfs:comment "Magnitude of a quantity, defined and adopted by convention or by law, that is used as a standard for measurement of the same kind of quantity."@en ;
+    rdfs:domain owl:DatatypeProperty ;
+    rdfs:isDefinedBy : ;
+    rdfs:range <http://qudt.org/vocab/unit/> .
+
+:uopid a owl:DatatypeProperty .
+
+:usesGroup555 a owl:DatatypeProperty .
+
+:vNvallowovtrp a owl:DatatypeProperty .
+
+:vNvsupovtrp a owl:DatatypeProperty .
+
+:validityEndDate a owl:DatatypeProperty .
+
+:validityStartDate a owl:DatatypeProperty .
+
+:vehicleContactForce a owl:DatatypeProperty .
+
+:vehicleKinematicGaugeOther a owl:DatatypeProperty .
+
+:vehicleMaxSandingOutput a owl:DatatypeProperty .
+
+:vehicleNumber a owl:DatatypeProperty .
+
+:vehiclePantographHead a owl:DatatypeProperty .
+
+:vehicleSeries a owl:DatatypeProperty .
+
+:vehicleTechnicalDataCharacteristic a owl:DatatypeProperty .
+
+:vehicleTypeMaximumCantDeficiency a owl:DatatypeProperty .
+
+:vehicleTypeMaximumSpeed a owl:DatatypeProperty .
+
+:vehicleTypeTechnicalDataCharacteristic a owl:DatatypeProperty .
+
+:vehiclesComposingFixedFormation a owl:DatatypeProperty .
+
+:verificationCCS a owl:DatatypeProperty .
+
+:verificationENE a owl:DatatypeProperty .
+
+:verificationINF a owl:DatatypeProperty .
+
+:verificationSRT a owl:DatatypeProperty .
+
+:voiceOperationalCommImpl a owl:DatatypeProperty .
+
+:wheelSetGaugeTransformationMethod a owl:DatatypeProperty .
+
+:wheelchairSleepingPlaces a owl:DatatypeProperty .
+
+:wheelchairSpaces a owl:DatatypeProperty .
+
+dcterms:identifier a owl:DatatypeProperty .
+
+geo:asWKT a owl:DatatypeProperty .
+
+geo:hasSerialization a owl:DatatypeProperty .
+
+skos:notation a owl:DatatypeProperty .
+
+org:identifier a owl:DatatypeProperty .
+
+foaf:name a owl:DatatypeProperty .
+
+owl:DatatypeProperty a owl:Class .
+

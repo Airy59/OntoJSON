@@ -1,0 +1,55 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ErrorCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ErrorCode" ;
+    rdfs:comment """To be defined: code list from 1 to 9999.
+										Proposal from PathDossierErrorCode: "Standard values are
+										between 5000 and 6000 (central maintained list). The values
+										greater than 6000 can be used on national level. \"""" ;
+    rdfs:domain :Error ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Severity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Severity" ;
+    rdfs:comment """1 = WARNING: Message content, sequence or
+										other parameters are off standard but (partial) processing
+										has been possible.2 = ERROR: Message cannot be processed.""" ;
+    rdfs:domain :Error ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TagReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TagReference" ;
+    rdfs:comment """This is a placeholder for XPath expression
+										indicating the element of the orginal message which caused
+										the error.""" ;
+    rdfs:domain :Error ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeOfError a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeOfError" ;
+    rdfs:comment """It is an enumerated type to indicate if the
+										error was caused due to a bussines rule violation (1 =
+										FUNCTIONAL) or due to a system failure (2 = TECHNICAL) or
+										both (0 = BOTH)""" ;
+    rdfs:domain :Error ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasError rdfs:range :Error .
+
+:Error a owl:Class ;
+    rdfs:label "Error" .
+
+[] rdf:first :Error .
+

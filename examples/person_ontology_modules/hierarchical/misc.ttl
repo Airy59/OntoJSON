@@ -1,0 +1,85 @@
+@prefix : <http://example.org/person#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:JohnDoe a :Employee .
+
+:age a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Age"@en ;
+    rdfs:comment "The person's age in years"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:integer .
+
+:city a owl:DatatypeProperty ;
+    rdfs:label "City"@en ;
+    rdfs:domain :Address ;
+    rdfs:range xsd:string .
+
+:email a owl:DatatypeProperty ;
+    rdfs:label "Email"@en ;
+    rdfs:comment "The person's email address"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string .
+
+:employeeId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Employee ID"@en ;
+    rdfs:comment "The employee's unique identifier"@en ;
+    rdfs:domain :Employee ;
+    rdfs:range xsd:string .
+
+:hasAddress a owl:ObjectProperty ;
+    rdfs:label "Has Address"@en ;
+    rdfs:comment "The person's postal address"@en ;
+    rdfs:domain :Person ;
+    rdfs:range :Address .
+
+:hasEmployee a owl:ObjectProperty ;
+    rdfs:label "Has Employee"@en ;
+    rdfs:comment "The employees of the organization"@en ;
+    rdfs:domain :Organization ;
+    rdfs:range :Employee ;
+    owl:inverseOf :worksFor .
+
+:postalCode a owl:DatatypeProperty ;
+    rdfs:label "Postal Code"@en ;
+    rdfs:domain :Address ;
+    rdfs:range xsd:string .
+
+:street a owl:DatatypeProperty ;
+    rdfs:label "Street"@en ;
+    rdfs:domain :Address ;
+    rdfs:range xsd:string .
+
+:firstName a owl:DatatypeProperty ;
+    rdfs:label "First Name"@en ;
+    rdfs:comment "The person's given name"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string .
+
+:lastName a owl:DatatypeProperty ;
+    rdfs:label "Last Name"@en ;
+    rdfs:comment "The person's family name"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string .
+
+:worksFor a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Works For"@en ;
+    rdfs:comment "The organization the employee works for"@en ;
+    rdfs:domain :Employee ;
+    rdfs:range :Organization .
+
+:Employee a owl:Class ;
+    rdfs:label "Employee"@en ;
+    rdfs:comment "A person who works for an organization"@en ;
+    rdfs:subClassOf :Person .
+
+:Person a owl:Class ;
+    rdfs:label "Person"@en ;
+    rdfs:comment "A human being"@en ;
+    rdfs:subClassOf [ owl:onProperty :firstName ],
+        [ owl:onProperty :lastName ] .
+

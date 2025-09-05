@@ -1,0 +1,71 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DriverIndication a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DriverIndication" ;
+    rdfs:comment """0 - no driver present in Loco, 1 - driver(s)
+										is /are) present in Loco""" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocoNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocoNumber" ;
+    rdfs:comment """Identifies the number of the locomotive, usually the European Vehicle
+				Number on 12N. It is currently not restricted only to numeric values.""" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TractionPositionInTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TractionPositionInTrain" ;
+    rdfs:comment """Identifies position of intermediate traction unit(s) in the train
+				indicating after which wagon (specified by order number) the unit is placed.""" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TractionType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TractionType" ;
+    rdfs:comment """Identifies the type of a locomotive:
+First digit:
+â€œ0â€ = not specified
+â€œ1â€ = external electric power supply for traction (catenary and pantograph, third rail or other such as maglev)
+â€œ2â€ = on-board traction power supply for traction without external electrical or other power supply available
+â€œ3â€ = hybrid traction (both on-board or electric traction available)
+Second digit (definitions in chapter 2.2.2 of the LOC and PAS TSI 1302/2014):
+â€œ0â€ = not specified
+â€œ1â€ = locomotive or power unit
+â€œ2â€ = trainset or multiple unit or railcar
+â€œ3â€ = shunter
+â€œ4â€ = on track machine or infrastructure inspection vehicle
+			""" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasLocoIdent rdfs:range :LocoIdent .
+
+:hasRegenerativeBrake a owl:ObjectProperty ;
+    rdfs:label "has RegenerativeBrake" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range :RegenerativeBrake .
+
+:LocoIdent a owl:Class ;
+    rdfs:label "LocoIdent" ;
+    rdfs:comment """Defines the actual Type, the number and the mode of
+							deployment of a traction unit of the freight train""" .
+
+[] rdf:first :LocoIdent .
+
+[] rdf:first :LocoIdent .
+
+[] rdf:first :LocoIdent .
+

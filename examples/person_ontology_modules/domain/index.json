@@ -1,0 +1,16 @@
+{
+  "strategy": "domain",
+  "source_file": "../examples/person_ontology.owl",
+  "partitions": {
+    "administrative": {
+      "file": "../examples/person_ontology_modules/domain/administrative.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "general": {
+      "file": "../examples/person_ontology_modules/domain/general.ttl",
+      "entities": 14,
+      "triples": 71
+    }
+  }
+}

@@ -1,0 +1,365 @@
+Ontology Chunking Summary
+==================================================
+
+Source file: /Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312.ttl
+Total lines: 14302
+Header lines: 497
+Total entities: 1463
+Total chunks: 50
+
+Entity Types:
+  - unknown: 769
+  - class: 686
+  - property: 8
+
+Chunks:
+  01_unknown_1:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 498-735
+    - File: 01_unknown_1.ttl
+    - Combined: combined_01_unknown_1.ttl
+
+  02_unknown_2:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 736-795
+    - File: 02_unknown_2.ttl
+    - Combined: combined_02_unknown_2.ttl
+
+  03_unknown_3:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 796-1249
+    - File: 03_unknown_3.ttl
+    - Combined: combined_03_unknown_3.ttl
+
+  04_unknown_4:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 1280-2049
+    - File: 04_unknown_4.ttl
+    - Combined: combined_04_unknown_4.ttl
+
+  05_unknown_5:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 2064-2858
+    - File: 05_unknown_5.ttl
+    - Combined: combined_05_unknown_5.ttl
+
+  06_unknown_6:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 2869-3484
+    - File: 06_unknown_6.ttl
+    - Combined: combined_06_unknown_6.ttl
+
+  07_unknown_7:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 3519-4098
+    - File: 07_unknown_7.ttl
+    - Combined: combined_07_unknown_7.ttl
+
+  08_unknown_8:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 4108-4685
+    - File: 08_unknown_8.ttl
+    - Combined: combined_08_unknown_8.ttl
+
+  09_unknown_9:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 4695-5338
+    - File: 09_unknown_9.ttl
+    - Combined: combined_09_unknown_9.ttl
+
+  10_unknown_10:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 5396-5970
+    - File: 10_unknown_10.ttl
+    - Combined: combined_10_unknown_10.ttl
+
+  11_unknown_11:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 5981-6419
+    - File: 11_unknown_11.ttl
+    - Combined: combined_11_unknown_11.ttl
+
+  12_unknown_12:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 6448-7087
+    - File: 12_unknown_12.ttl
+    - Combined: combined_12_unknown_12.ttl
+
+  13_unknown_13:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 7103-7571
+    - File: 13_unknown_13.ttl
+    - Combined: combined_13_unknown_13.ttl
+
+  14_unknown_14:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 7602-8286
+    - File: 14_unknown_14.ttl
+    - Combined: combined_14_unknown_14.ttl
+
+  15_unknown_15:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 8312-8972
+    - File: 15_unknown_15.ttl
+    - Combined: combined_15_unknown_15.ttl
+
+  16_unknown_16:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 8981-9560
+    - File: 16_unknown_16.ttl
+    - Combined: combined_16_unknown_16.ttl
+
+  17_unknown_17:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 9580-10165
+    - File: 17_unknown_17.ttl
+    - Combined: combined_17_unknown_17.ttl
+
+  18_unknown_18:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 10181-10759
+    - File: 18_unknown_18.ttl
+    - Combined: combined_18_unknown_18.ttl
+
+  19_unknown_19:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 10773-11305
+    - File: 19_unknown_19.ttl
+    - Combined: combined_19_unknown_19.ttl
+
+  20_unknown_20:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 11323-11773
+    - File: 20_unknown_20.ttl
+    - Combined: combined_20_unknown_20.ttl
+
+  21_unknown_21:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 11787-12345
+    - File: 21_unknown_21.ttl
+    - Combined: combined_21_unknown_21.ttl
+
+  22_unknown_22:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 12354-12964
+    - File: 22_unknown_22.ttl
+    - Combined: combined_22_unknown_22.ttl
+
+  23_unknown_23:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 12970-13347
+    - File: 23_unknown_23.ttl
+    - Combined: combined_23_unknown_23.ttl
+
+  24_unknown_24:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 13357-13788
+    - File: 24_unknown_24.ttl
+    - Combined: combined_24_unknown_24.ttl
+
+  25_unknown_25:
+    - Type: unknown
+    - Entities: 30
+    - Lines: 13811-14242
+    - File: 25_unknown_25.ttl
+    - Combined: combined_25_unknown_25.ttl
+
+  26_unknown_26:
+    - Type: unknown
+    - Entities: 19
+    - Lines: 14243-14302
+    - File: 26_unknown_26.ttl
+    - Combined: combined_26_unknown_26.ttl
+
+  27_class_1:
+    - Type: class
+    - Entities: 30
+    - Lines: 503-1057
+    - File: 27_class_1.ttl
+    - Combined: combined_27_class_1.ttl
+
+  28_class_2:
+    - Type: class
+    - Entities: 30
+    - Lines: 1059-1656
+    - File: 28_class_2.ttl
+    - Combined: combined_28_class_2.ttl
+
+  29_class_3:
+    - Type: class
+    - Entities: 30
+    - Lines: 1658-2505
+    - File: 29_class_3.ttl
+    - Combined: combined_29_class_3.ttl
+
+  30_class_4:
+    - Type: class
+    - Entities: 30
+    - Lines: 2507-3138
+    - File: 30_class_4.ttl
+    - Combined: combined_30_class_4.ttl
+
+  31_class_5:
+    - Type: class
+    - Entities: 30
+    - Lines: 3140-3775
+    - File: 31_class_5.ttl
+    - Combined: combined_31_class_5.ttl
+
+  32_class_6:
+    - Type: class
+    - Entities: 30
+    - Lines: 3777-4314
+    - File: 32_class_6.ttl
+    - Combined: combined_32_class_6.ttl
+
+  33_class_7:
+    - Type: class
+    - Entities: 30
+    - Lines: 4316-4943
+    - File: 33_class_7.ttl
+    - Combined: combined_33_class_7.ttl
+
+  34_class_8:
+    - Type: class
+    - Entities: 30
+    - Lines: 4945-5644
+    - File: 34_class_8.ttl
+    - Combined: combined_34_class_8.ttl
+
+  35_class_9:
+    - Type: class
+    - Entities: 30
+    - Lines: 5646-6125
+    - File: 35_class_9.ttl
+    - Combined: combined_35_class_9.ttl
+
+  36_class_10:
+    - Type: class
+    - Entities: 30
+    - Lines: 6127-6762
+    - File: 36_class_10.ttl
+    - Combined: combined_36_class_10.ttl
+
+  37_class_11:
+    - Type: class
+    - Entities: 30
+    - Lines: 6764-7383
+    - File: 37_class_11.ttl
+    - Combined: combined_37_class_11.ttl
+
+  38_class_12:
+    - Type: class
+    - Entities: 30
+    - Lines: 7385-8008
+    - File: 38_class_12.ttl
+    - Combined: combined_38_class_12.ttl
+
+  39_class_13:
+    - Type: class
+    - Entities: 30
+    - Lines: 8010-8703
+    - File: 39_class_13.ttl
+    - Combined: combined_39_class_13.ttl
+
+  40_class_14:
+    - Type: class
+    - Entities: 30
+    - Lines: 8705-9331
+    - File: 40_class_14.ttl
+    - Combined: combined_40_class_14.ttl
+
+  41_class_15:
+    - Type: class
+    - Entities: 30
+    - Lines: 9333-9971
+    - File: 41_class_15.ttl
+    - Combined: combined_41_class_15.ttl
+
+  42_class_16:
+    - Type: class
+    - Entities: 30
+    - Lines: 9973-10550
+    - File: 42_class_16.ttl
+    - Combined: combined_42_class_16.ttl
+
+  43_class_17:
+    - Type: class
+    - Entities: 30
+    - Lines: 10552-11077
+    - File: 43_class_17.ttl
+    - Combined: combined_43_class_17.ttl
+
+  44_class_18:
+    - Type: class
+    - Entities: 30
+    - Lines: 11079-11607
+    - File: 44_class_18.ttl
+    - Combined: combined_44_class_18.ttl
+
+  45_class_19:
+    - Type: class
+    - Entities: 30
+    - Lines: 11609-12156
+    - File: 45_class_19.ttl
+    - Combined: combined_45_class_19.ttl
+
+  46_class_20:
+    - Type: class
+    - Entities: 30
+    - Lines: 12158-12736
+    - File: 46_class_20.ttl
+    - Combined: combined_46_class_20.ttl
+
+  47_class_21:
+    - Type: class
+    - Entities: 30
+    - Lines: 12738-13356
+    - File: 47_class_21.ttl
+    - Combined: combined_47_class_21.ttl
+
+  48_class_22:
+    - Type: class
+    - Entities: 30
+    - Lines: 13358-13810
+    - File: 48_class_22.ttl
+    - Combined: combined_48_class_22.ttl
+
+  49_class_23:
+    - Type: class
+    - Entities: 26
+    - Lines: 13812-14231
+    - File: 49_class_23.ttl
+    - Combined: combined_49_class_23.ttl
+
+  50_property_1:
+    - Type: property
+    - Entities: 8
+    - Lines: 522-14263
+    - File: 50_property_1.ttl
+    - Combined: combined_50_property_1.ttl
+

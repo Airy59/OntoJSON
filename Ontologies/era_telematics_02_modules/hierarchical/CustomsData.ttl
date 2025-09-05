@@ -1,0 +1,49 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:CustomsEndorsements a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CustomsEndorsements" ;
+    rdfs:comment """Reserved for
+																endorsements by customs or a
+																consignor/consignee authorised by
+																customs. Data element in accordance
+																with Regulation (EC) 1875/2006).""" ;
+    rdfs:domain :CustomsData ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CustomsSurveillance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CustomsSurveillance" ;
+    rdfs:comment """Good under customs
+																surveillance""" ;
+    rdfs:domain :CustomsData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrincipalRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrincipalRU" ;
+    rdfs:comment """Code for the principal
+																RU""" ;
+    rdfs:domain :CustomsData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SimplifiedTransportProcedure a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SimplifiedTransportProcedure" ;
+    rdfs:comment """Simplified transport
+																procedure is used (STP).""" ;
+    rdfs:domain :CustomsData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCustomsData rdfs:range :CustomsData .
+
+:CustomsData a owl:Class ;
+    rdfs:label "CustomsData" ;
+    rdfs:comment "Customs Data" .
+

@@ -1,0 +1,183 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AntennaDistanceFromFrontOfTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AntennaDistanceFromFrontOfTrain" ;
+    rdfs:comment """Distance of the defined coordinates from the front of the
+							train, in meters.""" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CurrentSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CurrentSpeed" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsVolume a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DangerousGoodsVolume" ;
+    rdfs:comment "The volume of the dangerous goods in cubic meters" ;
+    rdfs:domain :SummaryOFGoodsWithSameRID ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsVolumeCubicMeters a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DangerousGoodsVolumeCubicMeters" ;
+    rdfs:comment "The volume of the dangerous goods in cubic meters" ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DistancePrecision a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DistancePrecision" ;
+    rdfs:comment """Precision of the position along the track. Expressed in
+							metres.""" ;
+    rdfs:domain :NetworkProjectedLocation ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Heading a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Heading" ;
+    rdfs:comment """Direction towards which the train is going. Expressed in
+							degrees from North (examples : 0 = North, 90 = East, 180 = South, 270 =
+							West)""" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocalisationPrecision a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocalisationPrecision" ;
+    rdfs:comment "Precision of the position. Expressed in metres." ;
+    rdfs:domain :GeoLocalisation ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfVisibleSatellites a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfVisibleSatellites" ;
+    rdfs:comment """Indicates the number of satellites being used
+										in the position solution. Greater value indicates better
+										quality.""" ;
+    rdfs:domain :SignalQuality ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ProportionOfDistanceBetweenLocations a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ProportionOfDistanceBetweenLocations" ;
+    rdfs:comment """Percentage of the distance between the reporting location,
+							and the next location, on a scale from 0 to 100. """ ;
+    rdfs:domain :NetworkProjectedLocation ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SatelliteHDOP a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SatelliteHDOP" ;
+    rdfs:comment """HDOP = Horizontal Dilution Of Precision.
+										Parameter used to describe the strength of the current
+										satellite configuration, or geometry, and itâ€™s impact on the
+										accuracy of the data collected by a GNSS receiver at the
+										time of use. HDOP provides a measure of accuracy in 2-D
+										position (e.g. Latitude and Longitude). Smaller value
+										indicates better precision. Values less than 1 are the best.
+										Values from 2 - 5 are good. Values greater 10 indicate bad
+										quality """ ;
+    rdfs:domain :SignalQuality ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Volume a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Volume" ;
+    rdfs:comment "Identifies the volume of a shipment, expressed in cubic metres" ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasGNSS_DynamicPosition a owl:ObjectProperty ;
+    rdfs:label "has GNSS_DynamicPosition" ;
+    rdfs:domain :GeoLocalisation ;
+    rdfs:range :GNSS_DynamicPosition .
+
+:hasGeoLocalisation a owl:ObjectProperty ;
+    rdfs:label "has GeoLocalisation" ;
+    rdfs:domain :GeoLocalisationOnNetwork ;
+    rdfs:range :GeoLocalisation .
+
+:hasGeoLocalisationOnNetwork a owl:ObjectProperty ;
+    rdfs:label "has GeoLocalisationOnNetwork" ;
+    rdfs:domain [ ] ;
+    rdfs:range :GeoLocalisationOnNetwork .
+
+:hasNetworkProjectedLocation a owl:ObjectProperty ;
+    rdfs:label "has NetworkProjectedLocation" ;
+    rdfs:domain :GeoLocalisationOnNetwork ;
+    rdfs:range :NetworkProjectedLocation .
+
+:hasNextLocation a owl:ObjectProperty ;
+    rdfs:label "has NextLocation" ;
+    rdfs:domain :NetworkProjectedLocation ;
+    rdfs:range :NextLocation .
+
+:hasSignalQuality a owl:ObjectProperty ;
+    rdfs:label "has SignalQuality" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:range :SignalQuality .
+
+:hasSummaryOFGoodsWithSameRID a owl:ObjectProperty ;
+    rdfs:label "has SummaryOFGoodsWithSameRID" ;
+    rdfs:domain [ ] ;
+    rdfs:range :SummaryOFGoodsWithSameRID .
+
+:NextLocation a owl:Class ;
+    rdfs:label "NextLocation" ;
+    rdfs:comment """Next location forecasted to be encountered by the train.
+							If this element isnâ€™t present, the GNSS position is considered to be
+							within the â€œboundariesâ€ of the location included in the LocationReport""" .
+
+:GeoLocalisation a owl:Class ;
+    rdfs:label "GeoLocalisation" ;
+    rdfs:comment "Geolocalisation that may be between two identified locations. " .
+
+:GeoLocalisationOnNetwork a owl:Class ;
+    rdfs:label "GeoLocalisationOnNetwork" ;
+    rdfs:comment "Geolocalisation information crossed with network data. " .
+
+:SignalQuality a owl:Class ;
+    rdfs:label "SignalQuality" ;
+    rdfs:comment "Indicates satellite communication signal quality" .
+
+:NetworkProjectedLocation a owl:Class ;
+    rdfs:label "NetworkProjectedLocation" ;
+    rdfs:comment "Projection of a geographical position on a network line. " .
+
+:SummaryOFGoodsWithSameRID a owl:Class ;
+    rdfs:label "SummaryOFGoodsWithSameRID" ;
+    rdfs:comment """This element is only in use if the consignment includes more than one
+				good with the same UN-Number in , packing group and propershipping name in the
+				wagon. The added amount of the dangerous goods are to be stored here""" .
+
+:GNSS_DynamicPosition a owl:Class ;
+    rdfs:label "GNSS_DynamicPosition" .
+
+[] rdf:first :SummaryOFGoodsWithSameRID .
+
+[] rdf:first :GNSS_DynamicPosition .
+
+[] rdf:first xsd:float .
+
+[] rdf:first xsd:float .
+
+[] rdf:first :SummaryOFGoodsWithSameRID .
+
+[] rdf:first :SummaryOFGoodsWithSameRID .
+

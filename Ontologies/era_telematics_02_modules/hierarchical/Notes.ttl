@@ -1,0 +1,23 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Note a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Note" ;
+    rdfs:domain :Notes ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasNoteLocationIdent a owl:ObjectProperty ;
+    rdfs:label "has NoteLocationIdent" ;
+    rdfs:domain :Notes ;
+    rdfs:range :NoteLocationIdent .
+
+:hasNotes rdfs:range :Notes .
+
+:Notes a owl:Class ;
+    rdfs:label "Notes" ;
+    rdfs:comment "Remarks to be transmitted to IM" .
+

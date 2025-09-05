@@ -1,0 +1,29 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasTrainCompositionJourneySection a owl:ObjectProperty ;
+    rdfs:label "has TrainCompositionJourneySection" ;
+    rdfs:domain :TrainCompositionMessage ;
+    rdfs:range :TrainCompositionJourneySection .
+
+:TrainCompositionMessage a owl:Class ;
+    rdfs:label "TrainCompositionMessage" ;
+    rdfs:comment """This message is sent from an RU to an IM defining the composition of
+				the proposed train.""" .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainCompositionMessage .
+

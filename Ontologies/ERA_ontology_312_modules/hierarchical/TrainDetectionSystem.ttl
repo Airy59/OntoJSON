@@ -1,0 +1,481 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:flangeLubeRules a owl:DatatypeProperty ;
+    rdfs:label "Existence of rules on on-board flange lubrication"@en ;
+    :XMLName "CTD_FlangeLubeRules" ;
+    :rinfIndex "1.1.1.3.7.20" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication whether rules for activation or deactivation of flange lubrication exist."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:frequencyBandsForDetection a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Frequency bands for detection"@en ;
+    :applicable "Y/N/NYA" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/train-detection/FrequencyBandsForDetection> ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.4.2",
+        "1.2.1.1.3.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FrequencyBandsForDetection>,
+        <http://data.europa.eu/949/shapes/FrequencyBandsForDetectionSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date ;
+    dcterms:relation :maximumInterferenceCurrent,
+        :minVehicleImpedance,
+        :tdsMaximumMagneticField ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Bands of the frequency management of the train detection systems as defined in the TSI CCS, and in the specific cases or technical documents referred to in Article 13 of TSI CCS when they are available."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg_impl/2023/1695/oj"^^xsd:anyURI,
+        "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsObjParameter ;
+    ns1:term_status "unstable" ;
+    skos:scopeNote """Verification of compliance with TSI includes application of notified national rules (when they exist).
+
+Multiple selection from a predefined list:
+- Axle Counters: bands A1-A3
+- Track circuits: bands A1-A8"""@en .
+
+:maxDistEndTrainFirstAxle a owl:DatatypeProperty ;
+    rdfs:label "Maximum distance between end of train and first axle"@en ;
+    :XMLName "CTD_MaxDistEndTrainFirstAxle" ;
+    :rinfIndex "1.1.1.3.7.5" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication of maximum distance between end of train and first axle, given in millimetres, applicable for both sides (front and rear) of a vehicle or train."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:maxSandingOutput a owl:ObjectProperty ;
+    rdfs:label "Maximum amount of sand"@en ;
+    :XMLName "CTD_MaxSandOutput" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/max-amount-sandings/MaxAmountSandings> ;
+    :rinfIndex "1.1.1.3.7.17" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment """Maximum amount of sand accepted on the track within value of sanding output for 30s, given in grams.
+Deprecated according to the amendment to the Regulation (EU) 2019/777."""@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:requiredSandingOverride a owl:DatatypeProperty ;
+    rdfs:label "Sanding override by driver required"@en ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication whether possibility to activate/deactivate sanding devices by driver, according to instructions from the Infrastructure Manager, is required or not. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tdsMinAxleLoadVehicleCategory a owl:ObjectProperty ;
+    rdfs:label "Train detection system min axle load vehicle category"@en ;
+    :XMLName "CTD_MinAxleLoadByVehicleCat" ;
+    :rinfIndex "1.1.1.3.7.11.1" ;
+    dcterms:created "2023-01-25"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Indication of load given in tons depending of the category of vehicle. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :MinAxleLoadVehicleCategory ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:trainDetectionSystemSpecificCheck a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Type of track circuits or axle counters to which specific checks are needed"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "It is applicable only when parameter \"Type of train detection system\" is applicable"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/train-detection-specific-checks/TrainDetectionSystemsSpecificChecks> ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.7.1.2",
+        "1.2.1.1.6.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrainDetectionSystemSpecificCheck>,
+        <http://data.europa.eu/949/shapes/TrainDetectionSystemSpecificCheckApplicability>,
+        <http://data.europa.eu/949/shapes/TrainDetectionSystemSpecificCheckSKOS> ;
+    :usedInRCCCalculations false,
+        true ;
+    dcterms:modified "2020-08-24"^^xsd:date,
+        "2021-08-08"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-09-25"^^xsd:date,
+        "2024-10-31"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemSpecificCheckDocument,
+        :trainDetectionSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Reference to the technical specification of train detection system, in accordance with the specification referenced in Appendix A-1, index [D]"@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :otherTrainDetectionSystemsObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "String containing the name of the TD system for which checks are mentioned in 1.1.1.3.7.1.3."@en .
+
+:tsiCompliantCompositeBrakeBlocks a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of rules on the use of composite brake blocks"@en ;
+    :XMLName "CTD_TSICompositeBrakeBlocks" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.21" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. TSI compliance of rules on the use of composite brake blocks."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantFerromagneticWheel a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of Ferromagnetic characteristics of wheel material required"@en ;
+    :XMLName "CTD_TSIFerroWheelMat" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.14" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI compliance of Ferromagnetic characteristics of wheel material required. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantMaxDistConsecutiveAxles a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of maximum permitted distance between two consecutive axles"@en ;
+    :XMLName "CTD_TSIMaxDistConsecutiveAxles" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.2.1" ;
+    dcterms:created "2021-08-07"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Indication whether required distance between two consecutive axles is compliant with the TSI. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantMaxImpedanceWheelset a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of maximum permitted impedance between opposite wheels of a wheelset"@en ;
+    :XMLName "CTD_TSIMaxImpedanceWheelset" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.15.1" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI compliance of maximum permitted impedance between opposite wheels of a wheelset. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantMetalConstruction a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of rules for vehicle metal construction"@en ;
+    :XMLName "CTD_TSIMetalConstruction" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.13" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI compliance of rules for vehicle metal construction. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantMetalFreeSpace a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of rules for metal-free space around wheels"@en ;
+    :XMLName "CTD_TSIMetalFree" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.12" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI compliance of rules for metal-free space around wheels. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantRSTShuntImpedance a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of rules on combination of RST characteristics influencing shunting impedance"@en ;
+    :XMLName "CTD_TSIRSTShuntImpedance" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.23" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI compliance of rules on combination of RST characteristics influencing shunting impedance. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantSandCharacteristics a owl:ObjectProperty ;
+    rdfs:label "TSI Compliance of rules on sand characteristics"@en ;
+    :XMLName "CTD_TSISandCharacteristics" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.19" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI Compliance of rules on sand characteristics. Deprecated according to the amendment to the Regulation (EU) 2019/777." ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantSanding a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of sanding"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.16" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI compliance of sanding rules to allow compatibility with track circuits. Too much sand brings the risk of not detecting trains in tracks equipped with track circuits. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "unstable" .
+
+:tsiCompliantShuntDevices a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of rules on shunt assisting devices"@en ;
+    :XMLName "CTD_TSIShuntDevices" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.22" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. TSI compliance of rules on shunt assisting devices."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:frenchTrainDetectionSystemLimitation a owl:ObjectProperty ;
+    rdfs:label "Section with train detection limitation, only for the French network"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/train-detection/FrenchTrainDetectionSystemLimitations> ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:isReplacedBy :frenchTrainDetectionSystemLimitationApplicable,
+        :frenchTrainDetectionSystemLimitationNumber,
+        :tdsFrenchTrainDetectionSystemLimitation ;
+    dcterms:modified "2022-04-05"^^xsd:date ;
+    rdfs:comment "Specific for route compatibility check on French network. The reason for deprecation is because of replacement by a class, an object property and two datatype properties. The reason is that the property is composed of two values: A boolean [Y/N] and  a number N is between 1 and 8."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:maximumInterferenceCurrentEvaluation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Evaluation parameters if maximum interference current is not measured in the preferred bands"@en ;
+    :dependencyNote """If the preferred frequency bands are not used, (mandatory) description of the parameters for evaluation of compliance.
+If the preferred frequency bands are used, this parameter is optional."""@en ;
+    :rinfIndex "1.1.1.3.4.2.1",
+        "1.2.1.1.3.2.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumInterferenceCurrentEvaluation> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    dcterms:relation :maximumInterferenceCurrent,
+        :trainDetectionSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Maximum interference current limits allowed for track circuits for a defined frequency band. "@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsDataParameter ;
+    ns1:term_status "stable" .
+
+:minVehicleImpedance a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Vehicle impedance"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Mandatory only for track circuits" ;
+    :formatNote "The values is an instance of era:MinVehicleImpedance class with its 2 properties.	Per voltage : input Capacitance (Cin) and Input Impedance (Zin)"@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        """For train detection system compliant with TSIs, 12 months after publication of Article 7 Guide.
+For train detection system not TSI compliant: in relation to article 13 of TSI CCS"""@en ;
+    :rinfIndex "1.1.1.3.4.2.2",
+        "1.2.1.1.3.2.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleImpedance>,
+        <http://data.europa.eu/949/shapes/MinVehicleImpedanceApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:modified "2025-02-28"^^xsd:date ;
+    rdfs:comment "Impedance as defined in the specification referenced in Appendix A-1, index [D]"@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :MinVehicleImpedance ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg_impl/2023/1695/oj"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsObjParameter ;
+    skos:scopeNote "Compatibility with track circuits. A track circuit is only able to detect rolling stock if the impedance between rails does not exceed a certain value."@en .
+
+:tdsFrenchTrainDetectionSystemLimitation a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Section with train detection limitation"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Only applicable on running tracks in France"@en ;
+    :formatNote """The value of this parameter is an instance of the era:FrenchTrainDetectionSystemLimitation class with all its properties:
+ - true/false for the existence of a section with train detection limitation
+ - list of values from 1 to 8 defined in the taxonomy""" ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "16 January 2020"@en ;
+    :rinfIndex "1.1.1.3.7.1.4",
+        "1.2.1.1.6.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TdsFrenchTrainDetectionSystemLimitation> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-04"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:relation :frenchTrainDetectionSystemLimitationApplicable,
+        :frenchTrainDetectionSystemLimitationNumber ;
+    dcterms:replaces :frenchTrainDetectionSystemLimitation ;
+    rdfs:comment "Specific for route compatibility check on French network."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :FrenchTrainDetectionSystemLimitation ;
+    rdfs:subPropertyOf :otherTrainDetectionSystemsObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Relates the class train detection system with the class that represents the section with train detection limitation. Select the special condition as applicable through National Rule from the List.
+
+For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, the data format is a character string with the following structure:
+[Y/N]+[N]
+where:
+- [Y/N] - is the existence of section with train detection limitation
+- [N] is a number from 1 to 8 referring to sections with:
+    [1] Tonnage circulated per track is inferior to 15000 tons/day/track
+    [2] Directional Interlocking
+    [3] 45-second delay for directional interlocking
+    [4] Installation with track circuit announcement
+    [5] Absence of a shunting assistance pedal in the normal direction of circulation for non-reversible double track lines
+    [6] Absence of a shunting assistance pedal regardless of the direction of traffic for single track lines and tracks for two way working
+    [7] Absence of a pedal announcement mechanism
+    [8] 45-second delay for specific announcement reset devices."""@en .
+
+:tdsMaximumMagneticField a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Maximum magnetic field"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Mandatory for train detection systems based on axle counters"@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        """For train detection system compliant with TSIs, 12 months after publication of Article 7 Guide.
+For train detection system not TSI compliant: in relation to article 13 of TSI CCS"""@en ;
+    :rinfIndex "1.1.1.3.4.2.3",
+        "1.2.1.1.3.2.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TdsMaximumMagneticField>,
+        <http://data.europa.eu/949/shapes/TdsMaximumMagneticFieldApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/2023-09-08> ;
+    rdfs:comment """The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band.
+It should be provided in 3 directions."""@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :MaximumMagneticField ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Relates the Axle Counter TrainDetectionSystem with its MaximumMagneticField in (X,Y,Z). Verification of compliance with TSI includes application of notified national rules (when they exist)."@en .
+
+:trainDetectionSystemSpecificCheckDocument a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Document with the procedure(s) related to the type of train detection systems declared in \"Type of track circuits or axle counters to which specific checks are needed\""@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "It is applicable only when parameter \"Type of train detection system\" is applicable"@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with TSI CCS Art. 13 and 12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.7.1.3",
+        "1.2.1.1.6.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrainDetectionSystemSpecificCheckDocument>,
+        <http://data.europa.eu/949/shapes/TrainDetectionSystemSpecificCheckDocumentApplicability> ;
+    :usedInRCCCalculations false,
+        true ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-04-23"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:comment "Electronic document from the IM stored by the Agency with precise values in accordance with TSI CCS Article13 and the specification referenced in Appendix A-1, index [D], for the specific check to be performed for train detection systems identified in parameter \"Type of track circuits or axle counters to which specific checks are needed\"."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Document ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :otherTrainDetectionSystemsObjParameter ;
+    ns1:term_status "stable" ;
+    skos:changeNote "Change from datatype property to object property in order to point to the class Document (reference document)"@en ;
+    skos:scopeNote """The value of this parameter should be either a reference to a file name or an external link to a document.
+If a file name is provided, the Infrastructure Manager (IM) must upload a document with the same file name using the "Reference Documents Management" functionality in the RINF application. The document must be in electronic format and available in two official EU languages. In this case, the parameter value must be repeated for each document.
+If an external link is provided, the IM must ensure that the document is available at the provided link."""@en .
+
+:maximumInterferenceCurrent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum interference current"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Evaluation parameters must be added if preferred bands are not used."@en ;
+    :formatNote "NNN. An optional value could be filled in era:maximumInterferenceCurrentEvaluation" ;
+    :legalDeadline """For train detection system compliant with TSIs: 12 months after publication of Article 7 Guide.
+For train detection system not TSI compliant: in relation to article 13 of TSI CCS"""@en ;
+    :rinfIndex "1.1.1.3.4.2.1",
+        "1.2.1.1.3.2.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumInterferenceCurrent> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/A-PER-M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :maximumInterferenceCurrentEvaluation,
+        :trainDetectionSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Maximum interference current limits allowed for track circuits for a defined frequency band."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """To be expressed in A/m. Verification of compliance with TSI includes application of notified national rules (when they exist).
+
+Evaluation parameters must be added if preferred bands are not used. """@en .
+
+:TrainDetectionSystem a owl:Class ;
+    rdfs:label "Train Detection System"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrainDetectionSystemShape> ;
+    dcterms:created "2021-08-07"^^xsd:date ;
+    dcterms:modified "2021-08-07"^^xsd:date ;
+    rdfs:comment "Safety system used to detect the presence of vehicles on the railway track."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" .
+

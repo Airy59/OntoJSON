@@ -1,0 +1,23 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ArrivalTimeAtDestination a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ArrivalTimeAtDestination" ;
+    rdfs:comment """The actual Date and Time of the arrival of wagons by train at its
+				final destination yard""" ;
+    rdfs:domain :ArrivalAtDestination ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ArrivalAtDestination a owl:Class ;
+    rdfs:label "ArrivalAtDestination" ;
+    rdfs:comment """Arrival of a wagon at its destnation point with Date and Time. The
+				location is not the final destination at ustomer sidings, but he location of the
+				last RU which has to organise the final delivery of the wagon to customer sidings""" .
+
+[] rdf:first :ArrivalAtDestination .
+

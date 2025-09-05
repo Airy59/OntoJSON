@@ -1,0 +1,495 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:brakeRelatedDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Brake related parameters"@en ;
+    :rinfIndex "1.1.1.3.11" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :ccsSubsystemDataParameter .
+
+:brakeRelatedObjParameter a owl:ObjectProperty ;
+    rdfs:label "Brake related parameters"@en ;
+    :rinfIndex "1.1.1.3.11" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :ccsSubsystemObjParameter .
+
+:nationalLoadCapability a owl:DatatypeProperty ;
+    rdfs:label "National classification for load capability"@en ;
+    :XMLName "IPP_NCLoadCap" ;
+    :applicable "Y/N" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.2.4.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NationalLoadCapability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "National classification for load capability"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :performanceDataParameter ;
+    ns1:term_status "stable" ;
+    skos:example "The French IM SNCF reseau is using the concept of 'groupe Demeaux' with the following definition is 'Groupe de classification de la voie tenant compte de la resistance de son armement en flexion verticale'." ;
+    skos:scopeNote "Some Networks are using National classification for load capability (instead of parameter 1.1.1.1.2.4 Load capability that provide load capability in accordance with EN 15528)"@en .
+
+:oclSeparationSectionsDataParameter a owl:DatatypeProperty ;
+    rdfs:label "OCL separation sections"@en ;
+    :rinfIndex "1.1.1.2.4" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :energySubsystemDataParameter .
+
+:oclSeparationSectionsObjParameter a owl:ObjectProperty ;
+    rdfs:label "OCL separation sections"@en ;
+    :rinfIndex "1.1.1.2.4" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :energySubsystemObjParameter .
+
+:ofParameter a owl:ObjectProperty ;
+    rdfs:label "of parameter"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OfParameter> ;
+    dcterms:created "2024-10-28"^^xsd:date ;
+    dcterms:modified "2024-12-10"^^xsd:date ;
+    rdfs:comment "Indicates the parameter (object or datatype property) for which an applicability is being defined."@en ;
+    rdfs:domain :ParameterApplicability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range rdf:Property .
+
+:opGenericDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Operational point generic information"@en ;
+    :rinfIndex "1.2.0.0.0" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalDataCharacteristic .
+
+:opGenericObjParameter a owl:ObjectProperty ;
+    rdfs:label "Operational point generic information"@en ;
+    :rinfIndex "1.2.0.0.0" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalObjectCharacteristic .
+
+:parameterApplicability a owl:ObjectProperty ;
+    rdfs:label "parameter applicability"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ParameterApplicability> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2024-10-28"^^xsd:date ;
+    rdfs:comment "Relates an infrastructure element or a common characteristics subset with the applicability of a certain parameter."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :ParameterApplicability .
+
+:parameterValue a owl:DatatypeProperty ;
+    rdfs:label "Parameter value"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ParameterValue> ;
+    dcterms:created "2024-12-10"^^xsd:date ;
+    rdfs:comment "This property is used to link an applicability to the precise value of the parameter"@en ;
+    rdfs:domain :ParameterApplicability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range rdfs:Literal .
+
+:parameterValueType a owl:ObjectProperty ;
+    rdfs:label "parameter value type"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/parameterApplicability/ValueTypes> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ParameterValueType>,
+        <http://data.europa.eu/949/shapes/ParameterValueTypeSKOS> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "In the case of a change in the value of a parameter, there needs to be an information on the type of the new value. The â€œValue typeâ€ will have different possible options: â€œnominalâ€, â€œplanned temporary restrictionâ€, â€œpermanent restrictionâ€, â€œplanned temporary closureâ€."@en ;
+    rdfs:domain :ParameterApplicability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:profileNumberSemiTrailers a owl:ObjectProperty ;
+    rdfs:label "Standard combined transport profile number for semi-trailers"@en ;
+    :XMLName "ILL_ProfileNumSemiTrailers" ;
+    :applicable "Y/N" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/profile-num-semi-trailers/ProfileNumbersSemiTrailers> ;
+    :legalDeadline "by 16 March 2019 at the latest for lines belonging to the TEN (1.1.1.1.2.1)"@en ;
+    :rinfIndex "1.1.1.1.3.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ProfileNumberSemiTrailersSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Coding for combined transport for semi-trailers (for all freight and mixed-traffic lines) in accordance with the specification referenced in Appendix A-1, index [B]."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :lineLayoutObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The technical number is made up of the wagon compatibility code (1 letter) and the standard combined transport profile number (2 digits when width <= 2500 mm or 3 digits when 2500 < width <= 2600 mm).
+Additional values than the already identified in the list above are possible. They will be introduced by the Agency on request via a process of change request."""@en .
+
+:profileNumberSwapBodies a owl:ObjectProperty ;
+    rdfs:label "Standard combined transport profile number for swap bodies"@en ;
+    :XMLName "ILL_ProfileNumSwapBodies" ;
+    :applicable "Y/N" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/profile-num-swap-bodies/ProfileNumbersSwapBodies> ;
+    :legalDeadline "by 16 March 2019 at the latest for lines belonging to the TEN (1.1.1.1.2.1)"@en ;
+    :rinfIndex "1.1.1.1.3.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ProfileNumberSwapBodiesSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Coding for combined transport with swap bodies (for all freight and mixed-traffic lines) in accordance with the specification referenced in Appendix A-1, index [B]"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :lineLayoutObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The technical number is made up of the wagon compatibility code (1 letter) and the standard combined transport profile number (2 digits when width <= 2550 mm or 3 digits when, 2550 < width <= 2600 mm). "@en .
+
+:relatedElectromagneticInterferencesDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Parameters related to electromagnetic interferences"@en ;
+    :rinfIndex "1.1.1.3.9",
+        "1.2.1.1.8" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :ccsSubsystemDataParameter .
+
+:requirementsRollingStockDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Requirements for rolling stock"@en ;
+    :rinfIndex "1.1.1.2.5" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :energySubsystemDataParameter .
+
+:requirementsRollingStockObjParameter a owl:ObjectProperty ;
+    rdfs:label "Requirements for rolling stock"@en ;
+    :rinfIndex "1.1.1.2.5" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :energySubsystemObjParameter .
+
+:rulesDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Rules and restrictions"@en ;
+    :rinfIndex "1.1.1.4",
+        "1.2.3" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalDataCharacteristic .
+
+:rulesObjParameter a owl:ObjectProperty ;
+    rdfs:label "Rules and restrictions"@en ;
+    :rinfIndex "1.1.1.4",
+        "1.2.3" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalObjectCharacteristic .
+
+:sidingFixedInstalationsDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Fixed installations for servicing trains"@en ;
+    :rinfIndex "1.2.2.0.4" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :sidingDataParameter .
+
+:sidingObjParameter a owl:ObjectProperty ;
+    rdfs:label "Siding"@en ;
+    :rinfIndex "1.2.2" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalObjectCharacteristic .
+
+:solGenericDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Section of line generic information"@en ;
+    :rinfIndex "1.1.0.0.0" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalDataCharacteristic .
+
+:solGenericObjParameter a owl:ObjectProperty ;
+    rdfs:label "Section of line generic information"@en ;
+    :rinfIndex "1.1.0.0.0" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalObjectCharacteristic .
+
+:standardCombinedTransportContainers a owl:ObjectProperty ;
+    rdfs:label "Standard combined transport profile number for containers"@en ;
+    :applicable "Y/N" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/standard-combined-transport-containers/StandardCombinedTransportContainers> ;
+    :legalDeadline "12 months after the adoption of the Article 7 Guide for lines belonging to the TEN (1.1.1.1.2.1)"@en ;
+    :rinfIndex "1.1.1.1.3.8" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/StandardCombinedTransportContainers>,
+        <http://data.europa.eu/949/shapes/StandardCombinedTransportContainersSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2025-02-20"^^xsd:date ;
+    rdfs:comment "Coding for combined transport for containers (for all freight and mixed-traffic lines) in accordance with the specification referenced in Appendix A-1, index [B]"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :lineLayoutObjParameter ;
+    ns1:term_status "stable" .
+
+:standardCombinedTransportRollerUnits a owl:ObjectProperty ;
+    rdfs:label "Standard combined transport profile number for roller units"@en ;
+    :applicable "Y/N/NYA" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/standard-combined-transport-roller-units/StandardCombinedTransportRollerUnits> ;
+    :legalDeadline "12 months after the adoption of the Article 7 Guide for lines belonging to the TEN (1.1.1.1.2.1)"@en ;
+    :rinfIndex "1.1.1.1.3.9" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/StandardCombinedRollerUnits>,
+        <http://data.europa.eu/949/shapes/StandardCombinedRollerUnitsSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2025-02-20"^^xsd:date ;
+    rdfs:comment "Coding for combined transport for roller units (for all freight and mixed-traffic lines) in accordance with the specification referenced in Appendix A-1, index [B]"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :lineLayoutObjParameter ;
+    ns1:term_status "stable" .
+
+:transitionsBetweenSystemsDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Transitions between systems"@en ;
+    :rinfIndex "1.1.1.3.8",
+        "1.2.1.1.7" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :ccsSubsystemDataParameter .
+
+:transitionsBetweenSystemsObjParameter a owl:ObjectProperty ;
+    rdfs:label "Transitions between systems"@en ;
+    :rinfIndex "1.1.1.3.8",
+        "1.2.1.1.7" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :ccsSubsystemObjParameter .
+
+:verifiedRccObjParameter a owl:ObjectProperty ;
+    rdfs:label "Vehicles for which Route compatibility is verified"@en ;
+    :rinfIndex "1.1.1.5" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalObjectCharacteristic .
+
+:infraSubsystemDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Infrastructure subsystem"@en ;
+    :rinfIndex "1.1.1.1" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalDataCharacteristic .
+
+:infraSubsystemObjParameter a owl:ObjectProperty ;
+    rdfs:label "Infrastructure subsystem"@en ;
+    :rinfIndex "1.1.1.1" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    dcterms:modified "2024-10-28"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalObjectCharacteristic .
+
+:loadCapabilitySpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Load capability speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilitySpeed> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Part of the load capability of a track that corresponds to the speed of the load model"@en ;
+    rdfs:domain :LoadCapability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:performanceDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Performance parameter"@en ;
+    :rinfIndex "1.1.1.1.2",
+        "1.2.1.0.2",
+        "1.2.2.0.2" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :infraSubsystemDataParameter .
+
+:performanceObjParameter a owl:ObjectProperty ;
+    rdfs:label "Performance parameter"@en ;
+    :rinfIndex "1.1.1.1.2",
+        "1.2.1.0.2",
+        "1.2.2.0.2" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :infraSubsystemObjParameter .
+
+:sidingDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Siding"@en ;
+    :rinfIndex "1.2.2" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalDataCharacteristic .
+
+:trackLoadCapability a owl:ObjectProperty ;
+    rdfs:label "Load capability"@en ;
+    :XMLName "IPP_LoadCap" ;
+    :applicable "Y" ;
+    :formatNote """The value of this parameter is an instance of the era:LoadCapability class which consists of 2 properties:
+- era:loadCapabilityLineCategory - as a taxonomy of load models representing line category
+- era:loadCapabilitySpeed - integer for the value of speed [km/h] permitted for a specific load model
+
+For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, the data format is:
+[CCCC] [NNN],
+where:
+- [CCCC] is a single selection from the predefined list of load models representing line category
+- [NNN] is the value of speed [km/h] permitted for a specific load model."""@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.2.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrackLoadCapability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    rdfs:comment "Relates the track with the class LoadCapability. A combination of the line category and speed at the weakest point of the track."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LoadCapability ;
+    rdfs:seeAlso """INF TSI: 4.2.1, 4.2.7.1, 4.2.7.2, 4.2.7.4
+Annex D1 OPE TSI""" ;
+    rdfs:subPropertyOf :performanceObjParameter ;
+    ns1:term_status "stable" ;
+    skos:example """The set of selected data may include: B2-160, D4-120 and E5-100
+When classifying infrastructure lines into line categories, the following options shall be used by the infrastructure manager to optimize freight traffic:
+Option 1: determination of the line category at maximum freight traffic speed (maximum 120 Km/h)
+Option 2: determination of a line category at an associated lower speed (less than the maximum freight traffic speed)
+Example of option 1 (Annex F of EN 15528:2021): In a given track, if the traffic is mixed, the local speed of the line is 90 Km/h and the determined line category is D4 at a maximum of 90 Km/h, the information displayed should be: D4/90.
+Example of option 2 (Annex F of EN 15528:2021): In a given track, if the traffic is mixed, the local speed of the line is 120 Km/h and the determined line category is C4 at a maximum of 120 Km/h and D4 at maximum of 90 Km/h, the information displayed should be: C4/120 and D4/90.""" ;
+    skos:scopeNote """At this step, RINF does not allow to enter additional data referred to additional speed regulations and operating requirements relating to locomotives (e.g., locomotive classes and associated maximum speed) or traffic types (e.g., maximum speed of freight traffic or passenger traffic).
+
+The load capability describes the weakest point of this track within this section of line (which is normally a bridge or other sub-track structure).
+It is expressed as a combination of the line category and speed permitted for trains exerting loads defined for this line category.
+The result of the classification process is set out in EN 15528:2021 (Annex A) and referred to in that standard as Line Category.
+
+The Load capability for UK in respect of Northern Ireland consists of RA and speed in miles per hour. RA shall be applied according to UK Railway Group Standard GE/RT8006, Issue Two, September 2010.
+
+More than one combination may be published for the same track if applicable, but it has to be done by repetition of the parameter with one value selected only  that is why Y is given in line Can be repeated.
+For the following cases, it is not possible to use EN 15528:2021 categories of line classification:
+- TSI categories of line P1520 and F1520 (passenger traffic or freight traffic at any speed)
+- TSI categories of line P1600 and F1600 (passenger traffic or freight traffic at any speed)
+
+When more than one value of the parameter has to be published, then parameter has to be repeated as many times as many values of the parameter will be published."""@en .
+
+:LoadCapability a owl:Class ;
+    rdfs:label "Load capability"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilityShape> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    rdfs:comment """A combination of the line category and speed at the weakest point of the track.
+Each track can have several load capability (structured) values, and each one has values for load model line category and load model speed."""@en,
+        "This class together with properties loadCapabilityLineCategory and loadCapabilitySpeed replaces the previous loadCapability SKOS property."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """At this step, RINF does not allow to enter additional data referred to additional speed regulations and operating requirements relating to locomotives (e.g., locomotive classes and associated maximum speed) or traffic types (e.g., maximum speed of freight traffic or passenger traffic).
+
+The load capability describes the weakest point of this track within this section of line (which is normally a bridge or other sub-track structure). It is expressed as a combination of the line category and speed permitted for trains exerting loads defined for this line category. The result of the classification process is set out in EN 15528:2021 (Annex A) and referred to in that standard as â€œLine Categoryâ€.
+
+It represents the ability of the infrastructure to withstand the vertical loads imposed by vehicles on the track for regular service as a combination of Line Category with a permitted speed according to EN 15528:2021
+
+More than one combination may be published for the same track if applicable, but it has to be done by repetition of the parameter with one value selected only - that is why 'Y' is given in line 'Can be repeated'.
+
+For the following cases, it is not possible to use EN 15528:20021categories of line classification:
+- TSI categories of line P1520 and F1520 (passenger traffic or freight traffic at any speed)
+- TSI categories of line P1600 and F1600 (passenger traffic or freight traffic at any speed)"""@en .
+
+:loadCapability a owl:ObjectProperty ;
+    rdfs:label "Load Capability"@en ;
+    :XMLName "IPP_LoadCap" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/load-capabilities/LoadCapabilities> ;
+    :rinfIndex "1.1.1.1.2.4" ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:isReplacedBy :LoadCapability,
+        :loadCapabilityLineCategory,
+        :loadCapabilitySpeed,
+        :trackLoadCapability ;
+    dcterms:modified "2023-01-20"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "A combination of the line category and speed at the weakest point of the track. The reason for deprecation is that the load capability property 1.1.1.1.2.4 was defined incorrectly as a SKOS property. It is composed of two values: (1)  line category, and (2) speed. Only line category is a list of predefined values (SKOS), whereas speed is an integer (according to the RINF application guide)."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:ParameterApplicability a owl:Class ;
+    rdfs:label "Parameter applicability"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ParameterApplicabilityShape> ;
+    dcterms:modified "2024-10-28"^^xsd:date ;
+    rdfs:comment "Applicability interval defines the date interval in which a characteristic of an infrastructure element is applicable. This interval can be applied for any of the technical characteristics or general information of infrastructure elements. This helps identifying planned changes applied to technical parameters over time."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :TemporalFeature .
+

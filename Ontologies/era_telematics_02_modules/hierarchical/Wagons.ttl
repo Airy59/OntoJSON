@@ -1,0 +1,24 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasWagonDetails a owl:ObjectProperty ;
+    rdfs:label "has WagonDetails" ;
+    rdfs:domain :Wagons ;
+    rdfs:range :WagonDetails .
+
+:hasWagons rdfs:range :Wagons .
+
+:Wagons a owl:Class ;
+    rdfs:label "Wagons" ;
+    rdfs:comment "Content of the wagon" .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :Wagons .
+

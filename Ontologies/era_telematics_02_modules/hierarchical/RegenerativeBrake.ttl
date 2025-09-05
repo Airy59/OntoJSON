@@ -1,0 +1,25 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:RegenerativeBrakeFitted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RegenerativeBrakeFitted" ;
+    rdfs:comment "False - Not fitted, True- Regenerative Brake fitted" ;
+    rdfs:domain :RegenerativeBrake ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasPossibilityToPreventRegenerativeBrake a owl:ObjectProperty ;
+    rdfs:label "has PossibilityToPreventRegenerativeBrake" ;
+    rdfs:domain :RegenerativeBrake ;
+    rdfs:range :PossibilityToPreventRegenerativeBrake .
+
+:hasRegenerativeBrake rdfs:range :RegenerativeBrake .
+
+:RegenerativeBrake a owl:Class ;
+    rdfs:label "RegenerativeBrake" ;
+    rdfs:comment """Information of the Regenerative Brake, only for locomotives/vehicles
+				with electrical traction connected external power source """ .
+

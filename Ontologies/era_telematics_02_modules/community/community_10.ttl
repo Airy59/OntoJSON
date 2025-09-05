@@ -1,0 +1,11 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:AssociatedAttachedLocationIdent a owl:Class ;
+    rdfs:label "AssociatedAttachedLocationIdent" ;
+    :domain "Telematics" ;
+    rdfs:comment """Location in the path of train with
+				AssociatedAttachedTrainID/AssociatedAttachedOTN, for which dependency described in
+				TrainActivityTypeCode exists """ .
+

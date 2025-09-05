@@ -11,6 +11,11 @@ A powerful, configurable transformation engine for converting RDF/OWL ontologies
 - **Full Inheritance Support**: Correctly handles complex class hierarchies including multiple inheritance
 - **RDF/Turtle Support**: Import and transform RDF Turtle files (.ttl) with proper namespace handling
 - **Import Resolution**: Automatic resolution and loading of imported ontologies
+- **Ontology Partitioning**: Split large ontologies into semantically coherent modules
+  - Efficient chunking for files exceeding memory/token limits
+  - Multiple partitioning strategies (community detection, domain-based, hierarchical)
+  - Preserves semantic completeness (annotations, restrictions, domains/ranges)
+  - Quality metrics and visualizations
 
 ### Smart Multi-Ontology Support
 - **Intelligent Workflow Detection**:
@@ -400,6 +405,7 @@ For detailed build instructions, see [build_system/README.md](build_system/READM
 - **[Transformation Rules](transformation_rules.md)**: Complete list of available transformation rules
 - **[Architecture](architecture.md)**: System architecture and design patterns
 - **[Build System](build_system/README.md)**: Instructions for building standalone applications
+- **[Ontology Partitioning](OntologyPartitioning/README.md)**: Documentation for the ontology partitioning system
 - **[API Reference](docs/api.md)**: Detailed API documentation (coming soon)
 
 ## 🧪 Development
@@ -432,7 +438,15 @@ OntoJSON/
 │   └── owl2jsonschema_gui/       # GUI application
 │       ├── __init__.py
 │       ├── app.py                 # Application entry point
+│       ├── editor_selector.py     # External editor selection dialog
 │       └── main_window.py         # Main window implementation
+├── OntologyPartitioning/          # Ontology partitioning system
+│   ├── ontology_chunker.py       # Efficient chunker for large files
+│   ├── semantic_partitioner.py   # Semantic partitioning engine
+│   ├── domain_classifier.py      # Domain-based classification
+│   ├── community_namer.py        # Community naming utilities
+│   ├── partitioning_strategy.md  # Strategy documentation
+│   └── README.md                  # Partitioning documentation
 ├── build_system/                  # Standalone app builder
 │   ├── configs/                   # Build configurations
 │   │   └── build_config.py

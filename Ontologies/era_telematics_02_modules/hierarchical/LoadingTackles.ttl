@@ -1,0 +1,42 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:LoadingTackleType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadingTackleType" ;
+    rdfs:comment """Loading tackle according toUN/EDIFACT Data Element 8053
+							UN/CEFACT Revision 2004B. Additional dummy code 'ZZZ' may be used in
+							case the loading tackle is not included in the list. """ ;
+    rdfs:domain :LoadingTackles ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TotalWeightLoadingTackles a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TotalWeightLoadingTackles" ;
+    rdfs:comment """Total weight of the loading tackles (kg) of the specified
+							type""" ;
+    rdfs:domain :LoadingTackles ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeDescription a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeDescription" ;
+    rdfs:comment """Description of loading tackle, which is not included in
+							the UN/EDIFACT 8053 list.""" ;
+    rdfs:domain :LoadingTackles ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasLoadingTackles rdfs:range :LoadingTackles .
+
+:LoadingTackles a owl:Class ;
+    rdfs:label "LoadingTackles" ;
+    rdfs:comment "Describes the loading tackles used inside the wagon" .
+
+[] rdf:first :LoadingTackles .
+

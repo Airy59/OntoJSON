@@ -1,0 +1,775 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:NetAreaReference a owl:Class ;
+    rdfs:label "Net Area Reference"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetAreaReferenceShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents an area reference in the network."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :NetBasicReference ;
+    skos:example "Example: non-stopping area, cross section area, area of implementation of GPRS etc."@en ;
+    skos:scopeNote "It is used for infrastructure elements positioned in relation to the topology as a subnetwork. (e.g.: tunnels, non-stopping area, stations etc.)"@en .
+
+:allocationCompany a owl:ObjectProperty ;
+    rdfs:label "allocation company"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AllocationCompany> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date ;
+    rdfs:comment "The organisation in charge to allocate the code for the subsidiary location."@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :OrganisationRole .
+
+:areaBoardingAid a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Range of use of the platform boarding aid"@en ;
+    :XMLName "IPL_AreaBoardingAid" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.1.0.6.7" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AreaBoardingAid> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-02"^^xsd:date ;
+    dcterms:modified "2023-01-20"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "Information of the train access level for which the boarding aid can be used."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :platformDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Information of the train access level for which the boarding aid can be used. Data is presented as the vertical difference that is overcome by the platform boarding aid in millimetres. The value â€œ0â€ means that the platform is not equipped with a platform boarding aid."@en .
+
+:authorizedCountry a owl:ObjectProperty ;
+    rdfs:label "authorized country"@en ;
+    :inSkosConceptScheme <http://publications.europa.eu/resource/authority/country> ;
+    dcterms:created "2020-09-30"^^xsd:date ;
+    dcterms:modified "2020-09-30"^^xsd:date ;
+    rdfs:comment "Indicates the country(ies) in where a vehicle type has been authorized to operate."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic ;
+    ns1:term_status "stable" .
+
+:borderPointId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Border point identification"@en ;
+    dcterms:created "2024-11-26"@en ;
+    rdfs:comment "Border point identification in the list of reference border points in the RINF application guide."@en ;
+    rdfs:domain :ReferenceBorderPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    ns1:term_status "stable" .
+
+:crossSectionArea a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Cross section area"@en ;
+    :XMLName "ITU_CrossSectionArea" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if the speed of the line is equal or greater than 200km/h "@en ;
+    :formatNote "NNN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.8.8" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/CrossSectionAreaApplicability>,
+        <http://data.europa.eu/949/shapes/CrossSectionAreaT> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M2> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "Smallest cross section area in square metres of the tunnel"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg/2014/1299/2023-09-28#:~:text=4.2.10.1.%C2%A0%C2%A0%C2%A0%20Maximum%20pressure%20variations%20in%20tunnels"^^xsd:anyURI,
+        "[4.2.10.1 of INF TSI on Maximum pressure variations in tunnels | " ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Smallest real cross section area (expressed in square metres) of the tunnel.
+
+Reference: 4.2.10.1 of INF TSI on Maximum pressure variations in tunnels."""@en .
+
+:endIntrinsicCoordinate a owl:DatatypeProperty ;
+    rdfs:label "End intrinsic coordinate"@en ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2021-04-01"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:endLocation a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "End of tunnel"@en ;
+    :XMLName "SOLTunnelEnd" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.8.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EndLocation> ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2024-02-05"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "Geographical coordinates in decimal degrees and km of the line at the end of a tunnel."@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range <http://www.opengis.net/ont/sf#Point> ;
+    rdfs:subPropertyOf :tunnelObjParameter,
+        geo:hasGeometry ;
+    ns1:term_status "stable" ;
+    skos:example "Latitude=`51.5479123` Longitude=`-0.076732`" ;
+    skos:scopeNote """Geographical coordinates according to the standard World Geodetic System (WGS).  Precision for both geographical latitude and geographical longitude is assumed as [NN.NNNNNNN] in degrees with decimals what gives discretion of 10 cm in the network.
+Kilometre shall concern the national line identification given in 1.1.0.0.0.2
+Location of the point which is assumed to be the end of the tunnel it is the point on the track centre line where is laid the vertical shadow of the extreme part of the tunnel s portal."""@en .
+
+:gaugingCheckLocation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Railway location of particular points requiring specific checks"@en ;
+    :XMLName "ILL_GaugeCheckLoc" ;
+    :applicable "Y/N" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.3.1.2",
+        "1.2.1.0.3.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/GaugingCheckLocation> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment "Location of particular points requiring specific checks due to deviations from gauging referred to in parameter \"Gauging\""@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :lineLayoutDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """This parameter is applicable when the IM wants to highlight a particular point requiring checks and provide info via parameter 'Document with the transversal section of the particular points requiring specific checks'.
+
+The railway location identifies the location of the structure in the system of reference of the line to which the track belongs.
+
+The location (generally the distance from the origin of the line to the point of interest for the specific check) on a line is given in kilometres with decimals (precision of 0.001)."""@en .
+
+:gprsImplementationArea a owl:DatatypeProperty ;
+    rdfs:label "Area of implementation of GPRS"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "GSM-R, ETCS L2 and GPRS for ETCS must be installed for this parameter to be applicable."@en ;
+    :legalDeadline "1 January 2021"@en,
+        "12 months after publication of Article 7 Guide for OP tracks"@en ;
+    :rinfIndex "1.1.1.3.3.3.3",
+        "1.2.1.1.2.3.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/GprsImplementationArea>,
+        <http://data.europa.eu/949/shapes/GprsImplementationAreaApplicability> ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :etcsLevelType,
+        :gprsForETCS ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication of the area in which GPRS can be used for ETCS, expressed as a list of GPRS-enabled RBCs."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:seeAlso "Sections of EIRENE optional for trackside in TSI"@en ;
+    rdfs:subPropertyOf :tsiCompliantRadioDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Since GPRS can be used for ETCS, indicate in which areas it is implemented (e.g.: whole section, only between two signals, at the stationâ€¦)"@en .
+
+:handoverPointFlag a owl:DatatypeProperty ;
+    rdfs:label "handover point flag"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HandoverPointFlag> ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:domain :PrimaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean .
+
+:hasEvacuationAndRescuePoints a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of evacuation and rescue points"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Mandatory for TSI-compliant tunnels longer than 0.5 km"@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.1.8.13",
+        "1.2.1.0.5.11",
+        "1.2.2.0.5.10" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEvacuationAndRescuePoints> ;
+    :tsiOPEAppendixD2Index "3.2.3" ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of existence of evacuation and rescue points"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "Point 4.2.1.7.  \"Evacuation and rescue points\" of the Commission Regulation (EU) No 1303/2014 of 18 November 2014 concerning the technical specification for interoperability relating to safety in railway tunnels of the rail system of the European Union|https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1566396648532&uri=CELEX%3A02014R1303-20190616"^^xsd:anyURI ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" .
+
+:hasLrsCoordinate a owl:ObjectProperty ;
+    rdfs:label "has line referencing system coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasLrsCoordinate> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the LRS coordinate associated with a topological coordinate."@en ;
+    rdfs:domain :NetPointReference ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearPositioningSystemCoordinate .
+
+:hasTopoCoordinate a owl:ObjectProperty ;
+    rdfs:label "has topological coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasTopoCoordinate> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the topological coordinate of a network point reference."@en ;
+    rdfs:domain :NetPointReference ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :TopologicalCoordinate .
+
+:hotAxleBoxDetectorLocation a owl:DatatypeProperty ;
+    rdfs:label "Railway location of trackside HABD"@en ;
+    :XMLName "IHS_HABDLoc" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if the HABD is not TSI compliant (the value of parameter 1.1.1.1.7.5 (Trackside HABD TSI compliant) is 'False')"@en ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.7.8" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HotAxleBoxDetectorLocation>,
+        <http://data.europa.eu/949/shapes/HotAxleBoxDetectorLocationApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment """Specific for the French Italian and Swedish networks.
+Applicable if trackside HABD is not TSI compliant, localisation of trackside hot axle box detector."""@en ;
+    rdfs:domain :HABD ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The location (generally the distance from the origin of the line to the point of interest) on a line is given in kilometres with decimals (precision of 0.001).
+
+It may be also possible to provide the location of the HABD as an era:netReference property for the HABD pointing to an era:NetPointReference with (at least)era:LinearPositioningSystemCoordinate"""@en .
+
+:inCountry a owl:ObjectProperty ;
+    rdfs:label "In country"@en ;
+    :inSkosConceptScheme <http://publications.europa.eu/resource/authority/country> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/InCountry>,
+        <http://data.europa.eu/949/shapes/InCountrySKOS> ;
+    dcterms:created "2020-09-01"^^xsd:date ;
+    dcterms:modified "2020-11-20"^^xsd:date,
+        "2025-03-10"^^xsd:date ;
+    rdfs:comment "Indicates the country in which an entity resides."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :InfrastructureElement ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "stable" .
+
+:kilometer a owl:DatatypeProperty ;
+    rdfs:label "kilometer number"@en ;
+    :XMLName "OPRailwayLocation" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Kilometer> ;
+    :tsiOPEAppendixD2Index "2.2.2" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM> ;
+    dcterms:created "2021-01-29"^^xsd:date ;
+    dcterms:modified "2021-01-29"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2025-01-30"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Kilometer number of the kilometric post related to line identification defining the location of an infrastructure element."@en ;
+    rdfs:domain :KilometricPost ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :signalDataParameter,
+        :tunnelDataParameter ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Railway location of Operational point"@en ;
+    skos:scopeNote """For walkways: Value provided in Kilometric point of the start of the walkway and the length in m. Repeatable values for each location.
+For rescue points: Value provided in Kilometric point of the start of the point of evacuation and rescue point and the length in m. Repeatable values for each location.
+For signals: Relative position to the line identified under parameter 1.1.0.0.0.2, given in km ([reference point, via era:referent] / [NNN.NNN] )."""@en .
+
+:manufacturingCountry a owl:ObjectProperty ;
+    rdfs:label "Manufacturing country"@en ;
+    :inSkosConceptScheme <http://publications.europa.eu/resource/authority/country> ;
+    dcterms:created "2020-09-30"^^xsd:date ;
+    dcterms:modified "2020-11-22"^^xsd:date ;
+    rdfs:comment "Indicates the country in which a vehicle or vehicle type is manufactured."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :Vehicle :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Vehicle :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Vehicle :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Vehicle :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Vehicle :VehicleType ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :vehicleTechnicalObjCharacteristic,
+        :vehicleTypeTechnicalObjectCharacteristic ;
+    ns1:term_status "stable" .
+
+:positionOnA a owl:ObjectProperty ;
+    rdfs:label "Position on A"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/relation-positions/RelationPositions> ;
+    :rinfIndex "1.1.1.0.1.2",
+        "1.2.4.1" ;
+    dcterms:created "2021-04-03"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date ;
+    rdfs:comment "Determines the position of the topological object A in a relation."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Internal connection"@en .
+
+:positionOnB a owl:ObjectProperty ;
+    rdfs:label "Position on B"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/relation-positions/RelationPositions> ;
+    :rinfIndex "1.1.1.0.1.2",
+        "1.2.4.1" ;
+    dcterms:created "2021-04-03"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date ;
+    rdfs:comment "Determines the position of the topological object B in a relation."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Internal connection"@en .
+
+:primaryLocationName a owl:DatatypeProperty ;
+    rdfs:label "primary location name"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocationName> ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:domain :PrimaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:relativeDistanceDangerPoint a owl:DatatypeProperty ;
+    rdfs:label "Relative distance of the danger point"@en ;
+    :applicable "Y/N/NYA" ;
+    :formatNote "NNN" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.14.4",
+        "1.2.1.0.8.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RelativeDistanceDangerPoint> ;
+    :tsiOPEAppendixD2Index "2.2.3",
+        "2.3.3" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Distance in meters to the danger point"@en ;
+    rdfs:domain :Signal ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :signalDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Danger point is defined in ERTMS/ETCS - Glossary of Terms and Abbreviations - version  4.0.0 - date 05/07/2023. For installations without ERTMS, the signalling definition is equivalent.
+See: TSI OPE Appendix D2 (2.3.3), the danger point relative distance from the signal itself."""@en .
+
+:relativePosition a owl:DatatypeProperty ;
+    rdfs:label "Relative position"@en ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2023-11-10"^^xsd:date ;
+    rdfs:comment "Indicates the position of an object relative to the linear coordinates of the associated topological object."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:editorialNote " The reason for deprecation is that this property is not specified in the latest legal text nor the RINF application guide. Also, no data has been provided for this property."@en .
+
+:specialAreaType a owl:ObjectProperty ;
+    rdfs:label "Special area type"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/special-area-types/SpecialAreaTypes> ;
+    :rinfIndex "1.1.0.0.1.1" ;
+    :tsiOPEAppendixD2Index "3.2.3",
+        "3.2.4",
+        "3.2.5",
+        "3.2.6",
+        "3.3.5",
+        "3.3.6" ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-04-18"^^xsd:date ;
+    rdfs:comment "Indicates the special area or location types such as safe areas and restricted area types."@en ;
+    rdfs:domain :SpecialArea ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "unstable" .
+
+:startIntrinsicCoordinate a owl:DatatypeProperty ;
+    rdfs:label "Start intrinsic coordinate"@en ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2021-04-01"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:startLocation a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Start of tunnel location"@en ;
+    :XMLName "SOLTunnelStart" ;
+    :rinfIndex "1.1.1.1.8.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/StartLocation> ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2024-02-05"^^xsd:date ;
+    rdfs:comment """Part of the Start of tunnel that indicates the Geographical coordinates according to the standard World Geodetic System (WGS). Precision for both geographical latitude and geographical longitude is assumed as [NN.NNNNNNN] in degrees with decimals what gives discretion of 10 cm in the network.
+The Start of tunnel is the Geographical coordinates in decimal degrees and km of the line at the beginning of a tunnel."""@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range <http://www.opengis.net/ont/sf#Point> ;
+    rdfs:subPropertyOf :tunnelObjParameter,
+        geo:hasGeometry ;
+    ns1:term_status "stable" .
+
+:structureCheckLocation a owl:DatatypeProperty ;
+    rdfs:label "Railway location of structures requiring specific checks"@en ;
+    :XMLName "IPP_StructureCheckLoc" ;
+    :applicable "Y/N" ;
+    :dependencyNote "This information is to be linked with parameter 1.1.1.1.2.4.4"@en ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.2.4.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/StructureCheckLocation> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:relation :compatibilityProcedureDocument ;
+    rdfs:comment "Localisation of structures requiring specific checks"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :performanceDataParameter ;
+    ns1:term_status "stable" ;
+    skos:example "The IM A knows that its bridge X might have problems with combination of speed and load above a certain limit values Z, and for that the IM A has a specific procedure W for the check to be done; if the vehicle operation is intended to be within this case (above the limit Z), then RU shall proceed in accordance to the procedure W; therefore the bridge X shall be referred to in the parameter of the RINF:  1.1.1.1.2.4.3 / Railway location of structures requiring specific checks." ;
+    skos:scopeNote "The railway location identifies the location of the structure in the system of reference of the line to which the track belongs."@en .
+
+:subsidiaryLocationCode a owl:DatatypeProperty ;
+    rdfs:label "subsidiary location code"@en ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:comment "The numeric code for the subsidiary location" ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:subsidiaryLocationName a owl:DatatypeProperty ;
+    rdfs:label "subsidiary location name"@en ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:comment "The common name given to the subsidiary location"@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:subsidiaryLocationType a owl:ObjectProperty ;
+    rdfs:label "subsidiary location type"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/subsidiary-location-types/SubsidiaryLocationTypes> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SubsidiaryLocationType>,
+        <http://data.europa.eu/949/shapes/SubsidiaryLocationTypeSKOS> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    rdfs:comment "Indicates the subsidiary location type that belongs to a taxonomy."@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:LinearPositioningSystemCoordinate a owl:Class ;
+    rdfs:label "Linear Positioning System Coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearPositioningSystemCoordinateShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents coordinates in a linear positioning system."@en ;
+    rdfs:isDefinedBy : .
+
+:TopologicalCoordinate a owl:Class ;
+    rdfs:label "Topological Coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TopologicalCoordinateShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents a topological coordinate."@en ;
+    rdfs:isDefinedBy : .
+
+:primaryLocation a owl:ObjectProperty ;
+    rdfs:label "primary location"@en ;
+    :XMLName "OPTafTapCode" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Applicable only in case when a primary location exists"@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocation> ;
+    :tsiOPEAppendixD2Index "2.2.2" ;
+    dcterms:modified "2024-12-03"^^xsd:date,
+        "2025-01-30"^^xsd:date ;
+    dcterms:replaces :tafTAPCode ;
+    rdfs:comment "Primary location code developed for information exchange in accordance with the TSIs relating to the telematics applications subsystem."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :PrimaryLocation ;
+    rdfs:subPropertyOf :opGenericObjParameter .
+
+:primaryLocationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "primary location code"@en ;
+    :XMLName "OPTafTapCode" ;
+    :rinfIndex "1.2.0.0.0.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocation>,
+        <http://data.europa.eu/949/shapes/PrimaryLocationCode> ;
+    :tsiOPEAppendixD2Index "2.2.2" ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    dcterms:replaces :tafTAPCode ;
+    rdfs:comment "Primary location code developed for information exchange in accordance with the TSIs relating to the telematics applications subsystem."@en ;
+    rdfs:domain :PrimaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    ns1:term_status "stable" .
+
+:SpecialArea a owl:Class ;
+    rdfs:label "Special area"@en ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment """Encompasses all those areas (outside of the operational gauge) or sections (those in tunnels excluded) which influence operation in the gauge itself, such as
+- safe areas,
+- restricted areas (non-stopping areas or industrial risk locations).
+
+For these areas in tunnels, use era:SpecialTunnelArea."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :Switch,
+        :Track,
+        :Tunnel ;
+    ns1:term_status "stable" ;
+    skos:definition """Non-stopping Area: Area defined by the Infrastructure Manager where it may not be safe or suitable to stop a train.
+Safe Area: Area defined by the Infrastructure Manager where it is safe or suitable to stop and evacuate a train.
+Industrial Risk Area: locations where it is dangerous for the driver to step out."""@en ;
+    skos:editorialNote "TODO review the definition" .
+
+:borderPointOf a owl:ObjectProperty ;
+    rdfs:label "border point of"@en ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:isReplacedBy :ReferenceBorderPoint,
+        :referenceBorderPoint ;
+    dcterms:modified "2024-10-25"^^xsd:date ;
+    rdfs:comment "Relates the information that each country maintains on a border point, to the operational point that represents the general information on the border point."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :OperationalPoint ;
+    owl:deprecated true ;
+    owl:inverseOf :opInfoPerCountry ;
+    ns1:term_status "stable" .
+
+:referenceBorderPoint a owl:ObjectProperty ;
+    rdfs:label "reference border point"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ReferenceBorderPoint> ;
+    dcterms:created "2024-10-24"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :borderPointOf,
+        :opInfoPerCountry ;
+    rdfs:comment "Relates an operational point that is a border point with an instance of the list of reference border points that are specified in the RINF Application Guide."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :ReferenceBorderPoint .
+
+:tafTAPCode a owl:DatatypeProperty ;
+    rdfs:label "OP primary location code"@en ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:isReplacedBy :primaryLocation,
+        :primaryLocationCode ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-06-03"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    rdfs:comment "Not used anymore. It has been replaced by era:primaryLocationCode."@en,
+        "Primary location code developed for information exchange in accordance with the TSIs relating to the telematics applications subsystem"@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+<http://www.opengis.net/ont/sf#Point> a owl:Class ;
+    rdfs:label "Point"@en .
+
+:opInfoPerCountry a owl:ObjectProperty ;
+    rdfs:label "Border point information per country"@en ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:isReplacedBy :ReferenceBorderPoint,
+        :referenceBorderPoint ;
+    dcterms:modified "2024-10-24"^^xsd:date ;
+    rdfs:comment "Relates an operational point that represents the general information of a border point to the information that each country maintains for the border point."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :OperationalPoint ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:ReferenceBorderPoint a owl:Class ;
+    rdfs:label "Reference border point"@en ;
+    dcterms:created "2024-10-24"^^xsd:date ;
+    dcterms:replaces :borderPointOf,
+        :opInfoPerCountry ;
+    rdfs:comment "List of reference border points that are specified in the RINF Application Guide."@en ;
+    rdfs:isDefinedBy : .
+
+:linkedToPrimaryLocation a owl:ObjectProperty ;
+    rdfs:label "linked to primary location"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinkedToPrimaryLocation> ;
+    dcterms:created "2024-10-28"^^xsd:date ;
+    rdfs:comment "Relates a subsidiary location with a primary location."@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :PrimaryLocation .
+
+:SubsidiaryLocation a owl:Class ;
+    rdfs:label "Subsidiary location"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SubsidiaryLocationShape> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "Subsidiary location must be linked to a Primary Location and specifies in more detailed way part, attributes, or usage of Primary location. It may be also a non-rail point or a rail point that is not managed by an Infrastructure Manager (IM). It may be defined by entity having company code according to their needs. The Subsidiary location is optional and dependent upon business needs."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "http://taf-jsg.info/wp-content/uploads/2024/01/20231018-JGS-Handbook-3.4-with-XSD-3.4.0.0.pdf" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :PrimaryLocation ;
+            owl:onProperty :linkedToPrimaryLocation ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        :Feature .
+
+:NetPointReference a owl:Class ;
+    rdfs:label "Net Point Reference"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetPointReferenceShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents a point reference in the network."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :NetBasicReference ;
+    skos:scopeNote "It is used for infrastructure elements positioned in relation to the topology as a point. (e.g.: signals, ETCS balises, buffer stops, etc.)"@en .
+
+:PrimaryLocation a owl:Class ;
+    rdfs:label "Primary Location"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocationShape> ;
+    dcterms:modified "2024-10-28"^^xsd:date,
+        "2025-03-01"^^xsd:date,
+        "2025-06-06"^^xsd:date ;
+    rdfs:comment """Primary Location is a place used by IM to define a path for a train in TAF/TAP TSI framework/messages. This location is a rail point inside the rail network where train starts, ends, stops, or runs through or change line. This location must be managed by an Infrastructure Manager (IM) identified by company code.
+
+Primary locations are identified by single and unique Primary Location codes. Primary location code is allocated based on processes defined by national entity. Primary location codes are used in any kind of TAF/TAP communication.
+
+See: Handbook 9.3.3 / page 60"""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "http://taf-jsg.info/wp-content/uploads/2024/01/20231018-JGS-Handbook-3.4-with-XSD-3.4.0.0.pdf"^^xsd:anyURI ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        :InfrastructureElement ;
+    owl:disjointWith :RadioBlockCenter,
+        :SectionOfLine,
+        :Signal,
+        :SpecialArea,
+        :SubsidiaryLocation,
+        :Switch,
+        :Track,
+        :Tunnel ;
+    skos:example "Primary locations are for example: stations, yards, halts, handover points, border points, open access terminals. "@en .
+

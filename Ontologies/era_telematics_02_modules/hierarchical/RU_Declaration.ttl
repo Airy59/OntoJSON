@@ -1,0 +1,32 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DeclaringRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeclaringRU" ;
+    rdfs:comment """Code of
+																			carrier, who added the
+																			declaration.""" ;
+    rdfs:domain :RU_Declaration ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RU_DeclarationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RU_DeclarationCode" ;
+    rdfs:comment "Carrier declaration code. " ;
+    rdfs:domain :RU_Declaration ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasRU_Declaration rdfs:range :RU_Declaration .
+
+:RU_Declaration a owl:Class ;
+    rdfs:label "RU_Declaration" ;
+    rdfs:comment """Details of the
+																carriers declaration.""" .
+
+[] rdf:first :RU_Declaration .
+

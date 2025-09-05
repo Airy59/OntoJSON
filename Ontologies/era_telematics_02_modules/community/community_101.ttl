@@ -1,0 +1,10 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Company a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Company" ;
+    rdfs:comment "Identifies a railway company (RU or IM)" ;
+    rdfs:subPropertyOf :dataProperties .
+

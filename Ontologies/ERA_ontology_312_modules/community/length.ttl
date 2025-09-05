@@ -1,0 +1,32 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:length a owl:DatatypeProperty ;
+    rdfs:label "Length"@en ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-11-04"^^xsd:date ;
+    rdfs:comment "Generic super-property for different types of length"@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "ERA" ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Position of the start of the walkway:  [integer] m (from the same origin point of the kilometer post.)
+Lenght of the walkway: [integer] m"""@en,
+        """The length can be
+- a section of line (For operational length, use era:lengthOfSectionOfLine),
+- a tunnel (For operational length, use era:lengthOfTunnel),
+- a platform (For its usable length, use era:lengthOfPlatform),
+- a siding (For its usable length, use era:lengthOfSiding), and
+- length of other areas such as
+  - a non-stopping area (accuracy +- 10m),
+  - a walkway,
+  - an evacuation and rescue point.
+- a vehicle length."""@en .
+

@@ -1,0 +1,24 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasWagonInformation a owl:ObjectProperty ;
+    rdfs:label "has WagonInformation" ;
+    rdfs:domain [ ] ;
+    rdfs:range :WagonInformation .
+
+:WagonInformation a owl:Class ;
+    rdfs:label "WagonInformation" ;
+    rdfs:comment """This element shows the unique wagon number together with the
+				transportation units, loaded on the wagon, the used capacity and the weight of the
+				complete load of the wagon""" .
+
+[] rdf:first :WagonInformation .
+
+[] rdf:first :WagonInformation .
+
+[] rdf:first :WagonInformation .
+
+[] rdf:first :WagonInformation .
+

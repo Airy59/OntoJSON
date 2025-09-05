@@ -1,0 +1,31 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateTime" ;
+    rdfs:comment """DateTime, when the
+																changes were applied.""" ;
+    rdfs:domain :ChangeLog ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfModifiedVersion a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfModifiedVersion" ;
+    rdfs:comment """Version number of the
+																modified message (as also written
+																into COMHeader/COMVersionNumber).""" ;
+    rdfs:domain :ChangeLog ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasChangeLog rdfs:range :ChangeLog .
+
+:ChangeLog a owl:Class ;
+    rdfs:label "ChangeLog" ;
+    rdfs:comment """Log of changes made by the LeadRU
+													/ contractual carrier during the transport.""" .
+

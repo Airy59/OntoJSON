@@ -1,0 +1,32 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:TrainDepartureDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainDepartureDate" ;
+    rdfs:comment """Out only: Departure Date of the
+													Train """,
+        """use here the date the train left
+													origin using this train number""" ;
+    rdfs:domain :Train ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainOperatingRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainOperatingRU" ;
+    rdfs:domain :Train ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTrain rdfs:range :Train .
+
+:Train a owl:Class ;
+    rdfs:label "Train" .
+
+[] rdf:first :Train .
+
+[] rdf:first :Train .
+

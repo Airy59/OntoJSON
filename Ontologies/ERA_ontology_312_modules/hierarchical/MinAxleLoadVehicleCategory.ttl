@@ -1,0 +1,31 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:minAxleLoadVehicleCategory a owl:ObjectProperty ;
+    rdfs:label "Minimum axle load vehicle category"@en ;
+    :XMLName "CTD_MinAxleLoadByVehicleCat" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/min-axle-load-vehicle-categories/MinAxleLoadVehicleCategories> ;
+    :rinfIndex "1.1.1.3.7.11.1" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment """Represents the category of vehicle which is amended by value of minimum permitted axle load [tons] (property minAxleLoad).
+Deprecated according to the amendment to the Regulation (EU) 2019/777."""@en ;
+    rdfs:domain :MinAxleLoadVehicleCategory ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:MinAxleLoadVehicleCategory a owl:Class ;
+    rdfs:label "(deprecated) Min axle load vehicle category"@en ;
+    dcterms:created "2023-01-25"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+

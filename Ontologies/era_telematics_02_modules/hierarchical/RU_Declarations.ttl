@@ -1,0 +1,20 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasDifferentAcceptance a owl:ObjectProperty ;
+    rdfs:label "has DifferentAcceptance" ;
+    rdfs:domain :RU_Declarations ;
+    rdfs:range :DifferentAcceptance .
+
+:hasRU_Declaration a owl:ObjectProperty ;
+    rdfs:label "has RU_Declaration" ;
+    rdfs:domain :RU_Declarations ;
+    rdfs:range :RU_Declaration .
+
+:hasRU_Declarations rdfs:range :RU_Declarations .
+
+:RU_Declarations a owl:Class ;
+    rdfs:label "RU_Declarations" ;
+    rdfs:comment "Carriers declaration" .
+

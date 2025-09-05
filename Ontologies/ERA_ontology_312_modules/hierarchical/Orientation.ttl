@@ -1,0 +1,49 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:carrierLinearElement a owl:ObjectProperty ;
+    rdfs:label "carrier linear element"@en ;
+    dcterms:created "2025-01-30"^^xsd:date ;
+    rdfs:comment "The carrier linear element in relation to which the orientation is based on"@en ;
+    rdfs:domain :Orientation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearElement .
+
+:direction a owl:ObjectProperty ;
+    rdfs:label "direction"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/orientations/OrientationDirections> ;
+    dcterms:created "2024-04-23"^^xsd:date ;
+    rdfs:comment "The direction of the orientation of a railway element, in relation to the carrier linear element"@en ;
+    rdfs:domain :Orientation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    skos:editorialNote "To review the orientation direction" .
+
+:orientation a owl:ObjectProperty ;
+    rdfs:label "orientation"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/orientations/OrientationDirections> ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    rdfs:comment "The orientation of the object in relation to the carrier linear element. Possible values: Normal, Opposite, Both"@en ;
+    rdfs:domain :Orientation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:side a owl:ObjectProperty ;
+    rdfs:label "on side"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/orientations/Sides> ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "Indication of the position of the signal in relation to the track in the running direction from the origin of the referencing system (e.g., direction of the main line)"@en ;
+    rdfs:domain :Orientation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:Orientation a owl:Class ;
+    rdfs:label "Orientation"@en ;
+    rdfs:comment "Represents the orientation of a railway object in relation to a carrier linear element. It can be described by direction, orientation and side."@en ;
+    rdfs:isDefinedBy : .
+

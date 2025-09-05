@@ -1,0 +1,25 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasEventLocation a owl:ObjectProperty ;
+    rdfs:label "has EventLocation" ;
+    rdfs:domain :EventLocationInformation ;
+    rdfs:range :EventLocation .
+
+:hasEventLocationInformation rdfs:range :EventLocationInformation .
+
+:hasPosition a owl:ObjectProperty ;
+    rdfs:label "has Position" ;
+    rdfs:domain :EventLocationInformation ;
+    rdfs:range :Position .
+
+:EventLocationInformation a owl:Class ;
+    rdfs:label "EventLocationInformation" ;
+    rdfs:comment """Information concerning the event
+													location. Optional for event types 06 and 16,
+													these events may not have a location. But for
+													all remaining event types, at least one of the
+													elements EventLocation or Position should be
+													sent""" .
+

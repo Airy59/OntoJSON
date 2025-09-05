@@ -1,0 +1,1398 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ARC rdfs:range xsd:string .
+
+:ATEXCertified a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ATEXCertified" ;
+    rdfs:comment """Indication if the telematics device
+									is ATEX certified.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ATEXLevel a owl:DatatypeProperty ;
+    rdfs:label "ATEXLevel" ;
+    rdfs:comment """Indication of ATEX level (gas and
+									dust if applicable) based on ATEX/IECEx standard; e.g.: II 2G Ex
+									ib IIB T4 Gb or II 2D Ex ib IIIC T135Â°C Db.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ActionRequiredFromCarrier rdfs:range xsd:string .
+
+:AdditionalCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AdditionalCode" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AdditionalGoodInformation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AdditionalGoodInformation" ;
+    rdfs:comment """Additional information regarding the
+												loaded good, given by the customer.""",
+        """Additional information regarding the loaded good, given by
+							the customer.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AdditionalInformation rdfs:range xsd:string .
+
+:AdditionalInformationILU rdfs:range xsd:string .
+
+:AdditionalInstruction a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AdditionalInstruction" ;
+    rdfs:comment "Additional instructions regarding the wagon or shipment in free text" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Address a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Address" ;
+    rdfs:comment "Generic postal address in clear text" ;
+    rdfs:domain :AdministrativeContactInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AgainstBooked a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AgainstBooked" ;
+    rdfs:comment "Identifies the Delta delay time against the booked schedule in minutes" ;
+    rdfs:domain :TrainDelay ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AgainstReferenced a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AgainstReferenced" ;
+    rdfs:comment "Delay compared to the referenced Date/Time" ;
+    rdfs:domain :TrainDelay ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AssociatedAttachedOTN a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AssociatedAttachedOTN" ;
+    rdfs:comment """Identifies the associated train for the activity for traffic
+				management purposes by the Dispatcher, GSMR services, etc.""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AssociatedAttachedTrainServiceNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AssociatedAttachedTrainServiceNumber" ;
+    rdfs:comment """Identifies the associated train service line number for the train
+				activity connecting service""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BitmapDays a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BitmapDays" ;
+    rdfs:comment """Structure BitmapDays must be provided if ValidityPeriod of associated
+				calendar contains more than one day; it is optional otherwise.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BodyType rdfs:range xsd:string .
+
+:BookingNumber rdfs:range xsd:string .
+
+:BrakeBlockName rdfs:range xsd:string .
+
+:BrakeSystem rdfs:range xsd:string .
+
+:BufferType rdfs:range xsd:string .
+
+:C1 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "C1" ;
+    rdfs:domain :CombinedTrafficLoadProfile ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:C2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "C2" ;
+    rdfs:comment "C2 requires the code in case the gauge of the swap body is greater than 2550 mm less or equal 2600 mm" ;
+    rdfs:domain :CombinedTrafficLoadProfile ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CarrierName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CarrierName" ;
+    rdfs:comment "Name of Carrier",
+        """Name of contractual
+																carrier""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CheckingResults rdfs:range xsd:string .
+
+:CheckingType rdfs:range xsd:string .
+
+:City a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "City" ;
+    rdfs:comment "City / Town",
+        "City/Town" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CityTown a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CityTown" ;
+    rdfs:comment "Name of the City or Town in Clear Text" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ClassificationCode rdfs:range xsd:string .
+
+:Code a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Code" ;
+    rdfs:comment """Additional
+																			charges code""",
+        """Additional
+																			charges code according
+																			CIT GLV-CIM appendix 3""" ;
+    rdfs:domain :AdditionalCharges ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Comments a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Comments" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CommercialRouteCode rdfs:range xsd:string .
+
+:ComponentMounted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ComponentMounted" ;
+    rdfs:comment """Indication of the component to which
+									the telematics unit is attached.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ConsignorReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ConsignorReference" ;
+    rdfs:comment """Consignor's reference
+																concerning the complete consignment""" ;
+    rdfs:domain :GeneralInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ContainerNumber rdfs:range xsd:string .
+
+:ContractNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ContractNumber" ;
+    rdfs:comment "Number of agreement between LeadRU and Responsible RU",
+        """Number of customer
+																agreement.""",
+        """additional contract
+																number according to the given
+																carrier code.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ContractNumberMovement a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ContractNumberMovement" ;
+    rdfs:comment """Identifies the contract between LeadRU and RU involved in the
+				transport""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ContractualCarrierCode rdfs:range xsd:string .
+
+:ControlDigit a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ControlDigit" ;
+    rdfs:comment """1 control digit as usual at the end of the 12 digit UIC
+							identifier. Not used in Planning""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Core a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Core" ;
+    rdfs:comment """It is the main part of identifier and is determent by the company that
+				creates it.""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Country a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Country" ;
+    rdfs:comment "Country Code (ISO Code)",
+        "Country Code ISO" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CountryCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CountryCode" ;
+    rdfs:comment """Country Code (ISO
+																Code)""",
+        """Invoiced
+																						section
+																						specified by
+																						country""",
+        """Numerical country code as in Part 4 of the Appendix 6 of
+							the decision 2007/756""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CurrencyCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CurrencyCode" ;
+    rdfs:comment """Code for the currency
+																of the amounts entered in the
+																charging section.""",
+        """Currency abbreviation
+																(ISO-4217 alphanumeric)""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CustomerCode rdfs:range xsd:string .
+
+:CustomerNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CustomerNumber" ;
+    rdfs:comment """The customer number of the COM differs from the customer code used in
+				TAF/TSI, its format may not accord to the TAf element""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CustomerReference rdfs:range xsd:string .
+
+:CustomsEndorsements rdfs:range xsd:string .
+
+:DeclarationText a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeclarationText" ;
+    rdfs:comment "Additional Text for codes with free text" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DelayMinutes rdfs:range xsd:string .
+
+:DeliveryReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeliveryReference" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DepartureCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DepartureCountry" ;
+    rdfs:comment "CODE: ISO-3166-2",
+        "Code of departure country of the ILU.",
+        "Code of departure country of the UTI." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DerailmentDetectionDevice rdfs:range xsd:string .
+
+:Description a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Description" ;
+    rdfs:comment """Additional
+																			charges description""",
+        """Description for
+																CodeOfCause no. 9.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DetailedDescriptionOfLocation rdfs:range xsd:string .
+
+:DeviceType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeviceType" ;
+    rdfs:comment """Specification of type of telematics
+									device.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DocumentInformation rdfs:range xsd:string .
+
+:DocumentTypeDescription rdfs:range xsd:string .
+
+:DossierNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DossierNumber" ;
+    rdfs:comment """Internal identification number of
+													the Wo. This information is important to be able
+													to identify the COM even after modifications.
+													Format: RRRRYYYYMMDDNNNNNNN Where RRRR = railway
+													code, YYYY = year, MM = month, DD = day and
+													NNNNNNN = running number.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECM rdfs:range xsd:string .
+
+:EWC_Key a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EWC_Key" ;
+    rdfs:comment """CODE: European waste catalogue (EWC)
+												2000/532/EC""",
+        "CODE: European waste catalogue (EWC) 2000/532/EC",
+        """Numeric key according to the European
+												Waste Catalogue""",
+        "Numeric key according to the European Waste Catalogue" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ExceptionalGaugingCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ExceptionalGaugingCode" ;
+    rdfs:comment "Acceptance agreement number, based on guidelines of IM_Partner" ;
+    rdfs:domain :ExceptionalGaugingIdent ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ExceptionalGaugingProfile rdfs:range xsd:string .
+
+:FaxNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FaxNumber" ;
+    rdfs:comment "Generic Fax number in Free text" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Filename rdfs:range xsd:string .
+
+:FirstName rdfs:range xsd:string .
+
+:Forwarding a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Forwarding" ;
+    rdfs:comment "Final destination of the ILU.",
+        "Final destination of the UTI." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ForwardingTrainNumber rdfs:range xsd:string .
+
+:FreeTextField a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FreeTextField" ;
+    rdfs:comment "Free Text" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:GeographicalCoordinates a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GeographicalCoordinates" ;
+    rdfs:comment "Longitude and latitude as defined in UIC Leafle 920-2" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:GoodsDescription a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GoodsDescription" ;
+    rdfs:comment "This element describes the goods of the shipment as free text" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HS_Code a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HS_Code" ;
+    rdfs:comment """HS-Code for sensible goods (appendix
+												44c of ccip) 10 digits are needed, if a good code
+												was already assigned for 'Zollanmeldung'. In this
+												case this good code has to be taken. These good
+												codes may have more than 6 digits.""",
+        """HS-Code for sensible goods (appendix 44c of ccip) 10
+							digits are needed, if a good code was already assigned for
+							'Zollanmeldung'. In this case this good code has to be taken. These good
+							codes may have more than 6 digits.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HandlingInstruction a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HandlingInstruction" ;
+    rdfs:comment """Special instructions regarding the handling of the wagon or shipment
+				in free text""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HarbourName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HarbourName" ;
+    rdfs:comment """Name of harbour, where the transport will be handed over
+							to a ship.""" ;
+    rdfs:domain :Ship ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HazardIdentificationNumber rdfs:range xsd:string .
+
+:InformationConsignee a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InformationConsignee" ;
+    rdfs:comment """Information from the
+																consignor to the consignee relating
+																to the consignment. This information
+																is not to commit the carrier.""" ;
+    rdfs:domain :GeneralInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InternalReferenceIdentifier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InternalReferenceIdentifier" ;
+    rdfs:comment "The link to the IM System Reference" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InterruptionDescription a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InterruptionDescription" ;
+    rdfs:comment "The free text description of an interruption" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:KeeperShortNameVKM a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "KeeperShortNameVKM" ;
+    rdfs:comment """Free text, short name/vehicle keeper marking of the wagon keeper as
+				listed in VKM register (https://www.era.europa.eu/domains/registers/vkm_en, 2nd
+				column (UNIQUE) - without special characters)""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LastName rdfs:range xsd:string .
+
+:LetterMarking rdfs:range xsd:string .
+
+:LoadTableCountry rdfs:range xsd:string .
+
+:LoadUnitNumber rdfs:range xsd:string .
+
+:LoadingTackleType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadingTackleType" ;
+    rdfs:comment """Loading tackle according toUN/EDIFACT Data Element 8053
+							UN/CEFACT Revision 2004B. Additional dummy code 'ZZZ' may be used in
+							case the loading tackle is not included in the list. """ ;
+    rdfs:domain :LoadingTackles ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationSubsidiaryName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationSubsidiaryName" ;
+    rdfs:comment """To be completed in an official language of the Country using the ISO
+				Unicode alphabet""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocoNumber rdfs:range xsd:string .
+
+:MRN_Number rdfs:range xsd:string .
+
+:ManufacturerName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ManufacturerName" ;
+    rdfs:comment """Name of the manufacturer of the
+									telematics device.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MessageDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageDateTime" ;
+    rdfs:comment "Generated by the common Interface" ;
+    rdfs:domain :MessageReference ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MessageIdentifier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageIdentifier" ;
+    rdfs:comment "Identification of the Message" ;
+    rdfs:domain :MessageReference ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MessageReferenceNumber rdfs:range xsd:string .
+
+:MessageSenderReference rdfs:range xsd:string .
+
+:MessageType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageType" ;
+    rdfs:comment """To indicate the message type transmitted or referred to. The following
+				list was agreed within the sector: 1000 ConsignmentOrderMessage 2001
+				PathCanceledMessage 2002 PathConfirmedMessage 2003 PathDetailsMessage 2004
+				PathDetailsRefusedMessage 2005 PathNotAvailableMessage 2006 PathRequestMessage 2007
+				ReceiptConfirmationMessage -- sector messages (Planning) -- 2500
+				PathCoordinationMessage 2501 PathSectionNotificationMessage -- sector message end --
+				3003 TrainCompositionMessage 3006 TrainReadyMessage 4001 TrainDelayCauseMessage 4003
+				TrainForecastAtReportingLocationMessage 4004 TrainRunningForecastMessage 4005
+				TrainRunningInformationMessage 4006 TrainRunningInterruptionMessage -- sector
+				message (Operations) -- 4500 PassengerTrainCompositionMessage 4501
+				RollingStockRestrictionMessage 4504 ChangeOfTrackMessage 4505
+				TrainJourneyModificationMessage 4506 TrainForecastedDelayCauseMessage 4510
+				RunningStatusReportMessage -- sector message end -- 5001 AlertMessage 5006
+				WagonETI_ETA_Message -- sector message (Wagon interchange) -- 5009
+				WagonInterchangeNoticeMessage 5012 WagonReceivedAtInterchangeMessage 5013
+				WagonRefusedAtInterchangeMessage -- sector message end -- 5020 WagonStatusMessage
+				6002 LocationFileDatasetMessage 6003 RollingStockDatasetMessage 6005
+				ILUDataQueryMessage 6006 ILUDataMessage --sector (RU-RU) --- 5500
+				WagonPerformanceMessage -- sector end--- 6004 RollingStockDatasetQueryMessage --
+				Sector Messages TCR begin -- 6500 TCRMessage 6501 TCRResponseMessage 6502
+				TCRCanceledMessage -- Sector Messages TCR end -- -- sector (TrainID) begin -- 8500
+				UpateLinkMessage 8501 ObjectInfoMessage -- sector end -- 9000 ErrorMessage
+				--Reserved: (IM-RU for SFERA) --- SF00 to SF99 for SFERA messages (see IRS90940) â€“
+				Reserved end â€“ """ ;
+    rdfs:domain :MessageReference ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MessageTypeVersion a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageTypeVersion" ;
+    rdfs:comment "Version of the Message Type" ;
+    rdfs:domain :MessageReference ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MountedPosition a owl:DatatypeProperty ;
+    rdfs:label "MountedPosition" ;
+    rdfs:comment """Indication of where the telematics
+									unit is located on the component.""" ;
+    rdfs:domain :TelematicsDevice ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MultilateralAuthorisationCountries rdfs:range xsd:string .
+
+:NHMCode rdfs:range xsd:string .
+
+:NHM_Code a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NHM_Code" ;
+    rdfs:comment "NHM code of the goods" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NUTS_Code rdfs:range xsd:string .
+
+:Name a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Name" ;
+    rdfs:comment "Generic Name in Free Text" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NatureOfPacking rdfs:range xsd:string .
+
+:NoGoodsOfClassX a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NoGoodsOfClassX" ;
+    rdfs:comment """Element has to be filled with the
+												class of the dangerous goods which are mentioned in
+												Table 3.2 RID but are not dangerous according to
+												chapter 2 (5.4.1.5 RID)""",
+        """Element has to be filled with the class of the dangerous
+							goods which are mentioned in Table 3.2 RID but are not dangerous
+							according to chapter 2 (5.4.1.5 RID)""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Note rdfs:range xsd:string .
+
+:Number a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Number" ;
+    rdfs:comment "ITU number",
+        "Number of the report form." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberPlate rdfs:range xsd:string .
+
+:ObjectType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ObjectType" ;
+    rdfs:comment """Provides a possibility for differentiation between the objects: Train
+				(TR), Route (RO), Path (PA), Case Reference (CR), Path Request (PR), Capacity Needs
+				Announcements (CN), Capacity Model (CM), Catalogue Path (CP)""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:OperationalTrainNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OperationalTrainNumber" ;
+    rdfs:comment """Identifies the train for traffic management purposes by the
+				Dispatcher, GSMR services, etc.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:P1 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "P1" ;
+    rdfs:comment "P1 requires the code in case the gauge of the semi-trailer is less or equal 2500 mm." ;
+    rdfs:domain :CombinedTrafficLoadProfile ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:P2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "P2" ;
+    rdfs:comment "P2 requires the code in case the gauge of the semi-trailer is greater than 2500 mm less or equal 2600 mm" ;
+    rdfs:domain :CombinedTrafficLoadProfile ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:POBox a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "POBox" ;
+    rdfs:comment "P.O. Box" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PackageIdentification rdfs:range xsd:string .
+
+:PermissionNumber rdfs:range xsd:string .
+
+:PhonNumber rdfs:range xsd:string .
+
+:PhoneNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PhoneNumber" ;
+    rdfs:comment "Generic Phone number in Free text" ;
+    rdfs:domain :AdministrativeContactInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Place a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Place" ;
+    rdfs:comment """Place of the
+																extension.""",
+        """Place on which the
+																consignment note was made out""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PostalCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PostalCode" ;
+    rdfs:comment "The postal code for the postal address" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreArrangedPath rdfs:range xsd:string .
+
+:Prefix rdfs:range xsd:string .
+
+:PreviousLoadedGood a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreviousLoadedGood" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreviousWagonNumber rdfs:range xsd:string .
+
+:PreviousWagonNumberFreight rdfs:range xsd:string .
+
+:PrimaryCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrimaryCode" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrimaryLocationName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrimaryLocationName" ;
+    :domain "Telematics" ;
+    rdfs:comment """Location Name in an offication language of the Country using the ISO
+				Unicode alphabet""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrimaryLocationNameASCII rdfs:range xsd:string .
+
+:ProductRIDName rdfs:range xsd:string .
+
+:ProperShippingName rdfs:range xsd:string .
+
+:QuieterRoutesExemptionCountry rdfs:range xsd:string .
+
+:RID_Class rdfs:range xsd:string .
+
+:RP_Code a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RP_Code" ;
+    rdfs:comment """Routing point code of the production station of the acceptance or
+				delivery point. """ ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ReasonOfReference rdfs:range xsd:string .
+
+:RegistrationCountry rdfs:range xsd:string .
+
+:RelatedIdentifier rdfs:range xsd:string .
+
+:RelatedSenderReference rdfs:range xsd:string .
+
+:Remarks a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Remarks" ;
+    rdfs:comment "Free Form Text" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Result rdfs:range xsd:string .
+
+:RouteClass a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RouteClass" ;
+    rdfs:comment """Indication of the route class (based on CEN EN 15528: line categories for managing the interface between load limits of vehicles on infrastructure). All the codes in this code list refer to CEN EN 15528: line categories for managing the interface between load limits of vehicles on infrastructure.
+CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems which only support two character codes.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RouteCode rdfs:range xsd:string .
+
+:RouteInformation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RouteInformation" ;
+    rdfs:comment """The route of the journey for a wagon / shipment or Intermodal unit
+				assigned by the LRU""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RouteText rdfs:range xsd:string .
+
+:SRID rdfs:range xsd:string .
+
+:SealsDescription rdfs:range xsd:string .
+
+:SenderReference rdfs:range xsd:string .
+
+:SerialNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SerialNumber" ;
+    rdfs:comment """Three digits representing the serial number of the
+							traction of the series. Optionally used in Planning to identify the
+							subseries. Composite identifier should be unique with the series number
+							within a country.""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SeriesNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SeriesNumber" ;
+    rdfs:comment """4 digits representing the type according to the country
+							rules and based on the national vehicle register of the country
+							indicated with the CountryCode""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShipOwner a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShipOwner" ;
+    rdfs:comment "Name of ship owner." ;
+    rdfs:domain :Ship ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShippingCarrier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingCarrier" ;
+    rdfs:comment """RICS Code of the RU
+																who created the consignment
+																identification (not necessarily the
+																first carrier in the transport
+																chain)""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShippingCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingCountry" ;
+    rdfs:comment """Forwarding UIC Country
+																Code""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShippingStationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingStationCode" ;
+    rdfs:comment """UIC Code of the
+																shipping station""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShippingStationName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingStationName" ;
+    rdfs:comment """Name of the shipping
+																station""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Signature a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Signature" ;
+    rdfs:comment "Signature",
+        """Signature of the
+																contractual carrier. When missing,
+																the shipment number (CIM: 62) shall
+																be used for signature purposes.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Source rdfs:range xsd:string .
+
+:SpecialProvisionRID5.4 rdfs:range xsd:string .
+
+:SpecialProvisionsRID3.3 rdfs:range xsd:string .
+
+:SpecialTreatmentCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SpecialTreatmentCode" ;
+    rdfs:comment "Special Treatment code" ;
+    rdfs:domain :SpecialTreatments ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SpecialTreatmentInformation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SpecialTreatmentInformation" ;
+    rdfs:comment "Additional Text for codes with free text" ;
+    rdfs:domain :SpecialTreatments ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SpecificationText rdfs:range xsd:string .
+
+:Street a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Street" ;
+    rdfs:comment """Name of street of the
+																carrier""",
+        "Street" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:StreetNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "StreetNumber" ;
+    rdfs:comment "House number",
+        "Street Number",
+        """Streetnumber of
+																carrier.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SubContractNumber_SplitContract rdfs:range xsd:string .
+
+:SubsequentECM rdfs:range xsd:string .
+
+:SwapBodyCodification a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SwapBodyCodification" ;
+    rdfs:comment "CODE:",
+        """Codification used for swap bodies according to UIC/UIRR
+							regulations """ ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TagReference rdfs:range xsd:string .
+
+:TankCode rdfs:range xsd:string .
+
+:TariffNumber rdfs:range xsd:string .
+
+:TechnicalDescription rdfs:range xsd:string .
+
+:TotalWeightLoadingTackles a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TotalWeightLoadingTackles" ;
+    rdfs:comment """Total weight of the loading tackles (kg) of the specified
+							type""" ;
+    rdfs:domain :LoadingTackles ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrafficTypeCode rdfs:range xsd:string .
+
+:TrainActivityType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainActivityType" ;
+    rdfs:comment """Indicates certain treatments or operations required for a train. If
+				national codes are used, the first 2 position will be the ISO country code, followed
+				by 00-99. 0001 Commercial stop RU Board/disembark passenger train, load/unload
+				freight train 0002 Operational stop IM Stops needed by the IM (e.g. overpassing by
+				another train) 0003 Service stop RU/IM Stops which are used for non-commercial
+				activities (e.g. boarding of staff) 0004 System stop RU/IM allowing the RU to change
+				a system (e.g. signalling system, safety system) 0005 Reversing stop RU/IM stop to
+				enable train unit to run in the opposite direction (without change of engine) 0006
+				Stops for reversing move or driver change ends RU stop to enable train unit to run
+				in the opposite direction (with using another engine at the other end of the train
+				and change of driver) 0007 Stops for locomotive to run round train RU stop to enable
+				train unit to run in the opposite direction (with using the same engine at the other
+				end of the train) 0008 Technical check/inspection coaches/wagons RU/IM e.g. at
+				origin or intermediate station: brake test, checking load 0009 Change gauge RU/IM
+				continuation on a network with a different gauge with change of bogies or adaptation
+				of the axles (F->E, SVE->FI) 0010 attach engine/unit RU Unit not previously in
+				service 0011 detach engine/unit RU Unit no longer in service 0012 change engine RU
+				0013 attach coach/wagon RU 0014 detach coach/wagon RU 0015 attach and detach
+				coach/wagon RU 0016 attach train Operational Train (in service) 0017 split train
+				Operational Train (in service) 0018 Parking of vehicle RU e.g. need to park the
+				train/composition midway for several hours 0019 Mail/parcel services RU 0020
+				shunting RU actual activity of shunting 0021 shunting service RU Request for
+				shunting service (if offered by the IM or a third party) 0022 Terminal service
+				(terminal in the meaning of final destination) RU Request for services at the end of
+				a train run (if offered by the IM or a third party) 0023 Loco driver change RU 0024
+				Loco driver break RU legal issue, e.g. to respect working law 0025 Crew change RU
+				different to loco driver change as for the change of the crew a platform will be
+				needed 0026 Custom and passport facilities RU 0027 Other stop reason (miscellaneous)
+				RU/IM 0028 Boarding only RU 0029 Disembarking only RU 0030 Stop on request RU 0031
+				Departure equals to arrival time RU If in some stations only arrival times are
+				published, this activity code may used to indicate that the train cannot continue
+				before the published arrival time in case of an early arrival. 0032 Departure after
+				disembarking RU mainly used at the end of train run, train may continue as soon as
+				all passengers have disembarked 0033 No waiting for connection RU 0034 Watering RU
+				Indicates the IM that a track with water access will be needed. 0035 Heating
+				Indicates the IM that a track with heating equipment will be needed. 0036 Cleaning /
+				disinfecting RU 0037 Treatment on plants and live animals RU Watering, Foddering,
+				Milking, Spraying, Closing ventilation flaps, Opening ventilation flaps 0038
+				Treatment of perishable goods RU Checking the temperature, Re-icing, Heating,
+				Checking the proper functioning of the mechanical refrigeration equipment,
+				Refuelling machinery, Switching machinery on or off 0039 Administrative operations
+				RU Weighing, Re-forwarding, Submission to phytosanitary inspections 0040 Run Through
+				(Passing Time) IM 0041 Photo run-by / Photo-stop 0042 Train Waiting Waiting
+				according to local rules 0043 Train running with another train RU Where trains have
+				been attached at a previous location on the schedule 0044 Dependency between trains
+				(rolling stock). The same wagon/train/trainset is used for the next train service.
+				RU 0045 Dependency between trains (rolling stock). The same wagon/train/trainset is
+				reused from the previous train service. RU 0046 Dependency between trains
+				(passengers/goods). Passengers/goods change from this train to another. RU 0047
+				Dependency between trains (passengers/goods). Passengers/goods change from another
+				train to this train. RU 0048 Linkage of OTNs belonging to the same transport if no
+				TrainID is present 0049 Loco battery charging National / company codes: Examples:
+				Numbers 00 to 99 may be used by an IM for Network national purposes, just adding ISO
+				country code CZ01 Stops from new stop opening day UK55 Stop shorter than 1/2 min
+				IT72 Train report stop cancelled """ ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainContactDetails rdfs:range xsd:string .
+
+:TrainNotReadyDescription rdfs:range xsd:string .
+
+:TransportInstruction a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TransportInstruction" ;
+    rdfs:comment """Special instructions regarding the transportation of the wagon or
+				shipment in free text""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TurnInNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TurnInNumber" ;
+    rdfs:comment """Reference number used for empty containers in depots of
+							shipping company.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeCode1 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeCode1" ;
+    rdfs:comment """Value is 9 as it's written in Part 0 of the Appendix 6 of
+							the decision 2007/756""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeCode2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeCode2" ;
+    rdfs:comment """Type of tractive rolling stock as in Part 8 of the
+							Appendix 6 of the decision 2007/756""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeDescription a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeDescription" ;
+    rdfs:comment """Description of loading tackle, which is not included in
+							the UN/EDIFACT 8053 list.""" ;
+    rdfs:domain :LoadingTackles ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeOfIMHarmonization a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeOfIMHarmonization" ;
+    rdfs:comment "Enumeration of Type of IM harmonization: Full, Part " ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeOfRUHarmonization a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeOfRUHarmonization" ;
+    rdfs:comment "Type of RU harmonization: Full, Part, None." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:UN_Number a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "UN_Number" ;
+    rdfs:comment """The UNNumber of the dangerous good according to the RID
+							chapter 3.2, table A, column 1. Mandatory, except it concerns a
+							declaration of an empty packaging of the type "EMPTY PACKAGING", "EMPTY
+							RECEPTACLE <=1000L", "EMPTY IBC" or "EMPTY LARGE PACKAGING" .""",
+        """The UNNumber of the dangerous good according to the RID
+						chapter 3.2, table A, column 1. Mandatory, except it concerns a declaration
+						of an empty packaging of the type "EMPTY PACKAGING", "EMPTY RECEPTACLE
+						<=1000L", "EMPTY IBC" or "EMPTY LARGE PACKAGING" .""",
+        """The UNNumber of the dangerous good according to the RID chapter 3.2,
+				table A, column 1. Mandatory, except it concerns a declaration of an empty packaging
+				of the type "EMPTY PACKAGING", "EMPTY RECEPTACLE <=1000L", "EMPTY IBC" or "EMPTY
+				LARGE PACKAGING" .""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:UltimateDestinationCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "UltimateDestinationCountry" ;
+    rdfs:comment "Country of Ultimate Destination" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:VAT a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "VAT" ;
+    rdfs:comment "VAT identification Nr of customer",
+        "Value Added Tax" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Variant a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Variant" ;
+    rdfs:comment """The variant shows a relationship between two identifiers referring to
+				the same business case""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonGroupInfo a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonGroupInfo" ;
+    rdfs:comment """Consignor information
+																regarding the whole consignment.
+																Comparable with the element
+																WagonInfo, but for all wagons.""" ;
+    rdfs:domain :GeneralInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonInfo rdfs:range xsd:string .
+
+:WagonNumberFreight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonNumberFreight" ;
+    rdfs:comment "Identifies uniquely the freight wagon by its number" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WheelSetType rdfs:range xsd:string .
+
+:ZIPCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ZIPCode" ;
+    rdfs:comment "Postal Code" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:eMail a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "eMail" ;
+    rdfs:comment "Generic eMail address in Free text" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasAdditionalCharges a owl:ObjectProperty ;
+    rdfs:label "has AdditionalCharges" ;
+    rdfs:domain [ ] ;
+    rdfs:range :AdditionalCharges .
+
+:hasAdministrativeContactInformation a owl:ObjectProperty ;
+    rdfs:label "has AdministrativeContactInformation" ;
+    rdfs:domain [ ] ;
+    rdfs:range :AdministrativeContactInformation .
+
+:hasCombinedTrafficLoadProfile a owl:ObjectProperty ;
+    rdfs:label "has CombinedTrafficLoadProfile" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range :CombinedTrafficLoadProfile .
+
+:hasConsignmentIdentification a owl:ObjectProperty ;
+    rdfs:label "has ConsignmentIdentification" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :ConsignmentIdentification .
+
+:hasConsignmentNumber a owl:ObjectProperty ;
+    rdfs:label "has ConsignmentNumber" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:range :ConsignmentNumber .
+
+:hasControlLabel a owl:ObjectProperty ;
+    rdfs:label "has ControlLabel" ;
+    rdfs:domain :ConsignmentIdentification ;
+    rdfs:range :ControlLabel .
+
+:hasExceptionalGaugingIdent a owl:ObjectProperty ;
+    rdfs:label "has ExceptionalGaugingIdent" ;
+    rdfs:domain [ ] ;
+    rdfs:range :ExceptionalGaugingIdent .
+
+:hasGeneralInformation a owl:ObjectProperty ;
+    rdfs:label "has GeneralInformation" ;
+    rdfs:domain :COM ;
+    rdfs:range :GeneralInformation .
+
+:hasLoadingTackles a owl:ObjectProperty ;
+    rdfs:label "has LoadingTackles" ;
+    rdfs:domain [ ] ;
+    rdfs:range :LoadingTackles .
+
+:hasLocoTypeNumber a owl:ObjectProperty ;
+    rdfs:label "has LocoTypeNumber" ;
+    rdfs:domain [ ] ;
+    rdfs:range :LocoTypeNumber .
+
+:hasMessageReference a owl:ObjectProperty ;
+    rdfs:label "has MessageReference" ;
+    rdfs:domain [ ] ;
+    rdfs:range :MessageReference .
+
+:hasShip a owl:ObjectProperty ;
+    rdfs:label "has Ship" ;
+    rdfs:domain [ ] ;
+    rdfs:range :Ship .
+
+:hasSpecialTreatments a owl:ObjectProperty ;
+    rdfs:label "has SpecialTreatments" ;
+    rdfs:domain [ ] ;
+    rdfs:range :SpecialTreatments .
+
+:hasTrainDelay a owl:ObjectProperty ;
+    rdfs:label "has TrainDelay" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TrainDelay .
+
+:PreviousConsignmentNumber a owl:Class,
+        owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreviousConsignmentNumber" ;
+    rdfs:comment """This element shows the previous Reference number assigned to a
+				consignment by a lead RU""" ;
+    rdfs:domain :PreviousConsignmentNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ConsignmentNumber a owl:Class,
+        owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ConsignmentNumber" ;
+    rdfs:comment "Reference number assigned to a consignment by a lead RU",
+        """Running number and
+																check digit of the consignment
+																between Lead RU and customer.
+																Format: NNNNNC The number consists
+																of NNNNN = running number C = check
+																digit, """ ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AdditionalCharges a owl:Class ;
+    rdfs:label "AdditionalCharges" ;
+    rdfs:comment "Additional Charges",
+        "None",
+        "Sum of Prepaid",
+        "Sum of Transferred" .
+
+:ConsignmentIdentification a owl:Class ;
+    rdfs:label "ConsignmentIdentification" ;
+    rdfs:comment """List of Identifications for the consignment In
+										order to identify the consignment(s) on the wagon, the
+										ControlLabel and or DossierNumber for each consignment must
+										be present if the wagon is loaded and the Consignment Note
+										is already available""",
+        """consignment note number (without carrier (due
+										to history))""" .
+
+:ExceptionalGaugingIdent a owl:Class ;
+    rdfs:label "ExceptionalGaugingIdent" ;
+    rdfs:comment "Indicates that an exceptional Gauging is in the train or for the wagon " .
+
+:TrainDelay a owl:Class ;
+    rdfs:label "TrainDelay" ;
+    rdfs:comment """Identifies the Delta delay time of a train against the booked schedule
+				as well as against the referenced time """ .
+
+:GeneralInformation a owl:Class ;
+    rdfs:label "GeneralInformation" ;
+    rdfs:comment """Genearal information about the
+													complete consignment""" .
+
+:Ship a owl:Class ;
+    rdfs:label "Ship" ;
+    rdfs:comment """Additional information for transports, which shall be handed over to a
+				ship""" .
+
+:CombinedTrafficLoadProfile a owl:Class ;
+    rdfs:label "CombinedTrafficLoadProfile" ;
+    rdfs:comment """This element does refer to combined load units that can be used for Freight Requests only.
+There are two entry options:
+â€¢ One option refers to â€œPâ€ (Semi-trailer/road semi-trailer):
+â€¢ The other option refers to â€œCâ€ (Swap body):
+The RUs may indicate the relevant values if they are familiar with the IMs line profiles. In case there is a path request for a train with combined traffic load, the IM should indicate the possible max. value for all 4 elements (P1, P2, C1, C2). Further information about Combined Traffic Load Profile can be seen in the UIC 596-6 Leaflet.
+""" .
+
+:LoadingTackles a owl:Class ;
+    rdfs:label "LoadingTackles" ;
+    rdfs:comment "Describes the loading tackles used inside the wagon" .
+
+:MessageReference a owl:Class ;
+    rdfs:label "MessageReference" ;
+    rdfs:comment "This element identifies the message" .
+
+:SpecialTreatments a owl:Class ;
+    rdfs:label "SpecialTreatments" ;
+    rdfs:comment "Special treatment" .
+
+:TelematicsDevice a owl:Class ;
+    rdfs:label "TelematicsDevice" ;
+    rdfs:comment """Detailed information about a specific telematics
+						device.""" .
+
+:AdministrativeContactInformation a owl:Class ;
+    rdfs:label "AdministrativeContactInformation" ;
+    rdfs:comment "Used to define adminstrative contact information" .
+
+:ControlLabel a owl:Class ;
+    rdfs:label "ControlLabel" .
+
+:LocoTypeNumber a owl:Class ;
+    rdfs:label "LocoTypeNumber" ;
+    rdfs:comment """Composite identifier for the loco types and locomotives. First four
+				elements identify the series of the loco, rest can identify the exact individual
+				locomotive""" .
+
+[] rdf:first :Ship .
+
+[] rdf:first :ControlLabel .
+
+[] rdf:first :ConsignmentNumber .
+
+[] rdf:first :LocoTypeNumber .
+
+[] rdf:first :AdditionalCharges .
+
+[] rdf:first :ConsignmentIdentification .
+
+[] rdf:first :AdministrativeContactInformation .
+
+[] rdf:first :AdministrativeContactInformation .
+
+[] rdf:first :ExceptionalGaugingIdent .
+
+[] rdf:first :AdministrativeContactInformation .
+
+[] rdf:first :LoadingTackles .
+
+[] rdf:first :SpecialTreatments .
+
+[] rdf:first xsd:string .
+
+[] rdf:first xsd:string .
+
+[] rdf:first :AdministrativeContactInformation .
+
+[] rdf:first :SpecialTreatments .
+

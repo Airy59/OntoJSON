@@ -1,0 +1,53 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:CommercialTrafficType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CommercialTrafficType" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PushPullTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PushPullTrain" ;
+    rdfs:comment """Indicates that the train can change direction without shunting. This
+				flag can be used only with TractionMode 1X, 2X, 5X.""" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCombinedTrafficLoadProfile a owl:ObjectProperty ;
+    rdfs:label "has CombinedTrafficLoadProfile" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range :CombinedTrafficLoadProfile .
+
+:hasPlannedTrainData rdfs:range :PlannedTrainData .
+
+:hasPlannedTrainTechnicalData a owl:ObjectProperty ;
+    rdfs:label "has PlannedTrainTechnicalData" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range :PlannedTrainTechnicalData .
+
+:hasTrafficType a owl:ObjectProperty ;
+    rdfs:label "has TrafficType" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range :TrafficType .
+
+:hasTypeofService a owl:ObjectProperty ;
+    rdfs:label "has TypeofService" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range :TypeofService .
+
+:PlannedTrainData a owl:Class ;
+    rdfs:label "PlannedTrainData" ;
+    rdfs:comment "Train relevant data for a planning period" .
+
+[] rdf:first :PlannedTrainData .
+
+[] rdf:first :PlannedTrainData .
+
+[] rdf:first :PlannedTrainData .
+

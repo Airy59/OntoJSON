@@ -1,0 +1,532 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Bridge owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:CommonCharacteristicsSubset rdfs:subClassOf rdf:List .
+
+:HABD owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:KilometricPost owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:LevelCrossing owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:OperationalPoint owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:PlatformEdge owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:PrimaryLocation owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:RadioBlockCenter owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:RunningTrack owl:disjointWith :Tunnel .
+
+:SectionOfLine owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:Siding owl:disjointWith :Tunnel .
+
+:Signal owl:disjointWith :SpecialArea,
+        :Tunnel .
+
+:appliesToDirection a owl:ObjectProperty ;
+    rdfs:label "applies to direction"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/orientations/OrientationDirections> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AppliesToDirection>,
+        <http://data.europa.eu/949/shapes/AppliesToDirectionSKOS> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "The direction relative to the origin of the linear element towards the point reference applies."@en ;
+    rdfs:domain :NetPointReference ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:endLocation a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "End of tunnel"@en ;
+    :XMLName "SOLTunnelEnd" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.8.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EndLocation> ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2024-02-05"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "Geographical coordinates in decimal degrees and km of the line at the end of a tunnel."@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range <http://www.opengis.net/ont/sf#Point> ;
+    rdfs:subPropertyOf :tunnelObjParameter,
+        geo:hasGeometry ;
+    ns1:term_status "stable" ;
+    skos:example "Latitude=`51.5479123` Longitude=`-0.076732`" ;
+    skos:scopeNote """Geographical coordinates according to the standard World Geodetic System (WGS).  Precision for both geographical latitude and geographical longitude is assumed as [NN.NNNNNNN] in degrees with decimals what gives discretion of 10 cm in the network.
+Kilometre shall concern the national line identification given in 1.1.0.0.0.2
+Location of the point which is assumed to be the end of the tunnel it is the point on the track centre line where is laid the vertical shadow of the extreme part of the tunnel s portal."""@en .
+
+:endsAt a owl:ObjectProperty ;
+    rdfs:label "ends at"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EndsAt> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the ending coordinate of a linear reference."@en ;
+    rdfs:domain :NetLinearReference ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :TopologicalCoordinate .
+
+:hasLrsCoordinate rdfs:domain :NetPointReference .
+
+:hasSequence a owl:ObjectProperty ;
+    rdfs:label "has sequence"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSequence> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "The ordered sequence of topological linear elements which create a linear net reference."@en ;
+    rdfs:domain :NetLinearReference ;
+    rdfs:isDefinedBy : ;
+    rdfs:range rdf:List .
+
+:hasTopoCoordinate a owl:ObjectProperty ;
+    rdfs:label "has topological coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasTopoCoordinate> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the topological coordinate of a network point reference."@en ;
+    rdfs:domain :NetPointReference ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :TopologicalCoordinate .
+
+:includes a owl:ObjectProperty ;
+    rdfs:label "includes list of linear references"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Includes> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "List of linear references included in an network area reference."@en ;
+    rdfs:domain :NetAreaReference ;
+    rdfs:isDefinedBy : ;
+    rdfs:range rdf:List .
+
+:lengthOfTunnel a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Length of tunnel"@en ;
+    :XMLName "ITU_Length" ;
+    :applicable "Y" ;
+    :dependencyNote "Only applicable for a tunnel with length of 100 metres or more."@en ;
+    :formatNote "NNNNN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.8.7",
+        "1.2.1.0.5.5",
+        "1.2.2.0.5.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LengthOfTunnel> ;
+    :tsiOPEAppendixD2Index "3.2.3" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2024-05-16"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-08"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Length of a tunnel in metres from entrance portal to exit portal."@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :length,
+        :tunnelDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Length of a tunnel is expressed in metres from portal to portal at the level of the top of rail. "@en .
+
+:offsetFromOrigin a owl:DatatypeProperty ;
+    rdfs:label "offset from origin"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OffsetFromOrigin> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date ;
+    rdfs:comment "Offset from the origin in a topological coordinate."@en ;
+    rdfs:domain :TopologicalCoordinate ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:positiveInteger .
+
+:onLinearElement a owl:ObjectProperty ;
+    rdfs:label "on linear element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OnLinearElement> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the linear element a coordinate is associated with."@en ;
+    rdfs:domain :TopologicalCoordinate ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearElement .
+
+:passesThroughTunnel rdfs:range :Tunnel .
+
+:specialAreaType a owl:ObjectProperty ;
+    rdfs:label "Special area type"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/special-area-types/SpecialAreaTypes> ;
+    :rinfIndex "1.1.0.0.1.1" ;
+    :tsiOPEAppendixD2Index "3.2.3",
+        "3.2.4",
+        "3.2.5",
+        "3.2.6",
+        "3.3.5",
+        "3.3.6" ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-04-18"^^xsd:date ;
+    rdfs:comment "Indicates the special area or location types such as safe areas and restricted area types."@en ;
+    rdfs:domain :SpecialArea ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "unstable" .
+
+:specialTunnelArea a owl:ObjectProperty ;
+    rdfs:label "Special tunnel area"@en ;
+    :tsiOPEAppendixD2Index "3.2.3" ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Relates a tunnel with a special area or location."@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :SpecialTunnelArea ;
+    ns1:term_status "stable" .
+
+:startLocation a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Start of tunnel location"@en ;
+    :XMLName "SOLTunnelStart" ;
+    :rinfIndex "1.1.1.1.8.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/StartLocation> ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2024-02-05"^^xsd:date ;
+    rdfs:comment """Part of the Start of tunnel that indicates the Geographical coordinates according to the standard World Geodetic System (WGS). Precision for both geographical latitude and geographical longitude is assumed as [NN.NNNNNNN] in degrees with decimals what gives discretion of 10 cm in the network.
+The Start of tunnel is the Geographical coordinates in decimal degrees and km of the line at the beginning of a tunnel."""@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range <http://www.opengis.net/ont/sf#Point> ;
+    rdfs:subPropertyOf :tunnelObjParameter,
+        geo:hasGeometry ;
+    ns1:term_status "stable" .
+
+:startsAt a owl:ObjectProperty ;
+    rdfs:label "starts at"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/StartsAt> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the starting coordinate of a linear reference."@en ;
+    rdfs:domain :NetLinearReference ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :TopologicalCoordinate .
+
+:tunnelDocRef a owl:ObjectProperty ;
+    rdfs:label "Document available from the IM with precise description of the tunnel"@en ;
+    :XMLName "ITU_TunnelDocRef" ;
+    :applicable "Y/N" ;
+    :legalDeadline "1 January 2021"@en ;
+    :rinfIndex "1.1.1.1.8.8.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TunnelDocRef> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-04-23"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "Electronic document available from the IM stored by the Agency with precise description of the clearance gauge and geometry of the tunnel."@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Document ;
+    rdfs:subPropertyOf :tunnelObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The value of this parameter should be either a reference to a file name or an external link to a document.
+If a file name is provided, the Infrastructure Manager (IM) must upload a document with the same file name using the "Reference Documents Management" functionality in the RINF application. The document must be in electronic format and available in two official EU languages. In this case, the parameter value must be repeated for each document.
+If an external link is provided, the IM must ensure that the document is available at the provided link."""@en .
+
+:tunnelIdentification a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Tunnel identification"@en ;
+    :XMLName "OPSidingTunnelIdentification",
+        "OPTrackTunnelIdentification",
+        "SOLTunnelIdentification" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.8.2",
+        "1.2.1.0.5.2",
+        "1.2.2.0.5.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TunnelIdentification> ;
+    :tsiOPEAppendixD2Index "3.2.3" ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2021-09-13"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-08"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Unique tunnel identification or unique tunnel number within Member State"@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :tunnelDataParameter,
+        dcterms:identifier ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Here should be given the name, number, code or any other expression which is normally used for the identification of the tunnel other than mentioned in parameters 1.1.1.1.8.3   1.1.1.1.8.4. In case when tunnel does not have its own identification within the Member State, the IM should deliver it himself"@en .
+
+:NetAreaReference a owl:Class ;
+    rdfs:label "Net Area Reference"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetAreaReferenceShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents an area reference in the network."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :NetBasicReference ;
+    skos:example "Example: non-stopping area, cross section area, area of implementation of GPRS etc."@en ;
+    skos:scopeNote "It is used for infrastructure elements positioned in relation to the topology as a subnetwork. (e.g.: tunnels, non-stopping area, stations etc.)"@en .
+
+:SpecialTunnelArea a owl:Class ;
+    rdfs:label "Special tunnel area"@en ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment """Area or location within a tunnel where there are:
+- a safe area: a walkway, evacuation and rescue points;
+- a restricted area (non-stopping area or industrial risk location in a tunnel)."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :SpecialArea ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "TODO review the definition" .
+
+:Switch owl:disjointWith :Tunnel .
+
+:Track owl:disjointWith :Tunnel .
+
+:lineReferenceTunnelEnd a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "End of tunnel kilometer"@en ;
+    :XMLName "SOLTunnelEnd" ;
+    :rinfIndex "1.1.1.1.8.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LineReferenceTunnelEnd> ;
+    dcterms:created "2024-02-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2024-11-29"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    dcterms:replaces :tunnelKilometerEnd ;
+    rdfs:comment """Part of the End of tunnel that indicates the km of the line at the end of a tunnel.
+
+The End of tunnel is the Geographical coordinates in decimal degrees and km of the line at the end of a tunnel."""@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :NetPointReference ;
+    rdfs:subPropertyOf :tunnelObjParameter ;
+    ns1:term_status "stable" ;
+    skos:example "Kilometer=`0.270`" ;
+    skos:scopeNote "Parameters of this group (from 1.1.1.1.8.1 to 1.1.1.1.8.13) are only applicable if tunnels exist on the SoL"@en .
+
+:lineReferenceTunnelStart a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Start of tunnel kilometer"@en ;
+    :XMLName "SOLTunnelStart" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.8.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LineReferenceTunnelStart> ;
+    dcterms:created "2024-02-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2024-11-29"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    dcterms:replaces :tunnelKilometerStart ;
+    rdfs:comment """Part of the Start of tunnel that indicates the km of the line at the beginning of a tunnel.
+
+The Start of tunnel is the Geographical coordinates in decimal degrees and km of the line at the beginning of a tunnel."""@en ;
+    rdfs:domain :Tunnel ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :NetPointReference ;
+    rdfs:subPropertyOf :tunnelObjParameter ;
+    ns1:term_status "stable" ;
+    skos:example "Kilometer=`0.895`" ;
+    skos:scopeNote """Geographical coordinates according to the standard World Geodetic System (WGS).  Precision for both geographical latitude and geographical longitude is assumed as [NN.NNNNNNN] in degrees with decimals what gives discretion of 10 cm in the network.
+Kilometre shall concern the national line identification given in 1.1.0.0.0.2
+Location of the point which is assumed to be the beginning of the tunnel it is the point on the track centre line where is laid the vertical shadow of the extreme part of the tunnel s portal."""@en .
+
+:tunnelKilometerEnd dcterms:isReplacedBy :lineReferenceTunnelEnd .
+
+:tunnelKilometerStart dcterms:isReplacedBy :lineReferenceTunnelStart .
+
+<http://www.opengis.net/ont/sf#Point> a owl:Class ;
+    rdfs:label "Point"@en .
+
+:NetLinearReference a owl:Class ;
+    rdfs:label "Net Linear Reference"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetLinearReferenceShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents a linear reference in the network."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :NetBasicReference ;
+    skos:example "Example: tracks, tunnels, bridges, platform edges etc."@en ;
+    skos:scopeNote "It is used for infrastructure elements positioned in relation to the topology as a line, or along a path. (e.g.: tracks, bridges, platform edges, etc.)"@en .
+
+:netReference a owl:ObjectProperty ;
+    rdfs:label "net reference"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetReference> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "The reference that a physical infrastructure element has it on the topology. It may be used to define the positioning or a representation as a point, line or area"@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :NetBasicReference .
+
+:NetBasicReference a owl:Class ;
+    rdfs:label "Net Basic Reference"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetBasicReferenceShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Basic positioning reference within the ERA ontology. It represents different types of geographical locations. Geographical coordinates are provided according to the standard World Geodetic System (WGS84)."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "https://wiki.railtopomodel.org/wiki/Object_positioning_in_the_network"^^xsd:anyURI ;
+    rdfs:subClassOf :Feature ;
+    skos:scopeNote ""@en .
+
+:TopologicalCoordinate a owl:Class ;
+    rdfs:label "Topological Coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TopologicalCoordinateShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents a topological coordinate."@en ;
+    rdfs:isDefinedBy : .
+
+:NetPointReference a owl:Class ;
+    rdfs:label "Net Point Reference"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetPointReferenceShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents a point reference in the network."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :NetBasicReference ;
+    skos:scopeNote "It is used for infrastructure elements positioned in relation to the topology as a point. (e.g.: signals, ETCS balises, buffer stops, etc.)"@en .
+
+:SpecialArea a owl:Class ;
+    rdfs:label "Special area"@en ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment """Encompasses all those areas (outside of the operational gauge) or sections (those in tunnels excluded) which influence operation in the gauge itself, such as
+- safe areas,
+- restricted areas (non-stopping areas or industrial risk locations).
+
+For these areas in tunnels, use era:SpecialTunnelArea."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :Switch,
+        :Track,
+        :Tunnel ;
+    ns1:term_status "stable" ;
+    skos:definition """Non-stopping Area: Area defined by the Infrastructure Manager where it may not be safe or suitable to stop a train.
+Safe Area: Area defined by the Infrastructure Manager where it is safe or suitable to stop and evacuate a train.
+Industrial Risk Area: locations where it is dangerous for the driver to step out."""@en ;
+    skos:editorialNote "TODO review the definition" .
+
+rdf:List a owl:Class .
+
+:Tunnel a owl:Class ;
+    rdfs:label "Tunnel"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TunnelShape> ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2022-07-07"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-01-30"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1303/2024-01-29> ;
+    rdfs:comment "A railway tunnel is an excavation or a construction around the track provided to allow the railway to pass for example higher land, buildings or water."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    ns1:term_status "stable" ;
+    skos:definition """A railway tunnel is an excavation or a construction around the track provided to allow the railway to pass for example higher land, buildings or water.
+
+The length of a tunnel is defined as the length of the fully enclosed section, measured at rail level. A tunnel in the context of this TSI is 0.1 km or longer.
+Where certain requirements apply only to longer tunnels, thresholds are mentioned in the relevant clauses."""@en .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] a rdf:List .
+
+[] a rdf:List .
+
+[] a rdf:List .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] a rdf:List .
+
+[] a rdf:List .
+
+[] a rdf:List .
+
+[] rdf:first :Tunnel .
+
+[] owl:allValuesFrom :NetPointReference ;
+    owl:onProperty :netReference .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] rdf:first :Tunnel .
+
+[] a rdf:List .
+
+[] a rdf:List .
+
+[] a rdf:List .
+
+[] owl:allValuesFrom :NetPointReference ;
+    owl:onProperty :netReference .
+
+[] owl:allValuesFrom :NetPointReference ;
+    owl:onProperty :netReference .
+
+[] rdf:first :Tunnel .
+

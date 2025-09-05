@@ -1,0 +1,21 @@
+{
+  "strategy": "hierarchical",
+  "source_file": "../examples/person_ontology.owl",
+  "partitions": {
+    "Address": {
+      "file": "../examples/person_ontology_modules/hierarchical/Address.ttl",
+      "entities": 4,
+      "triples": 16
+    },
+    "Organization": {
+      "file": "../examples/person_ontology_modules/hierarchical/Organization.ttl",
+      "entities": 2,
+      "triples": 11
+    },
+    "misc": {
+      "file": "../examples/person_ontology_modules/hierarchical/misc.ttl",
+      "entities": 13,
+      "triples": 68
+    }
+  }
+}

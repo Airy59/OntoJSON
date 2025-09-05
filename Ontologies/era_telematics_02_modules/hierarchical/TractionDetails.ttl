@@ -1,0 +1,29 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:TractionWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TractionWeight" ;
+    rdfs:comment "The weight of the traction unit" ;
+    rdfs:domain :TractionDetails ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTractionDetails rdfs:range :TractionDetails .
+
+:TractionDetails a owl:Class ;
+    rdfs:label "TractionDetails" ;
+    rdfs:comment """Defines the design series, mode of deployment and technical
+				specfications associated with the traction of a train.""" .
+
+[] rdf:first :TractionDetails .
+
+[] rdf:first :TractionDetails .
+
+[] rdf:first :TractionDetails .
+
+[] rdf:first :TractionDetails .
+

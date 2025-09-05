@@ -1,0 +1,188 @@
+# Ontology Partitioning Report
+
+**Source Ontology:** era_telematics_02.ttl
+**Date:** 2025-09-05 16:10:45
+
+## Ontology Statistics
+
+- **Classes:** 265
+- **Object Properties:** 213
+- **Datatype Properties:** 520
+- **Annotation Properties:** 22
+- **Individuals:** 0
+- **Total Entities:** 998
+- **Total Triples:** 6694
+
+## Dependency Analysis
+
+- **Graph Nodes:** 1028
+- **Graph Edges:** 1204
+- **Average Degree:** 2.34
+- **Connected Components:** 94
+  - Largest component: 889 nodes
+  - Smallest component: 1 nodes
+
+## Partitioning Results
+
+### Hierarchical Strategy
+
+#### Metrics
+
+| Metric | Value |
+|--------|-------|
+| Number of Partitions | 266 |
+| Cohesion | 0.008 |
+| Coupling | 0.992 |
+| Min Partition Size | 1 |
+| Max Partition Size | 726 |
+| Avg Partition Size | 5.7 |
+| Inter-partition Edges | 729 |
+| Intra-partition Edges | 6 |
+
+#### Partition Size Distribution
+
+| Category | Count | Sizes |
+|----------|-------|-------|
+| Large (>50) | 1 | [726] |
+| Medium (10-50) | 8 | [37, 24, 15, 13, 12, 11, 11, 10] |
+| Small (3-9) | 112 | [8, 8, 8, 7, 7, 7, 6, 6, 6, 6]... |
+| Tiny (2) | 48 | - |
+| Singleton (1) | 97 | - |
+
+#### Top 10 Largest Partitions
+
+| Partition Name | Entity Count |
+|----------------|-------------|
+| misc | 726 |
+| DesignDataSet | 37 |
+| COM | 24 |
+| AdministrativeDataSet | 15 |
+| RID | 13 |
+| PlannedTrainTechnicalData | 12 |
+| WagonStatusMessage | 11 |
+| COM_Header | 11 |
+| WagonDetails | 10 |
+| Tariff | 8 |
+
+### Community Strategy
+
+#### Metrics
+
+| Metric | Value |
+|--------|-------|
+| Number of Partitions | 110 |
+| Cohesion | 0.843 |
+| Coupling | 0.157 |
+| Min Partition Size | 1 |
+| Max Partition Size | 145 |
+| Avg Partition Size | 9.3 |
+| Inter-partition Edges | 189 |
+| Intra-partition Edges | 1013 |
+
+#### Partition Size Distribution
+
+| Category | Count | Sizes |
+|----------|-------|-------|
+| Large (>50) | 8 | [145, 101, 80, 78, 61]... |
+| Medium (10-50) | 10 | [41, 33, 27, 26, 25, 23, 21, 13, 11, 10] |
+| Small (3-9) | 13 | [9, 7, 6, 5, 5, 5, 5, 4, 4, 4]... |
+| Tiny (2) | 17 | - |
+| Singleton (1) | 62 | - |
+
+#### Top 10 Largest Partitions
+
+| Partition Name | Entity Count |
+|----------------|-------------|
+| number_code | 145 |
+| load_type | 101 |
+| location_planned | 80 |
+| time_date | 78 |
+| section_delivery | 61 |
+| type_number | 60 |
+| section_seals | 57 |
+| event_position | 51 |
+| ecm_date | 41 |
+| timing_tariff | 33 |
+
+### Domain Strategy
+
+#### Metrics
+
+| Metric | Value |
+|--------|-------|
+| Number of Partitions | 10 |
+| Cohesion | 0.727 |
+| Coupling | 0.273 |
+| Min Partition Size | 4 |
+| Max Partition Size | 590 |
+| Avg Partition Size | 99.1 |
+| Inter-partition Edges | 201 |
+| Intra-partition Edges | 534 |
+
+#### Partition Size Distribution
+
+| Category | Count | Sizes |
+|----------|-------|-------|
+| Large (>50) | 4 | [590, 166, 85, 53] |
+| Medium (10-50) | 4 | [33, 29, 13, 10] |
+| Small (3-9) | 2 | [8, 4] |
+| Tiny (2) | 0 | - |
+| Singleton (1) | 0 | - |
+
+#### Top 10 Largest Partitions
+
+| Partition Name | Entity Count |
+|----------------|-------------|
+| general | 590 |
+| rolling_stock | 166 |
+| geographic | 85 |
+| operations | 53 |
+| infrastructure | 33 |
+| signaling | 29 |
+| administrative | 13 |
+| technical | 10 |
+| electrical | 8 |
+| safety | 4 |
+
+## Quality Assessment
+
+### Hierarchical Strategy
+
+- **Cohesion (0.008):** ⚠️ **Fair** - Could benefit from refinement
+- **Coupling (0.992):** ⚠️ **Fair** - High inter-partition dependencies
+
+⚠️ **Note:** High number of singleton partitions. Consider adjusting parameters or merging strategy.
+
+### Community Strategy
+
+- **Cohesion (0.843):** ✅ **Excellent** - Highly cohesive partitions
+- **Coupling (0.157):** ✅ **Excellent** - Low inter-partition dependencies
+
+⚠️ **Note:** High number of singleton partitions. Consider adjusting parameters or merging strategy.
+
+### Domain Strategy
+
+- **Cohesion (0.727):** ✅ **Excellent** - Highly cohesive partitions
+- **Coupling (0.273):** ✅ **Excellent** - Low inter-partition dependencies
+
+## Output Files
+
+The following files have been generated:
+
+- `partitioning_summary.json` - Machine-readable summary
+- `PARTITIONING_REPORT.md` - This human-readable report
+- `hierarchical/` - Directory containing partition modules
+  - `*.ttl` - Individual partition files in Turtle format
+  - `index.json` - Index of partitions with metadata
+- `hierarchical_visualization.png` - Graph visualization
+- `community/` - Directory containing partition modules
+  - `*.ttl` - Individual partition files in Turtle format
+  - `index.json` - Index of partitions with metadata
+- `community_visualization.png` - Graph visualization
+- `domain/` - Directory containing partition modules
+  - `*.ttl` - Individual partition files in Turtle format
+  - `index.json` - Index of partitions with metadata
+- `domain_visualization.png` - Graph visualization
+
+---
+*Generated by Semantic Partitioner*

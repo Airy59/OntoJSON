@@ -1,0 +1,639 @@
+:loadCapabilitySpeed rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain :LoadCapability ;
+                     rdfs:range xsd:integer ;
+                     :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilitySpeed> ;
+                     :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+                     <http://purl.org/dc/terms/created> "2023-01-20"^^xsd:date ;
+                     <http://purl.org/dc/terms/modified> "2025-02-18"^^xsd:date ,
+                                                         "2025-03-11"^^xsd:date ;
+                     <http://purl.org/dc/terms/replaces> :loadCapability ;
+                     <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+                     rdfs:comment "Part of the load capability of a track that corresponds to the speed of the load model"@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "Load capability speed"@en ;
+                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/loadingPlatformHeight
+:loadingPlatformHeight rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                       rdfs:domain :VehicleType ;
+                       rdfs:range xsd:integer ;
+                       :eratvIndex "4.8.7" ;
+                       <http://purl.org/dc/terms/created> "2021-08-31"^^xsd:date ;
+                       <http://purl.org/dc/terms/modified> "2021-08-31"^^xsd:date ;
+                       rdfs:comment "Height of loading platform (for flat wagons and combined transport), given in mm."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Loading platform height"@en ;
+                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/localRulesOrRestrictions
+:localRulesOrRestrictions rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf :rulesDataParameter ;
+                          rdf:type owl:FunctionalProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( :CommonCharacteristicsSubset
+                                                      :OperationalPoint
+                                                      :RunningTrack
+                                                    )
+                                      ] ;
+                          rdfs:range xsd:boolean ;
+                          :XMLName "RUL_LocalRulesOrRestrictions" ;
+                          :applicable "Y/N" ;
+                          :formatNote "Y/N" ;
+                          :legalDeadline "1 January 2021"@en ;
+                          :rinfIndex "1.1.1.4.1" ,
+                                     "1.2.3.1" ;
+                          :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LocalRulesOrRestrictions> ;
+                          <http://purl.org/dc/terms/created> "2021-08-09"^^xsd:date ;
+                          <http://purl.org/dc/terms/modified> "2021-09-12"^^xsd:date ,
+                                                              "2025-03-11"^^xsd:date ;
+                          rdfs:comment "Existence of rules and restrictions of a strictly local nature"@en ;
+                          rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                          rdfs:label "Existence of rules and restrictions of a strictly local nature"@en ;
+                          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                          <http://www.w3.org/2004/02/skos/core#scopeNote> """There is a general obligation for Member States to notify existing national rules but:  Member States may decide not to notify rules and restrictions of a strictly local nature. In such cases, Member States shall mention those rules and restrictions in the registers of infrastructure.
+In this eventuality, this parameter allows the IM accordingly to its Member State decision to declare the existence of such rules and to provide them with the parameter 'Documents regarding the rules or restrictions of a strictly local nature available by the IM'"""@en .
+
+
+###  http://data.europa.eu/949/mNvderun
+:mNvderun rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf :etcsNationalValuesDataParameter ;
+          rdf:type owl:FunctionalProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :CommonCharacteristicsSubset
+                                      :RunningTrack
+                                    )
+                      ] ;
+          rdfs:range xsd:boolean ;
+          :applicable "Y/N/NYA" ;
+          :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+          :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+          :rinfIndex "1.1.1.3.2.16.10" ,
+                     "1.2.1.1.1.16.10" ;
+          :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MNvderun> ,
+                                    <http://data.europa.eu/949/shapes/MNvderunApplicability> ;
+          :tsiOPEAppendixD3Index "1.5.10" ;
+          <http://purl.org/dc/terms/created> "2022-11-07"^^xsd:date ;
+          <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ,
+                                              "2023-04-18"^^xsd:date ;
+          <http://purl.org/dc/terms/relation> :etcsLevelType ;
+          <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+          rdfs:comment "Entry of Driver ID permitted while running According to the specification referenced in Appendix A-1, index [C]"@en ;
+          rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+          rdfs:label "M_NVDERUN"@en ;
+          rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+          <http://www.w3.org/2004/02/skos/core#scopeNote> "See: TSI CCS (Subset 26, chapter 7. 7.5.1.75 M_NVDERUN)"@en .
+
+
+###  http://data.europa.eu/949/magneticBrakePrevention
+:magneticBrakePrevention rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                         rdfs:domain :VehicleType ;
+                         rdfs:range xsd:boolean ;
+                         :eratvIndex "4.7.4.2.2" ;
+                         <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                         <http://purl.org/dc/terms/modified> "2021-04-13"^^xsd:date ;
+                         rdfs:comment "Possibility of preventing the use of the magnetic track brake (only if fitted with magnetic brake)"@en ;
+                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                         rdfs:label "Magnetic brake prevention"@en ;
+                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/magneticBrakingFitted
+:magneticBrakingFitted rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                       rdfs:domain :VehicleType ;
+                       rdfs:range xsd:boolean ;
+                       :eratvIndex "4.7.4.2.1" ;
+                       <http://purl.org/dc/terms/created> "2022-09-12"^^xsd:date ;
+                       rdfs:comment "Magnetic track brake fitted. New property defined to distinguish it from magneticBraking which is a RINF SKOS property."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Magnetic braking fitted"@en ;
+                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/massPerWheel
+:massPerWheel rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+              rdfs:domain :VehicleType ;
+              rdfs:range xsd:integer ;
+              :eratvIndex "4.5.6" ;
+              <http://purl.org/dc/terms/created> "2021-08-26"^^xsd:date ;
+              <http://purl.org/dc/terms/modified> "2021-08-26"^^xsd:date ;
+              rdfs:comment "Mass per wheel, given in kg."@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "Mass per wheel"@en ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maxCurrentStandstillPantograph
+:maxCurrentStandstillPantograph rdf:type owl:DatatypeProperty ;
+                                rdfs:subPropertyOf :contactLineSystemDataParameter ,
+                                                   :vehicleTypeTechnicalDataCharacteristic ;
+                                rdf:type owl:FunctionalProperty ;
+                                rdfs:domain [ rdf:type owl:Class ;
+                                              owl:unionOf ( :ContactLineSystem
+                                                            :Siding
+                                                            :VehicleType
+                                                          )
+                                            ] ;
+                                rdfs:range xsd:integer ;
+                                :XMLName "ECS_MaxStandstillCurrent" ;
+                                :applicable "Y/N" ;
+                                :dependencyNote """This parameter is applicable only the type of contact line system is 'Overhead contact line (OCL)'
+In sidings, it may be not applicable, in the following cases:
+- siding is not electrified
+- Siding is destined to freight traffic, whose trains have a low consumption in stationary (the maximum demand of energy is due to air conditioning systems, which is not significant in these trains).
+- Siding is used in access to depots or workshops."""@en ;
+                                :eratvIndex "4.10.4" ;
+                                :formatNote "NNN" ;
+                                :legalDeadline """In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest for DC systems
+30 June 2024 for AC systems"""@en ;
+                                :rinfIndex "1.1.1.2.2.3" ,
+                                           "1.2.2.0.6.1" ;
+                                :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaxCurrentStandstillPantograph> ,
+                                                          <http://data.europa.eu/949/shapes/MaxCurrentStandstillPantographApplicability> ,
+                                                          <http://data.europa.eu/949/shapes/MaxCurrentStandstillPantographS> ;
+                                :tsiOPEAppendixD2Index "3.3.8" ;
+                                :unitOfMeasure <http://qudt.org/vocab/unit/A> ;
+                                :usedInRCCCalculations "true"^^xsd:boolean ;
+                                <http://purl.org/dc/terms/created> "2020-08-25"^^xsd:date ;
+                                <http://purl.org/dc/terms/modified> "2021-09-12"^^xsd:date ,
+                                                                    "2024-05-16"^^xsd:date ,
+                                                                    "2024-09-25"^^xsd:date ,
+                                                                    "2025-02-28"^^xsd:date ;
+                                <http://purl.org/dc/terms/relation> :contactLineSystemType ;
+                                <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+                                rdfs:comment "Indication of the maximum allowable train current at standstill expressed in amperes."@en ;
+                                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                rdfs:label "Maximum current at standstill per pantograph"@en ;
+                                rdfs:seeAlso "ENE TSI: 4.2.5, LOC&PAS TSI: 4.2.8.2.5" ;
+                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                                <http://www.w3.org/2004/02/skos/core#scopeNote> """Parameter related to current taken by the vehicle when it is not in a traction or regenerative mode, e.g. preheating, air-condition, etc.
+Due to operational reasons, trains can get stuck on SoL for hours, and in some cases, this parameter is even the reason the air-condition is shut down"""@en .
+
+
+###  http://data.europa.eu/949/maxDistConsecutiveAxles
+:maxDistConsecutiveAxles rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                         rdfs:domain :VehicleType ;
+                         rdfs:range xsd:integer ;
+                         :XMLName "CTD_MaxDistConsecutiveAxles" ;
+                         :eratvIndex "4.14.2.1" ;
+                         :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+                         <http://purl.org/dc/terms/created> "2021-08-08"^^xsd:date ;
+                         <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ;
+                         rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter. Indication of maximum permitted distance between two consecutive axles in case of TSI non-compliance, given in millimetres."@en ;
+                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                         rdfs:label "Maximum permitted distance between two consecutive axles in case of TSI non-compliance"@en ;
+                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maxDistEndTrainFirstAxle
+:maxDistEndTrainFirstAxle rdf:type owl:DatatypeProperty ;
+                          rdfs:domain :TrainDetectionSystem ;
+                          rdfs:range xsd:integer ;
+                          :XMLName "CTD_MaxDistEndTrainFirstAxle" ;
+                          :rinfIndex "1.1.1.3.7.5" ;
+                          :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+                          <http://purl.org/dc/terms/created> "2021-08-08"^^xsd:date ;
+                          <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ;
+                          rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication of maximum distance between end of train and first axle, given in millimetres, applicable for both sides (front and rear) of a vehicle or train."@en ;
+                          rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                          rdfs:label "Maximum distance between end of train and first axle"@en ;
+                          owl:deprecated "true"^^xsd:boolean ;
+                          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maxFlangeHeight
+:maxFlangeHeight rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                 rdfs:domain :VehicleType ;
+                 rdfs:range xsd:double ;
+                 :XMLName "CTD_MaxFlangeHeight" ;
+                 :eratvIndex "4.14.2.9" ;
+                 :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+                 <http://purl.org/dc/terms/created> "2021-08-08"^^xsd:date ;
+                 <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ;
+                 rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter. Maximum permitted flange height, given in millimetres."@en ;
+                 rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                 rdfs:label "Maximum permitted height of the flange"@en ;
+                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maxImpedanceWheelset
+:maxImpedanceWheelset rdf:type owl:DatatypeProperty ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( :TrainDetectionSystem
+                                                  :VehicleType
+                                                )
+                                  ] ;
+                      rdfs:range xsd:double ;
+                      :XMLName "CTD_MaxImpedanceWheelset" ;
+                      :eratvIndex "4.14.2.16" ;
+                      :rinfIndex "1.1.1.3.7.15.2" ;
+                      <http://purl.org/dc/terms/created> "2021-08-08"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ;
+                      rdfs:comment "The value of maximum permitted impedance given in ohm in case of TSI non-compliance. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Maximum permitted impedance between opposite wheels of a wheelset when not TSI compliant"@en ;
+                      owl:deprecated "true"^^xsd:boolean ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maxLengthVehicleNose
+:maxLengthVehicleNose rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                      rdfs:domain :VehicleType ;
+                      rdfs:range xsd:integer ;
+                      :eratvIndex "4.14.2.4" ;
+                      <http://purl.org/dc/terms/created> "2021-09-01"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2021-09-01"^^xsd:date ;
+                      rdfs:comment "Maximum length of the vehicle nose."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Maximum length vehicle nose"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maxTrainCurrent
+:maxTrainCurrent rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :contactLineSystemDataParameter ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :ContactLineSystem ;
+                 rdfs:range xsd:integer ;
+                 :XMLName "ECS_MaxTrainCurrent" ;
+                 :applicable "Y/N" ;
+                 :dependencyNote "When `not electrified` is chosen in parameter 1.1.1.2.2.1.1, then this parameter is not applicable."@en ;
+                 :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                 :rinfIndex "1.1.1.2.2.2" ;
+                 :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumTrainCurrent> ;
+                 :tsiOPEAppendixD2Index "3.3.2" ;
+                 :unitOfMeasure <http://qudt.org/vocab/unit/A> ;
+                 <http://purl.org/dc/terms/created> "2021-08-06"^^xsd:date ;
+                 <http://purl.org/dc/terms/modified> "2021-08-06"^^xsd:date ,
+                                                     "2024-05-16"^^xsd:date ,
+                                                     "2024-09-25"^^xsd:date ,
+                                                     "2025-02-28"^^xsd:date ;
+                 <http://purl.org/dc/terms/relation> :contactLineSystemType ;
+                 rdfs:comment "Indication of the maximum allowable train current expressed in amperes."@en ;
+                 rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                 rdfs:label "Maximum train current"@en ;
+                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                 <http://www.w3.org/2004/02/skos/core#scopeNote> """For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, an XML attribute called â€œSetâ€ will be used to link the value of this parameter to the parameter 1.1.1.2.2.1.1 / ECS_SystemType"""@en .
+
+
+###  http://data.europa.eu/949/maximumAltitude
+:maximumAltitude rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :performanceDataParameter ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :CommonCharacteristicsSubset
+                                             :RunningTrack
+                                           )
+                             ] ;
+                 rdfs:range xsd:double ;
+                 :XMLName "IPP_MaxAltitude" ;
+                 :applicable "Y/N" ;
+                 :formatNote "[+/-][NNNN]" ;
+                 :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                 :rinfIndex "1.1.1.1.2.7" ;
+                 :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumAltitude> ;
+                 :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+                 <http://purl.org/dc/terms/created> "2021-08-03"^^xsd:date ;
+                 <http://purl.org/dc/terms/modified> "2022-10-20"^^xsd:date ,
+                                                     "2024-09-19"^^xsd:date ;
+                 rdfs:comment "Highest point of the section of line above sea level in reference to Normal Amsterdam's Peil (NAP)."@en ;
+                 rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                 rdfs:label "Maximum altitude"@en ;
+                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                 <http://www.w3.org/2004/02/skos/core#scopeNote> """Normaal Amsterdams Peil (NAP), called also Amsterdam Ordnance Datum, it is a vertical datum commonly in use in Europe as reference level for the description of the height of objects in relation to the sea level.
+
+The value of the parameter shall be given in metres, with tolerance of +/-100m."""@en .
+
+
+###  http://data.europa.eu/949/maximumAverageDeceleration
+:maximumAverageDeceleration rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                            rdfs:domain :VehicleType ;
+                            rdfs:range xsd:double ;
+                            :eratvIndex "4.7.1" ;
+                            :unitOfMeasure <http://qudt.org/vocab/unit/M-PER-SEC2> ;
+                            <http://purl.org/dc/terms/created> "2021-08-26"^^xsd:date ;
+                            <http://purl.org/dc/terms/modified> "2021-08-26"^^xsd:date ,
+                                                                "2024-06-26"^^xsd:date ;
+                            rdfs:comment "Maximum train deceleration given in m/sÂ²."@en ;
+                            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                            rdfs:label "Maximum average deceleration"@en ;
+                            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maximumBrakeThermalEnergyCapacity
+:maximumBrakeThermalEnergyCapacity rdf:type owl:DatatypeProperty ;
+                                   rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                                   rdfs:domain :VehicleType ;
+                                   rdfs:range xsd:integer ;
+                                   :eratvIndex "4.7.2.1.6" ;
+                                   :unitOfMeasure <http://qudt.org/vocab/unit/KiloJ> ;
+                                   <http://purl.org/dc/terms/created> "2021-08-26"^^xsd:date ;
+                                   <http://purl.org/dc/terms/modified> "2021-08-26"^^xsd:date ,
+                                                                       "2024-06-26"^^xsd:date ;
+                                   rdfs:comment "Maximum brake thermal energy capacity given in kJ"@en ;
+                                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                   rdfs:label "Maximum brake thermal energy capacity"@en ;
+                                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maximumBrakingDistance
+:maximumBrakingDistance rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf :brakeRelatedDataParameter ;
+                        rdf:type owl:FunctionalProperty ;
+                        rdfs:domain [ rdf:type owl:Class ;
+                                      owl:unionOf ( :CommonCharacteristicsSubset
+                                                    :RunningTrack
+                                                  )
+                                    ] ;
+                        rdfs:range xsd:integer ;
+                        :XMLName "CBP_MaxBrakeDist" ;
+                        :applicable "Y/N" ;
+                        :formatNote "NNNNN" ;
+                        :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                        :rinfIndex "1.1.1.3.11.1" ;
+                        :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumBrakingDistance> ;
+                        :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+                        :usedInRCCCalculations "true"^^xsd:boolean ;
+                        <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                        <http://purl.org/dc/terms/modified> "2021-09-12"^^xsd:date ,
+                                                            "2024-06-26"^^xsd:date ,
+                                                            "2024-09-19"^^xsd:date ;
+                        <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ,
+                                                          <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                        rdfs:comment "The maximum value of the braking distance [in metres] of a train shall be given for the maximum line speed."@en ;
+                        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                        rdfs:label "Maximum braking distance requested"@en ;
+                        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                        <http://www.w3.org/2004/02/skos/core#scopeNote> """This distance corresponds to the smallest physical distance between signals of the section of line at V max, taking into account the effect of gradient, minus the value of the safety margin used by the IM.
+
+The braking capability of a train allows it to respect this braking distance.
+
+Note that the OPE TSI provides for an exchange of detailed information between the infrastructure manager and the railway undertaking to ensure safe operation.
+
+See also:
+- OPE TSI: 4.2.2.6
+- CCS TSI: 4.2.2"""@en .
+
+
+###  http://data.europa.eu/949/maximumContactWireHeight
+:maximumContactWireHeight rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf :contactLineSystemDataParameter ,
+                                             :vehicleTypeTechnicalDataCharacteristic ;
+                          rdf:type owl:FunctionalProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( :ContactLineSystem
+                                                      :Siding
+                                                      :VehicleType
+                                                    )
+                                      ] ;
+                          rdfs:range xsd:double ;
+                          :XMLName "ECS_MaxWireHeight" ;
+                          :applicable "Y/N" ;
+                          :dependencyNote "Mandatory only if â€œOverhead contact line (OCL)â€ is selected in 1.1.1.2.2.1.1, otherwise the parameter is not applicable."@en ;
+                          :eratvIndex "4.10.5" ;
+                          :formatNote "N.NN" ;
+                          :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                          :rinfIndex "1.1.1.2.2.5" ;
+                          :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumContactWireHeight> ,
+                                                    <http://data.europa.eu/949/shapes/MaximumContactWireHeightApplicability> ;
+                          :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+                          :usedInRCCCalculations "true"^^xsd:boolean ;
+                          <http://purl.org/dc/terms/created> "2020-08-25"^^xsd:date ;
+                          <http://purl.org/dc/terms/modified> "2021-09-11"^^xsd:date ,
+                                                              "2024-09-25"^^xsd:date ,
+                                                              "2025-02-28"^^xsd:date ;
+                          <http://purl.org/dc/terms/relation> :contactLineSystemType ;
+                          rdfs:comment "Indication of the maximum contact wire height expressed in metres."@en ;
+                          rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                          rdfs:label "Maximum contact wire height"@en ;
+                          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                          <http://www.w3.org/2004/02/skos/core#scopeNote> """The value given can be design value or the last known measured value. If there is no change in height, nominal value will be given.
+
+Values shall be given in metres with precision of 0.01 m."""@en .
+
+
+###  http://data.europa.eu/949/maximumDesignSpeed
+:maximumDesignSpeed rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                    rdfs:domain :VehicleType ;
+                    rdfs:range xsd:integer ;
+                    :eratvIndex "4.1.2.1" ;
+                    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+                    <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                    <http://purl.org/dc/terms/modified> "2020-11-03"^^xsd:date ,
+                                                        "2024-06-26"^^xsd:date ;
+                    rdfs:comment "Maximum design speed."@en ;
+                    rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                    rdfs:label "Maximum design speed"@en ;
+                    <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maximumInterferenceCurrent
+:maximumInterferenceCurrent rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsDataParameter ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain :TrainDetectionSystem ;
+                            rdfs:range xsd:double ;
+                            :applicable "Y/N/NYA" ;
+                            :dependencyNote "Evaluation parameters must be added if preferred bands are not used."@en ;
+                            :formatNote "NNN. An optional value could be filled in era:maximumInterferenceCurrentEvaluation" ;
+                            :legalDeadline """For train detection system compliant with TSIs: 12 months after publication of Article 7 Guide.
+For train detection system not TSI compliant: in relation to article 13 of TSI CCS"""@en ;
+                            :rinfIndex "1.1.1.3.4.2.1" ,
+                                       "1.2.1.1.3.2.1" ;
+                            :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumInterferenceCurrent> ;
+                            :unitOfMeasure <http://qudt.org/vocab/unit/A-PER-M> ;
+                            :usedInRCCCalculations "true"^^xsd:boolean ;
+                            <http://purl.org/dc/terms/created> "2023-03-14"^^xsd:date ;
+                            <http://purl.org/dc/terms/modified> "2024-04-18"^^xsd:date ,
+                                                                "2025-02-28"^^xsd:date ;
+                            <http://purl.org/dc/terms/relation> :maximumInterferenceCurrentEvaluation ,
+                                                                :trainDetectionSystemType ;
+                            <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                            rdfs:comment "Maximum interference current limits allowed for track circuits for a defined frequency band."@en ;
+                            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                            rdfs:label "Maximum interference current"@en ;
+                            rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+                            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                            <http://www.w3.org/2004/02/skos/core#scopeNote> """To be expressed in A/m. Verification of compliance with TSI includes application of notified national rules (when they exist).
+
+Evaluation parameters must be added if preferred bands are not used. """@en .
+
+
+###  http://data.europa.eu/949/maximumInterferenceCurrentEvaluation
+:maximumInterferenceCurrentEvaluation rdf:type owl:DatatypeProperty ;
+                                      rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsDataParameter ;
+                                      rdf:type owl:FunctionalProperty ;
+                                      rdfs:domain :TrainDetectionSystem ;
+                                      rdfs:range xsd:string ;
+                                      :dependencyNote """If the preferred frequency bands are not used, (mandatory) description of the parameters for evaluation of compliance.
+If the preferred frequency bands are used, this parameter is optional."""@en ;
+                                      :rinfIndex "1.1.1.3.4.2.1" ,
+                                                 "1.2.1.1.3.2.1" ;
+                                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumInterferenceCurrentEvaluation> ;
+                                      :usedInRCCCalculations "true"^^xsd:boolean ;
+                                      <http://purl.org/dc/terms/created> "2024-04-18"^^xsd:date ;
+                                      <http://purl.org/dc/terms/relation> :maximumInterferenceCurrent ,
+                                                                          :trainDetectionSystemType ;
+                                      <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                                      rdfs:comment "Maximum interference current limits allowed for track circuits for a defined frequency band. "@en ;
+                                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                      rdfs:label "Evaluation parameters if maximum interference current is not measured in the preferred bands"@en ;
+                                      rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+                                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maximumLocomotivesCoupled
+:maximumLocomotivesCoupled rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                           rdfs:domain :VehicleType ;
+                           rdfs:range xsd:integer ;
+                           :eratvIndex "4.1.5" ;
+                           <http://purl.org/dc/terms/created> "2021-08-25"^^xsd:date ;
+                           <http://purl.org/dc/terms/modified> "2021-08-25"^^xsd:date ;
+                           rdfs:comment "Maximum number of trainsets or locomotives coupled together in multiple operation."@en ;
+                           rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                           rdfs:label "Maximum locomotives coupled"@en ;
+                           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maximumMagneticFieldDirectionX
+:maximumMagneticFieldDirectionX rdf:type owl:DatatypeProperty ,
+                                         owl:FunctionalProperty ;
+                                rdfs:domain :MaximumMagneticField ;
+                                rdfs:range xsd:integer ;
+                                :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldDirectionX> ;
+                                <http://purl.org/dc/terms/created> "2023-03-14"^^xsd:date ;
+                                <http://purl.org/dc/terms/modified> "2024-09-19"^^xsd:date ;
+                                <http://purl.org/dc/terms/relation> :trainDetectionSystemType ;
+                                rdfs:comment "The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band. Direction X."@en ;
+                                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                rdfs:label "Maximum magnetic field direction X"@en ;
+                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                                <http://www.w3.org/2004/02/skos/core#scopeNote> "The maximumMagneticFieldDirectionX parameter is only applicable for axle counters."@en .
+
+
+###  http://data.europa.eu/949/maximumMagneticFieldDirectionY
+:maximumMagneticFieldDirectionY rdf:type owl:DatatypeProperty ,
+                                         owl:FunctionalProperty ;
+                                rdfs:domain :MaximumMagneticField ;
+                                rdfs:range xsd:integer ;
+                                :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldDirectionY> ;
+                                <http://purl.org/dc/terms/created> "2023-03-14"^^xsd:date ;
+                                <http://purl.org/dc/terms/modified> "2024-09-19"^^xsd:date ;
+                                <http://purl.org/dc/terms/relation> :trainDetectionSystemType ;
+                                rdfs:comment "The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band. Direction Y."@en ;
+                                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                rdfs:label "Maximum magnetic field direction Y"@en ;
+                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                                <http://www.w3.org/2004/02/skos/core#scopeNote> "The maximumMagneticFieldDirectionY parameter is only applicable for axle counters."@en .
+
+
+###  http://data.europa.eu/949/maximumMagneticFieldDirectionZ
+:maximumMagneticFieldDirectionZ rdf:type owl:DatatypeProperty ;
+                                rdfs:domain :MaximumMagneticField ;
+                                rdfs:range xsd:integer ;
+                                :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldDirectionZ> ;
+                                <http://purl.org/dc/terms/created> "2023-03-14"^^xsd:date ;
+                                <http://purl.org/dc/terms/modified> "2024-09-19"^^xsd:date ;
+                                <http://purl.org/dc/terms/relation> :trainDetectionSystemType ;
+                                rdfs:comment "The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band. Direction Z."@en ;
+                                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                rdfs:label "Maximum magnetic field direction Z"@en ;
+                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                                <http://www.w3.org/2004/02/skos/core#scopeNote> "The maximumMagneticFieldDirectionZ parameter is applicable for axle counters."@en .
+
+
+###  http://data.europa.eu/949/maximumPermittedSpeed
+:maximumPermittedSpeed rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf :performanceDataParameter ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( :CommonCharacteristicsSubset
+                                                   :RunningTrack
+                                                 )
+                                   ] ;
+                       rdfs:range xsd:integer ;
+                       :XMLName "IPP_MaxSpeed" ;
+                       :applicable "Y/N" ;
+                       :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                       :rinfIndex "1.1.1.1.2.5" ;
+                       :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumPermittedSpeed> ;
+                       :tsiOPEAppendixD2Index "3.1.4" ;
+                       :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+                       :usedInRCCCalculations "true"^^xsd:boolean ;
+                       <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                       <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ,
+                                                           "2024-09-19"^^xsd:date ,
+                                                           "2025-02-26"^^xsd:date ;
+                       rdfs:comment "Nominal maximum operational speed on the line as a result of infrastructure, energy and control, command signalling subsystem characteristics expressed in kilometres/hour."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Maximum permitted speed"@en ;
+                       rdfs:seeAlso "INF TSI, ENE TSI, CCS TSI" ;
+                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                       <http://www.w3.org/2004/02/skos/core#example> """In case INF, ENE and/or CCS allow different speeds, the max permitted speed on this track of this section of line shall be the lowest one.
+In case the maximum permitted speed for freight and passenger trains operation are different, the max permitted speed on this track of this section of line shall be the highest one.""" ;
+                       <http://www.w3.org/2004/02/skos/core#scopeNote> "\"Speed on the line\" shall be understood as speed on the track of the section of line in question. "@en .
+
+
+###  http://data.europa.eu/949/maximumServiceBrake
+:maximumServiceBrake rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                     rdfs:domain :VehicleType ;
+                     rdfs:range xsd:string ;
+                     :eratvIndex "4.7.7" ;
+                     <http://purl.org/dc/terms/created> "2021-08-26"^^xsd:date ;
+                     <http://purl.org/dc/terms/modified> "2021-08-26"^^xsd:date ;
+                     rdfs:comment "At maximum service brake: Stopping distance, Maximum deceleration, for the load condition 'design mass under normal payload' at the design maximum speed."@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "Maximum service break"@en ;
+                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maximumSpeedAndCantDeficiency
+:maximumSpeedAndCantDeficiency rdf:type owl:DatatypeProperty ;
+                               rdfs:domain :VehicleType ;
+                               rdfs:range xsd:string ;
+                               :eratvIndex "4.6.4" ;
+                               <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                               <http://purl.org/dc/terms/isReplacedBy> :MaximumSpeedAndCantDeficiency ,
+                                                                       :vehicleTypeMaximumCantDeficiency ,
+                                                                       :vehicleTypeMaximumSpeed ,
+                                                                       :vehicleTypeMaximumSpeedAndCantDeficiency ;
+                               <http://purl.org/dc/terms/modified> "2023-04-05"^^xsd:date ;
+                               rdfs:comment """Combination of maximum speed and maximum cant deficiency for which the vehicle was assessed.
+
+This property was before an object skos property. The values for this property do not come from a list of predefined values. Thus, the original object property was replaced by this datatype property with range xsd:string.
+Deprecated because of replacement by a class and two integer properties. The reason is that the property represents two concepts: [number] km/h for maximum speed - [number] mm for maximum cant deficiency."""@en ;
+                               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                               rdfs:label "Maximum speed and cant deficiency"@en ;
+                               owl:deprecated "true"^^xsd:boolean ;
+                               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/maximumSpeedEmpty
+:maximumSpeedEmpty rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                   rdfs:domain :VehicleType ;
+                   rdfs:range xsd:integer ;
+                   :eratvIndex "4.1.2.2" ;
+                   <http://purl.org/dc/terms/created> "2021-08-24"^^xsd:date ;
+                   <http://purl.org/dc/terms/modified> "2021-08-24"^^xsd:date ;
+                   rdfs:comment "Maximum speed when empty."@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "Maximum speed empty"@en ;
+                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+

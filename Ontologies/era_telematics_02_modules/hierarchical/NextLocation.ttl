@@ -1,0 +1,12 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasNextLocation rdfs:range :NextLocation .
+
+:NextLocation a owl:Class ;
+    rdfs:label "NextLocation" ;
+    rdfs:comment """Next location forecasted to be encountered by the train.
+							If this element isnâ€™t present, the GNSS position is considered to be
+							within the â€œboundariesâ€ of the location included in the LocationReport""" .
+

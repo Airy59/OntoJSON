@@ -1,0 +1,21 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:etcsNationalPacket44Function dcterms:replaces :etcsNationalPacket44 .
+
+:hasEtcsNationalPacket44 dcterms:replaces :etcsNationalPacket44 .
+
+:etcsNationalPacket44 a owl:DatatypeProperty ;
+    rdfs:label "ETCS national packet 44 application implemented"@en ;
+    :rinfIndex "1.1.1.3.2.5",
+        "1.2.1.1.1.5" ;
+    dcterms:isReplacedBy :etcsNationalPacket44Function,
+        :hasEtcsNationalPacket44 ;
+    dcterms:modified "2025-05-05"^^xsd:date ;
+    rdfs:comment "Indication whether data for national applications is transmitted between track and train."@en ;
+    rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter ;
+    owl:deprecated true .
+

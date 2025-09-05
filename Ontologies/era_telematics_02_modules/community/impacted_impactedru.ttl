@@ -1,0 +1,10 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:ImpactedRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ImpactedRU" ;
+    rdfs:comment "The RU impacted by a restriction" ;
+    rdfs:subPropertyOf :dataProperties .
+

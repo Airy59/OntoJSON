@@ -1,0 +1,39 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:BrakeBlockName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BrakeBlockName" ;
+    rdfs:comment """Name of the brake block type,
+													including the length in mm""" ;
+    rdfs:domain :BrakeBlock ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CompositeBrakeBlockInstallationDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CompositeBrakeBlockInstallationDate" ;
+    rdfs:comment """Date of composite brake block
+													installation, for originally equipped wagon =
+													date put into service""" ;
+    rdfs:domain :BrakeBlock ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CompositeBrakeBlockRetrofitted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CompositeBrakeBlockRetrofitted" ;
+    rdfs:comment """ Indication if composite brake
+													blocks are retrofitted or originally equipped""" ;
+    rdfs:domain :BrakeBlock ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasBrakeBlock rdfs:range :BrakeBlock .
+
+:BrakeBlock a owl:Class ;
+    rdfs:label "BrakeBlock" ;
+    rdfs:comment "Characteristics of brake blocks" .
+

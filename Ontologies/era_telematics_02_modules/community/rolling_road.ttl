@@ -1,0 +1,185 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ContainerNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ContainerNumber" ;
+    rdfs:domain :GoodsInWagon ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:FirstName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FirstName" ;
+    rdfs:comment "AMEND: ",
+        """Optional first name of the
+													attendant.""",
+        "READ: ",
+        "WRITE: " ;
+    rdfs:domain :Attendants ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LastName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LastName" ;
+    rdfs:comment "AMEND: ",
+        "Last name of attendant.",
+        "READ: ",
+        "WRITE: " ;
+    rdfs:domain :Attendants ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberPlate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberPlate" ;
+    rdfs:comment "AMEND: ",
+        "Number plate of the vehicle.",
+        "READ: ",
+        "WRITE: " ;
+    rdfs:domain :Vehicles ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RollingRoadUnitType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RollingRoadUnitType" ;
+    rdfs:comment "AMEND: ",
+        "CODE:",
+        "READ: ",
+        "Type of Rolling Road unit on Wagon",
+        "WRITE: " ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TareWeightVehicle a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TareWeightVehicle" ;
+    rdfs:comment """Total weight [kg] of vehicle (truck and
+										trailer).""" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasAttendants a owl:ObjectProperty ;
+    rdfs:label "has Attendants" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range :Attendants .
+
+:hasGoodsInContainer a owl:ObjectProperty ;
+    rdfs:label "has GoodsInContainer" ;
+    rdfs:domain :GoodsInWagon ;
+    rdfs:range :GoodsInContainer .
+
+:hasGoodsInWagon a owl:ObjectProperty ;
+    rdfs:label "has GoodsInWagon" ;
+    rdfs:domain [ ] ;
+    rdfs:range :GoodsInWagon .
+
+:hasHaulier a owl:ObjectProperty ;
+    rdfs:label "has Haulier" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range :Haulier .
+
+:hasILU a owl:ObjectProperty ;
+    rdfs:label "has ILU" ;
+    rdfs:domain :GoodsInWagon ;
+    rdfs:range :ILU .
+
+:hasILU_Details a owl:ObjectProperty ;
+    rdfs:label "has ILU_Details" ;
+    rdfs:domain :ILU ;
+    rdfs:range :ILU_Details .
+
+:hasRollingRoadUnit a owl:ObjectProperty ;
+    rdfs:label "has RollingRoadUnit" ;
+    rdfs:domain :GoodsInWagon ;
+    rdfs:range :RollingRoadUnit .
+
+:hasRollingRoadUnitDetails a owl:ObjectProperty ;
+    rdfs:label "has RollingRoadUnitDetails" ;
+    rdfs:domain :RollingRoadUnit ;
+    rdfs:range :RollingRoadUnitDetails .
+
+:hasVehicles a owl:ObjectProperty ;
+    rdfs:label "has Vehicles" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range :Vehicles .
+
+:Haulier a owl:Class ;
+    rdfs:label "Haulier" ;
+    rdfs:comment "Information concerning the haulier." .
+
+:Vehicles a owl:Class ;
+    rdfs:label "Vehicles" ;
+    rdfs:comment """List of vehicles loaded (i.e. truck and
+										trailer).""" .
+
+:Attendants a owl:Class ;
+    rdfs:label "Attendants" ;
+    rdfs:comment "Attendants during the transport." .
+
+:GoodsInContainer a owl:Class ;
+    rdfs:label "GoodsInContainer" .
+
+:RollingRoadUnit a owl:Class ;
+    rdfs:label "RollingRoadUnit" ;
+    rdfs:comment "Describes the type and content of a Rolling road unit" .
+
+:ILU a owl:Class ;
+    rdfs:label "ILU" ;
+    rdfs:comment "Describes the type and content of an IntermodalTransportUnit" .
+
+:RollingRoadUnitDetails a owl:Class ;
+    rdfs:label "RollingRoadUnitDetails" ;
+    rdfs:comment "Details for Rolling Road units on wagon" .
+
+:GoodsInWagon a owl:Class ;
+    rdfs:label "GoodsInWagon" ;
+    rdfs:comment "Goods" .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :ILU .
+
+[] rdf:first :RollingRoadUnit .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInContainer .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :ILU .
+
+[] rdf:first :RollingRoadUnitDetails .
+
+[] rdf:first :RollingRoadUnit .
+
+[] rdf:first :GoodsInContainer .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :Haulier .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :ILU .
+

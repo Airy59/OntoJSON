@@ -1,0 +1,17 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasDistance rdfs:range :Distance .
+
+:Distance a owl:Class ;
+    rdfs:label "Distance" ;
+    :domain "Telematics" ;
+    rdfs:comment """Tariff
+																			distance, expressed in
+																			km or zones, between the
+																			stations or points
+																			corresponding to the
+																			beginning and end of the
+																			charging section.""" .
+

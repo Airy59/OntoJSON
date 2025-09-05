@@ -1,0 +1,9 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+geo:Geometry a owl:Class ;
+    rdfs:label "Geometry"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/GeometryShape> .
+

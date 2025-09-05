@@ -1,0 +1,327 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AuthorisationValidUntil a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AuthorisationValidUntil" ;
+    rdfs:comment """End date for restricted authorisation (special
+										case)""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BrakeBlockName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BrakeBlockName" ;
+    rdfs:comment """Name of the brake block type,
+													including the length in mm""" ;
+    rdfs:domain :BrakeBlock ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ChannelTunnelPermitted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ChannelTunnelPermitted" ;
+    rdfs:comment """Indication if wagon is allowed to pass the
+										Channel Tunnel - if the transport is planned between UK and
+										France and should use Eurotunnel infrastructure.""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CompositeBrakeBlockInstallationDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CompositeBrakeBlockInstallationDate" ;
+    rdfs:comment """Date of composite brake block
+													installation, for originally equipped wagon =
+													date put into service""" ;
+    rdfs:domain :BrakeBlock ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CompositeBrakeBlockRetrofitted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CompositeBrakeBlockRetrofitted" ;
+    rdfs:comment """ Indication if composite brake
+													blocks are retrofitted or originally equipped""" ;
+    rdfs:domain :BrakeBlock ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CoversNonTankWagonsForDangerousGoods a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CoversNonTankWagonsForDangerousGoods" ;
+    rdfs:comment """Certificate covers other wagons
+													specialised in transport of dangerous goods""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CoversTankWagonsForDangerousGoods a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CoversTankWagonsForDangerousGoods" ;
+    rdfs:comment """Certificate covers tank wagons for
+													dangerous goods""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CreationDate rdfs:range xsd:date .
+
+:CurrentECMAssignedUntil a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CurrentECMAssignedUntil" ;
+    rdfs:comment """ Date until the current Entity in
+													Charge of Maintenance is assigned to the wagon""" ;
+    rdfs:domain :PlannedChangeOfECM ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Date rdfs:range xsd:date .
+
+:DateECMCertificateSuspended a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateECMCertificateSuspended" ;
+    rdfs:comment """Date of the suspension of the ECM
+													certificate; must be provided in case of
+													suspension""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateLastOverhaul a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateLastOverhaul" ;
+    rdfs:comment """ Date of the last overhaul. For wagons newly placed on the market, the
+				date put into service must be used. """ ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateNextOverhaul a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateNextOverhaul" ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateOfNextTankInspection a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateOfNextTankInspection" ;
+    rdfs:comment """Date of the next tank inspection, applies only
+										for tank wagons""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateOfReturn rdfs:range xsd:date .
+
+:DatePutIntoService a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DatePutIntoService" ;
+    rdfs:comment "Original Date of first operation" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateSuspensionOfAuthorisation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateSuspensionOfAuthorisation" ;
+    rdfs:comment """Date of the suspension of authorisation; must
+										be provided in case of suspension""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECM a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ECM" ;
+    rdfs:comment """ Full name of the assigned Entity in Charge of
+										Maintenance""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateSuspended a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ECMCertificateSuspended" ;
+    rdfs:comment """Identification if certificate has
+													been suspended for any reason""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateValidFrom a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ECMCertificateValidFrom" ;
+    rdfs:comment "Certificate valid from date" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateValidTo a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ECMCertificateValidTo" ;
+    rdfs:comment "Certificate valid to date" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EndDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EndDate" ;
+    rdfs:comment "The end date/time in effect" ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:GCUWagon a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GCUWagon" ;
+    rdfs:comment """Indication if wagon is operated under the GCU
+										contract""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InteropCapability a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InteropCapability" ;
+    rdfs:comment "Identification of the general interoperability capability of the wagon." ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MultilateralAuthorisationCountries a owl:DatatypeProperty ;
+    rdfs:label "MultilateralAuthorisationCountries" ;
+    rdfs:comment """ ISO country code of countries where the wagon
+										is authorised (applies only in case of limited
+										interoperability); first entry indicates the initial
+										authorisation country""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PlannedDateNextOverhaul a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PlannedDateNextOverhaul" ;
+    rdfs:comment """ Date of planned next overhaul. It must be within the validity period
+				of the last overhaul. The element serves as indication of the actually planned date
+				of next overhaul by the wagon keeper/ECM. Minimum planned date next overhaul or
+				overhaul validity period must be provided by the wagon keeper. """ ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreviousWagonNumberFreight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreviousWagonNumberFreight" ;
+    rdfs:comment """For identification of a wagon after
+										renumbering""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:QuieterRoutesExemptionCountry a owl:DatatypeProperty ;
+    rdfs:label "QuieterRoutesExemptionCountry" ;
+    rdfs:comment """ISO code of country where the wagon has an
+										exemption in accordance with TSI Noise to run on quieter
+										routes although it is not TSI noise compliant""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RegistrationCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RegistrationCountry" ;
+    rdfs:comment "ISO country code of registration country" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:StartDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "StartDate" ;
+    rdfs:comment "The start of the date/time in effect" ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SubsequentECM a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SubsequentECM" ;
+    rdfs:comment """ Full name of the following Entity
+													in Charge of Maintenance""" ;
+    rdfs:domain :PlannedChangeOfECM ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SuspensionOfAuthorisation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SuspensionOfAuthorisation" ;
+    rdfs:comment """Information if authorisation has been
+										suspended by the authority""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainDepartureDate rdfs:range xsd:date .
+
+:hasAdministrativeDataSet a owl:ObjectProperty ;
+    rdfs:label "has AdministrativeDataSet" ;
+    rdfs:domain :RollingStockDataset ;
+    rdfs:range :AdministrativeDataSet .
+
+:hasBrakeBlock a owl:ObjectProperty ;
+    rdfs:label "has BrakeBlock" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range :BrakeBlock .
+
+:hasDesignDataSet a owl:ObjectProperty ;
+    rdfs:label "has DesignDataSet" ;
+    rdfs:domain :RollingStockDataset ;
+    rdfs:range :DesignDataSet .
+
+:hasECMCertificate a owl:ObjectProperty ;
+    rdfs:label "has ECMCertificate" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range :ECMCertificate .
+
+:hasEINNumber rdfs:domain :ECMCertificate .
+
+:hasPlannedChangeOfECM a owl:ObjectProperty ;
+    rdfs:label "has PlannedChangeOfECM" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range :PlannedChangeOfECM .
+
+:hasRollingStockDataset a owl:ObjectProperty ;
+    rdfs:label "has RollingStockDataset" ;
+    rdfs:domain [ ] ;
+    rdfs:range :RollingStockDataset .
+
+:PlannedChangeOfECM a owl:Class ;
+    rdfs:label "PlannedChangeOfECM" .
+
+:RollingStockDataset a owl:Class ;
+    rdfs:label "RollingStockDataset" ;
+    rdfs:comment "Rolling Stock adminsitrative and Technical Dataset" .
+
+:BrakeBlock a owl:Class ;
+    rdfs:label "BrakeBlock" ;
+    rdfs:comment "Characteristics of brake blocks" .
+
+:ECMCertificate a owl:Class ;
+    rdfs:label "ECMCertificate" ;
+    rdfs:comment "ECM certificate information" .
+
+:AdministrativeDataSet a owl:Class ;
+    rdfs:label "AdministrativeDataSet" .
+
+xsd:date a rdfs:Datatype .
+
+[] rdf:first xsd:date .
+
+[] rdf:first :AdministrativeDataSet .
+
+[] rdf:first :AdministrativeDataSet .
+

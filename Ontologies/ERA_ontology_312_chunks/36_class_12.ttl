@@ -1,0 +1,763 @@
+:hasBridge rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :RunningTrack ;
+           rdfs:range xsd:boolean ;
+           :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasBridge> ;
+           <http://purl.org/dc/terms/created> "2024-12-10"^^xsd:date ;
+           rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+           rdfs:label "Has bridge"@en ;
+           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+           <http://www.w3.org/2004/02/skos/core#definition> "Whether or not a track is associated with a bridge."@en .
+
+
+###  http://data.europa.eu/949/hasCantDefficiencyCompensation
+:hasCantDefficiencyCompensation rdf:type owl:DatatypeProperty ;
+                                rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                                rdfs:domain :VehicleType ;
+                                rdfs:range xsd:boolean ;
+                                :eratvIndex "4.6.2" ;
+                                <http://purl.org/dc/terms/created> "2021-08-26"^^xsd:date ;
+                                <http://purl.org/dc/terms/modified> "2021-08-26"^^xsd:date ;
+                                rdfs:comment "Vehicle equipped with a cant deficiency compensation system (tilting vehicle)."@en ;
+                                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                rdfs:label "Has cant deficiency compensation"@en ;
+                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasCurrentLimitation
+:hasCurrentLimitation rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                      rdfs:domain :VehicleType ;
+                      rdfs:range xsd:boolean ;
+                      :eratvIndex "4.10.14" ;
+                      <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2020-11-03"^^xsd:date ;
+                      rdfs:comment "Electric units equipped with power or current limitation function."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Has current limitation"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasETCSRestrictionsConditions
+:hasETCSRestrictionsConditions rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter ;
+                               rdf:type owl:FunctionalProperty ;
+                               rdfs:domain [ rdf:type owl:Class ;
+                                             owl:unionOf ( :CommonCharacteristicsSubset
+                                                           :RunningTrack
+                                                         )
+                                           ] ;
+                               rdfs:range xsd:boolean ;
+                               :applicable "Y/N/NYA" ;
+                               :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+                               :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en ,
+                                              "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                               :rinfIndex "1.1.1.3.2.6" ,
+                                          "1.2.1.1.1.6" ;
+                               :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasETCSRestrictionsConditions> ,
+                                                         <http://data.europa.eu/949/shapes/HasETCSRestrictionsConditionsApplicability> ;
+                               <http://purl.org/dc/terms/created> "2021-08-08"^^xsd:date ;
+                               <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                                   "2024-04-18"^^xsd:date ,
+                                                                   "2024-11-20"^^xsd:date ,
+                                                                   "2025-02-28"^^xsd:date ;
+                               <http://purl.org/dc/terms/relation> :etcsLevelType ;
+                               <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                               rdfs:comment "Indication whether restrictions or conditions due to partial compliance with the TSI CCS exist."@en ;
+                               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                               rdfs:label "Existence of operating restrictions or conditions"@en ;
+                               rdfs:seeAlso "https://www.era.europa.eu/content/certification-issues"^^xsd:anyURI ,
+                                            "https://www.era.europa.eu/system/files/2022-11/restrictions_and_added_functions_en_1.doc"^^xsd:anyURI ;
+                               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                               <http://www.w3.org/2004/02/skos/core#scopeNote> """If operational restrictions and conditions are applicable, a document will be provided as a value of era:era:etcsRestrictionsConditionsDoc property. The RU has to contact the IM to be informed about these conditions.
+
+These conditions and restrictions of use are considered in section 6.4 of the CCS TSI. They should be described using the template available on Agency website (Certification
+and deviations - Guidelines for using the ERA template) with the following link: https://www.era.europa.eu/activities/european-rail-traffic-management-system-ertms_en#meeting6."""@en .
+
+
+###  http://data.europa.eu/949/hasElectricShoreSupply
+:hasElectricShoreSupply rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+                        rdf:type owl:FunctionalProperty ;
+                        rdfs:domain [ rdf:type owl:Class ;
+                                      owl:unionOf ( :CommonCharacteristicsSubset
+                                                    :Siding
+                                                  )
+                                    ] ;
+                        rdfs:range xsd:boolean ;
+                        :XMLName "ITS_ElectricShoreSupply" ;
+                        :applicable "Y/N" ;
+                        :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                        :rinfIndex "1.2.2.0.4.6" ;
+                        :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasElectricShoreSupply> ;
+                        <http://purl.org/dc/terms/created> "2021-08-10"^^xsd:date ;
+                        <http://purl.org/dc/terms/modified> "2021-08-10"^^xsd:date ,
+                                                            "2024-09-19"^^xsd:date ,
+                                                            "2025-03-11"^^xsd:date ;
+                        <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+                        rdfs:comment "Indication whether exists an installation of electric shore supply (fixed installation for servicing trains)."@en ;
+                        rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                        rdfs:label "Existence of electric shore supply"@en ;
+                        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasEmergencyPlan
+:hasEmergencyPlan rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf :tunnelDataParameter ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( :CommonCharacteristicsSubset
+                                              :Tunnel
+                                            )
+                              ] ;
+                  rdfs:range xsd:boolean ;
+                  :XMLName "ITU_EmergencyPlan" ;
+                  :applicable "Y/N" ;
+                  :dependencyNote "Mandatory for tunnels longer than 1 km"@en ;
+                  :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                  :rinfIndex "1.1.1.1.8.9" ,
+                             "1.2.1.0.5.6" ,
+                             "1.2.2.0.5.6" ;
+                  :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEmergencyPlan> ,
+                                            <http://data.europa.eu/949/shapes/HasEmergencyPlanApplicability> ;
+                  <http://purl.org/dc/terms/created> "2021-08-03"^^xsd:date ;
+                  <http://purl.org/dc/terms/modified> "2021-08-10"^^xsd:date ,
+                                                      "2024-09-19"^^xsd:date ;
+                  <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1303/2024-01-29> ;
+                  rdfs:comment "Indication whether emergency plan exists."@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "Existence of emergency plan"@en ;
+                  rdfs:seeAlso """SRT TSI: 4.4.2
+OPE TSI: 4.2.3.7""" ;
+                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                  <http://www.w3.org/2004/02/skos/core#scopeNote> """A value may not be applicable for tunnels shorter than 1 km, as for them the fire category according SRT TSI does not exist.
+Emergency plan has to be a document developed for each tunnel under the direction of the IM, in co-operation, where appropriate, with RUs, Rescue services and relevant authorities. It shall be consistent with the self-rescue, evacuation and rescue facilities provided.
+It is applicable for tunnels longer than 1 km, in accordance with section 4.4.2 of SRT TSI, the emergency plan is mandatory only for tunnel length of more than 1km.
+
+SRT TSI: 4.4.2
+OPE TSI: 4.2.3.7"""@en .
+
+
+###  http://data.europa.eu/949/hasEtcsNationalPacket44
+:hasEtcsNationalPacket44 rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:domain [ rdf:type owl:Class ;
+                                       owl:unionOf ( :CommonCharacteristicsSubset
+                                                     :Track
+                                                   )
+                                     ] ;
+                         rdfs:range xsd:boolean ;
+                         :dependencyNote "Only applicable when selected value for 1.1.1.3.2.1 (ETCS present)."@en ;
+                         :rinfIndex "1.1.1.3.2.5" ,
+                                    "1.2.1.1.1.5" ;
+                         :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEtcsNationalPacket44> ,
+                                                   <http://data.europa.eu/949/shapes/HasEtcsNationalPacket44Applicability> ;
+                         <http://purl.org/dc/terms/created> "2024-11-20"^^xsd:date ;
+                         <http://purl.org/dc/terms/modified> "2025-05-05"^^xsd:date ;
+                         <http://purl.org/dc/terms/replaces> :etcsNationalPacket44 ;
+                         <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                         rdfs:comment "Indication whether data for national packet 44 applications is transmitted between track and train."@en ;
+                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                         rdfs:label "has ETCS national packet 44 application implemented"@en ;
+                         rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                         <http://www.w3.org/2004/02/skos/core#scopeNote> """Value can be `false` or a link to the implemented functions. The hasEtcsNationalPacket44 property represents the true or false value. The etcsNationalPacket44Function represents the functions.
+
+Packets 44 are the means to transmit data for national applications between train and track and vice versa, using the data transmission facilities included within the ETCS.
+NID_XUSER values managed by ERA in a document about ETCS variables available on ERA website.
+
+See: TSI CCS (7.4.3 & 6.2.4.2)."""@en .
+
+
+###  http://data.europa.eu/949/hasEvacuationAndRescuePoints
+:hasEvacuationAndRescuePoints rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf :tunnelDataParameter ;
+                              rdf:type owl:FunctionalProperty ;
+                              rdfs:domain [ rdf:type owl:Class ;
+                                            owl:unionOf ( :CommonCharacteristicsSubset
+                                                          :Tunnel
+                                                        )
+                                          ] ;
+                              rdfs:range xsd:boolean ;
+                              :applicable "Y/N/NYA" ;
+                              :dependencyNote "Mandatory for TSI-compliant tunnels longer than 0.5 km"@en ;
+                              :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+                              :rinfIndex "1.1.1.1.8.13" ,
+                                         "1.2.1.0.5.11" ,
+                                         "1.2.2.0.5.10" ;
+                              :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEvacuationAndRescuePoints> ;
+                              :tsiOPEAppendixD2Index "3.2.3" ;
+                              <http://purl.org/dc/terms/created> "2022-10-27"^^xsd:date ;
+                              <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ,
+                                                                  "2024-09-19"^^xsd:date ,
+                                                                  "2025-02-28"^^xsd:date ;
+                              <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+                              rdfs:comment "Indication of existence of evacuation and rescue points"@en ;
+                              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                              rdfs:label "Existence of evacuation and rescue points"@en ;
+                              rdfs:seeAlso "Point 4.2.1.7.  \"Evacuation and rescue points\" of the Commission Regulation (EU) No 1303/2014 of 18 November 2014 concerning the technical specification for interoperability relating to safety in railway tunnels of the rail system of the European Union|https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1566396648532&uri=CELEX%3A02014R1303-20190616"^^xsd:anyURI ;
+                              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasExternalCleaning
+:hasExternalCleaning rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+                     rdf:type owl:FunctionalProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( :CommonCharacteristicsSubset
+                                                 :Siding
+                                               )
+                                 ] ;
+                     rdfs:range xsd:boolean ;
+                     :XMLName "ITS_ExternalCleaning" ;
+                     :applicable "Y/N" ;
+                     :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                     :rinfIndex "1.2.2.0.4.2" ;
+                     :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasExternalCleaning> ;
+                     <http://purl.org/dc/terms/created> "2021-08-10"^^xsd:date ;
+                     <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                         "2024-09-19"^^xsd:date ,
+                                                         "2025-03-11"^^xsd:date ;
+                     <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+                     rdfs:comment "Indication whether exists an installation of external cleaning facility (fixed installation for servicing trains) as defined in TSI INF"@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "Existence of external cleaning facilities"@en ;
+                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasHotAxleBoxDetector
+:hasHotAxleBoxDetector rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( :CommonCharacteristicsSubset
+                                                   :RunningTrack
+                                                 )
+                                   ] ;
+                       rdfs:range xsd:boolean ;
+                       :XMLName "IHS_HABDExist" ;
+                       :applicable "Y" ;
+                       :formatNote "in XML: Y/N" ;
+                       :legalDeadline "16 January 2020"@en ;
+                       :rinfIndex "1.1.1.1.7.4" ;
+                       :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasHotAxleBoxDetector> ;
+                       :usedInRCCCalculations "true"^^xsd:boolean ;
+                       <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                       <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                           "2025-02-28"^^xsd:date ;
+                       rdfs:comment "Existence of trackside HABD"@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Existence of trackside hot axle box detector (HABD)"@en ;
+                       rdfs:seeAlso """TSI Loc&Pas: 4.2.10.2.3, 4.2.3.3.2
+WAG TSI: 4.2.3.4
+EN 15437-1:2009""" ;
+                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                       <http://www.w3.org/2004/02/skos/core#scopeNote> """The aim of axle bearing condition monitoring is to detect deficient axle box bearings. The TSI Loc&Pas provides with the requirement that units of maximum design speed higher than or equal to 250 km/h, on board detection equipment shall be provided. For units of maximum design speed lower than 250 km/h, and designed to be operated on others track gauge systems than the 1 520 mm system, axle bearing condition monitoring shall be provided and be achieved either by on board equipment or by using track side equipment. Track side equipment (also known as HABD) are defined from the perspective of rolling stock, for which the zone visible to the trackside equipment is defined by the area referred in the standard EN 15437-1:2009, as required by the TSI Loc&Pas.
+This parameter is to indicate whether the section of line is equipped with trackside hot axle box detector (HABD) and is necessary for the route compatibility check."""@en .
+
+
+###  http://data.europa.eu/949/hasLevelCrossings
+:hasLevelCrossings rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( :CommonCharacteristicsSubset
+                                               :RunningTrack
+                                             )
+                               ] ;
+                   rdfs:range xsd:boolean ;
+                   :XMLName "IHS_LevelCrossing" ;
+                   :applicable "Y" ;
+                   :formatNote "in XML: Y/N" ;
+                   :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                   :rinfIndex "1.1.1.1.7.2" ;
+                   :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasLevelCrossings> ;
+                   <http://purl.org/dc/terms/created> "2021-08-03"^^xsd:date ;
+                   <http://purl.org/dc/terms/modified> "2021-09-11"^^xsd:date ,
+                                                       "2025-02-28"^^xsd:date ;
+                   rdfs:comment "Indication whether level crossings (including pedestrian track crossing) exist on the section of line."@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "Existence of level crossings"@en ;
+                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                   <http://www.w3.org/2004/02/skos/core#scopeNote> "This parameter concerns the level crossing of the railway with a road or a street. Provision the correct location of the level crossing(s) is not required, but RINF data model allows providing such information on a voluntary basis, and it can be a geographical information and/or a reference to a line referencing system."@en .
+
+
+###  http://data.europa.eu/949/hasLubricationDevicePrevention
+:hasLubricationDevicePrevention rdf:type owl:DatatypeProperty ;
+                                rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                                rdfs:domain :VehicleType ;
+                                rdfs:range xsd:boolean ;
+                                :eratvIndex "4.9.3.2" ;
+                                <http://purl.org/dc/terms/created> "2021-08-31"^^xsd:date ;
+                                <http://purl.org/dc/terms/modified> "2021-08-31"^^xsd:date ;
+                                rdfs:comment "Possibility of preventing the use of the lubrication device (only if fitted with flange lubrication)."@en ;
+                                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                rdfs:label "Has lubrication device prevention"@en ;
+                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasOtherTrainProtection
+:hasOtherTrainProtection rdf:type owl:DatatypeProperty ;
+                         rdfs:range xsd:boolean ;
+                         :rinfIndex "1.1.1.3.5.1" ;
+                         <http://purl.org/dc/terms/created> "2021-08-09"^^xsd:date ;
+                         <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ;
+                         rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication if other train protection, control and warning systems in normal operation are installed lineside."@en ;
+                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                         rdfs:label "Existence of other train protection, control and warning systems installed"@en ;
+                         owl:deprecated "true"^^xsd:boolean ;
+                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+
+###  http://data.europa.eu/949/hasParkingBrake
+:hasParkingBrake rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                 rdfs:domain :VehicleType ;
+                 rdfs:range xsd:boolean ;
+                 :eratvIndex "4.7.3.4" ;
+                 <http://purl.org/dc/terms/created> "2021-08-26"^^xsd:date ;
+                 <http://purl.org/dc/terms/modified> "2021-08-26"^^xsd:date ;
+                 rdfs:comment "Indicates if a vehicle type has parking brake."@en ;
+                 rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                 rdfs:label "Has parking brake"@en ;
+                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasPhaseSeparation
+:hasPhaseSeparation rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf :oclSeparationSectionsDataParameter ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( :CommonCharacteristicsSubset
+                                                :RunningTrack
+                                              )
+                                ] ;
+                    rdfs:range xsd:boolean ;
+                    :XMLName "EOS_Phase" ;
+                    :applicable "Y/N" ;
+                    :dependencyNote "A value is mandatory only if 1.1.1.2.2.1.1 parameter values is  Overhead contact line (OCL) , otherwise applicability flag is \"N\" (not applicable)"@en ;
+                    :formatNote "in XML: Y/N" ;
+                    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                    :rinfIndex "1.1.1.2.4.1.1" ;
+                    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasPhaseSeparation> ,
+                                              <http://data.europa.eu/949/shapes/HasPhaseSeparationApplicability> ;
+                    <http://purl.org/dc/terms/created> "2021-08-08"^^xsd:date ;
+                    <http://purl.org/dc/terms/modified> "2021-09-12"^^xsd:date ;
+                    <http://purl.org/dc/terms/relation> :contactLineSystemType ;
+                    rdfs:comment "Indication of existence of phase separation and required information."@en ;
+                    rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                    rdfs:label "Phase separation"@en ;
+                    <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                    <http://www.w3.org/2004/02/skos/core#scopeNote> "In case of existence of phase separation on the track or on the section of the line the option  True  shall be selected."@en .
+
+
+###  http://data.europa.eu/949/hasPlatformCurvature
+:hasPlatformCurvature rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :platformDataParameter ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( :CommonCharacteristicsSubset
+                                                  :PlatformEdge
+                                                )
+                                  ] ;
+                      rdfs:range xsd:boolean ;
+                      :applicable "Y/N/NYA" ;
+                      :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+                      :rinfIndex "1.2.1.0.6.8" ;
+                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasPlatformCurvature> ;
+                      :tsiOPEAppendixD2Index "2.3.8" ;
+                      <http://purl.org/dc/terms/created> "2022-10-27"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ,
+                                                          "2025-03-11"^^xsd:date ;
+                      <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+                      rdfs:comment "Indication of the existence of the curvature of the platform."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Curvature of the platform"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasRefuelling
+:hasRefuelling rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+               rdf:type owl:FunctionalProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( :CommonCharacteristicsSubset
+                                           :Siding
+                                         )
+                           ] ;
+               rdfs:range xsd:boolean ;
+               :XMLName "ITS_Refuelling" ;
+               :applicable "Y/N" ;
+               :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+               :rinfIndex "1.2.2.0.4.4" ;
+               :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasRefuelling> ;
+               <http://purl.org/dc/terms/created> "2021-08-10"^^xsd:date ;
+               <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                   "2024-09-19"^^xsd:date ,
+                                                   "2025-03-11"^^xsd:date ;
+               <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+               rdfs:comment "Indication whether exists an installation of refuelling (fixed installation for servicing trains) as defined in TSI INF."@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "Existence of refuelling"@en ;
+               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasRegenerativeBrake
+:hasRegenerativeBrake rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                      rdfs:domain :VehicleType ;
+                      rdfs:range xsd:boolean ;
+                      :eratvIndex "4.7.4.3.1" ;
+                      <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2021-08-06"^^xsd:date ;
+                      rdfs:comment "Indication whether regenerative braking is permitted or not."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Permission for regenerative braking"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasSandRestocking
+:hasSandRestocking rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( :CommonCharacteristicsSubset
+                                               :Siding
+                                             )
+                               ] ;
+                   rdfs:range xsd:boolean ;
+                   :XMLName "ITS_SandRestocking" ;
+                   :applicable "Y/N" ;
+                   :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                   :rinfIndex "1.2.2.0.4.5" ;
+                   :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSandRestocking> ;
+                   <http://purl.org/dc/terms/created> "2021-08-10"^^xsd:date ;
+                   <http://purl.org/dc/terms/modified> "2021-08-10"^^xsd:date ,
+                                                       "2025-03-11"^^xsd:date ;
+                   rdfs:comment "Indication whether an installation of sand restocking exists (fixed installation for servicing trains)."@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "Existence of sand restocking"@en ;
+                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasSandingPrevention
+:hasSandingPrevention rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                      rdfs:domain :VehicleType ;
+                      rdfs:range xsd:boolean ;
+                      :eratvIndex "4.14.2.12" ;
+                      <http://purl.org/dc/terms/created> "2021-09-01"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2021-09-01"^^xsd:date ;
+                      rdfs:comment "Possibility of preventing the use of sanding."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Has sanding prevention"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasSchematicOverviewOPDigitalForm
+:hasSchematicOverviewOPDigitalForm rdf:type owl:DatatypeProperty ;
+                                   rdfs:subPropertyOf :opGenericDataParameter ;
+                                   rdfs:domain :OperationalPoint ;
+                                   rdfs:range xsd:boolean ;
+                                   :applicable "Y/N/NYA" ;
+                                   :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+                                   :rinfIndex "1.2.0.0.0.7" ;
+                                   :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSchematicOverviewOPDigitalForm> ;
+                                   :tsiOPEAppendixD2Index "2.1" ;
+                                   <http://purl.org/dc/terms/created> "2023-03-14"^^xsd:date ;
+                                   <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                                       "2025-03-11"^^xsd:date ;
+                                   rdfs:comment "The existence of a schematic overview of the operational point in digital form."@en ;
+                                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                   rdfs:label "Schematic overview of the operational point in digital form"@en ;
+                                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasSevereWeatherConditions
+:hasSevereWeatherConditions rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf :performanceDataParameter ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain [ rdf:type owl:Class ;
+                                          owl:unionOf ( :CommonCharacteristicsSubset
+                                                        :RunningTrack
+                                                      )
+                                        ] ;
+                            rdfs:range xsd:boolean ;
+                            :XMLName "IPP_SevereClimateCon" ;
+                            :applicable "Y/N" ;
+                            :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                            :rinfIndex "1.1.1.1.2.8" ;
+                            :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSevereWeatherConditions> ;
+                            :usedInRCCCalculations "true"^^xsd:boolean ;
+                            <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                            <http://purl.org/dc/terms/modified> "2021-09-10"^^xsd:date ,
+                                                                "2024-09-19"^^xsd:date ;
+                            <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1302/2023-09-28> ;
+                            rdfs:comment "Climatic conditions on the line are severe according to European standard."@en ;
+                            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                            rdfs:label "Existence of severe climatic conditions"@en ;
+                            rdfs:seeAlso """EN 50125-1 (2014): 4.7
+LOC&PAS TSI:4.2.6.1.2""" ;
+                            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                            <http://www.w3.org/2004/02/skos/core#scopeNote> """Value 'true' shall be selected in case there are possible severe climatic conditions to be expected, i.e. a significant amount of snow or ice is to be expected during winter and vehicle should be designed accordingly to be able to run in such conditions. (compliance to 4.2.6.1.2(3),(4) of TSI Loc&Pas required). 'False' to be selected otherwise.
+
+Nominal and severe conditions are defined at TSI Loc&Pas level, section 4.2.6.1.2, which requires that the applicant declares to which snow conditions a vehicle complies with : either \"nominal\" or \"severe\" conditions. This technical aspect is reflected in the parameter 4.3.3 \"Snow, ice and hail conditions\" of ERATV , which will provide the two possible values:
+- Nominal conditions correspond to compliance with clause 4.7 of EN 50125 as referred in the Â§4.2.6.1.2 (1) of TSI Loc&Pas.
+To be noted: It is not required to precise the categorisation S1, S2 or S3 as mentioned in the EN 50125.
+- Severe conditions correspond to compliance with Â§4.2.6.1.2 (3) and (4) : the applicant designs and tests its vehicle according to the different scenarios mentioned in the TSI Â§4.2.6.1.2 (3) (snowdrift, powder snow, temperature gradient, etc.) and set the related provisions to achieve this as required by Â§4.2.6.1.2 (4) (obstacle deflector of sufficient size, effect of ice and snow on running gear and brake function, etc.)."""@en .
+
+
+###  http://data.europa.eu/949/hasShuntingRestrictions
+:hasShuntingRestrictions rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                         rdfs:domain :VehicleType ;
+                         rdfs:range xsd:boolean ;
+                         :eratvIndex "4.8.3" ;
+                         <http://purl.org/dc/terms/created> "2021-08-31"^^xsd:date ;
+                         <http://purl.org/dc/terms/modified> "2021-08-31"^^xsd:date ;
+                         rdfs:comment "Indicates the presence of shunting restrictions."@en ;
+                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                         rdfs:label "Has shunting restrictions"@en ;
+                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasSystemSeparation
+:hasSystemSeparation rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :oclSeparationSectionsDataParameter ;
+                     rdf:type owl:FunctionalProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( :CommonCharacteristicsSubset
+                                                 :RunningTrack
+                                               )
+                                 ] ;
+                     rdfs:range xsd:boolean ;
+                     :XMLName "EOS_System" ;
+                     :applicable "Y/N" ;
+                     :dependencyNote "It is applicable ( Y ) only if the value  Overhead contact line (OCL)  is selected for parameter \"Type of contact line system\""@en ;
+                     :formatNote "Y/N" ;
+                     :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                     :rinfIndex "1.1.1.2.4.2.1" ;
+                     :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSystemSeparation> ,
+                                               <http://data.europa.eu/949/shapes/HasSystemSeparationApplicability> ;
+                     <http://purl.org/dc/terms/created> "2021-08-08"^^xsd:date ;
+                     <http://purl.org/dc/terms/modified> "2021-09-12"^^xsd:date ;
+                     rdfs:comment "Indication of existence of system separation"@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "System separation"@en ;
+                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                     <http://www.w3.org/2004/02/skos/core#scopeNote> "In case of existence of system separation on the track or on the section of the line and required information on the section of the line, the option  Y=yes  shall be selected."@en .
+
+
+###  http://data.europa.eu/949/hasTSITrainDetection
+:hasTSITrainDetection rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsDataParameter ;
+                      rdf:type owl:FunctionalProperty ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( :CommonCharacteristicsSubset
+                                                  :RunningTrack
+                                                )
+                                  ] ;
+                      rdfs:range xsd:boolean ;
+                      :applicable "Y/N/NYA" ;
+                      :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en ,
+                                     "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                      :rinfIndex "1.1.1.3.4.1" ,
+                                 "1.2.1.1.3.1" ;
+                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasTSITrainDetection> ;
+                      <http://purl.org/dc/terms/created> "2021-08-09"^^xsd:date ;
+                      <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ;
+                      <http://purl.org/dc/terms/relation> :trainDetectionSystemType ;
+                      <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                      rdfs:comment "Indication if there is any train detection system installed and fully compliant with the TSI CCS"@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Existence of train detection system fully compliant with the TSI"@en ;
+                      rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                      <http://www.w3.org/2004/02/skos/core#scopeNote> """Verification of compliance with TSI includes application of notified national rules (when they exist).
+
+See: (Annex I, Appendix A, Table A.2 -Index 77)."""@en .
+
+
+###  http://data.europa.eu/949/hasToiletDischarge
+:hasToiletDischarge rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( :CommonCharacteristicsSubset
+                                                :Siding
+                                              )
+                                ] ;
+                    rdfs:range xsd:boolean ;
+                    :XMLName "ITS_ToiletDischarge" ;
+                    :applicable "Y/N" ;
+                    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                    :rinfIndex "1.2.2.0.4.1" ;
+                    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasToiletDischarge> ;
+                    <http://purl.org/dc/terms/created> "2021-08-10"^^xsd:date ;
+                    <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                        "2024-09-19"^^xsd:date ,
+                                                        "2025-03-11"^^xsd:date ;
+                    <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+                    rdfs:comment "Indication whether exists an installation of toilet discharge (fixed installation for servicing trains) as defined in TSI INF"@en ;
+                    rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                    rdfs:label "Existence of toilet discharge"@en ;
+                    <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasTrainIntegrityConfirmation
+:hasTrainIntegrityConfirmation rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                               rdfs:domain :VehicleType ;
+                               rdfs:range xsd:boolean ;
+                               :eratvIndex "4.13.1.9" ;
+                               <http://purl.org/dc/terms/created> "2020-08-31"^^xsd:date ;
+                               <http://purl.org/dc/terms/modified> "2021-09-12"^^xsd:date ;
+                               rdfs:comment "Indication of on-board management system about completeness of the train information."@en ;
+                               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                               rdfs:label "Has train integrity confirmation"@en ;
+                               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasWalkway
+:hasWalkway rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :tunnelDataParameter ;
+            rdf:type owl:FunctionalProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :CommonCharacteristicsSubset
+                                        :Tunnel
+                                      )
+                        ] ;
+            rdfs:range xsd:boolean ;
+            :applicable "Y/NYA" ;
+            :dependencyNote "Mandatory for TSI-compliant tunnels longer than 0.5 km"@en ;
+            :formatNote """[Y/N]
+
+If =Y then TSI-Compliant OR NON-TSI-Compliant""" ;
+            :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+            :rinfIndex "1.1.1.1.8.12" ,
+                       "1.2.1.0.5.10" ,
+                       "1.2.2.0.5.9" ;
+            :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasWalkway> ;
+            :tsiOPEAppendixD2Index "3.2.3" ;
+            <http://purl.org/dc/terms/created> "2022-10-27"^^xsd:date ;
+            <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ,
+                                                "2024-09-19"^^xsd:date ,
+                                                "2025-02-28"^^xsd:date ;
+            <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+            rdfs:comment "Indication of existence of walkways"@en ;
+            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+            rdfs:label "Existence of walkways"@en ;
+            rdfs:seeAlso "Point 4.2.1.6. \"Escape walkways\" of the Commission Regulation (EU) No 1303/2014 of 18 November 2014 concerning the technical specification for interoperability relating to safety in railway tunnels of the rail system of the European Union|https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1566396648532&uri=CELEX%3A02014R1303-20190616 "^^xsd:anyURI ;
+            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+            <http://www.w3.org/2004/02/skos/core#altLabel> "Existence of walkways in tunnel"@en ;
+            <http://www.w3.org/2004/02/skos/core#scopeNote> """Indicates the existence of \"Escape walkways\", if the tunnel is longer than 0.5km then definition from Section 4.2.1.6 of TSI SRT applies.
+If the selected value is \"true\", provide the boolean value for \"Is TSI compliant\".
+On top of the requirements set out in the TSI SRT, the application guide to the TSI allows to use a ballastless track as a walkway. So, a 'Yes' in this parameters might not result in a physical standalone walkway.
+
+For Siding the mechanism to locate a specific object is different depending on the member state. The TWG is still working on it."""@en .
+
+
+###  http://data.europa.eu/949/hasWaterRestocking
+:hasWaterRestocking rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( :CommonCharacteristicsSubset
+                                                :Siding
+                                              )
+                                ] ;
+                    rdfs:range xsd:boolean ;
+                    :XMLName "ITS_WaterRestocking" ;
+                    :applicable "Y/N" ;
+                    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+                    :rinfIndex "1.2.2.0.4.3" ;
+                    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasWaterRestocking> ;
+                    <http://purl.org/dc/terms/created> "2021-08-10"^^xsd:date ;
+                    <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                        "2024-09-19"^^xsd:date ,
+                                                        "2025-03-11"^^xsd:date ;
+                    <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+                    rdfs:comment "Indication whether exists an installation of water restocking (fixed installation for servicing trains) as defined in TSI INF"@en ;
+                    rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                    rdfs:label "Existence of water restocking"@en ;
+                    <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/hasWheelSlideProtectionSystem
+:hasWheelSlideProtectionSystem rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+                               rdfs:domain :VehicleType ;
+                               rdfs:range xsd:boolean ;
+                               :eratvIndex "4.7.8" ;
+                               <http://purl.org/dc/terms/created> "2021-08-31"^^xsd:date ;
+                               <http://purl.org/dc/terms/modified> "2021-08-31"^^xsd:date ;
+                               rdfs:comment "Indicates the presence of a wheel slide protection system."@en ;
+                               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                               rdfs:label "Has wheel slide protection system"@en ;
+                               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/healthSafetyAndEnvironmentDataParameter
+:healthSafetyAndEnvironmentDataParameter rdf:type owl:DatatypeProperty ;
+                                         rdfs:subPropertyOf :infraSubsystemDataParameter ;
+                                         :rinfIndex "1.1.1.1.7" ;
+                                         <http://purl.org/dc/terms/created> "2024-10-31"^^xsd:date ;
+                                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                         rdfs:label "Health, safety and environment"@en .
+
+
+###  http://data.europa.eu/949/highSpeedLoadModelCompliance
+:highSpeedLoadModelCompliance rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf :performanceDataParameter ;
+                              rdf:type owl:FunctionalProperty ;
+                              rdfs:domain [ rdf:type owl:Class ;
+                                            owl:unionOf ( :CommonCharacteristicsSubset
+                                                          :RunningTrack
+                                                        )
+                                          ] ;
+                              rdfs:range xsd:boolean ;
+                              :XMLName "IPP_HSLMCompliant" ;
+                              :applicable "Y/N" ;
+                              :legalDeadline "16 January 2020"@en ;
+                              :rinfIndex "1.1.1.1.2.4.2" ;
+                              :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HighSpeedLoadModelCompliance> ;
+                              :usedInRCCCalculations "true"^^xsd:boolean ;
+                              <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                              <http://purl.org/dc/terms/modified> "2024-01-08"^^xsd:date ,
+                                                                  "2024-09-19"^^xsd:date ;
+                              <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg/2014/1299/2023-09-28#tocId3> ,
+                                                                <http://data.europa.eu/eli/reg/2014/1299/2023-09-28#tocId30> ;
+                              rdfs:comment "For sections of line with a maximum permitted speed of 200 km/h or more. Information regarding the procedure to be used to perform the dynamic compatibility check."@en ;
+                              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                              rdfs:label "Compliance of structures with the High Speed Load Model (HSLM)"@en ;
+                              rdfs:seeAlso """Annex D1 OPE TSI
+INF TSI: 4.2.7.1.2(2)""" ;
+                              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                              <http://www.w3.org/2004/02/skos/core#scopeNote> "(TSI INF 4.2.7.1.2(2)) Applicable if the maximum permitted speed of the running track is more than 200km/h and the structures within the section of line are all compatible with the High Speed Load Model (HSLM); information regarding the procedure to be used to perform the dynamic compatibility check shall be provided as well."@en .
+
+
+###  http://data.europa.eu/949/hotAxleBoxDetectorGeneration
+:hotAxleBoxDetectorGeneration rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+                              rdf:type owl:FunctionalProperty ;
+                              rdfs:domain :HABD ;
+                              rdfs:range xsd:string ;
+                              :XMLName "IHS_HABDGen" ;
+                              :applicable "Y/N" ;
+                              :dependencyNote "Mandatory if the HABD is not TSI compliant (the value of parameter 1.1.1.1.7.5 (Trackside HABD TSI compliant) is 'False')"@en ;
+                              :legalDeadline "16 January 2020"@en ;
+                              :rinfIndex "1.1.1.1.7.7" ;
+                              :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HotAxleBoxDetectorGeneration> ,
+                                                        <http://data.europa.eu/949/shapes/HotAxleBoxDetectorGenerationApplicability> ;
+                              :usedInRCCCalculations "true"^^xsd:boolean ;
+                              <http://purl.org/dc/terms/created> "2020-08-24"^^xsd:date ;
+                              <http://purl.org/dc/terms/modified> "2021-09-11"^^xsd:date ,
+                                                                  "2025-02-28"^^xsd:date ;
+                              rdfs:comment """Specific for the French Italian and Swedish networks.
+Generation of trackside hot axle box detector."""@en ;
+                              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                              rdfs:label "Generation of trackside HABD"@en ;
+                              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                              <http://www.w3.org/2004/02/skos/core#scopeNote> "Waiting provision of possible answers by the French, Italian and Swedish NREs "@en .
+
+

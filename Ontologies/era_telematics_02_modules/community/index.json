@@ -1,0 +1,556 @@
+{
+  "strategy": "community",
+  "source_file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02.ttl",
+  "partitions": {
+    "arrival_track": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/arrival_track.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "associated_attached": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/associated_attached.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "country_code": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/country_code.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "departure_journey": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/departure_journey.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "departure_track": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/departure_track.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "end_location": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/end_location.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "loading_facility": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/loading_facility.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "location_subsidiary": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/location_subsidiary.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "path_canceled": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/path_canceled.ttl",
+      "entities": 1,
+      "triples": 15
+    },
+    "path_confirmed": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/path_confirmed.ttl",
+      "entities": 1,
+      "triples": 14
+    },
+    "path_details": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/path_details.ttl",
+      "entities": 1,
+      "triples": 18
+    },
+    "recipient": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/recipient.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "requested_period": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/requested_period.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "requested_timeframe": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/requested_timeframe.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "rolling_stock": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/rolling_stock.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "sender": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/sender.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "start_location": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/start_location.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "train_running": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/train_running.ttl",
+      "entities": 1,
+      "triples": 12
+    },
+    "wagon_departure": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/wagon_departure.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "wagon_pickup": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/wagon_pickup.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "yard_departure": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/yard_departure.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "acceptance_date": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/acceptance_date.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "allocation_company": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/allocation_company.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "carrier_code": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/carrier_code.ttl",
+      "entities": 1,
+      "triples": 11
+    },
+    "company": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/company.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "coordinating_coordinatingim": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/coordinating_coordinatingim.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "partner_im_partner": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/partner_im_partner.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "impacted_impactedru": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/impacted_impactedru.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "latitude": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/latitude.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "lead_leadru": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/lead_leadru.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "longitude": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/longitude.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "origin_country": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/origin_country.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "partner_ru_partner": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/partner_ru_partner.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "responsible_responsibleim": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/responsible_responsibleim.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "responsible_responsibleru": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/responsible_responsibleru.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "section_carrier": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/section_carrier.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "train_max": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/train_max.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "train_weight": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/train_weight.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "transferee_transfereeim": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/transferee_transfereeim.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "value": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/value.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "data_properties": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/data_properties.ttl",
+      "entities": 1,
+      "triples": 521
+    },
+    "license": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/license.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "taftsi": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/taftsi.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "domain": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/domain.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "schemes": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/schemes.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "unit_measure": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/unit_measure.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "version": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/version.ttl",
+      "entities": 1,
+      "triples": 2
+    },
+    "www_era": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/www_era.ttl",
+      "entities": 1,
+      "triples": 2
+    },
+    "created": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/created.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "creator": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/creator.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "description": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/description.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "modified": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/modified.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "publisher": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/publisher.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "source": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/source.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "title": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/title.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "qualified_cardinality": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/qualified_cardinality.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "term_status": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/term_status.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "alt_label": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/alt_label.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "editorial_note": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/editorial_note.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "example": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/example.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "member": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/member.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "name": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/name.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "dangerous_goods": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/dangerous_goods.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "destination": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/destination.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "length": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/length.ttl",
+      "entities": 2,
+      "triples": 9
+    },
+    "location": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/location.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "network_specific": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/network_specific.ttl",
+      "entities": 2,
+      "triples": 9
+    },
+    "planned_transport": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/planned_transport.ttl",
+      "entities": 2,
+      "triples": 6
+    },
+    "production_station": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/production_station.ttl",
+      "entities": 2,
+      "triples": 9
+    },
+    "reference_otn": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/reference_otn.ttl",
+      "entities": 2,
+      "triples": 7
+    },
+    "reference_train": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/reference_train.ttl",
+      "entities": 2,
+      "triples": 9
+    },
+    "station": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/station.ttl",
+      "entities": 2,
+      "triples": 7
+    },
+    "train_activity": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/train_activity.ttl",
+      "entities": 2,
+      "triples": 7
+    },
+    "train_trainid": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/train_trainid.ttl",
+      "entities": 2,
+      "triples": 6
+    },
+    "train_location": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/train_location.ttl",
+      "entities": 3,
+      "triples": 21
+    },
+    "transfer_point": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/transfer_point.ttl",
+      "entities": 2,
+      "triples": 7
+    },
+    "transport_operational": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/transport_operational.ttl",
+      "entities": 2,
+      "triples": 6
+    },
+    "validity_period": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/validity_period.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "wagon_information": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/wagon_information.ttl",
+      "entities": 2,
+      "triples": 11
+    },
+    "skos_concept": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/skos_concept.ttl",
+      "entities": 2,
+      "triples": 7
+    },
+    "affected_location": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/affected_location.ttl",
+      "entities": 3,
+      "triples": 22
+    },
+    "interruption_information": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/interruption_information.ttl",
+      "entities": 3,
+      "triples": 26
+    },
+    "requested_calendar": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/requested_calendar.ttl",
+      "entities": 4,
+      "triples": 16
+    },
+    "operational_related": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/operational_related.ttl",
+      "entities": 4,
+      "triples": 13
+    },
+    "time_booked": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/time_booked.ttl",
+      "entities": 4,
+      "triples": 19
+    },
+    "track_location": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/track_location.ttl",
+      "entities": 5,
+      "triples": 28
+    },
+    "error_reference": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/error_reference.ttl",
+      "entities": 5,
+      "triples": 26
+    },
+    "identifiers_related": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/identifiers_related.ttl",
+      "entities": 5,
+      "triples": 20
+    },
+    "path_train": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/path_train.ttl",
+      "entities": 5,
+      "triples": 34
+    },
+    "section_start": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/section_start.ttl",
+      "entities": 6,
+      "triples": 27
+    },
+    "interchange_report": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/interchange_report.ttl",
+      "entities": 7,
+      "triples": 39
+    },
+    "modification_train": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/modification_train.ttl",
+      "entities": 9,
+      "triples": 57
+    },
+    "interruption_train": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/interruption_train.ttl",
+      "entities": 10,
+      "triples": 56
+    },
+    "different_acceptance": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/different_acceptance.ttl",
+      "entities": 11,
+      "triples": 50
+    },
+    "checking_body": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/checking_body.ttl",
+      "entities": 13,
+      "triples": 73
+    },
+    "wagon_details": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/wagon_details.ttl",
+      "entities": 21,
+      "triples": 120
+    },
+    "rolling_road": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/rolling_road.ttl",
+      "entities": 23,
+      "triples": 133
+    },
+    "customer_event": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/customer_event.ttl",
+      "entities": 25,
+      "triples": 139
+    },
+    "localisation_volume": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/localisation_volume.ttl",
+      "entities": 26,
+      "triples": 127
+    },
+    "section_journey": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/section_journey.ttl",
+      "entities": 27,
+      "triples": 135
+    },
+    "timing_tariff": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/timing_tariff.ttl",
+      "entities": 33,
+      "triples": 183
+    },
+    "ecm_date": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/ecm_date.ttl",
+      "entities": 41,
+      "triples": 243
+    },
+    "event_position": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/event_position.ttl",
+      "entities": 51,
+      "triples": 246
+    },
+    "section_seals": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/section_seals.ttl",
+      "entities": 57,
+      "triples": 334
+    },
+    "type_number": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/type_number.ttl",
+      "entities": 60,
+      "triples": 394
+    },
+    "section_delivery": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/section_delivery.ttl",
+      "entities": 61,
+      "triples": 326
+    },
+    "time_date": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/time_date.ttl",
+      "entities": 78,
+      "triples": 464
+    },
+    "location_planned": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/location_planned.ttl",
+      "entities": 80,
+      "triples": 469
+    },
+    "load_type": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/load_type.ttl",
+      "entities": 101,
+      "triples": 645
+    },
+    "number_code": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/community/number_code.ttl",
+      "entities": 145,
+      "triples": 1006
+    }
+  }
+}

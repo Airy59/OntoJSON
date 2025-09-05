@@ -1,0 +1,33 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Altitude a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Altitude" ;
+    rdfs:comment """Altitude (in m) at the beginning of the SP. Considering ETRS89 as
+				reference. Starting at -1000m""" ;
+    rdfs:domain :GeographicCoordinates ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SRID a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SRID" ;
+    rdfs:comment "ID of coordinates system used (EPSG code)" ;
+    rdfs:domain :GeographicCoordinates ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasGeographicCoordinates rdfs:range :GeographicCoordinates .
+
+:GeographicCoordinates a owl:Class ;
+    rdfs:label "GeographicCoordinates" ;
+    rdfs:comment "Latitude and Longitude of location" .
+
+[] rdf:first :GeographicCoordinates .
+
+[] rdf:first :GeographicCoordinates .
+

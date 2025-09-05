@@ -1,0 +1,28 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:IsAbleToRun a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "IsAbleToRun" ;
+    rdfs:comment """True if the damage does not cause
+													an interruption of the transport run. False
+													otherwise: The damage causes an interruption of
+													the transport run (the wagon has to be repaired,
+													the loading of the good has to be bettered, . .
+													.""" ;
+    rdfs:domain :WagonJourneyIrregularity ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasDamageCodes a owl:ObjectProperty ;
+    rdfs:label "has DamageCodes" ;
+    rdfs:domain :WagonJourneyIrregularity ;
+    rdfs:range :DamageCodes .
+
+:hasWagonJourneyIrregularity rdfs:range :WagonJourneyIrregularity .
+
+:WagonJourneyIrregularity a owl:Class ;
+    rdfs:label "WagonJourneyIrregularity" .
+

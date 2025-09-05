@@ -1,0 +1,33 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:flangeLubeForbidden rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:hasHotAxleBoxDetector rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:hasLevelCrossings rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:hotAxleBoxDetectorGeneration rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:hotAxleBoxDetectorIdentification rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:hotAxleBoxDetectorLocation rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:hotAxleBoxDetectorTSICompliant rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:isQuietRoute rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:permitUseReflectivePlates rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:redLightsRequired rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter .
+
+:healthSafetyAndEnvironmentDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Health, safety and environment"@en ;
+    :rinfIndex "1.1.1.1.7" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :infraSubsystemDataParameter .
+

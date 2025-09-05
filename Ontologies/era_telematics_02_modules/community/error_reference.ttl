@@ -1,0 +1,46 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:MessageSenderReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageSenderReference" ;
+    rdfs:domain :ErrorCauseReference ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasError a owl:ObjectProperty ;
+    rdfs:label "has Error" ;
+    rdfs:domain :ErrorMessage ;
+    rdfs:range :Error .
+
+:hasErrorCauseReference a owl:ObjectProperty ;
+    rdfs:label "has ErrorCauseReference" ;
+    rdfs:domain :ErrorMessage ;
+    rdfs:range :ErrorCauseReference .
+
+:ErrorCauseReference a owl:Class ;
+    rdfs:label "ErrorCauseReference" ;
+    rdfs:comment """The reference to the message and its particular element(s)
+							that caused the error is provided here""" .
+
+:ErrorMessage a owl:Class ;
+    rdfs:label "ErrorMessage" ;
+    rdfs:comment """This message should be sent from the receiver to the sender after the
+				processing of the previously sent TAF/TAP message in the backend (legacy) system of
+				the receiver has failed.""" .
+
+[] rdf:first :ErrorMessage .
+
+[] rdf:first :ErrorCauseReference .
+
+[] rdf:first :ErrorMessage .
+
+[] rdf:first :ErrorMessage .
+
+[] rdf:first :ErrorMessage .
+
+[] rdf:first :ErrorMessage .
+

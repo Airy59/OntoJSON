@@ -1,0 +1,31 @@
+{
+  "strategy": "community",
+  "source_file": "../examples/person_ontology.owl",
+  "partitions": {
+    "community_0": {
+      "file": "../examples/person_ontology_modules/community/community_0.ttl",
+      "entities": 7,
+      "triples": 34
+    },
+    "community_1": {
+      "file": "../examples/person_ontology_modules/community/community_1.ttl",
+      "entities": 5,
+      "triples": 27
+    },
+    "community_2": {
+      "file": "../examples/person_ontology_modules/community/community_2.ttl",
+      "entities": 5,
+      "triples": 20
+    },
+    "community_4": {
+      "file": "../examples/person_ontology_modules/community/community_4.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "community_3": {
+      "file": "../examples/person_ontology_modules/community/community_3.ttl",
+      "entities": 1,
+      "triples": 3
+    }
+  }
+}

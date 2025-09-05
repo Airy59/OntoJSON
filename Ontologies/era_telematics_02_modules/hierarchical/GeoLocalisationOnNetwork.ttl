@@ -1,0 +1,20 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasGeoLocalisation a owl:ObjectProperty ;
+    rdfs:label "has GeoLocalisation" ;
+    rdfs:domain :GeoLocalisationOnNetwork ;
+    rdfs:range :GeoLocalisation .
+
+:hasGeoLocalisationOnNetwork rdfs:range :GeoLocalisationOnNetwork .
+
+:hasNetworkProjectedLocation a owl:ObjectProperty ;
+    rdfs:label "has NetworkProjectedLocation" ;
+    rdfs:domain :GeoLocalisationOnNetwork ;
+    rdfs:range :NetworkProjectedLocation .
+
+:GeoLocalisationOnNetwork a owl:Class ;
+    rdfs:label "GeoLocalisationOnNetwork" ;
+    rdfs:comment "Geolocalisation information crossed with network data. " .
+

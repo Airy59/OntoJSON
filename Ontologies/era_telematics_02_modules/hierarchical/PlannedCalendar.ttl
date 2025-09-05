@@ -1,0 +1,30 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:OffsetToReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OffsetToReference" ;
+    rdfs:comment """ The OffsetToReference (OTR) is the shift of the days between Planned
+				Calendar of the related object (route, path request or path) to the days in
+				Reference Calendar. The shift is mentioned in days. OTR value is set to zero when
+				there is no gap between Planned Calendar and Reference Calendar, OTR value is
+				positive if Planned Calendar later than Reference Calendar and negative if Planned
+				Calendar earlier than Reference Calendar.>""" ;
+    rdfs:domain :PlannedCalendar ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasPlannedCalendar rdfs:range :PlannedCalendar .
+
+:PlannedCalendar a owl:Class ;
+    rdfs:label "PlannedCalendar" ;
+    rdfs:comment """This is the calendar item for path request/path details messages -
+				used in planning phase""" .
+
+[] rdf:first :PlannedCalendar .
+
+[] rdf:first :PlannedCalendar .
+

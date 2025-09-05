@@ -1,0 +1,35 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ActualETA a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ActualETA" ;
+    rdfs:comment """Identifies the actual ETA date and time of arrival of the Wagon or
+				Unit on the final destination of the customer siding.""" ;
+    rdfs:domain :AlertMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CommitmentETA a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CommitmentETA" ;
+    rdfs:comment """Identifies the commitment to the customer regarding date and time of
+				the arrival date and time of the Wagon or Unit on the final destination of the
+				customer siding.""" ;
+    rdfs:domain :AlertMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AlertMessage a owl:Class ;
+    rdfs:label "AlertMessage" ;
+    rdfs:comment """Following the comparison betzeen the acual ETA and the commitment to
+				the customer, the Lead RU sends this Alert Message to the actual RU in charge and to
+				all following RUs involved in the transport chain""" .
+
+[] rdf:first :AlertMessage .
+
+[] rdf:first :AlertMessage .
+

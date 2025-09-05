@@ -1,0 +1,15 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:ResponsibleIM a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ResponsibleIM" ;
+    rdfs:comment """IM Responsible for Reporting. For Path Requests, this element has to
+				be used - in the first journey location (origin of train) - in journey locations
+				(could even be a network border without stopping of the train) in case where the IM
+				on the oncoming section changes from the legal point of view. This means, the new IM
+				has the legal responsibility for the oncoming section. """ ;
+    rdfs:domain [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+

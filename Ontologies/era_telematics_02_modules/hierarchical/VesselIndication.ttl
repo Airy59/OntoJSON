@@ -1,0 +1,30 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ClosingTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ClosingTime" ;
+    rdfs:comment """The closing Date and Time of the port for the delivery of the shipment
+				by rail to a vessel.""" ;
+    rdfs:domain :VesselIndication ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:VesselName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "VesselName" ;
+    rdfs:comment """This element identifies the vessel by name according the Lloyd
+				register, if the shipment has to change the transportation mode from rail to sea""" ;
+    rdfs:domain :VesselIndication ;
+    rdfs:range xsd:Name ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasVesselIndication rdfs:range :VesselIndication .
+
+:VesselIndication a owl:Class ;
+    rdfs:label "VesselIndication" ;
+    rdfs:comment """This element identifies to which extent the transportation unit is
+				used""" .
+

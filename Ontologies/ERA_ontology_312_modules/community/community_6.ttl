@@ -1,0 +1,725 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Bridge owl:disjointWith :KilometricPost .
+
+:HABD owl:disjointWith :KilometricPost .
+
+:LinearPositioningSystem owl:disjointWith :LinearPositioningSystemCoordinate .
+
+:catenaryMaxRatedCurrent a owl:DatatypeProperty ;
+    rdfs:label "Catenary max rated current"@en ;
+    :eratvIndex "4.10.3" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Maximum rated current from the catenary (to be indicated for each electrical energy supply system the vehicle is equipped for), given in A."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:endIntrinsicCoordinate a owl:DatatypeProperty ;
+    rdfs:label "End intrinsic coordinate"@en ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2021-04-01"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:endOffsetFromOrigin rdfs:range xsd:double .
+
+:energySupplyMaxPower a owl:DatatypeProperty ;
+    rdfs:label "Energy supply max power"@en ;
+    :eratvIndex "4.10.2" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Maximum power (to be indicated for each energy supply system the vehicle is equipped for), given in kW."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:frequencyBandsForDetection dcterms:relation :minVehicleImpedance .
+
+:gradient a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Gradient for stabling tracks"@en ;
+    :XMLName "ILL_Gradient" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.3.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Gradient> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM-PER-M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2021-08-10"^^xsd:date ;
+    dcterms:modified "2021-08-10"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Maximum value of the gradient for stabling tracks expressed in millimetres per metre."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :sidingDataParameter ;
+    ns1:term_status "stable" .
+
+:hasLRS rdfs:domain :KilometricPost .
+
+:hasLrsCoordinate a owl:ObjectProperty ;
+    rdfs:label "has line referencing system coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasLrsCoordinate> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the LRS coordinate associated with a topological coordinate."@en ;
+    rdfs:domain :NetPointReference ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearPositioningSystemCoordinate .
+
+:hotAxleBoxDetectorLocation rdfs:range xsd:double .
+
+:kilometer a owl:DatatypeProperty ;
+    rdfs:label "kilometer number"@en ;
+    :XMLName "OPRailwayLocation" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Kilometer> ;
+    :tsiOPEAppendixD2Index "2.2.2" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM> ;
+    dcterms:created "2021-01-29"^^xsd:date ;
+    dcterms:modified "2021-01-29"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2025-01-30"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Kilometer number of the kilometric post related to line identification defining the location of an infrastructure element."@en ;
+    rdfs:domain :KilometricPost ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :signalDataParameter,
+        :tunnelDataParameter ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Railway location of Operational point"@en ;
+    skos:scopeNote """For walkways: Value provided in Kilometric point of the start of the walkway and the length in m. Repeatable values for each location.
+For rescue points: Value provided in Kilometric point of the start of the point of evacuation and rescue point and the length in m. Repeatable values for each location.
+For signals: Relative position to the line identified under parameter 1.1.0.0.0.2, given in km ([reference point, via era:referent] / [NNN.NNN] )."""@en .
+
+:kmPost a owl:ObjectProperty ;
+    rdfs:label "km post for reference"@en ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "The closest kilometric post on the line, used as a reference by the LRS coordinate."@en ;
+    rdfs:domain :LinearPositioningSystemCoordinate ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :KilometricPost .
+
+:kmPostName a owl:DatatypeProperty ;
+    rdfs:label "kilometric post name"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/KmPostName> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date,
+        "2024-11-29"^^xsd:date,
+        "2025-03-10"^^xsd:date ;
+    rdfs:comment "Name of the kilometric post (optional)."@en ;
+    rdfs:domain :KilometricPost ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    ns1:term_status "stable" ;
+    skos:altLabel "mileage post"@en .
+
+:lengthOfNetLinearElement rdfs:range xsd:double .
+
+:lengthOfPlatform rdfs:range xsd:double .
+
+:lengthOfSectionOfLine rdfs:range xsd:double .
+
+:lengthOfSiding rdfs:range xsd:double .
+
+:lengthOfTunnel rdfs:range xsd:double .
+
+:lengthOfVehicle rdfs:range xsd:double .
+
+:linearCoordinate a owl:DatatypeProperty ;
+    rdfs:label "Linear coordinate"@en ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2023-11-10"^^xsd:date ;
+    rdfs:comment "Indicates the position of an object within a linear positioning system. For example, relative to a national railway line"@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "The reason for deprecation is that this property is not specified in the latest legal text nor the RINF application guide. Also, no data has been provided for this property."@en .
+
+:maxFlangeHeight a owl:DatatypeProperty ;
+    rdfs:label "Maximum permitted height of the flange"@en ;
+    :XMLName "CTD_MaxFlangeHeight" ;
+    :eratvIndex "4.14.2.9" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter. Maximum permitted flange height, given in millimetres."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:maxImpedanceWheelset a owl:DatatypeProperty ;
+    rdfs:label "Maximum permitted impedance between opposite wheels of a wheelset when not TSI compliant"@en ;
+    :XMLName "CTD_MaxImpedanceWheelset" ;
+    :eratvIndex "4.14.2.16" ;
+    :rinfIndex "1.1.1.3.7.15.2" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "The value of maximum permitted impedance given in ohm in case of TSI non-compliance. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:maximumAltitude a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum altitude"@en ;
+    :XMLName "IPP_MaxAltitude" ;
+    :applicable "Y/N" ;
+    :formatNote "[+/-][NNNN]" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.2.7" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumAltitude> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2022-10-20"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "Highest point of the section of line above sea level in reference to Normal Amsterdam's Peil (NAP)."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :performanceDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Normaal Amsterdams Peil (NAP), called also Amsterdam Ordnance Datum, it is a vertical datum commonly in use in Europe as reference level for the description of the height of objects in relation to the sea level.
+
+The value of the parameter shall be given in metres, with tolerance of +/-100m."""@en .
+
+:maximumAverageDeceleration a owl:DatatypeProperty ;
+    rdfs:label "Maximum average deceleration"@en ;
+    :eratvIndex "4.7.1" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M-PER-SEC2> ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date,
+        "2024-06-26"^^xsd:date ;
+    rdfs:comment "Maximum train deceleration given in m/sÂ²."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:maximumContactWireHeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum contact wire height"@en ;
+    :XMLName "ECS_MaxWireHeight" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory only if â€œOverhead contact line (OCL)â€ is selected in 1.1.1.2.2.1.1, otherwise the parameter is not applicable."@en ;
+    :eratvIndex "4.10.5" ;
+    :formatNote "N.NN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.2.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumContactWireHeight>,
+        <http://data.europa.eu/949/shapes/MaximumContactWireHeightApplicability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of the maximum contact wire height expressed in metres."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :contactLineSystemDataParameter,
+        :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The value given can be design value or the last known measured value. If there is no change in height, nominal value will be given.
+
+Values shall be given in metres with precision of 0.01 m."""@en .
+
+:maximumInterferenceCurrent rdfs:range xsd:double .
+
+:maximumTrainDeceleration a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum train deceleration"@en ;
+    :XMLName "ILR_MaxDeceleration" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Not applicable if line is not in scope of INF TSI"@en ;
+    :formatNote "N.N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.6.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumTrainDeceleration> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M-PER-SEC2> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Limit for longitudinal track resistance given as a maximum allowed train deceleration and expressed in metres per square second."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:seeAlso "INF TSI: 4.2.6" ;
+    rdfs:subPropertyOf :trackResistanceToAppliedLoadsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """New lines are assumed to be compliant with the TSI INF.
+For TSI compliant lines the default value of 2.5 m/s2 shall be presented.
+
+If for the design of the track the braking forces were assumed on basis of the deceleration lower value than 2.5 m/s2, the applied value of the deceleration has to be specified."""@en .
+
+:measuredDistance a owl:DatatypeProperty ;
+    rdfs:label "measured distance"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MeasuredDistance> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Measured distance from the origin of the LRS."@en ;
+    rdfs:domain :KilometricPost ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double .
+
+:minAxleLoad a owl:DatatypeProperty ;
+    rdfs:label "Minimum permitted axle load"@en ;
+    :eratvIndex "4.14.2.10" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/TONNE> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Minimum permitted axle load, given in tons."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Should be deprecated according to the amendment to the Regulation (EU) 2019/777 but remains because it is also a parameter of ERATV."@en .
+
+:minFlangeHeight a owl:DatatypeProperty ;
+    rdfs:label "Minimum permitted height of the flange"@en ;
+    :eratvIndex "4.14.2.8" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-01"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Minimum permitted flange height, given in millimetres."@en .
+
+:minFlangeThickness a owl:DatatypeProperty ;
+    rdfs:label "Minimum permitted thickness of the flange"@en ;
+    :eratvIndex "4.14.2.7" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-01"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Minimum permitted flange thickness, given in millimetres."@en .
+
+:minRimWidth a owl:DatatypeProperty ;
+    rdfs:label "Minimum permitted width of the rim"@en ;
+    :eratvIndex "4.14.2.5" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliM> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. However, the parameter remains as it is also an ERATV parameter."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :otherTrainDetectionSystemsDataParameter ;
+    ns1:term_status "stable" .
+
+:minVehicleImpedanceVoltages a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "minimum Vehicle Impedance (Voltage applicable)"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/energy-supply-systems/EnergySupplySystems> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleImpedanceVoltages>,
+        <http://data.europa.eu/949/shapes/MinVehicleImpedanceVoltagesApplicability>,
+        <http://data.europa.eu/949/shapes/MinVehicleImpedanceVoltagesSKOS> ;
+    dcterms:created "2024-05-30"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:domain :MinVehicleImpedance ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "stable" .
+
+:minVehicleInputCapacitance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "minimal vehicle input capacitance"@en ;
+    :formatNote "For the selected DC voltage: [CCCC], as input capacitance [CCCC](Cin)"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleInputCapacitance>,
+        <http://data.europa.eu/949/shapes/MinVehicleInputCapacitanceApplicability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/NanoFARAD> ;
+    dcterms:created "2024-05-30"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:domain :MinVehicleImpedance ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" .
+
+:minVehicleInputImpedance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "minimal vehicle input impedance"@en ;
+    :formatNote "For the selected DC voltage: [ZZZZ], as input impedance [ZZZZ](Zin)"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleInputImpedance>,
+        <http://data.europa.eu/949/shapes/MinVehicleInputImpedanceApplicability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliH> ;
+    dcterms:created "2024-05-30"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:domain :MinVehicleImpedance ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" .
+
+:minimumContactWireHeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Minimum contact wire height"@en ;
+    :XMLName "ECS_MinWireHeight" ;
+    :applicable "Y/N" ;
+    :dependencyNote "When `not electrified` is chosen in parameter 1.1.1.2.2.1.1, then this parameter is not applicable."@en ;
+    :eratvIndex "4.10.5" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.2.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumContactWireHeight>,
+        <http://data.europa.eu/949/shapes/MinimumContactWireHeightApplicability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2024-09-25"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of the minimum contact wire height expressed in metres."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :contactLineSystemDataParameter,
+        :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The value given can be design value or the last known measured value. If there is no change in height, nominal value will be given.
+
+Values shall be given in metres with precision of 0.01 m."""@en .
+
+:offsetFromKilometricPost a owl:DatatypeProperty ;
+    rdfs:label "offset"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OffsetFromKilometricPost> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Relative distance from a reference kilometric post "@en ;
+    rdfs:domain :LinearPositioningSystemCoordinate ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double .
+
+:parkingBrakeMaximumGradient a owl:DatatypeProperty ;
+    rdfs:label "Parking brake maximum gradient"@en ;
+    :eratvIndex "4.7.3.3" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Maximum gradient on which the unit is kept immobilised by the parking brake alone (if the vehicle is fitted with it)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:passByNoiseLevel a owl:DatatypeProperty ;
+    rdfs:label "Pass-by noise level"@en ;
+    :eratvIndex "4.11.1" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Pass-by noise level given in dB(A)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:phaseInfoKm rdfs:range xsd:double .
+
+:quasiStaticGuidingForce a owl:DatatypeProperty ;
+    rdfs:label "Quasi static guiding force"@en ;
+    :eratvIndex "4.5.4" ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date ;
+    rdfs:comment "Quasi-static guiding force (if exceeds the limit defined in TSI or not defined in the TSI), given in kN."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:relativePosition a owl:DatatypeProperty ;
+    rdfs:label "Relative position"@en ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2023-11-10"^^xsd:date ;
+    rdfs:comment "Indicates the position of an object relative to the linear coordinates of the associated topological object."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:editorialNote " The reason for deprecation is that this property is not specified in the latest legal text nor the RINF application guide. Also, no data has been provided for this property."@en .
+
+:startIntrinsicCoordinate a owl:DatatypeProperty ;
+    rdfs:label "Start intrinsic coordinate"@en ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2021-04-01"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:startOffsetFromOrigin rdfs:range xsd:double .
+
+:startingNoiseLevel a owl:DatatypeProperty ;
+    rdfs:label "Starting noise level"@en ;
+    :eratvIndex "4.11.4" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "starting noise level given in dB(A)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:staticAxleLoadExceptionalPayload a owl:DatatypeProperty ;
+    rdfs:label "Static axle load under exceptional payload"@en ;
+    :eratvIndex "4.5.3.3" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Static axle load under exceptional payload."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:staticAxleLoadNormalPayload a owl:DatatypeProperty ;
+    rdfs:label "Static axle load under normal payload"@en ;
+    :eratvIndex "4.5.3.2" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Static axle load under normal payload."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:staticAxleLoadWorkingOrder a owl:DatatypeProperty ;
+    rdfs:label "Static axle load in working order"@en ;
+    :eratvIndex "4.5.3.1" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Static axle load in working order."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:stationaryNoiseLevel a owl:DatatypeProperty ;
+    rdfs:label "Stationary noise level"@en ;
+    :eratvIndex "4.11.3" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "stationary noise level given in dB(A)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:structureCheckLocation a owl:DatatypeProperty ;
+    rdfs:label "Railway location of structures requiring specific checks"@en ;
+    :XMLName "IPP_StructureCheckLoc" ;
+    :applicable "Y/N" ;
+    :dependencyNote "This information is to be linked with parameter 1.1.1.1.2.4.4"@en ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.2.4.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/StructureCheckLocation> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:relation :compatibilityProcedureDocument ;
+    rdfs:comment "Localisation of structures requiring specific checks"@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :performanceDataParameter ;
+    ns1:term_status "stable" ;
+    skos:example "The IM A knows that its bridge X might have problems with combination of speed and load above a certain limit values Z, and for that the IM A has a specific procedure W for the check to be done; if the vehicle operation is intended to be within this case (above the limit Z), then RU shall proceed in accordance to the procedure W; therefore the bridge X shall be referred to in the parameter of the RINF:  1.1.1.1.2.4.3 / Railway location of structures requiring specific checks." ;
+    skos:scopeNote "The railway location identifies the location of the structure in the system of reference of the line to which the track belongs."@en .
+
+:systemSeparationInfoKm rdfs:range xsd:double .
+
+:thermalCapacityDistance a owl:DatatypeProperty ;
+    rdfs:label "Thermal capacity distance"@en ;
+    :eratvIndex "4.7.2.1.4" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM> ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date,
+        "2024-06-26"^^xsd:date ;
+    rdfs:comment "Thermal capacity distance. If no reference case is indicated."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:thermalCapacityGradient a owl:DatatypeProperty ;
+    rdfs:label "Thermal capacity gradient"@en ;
+    :eratvIndex "4.7.2.1.3" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Thermal capacity gradient. If no reference case is indicated."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:thermalCapacitySpeed a owl:DatatypeProperty ;
+    rdfs:label "Thermal capacity speed"@en ;
+    :eratvIndex "4.7.2.1.2" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Thermal capacity speed. If no reference case is indicated."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:lineReferenceTunnelEnd dcterms:replaces :tunnelKilometerEnd .
+
+:lineReferenceTunnelStart dcterms:replaces :tunnelKilometerStart .
+
+:minVehicleImpedance a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Vehicle impedance"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Mandatory only for track circuits" ;
+    :formatNote "The values is an instance of era:MinVehicleImpedance class with its 2 properties.	Per voltage : input Capacitance (Cin) and Input Impedance (Zin)"@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        """For train detection system compliant with TSIs, 12 months after publication of Article 7 Guide.
+For train detection system not TSI compliant: in relation to article 13 of TSI CCS"""@en ;
+    :rinfIndex "1.1.1.3.4.2.2",
+        "1.2.1.1.3.2.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleImpedance>,
+        <http://data.europa.eu/949/shapes/MinVehicleImpedanceApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:modified "2025-02-28"^^xsd:date ;
+    rdfs:comment "Impedance as defined in the specification referenced in Appendix A-1, index [D]"@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :MinVehicleImpedance ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg_impl/2023/1695/oj"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsObjParameter ;
+    skos:scopeNote "Compatibility with track circuits. A track circuit is only able to detect rolling stock if the impedance between rails does not exceed a certain value."@en .
+
+:tunnelKilometerEnd a owl:DatatypeProperty ;
+    rdfs:label "(deprecated) End of tunnel kilometer"@en ;
+    :XMLName "SOLTunnelEnd" ;
+    :rinfIndex "1.1.1.1.8.4" ;
+    dcterms:created "2023-03-29"^^xsd:date ;
+    dcterms:isReplacedBy :lineReferenceTunnelEnd ;
+    dcterms:modified "2024-02-05"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment """Part of the End of tunnel that indicates the km of the line at the end of a tunnel.
+The End of tunnel is the Geographical coordinates in decimal degrees and km of the line at the end of a tunnel. The reason for deprecation is that the property is now a subproperty of lineReference in order to represent the kilometer in relation to a national railway line"""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tunnelKilometerStart a owl:DatatypeProperty ;
+    rdfs:label "(deprecated) Start of tunnel kilometer"@en ;
+    dcterms:created "2023-03-29"^^xsd:date ;
+    dcterms:isReplacedBy :lineReferenceTunnelStart ;
+    dcterms:modified "2024-02-05"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:LinearPositioningSystemCoordinate a owl:Class ;
+    rdfs:label "Linear Positioning System Coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearPositioningSystemCoordinateShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents coordinates in a linear positioning system."@en ;
+    rdfs:isDefinedBy : .
+
+:MinVehicleImpedance a owl:Class ;
+    rdfs:label "Minimum Vehicle Impedance"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleImpedanceShape> ;
+    dcterms:created "2024-05-30"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment """Impedance as defined in the TSI CCS (Annex I, Appendix A, Table A.2 -Index 77).
+
+Minimum vehicle impedance (between wheels and pantograph) (only for vehicles equipped for 1500V or 3000V DC).
+
+Per Voltage:
+[1500]: [CCCC]+[ZZZZ], with input capacitance [CCCC](Cin) and input impedance [ZZZZ](Zin)
+[3000]: [CCCC]+[ZZZZ], idem."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The MinVehicleImpedance class is applicable for track circuits."@en .
+
+:KilometricPost a owl:Class ;
+    rdfs:label "Kilometric Post"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/KilometricPostShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    rdfs:comment "Represents a kilometric post in the linear positioning system."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :LevelCrossing,
+        :OperationalPoint,
+        :PlatformEdge,
+        :PrimaryLocation,
+        :RadioBlockCenter,
+        :SectionOfLine,
+        :Signal,
+        :SpecialArea,
+        :Switch,
+        :Track,
+        :Tunnel .
+

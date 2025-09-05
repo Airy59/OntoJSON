@@ -1,0 +1,27 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ARC a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ARC" ;
+    rdfs:comment """Administrative Reference CodeEMCS (Excise Movement and
+							Control System)""",
+        "CODE: EU (EC) No 684/2009" ;
+    rdfs:domain :ReferenceNumbers ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasMovementReferenceNumber a owl:ObjectProperty ;
+    rdfs:label "has MovementReferenceNumber" ;
+    rdfs:domain :ReferenceNumbers ;
+    rdfs:range :MovementReferenceNumber .
+
+:hasReferenceNumbers rdfs:range :ReferenceNumbers .
+
+:ReferenceNumbers a owl:Class ;
+    rdfs:label "ReferenceNumbers" ;
+    rdfs:comment """This element contains references according to NCTS or EMCS law.This
+				element MUST NOT be empty!""" .
+

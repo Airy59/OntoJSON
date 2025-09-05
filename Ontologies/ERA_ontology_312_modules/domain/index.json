@@ -1,0 +1,56 @@
+{
+  "strategy": "domain",
+  "source_file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312.ttl",
+  "partitions": {
+    "electrical": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/electrical.ttl",
+      "entities": 51,
+      "triples": 2564
+    },
+    "infrastructure": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/infrastructure.ttl",
+      "entities": 137,
+      "triples": 3602
+    },
+    "rolling_stock": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/rolling_stock.ttl",
+      "entities": 102,
+      "triples": 2064
+    },
+    "geographic": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/geographic.ttl",
+      "entities": 45,
+      "triples": 905
+    },
+    "technical": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/technical.ttl",
+      "entities": 37,
+      "triples": 579
+    },
+    "signaling": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/signaling.ttl",
+      "entities": 42,
+      "triples": 1315
+    },
+    "safety": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/safety.ttl",
+      "entities": 13,
+      "triples": 439
+    },
+    "administrative": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/administrative.ttl",
+      "entities": 18,
+      "triples": 491
+    },
+    "operations": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/operations.ttl",
+      "entities": 9,
+      "triples": 144
+    },
+    "general": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/domain/general.ttl",
+      "entities": 233,
+      "triples": 5528
+    }
+  }
+}

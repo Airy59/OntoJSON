@@ -1,0 +1,668 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ATEXCertified rdfs:range xsd:boolean .
+
+:BogieWagonsOnly a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BogieWagonsOnly" ;
+    rdfs:comment """Indicates that the train consists of bogie wagons only or not.
+				â€œYesâ€/â€trueâ€ means always all wagons of the train are bogie wagons. Then content of
+				element is â€œnoâ€/â€falseâ€ or element isnâ€™t used means the train contains of different
+				wagons (not homogeneous only with bogie wagons).""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ChannelTunnelPermitted rdfs:range xsd:boolean .
+
+:CharacteristicDescriptionCode a owl:DatatypeProperty ;
+    rdfs:label "CharacteristicDescriptionCode" ;
+    rdfs:domain :TypeofService ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ChargesNoteAvailable rdfs:range xsd:boolean .
+
+:Coasting a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Coasting" ;
+    rdfs:comment """IM indicates to the RU whether the driver can rely on coasting. This
+				is of both economic and ecological interest, as in many parts of the journey the
+				trains may have enough inertia to be able to match the calculated time of the next
+				location relying on coasting only.""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CommercialTrafficType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CommercialTrafficType" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CompositeBrakeBlockRetrofitted rdfs:range xsd:boolean .
+
+:ContainerHandlingFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ContainerHandlingFlag" ;
+    rdfs:comment "This establishment is able to handle container traffic" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CoversNonTankWagonsForDangerousGoods rdfs:range xsd:boolean .
+
+:CoversTankWagonsForDangerousGoods rdfs:range xsd:boolean .
+
+:CustomsEndorsements a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CustomsEndorsements" ;
+    rdfs:comment """Reserved for
+																endorsements by customs or a
+																consignor/consignee authorised by
+																customs. Data element in accordance
+																with Regulation (EC) 1875/2006).""" ;
+    rdfs:domain :CustomsData ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CustomsSurveillance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CustomsSurveillance" ;
+    rdfs:comment """Good under customs
+																surveillance""" ;
+    rdfs:domain :CustomsData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsIndicator a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DangerousGoodsIndicator" ;
+    rdfs:comment """Indicates whether Dangerous Goods are allowed (Yes/No Indicator) If
+				"0", then no dangerous goods are allowed. If "1", then the restricted goods are
+				described in DangerousGoodsIndication""" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateSuspended rdfs:range xsd:boolean .
+
+:EmergencyBrakeOverride a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EmergencyBrakeOverride" ;
+    rdfs:comment """Ability of the whole train (all wagons and traction units) to override
+				the emergency brake signal""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EnvironmentalHazardous a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EnvironmentalHazardous" ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ExceptionalGaugingInd a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ExceptionalGaugingInd" ;
+    rdfs:comment """Indicates that an exceptional gauging is in the train or for the wagon
+				- (true/false)""" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:FacilityTypeDescriptionCode a owl:DatatypeProperty ;
+    rdfs:label "FacilityTypeDescriptionCode" ;
+    rdfs:domain :TypeofService ;
+    rdfs:subPropertyOf :dataProperties .
+
+:FerryPermittedFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FerryPermittedFlag" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:FreightFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FreightFlag" ;
+    rdfs:comment "Identifies that the Entity or Location is for Freight Activity" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:GCUWagon rdfs:range xsd:boolean .
+
+:HandoverHarmonized a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HandoverHarmonized" ;
+    rdfs:comment """IM indicates that he has finished to
+												harmonized the handover point. Used for PathDetails
+												message, should be mandatory for applications.""" ;
+    rdfs:domain :StatusOfHarmonization ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HandoverPointFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HandoverPointFlag" ;
+    rdfs:comment "Identifies if the location is a Handover Point from IM to IM" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HighestPlannedSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HighestPlannedSpeed" ;
+    rdfs:comment """IM may inform the RA (Responsible applicant) on the speed which was
+				the basis for path construction""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InterchangeHarmonized a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InterchangeHarmonized" ;
+    rdfs:comment """RU indicates that it has harmonized
+												the interchange point with its' partner. Used for
+												PathRequest, should be mandatory for applications""" ;
+    rdfs:domain :StatusOfHarmonization ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:IsAbleToRun rdfs:range xsd:boolean .
+
+:JourneyLocationTypeCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "JourneyLocationTypeCode" ;
+    rdfs:comment "None" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LengthOfSetOfCarriages a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LengthOfSetOfCarriages" ;
+    rdfs:comment """The calculated and rounded up maximum length of all wagons/coaches of
+				the train (sum of all length over buffer of the wagons) expressed in metres. This is
+				made optional together with TrainLength, but it could be implemented by applications
+				as mandatory.""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LimitedQuantityIndicator rdfs:range xsd:boolean .
+
+:LocationPrimaryCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationPrimaryCode" ;
+    rdfs:domain :LocationFileDatasetMessage ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationPrimaryName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationPrimaryName" ;
+    rdfs:comment """Location Name in an offication language of the Country using the ISO
+				Unicode alphabet""" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MarinePollutant a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MarinePollutant" ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MinBrakedWeightPercent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MinBrakedWeightPercent" ;
+    rdfs:comment "Minimum percentage of braking claimed by IM for safety reasons." ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NUTS_Code a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NUTS_Code" ;
+    rdfs:comment """Nomiclature for Territoritorial Units for Statistics. A
+							NUTS code begins with a two-letter code referencing the country, which
+							is identical to the ISO 3166-1 alpha-2 code """ ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Note a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Note" ;
+    rdfs:domain :Notes ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:OnDemandPath a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OnDemandPath" ;
+    rdfs:comment """For the use of on demand or optional path (has to be either activated
+				or deactived depending to network rules)""" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:OperationalTrainCouplingStrength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OperationalTrainCouplingStrength" ;
+    rdfs:comment """ OperationalTrainCouplingStrength expressed in kN. The operational
+				strength of the train coupling is a crucial technical characteristic for the
+				determination of a freight trainâ€™s tonnage rating """ ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PassengerFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PassengerFlag" ;
+    rdfs:comment "Identifies that the Entity or Location is for Passenger Activity" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PlannedSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PlannedSpeed" ;
+    rdfs:comment """IM may inform the RA on the speed which was the basis for path
+				construction""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PossibilityToPreventUseOfRegenerativeBrake a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PossibilityToPreventUseOfRegenerativeBrake" ;
+    rdfs:comment """False - not fitted, True - fitted the
+										possibility of preventing the use of the regenerative brake """ ;
+    rdfs:domain :PossibilityToPreventRegenerativeBrake ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreArrangedPath a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreArrangedPath" ;
+    rdfs:comment """Path offered by the IMs with pre-defined frequencies, times of
+				departures and destinations and routings suitable for freight transport services. """ ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrimaryLocationNameASCII a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrimaryLocationNameASCII" ;
+    rdfs:comment "the location name in free text, using ASCII character set" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrincipalRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrincipalRU" ;
+    rdfs:comment """Code for the principal
+																RU""" ;
+    rdfs:domain :CustomsData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PushPullTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PushPullTrain" ;
+    rdfs:comment """Indicates that the train can change direction without shunting. This
+				flag can be used only with TractionMode 1X, 2X, 5X.""" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RegenerativeBrakeFitted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RegenerativeBrakeFitted" ;
+    rdfs:comment "False - Not fitted, True- Regenerative Brake fitted" ;
+    rdfs:domain :RegenerativeBrake ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RegenerativeBrakePreventionInUse a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RegenerativeBrakePreventionInUse" ;
+    rdfs:comment """False - Regenerative Brake Prevention not in
+										use, True Regenerative Brake Prevention in use (obligatory
+										if fitted with the possibility of preventing the use of the
+										regenerative brake)""" ;
+    rdfs:domain :PossibilityToPreventRegenerativeBrake ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ResponsibleApplicant a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ResponsibleApplicant" ;
+    rdfs:comment """This element has to be used for the whle journey where the applicant
+				has made the request""" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RevisedRequest a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RevisedRequest" ;
+    rdfs:comment """Indication for the IM whether wait because the RU will send a revised
+				request soon or to make an alternative offer.""" ;
+    rdfs:domain :PathDetailsRefusedMessage ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SimplifiedTransportProcedure a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SimplifiedTransportProcedure" ;
+    rdfs:comment """Simplified transport
+																procedure is used (STP).""" ;
+    rdfs:domain :CustomsData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SpecialServiceDescriptionCode a owl:DatatypeProperty ;
+    rdfs:label "SpecialServiceDescriptionCode" ;
+    rdfs:domain :TypeofService ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SuspensionOfAuthorisation rdfs:range xsd:boolean .
+
+:TelematicsOnBoard a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TelematicsOnBoard" ;
+    rdfs:comment """Indication if wagon is equipped with a
+						telematics device.""" ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TiltingFunction a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TiltingFunction" ;
+    rdfs:comment "Indicates if a train uses a tilting system" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrafficTypeCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrafficTypeCode" ;
+    rdfs:domain :TrafficType ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrafficTypeNetwork a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrafficTypeNetwork" ;
+    rdfs:comment """The code of the company (IM) that has planning
+							responsibilty of the network where the TrafficTypeCode applies. If
+							NetworkCode isn't used, then the TrafficTypeCode must be a value in the
+							common European list.""" ;
+    rdfs:domain :TrafficType ;
+    rdfs:subPropertyOf :dataProperties .
+
+:VapourReturnSystem a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "VapourReturnSystem" ;
+    rdfs:comment """Indication if tank wagon is equipped with a
+										vapour return system""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Waste rdfs:range xsd:boolean .
+
+:WeightOfSetOfCarriages rdfs:domain :PlannedTrainTechnicalData .
+
+:hasActivities a owl:ObjectProperty ;
+    rdfs:label "has Activities" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range :Activities .
+
+:hasActivityLocationIdent a owl:ObjectProperty ;
+    rdfs:label "has ActivityLocationIdent" ;
+    rdfs:domain :Activities ;
+    rdfs:range :ActivityLocationIdent .
+
+:hasCombinedTrafficLoadProfile rdfs:domain :PlannedTrainData .
+
+:hasCustomsData a owl:ObjectProperty ;
+    rdfs:label "has CustomsData" ;
+    rdfs:domain :COM ;
+    rdfs:range :CustomsData .
+
+:hasLocationPrimaryInformation a owl:ObjectProperty ;
+    rdfs:label "has LocationPrimaryInformation" ;
+    rdfs:domain :LocationFileDatasetMessage ;
+    rdfs:range :LocationPrimaryInformation .
+
+:hasLocationSubsidiaryInformation a owl:ObjectProperty ;
+    rdfs:label "has LocationSubsidiaryInformation" ;
+    rdfs:domain :LocationFileDatasetMessage ;
+    rdfs:range :LocationSubsidiaryInformation .
+
+:hasNoteLocationIdent a owl:ObjectProperty ;
+    rdfs:label "has NoteLocationIdent" ;
+    rdfs:domain :Notes ;
+    rdfs:range :NoteLocationIdent .
+
+:hasNotes a owl:ObjectProperty ;
+    rdfs:label "has Notes" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range :Notes .
+
+:hasPlannedJourneyLocation a owl:ObjectProperty ;
+    rdfs:label "has PlannedJourneyLocation" ;
+    rdfs:domain [ ] ;
+    rdfs:range :PlannedJourneyLocation .
+
+:hasPlannedTrainData a owl:ObjectProperty ;
+    rdfs:label "has PlannedTrainData" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range :PlannedTrainData .
+
+:hasPlannedTrainTechnicalData a owl:ObjectProperty ;
+    rdfs:label "has PlannedTrainTechnicalData" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range :PlannedTrainTechnicalData .
+
+:hasPossibilityToPreventRegenerativeBrake a owl:ObjectProperty ;
+    rdfs:label "has PossibilityToPreventRegenerativeBrake" ;
+    rdfs:domain :RegenerativeBrake ;
+    rdfs:range :PossibilityToPreventRegenerativeBrake .
+
+:hasRegenerativeBrake a owl:ObjectProperty ;
+    rdfs:label "has RegenerativeBrake" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range :RegenerativeBrake .
+
+:hasStatusOfHarmonization a owl:ObjectProperty ;
+    rdfs:label "has StatusOfHarmonization" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range :StatusOfHarmonization .
+
+:hasTractionDetails rdfs:domain :PlannedTrainTechnicalData .
+
+:hasTrafficType a owl:ObjectProperty ;
+    rdfs:label "has TrafficType" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range :TrafficType .
+
+:hasTrainRunningData rdfs:range :TrainRunningData .
+
+:hasTrainRunningTechData rdfs:domain :TrainRunningData .
+
+:hasTypeofService a owl:ObjectProperty ;
+    rdfs:label "has TypeofService" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range :TypeofService .
+
+:ActivityLocationIdent a owl:Class ;
+    rdfs:label "ActivityLocationIdent" ;
+    :domain "Telematics" .
+
+:NoteLocationIdent a owl:Class ;
+    rdfs:label "NoteLocationIdent" ;
+    rdfs:comment "Identification of location for which is note valid" .
+
+:Activities a owl:Class ;
+    rdfs:label "Activities" .
+
+:Notes a owl:Class ;
+    rdfs:label "Notes" ;
+    rdfs:comment "Remarks to be transmitted to IM" .
+
+:PossibilityToPreventRegenerativeBrake a owl:Class ;
+    rdfs:label "PossibilityToPreventRegenerativeBrake" ;
+    rdfs:comment """Possibility of preventing the use of the regenerative
+							brake """ .
+
+:RegenerativeBrake a owl:Class ;
+    rdfs:label "RegenerativeBrake" ;
+    rdfs:comment """Information of the Regenerative Brake, only for locomotives/vehicles
+				with electrical traction connected external power source """ .
+
+:StatusOfHarmonization a owl:Class ;
+    rdfs:label "StatusOfHarmonization" ;
+    rdfs:comment """Does not force harmonization, it just sets an
+									indication message: has the interchange/handover been harmonized
+									or not.""" .
+
+:TrafficType a owl:Class ;
+    rdfs:label "TrafficType" ;
+    rdfs:comment """information about the type of traffic (combined, rolling highway,
+				etc). It is added here as a placeholder for coded values (e.g. from Merits)""" .
+
+:TypeofService a owl:Class ;
+    rdfs:label "TypeofService" ;
+    rdfs:comment """Information about the services available on a train. Used for
+				publication towards the passenger""" .
+
+:CustomsData a owl:Class ;
+    rdfs:label "CustomsData" ;
+    rdfs:comment "Customs Data" .
+
+:LocationFileDatasetMessage a owl:Class ;
+    rdfs:label "LocationFileDatasetMessage" ;
+    rdfs:comment " Used to Create, Modify or Update the LocationIdent Reference File" .
+
+:LocationSubsidiaryInformation a owl:Class ;
+    rdfs:label "LocationSubsidiaryInformation" ;
+    rdfs:comment """Required for Add, Update of a Location Subsidiary Code (modified to
+				global element)""" .
+
+:TrainRunningData a owl:Class ;
+    rdfs:label "TrainRunningData" ;
+    rdfs:comment "Train relevant data for a running train" .
+
+:PlannedTrainData a owl:Class ;
+    rdfs:label "PlannedTrainData" ;
+    rdfs:comment "Train relevant data for a planning period" .
+
+:LocationPrimaryInformation a owl:Class ;
+    rdfs:label "LocationPrimaryInformation" ;
+    rdfs:comment "Required for Primary Location Add, Update, of a Location Primary Code" .
+
+:PathDetailsRefusedMessage a owl:Class ;
+    rdfs:label "PathDetailsRefusedMessage" ;
+    rdfs:comment """This message is used by the RU to inform the IM that the PathDetails
+				(with changed values to the request or to earlier booked path) are not acceptable""" .
+
+:PlannedJourneyLocation a owl:Class ;
+    rdfs:label "PlannedJourneyLocation" ;
+    rdfs:comment "Any operation point along the train journey or path" .
+
+:PlannedTrainTechnicalData a owl:Class ;
+    rdfs:label "PlannedTrainTechnicalData" ;
+    rdfs:comment "Shows the relevant technical data for a running train" .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :Activities .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :PlannedTrainData .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :PlannedTrainData .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :LocationFileDatasetMessage .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :PathDetailsRefusedMessage .
+
+[] rdf:first :LocationFileDatasetMessage .
+
+[] rdf:first :PathDetailsRefusedMessage .
+

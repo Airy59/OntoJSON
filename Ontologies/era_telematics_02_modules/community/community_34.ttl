@@ -1,0 +1,274 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DamageCodePosition1 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition1" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition2" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition3 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition3" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition4 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition4" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageOldOrNew a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageOldOrNew" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EventType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EventType" ;
+    rdfs:comment "Type of event" ;
+    rdfs:domain :Event ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:IsAbleToRun a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "IsAbleToRun" ;
+    rdfs:comment """True if the damage does not cause
+													an interruption of the transport run. False
+													otherwise: The damage causes an interruption of
+													the transport run (the wagon has to be repaired,
+													the loading of the good has to be bettered, . .
+													.""" ;
+    rdfs:domain :WagonJourneyIrregularity ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MessageCreationDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageCreationDateTime" ;
+    rdfs:comment "Timestamp of Creation of Message",
+        """the timestamp is created by the originally
+										sending RU, it remains unchanged, when forwarded by the
+										central ISR application""" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RU" ;
+    rdfs:comment "Carrier (Railway Code)" ;
+    rdfs:domain :Carrier ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ReportingRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ReportingRU" ;
+    rdfs:comment """Company (RICS) Code of the RU who is reporting
+										the event""" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainDepartureDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainDepartureDate" ;
+    rdfs:comment """Out only: Departure Date of the
+													Train """,
+        """use here the date the train left
+													origin using this train number""" ;
+    rdfs:domain :Train ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainOperatingRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainOperatingRU" ;
+    rdfs:domain :Train ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeOfRequest a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeOfRequest" ;
+    rdfs:comment """Enumeration for the 3 different basic types of the planning processes
+				types in the planning: Study (1), Request (2), Modification (3) """ ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCarrier a owl:ObjectProperty ;
+    rdfs:label "has Carrier" ;
+    rdfs:domain :CarriersInvolved ;
+    rdfs:range :Carrier .
+
+:hasCarriersInvolved a owl:ObjectProperty ;
+    rdfs:label "has CarriersInvolved" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :CarriersInvolved .
+
+:hasConsignmentIdentification rdfs:domain :WagonStatusMessage .
+
+:hasDamageCodes a owl:ObjectProperty ;
+    rdfs:label "has DamageCodes" ;
+    rdfs:domain :WagonJourneyIrregularity ;
+    rdfs:range :DamageCodes .
+
+:hasDestinationLocation a owl:ObjectProperty ;
+    rdfs:label "has DestinationLocation" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :DestinationLocation .
+
+:hasEvent a owl:ObjectProperty ;
+    rdfs:label "has Event" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :Event .
+
+:hasEventLocation a owl:ObjectProperty ;
+    rdfs:label "has EventLocation" ;
+    rdfs:domain :EventLocationInformation ;
+    rdfs:range :EventLocation .
+
+:hasEventLocationInformation a owl:ObjectProperty ;
+    rdfs:label "has EventLocationInformation" ;
+    rdfs:domain :Event ;
+    rdfs:range :EventLocationInformation .
+
+:hasPosition a owl:ObjectProperty ;
+    rdfs:label "has Position" ;
+    rdfs:domain :EventLocationInformation ;
+    rdfs:range :Position .
+
+:hasRouting a owl:ObjectProperty ;
+    rdfs:label "has Routing" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :Routing .
+
+:hasShippingLocation a owl:ObjectProperty ;
+    rdfs:label "has ShippingLocation" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :ShippingLocation .
+
+:hasTrain a owl:ObjectProperty ;
+    rdfs:label "has Train" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :Train .
+
+:hasWagonJourneyIrregularity a owl:ObjectProperty ;
+    rdfs:label "has WagonJourneyIrregularity" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :WagonJourneyIrregularity .
+
+:hasWagonStatusMessage a owl:ObjectProperty ;
+    rdfs:label "has WagonStatusMessage" ;
+    rdfs:domain :WagonStatusMessages ;
+    rdfs:range :WagonStatusMessage .
+
+:DestinationLocation a owl:Class ;
+    rdfs:label "DestinationLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment """Destination Station ( TAF location code with
+										optional SLC type 42 or 36)""",
+        """use here the station code of the station the
+										wagon shall terminate its transport run """ .
+
+:EventLocation a owl:Class ;
+    rdfs:label "EventLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment """Location where the
+																event happend""" .
+
+:ShippingLocation a owl:Class ;
+    rdfs:label "ShippingLocation" ;
+    rdfs:comment """Shipping Station ( TAF location code with
+										optional SLC type 42 or 36)""",
+        """use here the station code of the station the
+										wagon has started its transport run""" .
+
+:CarriersInvolved a owl:Class ;
+    rdfs:label "CarriersInvolved" .
+
+:Routing a owl:Class ;
+    rdfs:label "Routing" ;
+    rdfs:comment """Sequential information about the complete routing of the consignment,
+				the LeadRu decides wether to provide this information or not""" .
+
+:WagonStatusMessages a owl:Class ;
+    rdfs:label "WagonStatusMessages" ;
+    rdfs:comment """Always MANDATORY, independent whether only one or more messages are in
+				the file """ .
+
+:Carrier a owl:Class ;
+    rdfs:label "Carrier" ;
+    rdfs:comment "Carrier(s) involved" .
+
+:EventLocationInformation a owl:Class ;
+    rdfs:label "EventLocationInformation" ;
+    rdfs:comment """Information concerning the event
+													location. Optional for event types 06 and 16,
+													these events may not have a location. But for
+													all remaining event types, at least one of the
+													elements EventLocation or Position should be
+													sent""" .
+
+:Position a owl:Class ;
+    rdfs:label "Position" ;
+    rdfs:comment """Geo coordinates of the
+																wagon event location in WGS84 as
+																used in the CRD""" .
+
+:WagonJourneyIrregularity a owl:Class ;
+    rdfs:label "WagonJourneyIrregularity" .
+
+:Event a owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "Information belonging to the event" .
+
+:Train a owl:Class ;
+    rdfs:label "Train" .
+
+:DamageCodes a owl:Class ;
+    rdfs:label "DamageCodes" ;
+    rdfs:comment """List of Damage Codes according to
+													description in GCU Appendix 9 Annex 1""" .
+
+:WagonStatusMessage a owl:Class ;
+    rdfs:label "WagonStatusMessage" ;
+    rdfs:comment """used to describe one event of one wagon (all bounded
+							elements are bounded to to obligations of legacy systems)""" .
+
+[] rdf:first :WagonStatusMessages .
+
+[] rdf:first :Train .
+
+[] rdf:first :Routing .
+
+[] rdf:first :Train .
+
+[] rdf:first :Carrier .
+
+[] rdf:first :Event .
+
+[] rdf:first :Position .
+
+[] rdf:first :WagonStatusMessage .
+
+[] rdf:first :Position .
+
+[] rdf:first :WagonStatusMessage .
+

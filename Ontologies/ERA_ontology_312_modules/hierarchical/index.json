@@ -1,0 +1,201 @@
+{
+  "strategy": "hierarchical",
+  "source_file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312.ttl",
+  "partitions": {
+    "Vehicle": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Vehicle.ttl",
+      "entities": 9,
+      "triples": 1108
+    },
+    "Instant": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Instant.ttl",
+      "entities": 1,
+      "triples": 2
+    },
+    "LinearPositioningSystem": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/LinearPositioningSystem.ttl",
+      "entities": 3,
+      "triples": 35
+    },
+    "ReferenceBorderPoint": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/ReferenceBorderPoint.ttl",
+      "entities": 2,
+      "triples": 17
+    },
+    "MinimumVerticalRadius": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/MinimumVerticalRadius.ttl",
+      "entities": 3,
+      "triples": 28
+    },
+    "TemporalDuration": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/TemporalDuration.ttl",
+      "entities": 1,
+      "triples": 2
+    },
+    "DatatypeProperty": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/DatatypeProperty.ttl",
+      "entities": 2,
+      "triples": 9
+    },
+    "List": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/List.ttl",
+      "entities": 8,
+      "triples": 147
+    },
+    "LoadCapability": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/LoadCapability.ttl",
+      "entities": 3,
+      "triples": 42
+    },
+    "VehicleType": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/VehicleType.ttl",
+      "entities": 125,
+      "triples": 1438
+    },
+    "MinAxleLoadVehicleCategory": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/MinAxleLoadVehicleCategory.ttl",
+      "entities": 2,
+      "triples": 20
+    },
+    "TopologicalCoordinate": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/TopologicalCoordinate.ttl",
+      "entities": 3,
+      "triples": 24
+    },
+    "Document": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Document.ttl",
+      "entities": 3,
+      "triples": 17
+    },
+    "Feature": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Feature.ttl",
+      "entities": 26,
+      "triples": 290
+    },
+    "RaisedPantographsDistanceAndSpeed": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/RaisedPantographsDistanceAndSpeed.ttl",
+      "entities": 4,
+      "triples": 53
+    },
+    "TrainDetectionSystem": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/TrainDetectionSystem.ttl",
+      "entities": 25,
+      "triples": 417
+    },
+    "SystemSeparationInfo": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/SystemSeparationInfo.ttl",
+      "entities": 6,
+      "triples": 72
+    },
+    "Property": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Property.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "ETCS": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/ETCS.ttl",
+      "entities": 5,
+      "triples": 121
+    },
+    "LinearPositioningSystemCoordinate": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/LinearPositioningSystemCoordinate.ttl",
+      "entities": 3,
+      "triples": 23
+    },
+    "OrganisationRole": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/OrganisationRole.ttl",
+      "entities": 5,
+      "triples": 92
+    },
+    "MinVehicleImpedance": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/MinVehicleImpedance.ttl",
+      "entities": 4,
+      "triples": 50
+    },
+    "Organization": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Organization.ttl",
+      "entities": 6,
+      "triples": 61
+    },
+    "PhaseInfo": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/PhaseInfo.ttl",
+      "entities": 7,
+      "triples": 91
+    },
+    "Concept": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Concept.ttl",
+      "entities": 1,
+      "triples": 2
+    },
+    "ContactLineSystem": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/ContactLineSystem.ttl",
+      "entities": 10,
+      "triples": 198
+    },
+    "FrenchTrainDetectionSystemLimitation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/FrenchTrainDetectionSystemLimitation.ttl",
+      "entities": 3,
+      "triples": 39
+    },
+    "ObjectProperty": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/ObjectProperty.ttl",
+      "entities": 2,
+      "triples": 10
+    },
+    "Person": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Person.ttl",
+      "entities": 1,
+      "triples": 2
+    },
+    "Orientation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Orientation.ttl",
+      "entities": 5,
+      "triples": 37
+    },
+    "LinesideDistanceIndication": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/LinesideDistanceIndication.ttl",
+      "entities": 4,
+      "triples": 52
+    },
+    "MaximumSpeedAndCantDeficiency": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/MaximumSpeedAndCantDeficiency.ttl",
+      "entities": 3,
+      "triples": 32
+    },
+    "MaximumMagneticField": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/MaximumMagneticField.ttl",
+      "entities": 4,
+      "triples": 45
+    },
+    "Certificate": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Certificate.ttl",
+      "entities": 2,
+      "triples": 20
+    },
+    "TemporalEntity": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/TemporalEntity.ttl",
+      "entities": 3,
+      "triples": 24
+    },
+    "Geometry": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Geometry.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "Point": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/Point.ttl",
+      "entities": 1,
+      "triples": 2
+    },
+    "LineReference": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/LineReference.ttl",
+      "entities": 1,
+      "triples": 12
+    },
+    "misc": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/hierarchical/misc.ttl",
+      "entities": 639,
+      "triples": 16277
+    }
+  }
+}

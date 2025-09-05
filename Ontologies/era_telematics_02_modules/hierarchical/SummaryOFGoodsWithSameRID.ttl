@@ -1,0 +1,28 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DangerousGoodsVolume a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DangerousGoodsVolume" ;
+    rdfs:comment "The volume of the dangerous goods in cubic meters" ;
+    rdfs:domain :SummaryOFGoodsWithSameRID ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasSummaryOFGoodsWithSameRID rdfs:range :SummaryOFGoodsWithSameRID .
+
+:SummaryOFGoodsWithSameRID a owl:Class ;
+    rdfs:label "SummaryOFGoodsWithSameRID" ;
+    rdfs:comment """This element is only in use if the consignment includes more than one
+				good with the same UN-Number in , packing group and propershipping name in the
+				wagon. The added amount of the dangerous goods are to be stored here""" .
+
+[] rdf:first :SummaryOFGoodsWithSameRID .
+
+[] rdf:first :SummaryOFGoodsWithSameRID .
+
+[] rdf:first :SummaryOFGoodsWithSameRID .
+

@@ -1,0 +1,40 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:PathDetailsMessage a owl:Class ;
+    rdfs:label "PathDetailsMessage" ;
+    rdfs:comment """This message is used by the IM to the RU confirmaing details of the
+				path in response to an RU request""" .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+
+[] rdf:first :PathDetailsMessage .
+

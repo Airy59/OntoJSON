@@ -1,0 +1,54 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:LoadTableCountry a owl:DatatypeProperty ;
+    rdfs:label "LoadTableCountry" ;
+    rdfs:comment """ISO country code of countries for
+													additional load tables""" ;
+    rdfs:domain :LoadTable ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadTableStars a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadTableStars" ;
+    rdfs:comment "Number of load table stars." ;
+    rdfs:domain :LoadTable ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SpeedCategory a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SpeedCategory" ;
+    rdfs:comment """Numeric speed in load table,
+													without speed empty in km/h""" ;
+    rdfs:domain :LoadTable ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasLoadTable rdfs:range :LoadTable .
+
+:hasLoadTableProduct a owl:ObjectProperty ;
+    rdfs:label "has LoadTableProduct" ;
+    rdfs:domain :LoadTable ;
+    rdfs:range :LoadTableProduct .
+
+:hasRouteClassPayloads a owl:ObjectProperty ;
+    rdfs:label "has RouteClassPayloads" ;
+    rdfs:domain :LoadTable ;
+    rdfs:range :RouteClassPayloads .
+
+:LoadTable a owl:Class ;
+    rdfs:label "LoadTable" ;
+    rdfs:comment """Indicates the load tables marked on the wagon.
+										When load tables are marked on the wagon the information
+										must be provided in the RSRD message. Several load tables
+										(international, product specific for LPG wagons and
+										additional/country specific) can be specified by providing
+										the element several times consecutively. For special wagons
+										with specific load tables (e.g. heavy haul wagons) no load
+										table need to be provided. The complete load table must be
+										provided including the empty load row (if existent).""" .
+

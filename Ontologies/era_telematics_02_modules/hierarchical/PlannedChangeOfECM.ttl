@@ -1,0 +1,28 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:CurrentECMAssignedUntil a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CurrentECMAssignedUntil" ;
+    rdfs:comment """ Date until the current Entity in
+													Charge of Maintenance is assigned to the wagon""" ;
+    rdfs:domain :PlannedChangeOfECM ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SubsequentECM a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SubsequentECM" ;
+    rdfs:comment """ Full name of the following Entity
+													in Charge of Maintenance""" ;
+    rdfs:domain :PlannedChangeOfECM ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasPlannedChangeOfECM rdfs:range :PlannedChangeOfECM .
+
+:PlannedChangeOfECM a owl:Class ;
+    rdfs:label "PlannedChangeOfECM" .
+

@@ -168,3 +168,4 @@ cython_debug/
 # Build system temporary files
 build_system/temp/
 build_system/dist/
+.roo/

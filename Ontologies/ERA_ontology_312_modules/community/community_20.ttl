@@ -1,0 +1,532 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:TSIMagneticFields a owl:ObjectProperty .
+
+:TSITractionHarmonics a owl:ObjectProperty .
+
+:accelerationLevelCrossing a owl:ObjectProperty .
+
+:additionalBrakingInformationDocument a owl:ObjectProperty .
+
+:aggregates a owl:ObjectProperty .
+
+:allocationCompany a owl:ObjectProperty .
+
+:appliesToDirection a owl:ObjectProperty .
+
+:atoCommunicationSystem a owl:ObjectProperty .
+
+:atoGradeAutomation a owl:ObjectProperty .
+
+:atoSystemVersion a owl:ObjectProperty .
+
+:authorizedCountry a owl:ObjectProperty .
+
+:automatedTrainOperationObjParameter a owl:ObjectProperty .
+
+:axleBearingConditionMonitoring a owl:ObjectProperty .
+
+:belongsTo a owl:ObjectProperty .
+
+:borderPointOf a owl:ObjectProperty .
+
+:brakeRelatedObjParameter a owl:ObjectProperty .
+
+:cantDeficiencyBasicSSP a owl:ObjectProperty .
+
+:carrierLinearElement a owl:ObjectProperty .
+
+:category a owl:ObjectProperty .
+
+:ccsSubsystemDeclarationsVerificationTrackObjParameter a owl:ObjectProperty .
+
+:ccsSubsystemObjParameter a owl:ObjectProperty .
+
+:certificate a owl:ObjectProperty .
+
+:companyCodeCategory a owl:ObjectProperty .
+
+:compatibilityProcedureDocument a owl:ObjectProperty .
+
+:conditionalRegenerativeBrake a owl:ObjectProperty .
+
+:conditionsAppliedRegenerativeBraking a owl:ObjectProperty .
+
+:conditionsSwitchClassBSystems a owl:ObjectProperty .
+
+:conditionsUseReflectivePlates a owl:ObjectProperty .
+
+:connectedTo a owl:ObjectProperty .
+
+:contactLineSystem a owl:ObjectProperty .
+
+:contactLineSystemObjParameter a owl:ObjectProperty .
+
+:contactLineSystemType a owl:ObjectProperty .
+
+:contactStripMaterial a owl:ObjectProperty .
+
+:contains a owl:ObjectProperty .
+
+:dataGSMRNetwork a owl:ObjectProperty .
+
+:dataRadioCompatible a owl:ObjectProperty .
+
+:definesSubset a owl:ObjectProperty .
+
+:direction a owl:ObjectProperty .
+
+:documentRestrictionPositionContactLineSeparation a owl:ObjectProperty .
+
+:documentRestrictionPowerConsumption a owl:ObjectProperty .
+
+:eddyCurrentBraking a owl:ObjectProperty .
+
+:eddyCurrentBrakingConditionsDocument a owl:ObjectProperty .
+
+:elementA a owl:ObjectProperty .
+
+:elementB a owl:ObjectProperty .
+
+:elementPart a owl:ObjectProperty .
+
+:endCouplingType a owl:ObjectProperty .
+
+:endLocation a owl:ObjectProperty .
+
+:endsAt a owl:ObjectProperty .
+
+:energySubsystemObjParameter a owl:ObjectProperty .
+
+:energySupplySystem a owl:ObjectProperty .
+
+:errorCorrectionsOnboard a owl:ObjectProperty .
+
+:etcs a owl:ObjectProperty .
+
+:etcsBaseline a owl:ObjectProperty .
+
+:etcsDegradedSituation a owl:ObjectProperty .
+
+:etcsEquipmentOnBoardLevel a owl:ObjectProperty .
+
+:etcsInfill a owl:ObjectProperty .
+
+:etcsLevelType a owl:ObjectProperty .
+
+:etcsMVersion a owl:ObjectProperty .
+
+:etcsNationalPacket44Function a owl:ObjectProperty .
+
+:etcsNationalValuesObjParameter a owl:ObjectProperty .
+
+:etcsRestrictionsConditionsDoc a owl:ObjectProperty .
+
+:etcsSystemCompatibility a owl:ObjectProperty .
+
+:etcsTransmittedTrackConditions a owl:ObjectProperty .
+
+:fireSafetyCategory a owl:ObjectProperty .
+
+:freightCorridor a owl:ObjectProperty .
+
+:frenchTrainDetectionSystemLimitation a owl:ObjectProperty .
+
+:frenchTrainDetectionSystemLimitationNumber a owl:ObjectProperty .
+
+:frequencyBandsForDetection a owl:ObjectProperty .
+
+:gaugingProfile a owl:ObjectProperty .
+
+:gaugingTransversalDocument a owl:ObjectProperty .
+
+:gsmRActiveMobiles a owl:ObjectProperty .
+
+:gsmRAdditionalInfo a owl:ObjectProperty .
+
+:gsmROptionalFunctions a owl:ObjectProperty .
+
+:gsmRRadioDataCommunication a owl:ObjectProperty .
+
+:gsmRVersion a owl:ObjectProperty .
+
+:gsmrConstraintsOperateOnlyInCircuitSwitch a owl:ObjectProperty .
+
+:gsmrNetworkCoverage a owl:ObjectProperty .
+
+:hasAbstraction a owl:ObjectProperty .
+
+:hasImplementation a owl:ObjectProperty .
+
+:hasLRS a owl:ObjectProperty .
+
+:hasLrsCoordinate a owl:ObjectProperty .
+
+:hasOrganisationRole a owl:ObjectProperty .
+
+:hasOrientation a owl:ObjectProperty .
+
+:hasPart a owl:ObjectProperty .
+
+:hasSequence a owl:ObjectProperty .
+
+:hasTopoCoordinate a owl:ObjectProperty .
+
+:healthSafetyAndEnvironmentObjParameter a owl:ObjectProperty .
+
+:hotAxleBoxDetectorDirection a owl:ObjectProperty .
+
+:inCountry a owl:ObjectProperty .
+
+:inSkosConceptScheme a owl:AnnotationProperty ;
+    rdfs:label "in SKOS Concept Scheme"@en ;
+    dcterms:created "2022-11-17"^^xsd:date ;
+    dcterms:modified "2024-08-13"^^xsd:date ;
+    rdfs:comment "Property that links an object SKOS property to a the URI of the corresponding SKOS Concept Scheme."@en ;
+    rdfs:domain owl:ObjectProperty ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:ConceptScheme ;
+    ns1:term_status "stable" .
+
+:includes a owl:ObjectProperty .
+
+:infraSubsystemObjParameter a owl:ObjectProperty .
+
+:infrastructureManager a owl:ObjectProperty .
+
+:infrastructureMgr a owl:ObjectProperty .
+
+:instructionsSwitchRadioSystems a owl:ObjectProperty .
+
+:isPartOf a owl:ObjectProperty .
+
+:kmPost a owl:ObjectProperty .
+
+:legacyRadioSystem a owl:ObjectProperty .
+
+:lineCategory a owl:ObjectProperty .
+
+:lineLayoutObjParameter a owl:ObjectProperty .
+
+:lineNationalId a owl:ObjectProperty .
+
+:lineReference a owl:ObjectProperty .
+
+:lineReferenceTunnelEnd a owl:ObjectProperty .
+
+:lineReferenceTunnelStart a owl:ObjectProperty .
+
+:lineSideSystemDegradedSituationObjParameter a owl:ObjectProperty .
+
+:linesideDistanceIndication a owl:ObjectProperty .
+
+:linesideDistanceIndicationAppearance a owl:ObjectProperty .
+
+:linesideDistanceIndicationPositioning a owl:ObjectProperty .
+
+:linkedToPrimaryLocation a owl:ObjectProperty .
+
+:loadCapability a owl:ObjectProperty .
+
+:loadCapabilityLineCategory a owl:ObjectProperty .
+
+:localRulesOrRestrictionsDoc a owl:ObjectProperty .
+
+:lrsMethod a owl:ObjectProperty .
+
+:mNvcontact a owl:ObjectProperty .
+
+:magneticBraking a owl:ObjectProperty .
+
+:magneticBrakingConditionsDocument a owl:ObjectProperty .
+
+:manufacturer a owl:ObjectProperty .
+
+:manufacturingCountry a owl:ObjectProperty .
+
+:maxSandingOutput a owl:ObjectProperty .
+
+:minAxleLoadVehicleCategory a owl:ObjectProperty .
+
+:minVehicleImpedance a owl:ObjectProperty .
+
+:minVehicleImpedanceVoltages a owl:ObjectProperty .
+
+:minimumVerticalRadius a owl:ObjectProperty .
+
+:nationalLine a owl:ObjectProperty .
+
+:navigability a owl:ObjectProperty .
+
+:netElement a owl:ObjectProperty .
+
+:netReference a owl:ObjectProperty .
+
+:notApplicable a owl:ObjectProperty .
+
+:notYetAvailable a owl:ObjectProperty .
+
+:oclSeparationSectionsObjParameter a owl:ObjectProperty .
+
+:ofParameter a owl:ObjectProperty .
+
+:onElement a owl:ObjectProperty .
+
+:onLinearElement a owl:ObjectProperty .
+
+:opEnd a owl:ObjectProperty .
+
+:opGenericObjParameter a owl:ObjectProperty .
+
+:opInfoPerCountry a owl:ObjectProperty .
+
+:opStart a owl:ObjectProperty .
+
+:opType a owl:ObjectProperty .
+
+:operatingLanguage a owl:ObjectProperty .
+
+:operationalRegimeType a owl:ObjectProperty .
+
+:operationalRestriction a owl:ObjectProperty .
+
+:orientation a owl:ObjectProperty .
+
+:osmClass a owl:ObjectProperty .
+
+:otherCantDeficiencyBasicSSP a owl:ObjectProperty .
+
+:otherPantographHead a owl:ObjectProperty .
+
+:otherRadioSystemsObjParameter a owl:ObjectProperty .
+
+:otherTrainDetectionSystemsObjParameter a owl:ObjectProperty .
+
+:otherTrainProtection a owl:ObjectProperty .
+
+:pantographObjParameter a owl:ObjectProperty .
+
+:parameterApplicability a owl:ObjectProperty .
+
+:parameterValueType a owl:ObjectProperty .
+
+:parkingBrakeType a owl:ObjectProperty .
+
+:passesThroughTunnel a owl:ObjectProperty .
+
+:performanceObjParameter a owl:ObjectProperty .
+
+:platformEdge a owl:ObjectProperty .
+
+:platformHeight a owl:ObjectProperty .
+
+:platformObjParameter a owl:ObjectProperty .
+
+:positionOnA a owl:ObjectProperty .
+
+:positionOnB a owl:ObjectProperty .
+
+:previousVehicleType a owl:ObjectProperty .
+
+:primaryLocation a owl:ObjectProperty .
+
+:profileNumberSemiTrailers a owl:ObjectProperty .
+
+:profileNumberSwapBodies a owl:ObjectProperty .
+
+:protectionLegacySystem a owl:ObjectProperty .
+
+:qNvdriverAdhes a owl:ObjectProperty .
+
+:qNvemrrls a owl:ObjectProperty .
+
+:quieterRoutesExemptedCountry a owl:ObjectProperty .
+
+:railInclination a owl:ObjectProperty .
+
+:reasonsEtcsRadioBlockCenterReject a owl:ObjectProperty .
+
+:referenceBorderPoint a owl:ObjectProperty .
+
+:requirementsRollingStockObjParameter a owl:ObjectProperty .
+
+:rinfTechnicalObjectCharacteristic a owl:ObjectProperty .
+
+:role a owl:ObjectProperty .
+
+:roleOf a owl:ObjectProperty .
+
+:rollingStockFireCategory a owl:ObjectProperty .
+
+:routeBookObjectParameter a owl:ObjectProperty .
+
+:rulesObjParameter a owl:ObjectProperty .
+
+:safeConsistLengthInformationNecessary a owl:ObjectProperty .
+
+:side a owl:ObjectProperty .
+
+:siding a owl:ObjectProperty .
+
+:sidingObjParameter a owl:ObjectProperty .
+
+:signalObjParameter a owl:ObjectProperty .
+
+:signalOrientation a owl:ObjectProperty .
+
+:signalType a owl:ObjectProperty .
+
+:snowIceHailConditions a owl:ObjectProperty .
+
+:solGenericObjParameter a owl:ObjectProperty .
+
+:solNature a owl:ObjectProperty .
+
+:specialAreaType a owl:ObjectProperty .
+
+:specialTunnelArea a owl:ObjectProperty .
+
+:standardCombinedTransportContainers a owl:ObjectProperty .
+
+:standardCombinedTransportRollerUnits a owl:ObjectProperty .
+
+:startLocation a owl:ObjectProperty .
+
+:startsAt a owl:ObjectProperty .
+
+:state a owl:ObjectProperty .
+
+:subCategory a owl:ObjectProperty .
+
+:subsetOf a owl:ObjectProperty .
+
+:subsidiaryLocationType a owl:ObjectProperty .
+
+:supportedPlatformHeight a owl:ObjectProperty .
+
+:tdsFrenchTrainDetectionSystemLimitation a owl:ObjectProperty .
+
+:tdsMaximumMagneticField a owl:ObjectProperty .
+
+:tdsMinAxleLoadVehicleCategory a owl:ObjectProperty .
+
+:temperatureRange a owl:ObjectProperty .
+
+:tenClassification a owl:ObjectProperty .
+
+:thermalCapacityTSIReference a owl:ObjectProperty .
+
+:track a owl:ObjectProperty .
+
+:trackDirection a owl:ObjectProperty .
+
+:trackGenericObjParameter a owl:ObjectProperty .
+
+:trackLoadCapability a owl:ObjectProperty .
+
+:trackObjParameter a owl:ObjectProperty .
+
+:trackPhaseInfo a owl:ObjectProperty .
+
+:trackRaisedPantographsDistanceAndSpeed a owl:ObjectProperty .
+
+:trackResistanceToAppliedLoadsObjParameter a owl:ObjectProperty .
+
+:trackSystemSeparationInfo a owl:ObjectProperty .
+
+:tracksideHabd a owl:ObjectProperty .
+
+:trainDetectionSystem a owl:ObjectProperty .
+
+:trainDetectionSystemBasedFrequencyBandsObjParameter a owl:ObjectProperty .
+
+:trainDetectionSystemSpecificCheck a owl:ObjectProperty .
+
+:trainDetectionSystemSpecificCheckDocument a owl:ObjectProperty .
+
+:trainDetectionSystemType a owl:ObjectProperty .
+
+:trainProtectionLegacySystemObjParameter a owl:ObjectProperty .
+
+:transitionsBetweenSystemsObjParameter a owl:ObjectProperty .
+
+:tsiCompliantCompositeBrakeBlocks a owl:ObjectProperty .
+
+:tsiCompliantFerromagneticWheel a owl:ObjectProperty .
+
+:tsiCompliantMaxDistConsecutiveAxles a owl:ObjectProperty .
+
+:tsiCompliantMaxImpedanceWheelset a owl:ObjectProperty .
+
+:tsiCompliantMetalConstruction a owl:ObjectProperty .
+
+:tsiCompliantMetalFreeSpace a owl:ObjectProperty .
+
+:tsiCompliantRSTShuntImpedance a owl:ObjectProperty .
+
+:tsiCompliantRadioObjParameter a owl:ObjectProperty .
+
+:tsiCompliantSandCharacteristics a owl:ObjectProperty .
+
+:tsiCompliantSanding a owl:ObjectProperty .
+
+:tsiCompliantShuntDevices a owl:ObjectProperty .
+
+:tsiCompliantTrainProtectionSystemObjParameter a owl:ObjectProperty .
+
+:tsiPantographHead a owl:ObjectProperty .
+
+:tunnelDocRef a owl:ObjectProperty .
+
+:tunnelObjParameter a owl:ObjectProperty .
+
+:typeVersionId a owl:ObjectProperty .
+
+:validity a owl:ObjectProperty .
+
+:vehicleCategory a owl:ObjectProperty .
+
+:vehicleKeeper a owl:ObjectProperty .
+
+:vehicleSubCategory a owl:ObjectProperty .
+
+:vehicleTechnicalObjCharacteristic a owl:ObjectProperty .
+
+:vehicleType a owl:ObjectProperty .
+
+:vehicleTypeMaximumSpeedAndCantDeficiency a owl:ObjectProperty .
+
+:vehicleTypeTechnicalObjectCharacteristic a owl:ObjectProperty .
+
+:vehicleTypesCompatibleTrafficLoad a owl:ObjectProperty .
+
+:vehiclesCompatibleTrafficLoad a owl:ObjectProperty .
+
+:verifiedRccObjParameter a owl:ObjectProperty .
+
+:voiceGSMRNetwork a owl:ObjectProperty .
+
+:voiceRadioCompatible a owl:ObjectProperty .
+
+:wheelSetGauge a owl:ObjectProperty .
+
+:wheelSetGaugeChangeoverFacility a owl:ObjectProperty .
+
+geo:hasGeometry a owl:ObjectProperty .
+
+time:hasBeginning a owl:ObjectProperty .
+
+time:hasEnd a owl:ObjectProperty .
+
+time:hasTime a owl:ObjectProperty .
+
+owl:ObjectProperty a owl:Class .
+

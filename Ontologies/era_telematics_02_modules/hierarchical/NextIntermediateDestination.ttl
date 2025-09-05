@@ -1,0 +1,26 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DeliveryTimeAtInterchange a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeliveryTimeAtInterchange" ;
+    rdfs:comment """The scheduled departure date and time or the scheduled handover date
+				and time of wagons at an interchange point, where the responsibility of the wagons
+				will change to another RU""" ;
+    rdfs:domain :NextIntermediateDestination ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasIntermediateDestination a owl:ObjectProperty ;
+    rdfs:label "has IntermediateDestination" ;
+    rdfs:domain :NextIntermediateDestination ;
+    rdfs:range :IntermediateDestination .
+
+:hasNextIntermediateDestination rdfs:range :NextIntermediateDestination .
+
+:NextIntermediateDestination a owl:Class ;
+    rdfs:label "NextIntermediateDestination" ;
+    rdfs:comment "Identifies next stopping point on the route of a train" .
+

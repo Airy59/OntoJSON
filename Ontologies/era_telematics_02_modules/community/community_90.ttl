@@ -1,0 +1,13 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasTransferPoint a owl:ObjectProperty ;
+    rdfs:label "has TransferPoint" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TransferPoint .
+
+:TransferPoint a owl:Class ;
+    rdfs:label "TransferPoint" ;
+    rdfs:comment "Transfer point or station of destination in the considered network" .
+

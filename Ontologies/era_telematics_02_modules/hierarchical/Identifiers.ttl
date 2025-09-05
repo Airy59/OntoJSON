@@ -1,0 +1,101 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ReasonOfReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ReasonOfReference" ;
+    rdfs:comment """Indicates the reason/purpose of usage of element RelatedPlannedTransportIdentifier.
+
+List of codes for element ReasonOfReference:
+1000 = Same path offer is desired as for stated PathRequestMessage
+    (Additional information: For a train requested with more than one PathRequestMessage (all with different bitmapdays) the same (or nearly the same)
+    routing and timing at location in path offers for all PathRequestMessages (PathRequestIDs) is desired by Responsible Applicant (if it is possible).
+    RPTID: All others PathRequestIDs).
+1001 = Same path is desired as for stated train/path
+    (Additional information: For that path request the same (or nearly the same) routing/path elaboration/offer is desired by Responsible Applicant
+    (if it is possible) as for stated train/path (may be in a previous period). RPTID: TrainID or PathID).
+1002 = Full replacement of stated previous path
+    (Additional information:The current path given in PathDetailsMessage will replace the stated path fully after confirming the path offer.
+    The code is used to mark an alternative offer after PathNotAvailableMessage/PathCanceledMessage or path alteration by IM. Calendar of
+    previous path and offered path contain the same dates. The previous path doesnâ€™t exist anymore. RPTID: PathID).
+1003 = Partial replacement of stated previous path
+    (Additional information: The current path given in PathDetailsMessage will replace the stated path partially after confirming the path offer.
+    The code is used to mark an alternative offer after PathNotAvailableMessage/PathCanceledMessage or path alteration by IM only for a part of
+    the previous calendar/traffic days. Calendar of offered path is only part of the calendar of former and changed path. The calendar of the previous
+    path has to changed (less days and shorter validity period) after confirmation of the offered path. RPTID: PathID).
+1004 = Reference to sub train of Y-train bundle
+    (Additional information: The current PathRequestMessage contains the main train of a Y-train bundle; the TrainID stated in RPTID is for
+    the sub train which will be joined with or splitted of the main train.)
+1005 = Reference to main train of Y-train bundle
+    (Additional information: The current PathRequestMessage contains the sub train of a Y-train bundle. The TrainID stated in RPTID is for
+    the main train with which the sub train will be joined with or splitted of.)
+1006 = Reference to another PathRequestMessage after interruption trainâ€™s journey by a foreign infrastructure area
+     (Additional information: The referencing indicates that another PathRequestMessage (specifying PathRequestID as RPTID) for the same train
+    exists after passing a foreign infrastructure area to continue trainâ€™s journey.)
+1007 = Reference to another PathRequestMessage before interruption trainâ€™s journey by a foreign infrastructure area
+    (Additional information: The referencing indicates that another PathRequestMessage (specifying PathRequestID as RPTID) for the same train
+    exists before passing a foreign infrastructure area.)
+1008 = Reference to further path offer for the PathRequestMessage
+    (Additional information: There are more than one path offers for the PathRequestMessage. RPTID: All other PathID's.)
+1009 = Reference to booked path before interruption by railway replacement traffic by bus
+    (Additional information: The stated train/path is continued following a railway replacement traffic with that new requested train/path. RPTID: PathID).
+1010 = Reference to a PreArrangedPath
+    (Additional information: Reference to a PathID of existing PAP, which is to be used by an annual train requested with that PRM. RPTID: PathID).
+1011 = Only the new train object shall be linked with the existing booked path for the specified validity period; no new path elaboration is needed
+    (Additional information: The code is used, when a new train object has to be linked with an existing booked path for a specified validity period
+    and no new path elaboration is needed. It is used in modification process of planning phase only instead of using UpdateLinkMessage and
+    ObjectInfoMessage. Result: Internal path modification (reduce of validity period of calendar) for previous Path. New path with new PathID for
+    the specified validity period. RPTID: Previous TrainID and PathID).
+1012 = New final offer to former draft offer
+    (Additional information: Reference to (old) draft offer in case of IM is making a (different) new offer (TypeOfInformation : Final offer).
+    Code is used only in process PathRequest (annual timetable); RPTID : PathID of draft offer.)
+1013 = Replaced path after modification by ResponsibleApplicant
+    (Additional information: Reference to replaced path when IM is making an offer after receiving PathRequestMessage sent by RA for
+    modification of booked path. Code is used only in Path Modification process in PathDetailsMessage. RPTID: PathID.)
+1014 = New Route
+    (Additional information: Reference to previous Route replaced by the new Route)
+
+1015 = Updated Route
+    (Additional information: Reference to the Route that is updated)
+5001 = Reference to another object on the basis of incident management in operations phase
+Specific code only for one IM/national codes:
+
+DE01 = Reference to an associated empty/transfer train
+    (Additional information: Stated train is a related train without passengers before or behind the current requested path for a train with
+    passengers. RPTID: TrainID.)
+DE02 = Reference to an associated main run
+    (Additional information: Stated train is a related train with passengers before or behind the current requested path for a train without
+    passengers. RPTID: TrainID.)
+DE03 = Notice stated PathRequestMessage
+    (Additional information: For path elaboration of current PathRequestMessage the stated PathRequestMessage should be considered.
+    RPTID: PathRequestID.)
+DE04 = Replacement of stated train
+    (Additional information: Full or partial replacement of the named former train; example: Change of passenger trainset (like ICE or TGV)
+    by set of loco and wagons in case of technical problems, delay or other reasons. It is not only change of TrainID. RPTID: TrainID.)
+DE05 = Reference to a reserved capacity
+    (Additional information: This code can be used to refer to a study offer (with booking option) as a result of the KFB process (internal
+    process for a specific product of DB Netz). RPTID: PathID.)
+DE06 = Use of same OTN as of stated train
+    (Additional information: Responsible Applicant wants to use same OTN as in stated train because of all trains are part of same family.
+    The trains have only slightly differences on various days. RPTID: TrainID.)
+DE07 = PathID from a framework contract
+""" ;
+    rdfs:domain :Identifiers ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasIdentifiers rdfs:range :Identifiers .
+
+:hasRelatedPlannedTransportIdentifiers a owl:ObjectProperty ;
+    rdfs:label "has RelatedPlannedTransportIdentifiers" ;
+    rdfs:domain :Identifiers ;
+    rdfs:range :RelatedPlannedTransportIdentifiers .
+
+:Identifiers a owl:Class ;
+    rdfs:label "Identifiers" .
+
+[] rdf:first :Identifiers .
+

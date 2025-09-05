@@ -1,0 +1,34 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:TrainRunningForecastMessage a owl:Class ;
+    rdfs:label "TrainRunningForecastMessage" ;
+    rdfs:comment """This message is issued from the IM to the neighbouring IM upon
+				departure from or movement past agreed points or prior to reaching the first
+				reporting point if, owing to a delay, the train has not reached the bilaterally
+				agreed initial running time. This message is also issued from the IM to the RU when,
+				at the next stopping or handling station, out-of-schedule running is anticipated
+				that exceeds the threshold agreed with the RU responsible for the train. This
+				message is also issued in any cases for handover points, interchange points, for the
+				destination point and for each other reporting point predefined by contract""" .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+

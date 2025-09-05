@@ -1,0 +1,32 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:kmPost a owl:ObjectProperty ;
+    rdfs:label "km post for reference"@en ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "The closest kilometric post on the line, used as a reference by the LRS coordinate."@en ;
+    rdfs:domain :LinearPositioningSystemCoordinate ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :KilometricPost .
+
+:offsetFromKilometricPost a owl:DatatypeProperty ;
+    rdfs:label "offset"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OffsetFromKilometricPost> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Relative distance from a reference kilometric post "@en ;
+    rdfs:domain :LinearPositioningSystemCoordinate ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double .
+
+:LinearPositioningSystemCoordinate a owl:Class ;
+    rdfs:label "Linear Positioning System Coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearPositioningSystemCoordinateShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents coordinates in a linear positioning system."@en ;
+    rdfs:isDefinedBy : .
+

@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/OntoJSON.icns</key>
 		<data>
-		/JAIQ8rWxRG0HEdvNlCalBh3xUM=
+		sXHcPO5e1iWea18TpRCE3oGs5Os=
 		</data>
 		<key>Resources/PyQt6/Qt6/translations/qt_ar.qm</key>
 		<data>
@@ -410,7 +410,7 @@
 		</data>
 		<key>Resources/base_library.zip</key>
 		<data>
-		yCcrd8GopJZoleDARz39+Aw+o78=
+		/nclzz4KcSjF9xBhofLaaRy3Fu8=
 		</data>
 		<key>Resources/certifi/cacert.pem</key>
 		<data>
@@ -3468,17 +3468,25 @@
 		<data>
 		VkyIEdcVl+uKMBWCJbDjgKBxO8Y=
 		</data>
+		<key>Resources/src/owl2jsonschema_gui/__pycache__/editor_selector.cpython-313.pyc</key>
+		<data>
+		q2PWiSyV8R5A+lMo680OYJMTRlw=
+		</data>
 		<key>Resources/src/owl2jsonschema_gui/__pycache__/main_window.cpython-313.pyc</key>
 		<data>
-		3Z2xY64cL3GB5AvzJFvHnQxKj5A=
+		Yh2hrE+TGX/SCqP/amfAiAqh2lU=
 		</data>
 		<key>Resources/src/owl2jsonschema_gui/app.py</key>
 		<data>
 		ZWvomJcd56+58wiI8t8LMyYsHV4=
 		</data>
+		<key>Resources/src/owl2jsonschema_gui/editor_selector.py</key>
+		<data>
+		Skeo2VQJ3o+BdGJbsWjELRiOj1o=
+		</data>
 		<key>Resources/src/owl2jsonschema_gui/main_window.py</key>
 		<data>
-		1IH0ozSDkapiUjDZ+kgPLxeD0fw=
+		rMNMptH6YXdW3I5SgNkFgHxefGY=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -4752,7 +4760,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QbBkqrH8FoDHWzdRS5wCVHZdkjF21rDV/ElLSFRRBGc=
+			HKgHAq15yZuNsC+R3yVp8kCLDJZ9LjSp7km/Z+rz5Cg=
 			</data>
 		</dict>
 		<key>Resources/PIL</key>
@@ -5537,7 +5545,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yR7W0sBgY8vcOyIiCgZsUkxrDfeG9YZFSjtNrYF1otM=
+			Km8tyudxcMYm5zFA8qmoUFfIMKSWPi2GvtsxFJ8QSVQ=
 			</data>
 		</dict>
 		<key>Resources/certifi/cacert.pem</key>
@@ -11008,11 +11016,18 @@
 			s8QeX6Sqh83CuWibKsJl+Z9vZcmZY99q84nrH384DbA=
 			</data>
 		</dict>
+		<key>Resources/src/owl2jsonschema_gui/__pycache__/editor_selector.cpython-313.pyc</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ROIEzFfsrDkb+o5+vSxGJxwMPh1LfKylMKGCVjkR5FI=
+			</data>
+		</dict>
 		<key>Resources/src/owl2jsonschema_gui/__pycache__/main_window.cpython-313.pyc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NQrJDg/2HruwlsVTZnfmhGD83vwAGnlstbNyW6rBVGU=
+			ZC4i7ALT0LecRG0fEpOEKKMS110VNumfm2SRFDQKpMc=
 			</data>
 		</dict>
 		<key>Resources/src/owl2jsonschema_gui/app.py</key>
@@ -11022,11 +11037,18 @@
 			6xkSlZJmmqq1BnRC9AOJM3ZUDwTBH/4x6QUfqmBK4d0=
 			</data>
 		</dict>
+		<key>Resources/src/owl2jsonschema_gui/editor_selector.py</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bK8OV10IlMRZJlauDWx+0J2tj0YsvMD8cYdXKN8V6Y4=
+			</data>
+		</dict>
 		<key>Resources/src/owl2jsonschema_gui/main_window.py</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			CVH/VS9CAIWFoxHmVPz4wEeZYqHhM2Qos7RmkG6a1Ss=
+			2W4w3OkAwNf5h0p5RcgEXDMENJC6buQTmzgIsvOZ6KY=
 			</data>
 		</dict>
 		<key>Resources/yaml</key>

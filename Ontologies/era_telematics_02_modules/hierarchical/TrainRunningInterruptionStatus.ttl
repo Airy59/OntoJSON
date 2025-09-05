@@ -1,0 +1,18 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:TrainInterrupted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainInterrupted" ;
+    rdfs:comment "None" ;
+    rdfs:domain :TrainRunningInterruptionStatus ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTrainRunningInterruptionStatus rdfs:range :TrainRunningInterruptionStatus .
+
+:TrainRunningInterruptionStatus a owl:Class ;
+    rdfs:label "TrainRunningInterruptionStatus" .
+

@@ -1,0 +1,122 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DeliveryTimeAtInterchange a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeliveryTimeAtInterchange" ;
+    rdfs:comment """The scheduled departure date and time or the scheduled handover date
+				and time of wagons at an interchange point, where the responsibility of the wagons
+				will change to another RU""" ;
+    rdfs:domain :NextIntermediateDestination ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NextResponsibleRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NextResponsibleRU" ;
+    rdfs:comment """The RU who is responsible for the train operation on the next journey
+				section.""" ;
+    rdfs:domain :ConsignmentLevelData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreviousResponsibleRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreviousResponsibleRU" ;
+    rdfs:comment """This element identifies the RU, who was responsible for the train
+				operation on the journey section before an interchange point""" ;
+    rdfs:domain :ConsignmentLevelData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreviousWagonNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreviousWagonNumber" ;
+    rdfs:domain :ConsignmentLevelData ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonEvent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonEvent" ;
+    rdfs:domain :WagonEventInformation ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasConsignmentLevelData a owl:ObjectProperty ;
+    rdfs:label "has ConsignmentLevelData" ;
+    rdfs:domain :WIMO_Dataset ;
+    rdfs:range :ConsignmentLevelData .
+
+:hasCustomer a owl:ObjectProperty ;
+    rdfs:label "has Customer" ;
+    rdfs:domain :ConsignmentLevelData ;
+    rdfs:range :Customer .
+
+:hasEventLevelData a owl:ObjectProperty ;
+    rdfs:label "has EventLevelData" ;
+    rdfs:domain :WIMO_Dataset ;
+    rdfs:range :EventLevelData .
+
+:hasIntermediateDestination a owl:ObjectProperty ;
+    rdfs:label "has IntermediateDestination" ;
+    rdfs:domain :NextIntermediateDestination ;
+    rdfs:range :IntermediateDestination .
+
+:hasNextIntermediateDestination a owl:ObjectProperty ;
+    rdfs:label "has NextIntermediateDestination" ;
+    rdfs:domain :ConsignmentLevelData ;
+    rdfs:range :NextIntermediateDestination .
+
+:hasWagonEventInformation a owl:ObjectProperty ;
+    rdfs:label "has WagonEventInformation" ;
+    rdfs:domain :EventLevelData ;
+    rdfs:range :WagonEventInformation .
+
+:IntermediateDestination a owl:Class ;
+    rdfs:label "IntermediateDestination" ;
+    :domain "Telematics" ;
+    rdfs:comment "A location on the route of a train" .
+
+:EventLevelData a owl:Class ;
+    rdfs:label "EventLevelData" .
+
+:NextIntermediateDestination a owl:Class ;
+    rdfs:label "NextIntermediateDestination" ;
+    rdfs:comment "Identifies next stopping point on the route of a train" .
+
+:WIMO_Dataset a owl:Class ;
+    rdfs:label "WIMO_Dataset" ;
+    rdfs:comment "Comment describing your root element" .
+
+:WagonEventInformation a owl:Class ;
+    rdfs:label "WagonEventInformation" ;
+    rdfs:comment """This is a WIMO element that is derived from the Wagon Release Notice
+				and Event Messages""" .
+
+:ConsignmentLevelData a owl:Class ;
+    rdfs:label "ConsignmentLevelData" .
+
+[] rdf:first :WIMO_Dataset .
+
+[] rdf:first :ConsignmentLevelData .
+
+[] rdf:first :ConsignmentLevelData .
+
+[] rdf:first :EventLevelData .
+
+[] rdf:first :ConsignmentLevelData .
+
+[] rdf:first :ConsignmentLevelData .
+
+[] rdf:first :ConsignmentLevelData .
+
+[] rdf:first :ConsignmentLevelData .
+
+[] rdf:first :WagonEventInformation .
+
+[] rdf:first :ConsignmentLevelData .
+
+[] rdf:first :WagonEventInformation .
+

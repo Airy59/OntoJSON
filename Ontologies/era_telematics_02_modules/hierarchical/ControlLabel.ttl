@@ -1,0 +1,56 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ShippingCarrier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingCarrier" ;
+    rdfs:comment """RICS Code of the RU
+																who created the consignment
+																identification (not necessarily the
+																first carrier in the transport
+																chain)""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShippingCountry a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingCountry" ;
+    rdfs:comment """Forwarding UIC Country
+																Code""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShippingStationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingStationCode" ;
+    rdfs:comment """UIC Code of the
+																shipping station""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShippingStationName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingStationName" ;
+    rdfs:comment """Name of the shipping
+																station""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasConsignmentNumber a owl:ObjectProperty ;
+    rdfs:label "has ConsignmentNumber" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:range :ConsignmentNumber .
+
+:hasControlLabel rdfs:range :ControlLabel .
+
+:ControlLabel a owl:Class ;
+    rdfs:label "ControlLabel" .
+
+[] rdf:first :ControlLabel .
+

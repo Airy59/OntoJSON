@@ -1,0 +1,261 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:InfrastructureElement rdfs:subClassOf :Feature .
+
+:NetBasicReference rdfs:subClassOf :Feature .
+
+:NetElement rdfs:subClassOf :Feature .
+
+:allocationCompany a owl:ObjectProperty ;
+    rdfs:label "allocation company"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AllocationCompany> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date ;
+    rdfs:comment "The organisation in charge to allocate the code for the subsidiary location."@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :OrganisationRole .
+
+:borderPointId rdfs:subPropertyOf dcterms:identifier .
+
+:currentlyValid a owl:DatatypeProperty ;
+    rdfs:label "Currently valid"@en ;
+    dcterms:created "2022-12-13"^^xsd:date ;
+    rdfs:domain :Feature ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:endLocation rdfs:subPropertyOf geo:hasGeometry .
+
+:imCode rdfs:subPropertyOf dcterms:identifier .
+
+:notApplicable a owl:ObjectProperty ;
+    rdfs:label "Not applicable"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NotApplicablePropertyShape> ;
+    dcterms:created "2021-09-13"^^xsd:date ;
+    dcterms:modified "2021-09-13"^^xsd:date,
+        "2025-03-10"^^xsd:date ;
+    rdfs:comment "Reference to a property that is not applicable."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range rdf:Property ;
+    ns1:term_status "stable" .
+
+:notYetAvailable a owl:ObjectProperty ;
+    rdfs:label "Not provided"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NotYetAvailablePropertyShape> ;
+    dcterms:created "2021-09-13"^^xsd:date ;
+    dcterms:modified "2023-10-11"^^xsd:date,
+        "2025-03-10"^^xsd:date ;
+    rdfs:comment "Reference to a property that is not provided."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range rdf:Property ;
+    ns1:term_status "stable" .
+
+:ofParameter a owl:ObjectProperty ;
+    rdfs:label "of parameter"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OfParameter> ;
+    dcterms:created "2024-10-28"^^xsd:date ;
+    dcterms:modified "2024-12-10"^^xsd:date ;
+    rdfs:comment "Indicates the parameter (object or datatype property) for which an applicability is being defined."@en ;
+    rdfs:domain :ParameterApplicability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range rdf:Property .
+
+:organisationCode rdfs:subPropertyOf dcterms:identifier .
+
+:parameterApplicability a owl:ObjectProperty ;
+    rdfs:label "parameter applicability"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ParameterApplicability> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2024-10-28"^^xsd:date ;
+    rdfs:comment "Relates an infrastructure element or a common characteristics subset with the applicability of a certain parameter."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :ParameterApplicability .
+
+:parameterValue a owl:DatatypeProperty ;
+    rdfs:label "Parameter value"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ParameterValue> ;
+    dcterms:created "2024-12-10"^^xsd:date ;
+    rdfs:comment "This property is used to link an applicability to the precise value of the parameter"@en ;
+    rdfs:domain :ParameterApplicability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range rdfs:Literal .
+
+:parameterValueType a owl:ObjectProperty ;
+    rdfs:label "parameter value type"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/parameterApplicability/ValueTypes> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ParameterValueType>,
+        <http://data.europa.eu/949/shapes/ParameterValueTypeSKOS> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "In the case of a change in the value of a parameter, there needs to be an information on the type of the new value. The â€œValue typeâ€ will have different possible options: â€œnominalâ€, â€œplanned temporary restrictionâ€, â€œpermanent restrictionâ€, â€œplanned temporary closureâ€."@en ;
+    rdfs:domain :ParameterApplicability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:primaryLocationCode rdfs:subPropertyOf dcterms:identifier .
+
+:rbcID rdfs:subPropertyOf dcterms:identifier .
+
+:sidingId rdfs:subPropertyOf dcterms:identifier .
+
+:signalId rdfs:subPropertyOf dcterms:identifier .
+
+:startLocation rdfs:subPropertyOf geo:hasGeometry .
+
+:subsidiaryLocationCode a owl:DatatypeProperty ;
+    rdfs:label "subsidiary location code"@en ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:comment "The numeric code for the subsidiary location" ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:subsidiaryLocationName a owl:DatatypeProperty ;
+    rdfs:label "subsidiary location name"@en ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:comment "The common name given to the subsidiary location"@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:subsidiaryLocationType a owl:ObjectProperty ;
+    rdfs:label "subsidiary location type"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/subsidiary-location-types/SubsidiaryLocationTypes> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SubsidiaryLocationType>,
+        <http://data.europa.eu/949/shapes/SubsidiaryLocationTypeSKOS> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    rdfs:comment "Indicates the subsidiary location type that belongs to a taxonomy."@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:tafTAPCode rdfs:subPropertyOf dcterms:identifier .
+
+:trackId rdfs:subPropertyOf dcterms:identifier .
+
+:tunnelIdentification rdfs:subPropertyOf dcterms:identifier .
+
+:uopid rdfs:subPropertyOf dcterms:identifier .
+
+:validity a owl:ObjectProperty ;
+    rdfs:label "validity"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Validity> ;
+    dcterms:modified "2024-11-29"^^xsd:date ;
+    rdfs:comment "Relates a feature with a temporal feature to indicate a validity period."@en ;
+    rdfs:domain :Feature ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :TemporalFeature .
+
+foaf:name a owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    rdfs:comment "A name for some thing." ;
+    rdfs:domain owl:Thing ;
+    rdfs:isDefinedBy foaf: ;
+    rdfs:range rdfs:Literal ;
+    ns1:term_status "testing" .
+
+:PrimaryLocation owl:disjointWith :SubsidiaryLocation .
+
+geo:Geometry a owl:Class ;
+    rdfs:label "Geometry"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/GeometryShape> .
+
+geo:Feature a owl:Class ;
+    rdfs:label "Feature"@en .
+
+geo:hasGeometry a owl:ObjectProperty ;
+    rdfs:label "hasGeometry"@en ;
+    :rinfIndex "1.1.0.0.1.1",
+        "1.1.1.0.1.1",
+        "1.1.1.3.14.6",
+        "1.2.0.0.0.5",
+        "1.2.1.0.8.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasGeometry> ;
+    :usedInRCCCalculations true ;
+    dcterms:contributor "Matthew Perry" ;
+    dcterms:creator "OGC GeoSPARQL 1.0 Standard Working Group" ;
+    dcterms:date "2011-06-16"^^xsd:date ;
+    rdfs:comment """
+      A spatial representation for a given feature.
+    """@en ;
+    rdfs:domain geo:Feature ;
+    rdfs:isDefinedBy <http://www.opengis.net/ont/geosparql>,
+        <http://www.opengis.net/spec/geosparql/1.0> ;
+    rdfs:range geo:Geometry ;
+    skos:definition """
+      A spatial representation for a given feature.
+    """@en ;
+    skos:prefLabel "hasGeometry"@en .
+
+:TemporalFeature a owl:Class ;
+    rdfs:label "Temporal Feature"@en ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    rdfs:comment "The union of TemporalDuration that represents a time extent and TemporalEntity that represents a temporal interval or instant." ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf [ ],
+        [ ],
+        [ ] .
+
+:linkedToPrimaryLocation a owl:ObjectProperty ;
+    rdfs:label "linked to primary location"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinkedToPrimaryLocation> ;
+    dcterms:created "2024-10-28"^^xsd:date ;
+    rdfs:comment "Relates a subsidiary location with a primary location."@en ;
+    rdfs:domain :SubsidiaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :PrimaryLocation .
+
+rdf:Property a owl:Class .
+
+:ParameterApplicability a owl:Class ;
+    rdfs:label "Parameter applicability"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ParameterApplicabilityShape> ;
+    dcterms:modified "2024-10-28"^^xsd:date ;
+    rdfs:comment "Applicability interval defines the date interval in which a characteristic of an infrastructure element is applicable. This interval can be applied for any of the technical characteristics or general information of infrastructure elements. This helps identifying planned changes applied to technical parameters over time."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :TemporalFeature .
+
+:Feature a owl:Class ;
+    rdfs:label "ERA Feature"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FeatureShape> ;
+    dcterms:created "2022-07-07"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date ;
+    rdfs:comment "Class that encompasses the features that are part of the physical infrastructure (class InfrastructureElement) and the topological objects (class TopologicalObject). It is a subclass of the geographical Feature class that has a spatial representation."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf geo:Feature ;
+    owl:disjointWith :TemporalFeature .
+
+:SubsidiaryLocation a owl:Class ;
+    rdfs:label "Subsidiary location"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SubsidiaryLocationShape> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "Subsidiary location must be linked to a Primary Location and specifies in more detailed way part, attributes, or usage of Primary location. It may be also a non-rail point or a rail point that is not managed by an Infrastructure Manager (IM). It may be defined by entity having company code according to their needs. The Subsidiary location is optional and dependent upon business needs."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "http://taf-jsg.info/wp-content/uploads/2024/01/20231018-JGS-Handbook-3.4-with-XSD-3.4.0.0.pdf" ;
+    rdfs:subClassOf [ owl:onProperty :linkedToPrimaryLocation ],
+        [ owl:onProperty :linkedToPrimaryLocation ],
+        [ owl:onProperty :linkedToPrimaryLocation ],
+        :Feature .
+
+dcterms:identifier a owl:DatatypeProperty ;
+    rdfs:label "Identifier"@en ;
+    rdfs:comment "An unambiguous reference to the resource within a given context."@en ;
+    rdfs:isDefinedBy dcterms: ;
+    rdfs:range rdfs:Literal ;
+    skos:example "Examples include International Standard Book Number (ISBN), Digital Object Identifier (DOI), and Uniform Resource Name (URN)." .
+

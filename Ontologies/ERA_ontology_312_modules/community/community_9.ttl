@@ -1,0 +1,123 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:loadCapabilityLineCategory a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Load capability line category"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/load-capability-line-categories/LoadCapabilityLineCategories> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilityLineCategory>,
+        <http://data.europa.eu/949/shapes/LoadCapabilityLineCategorySKOS> ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    rdfs:comment """Part of the load capability of a track that corresponds to the line category of the load model.
+The load capability is a value selected from the list of load models representing the line category which is amended by value of speed [km/h] permitted for a specific load model. The list of values may also be Route Availability which is amended by value of speed [miles/h] permitted for a specific load model."""@en ;
+    rdfs:domain :LoadCapability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "stable" .
+
+:loadCapabilitySpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Load capability speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilitySpeed> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Part of the load capability of a track that corresponds to the speed of the load model"@en ;
+    rdfs:domain :LoadCapability ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:trackLoadCapability a owl:ObjectProperty ;
+    rdfs:label "Load capability"@en ;
+    :XMLName "IPP_LoadCap" ;
+    :applicable "Y" ;
+    :formatNote """The value of this parameter is an instance of the era:LoadCapability class which consists of 2 properties:
+- era:loadCapabilityLineCategory - as a taxonomy of load models representing line category
+- era:loadCapabilitySpeed - integer for the value of speed [km/h] permitted for a specific load model
+
+For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, the data format is:
+[CCCC] [NNN],
+where:
+- [CCCC] is a single selection from the predefined list of load models representing line category
+- [NNN] is the value of speed [km/h] permitted for a specific load model."""@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.2.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrackLoadCapability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    rdfs:comment "Relates the track with the class LoadCapability. A combination of the line category and speed at the weakest point of the track."@en ;
+    rdfs:domain [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LoadCapability ;
+    rdfs:seeAlso """INF TSI: 4.2.1, 4.2.7.1, 4.2.7.2, 4.2.7.4
+Annex D1 OPE TSI""" ;
+    rdfs:subPropertyOf :performanceObjParameter ;
+    ns1:term_status "stable" ;
+    skos:example """The set of selected data may include: B2-160, D4-120 and E5-100
+When classifying infrastructure lines into line categories, the following options shall be used by the infrastructure manager to optimize freight traffic:
+Option 1: determination of the line category at maximum freight traffic speed (maximum 120 Km/h)
+Option 2: determination of a line category at an associated lower speed (less than the maximum freight traffic speed)
+Example of option 1 (Annex F of EN 15528:2021): In a given track, if the traffic is mixed, the local speed of the line is 90 Km/h and the determined line category is D4 at a maximum of 90 Km/h, the information displayed should be: D4/90.
+Example of option 2 (Annex F of EN 15528:2021): In a given track, if the traffic is mixed, the local speed of the line is 120 Km/h and the determined line category is C4 at a maximum of 120 Km/h and D4 at maximum of 90 Km/h, the information displayed should be: C4/120 and D4/90.""" ;
+    skos:scopeNote """At this step, RINF does not allow to enter additional data referred to additional speed regulations and operating requirements relating to locomotives (e.g., locomotive classes and associated maximum speed) or traffic types (e.g., maximum speed of freight traffic or passenger traffic).
+
+The load capability describes the weakest point of this track within this section of line (which is normally a bridge or other sub-track structure).
+It is expressed as a combination of the line category and speed permitted for trains exerting loads defined for this line category.
+The result of the classification process is set out in EN 15528:2021 (Annex A) and referred to in that standard as Line Category.
+
+The Load capability for UK in respect of Northern Ireland consists of RA and speed in miles per hour. RA shall be applied according to UK Railway Group Standard GE/RT8006, Issue Two, September 2010.
+
+More than one combination may be published for the same track if applicable, but it has to be done by repetition of the parameter with one value selected only  that is why Y is given in line Can be repeated.
+For the following cases, it is not possible to use EN 15528:2021 categories of line classification:
+- TSI categories of line P1520 and F1520 (passenger traffic or freight traffic at any speed)
+- TSI categories of line P1600 and F1600 (passenger traffic or freight traffic at any speed)
+
+When more than one value of the parameter has to be published, then parameter has to be repeated as many times as many values of the parameter will be published."""@en .
+
+:LoadCapability a owl:Class ;
+    rdfs:label "Load capability"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilityShape> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    dcterms:replaces :loadCapability ;
+    rdfs:comment """A combination of the line category and speed at the weakest point of the track.
+Each track can have several load capability (structured) values, and each one has values for load model line category and load model speed."""@en,
+        "This class together with properties loadCapabilityLineCategory and loadCapabilitySpeed replaces the previous loadCapability SKOS property."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """At this step, RINF does not allow to enter additional data referred to additional speed regulations and operating requirements relating to locomotives (e.g., locomotive classes and associated maximum speed) or traffic types (e.g., maximum speed of freight traffic or passenger traffic).
+
+The load capability describes the weakest point of this track within this section of line (which is normally a bridge or other sub-track structure). It is expressed as a combination of the line category and speed permitted for trains exerting loads defined for this line category. The result of the classification process is set out in EN 15528:2021 (Annex A) and referred to in that standard as â€œLine Categoryâ€.
+
+It represents the ability of the infrastructure to withstand the vertical loads imposed by vehicles on the track for regular service as a combination of Line Category with a permitted speed according to EN 15528:2021
+
+More than one combination may be published for the same track if applicable, but it has to be done by repetition of the parameter with one value selected only - that is why 'Y' is given in line 'Can be repeated'.
+
+For the following cases, it is not possible to use EN 15528:20021categories of line classification:
+- TSI categories of line P1520 and F1520 (passenger traffic or freight traffic at any speed)
+- TSI categories of line P1600 and F1600 (passenger traffic or freight traffic at any speed)"""@en .
+
+:loadCapability dcterms:isReplacedBy :LoadCapability,
+        :loadCapabilityLineCategory,
+        :loadCapabilitySpeed,
+        :trackLoadCapability .
+

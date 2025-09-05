@@ -1,0 +1,24 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasConsignmentIdentification rdfs:range :ConsignmentIdentification .
+
+:hasControlLabel a owl:ObjectProperty ;
+    rdfs:label "has ControlLabel" ;
+    rdfs:domain :ConsignmentIdentification ;
+    rdfs:range :ControlLabel .
+
+:ConsignmentIdentification a owl:Class ;
+    rdfs:label "ConsignmentIdentification" ;
+    rdfs:comment """List of Identifications for the consignment In
+										order to identify the consignment(s) on the wagon, the
+										ControlLabel and or DossierNumber for each consignment must
+										be present if the wagon is loaded and the Consignment Note
+										is already available""",
+        """consignment note number (without carrier (due
+										to history))""" .
+
+[] rdf:first :ConsignmentIdentification .
+

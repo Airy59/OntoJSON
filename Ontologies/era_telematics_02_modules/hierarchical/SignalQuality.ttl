@@ -1,0 +1,37 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:NumberOfVisibleSatellites a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfVisibleSatellites" ;
+    rdfs:comment """Indicates the number of satellites being used
+										in the position solution. Greater value indicates better
+										quality.""" ;
+    rdfs:domain :SignalQuality ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SatelliteHDOP a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SatelliteHDOP" ;
+    rdfs:comment """HDOP = Horizontal Dilution Of Precision.
+										Parameter used to describe the strength of the current
+										satellite configuration, or geometry, and itâ€™s impact on the
+										accuracy of the data collected by a GNSS receiver at the
+										time of use. HDOP provides a measure of accuracy in 2-D
+										position (e.g. Latitude and Longitude). Smaller value
+										indicates better precision. Values less than 1 are the best.
+										Values from 2 - 5 are good. Values greater 10 indicate bad
+										quality """ ;
+    rdfs:domain :SignalQuality ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasSignalQuality rdfs:range :SignalQuality .
+
+:SignalQuality a owl:Class ;
+    rdfs:label "SignalQuality" ;
+    rdfs:comment "Indicates satellite communication signal quality" .
+

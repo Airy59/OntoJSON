@@ -1,0 +1,39 @@
+@prefix : <http://example.org/person#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ExampleOrg a :Organization .
+
+:JohnDoe a :Employee .
+
+:employeeId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Employee ID"@en ;
+    rdfs:comment "The employee's unique identifier"@en ;
+    rdfs:domain :Employee ;
+    rdfs:range xsd:string .
+
+:hasEmployee a owl:ObjectProperty ;
+    rdfs:label "Has Employee"@en ;
+    rdfs:comment "The employees of the organization"@en ;
+    rdfs:domain :Organization ;
+    rdfs:range :Employee ;
+    owl:inverseOf :worksFor .
+
+:worksFor a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Works For"@en ;
+    rdfs:comment "The organization the employee works for"@en ;
+    rdfs:domain :Employee ;
+    rdfs:range :Organization .
+
+:Organization a owl:Class ;
+    rdfs:label "Organization"@en ;
+    rdfs:comment "A company or institution"@en .
+
+:Employee a owl:Class ;
+    rdfs:label "Employee"@en ;
+    rdfs:comment "A person who works for an organization"@en ;
+    rdfs:subClassOf :Person .
+

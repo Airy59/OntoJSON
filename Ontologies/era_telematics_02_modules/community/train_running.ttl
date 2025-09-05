@@ -1,0 +1,32 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:TrainRunningInformationMessage a owl:Class ;
+    rdfs:label "TrainRunningInformationMessage" ;
+    rdfs:comment """This message is issued upon 1) Arrrival, departure or run-through in
+				agreed reporting points and/or 2) Attainment of the agreed initial running time
+				and/or 3) A new divergence between nominal and actual being achieved in excess of
+				the agreed threshold value 4) as a response to the
+				EnquiryTrainsAtReportingLocationMessage. There will only be one train reported per
+				message and will include one response per train at a location.""" .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+

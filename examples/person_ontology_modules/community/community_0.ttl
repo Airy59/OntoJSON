@@ -1,0 +1,44 @@
+@prefix : <http://example.org/person#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Employee rdfs:subClassOf :Person .
+
+:age a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Age"@en ;
+    rdfs:comment "The person's age in years"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:integer .
+
+:email a owl:DatatypeProperty ;
+    rdfs:label "Email"@en ;
+    rdfs:comment "The person's email address"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string .
+
+:hasAddress a owl:ObjectProperty ;
+    rdfs:label "Has Address"@en ;
+    rdfs:comment "The person's postal address"@en ;
+    rdfs:domain :Person ;
+    rdfs:range :Address .
+
+:firstName a owl:DatatypeProperty ;
+    rdfs:label "First Name"@en ;
+    rdfs:comment "The person's given name"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string .
+
+:lastName a owl:DatatypeProperty ;
+    rdfs:label "Last Name"@en ;
+    rdfs:comment "The person's family name"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string .
+
+:Person a owl:Class ;
+    rdfs:label "Person"@en ;
+    rdfs:comment "A human being"@en ;
+    rdfs:subClassOf [ owl:onProperty :firstName ],
+        [ owl:onProperty :lastName ] .
+

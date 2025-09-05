@@ -1,0 +1,42 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:vehicleTypeMaximumCantDeficiency a owl:DatatypeProperty ;
+    rdfs:label "Vehicle type maximum cant deficiency"@en ;
+    :eratvIndex "4.6.4" ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :maximumSpeedAndCantDeficiency ;
+    rdfs:comment "Part of the combination of maximum speed and maximum cant deficiency for which the vehicle was assessed. Corresponds to the maximum cant deficiency."@en ;
+    rdfs:domain :MaximumSpeedAndCantDeficiency ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:vehicleTypeMaximumSpeed a owl:DatatypeProperty ;
+    rdfs:label "Vehicle type maximum speed"@en ;
+    :eratvIndex "4.6.4" ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :maximumSpeedAndCantDeficiency ;
+    rdfs:comment "Part of the combination of maximum speed and maximum cant deficiency for which the vehicle was assessed. Corresponds to the maximum speed."@en ;
+    rdfs:domain :MaximumSpeedAndCantDeficiency ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:MaximumSpeedAndCantDeficiency a owl:Class ;
+    rdfs:label "Maximum speed and cant deficiency"@en ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :maximumSpeedAndCantDeficiency ;
+    rdfs:comment "Combination of maximum speed and maximum cant deficiency for which the vehicle was assessed."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" .
+

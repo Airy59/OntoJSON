@@ -1,0 +1,25 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:hasElectricShoreSupply rdfs:subPropertyOf :sidingFixedInstalationsDataParameter .
+
+:hasExternalCleaning rdfs:subPropertyOf :sidingFixedInstalationsDataParameter .
+
+:hasRefuelling rdfs:subPropertyOf :sidingFixedInstalationsDataParameter .
+
+:hasSandRestocking rdfs:subPropertyOf :sidingFixedInstalationsDataParameter .
+
+:hasToiletDischarge rdfs:subPropertyOf :sidingFixedInstalationsDataParameter .
+
+:hasWaterRestocking rdfs:subPropertyOf :sidingFixedInstalationsDataParameter .
+
+:sidingFixedInstalationsDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Fixed installations for servicing trains"@en ;
+    :rinfIndex "1.2.2.0.4" ;
+    dcterms:created "2025-03-11"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :sidingDataParameter .
+

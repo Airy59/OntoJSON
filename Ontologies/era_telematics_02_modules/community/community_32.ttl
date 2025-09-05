@@ -1,0 +1,515 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Amount a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Amount" ;
+    rdfs:comment "Amount" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BogiePitch a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BogiePitch" ;
+    rdfs:comment "Bogie Wheelbase measured in mm" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BogiePivotPitch a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BogiePivotPitch" ;
+    rdfs:comment """Largest distance between two adjacent bogie
+										pitches in mm""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BufferType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BufferType" ;
+    rdfs:comment """ Classification of buffer. The following
+										values are mostly used in the sector.: A, AX, B, C, CX, L0
+										(130), L0 (150), L2 (130), L2 (150), L4 (130), L4 (150)""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateLastOverhaul rdfs:domain :DesignDataSet .
+
+:DateOfNextTankInspection rdfs:domain :DesignDataSet .
+
+:DerailmentDetectionDevice a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DerailmentDetectionDevice" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DwellTime rdfs:range xsd:decimal .
+
+:ExchangeRate rdfs:range xsd:decimal .
+
+:FerryPermittedFlag rdfs:domain :DesignDataSet .
+
+:FerryRampAngle a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FerryRampAngle" ;
+    rdfs:comment """Maximum allowed angle of the ferry ramp (in
+										grades: Â°)""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HandBrakedWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HandBrakedWeight" ;
+    rdfs:comment "Braked weight of the hand brake in tons" ;
+    rdfs:domain :HandBrake ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HeightOfLoadingPlaneUnladen a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HeightOfLoadingPlaneUnladen" ;
+    rdfs:comment """Height of the loading plane when wagon is
+										empty measured in mm""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InnerWheelbase a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InnerWheelbase" ;
+    rdfs:comment """Maximum distance between two adjacent axles in
+										mm""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LetterMarking a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LetterMarking" ;
+    rdfs:comment """Complete wagon category letter code. The
+										Identification marking for freight rolling stock (wagon
+										type) is defined in UIC Leaflet 438-2""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadArea a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadArea" ;
+    rdfs:comment "Payload Area - measured in M2" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadLimit rdfs:range xsd:decimal .
+
+:LoadTableCountry a owl:DatatypeProperty ;
+    rdfs:label "LoadTableCountry" ;
+    rdfs:comment """ISO country code of countries for
+													additional load tables""" ;
+    rdfs:domain :LoadTable ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadTableStars a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadTableStars" ;
+    rdfs:comment "Number of load table stars." ;
+    rdfs:domain :LoadTable ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadingCapacity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadingCapacity" ;
+    rdfs:comment "Usable Cube - measured in M3" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationPrimaryCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationPrimaryCode" ;
+    rdfs:domain :LocationFileDatasetMessage ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MaxAxleWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MaxAxleWeight" ;
+    rdfs:comment "Indicates the maximum design axle weight (to)." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MaxDesignSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MaxDesignSpeed" ;
+    rdfs:comment "Maximum approved speed of the wagon (km/h)" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MaxGrossWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MaxGrossWeight" ;
+    rdfs:comment "Weight of max Gross Load Weight plus the tare weight of the equipment" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MaxLengthOfLoad a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MaxLengthOfLoad" ;
+    rdfs:comment "Measured in mm" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MaxPayload a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MaxPayload" ;
+    rdfs:comment """Maximum payload in
+																tonns of line category; number of
+																entries must fit to number of
+																entries in SpeedCategory""" ;
+    rdfs:domain :RouteClassPayloads ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MinCurveRadius a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MinCurveRadius" ;
+    rdfs:comment "Measured in Metres" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MinVerticalRadiusYardHump a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MinVerticalRadiusYardHump" ;
+    rdfs:comment "Minimum allowed vertical radius over yard humps. Measured in meters." ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfAccessorOfSpecType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfAccessorOfSpecType" ;
+    rdfs:comment """Number of specified accessory
+													equipped on the wagon""" ;
+    rdfs:domain :RemovableAccessories ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfBogies rdfs:domain :DesignDataSet .
+
+:OverhaulValidityPeriod a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OverhaulValidityPeriod" ;
+    rdfs:comment "Validity period of last overhaul in years as marked on the wagon" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ParkingBrakeForce a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ParkingBrakeForce" ;
+    rdfs:comment """Indicates the parking brake force of the hand brake (kN). When the
+				parking brake force is marked on the wagon the information must be provided in the
+				RSRD message.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PermittedTolerance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PermittedTolerance" ;
+    rdfs:comment "Permitted tolerance after date of overhaul (in months)" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PlannedDateNextOverhaul rdfs:domain :DesignDataSet .
+
+:Prepaid a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Prepaid" ;
+    rdfs:comment """
+																				Prepaid""",
+        """Carriage
+																						charges to
+																						be paid by
+																						the
+																						consignor in
+																						the tariff
+																						currency.""" ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ProductRIDName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ProductRIDName" ;
+    rdfs:comment """ RID product name as
+																written on the folding panel""" ;
+    rdfs:domain :LoadTableProduct ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ProductUNCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ProductUNCode" ;
+    rdfs:comment """UN code of product if
+																product specific load table""" ;
+    rdfs:domain :LoadTableProduct ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SatelliteHDOP rdfs:range xsd:decimal .
+
+:SpeedCategory a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SpeedCategory" ;
+    rdfs:comment """Numeric speed in load table,
+													without speed empty in km/h""" ;
+    rdfs:domain :LoadTable ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TankCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TankCode" ;
+    rdfs:comment """Tank code (applies only for tank wagons). The
+										codes are defined in the RID regulation, chapter 4.3.3 and
+										4.3.4.1.1""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TechnicalForwardingRestrictions a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TechnicalForwardingRestrictions" ;
+    rdfs:comment """This element is designed to identify any special aspects or
+				restrictions which might be relevant to wagon handling operations in train formation
+				yards or in trains because of technical feature of the wagon or its load- All codes
+				of Transport restrictions for Freight Traffic (cf. UIC 920-13) and Passengers
+				Traffic are in the same list which is contained in the code list RestrictionCodes.
+				In this element we use only those codes that have "T - Technical" characteristics
+				and "F - Freight" as the type. The codes below are sorted out from the
+				RestrictionCodes. Only these codes should be used in this element. F = Freight P =
+				Passenger T = Technical D = Damage L = Load Code F or P Description T D L 07 F Shunt
+				only when hand brake operable with ground staff x x 11 F Wagon other than bogie
+				wagon with wheelbase of more than 9 metres x 12 F Bogie wagon with distance between
+				wheels of more than 14 metres and up to and including a distance of 17,50 metres x
+				13 F Bogie wagon with distance between wheels of more than 17,50 metres x 15 F Wagon
+				not allowed over the hump x x x 16 F Do not fly shunt or gravity shunt (3 red
+				triangles) x x x 18 F Must not use active braking equipment x 25 F Gas carrying tank
+				wagon with orange side stripe x 41 F Place this wagon at the front of the train x x
+				x 42 F Place this wagon at the rear of the train x x x 63 F (+P) Special consignment
+				or (for Passengers trains) loading/cinematic gauge larger than the planned one x x
+				70 F Shunt with care (1 red triangle) x x x 71 F Shunt with special care (2 red
+				triangle) x x x 94 F Gas carrying wagon without orange side stripe x """ ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Transferred a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Transferred" ;
+    rdfs:comment """
+																				Transferred""",
+        """Carriage
+																						charges to
+																						be paid by
+																						the
+																						consignee in
+																						the tariff
+																						currency.""" ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeOfRemovableAccessories a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeOfRemovableAccessories" ;
+    rdfs:comment """Specification of removable accessory.
+Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
+    rdfs:domain :RemovableAccessories ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:VapourReturnSystem rdfs:domain :DesignDataSet .
+
+:WheelDiameter a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WheelDiameter" ;
+    rdfs:comment """Diameter of wheels meausured in mm. Reference wheel diameter at
+				maximum. """ ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WheelSetTransformationMethod a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WheelSetTransformationMethod" ;
+    rdfs:comment "Description of the wheel set transformation method for wagons with a changeable wheel set gauge." ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WheelSetType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WheelSetType" ;
+    rdfs:comment """Type name of the wheel sets, and the name of
+										the type depends on the manufacturer.""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WheelsetGauge a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WheelsetGauge" ;
+    rdfs:comment """Track Gauge measured in mm; multi-entry for wagons with changeable
+				wheel set gauge""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasAirBrake rdfs:domain :DesignDataSet .
+
+:hasBrakeBlock rdfs:domain :DesignDataSet .
+
+:hasDesignDataSet rdfs:range :DesignDataSet .
+
+:hasHandBrake a owl:ObjectProperty ;
+    rdfs:label "has HandBrake" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range :HandBrake .
+
+:hasLoadTable a owl:ObjectProperty ;
+    rdfs:label "has LoadTable" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range :LoadTable .
+
+:hasLoadTableProduct a owl:ObjectProperty ;
+    rdfs:label "has LoadTableProduct" ;
+    rdfs:domain :LoadTable ;
+    rdfs:range :LoadTableProduct .
+
+:hasLocationPrimaryInformation a owl:ObjectProperty ;
+    rdfs:label "has LocationPrimaryInformation" ;
+    rdfs:domain :LocationFileDatasetMessage ;
+    rdfs:range :LocationPrimaryInformation .
+
+:hasLocationSubsidiaryInformation a owl:ObjectProperty ;
+    rdfs:label "has LocationSubsidiaryInformation" ;
+    rdfs:domain :LocationFileDatasetMessage ;
+    rdfs:range :LocationSubsidiaryInformation .
+
+:hasRemovableAccessories a owl:ObjectProperty ;
+    rdfs:label "has RemovableAccessories" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range :RemovableAccessories .
+
+:hasRouteClassPayloads a owl:ObjectProperty ;
+    rdfs:label "has RouteClassPayloads" ;
+    rdfs:domain :LoadTable ;
+    rdfs:range :RouteClassPayloads .
+
+:hasTemperatureRange rdfs:domain :DesignDataSet .
+
+:hasWagonTelematics a owl:ObjectProperty ;
+    rdfs:label "has WagonTelematics" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range :WagonTelematics .
+
+:value rdfs:range xsd:decimal .
+
+:WagonTelematics a owl:Class ;
+    rdfs:label "WagonTelematics" ;
+    rdfs:comment """Information about telematics
+										devices mounted on the wagon.""" .
+
+:LoadTableProduct a owl:Class ;
+    rdfs:label "LoadTableProduct" ;
+    rdfs:comment """Product description, only applies
+													for product-specific load tables""" .
+
+:RemovableAccessories a owl:Class ;
+    rdfs:label "RemovableAccessories" .
+
+:RouteClassPayloads a owl:Class ;
+    rdfs:label "RouteClassPayloads" .
+
+:HandBrake a owl:Class ;
+    rdfs:label "HandBrake" .
+
+:LocationFileDatasetMessage a owl:Class ;
+    rdfs:label "LocationFileDatasetMessage" ;
+    rdfs:comment " Used to Create, Modify or Update the LocationIdent Reference File" .
+
+:LoadTable a owl:Class ;
+    rdfs:label "LoadTable" ;
+    rdfs:comment """Indicates the load tables marked on the wagon.
+										When load tables are marked on the wagon the information
+										must be provided in the RSRD message. Several load tables
+										(international, product specific for LPG wagons and
+										additional/country specific) can be specified by providing
+										the element several times consecutively. For special wagons
+										with specific load tables (e.g. heavy haul wagons) no load
+										table need to be provided. The complete load table must be
+										provided including the empty load row (if existent).""" .
+
+:LocationSubsidiaryInformation a owl:Class ;
+    rdfs:label "LocationSubsidiaryInformation" ;
+    rdfs:comment """Required for Add, Update of a Location Subsidiary Code (modified to
+				global element)""" .
+
+:DesignDataSet a owl:Class ;
+    rdfs:label "DesignDataSet" .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first :DesignDataSet .
+
+[] rdf:first :HandBrake .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first xsd:decimal .
+
+[] rdf:first :DesignDataSet .
+
+[] rdf:first :LocationSubsidiaryInformation .
+
+[] rdf:first xsd:decimal .
+
+[] rdf:first :DesignDataSet .
+
+[] rdf:first :LocationFileDatasetMessage .
+
+[] rdf:first :DesignDataSet .
+
+[] rdf:first :HandBrake .
+
+[] rdf:first :RouteClassPayloads .
+
+[] rdf:first xsd:decimal .
+
+[] rdf:first :DesignDataSet .
+
+[] rdf:first :DesignDataSet .
+
+[] rdf:first :LocationFileDatasetMessage .
+

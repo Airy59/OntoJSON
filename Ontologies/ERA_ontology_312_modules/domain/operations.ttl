@@ -1,0 +1,175 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:hasSchematicOverviewOPDigitalForm a owl:DatatypeProperty ;
+    rdfs:label "Schematic overview of the operational point in digital form"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.2.0.0.0.7" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSchematicOverviewOPDigitalForm> ;
+    :tsiOPEAppendixD2Index "2.1" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "The existence of a schematic overview of the operational point in digital form."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :opGenericDataParameter ;
+    ns1:term_status "stable" .
+
+:maximumServiceBrake a owl:DatatypeProperty ;
+    rdfs:label "Maximum service break"@en ;
+    :eratvIndex "4.7.7" ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date ;
+    rdfs:comment "At maximum service brake: Stopping distance, Maximum deceleration, for the load condition 'design mass under normal payload' at the design maximum speed."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:opName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Name of operational point"@en ;
+    :XMLName "OPName" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpName> ;
+    :tsiOPEAppendixD2Index "2.3.1" ;
+    dcterms:created "2021-09-13"^^xsd:date ;
+    dcterms:modified "2021-09-13"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Name normally related to the town or village or to traffic control purpose."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :opGenericDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Name of OP may not always exist in common use. In such case IM should propose a name for OP. "@en .
+
+:opType a owl:ObjectProperty ;
+    rdfs:label "Type of operational point"@en ;
+    :XMLName "OPType" ;
+    :applicable "Y" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/op-types/OperationalPointTypes> ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpTypeP>,
+        <http://data.europa.eu/949/shapes/OpTypeSKOS> ;
+    :tsiOPEAppendixD2Index "2.2.2",
+        "2.3.2" ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Type of facility in relation to the dominating operational functions."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :opGenericObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Each existing case has to be approximated to the one of the above defined types by including size, importance and dominating functions. It is most important to recognize the most important role of specific OP in the network. That is why only one type for one OP is permitted.
+
+For purpose of RINF, there were defined the following types of OPs:
+1.	Station - large or major railway node with several functions, important for international traffic, basic for national railway system;
+2.	Passenger terminal - station with dominating function of service for passenger traffic, serving as a central hub for passengers, often integrating rail operations with intermodal transport networks and large-scale passenger facilities, including ticketing, waiting areas, and other passenger services;
+3.	Freight terminal - station dominantly serving for loading and unloading of freight trains;
+4.	Depot or workshop - group of tracks used by depot or workshop for RST maintenance;
+5.	Train technical services - group of tracks for servicing trains (parking, washing, etc.);
+6.	Passenger stop - or halts - small OP consisting of at least one platform, normally serving mostly for local passenger services, without routing, dispatching, or train management facilities;
+7.	Junction - OP consisting of at least one turnout, normally used mostly for changing direction of trains, with reduced or not existing other functions;
+8.	Border point - located in the point where a border between MSs meets a railway line;
+9.	Shunting yard - group of tracks used for shunting trains, mostly related to freight traffic;
+10.	Switch - OP consisting of only one switch and the area around it, delimited and protected by entry signals, normally used for changing direction of trains, with reduced or not existing other functions;
+11.	Domestic border point - designated location on the main lines where the infrastructure responsibilities transition between IMs.
+"""@en .
+
+:operationalRegimeType a owl:ObjectProperty ;
+    rdfs:label "Operational regime"@en ;
+    :applicable "Y/N/NYA" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/operational-regime-types/OperationalRegimeTypes> ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.0.0.1.3" ;
+    :tsiOPEAppendixD2Index "3.2.7" ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-09-24"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Double track type."@en ;
+    rdfs:domain :SectionOfLine ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :routeBookObjectParameter ;
+    ns1:term_status "unstable" .
+
+:operationalRestriction a owl:ObjectProperty ;
+    rdfs:label "Operational restriction"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/restrictions/Restrictions> ;
+    dcterms:created "2020-11-23"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date ;
+    rdfs:comment "Indicates an operational restriction of vehicle or wagon. Parking brake type (if the vehicle is fitted with it)."@en ;
+    rdfs:domain :Vehicle ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :vehicleTechnicalObjCharacteristic ;
+    ns1:term_status "stable" .
+
+:schematicOverviewOP a owl:DatatypeProperty ;
+    rdfs:label "Schematic overview of the operational point"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.2.0.0.0.7.1" ;
+    :tsiOPEAppendixD2Index "2.1" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    rdfs:comment "Document providing the schematic overview of the operational point"@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf :opGenericDataParameter ;
+    ns1:term_status "stable" .
+
+:voiceOperationalCommImpl a owl:DatatypeProperty ;
+    rdfs:label "Voice operational communication implementation"@en ;
+    :eratvIndex "4.13.2.6" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Voice and operational communication implementation."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:OperationalPoint a owl:Class ;
+    rdfs:label "Operational Point"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OperationalPointShape> ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2022-07-07"^^xsd:date,
+        "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    rdfs:comment "An operational point (OP) means any location for train service operations, where train services may begin and end or change route, and where passenger or freight services may be provided; operational point also means any location at boundaries between Member States or infrastructure managers."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :PlatformEdge,
+        :PrimaryLocation,
+        :RadioBlockCenter,
+        :SectionOfLine,
+        :Signal,
+        :SpecialArea,
+        :Switch,
+        :Track,
+        :Tunnel ;
+    ns1:term_status "stable" .
+

@@ -1,0 +1,23 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:InvoicingCarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InvoicingCarrierCode" ;
+    rdfs:comment """Sectional
+																			invoicing by""" ;
+    rdfs:domain :Section ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasInvoicedSection a owl:ObjectProperty ;
+    rdfs:label "has InvoicedSection" ;
+    rdfs:domain :Section ;
+    rdfs:range :InvoicedSection .
+
+:hasSection rdfs:range :Section .
+
+:Section a owl:Class ;
+    rdfs:label "Section" ;
+    rdfs:comment "Sectional Invoicing" .
+

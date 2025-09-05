@@ -1,0 +1,312 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:emergencyBrake a owl:DatatypeProperty ;
+    rdfs:label "Emergency braking"@en ;
+    :eratvIndex "4.7.5" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date ;
+    rdfs:comment "Stopping distance and deceleration profile for each load condition per design maximum speed."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:existenceOfIndustrialRisk a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Industrial risks â€” locations where it is dangerous for the driver to step out"@en ;
+    :applicable "Y/N" ;
+    :formatNote "Y/N" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.0.0.1.1" ;
+    :tsiOPEAppendixD2Index "3.2.5" ;
+    dcterms:created "2025-01-30"^^xsd:date ;
+    rdfs:comment "Indication that the full section of line (or a part of it) it is identified by the Infrastructure Managers (and communicated to the RU) where drivers are not supposed to get off the locomotive."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :routeBookDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Although it is just an indication of existence of an industrial risk, the area covering the industrial risk should be references on the topological network.
+For the route book purpose, the industrial risks should be defined as linear references instead of area. SpecialArea of type "industrial risk" should be used"""@en .
+
+:fireSafetyCategory a owl:ObjectProperty ;
+    rdfs:label "Fire safety category"@en ;
+    :eratvIndex "4.4.1" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/rolling-stock-fire/Categories> ;
+    dcterms:created "2020-08-29"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date ;
+    rdfs:comment "Fire safety category for tunnels."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic ;
+    ns1:term_status "stable" .
+
+:frequencyBandsForDetection a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Frequency bands for detection"@en ;
+    :applicable "Y/N/NYA" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/train-detection/FrequencyBandsForDetection> ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.4.2",
+        "1.2.1.1.3.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FrequencyBandsForDetection>,
+        <http://data.europa.eu/949/shapes/FrequencyBandsForDetectionSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date ;
+    dcterms:relation :maximumInterferenceCurrent,
+        :minVehicleImpedance,
+        :tdsMaximumMagneticField ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Bands of the frequency management of the train detection systems as defined in the TSI CCS, and in the specific cases or technical documents referred to in Article 13 of TSI CCS when they are available."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg_impl/2023/1695/oj"^^xsd:anyURI,
+        "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsObjParameter ;
+    ns1:term_status "unstable" ;
+    skos:scopeNote """Verification of compliance with TSI includes application of notified national rules (when they exist).
+
+Multiple selection from a predefined list:
+- Axle Counters: bands A1-A3
+- Track circuits: bands A1-A8"""@en .
+
+:hasEmergencyPlan a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of emergency plan"@en ;
+    :XMLName "ITU_EmergencyPlan" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory for tunnels longer than 1 km"@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.8.9",
+        "1.2.1.0.5.6",
+        "1.2.2.0.5.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEmergencyPlan>,
+        <http://data.europa.eu/949/shapes/HasEmergencyPlanApplicability> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2021-08-10"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1303/2024-01-29> ;
+    rdfs:comment "Indication whether emergency plan exists."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso """SRT TSI: 4.4.2
+OPE TSI: 4.2.3.7""" ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """A value may not be applicable for tunnels shorter than 1 km, as for them the fire category according SRT TSI does not exist.
+Emergency plan has to be a document developed for each tunnel under the direction of the IM, in co-operation, where appropriate, with RUs, Rescue services and relevant authorities. It shall be consistent with the self-rescue, evacuation and rescue facilities provided.
+It is applicable for tunnels longer than 1 km, in accordance with section 4.4.2 of SRT TSI, the emergency plan is mandatory only for tunnel length of more than 1km.
+
+SRT TSI: 4.4.2
+OPE TSI: 4.2.3.7"""@en .
+
+:hasOtherTrainProtection a owl:DatatypeProperty ;
+    rdfs:label "Existence of other train protection, control and warning systems installed"@en ;
+    :rinfIndex "1.1.1.3.5.1" ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication if other train protection, control and warning systems in normal operation are installed lineside."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "unstable" .
+
+:healthSafetyAndEnvironmentDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Health, safety and environment"@en ;
+    :rinfIndex "1.1.1.1.7" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :infraSubsystemDataParameter .
+
+:healthSafetyAndEnvironmentObjParameter a owl:ObjectProperty ;
+    rdfs:label "Health, safety and environment"@en ;
+    :rinfIndex "1.1.1.1.7" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :infraSubsystemObjParameter .
+
+:multipleTrainProtectionRequired a owl:DatatypeProperty ;
+    rdfs:label "Need for more than one train protection, control and warning system required on board"@en ;
+    :rinfIndex "1.1.1.3.5.2" ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication whether more than one train protection, control and warning system is required to be on-board and active simultaneously."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "unstable" .
+
+:otherTrainProtection a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Other train protection, control and warning systems for degraded situation"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Only applicable when for parameter 1.1.1.3.10.1 \"none\" was selected."@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/other-protection-control-warning/OtherProtectionControlWarnings> ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.10.2",
+        "1.2.1.1.9.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OtherTrainProtection>,
+        <http://data.europa.eu/949/shapes/OtherTrainProtectionApplicability>,
+        <http://data.europa.eu/949/shapes/OtherTrainProtectionSKOS> ;
+    :tsiOPEAppendixD2Index "3.4.1" ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/2023-09-28>,
+        <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication of existence of other system than ETCS for degraded situation."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2022-11/list_harmonised_national_restriction_codes_en %281%29.pdf?t=1707149802"^^xsd:anyURI ;
+    rdfs:subPropertyOf :lineSideSystemDegradedSituationObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Selected value shall answer the question whether any other system than ETCS exists on the respective track. The list of possible values is in line with ERA/TD/2011-09/INT, Table 3."@en .
+
+:protectionLegacySystem a owl:ObjectProperty ;
+    rdfs:label "Train protection legacy system"@en ;
+    :applicable "Y/N/NYA" ;
+    :eratvIndex "4.13.1.5" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/other-protection-control-warning/OtherProtectionControlWarnings> ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "16 January 2020"@en ;
+    :rinfIndex "1.1.1.3.5.3",
+        "1.2.1.1.4.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ProtectionLegacySystemSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-31"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj>,
+        <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication of which class B system is installed."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1695&qid=1694158367331#d1295e32-554-1"^^xsd:anyURI,
+        "https://www.era.europa.eu/system/files/2023-11/%5BK%5D%20ERA-TD-2011-09-INT-Coded%20restrictions-final.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainProtectionLegacySystemObjParameter,
+        :vehicleTypeTechnicalObjectCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The list is in line with ERA/TD/2011-09/INT (v1.13), Table 3, and is now in 3.3 of the annex II of TSI CCS."@en .
+
+:conditionsSwitchTrainProtectionSystems a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Special conditions to switch over between different class B train protection, control and warning systems"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Applicable when at least two different protection, control and warning systems exist."@en ;
+    :formatNote "NNN" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.8.1.1",
+        "1.2.1.1.7.1.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ConditionsSwitchTrainProtectionSystems> ;
+    :tsiOPEAppendixD2Index "3.4.2" ;
+    dcterms:created "2022-10-28"^^xsd:date ;
+    dcterms:relation :switchProtectControlWarning ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj>,
+        <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Conditions to switch over between different class B train protection, control and warning systems."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :transitionsBetweenSystemsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Switch over between different systems whilst running. Installation depends on local conditions. "@en .
+
+:switchProtectControlWarning a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of switch over between different protection, control and warning systems while running"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Applicable when at least two different protection, control and warning systems exist."@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.8.1",
+        "1.2.1.1.7.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SwitchProtectControlWarning>,
+        <http://data.europa.eu/949/shapes/SwitchProtectControlWarningApplicability> ;
+    :tsiOPEAppendixD2Index "3.4.2" ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :conditionsSwitchTrainProtectionSystems ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj>,
+        <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication whether a switch over between different systems whilst running exists."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :transitionsBetweenSystemsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Switch over between different systems whilst running. Installation depends on local conditions. "@en .
+

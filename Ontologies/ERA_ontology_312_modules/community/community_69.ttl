@@ -1,0 +1,44 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:dNvroll a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "D_NVROLL"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+    :formatNote "A number of form at NNNNNN.N, from 0 to 327670" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.2.16.1",
+        "1.2.1.1.1.16.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/DNvroll>,
+        <http://data.europa.eu/949/shapes/DNvrollApplicability> ;
+    :tsiOPEAppendixD3Index "1.5.1" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2022-11-07"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-12-05"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment """Parameter used by the ETCS on-board to supervise the distance allowed to be travelled under the roll-away protection and the reverse movement protection, in metres
+According to the specification referenced in Appendix A-1, index [C]"""@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range [ ],
+        [ ],
+        [ ] ;
+    rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+    rdfs:subPropertyOf :etcsNationalValuesDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Precision: [NNNNNN.N], with N a decimal number (0 9).
+
+See: TSI CCS (Subset 26, chapter 7. 7.5.1.17 D_NVROLL)"""@en .
+

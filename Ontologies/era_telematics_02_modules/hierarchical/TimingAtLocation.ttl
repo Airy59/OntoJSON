@@ -1,0 +1,29 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DwellTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DwellTime" ;
+    rdfs:comment "The minimum duration of dwell time expressed in minutes " ;
+    rdfs:domain :TimingAtLocation ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTiming a owl:ObjectProperty ;
+    rdfs:label "has Timing" ;
+    rdfs:domain :TimingAtLocation ;
+    rdfs:range :Timing .
+
+:hasTimingAtLocation rdfs:range :TimingAtLocation .
+
+:TimingAtLocation a owl:Class ;
+    rdfs:label "TimingAtLocation" ;
+    rdfs:comment """Timing at an operation point It has an attribute TimerQualifierCode
+				with the following values: PLA = Public Location Arrival ELA = Earliest Location
+				Arrival ALA = Actual Location Arival LLA = Latest Location Arrival PLD = Public
+				Location Departure ELD = Earliest Location Departure ALD = Actual Location Departure
+				LLD = Latest Location Departure ERT = Earliest Run Through ART = Actual Run Through
+				LRT = Latest Run Through """ .
+

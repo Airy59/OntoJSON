@@ -1,0 +1,28 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:BookedLocationTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BookedLocationTime" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:time ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTime a owl:ObjectProperty ;
+    rdfs:label "has Time" ;
+    rdfs:domain [ ] ;
+    rdfs:range :Time .
+
+:Time a owl:Class,
+        owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Time" ;
+    rdfs:comment "hh:mm:ss" ;
+    rdfs:domain :Time ;
+    rdfs:range xsd:time ;
+    rdfs:subPropertyOf :dataProperties .
+
+xsd:time a rdfs:Datatype .
+

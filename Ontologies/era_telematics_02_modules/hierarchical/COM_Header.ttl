@@ -1,0 +1,110 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:COM_PreparationDatetime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "COM_PreparationDatetime" ;
+    rdfs:comment """Date and Time of preparation of
+													the COM""" ;
+    rdfs:domain :COM_Header ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ConsignmentOrderType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ConsignmentOrderType" ;
+    rdfs:comment """Preliminary list of messages, by now restricted on different types of consignment orders.
+			Message types PRN, NACK, ECN, DEL, INFE, INFP, ECOM, ECOD and ECOU are only used in communication within Raildata ECN members.
+			""" ;
+    rdfs:domain :COM_Header ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Intermodal a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Intermodal" ;
+    rdfs:domain :COM_Header ;
+    rdfs:range xsd:byte ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MessageReferenceNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageReferenceNumber" ;
+    rdfs:comment """Message Reference NumberThis
+													identification is being generated during
+													creation of the message. This allows the tracing
+													of the message.""" ;
+    rdfs:domain :COM_Header ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrintForm a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrintForm" ;
+    rdfs:comment """Which form to use for printout.
+													CIM-CN or CIM-CN for combined traffic. This
+													information assures, that the same paper
+													document will be used for the 'duplicate of the
+													consignment note' and the final print out of the
+													ECN for the consignee.""" ;
+    rdfs:domain :COM_Header ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ReceivingRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ReceivingRU" ;
+    rdfs:comment """Use here the 4 digit code
+													according to UIC leaflet 920-1 of the railway,
+													which is the receipient of the message (like
+													2185).""" ;
+    rdfs:domain :COM_Header ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SendingRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SendingRU" ;
+    rdfs:comment """Use here the 4 digit code
+													according to UIC leaflet 920-1 of the railway,
+													which created/amended the message (like 2185).""" ;
+    rdfs:domain :COM_Header ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShipmentType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShipmentType" ;
+    rdfs:comment """Classification of the wagon order
+													as 'CUV','CIM' or "SMGS".""" ;
+    rdfs:domain :COM_Header ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:VersionNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "VersionNumber" ;
+    rdfs:comment """Message version number. This
+													number hast to be incremented after each
+													modification. On creation this value has to be
+													set to 0.""" ;
+    rdfs:domain :COM_Header ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCOM_Header rdfs:range :COM_Header .
+
+:hasChangeLog a owl:ObjectProperty ;
+    rdfs:label "has ChangeLog" ;
+    rdfs:domain :COM_Header ;
+    rdfs:range :ChangeLog .
+
+:COM_Header a owl:Class ;
+    rdfs:label "COM_Header" ;
+    rdfs:comment """Additional Header containing consignment
+										related key data such as dossiernumber, version number and a
+										change log for modifications""" .
+
+[] rdf:first :COM_Header .
+

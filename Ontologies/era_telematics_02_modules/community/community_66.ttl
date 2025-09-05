@@ -1,0 +1,67 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasPathPlanningReferenceLocation a owl:ObjectProperty ;
+    rdfs:label "has PathPlanningReferenceLocation" ;
+    rdfs:domain :TrainInformation ;
+    rdfs:range :PathPlanningReferenceLocation .
+
+:hasTrainInformation a owl:ObjectProperty ;
+    rdfs:label "has TrainInformation" ;
+    rdfs:domain :PathRequestMessage ;
+    rdfs:range :TrainInformation .
+
+:PathPlanningReferenceLocation a owl:Class ;
+    rdfs:label "PathPlanningReferenceLocation" ;
+    rdfs:comment """It has to be indicated whether the path planning
+							(direction of construction) is carried out at the traindeparturepoint
+							(origin), intermediate or traindestinationpoint. The operation point
+							referenced here MUST have a calendar/dayOfDeparture entry - applications
+							have to check this.""" .
+
+:TrainInformation a owl:Class ;
+    rdfs:label "TrainInformation" ;
+    rdfs:comment """Train information provided by the RUs as an overview for the entire
+				train journey from origin to destination""" .
+
+:PathRequestMessage a owl:Class ;
+    rdfs:label "PathRequestMessage" ;
+    rdfs:comment """This message serves to request a train path. The message is sent from
+				the RU to each IM involved.""" .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :TrainInformation .
+
+[] rdf:first :TrainInformation .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+
+[] rdf:first :PathRequestMessage .
+

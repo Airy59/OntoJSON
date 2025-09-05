@@ -1,0 +1,41 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:RelatedIdentifier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RelatedIdentifier" ;
+    rdfs:domain :RelatedReference ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RelatedMessageDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RelatedMessageDateTime" ;
+    rdfs:comment "Date Time of related message. " ;
+    rdfs:domain :RelatedReference ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RelatedSenderReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RelatedSenderReference" ;
+    rdfs:comment "Sender reference given by the Sender" ;
+    rdfs:domain :RelatedReference ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RelatedType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RelatedType" ;
+    rdfs:domain :RelatedReference ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasRelatedReference rdfs:range :RelatedReference .
+
+:RelatedReference a owl:Class ;
+    rdfs:label "RelatedReference" ;
+    rdfs:comment "Identifies the message to which the actual message refers" .
+

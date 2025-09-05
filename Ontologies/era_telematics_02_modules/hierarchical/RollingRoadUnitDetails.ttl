@@ -1,0 +1,50 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:RollingRoadUnitType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RollingRoadUnitType" ;
+    rdfs:comment "AMEND: ",
+        "CODE:",
+        "READ: ",
+        "Type of Rolling Road unit on Wagon",
+        "WRITE: " ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TareWeightVehicle a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TareWeightVehicle" ;
+    rdfs:comment """Total weight [kg] of vehicle (truck and
+										trailer).""" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasAttendants a owl:ObjectProperty ;
+    rdfs:label "has Attendants" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range :Attendants .
+
+:hasHaulier a owl:ObjectProperty ;
+    rdfs:label "has Haulier" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range :Haulier .
+
+:hasRollingRoadUnitDetails rdfs:range :RollingRoadUnitDetails .
+
+:hasVehicles a owl:ObjectProperty ;
+    rdfs:label "has Vehicles" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range :Vehicles .
+
+:RollingRoadUnitDetails a owl:Class ;
+    rdfs:label "RollingRoadUnitDetails" ;
+    rdfs:comment "Details for Rolling Road units on wagon" .
+
+[] rdf:first :RollingRoadUnitDetails .
+

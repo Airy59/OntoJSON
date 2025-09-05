@@ -1,0 +1,90 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:systemSeparationInfoChangeSupplySystem a owl:DatatypeProperty ;
+    rdfs:label "System separation info change supply system"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoChangeSupplySystem> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date,
+        "2025-06-09"^^xsd:date ;
+    rdfs:comment """Part of the system separation info of a track that shows whether the supply system has to be changed.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:systemSeparationInfoKm a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation info Km"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoKm> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :systemSeparationInfo ;
+    rdfs:comment """Part of the system separation info of a track. Indicates the location from the start of the line where the new value is valid.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" .
+
+:systemSeparationInfoLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation info length"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoLength> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :systemSeparationInfo ;
+    rdfs:comment """Part of the system separation info of a track that shows the length of the system separation in metres.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:systemSeparationInfoPantographLowered a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation info  pantograph lowered"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoPantographLowered> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    rdfs:comment """Part of the system separation info of a track that shows whether the pantograph has to be lowered.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" .
+
+:systemSeparationInfoSwitchOffBreaker a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation info switch off breaker"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoSwitchOffBreaker> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :systemSeparationInfo ;
+    rdfs:comment """Part of the system separation info of a track that shows whether the breaker has to be switched off.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" .
+
+:SystemSeparationInfo a owl:Class ;
+    rdfs:label "System separation info"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoShape> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :systemSeparationInfo ;
+    rdfs:comment "Indication of required several information on system separation."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" .
+

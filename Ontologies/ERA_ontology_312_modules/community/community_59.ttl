@@ -1,0 +1,81 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:authorizedCountry rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:axleBearingConditionMonitoring rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:category rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:contactStripMaterial rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:dataGSMRNetwork rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:dataRadioCompatible rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:endCouplingType rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:energySupplySystem rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:etcsBaseline rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:etcsEquipmentOnBoardLevel rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:etcsInfill rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:etcsSystemCompatibility rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:fireSafetyCategory rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:gaugingProfile rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:gsmRRadioDataCommunication rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:gsmRVersion rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:manufacturer rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:manufacturingCountry rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:otherRadioSystemsObjParameter rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:previousVehicleType rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:protectionLegacySystem rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:railInclination rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:snowIceHailConditions rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:subCategory rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:supportedPlatformHeight rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:thermalCapacityTSIReference rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:trainDetectionSystemType rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:typeVersionId rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:vehicleCategory rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:vehicleSubCategory rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:vehicleTypeMaximumSpeedAndCantDeficiency rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:voiceGSMRNetwork rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:voiceRadioCompatible rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:wheelSetGauge rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:wheelSetGaugeChangeoverFacility rdfs:subPropertyOf :vehicleTypeTechnicalObjectCharacteristic .
+
+:vehicleTypeTechnicalObjectCharacteristic a owl:ObjectProperty ;
+    rdfs:label "Vehicle type technical characteristic"@en ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : .
+

@@ -1,0 +1,67 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:minimumVerticalRadius a owl:ObjectProperty ;
+    rdfs:label "Minimum radius of vertical curve"@en ;
+    :XMLName "ILL_MinRadVertCurve" ;
+    :applicable "Y/N" ;
+    :formatNote """In RDF: the values points to an instance of era:MinimumVerticalRadius class with 2 properties for the crest and hollow values.
+                                                  In XML: NNN+NNN"""@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.3.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadius> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2023-04-05"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-12-12"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2019-06-16> ;
+    rdfs:comment "Radius of the smallest vertical curve expressed in metres."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :MinimumVerticalRadius ;
+    rdfs:seeAlso "INF TSI: 4.2.3.54" ;
+    rdfs:subPropertyOf :sidingObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The radius of vertical curves (except for humps in marshalling yards) shall be at least 500 m on a crest or 900 m in a hollow."@en .
+
+:minimumVerticalRadiusCrest a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Minimum radius of vertical curve crest"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadiusCrest> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    rdfs:comment "Part of the minimum radius of vertical curve that indicates the crest"@en ;
+    rdfs:domain :MinimumVerticalRadius ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:minimumVerticalRadiusHollow a owl:DatatypeProperty ;
+    rdfs:label "Minimum radius of vertical curve hollow"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadiusHollow> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    rdfs:comment "Part of the minimum radius of vertical curve that indicates the hollow"@en ;
+    rdfs:domain :MinimumVerticalRadius ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:MinimumVerticalRadius a owl:Class ;
+    rdfs:label "Minimum radius of vertical curve"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadiusShape> ;
+    dcterms:created "2021-12-12"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Presentation of parameter 1.2.2.0.3.3 'Minimum radius of vertical curve'"@en .
+

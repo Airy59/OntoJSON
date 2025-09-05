@@ -1,0 +1,17 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:unitOfMeasure a owl:AnnotationProperty ;
+    rdfs:label "Unit of measure"@en ;
+    dcterms:created "2024-05-16"^^xsd:date ;
+    dcterms:modified "2024-08-13"^^xsd:date ;
+    rdfs:comment "Magnitude of a quantity, defined and adopted by convention or by law, that is used as a standard for measurement of the same kind of quantity."@en ;
+    rdfs:domain owl:DatatypeProperty ;
+    rdfs:isDefinedBy : ;
+    rdfs:range <http://qudt.org/vocab/unit/> .
+
+owl:DatatypeProperty a owl:Class .
+

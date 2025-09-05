@@ -1,0 +1,65 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:TrainContactDetails a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainContactDetails" ;
+    rdfs:comment """Contact to driver of leading traction unit. This contact can be mobile
+				phone number, GSM-R call number or e.g. details for an analogue radio call.""" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainReadyTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainReadyTime" ;
+    rdfs:comment """It indicates date/time when the train will be ready for
+							departure. IM contract will define if this element can be used. Only to
+							be used if this time is in future (sent in advance). Purpose of this
+							element is to short the train stay. """ ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainStartTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainStartTime" ;
+    rdfs:comment "The Date and Time at which the tain actually started the journey" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTrainLocation a owl:ObjectProperty ;
+    rdfs:label "has TrainLocation" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range :TrainLocation .
+
+:hasTrainReadyStatus a owl:ObjectProperty ;
+    rdfs:label "has TrainReadyStatus" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range :TrainReadyStatus .
+
+:TrainReadyMessage a owl:Class ;
+    rdfs:label "TrainReadyMessage" ;
+    rdfs:comment """This message is sent from an RU to an IM indicating that the train is
+				ready for access to the network.""" .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainReadyMessage .
+

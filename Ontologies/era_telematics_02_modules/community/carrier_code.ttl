@@ -1,0 +1,25 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:CarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CarrierCode" ;
+    rdfs:comment """Code of the carrier
+														undertaking the examination (see CIM Article
+														11 sections 2 and 3). """,
+        """Code of the carrier who made
+														it out.""",
+        """Code of the shipping
+																carrier mentioned in the consignment
+																number.""",
+        """Contractual carrier,
+																railway undertaking (Railway Code).""",
+        """Railway Undertaking
+																(Railway Code)""",
+        """additional carrier
+																code belonging to the given contract
+																number""" ;
+    rdfs:domain [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+

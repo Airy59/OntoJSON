@@ -1,0 +1,278 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Amount a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Amount" ;
+    rdfs:comment "Amount" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DwellTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DwellTime" ;
+    rdfs:comment "The minimum duration of dwell time expressed in minutes " ;
+    rdfs:domain :TimingAtLocation ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ExchangeRate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ExchangeRate" ;
+    rdfs:comment """Exchange
+																			rate for amounts to be
+																			paid by the consignor or
+																			consignee which are not
+																			expressed in the
+																			invoicing currency.""" ;
+    rdfs:domain :Tariff ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Fee a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Fee" ;
+    rdfs:comment """Supplements,
+																			fees, deductions""" ;
+    rdfs:domain :Tariff ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:FerryRampAngle a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FerryRampAngle" ;
+    rdfs:comment """Maximum allowed angle of the ferry ramp (in
+										grades: Â°)""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HandBrakedWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HandBrakedWeight" ;
+    rdfs:comment "Braked weight of the hand brake in tons" ;
+    rdfs:domain :HandBrake ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadArea a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadArea" ;
+    rdfs:comment "Payload Area - measured in M2" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadLimit rdfs:range xsd:decimal .
+
+:LoadingCapacity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadingCapacity" ;
+    rdfs:comment "Usable Cube - measured in M3" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MaxAxleWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MaxAxleWeight" ;
+    rdfs:comment "Indicates the maximum design axle weight (to)." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MaxPayload rdfs:range xsd:decimal .
+
+:NHMCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NHMCode" ;
+    rdfs:comment """NHM code
+																			determining the charges
+																			applicable.""" ;
+    rdfs:domain :Tariff ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Offset a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Offset" ;
+    rdfs:domain :Timing ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ParkingBrakeForce a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ParkingBrakeForce" ;
+    rdfs:comment """Indicates the parking brake force of the hand brake (kN). When the
+				parking brake force is marked on the wagon the information must be provided in the
+				RSRD message.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Prepaid a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Prepaid" ;
+    rdfs:comment """
+																				Prepaid""",
+        """Carriage
+																						charges to
+																						be paid by
+																						the
+																						consignor in
+																						the tariff
+																						currency.""" ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SatelliteHDOP rdfs:range xsd:decimal .
+
+:TariffNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TariffNumber" ;
+    rdfs:comment """Customer
+																			agreement or tariff
+																			applied""",
+        "Number of the tariff." ;
+    rdfs:domain :Tariff ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TimingQualifierCode a owl:DatatypeProperty ;
+    rdfs:label "TimingQualifierCode" ;
+    rdfs:comment "None" ;
+    rdfs:domain :Timing ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Transferred a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Transferred" ;
+    rdfs:comment """
+																				Transferred""",
+        """Carriage
+																						charges to
+																						be paid by
+																						the
+																						consignee in
+																						the tariff
+																						currency.""" ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasChargedMass a owl:ObjectProperty ;
+    rdfs:label "has ChargedMass" ;
+    rdfs:domain :Tariff ;
+    rdfs:range :ChargedMass .
+
+:hasDistance a owl:ObjectProperty ;
+    rdfs:label "has Distance" ;
+    rdfs:domain :Tariff ;
+    rdfs:range :Distance .
+
+:hasFreightCharges a owl:ObjectProperty ;
+    rdfs:label "has FreightCharges" ;
+    rdfs:domain :Tariff ;
+    rdfs:range :FreightCharges .
+
+:hasHandBrake a owl:ObjectProperty ;
+    rdfs:label "has HandBrake" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range :HandBrake .
+
+:hasTariff a owl:ObjectProperty ;
+    rdfs:label "has Tariff" ;
+    rdfs:domain [ ] ;
+    rdfs:range :Tariff .
+
+:hasTiming a owl:ObjectProperty ;
+    rdfs:label "has Timing" ;
+    rdfs:domain :TimingAtLocation ;
+    rdfs:range :Timing .
+
+:hasTimingAtLocation a owl:ObjectProperty ;
+    rdfs:label "has TimingAtLocation" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TimingAtLocation .
+
+:measure a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "measure" ;
+    rdfs:domain :ChargedMass ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:value a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "value" ;
+    rdfs:domain :ChargedMass ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Distance a owl:Class ;
+    rdfs:label "Distance" ;
+    :domain "Telematics" ;
+    rdfs:comment """Tariff
+																			distance, expressed in
+																			km or zones, between the
+																			stations or points
+																			corresponding to the
+																			beginning and end of the
+																			charging section.""" .
+
+:FreightCharges a owl:Class ;
+    rdfs:label "FreightCharges" ;
+    :domain "Telematics" ;
+    rdfs:comment """Freight
+																			Charges (paid and due)""" .
+
+:ChargedMass a owl:Class ;
+    rdfs:label "ChargedMass" ;
+    rdfs:comment """Charged
+																			mass [weight in kg]. As
+																			appropriate, area in mÂ²
+																			or the volume of the
+																			wagon or goods in mÂ³ if
+																			used as the basis for
+																			charging.""" .
+
+:TimingAtLocation a owl:Class ;
+    rdfs:label "TimingAtLocation" ;
+    rdfs:comment """Timing at an operation point It has an attribute TimerQualifierCode
+				with the following values: PLA = Public Location Arrival ELA = Earliest Location
+				Arrival ALA = Actual Location Arival LLA = Latest Location Arrival PLD = Public
+				Location Departure ELD = Earliest Location Departure ALD = Actual Location Departure
+				LLD = Latest Location Departure ERT = Earliest Run Through ART = Actual Run Through
+				LRT = Latest Run Through """ .
+
+:HandBrake a owl:Class ;
+    rdfs:label "HandBrake" .
+
+:Timing a owl:Class ;
+    rdfs:label "Timing" .
+
+:Tariff a owl:Class ;
+    rdfs:label "Tariff" ;
+    rdfs:comment """Freight Charges
+																Section Tariff""",
+        """Number of customer agreement or
+													tariff""" .
+
+[] rdf:first :Timing .
+
+[] rdf:first :Timing .
+
+[] rdf:first :HandBrake .
+
+[] rdf:first xsd:decimal .
+
+[] rdf:first xsd:decimal .
+
+[] rdf:first :HandBrake .
+
+[] rdf:first xsd:decimal .
+

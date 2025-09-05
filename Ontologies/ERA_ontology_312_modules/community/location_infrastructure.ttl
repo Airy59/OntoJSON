@@ -1,0 +1,711 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Bridge a owl:Class ;
+    rdfs:label "Bridge"@en ;
+    dcterms:modified "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    rdfs:comment "It is a structure constructed for the exclusive purpose of carrying railroad traffic across an obstruction. It can be used for defining non-stopping areas, big metal mass, resistance to traffic load etc."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :HABD,
+        :KilometricPost,
+        :LevelCrossing,
+        :OperationalPoint,
+        :PlatformEdge,
+        :PrimaryLocation,
+        :RadioBlockCenter,
+        :RunningTrack,
+        :SectionOfLine,
+        :Siding,
+        :Signal,
+        :SpecialArea,
+        :Switch,
+        :Track,
+        :Tunnel .
+
+:Manufacturer a owl:Class ;
+    rdfs:label "(deprecated) Manufacturer"@en ;
+    dcterms:created "2020-11-19"^^xsd:date ;
+    dcterms:isReplacedBy :Body,
+        :manufacturer ;
+    dcterms:modified "2020-11-19"^^xsd:date,
+        "2024-06-03"^^xsd:date ;
+    rdfs:comment "(deprecated) Replaced by the era:Body class and era:manufacturer property. A company or organization that manufactures vehicles."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf org:Organization ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:VehicleKeeper a owl:Class ;
+    rdfs:label "(deprecated) Vehicle Keeper"@en ;
+    dcterms:created "2020-11-23"^^xsd:date ;
+    dcterms:isReplacedBy :Body,
+        :vehicleKeeper ;
+    dcterms:modified "2020-11-23"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-06-03"^^xsd:date ;
+    rdfs:comment """The natural or legal person that, being the owner of a vehicle or having the right to use it,
+exploits the vehicle as a means of transport and is registered as such in a vehicle register referred to in Article 47 of (EU)2016/797."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf org:Organization ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:belongsTo a owl:ObjectProperty ;
+    rdfs:label "belongs to"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/BelongsTo>,
+        <http://data.europa.eu/949/shapes/BelongsToUniqueIM> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date ;
+    rdfs:comment "Indicates that an infrastructure element belongs to a certain subset that contains common characteristics."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :CommonCharacteristicsSubset ;
+    owl:inverseOf :contains .
+
+:containerHandlingFlag a owl:DatatypeProperty ;
+    rdfs:label "container handling flag"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ContainerHandlingFlag> ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:domain :PrimaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean .
+
+:definesSubset a owl:ObjectProperty ;
+    rdfs:label "Defines subset"@en ;
+    dcterms:created "2022-11-04"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "(deprecated) not in use anymore. For the purposes of the register of infrastructure, each infrastructure manager may describe its railway network optionally via common characteristic subsets."@en ;
+    rdfs:domain :InfrastructureManager ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :CommonCharacteristicsSubset ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:freightFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "freight flag"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FreightFlag> ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:domain :PrimaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean .
+
+:handoverPointFlag a owl:DatatypeProperty ;
+    rdfs:label "handover point flag"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HandoverPointFlag> ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:domain :PrimaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean .
+
+:hasAbstraction a owl:ObjectProperty ;
+    rdfs:label "Has abstraction"@en ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    rdfs:comment "Property that links a physical entity with its topological abstraction representation."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:hasImplementation a owl:ObjectProperty ;
+    rdfs:label "Has implementation"@en ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    rdfs:comment "Property that links a topological abstraction entity with its physical representation."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :InfrastructureElement ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:hasPart a owl:IrreflexiveProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has part"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasPart>,
+        <http://data.europa.eu/949/shapes/HasPartOP> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    dcterms:replaces :siding,
+        :track ;
+    rdfs:comment """Indicates that an infrastructure element is composed of one or more other (distinct) infrastructure elements.
+This property is used to represent part-whole relationships between infrastructure elements.
+An element cannot be a part of itself."""@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :InfrastructureElement ;
+    owl:inverseOf :isPartOf .
+
+:hashSource a owl:AnnotationProperty ;
+    rdfs:label "Hash source"@en ;
+    dcterms:created "2024-02-06"^^xsd:date ;
+    rdfs:comment "This property indicates for each infrastructure element, the source, i.e. the identifier  or key that was input to the hash function in order to generate the hash value that is part of the hash URI."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:hotAxleBoxDetectorDirection a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Direction of measurement of trackside HABD"@en ;
+    :XMLName "IHS_HABDDirection" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if the HABD is not TSI compliant (the value of parameter 1.1.1.1.7.5 (Trackside HABD TSI compliant) is 'False')"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/hot-axle-box-detector-direction/HotAxleBoxDetectorDirections> ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.7.9" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HotAxleBoxDetectorDirection>,
+        <http://data.europa.eu/949/shapes/HotAxleBoxDetectorDirectionApplicability>,
+        <http://data.europa.eu/949/shapes/HotAxleBoxDetectorDirectionSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2022-07-08"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2025-02-20"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment "Direction of measurement of trackside HABD, specific for the French Italian and Swedish networks."@en ;
+    rdfs:domain :HABD ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentObjParameter ;
+    ns1:term_status "stable" ;
+    skos:changeNote "This property was previously a datatype property with domain Track and range string. As its values are a list of three predefined values, it is now a SKOS."@en ;
+    skos:scopeNote """Specific for the French Italian and Swedish networks.
+Applicable if trackside HABD is not TSI compliant, direction of measurement of trackside hot axle box detector.
+If the direction of measurement is:
+-	the same as the direction defined by the start and end of the SoL: (N)
+-	the opposite to the direction defined by the start and end of the SoL: (O)
+-	both directions: (B)"""@en .
+
+:hotAxleBoxDetectorGeneration a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Generation of trackside HABD"@en ;
+    :XMLName "IHS_HABDGen" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if the HABD is not TSI compliant (the value of parameter 1.1.1.1.7.5 (Trackside HABD TSI compliant) is 'False')"@en ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.7.7" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HotAxleBoxDetectorGeneration>,
+        <http://data.europa.eu/949/shapes/HotAxleBoxDetectorGenerationApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment """Specific for the French Italian and Swedish networks.
+Generation of trackside hot axle box detector."""@en ;
+    rdfs:domain :HABD ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Waiting provision of possible answers by the French, Italian and Swedish NREs "@en .
+
+:hotAxleBoxDetectorIdentification a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Identification of trackside HABD"@en ;
+    :XMLName "IHS_HABDID" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if the HABD is not TSI compliant (the value of parameter 1.1.1.1.7.5 (Trackside HABD TSI compliant) is 'False')"@en ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.7.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HotAxleBoxDetectorIdentification>,
+        <http://data.europa.eu/949/shapes/HotAxleBoxDetectorIdentificationApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment """Specific for the French, Italian and Swedish networks.
+Applicable if trackside HABD is not TSI compliant, identification of trackside hot axle box detector."""@en ;
+    rdfs:domain :HABD ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" .
+
+:hotAxleBoxDetectorLocation a owl:DatatypeProperty ;
+    rdfs:label "Railway location of trackside HABD"@en ;
+    :XMLName "IHS_HABDLoc" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if the HABD is not TSI compliant (the value of parameter 1.1.1.1.7.5 (Trackside HABD TSI compliant) is 'False')"@en ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.7.8" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HotAxleBoxDetectorLocation>,
+        <http://data.europa.eu/949/shapes/HotAxleBoxDetectorLocationApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment """Specific for the French Italian and Swedish networks.
+Applicable if trackside HABD is not TSI compliant, localisation of trackside hot axle box detector."""@en ;
+    rdfs:domain :HABD ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The location (generally the distance from the origin of the line to the point of interest) on a line is given in kilometres with decimals (precision of 0.001).
+
+It may be also possible to provide the location of the HABD as an era:netReference property for the HABD pointing to an era:NetPointReference with (at least)era:LinearPositioningSystemCoordinate"""@en .
+
+:hotAxleBoxDetectorTSICompliant a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Trackside HABD TSI compliant"@en ;
+    :XMLName "IHS_TSIHABD" ;
+    :applicable "Y" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.7.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HotAxleBoxDetectorTSICompliant> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date ;
+    rdfs:comment """Specific for the French, Italian and Swedish networks.
+Trackside HABD compliant to TSI means that the HABD Trackside is compliant with:
+- EN 15437-1:2009 referred in TSIs (LOC&PAS: 4.2.3.3.2.2, WAG TSI: 4.2.3.4),
+- Specific cases mentioned in TSIs (LOC&PAS TSI, WAG TSI)."""@en ;
+    rdfs:domain :HABD ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso """TSI LOC&PAS: 4.2.3.3.2.2, and 7.3.2.3
+WAG TSI: 4.2.3.4 and 7.3.2.2
+EN 15437-1:2009""" ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" .
+
+:infrastructureMgr a owl:ObjectProperty ;
+    rdfs:label "Infrastructure manager"@en ;
+    dcterms:created "2022-07-07"^^xsd:date ;
+    dcterms:isReplacedBy :infrastructureManager ;
+    rdfs:comment "(deprecated) not in use. Relates any feature implemented in the European railway infrastructure with its infrastructure manager."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :InfrastructureManager ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:lineNationalId a owl:ObjectProperty ;
+    rdfs:label "(deprecated) National line identification"@en ;
+    :XMLName "SOLLineIdentification" ;
+    :rinfIndex "1.1.0.0.0.2" ;
+    :tsiOPEAppendixD2Index "2.2.1.1" ;
+    dcterms:created "2020-09-30"^^xsd:date ;
+    dcterms:isReplacedBy :nationalLine ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-10-28"^^xsd:date ;
+    rdfs:comment "Unique line identification or unique line number within Member State."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :LineReference :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :LineReference :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :LineReference :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :LineReference :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :LineReference :SectionOfLine ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :NationalRailwayLine ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:lineReference a owl:ObjectProperty ;
+    rdfs:label "(deprecated) Railway location of an infrastructure object"@en ;
+    dcterms:created "2021-01-29"^^xsd:date ;
+    dcterms:isReplacedBy :nationalLine ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2024-11-29"^^xsd:date,
+        "2025-01-30"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    rdfs:comment "Indicates a relationship with a national railway line at a specific kilometer point."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LineReference ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:operatingLanguage a owl:ObjectProperty ;
+    rdfs:label "Operating language"@en ;
+    :applicable "Y/NYA" ;
+    :formatNote "http://publications.europa.eu/resource/authority/language" ;
+    :inSkosConceptScheme <http://publications.europa.eu/resource/authority/language> ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.0.0.1.2",
+        "1.2.0.0.0.8" ;
+    :tsiOPEAppendixD2Index "3.5.1" ;
+    dcterms:created "2022-10-28"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "The language or languages used in daily operation by infrastructure manager and published in its Network Statement, for the communication of operational or safety related messages between the staff of the infrastructure manager and the railway undertaking."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :routeBookObjectParameter ;
+    ns1:term_status "unstable" .
+
+:primaryLocation a owl:ObjectProperty ;
+    rdfs:label "primary location"@en ;
+    :XMLName "OPTafTapCode" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Applicable only in case when a primary location exists"@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocation> ;
+    :tsiOPEAppendixD2Index "2.2.2" ;
+    dcterms:modified "2024-12-03"^^xsd:date,
+        "2025-01-30"^^xsd:date ;
+    dcterms:replaces :tafTAPCode ;
+    rdfs:comment "Primary location code developed for information exchange in accordance with the TSIs relating to the telematics applications subsystem."@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :PrimaryLocation ;
+    rdfs:subPropertyOf :opGenericObjParameter .
+
+:primaryLocationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "primary location code"@en ;
+    :XMLName "OPTafTapCode" ;
+    :rinfIndex "1.2.0.0.0.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocation>,
+        <http://data.europa.eu/949/shapes/PrimaryLocationCode> ;
+    :tsiOPEAppendixD2Index "2.2.2" ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    dcterms:replaces :tafTAPCode ;
+    rdfs:comment "Primary location code developed for information exchange in accordance with the TSIs relating to the telematics applications subsystem."@en ;
+    rdfs:domain :PrimaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    ns1:term_status "stable" .
+
+:primaryLocationName a owl:DatatypeProperty ;
+    rdfs:label "primary location name"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocationName> ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:domain :PrimaryLocation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:railSystemType a owl:DatatypeProperty ;
+    rdfs:label "Rail system type"@en ;
+    dcterms:created "2022-11-04"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date ;
+    rdfs:comment "(deprecated) Type of railway system. Can be \"High-speed\" or \"Conventional\". Deprecated due to the lack of information"@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:subsetName a owl:DatatypeProperty ;
+    rdfs:label "Name of a subset with common characteristics"@en ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    rdfs:comment "A subset of elements with common characteristics could be identified with a unique name/id."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    ns1:term_status "stable" ;
+    skos:example "Example: \"ETCSbaseline2\": describes all ETCS National values (1.1.1.3.2.16 group) "@en .
+
+:subsetOf a owl:IrreflexiveProperty,
+        owl:ObjectProperty ;
+    rdfs:label "subset of"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SubsetOf> ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "Relates a subset with common characteristics with another subset with common characteristics."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :CommonCharacteristicsSubset ;
+    skos:scopeNote "Whenever a subset (A) is a subset of another subset (B), then the subset (A) inherits all the common characteristics of subset (B), which is that all the infrastructure elements belonging to subset (A) will have as common characteristics the union of parameters (A) and (B)."@en .
+
+:tracksideHabd a owl:ObjectProperty ;
+    rdfs:label "hot axle box detector (HABD)"@en ;
+    dcterms:created "2025-02-20"^^xsd:date ;
+    rdfs:comment "Link between the running track and the HABD, covering the RINF parameters 1.1.1.1.7.(5-9)"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :HABD .
+
+:validityEndDate a owl:DatatypeProperty ;
+    rdfs:label "Validity end date"@en ;
+    dcterms:created "2022-10-19"^^xsd:date ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:date ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "To be deprecated with the introduction of temporal entity"@en .
+
+:validityStartDate a owl:DatatypeProperty ;
+    rdfs:label "Validity start date"@en ;
+    dcterms:created "2022-10-20"^^xsd:date ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:date ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "To be deprecated with the introduction of temporal entity"@en .
+
+:vehicleTypesCompatibleTrafficLoad a owl:ObjectProperty ;
+    rdfs:label "List of vehicle types already identified as compatible with Traffic load and load carrying capacity of infrastructure and train detection systems"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.5.1" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date,
+        "2025-03-10"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "The infrastructure managers shall provide through RINF the information to the RU regarding list of vehicle types compatible with the route for which they have already verified compatibility for parameter Traffic load and load carrying capacity of infrastructure and train detection systems, where such information is available."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ] ;
+    rdfs:subPropertyOf :verifiedRccObjParameter ;
+    ns1:term_status "unstable" .
+
+:vehiclesCompatibleTrafficLoad a owl:ObjectProperty ;
+    rdfs:label "List of vehicles already identified as compatible with Traffic load and load carrying capacity of infrastructure and train detection systems"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.5.2" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date,
+        "2025-03-10"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "The infrastructure managers shall provide through RINF the information or a document to the RU regarding list of vehicles compatible with the route for which they have already verified compatibility for parameter Traffic load and load carrying capacity of infrastructure and train detection systems, where such information is available."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ] ;
+    rdfs:subPropertyOf :verifiedRccObjParameter ;
+    ns1:term_status "unstable" .
+
+org:identifier a owl:DatatypeProperty ;
+    rdfs:label "identifier"@en,
+        "tiene identificador"@es,
+        "identifiant"@fr,
+        "identificatore"@it ;
+    rdfs:comment "Gives an identifier, such as a company registration number, that can be used to used to uniquely identify the organization. Many different national and international identier schemes are available. The org ontology is neutral to which schemes are used. The particular identifier scheme should be indicated by the datatype of the identifier value.  Using datatypes to distinguish the notation scheme used is consistent with recommended best practice for `skos:notation` of which this property is a specialization."@en,
+        "CÃ³digo o identificador, como por ejemplo el CIF de una empresa, que permite identificar de forma inequÃ­voca a una organizaciÃ³n. Existen muchos cÃ³digos de identificaciÃ³n tanto nacionales como internacionales. Esta ontologÃ­a no obliga al uso de ningÃºn esquema en concreto. Los cÃ³digos de identificaciÃ³n utilizados en cada caso se deberÃ­an indicar mediante el uso de la propiedad â€œdatatypeâ€ del valor del identificador. El uso de la propiedad â€œdatatypeâ€ para especificar el esquema de notaciÃ³n utilizado estÃ¡ en consonancia con las buenas prÃ¡cticas recomendadas para el uso de la propiedad `skos:notation`, de la que esta propiedad es una especializaciÃ³n."@es,
+        "Donne un identifiant, comme par exemple le numÃ©ro d'enregistrement d'une entreprise, qui peut Ãªtre utilisÃ© comme identifiant unique pour l'Organisation. De nombreux schÃ©mas nationaux et internationaux sont disponibles. Cette ontologie reste neutre par rapport au schÃ©ma utilisÃ©. Le schÃ©ma particulier utilisÃ© devrait Ãªtre indiquÃ© par le `datatype` de la valeur de l'identifiant. Utiliser les datatypes pour distinguer les schÃ©mas de notation est cohÃ©rent avec les bonnes pratiques pour `skos:notation` dont cette propriÃ©tÃ© est une spÃ©cialisation."@fr,
+        "Indica un identificatore univoco per l'organizzazione, come ad esempio la partita IVA di un'azienda. Molti schemi di identificazione a livello nazionale e internazionale sono disponibili allo scopo. L'ontologia ORG Ã¨ neutrale rispetto allo schema da utilizzare. Lo schema di identificazione dovrebbe essere indicato dal datatype del valore dell'identificatore. L'uso del datatype per distinguere lo schema di identificazione Ã¨ coerente con le best practice per `skos:notation`, di cui questa proprietÃ  Ã¨ una specializzazione."@it,
+        "çµ„ç¹”ã‚’ä¸€æ„ã«è­˜åˆ¥ã™ã‚‹ãŸã‚ã«ä½¿ç”¨ã§ãã‚‹ä¼šç¤¾ç™»éŒ²ç•ªå·ãªã©ã®è­˜åˆ¥å­ã‚’ä¸Žãˆã¾ã™ã€‚"@ja ;
+    rdfs:domain org:Organization ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/org> ;
+    rdfs:subPropertyOf skos:notation .
+
+:NationalRailwayLine a owl:Class ;
+    rdfs:label "(deprecated) National railway line"@en ;
+    dcterms:created "2021-01-25"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    rdfs:comment """Railway line within a member state.
+A line is a sequence of one or more sections of line, which connects operational points and which may consist of several tracks used for regular railway operation."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:deprecated true ;
+    owl:disjointWith :PrimaryLocation ;
+    ns1:term_status "stable" .
+
+:contains a owl:ObjectProperty ;
+    rdfs:label "contains"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Contains> ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:comment "Indicates that a subset with common characteristics contains a certain infrastructure element."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :InfrastructureElement .
+
+:isPartOf a owl:IrreflexiveProperty,
+        owl:ObjectProperty ;
+    rdfs:label "is part of"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/IsPartOf> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date ;
+    rdfs:comment """Indicates that an infrastructure element is a part of another (distinct) infrastructure element.
+An element cannot be part of itself.
+This property is the inverse of era:hasPart and represents the partial or whole-part relationship between infrastructure elements."""@en ;
+    rdfs:domain :InfrastructureElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :InfrastructureElement .
+
+:InfrastructureManager a owl:Class ;
+    rdfs:label "Infrastructure manager"@en ;
+    dcterms:isReplacedBy :Body ;
+    rdfs:comment "(deprecated) The infrastructure manager owns and operates the railway network and related infrastructure."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf org:Organization ;
+    owl:deprecated true ;
+    skos:scopeNote "See point (2) of Article 3 of Directive 2012/34/EU of the European Parliament and of the Council establishing a single European railway area."@en .
+
+:LevelCrossing a owl:Class ;
+    rdfs:label "Level crossing"@en ;
+    dcterms:modified "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    rdfs:comment "A level crossing is an intersection where a railway line crosses a road or a path at the same level. It can be used for the implementation of the ETCS trackside or to identify potential collision scenarios"@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :OperationalPoint,
+        :PlatformEdge,
+        :PrimaryLocation,
+        :RadioBlockCenter,
+        :RunningTrack,
+        :SectionOfLine,
+        :Siding,
+        :Signal,
+        :SpecialArea,
+        :Switch,
+        :Track,
+        :Tunnel .
+
+xsd:date a rdfs:Datatype .
+
+:Switch a owl:Class ;
+    rdfs:label "Switch"@en ;
+    dcterms:modified "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/776/oj> ;
+    rdfs:comment "A unit of track comprising two fixed rails (stock rails) and two movable rails (switch rails) used to direct vehicles from one track to another track."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :Track,
+        :Tunnel ;
+    ns1:term_status "stable" .
+
+org:Organization a owl:Class ;
+    rdfs:label "Organization"@en,
+        "organizaciÃ³n"@es,
+        "Organisation"@fr,
+        "Organizzazione"@it .
+
+:LineReference a owl:Class ;
+    rdfs:label "(deprecated) Railway location"@en ;
+    dcterms:created "2021-01-29"^^xsd:date ;
+    dcterms:isReplacedBy :LinearPositioningSystem ;
+    dcterms:modified "2021-01-29"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    rdfs:comment "A reference to a specific railway line."@en ;
+    rdfs:isDefinedBy : ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Line reference" .
+
+:HABD a owl:Class ;
+    rdfs:label "Hot Axle Box Detector"@en ;
+    dcterms:created "2025-02-20"^^xsd:date ;
+    dcterms:modified "2025-03-01"^^xsd:date ;
+    rdfs:comment """A trackside Hot Axle Box Detector (HABD), necessary for the route compatibility check.
+Specific for the French, Italian and Swedish networks"""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :KilometricPost,
+        :LevelCrossing,
+        :OperationalPoint,
+        :PlatformEdge,
+        :PrimaryLocation,
+        :RadioBlockCenter,
+        :SectionOfLine,
+        :Signal,
+        :SpecialArea,
+        :Switch,
+        :Track,
+        :Tunnel .
+
+:PrimaryLocation a owl:Class ;
+    rdfs:label "Primary Location"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PrimaryLocationShape> ;
+    dcterms:modified "2024-10-28"^^xsd:date,
+        "2025-03-01"^^xsd:date,
+        "2025-06-06"^^xsd:date ;
+    rdfs:comment """Primary Location is a place used by IM to define a path for a train in TAF/TAP TSI framework/messages. This location is a rail point inside the rail network where train starts, ends, stops, or runs through or change line. This location must be managed by an Infrastructure Manager (IM) identified by company code.
+
+Primary locations are identified by single and unique Primary Location codes. Primary location code is allocated based on processes defined by national entity. Primary location codes are used in any kind of TAF/TAP communication.
+
+See: Handbook 9.3.3 / page 60"""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "http://taf-jsg.info/wp-content/uploads/2024/01/20231018-JGS-Handbook-3.4-with-XSD-3.4.0.0.pdf"^^xsd:anyURI ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :NetPointReference ;
+            owl:onProperty :netReference ],
+        :InfrastructureElement ;
+    owl:disjointWith :RadioBlockCenter,
+        :SectionOfLine,
+        :Signal,
+        :SpecialArea,
+        :SubsidiaryLocation,
+        :Switch,
+        :Track,
+        :Tunnel ;
+    skos:example "Primary locations are for example: stations, yards, halts, handover points, border points, open access terminals. "@en .
+
+:CommonCharacteristicsSubset a owl:Class ;
+    rdfs:label "Subset with common characteristics"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/CommonCharacteristicsSubsetShape> ;
+    dcterms:created "2022-11-04"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-10-31"^^xsd:date ;
+    rdfs:comment "A set of different infrastructure objects sharing the same common technical characteristics. The parameters may not be restricted to only one railway subsystem, but it can include common characteristics from each one of them (infrastructure, energy, track-side CCS)"@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf rdf:List ;
+    ns1:term_status "stable" .
+
+:InfrastructureElement a owl:Class ;
+    rdfs:label "Infrastructure element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/InfrastructureElementShape> ;
+    dcterms:created "2022-07-07"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date,
+        "2024-10-28"^^xsd:date,
+        "2025-04-30"^^xsd:date ;
+    rdfs:comment """This class encompasses all those classes that represent features that are  implemented in the European railway infrastructure. It is a subclass of the ERA Feature that has a spatial representation. It covers tracks, platforms, signals, tunnels, operational points, and sections of line.
+A feature that belongs to the infrastructure can be abstracted (hasAbstraction) as a topological object. It also is related to the infrastructure manager through the property infrastructureMgr."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :Feature .
+

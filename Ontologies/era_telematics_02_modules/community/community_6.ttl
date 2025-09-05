@@ -1,0 +1,839 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AirBrakeSpecialCharacteristic a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AirBrakeSpecialCharacteristic" ;
+    rdfs:comment "Coding in 404-2, chapter 1.8" ;
+    rdfs:domain :WagonTechData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AirBrakedMass a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AirBrakedMass" ;
+    rdfs:comment """General braked weight for wagon without a variation device; Braked
+				weight empty for wagons with a variation device; maximum braked weight for wagons
+				with linear auto continuous device; "0" for wagons without air brake (in tons).""" ;
+    rdfs:domain :AirBrake ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AirBrakedMassLoaded a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AirBrakedMassLoaded" ;
+    rdfs:comment """Braked weight in tonns loaded for change over
+										weight""" ;
+    rdfs:domain :LoadChangeDevice ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Altitude a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Altitude" ;
+    rdfs:comment """Altitude (in m) at the beginning of the SP. Considering ETRS89 as
+				reference. Starting at -1000m""" ;
+    rdfs:domain :GeographicCoordinates ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BogiePitch rdfs:range xsd:integer .
+
+:BrakeSpecialCharacteristics a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BrakeSpecialCharacteristics" ;
+    rdfs:comment """
+General brake characteristics. The values refer to UIC leaflet 920-13.
+			""" ;
+    rdfs:domain :AirBrake ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BrakeSystem a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BrakeSystem" ;
+    rdfs:comment """Abbreviation of air brake system. Following values are
+							examples: Kk; Dr; Bo; Hik; Bd; Ch; O; KE; WE; DK; WU; WA; DM; MH, SW; KE
+							435; through brake pipe""" ;
+    rdfs:domain :AirBrake ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BrakingPowerVariationDevice a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BrakingPowerVariationDevice" ;
+    rdfs:comment "Coding in 404-2, chapter 1.8" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BrakingRatio a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BrakingRatio" ;
+    rdfs:comment """Minimum percentage of braking. Expressed as an integer value (no
+				percent sign should be added).""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CI_InstanceNumber a owl:DatatypeProperty ;
+    rdfs:label "CI_InstanceNumber" ;
+    rdfs:comment "Number of a Common Interface Instance for the same Company" ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ChangeOverWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ChangeOverWeight" ;
+    rdfs:comment """Change over weight of braked weight in tonns
+										variation device""" ;
+    rdfs:domain :LoadChangeDevice ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CounterAcreditedRecognizedBody a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CounterAcreditedRecognizedBody" ;
+    rdfs:domain :EINNumber ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsVolumeLiters a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DangerousGoodsVolumeLiters" ;
+    rdfs:comment "The volume of the dangerous goods in liters" ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DangerousGoodsWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DangerousGoodsWeight" ;
+    rdfs:comment "The weight of dangerous goods in kilograms" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DriverIndication a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DriverIndication" ;
+    rdfs:comment """0 - no driver present in Loco, 1 - driver(s)
+										is /are) present in Loco""" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EINCounter a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EINCounter" ;
+    rdfs:domain :EINNumber ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EINYear a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EINYear" ;
+    rdfs:domain :EINNumber ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ErrorCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ErrorCode" ;
+    rdfs:comment """To be defined: code list from 1 to 9999.
+										Proposal from PathDossierErrorCode: "Standard values are
+										between 5000 and 6000 (central maintained list). The values
+										greater than 6000 can be used on national level. \"""" ;
+    rdfs:domain :Error ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:GrossWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GrossWeight" ;
+    rdfs:comment """Total weight of the goods either in a wagon or a transportation unit.
+				It is the booked weight of the goods including packing """ ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HandBrakeBrakedWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HandBrakeBrakedWeight" ;
+    rdfs:comment "Coding in 404-2, chapter 1.7 " ;
+    rdfs:domain :WagonTechData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Heading rdfs:range xsd:integer .
+
+:InteropCapability rdfs:range xsd:integer .
+
+:LengthOfSetOfCarriages rdfs:range xsd:integer .
+
+:LengthOverBuffers a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LengthOverBuffers" ;
+    rdfs:comment "Length over buffers is expressed in cm." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LivestockOrPeopleIndicator a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LivestockOrPeopleIndicator" ;
+    rdfs:comment "Indicates that livestock and people (other than train crew) will be carried. Coding: if live animals or people are transported = 1, in opposite case = 0. If code = 1, then at the wagon level for at least one wagon Info- Goods Shape, Type and Danger has to include the code '98' or Restrictions due to Load or Damage has to include code '09.'" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadTableStars rdfs:range xsd:integer .
+
+:LoadingStatus a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadingStatus" ;
+    rdfs:comment """Loading status of the equipment. 0=Empty,
+										1=Loaded""",
+        "Loading status of the equipment. 0=Empty, 1=Loaded" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocoNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocoNumber" ;
+    rdfs:comment """Identifies the number of the locomotive, usually the European Vehicle
+				Number on 12N. It is currently not restricted only to numeric values.""" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MaxDesignSpeed rdfs:range xsd:integer .
+
+:MaxGrossWeight rdfs:range xsd:integer .
+
+:MaxLengthOfLoad rdfs:range xsd:integer .
+
+:MessageRoutingID rdfs:range xsd:integer .
+
+:MessageSenderReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageSenderReference" ;
+    rdfs:domain :ErrorCauseReference ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MinBrakedWeightPercent rdfs:range xsd:integer .
+
+:MinCurveRadius rdfs:range xsd:integer .
+
+:MinVerticalRadiusYardHump rdfs:range xsd:integer .
+
+:ModificationReason a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ModificationReason" ;
+    rdfs:comment "Identifiies the reason for the train journey being modified" ;
+    rdfs:domain :TrainJourneyModificationMessage ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ModificationStatusIndicator a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ModificationStatusIndicator" ;
+    rdfs:comment """This elemnt shows if the location has been added or deleted in the
+				modified train journey""" ;
+    rdfs:domain :LocationModified ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Noise a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Noise" ;
+    rdfs:comment "Noise level at stand still in decibels" ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NoiseByPassLimit a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NoiseByPassLimit" ;
+    rdfs:comment "Noise limit on reference track" ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfAccessorOfSpecType rdfs:range xsd:integer .
+
+:NumberOfAxles a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfAxles" ;
+    rdfs:comment "The sum of number of axles of all wagons and all traction units" ;
+    rdfs:domain :TrainRunningTechData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfBrakes a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfBrakes" ;
+    rdfs:comment "Number of air brakes" ;
+    rdfs:domain :AirBrake ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfVehicles a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfVehicles" ;
+    rdfs:comment "The sum of number of wagons and number of traction units" ;
+    rdfs:domain :TrainRunningTechData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfVisibleSatellites rdfs:range xsd:integer .
+
+:Offset rdfs:range xsd:integer .
+
+:OffsetToReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OffsetToReference" ;
+    rdfs:comment """ The OffsetToReference (OTR) is the shift of the days between Planned
+				Calendar of the related object (route, path request or path) to the days in
+				Reference Calendar. The shift is mentioned in days. OTR value is set to zero when
+				there is no gap between Planned Calendar and Reference Calendar, OTR value is
+				positive if Planned Calendar later than Reference Calendar and negative if Planned
+				Calendar earlier than Reference Calendar.>""" ;
+    rdfs:domain :PlannedCalendar ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:OperationalTrainCouplingStrength rdfs:range xsd:integer .
+
+:OverhaulValidityPeriod rdfs:range xsd:integer .
+
+:PermittedTolerance rdfs:range xsd:integer .
+
+:ProductUNCode rdfs:range xsd:integer .
+
+:RefusalCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RefusalCode" ;
+    rdfs:comment "Code List Candidate" ;
+    rdfs:domain :RefusedWagonNumbers ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RelatedType rdfs:range xsd:integer .
+
+:SRID a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SRID" ;
+    rdfs:comment "ID of coordinates system used (EPSG code)" ;
+    rdfs:domain :GeographicCoordinates ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Severity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Severity" ;
+    rdfs:comment """1 = WARNING: Message content, sequence or
+										other parameters are off standard but (partial) processing
+										has been possible.2 = ERROR: Message cannot be processed.""" ;
+    rdfs:domain :Error ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TagReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TagReference" ;
+    rdfs:comment """This is a placeholder for XPath expression
+										indicating the element of the orginal message which caused
+										the error.""" ;
+    rdfs:domain :Error ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TareWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TareWeight" ;
+    rdfs:comment "Tare weight [kg] of ILU.",
+        "Tare weight [kg] of UTI." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TareWeightVehicle rdfs:range xsd:integer .
+
+:TechnicalRestrictions a owl:DatatypeProperty ;
+    rdfs:label "TechnicalRestrictions" ;
+    rdfs:domain :WagonTechData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TimetableYear a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TimetableYear" ;
+    rdfs:comment """Refers to the timetable period in which the business will be carried
+				out""" ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TotalLoadWeight rdfs:range xsd:integer .
+
+:TotalWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TotalWeight" ;
+    rdfs:comment "Total weight of the loaded wagon [kg]. " ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TotalWeightLoadingTackles rdfs:range xsd:integer .
+
+:TractionMode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TractionMode" ;
+    rdfs:comment """Identifies the mode of deployment of a traction within a train
+First digit â€“ traction role
+Second digit â€“ position in group of traction units with the same role
+""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TractionPositionInTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TractionPositionInTrain" ;
+    rdfs:comment """Identifies position of intermediate traction unit(s) in the train
+				indicating after which wagon (specified by order number) the unit is placed.""" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TractionType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TractionType" ;
+    rdfs:comment """Identifies the type of a locomotive:
+First digit:
+â€œ0â€ = not specified
+â€œ1â€ = external electric power supply for traction (catenary and pantograph, third rail or other such as maglev)
+â€œ2â€ = on-board traction power supply for traction without external electrical or other power supply available
+â€œ3â€ = hybrid traction (both on-board or electric traction available)
+Second digit (definitions in chapter 2.2.2 of the LOC and PAS TSI 1302/2014):
+â€œ0â€ = not specified
+â€œ1â€ = locomotive or power unit
+â€œ2â€ = trainset or multiple unit or railcar
+â€œ3â€ = shunter
+â€œ4â€ = on track machine or infrastructure inspection vehicle
+			""" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainInterrupted rdfs:range xsd:integer .
+
+:TrainJourneyModificationIndicator a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainJourneyModificationIndicator" ;
+    rdfs:comment """This indicates what has changed in the train running e.g. rerouting,
+				cancellation etc..""" ;
+    rdfs:domain :TrainJourneyModification ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainJourneyModificationTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainJourneyModificationTime" ;
+    rdfs:comment """Indicates the time time when the modification was made to the train
+				journey""" ;
+    rdfs:domain :TrainJourneyModificationMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainLength" ;
+    rdfs:comment """The calculated Length of a train (sum of all length over buffer of the
+				wagons and traction units). Expressed in Metres""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainNotAtInterruptionPoint a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainNotAtInterruptionPoint" ;
+    rdfs:comment """It is already known that train running might be interrupted in
+				interruption point although the train has not arrived to interruption point yet""" ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainReady rdfs:range xsd:integer .
+
+:TrainType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainType" ;
+    rdfs:comment """Element TrainType defines the main purpose of the train in a fundamental way. These purposes are:
+Transport of passengers
+Transport of freight/goods
+Transport of passengers and freight/goods
+Train only for run of traction unit/locomotive
+Train of the IM in case of emergency
+The element is not repeatable, and it does not support any overlapping meaning.
+""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeDocumentEIN a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeDocumentEIN" ;
+    rdfs:comment """Code List Candidate:
+																31, 34""" ;
+    rdfs:domain :EINNumber ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeOfError a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeOfError" ;
+    rdfs:comment """It is an enumerated type to indicate if the
+										error was caused due to a bussines rule violation (1 =
+										FUNCTIONAL) or due to a system failure (2 = TECHNICAL) or
+										both (0 = BOTH)""" ;
+    rdfs:domain :Error ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeOfInformation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeOfInformation" ;
+    rdfs:comment """ Enumeration indicating to which process step / process type in the
+				planning does the message belong: path study; pre-arranged/catalogue path; (draft)
+				offer; final offer; booked; deleted; utilisation notification; confirmation of
+				utilisation confirmation""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonTrainPosition a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonTrainPosition" ;
+    rdfs:comment """Identifies the position of a wagon within a train. Sequential number
+				starting with the first wagon at the front of train as NÂ°1.""" ;
+    rdfs:domain :WagonData ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonWeightEmpty a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonWeightEmpty" ;
+    rdfs:comment """The weight of an empty wagon according to the entry in the rolling
+				stock database""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WeightNettoExplosiveMass rdfs:range xsd:integer .
+
+:WheelDiameter rdfs:range xsd:integer .
+
+:WheelsetGauge rdfs:range xsd:integer .
+
+:hasAirBrake a owl:ObjectProperty ;
+    rdfs:label "has AirBrake" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range :AirBrake .
+
+:hasEINNumber a owl:ObjectProperty ;
+    rdfs:label "has EINNumber" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range :EINNumber .
+
+:hasError a owl:ObjectProperty ;
+    rdfs:label "has Error" ;
+    rdfs:domain :ErrorMessage ;
+    rdfs:range :Error .
+
+:hasErrorCauseReference a owl:ObjectProperty ;
+    rdfs:label "has ErrorCauseReference" ;
+    rdfs:domain :ErrorMessage ;
+    rdfs:range :ErrorCauseReference .
+
+:hasGeographicCoordinates a owl:ObjectProperty ;
+    rdfs:label "has GeographicCoordinates" ;
+    rdfs:domain [ ] ;
+    rdfs:range :GeographicCoordinates .
+
+:hasIntermodalTransportData a owl:ObjectProperty ;
+    rdfs:label "has IntermodalTransportData" ;
+    rdfs:domain :WagonData ;
+    rdfs:range :IntermodalTransportData .
+
+:hasJourneySection rdfs:domain :TrainCompositionJourneySection .
+
+:hasLoadChangeDevice a owl:ObjectProperty ;
+    rdfs:label "has LoadChangeDevice" ;
+    rdfs:domain :AirBrake ;
+    rdfs:range :LoadChangeDevice .
+
+:hasLocationModified a owl:ObjectProperty ;
+    rdfs:label "has LocationModified" ;
+    rdfs:domain :TrainJourneyModification ;
+    rdfs:range :LocationModified .
+
+:hasLocoIdent a owl:ObjectProperty ;
+    rdfs:label "has LocoIdent" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :LocoIdent .
+
+:hasPlannedCalendar a owl:ObjectProperty ;
+    rdfs:label "has PlannedCalendar" ;
+    rdfs:domain [ ] ;
+    rdfs:range :PlannedCalendar .
+
+:hasRefusedWagonNumbers a owl:ObjectProperty ;
+    rdfs:label "has RefusedWagonNumbers" ;
+    rdfs:domain :RollingStockDatasetMessage ;
+    rdfs:range :RefusedWagonNumbers .
+
+:hasRegenerativeBrake rdfs:domain :LocoIdent .
+
+:hasTrainCompositionJourneySection a owl:ObjectProperty ;
+    rdfs:label "has TrainCompositionJourneySection" ;
+    rdfs:domain :TrainCompositionMessage ;
+    rdfs:range :TrainCompositionJourneySection .
+
+:hasTrainJourneyModification a owl:ObjectProperty ;
+    rdfs:label "has TrainJourneyModification" ;
+    rdfs:domain :TrainJourneyModificationMessage ;
+    rdfs:range :TrainJourneyModification .
+
+:hasTrainRunningData rdfs:domain :TrainCompositionJourneySection .
+
+:hasTrainRunningTechData a owl:ObjectProperty ;
+    rdfs:label "has TrainRunningTechData" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range :TrainRunningTechData .
+
+:hasWagonData a owl:ObjectProperty ;
+    rdfs:label "has WagonData" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :WagonData .
+
+:hasWagonOperationalData a owl:ObjectProperty ;
+    rdfs:label "has WagonOperationalData" ;
+    rdfs:domain :WagonData ;
+    rdfs:range :WagonOperationalData .
+
+:hasWagonTechData a owl:ObjectProperty ;
+    rdfs:label "has WagonTechData" ;
+    rdfs:domain :WagonData ;
+    rdfs:range :WagonTechData .
+
+:IntermodalTransportData a owl:Class ;
+    rdfs:label "IntermodalTransportData" ;
+    :domain "Telematics" .
+
+:ErrorCauseReference a owl:Class ;
+    rdfs:label "ErrorCauseReference" ;
+    rdfs:comment """The reference to the message and its particular element(s)
+							that caused the error is provided here""" .
+
+:LoadChangeDevice a owl:Class ;
+    rdfs:label "LoadChangeDevice" ;
+    rdfs:comment "Specific weights for change over air brake systems" .
+
+:RollingStockDatasetMessage a owl:Class ;
+    rdfs:label "RollingStockDatasetMessage" ;
+    rdfs:comment "Rolling Stock adminsitrative and Technical Dataset" .
+
+:TrainJourneyModification a owl:Class ;
+    rdfs:label "TrainJourneyModification" ;
+    rdfs:comment """This element shows which locations are changed during the running of a
+				train""" .
+
+:PlannedCalendar a owl:Class ;
+    rdfs:label "PlannedCalendar" ;
+    rdfs:comment """This is the calendar item for path request/path details messages -
+				used in planning phase""" .
+
+:RefusedWagonNumbers a owl:Class ;
+    rdfs:label "RefusedWagonNumbers" .
+
+:EINNumber a owl:Class ;
+    rdfs:label "EINNumber" ;
+    rdfs:comment """ECM certificate reference number
+													NOTE: this is a placeholder! CR 335 by ERA is
+													containing this element and its full description
+													and code lists.""" .
+
+:GeographicCoordinates a owl:Class ;
+    rdfs:label "GeographicCoordinates" ;
+    rdfs:comment "Latitude and Longitude of location" .
+
+:LocationModified a owl:Class ;
+    rdfs:label "LocationModified" ;
+    rdfs:comment """This element shows the Location that has been changed for the train
+				run """ .
+
+:Error a owl:Class ;
+    rdfs:label "Error" .
+
+:TrainCompositionJourneySection a owl:Class ;
+    rdfs:label "TrainCompositionJourneySection" ;
+    rdfs:comment "Defines the make up of a train for each section of its journey" .
+
+:WagonData a owl:Class ;
+    rdfs:label "WagonData" ;
+    rdfs:comment "Wagon relevant data for the wagons within a running train" .
+
+:ErrorMessage a owl:Class ;
+    rdfs:label "ErrorMessage" ;
+    rdfs:comment """This message should be sent from the receiver to the sender after the
+				processing of the previously sent TAF/TAP message in the backend (legacy) system of
+				the receiver has failed.""" .
+
+:AirBrake a owl:Class ;
+    rdfs:label "AirBrake" ;
+    rdfs:comment "Characteristics of Air Brakes" .
+
+:TrainCompositionMessage a owl:Class ;
+    rdfs:label "TrainCompositionMessage" ;
+    rdfs:comment """This message is sent from an RU to an IM defining the composition of
+				the proposed train.""" .
+
+:LocoIdent a owl:Class ;
+    rdfs:label "LocoIdent" ;
+    rdfs:comment """Defines the actual Type, the number and the mode of
+							deployment of a traction unit of the freight train""" .
+
+:TrainJourneyModificationMessage a owl:Class ;
+    rdfs:label "TrainJourneyModificationMessage" ;
+    rdfs:comment """ This message is issued to show, in real time, that the train is
+				reroouted-cancelled-stopping pattern is changed""" .
+
+:TrainRunningTechData a owl:Class ;
+    rdfs:label "TrainRunningTechData" ;
+    rdfs:comment "Shows the relevant techical data for a running train" .
+
+:WagonTechData a owl:Class ;
+    rdfs:label "WagonTechData" ;
+    rdfs:comment """This element shows the wagon relevant technical data for the wagons
+				within a running train""" .
+
+[] rdf:first :RollingStockDatasetMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :ErrorMessage .
+
+[] rdf:first :ErrorCauseReference .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :ErrorMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :RollingStockDatasetMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :ErrorMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :PlannedCalendar .
+
+[] rdf:first :AirBrake .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :PlannedCalendar .
+
+[] rdf:first :LocationModified .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :AirBrake .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :Error .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :RefusedWagonNumbers .
+
+[] rdf:first :GeographicCoordinates .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :GeographicCoordinates .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :ErrorMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :LocoIdent .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :LocationModified .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :LocoIdent .
+
+[] rdf:first :RefusedWagonNumbers .
+
+[] rdf:first :WagonData .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :LocationModified .
+
+[] rdf:first :LocoIdent .
+
+[] rdf:first :ErrorMessage .
+

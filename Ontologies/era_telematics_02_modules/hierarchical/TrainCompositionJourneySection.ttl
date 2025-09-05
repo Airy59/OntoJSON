@@ -1,0 +1,39 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:LivestockOrPeopleIndicator a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LivestockOrPeopleIndicator" ;
+    rdfs:comment "Indicates that livestock and people (other than train crew) will be carried. Coding: if live animals or people are transported = 1, in opposite case = 0. If code = 1, then at the wagon level for at least one wagon Info- Goods Shape, Type and Danger has to include the code '98' or Restrictions due to Load or Damage has to include code '09.'" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasJourneySection a owl:ObjectProperty ;
+    rdfs:label "has JourneySection" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :JourneySection .
+
+:hasLocoIdent a owl:ObjectProperty ;
+    rdfs:label "has LocoIdent" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :LocoIdent .
+
+:hasTrainCompositionJourneySection rdfs:range :TrainCompositionJourneySection .
+
+:hasTrainRunningData a owl:ObjectProperty ;
+    rdfs:label "has TrainRunningData" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :TrainRunningData .
+
+:hasWagonData a owl:ObjectProperty ;
+    rdfs:label "has WagonData" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :WagonData .
+
+:TrainCompositionJourneySection a owl:Class ;
+    rdfs:label "TrainCompositionJourneySection" ;
+    rdfs:comment "Defines the make up of a train for each section of its journey" .
+

@@ -1,0 +1,12 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasTrainActivity rdfs:range :TrainActivity .
+
+:TrainActivity a owl:Class ;
+    rdfs:label "TrainActivity" ;
+    rdfs:comment """Since the activites can be related to attaching / detaching of wagons
+				and/or cars to different trains, the reference to other trains should be possible to
+				be indicated.""" .
+

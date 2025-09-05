@@ -1,0 +1,24 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:LocalisationPrecision a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocalisationPrecision" ;
+    rdfs:comment "Precision of the position. Expressed in metres." ;
+    rdfs:domain :GeoLocalisation ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasGNSS_DynamicPosition a owl:ObjectProperty ;
+    rdfs:label "has GNSS_DynamicPosition" ;
+    rdfs:domain :GeoLocalisation ;
+    rdfs:range :GNSS_DynamicPosition .
+
+:hasGeoLocalisation rdfs:range :GeoLocalisation .
+
+:GeoLocalisation a owl:Class ;
+    rdfs:label "GeoLocalisation" ;
+    rdfs:comment "Geolocalisation that may be between two identified locations. " .
+

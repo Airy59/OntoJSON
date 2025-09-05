@@ -1,0 +1,47 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasAffectedSection a owl:ObjectProperty ;
+    rdfs:label "has AffectedSection" ;
+    rdfs:domain [ ] ;
+    rdfs:range :AffectedSection .
+
+:hasEndOfSection a owl:ObjectProperty ;
+    rdfs:label "has EndOfSection" ;
+    rdfs:domain :AffectedSection ;
+    rdfs:range :EndOfSection .
+
+:hasStartOfSection a owl:ObjectProperty ;
+    rdfs:label "has StartOfSection" ;
+    rdfs:domain :AffectedSection ;
+    rdfs:range :StartOfSection .
+
+:EndOfSection a owl:Class ;
+    rdfs:label "EndOfSection" .
+
+:StartOfSection a owl:Class ;
+    rdfs:label "StartOfSection" .
+
+:AffectedSection a owl:Class ;
+    rdfs:label "AffectedSection" ;
+    rdfs:comment """Indication for the recepient if not the entire path is affected, e.g.
+				in case of a partial cancelation for the last part of the path""" .
+
+[] rdf:first :AffectedSection .
+
+[] rdf:first :AffectedSection .
+
+[] rdf:first :AffectedSection .
+
+[] rdf:first :AffectedSection .
+
+[] rdf:first :EndOfSection .
+
+[] rdf:first :StartOfSection .
+
+[] rdf:first :EndOfSection .
+
+[] rdf:first :StartOfSection .
+

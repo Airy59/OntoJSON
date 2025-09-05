@@ -1,0 +1,64 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:vNvsupovtrp a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "V_NVSUPOVTRP"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+    :formatNote "NNF, with N a decimal number (0 9), NNF must be divisible by 5, so F=(0|5), max. `600`" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en,
+        "12 months after publication of Article 7 Guide for OP tracks"@en ;
+    :rinfIndex "1.1.1.3.2.16.4",
+        "1.2.1.1.1.16.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/VNvsupovtrp>,
+        <http://data.europa.eu/949/shapes/VNvsupovtrpApplicability> ;
+    :tsiOPEAppendixD3Index "1.5.4" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    dcterms:created "2022-11-07"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-12-05"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment """Override speed limit to be supervised when the "override" function is active in km/h.
+According to the specification referenced in Appendix A-1, index [C]"""@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "600"^^xsd:unsignedInt ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "600"^^xsd:unsignedInt ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "600"^^xsd:unsignedInt ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "600"^^xsd:unsignedInt ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "600"^^xsd:unsignedInt ] ) ] ;
+    rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+    rdfs:subPropertyOf :etcsNationalValuesDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Format: [NNF], with N a decimal number (0Ã·9), [NNF] is divisible by 5 so F=(0|5), max. `600`.
+
+See: TSI CCS (Subset-026, chapter 7. 7.5.1.163 V_NVSUPOVTRP)"""@en .
+

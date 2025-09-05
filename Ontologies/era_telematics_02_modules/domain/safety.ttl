@@ -1,0 +1,37 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DerailmentDetectionDevice a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DerailmentDetectionDevice" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EmergencyBrakeOverride a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EmergencyBrakeOverride" ;
+    rdfs:comment """Ability of the whole train (all wagons and traction units) to override
+				the emergency brake signal""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EnvironmentalHazardous a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EnvironmentalHazardous" ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HazardIdentificationNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HazardIdentificationNumber" ;
+    rdfs:comment """This refers to RID 3.2 Table A. Definitions are in in section
+						5.3.2.3.2 of RID for classes 2 to 9. Definitions are in sections 2.2.1.1.5
+						and 2.2.1.1.6 of RID for class 1.""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+

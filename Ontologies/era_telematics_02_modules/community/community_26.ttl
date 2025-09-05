@@ -1,0 +1,12 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:CountryCodeISO a owl:Class,
+        owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CountryCodeISO" ;
+    rdfs:comment "Identifies a County or State by code (ISO 3166-1)" ;
+    rdfs:domain :CountryCodeISO ;
+    rdfs:subPropertyOf :dataProperties .
+

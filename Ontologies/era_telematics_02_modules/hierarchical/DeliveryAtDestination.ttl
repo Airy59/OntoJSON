@@ -1,0 +1,22 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DeliveryTimeAtDestination a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeliveryTimeAtDestination" ;
+    rdfs:comment """The actual Date and Time when the wagon is delivered to the customer
+				siding or when the wagon is ready for pick-up by the customer""" ;
+    rdfs:domain :DeliveryAtDestination ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DeliveryAtDestination a owl:Class ;
+    rdfs:label "DeliveryAtDestination" ;
+    rdfs:comment """Place, Date and Time when the wagon is ready to be picked up by the
+				customer""" .
+
+[] rdf:first :DeliveryAtDestination .
+

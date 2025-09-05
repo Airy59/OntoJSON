@@ -1,0 +1,47 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DamageCodePosition1 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition1" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition2" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition3 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition3" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageCodePosition4 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageCodePosition4" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DamageOldOrNew a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DamageOldOrNew" ;
+    rdfs:domain :DamageCodes ;
+    rdfs:range xsd:short ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasDamageCodes rdfs:range :DamageCodes .
+
+:DamageCodes a owl:Class ;
+    rdfs:label "DamageCodes" ;
+    rdfs:comment """List of Damage Codes according to
+													description in GCU Appendix 9 Annex 1""" .
+

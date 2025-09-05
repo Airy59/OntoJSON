@@ -1,0 +1,33 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:HandoverHarmonized a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HandoverHarmonized" ;
+    rdfs:comment """IM indicates that he has finished to
+												harmonized the handover point. Used for PathDetails
+												message, should be mandatory for applications.""" ;
+    rdfs:domain :StatusOfHarmonization ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InterchangeHarmonized a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InterchangeHarmonized" ;
+    rdfs:comment """RU indicates that it has harmonized
+												the interchange point with its' partner. Used for
+												PathRequest, should be mandatory for applications""" ;
+    rdfs:domain :StatusOfHarmonization ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasStatusOfHarmonization rdfs:range :StatusOfHarmonization .
+
+:StatusOfHarmonization a owl:Class ;
+    rdfs:label "StatusOfHarmonization" ;
+    rdfs:comment """Does not force harmonization, it just sets an
+									indication message: has the interchange/handover been harmonized
+									or not.""" .
+

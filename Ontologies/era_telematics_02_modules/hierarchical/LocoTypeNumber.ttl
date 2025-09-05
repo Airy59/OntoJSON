@@ -1,0 +1,64 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ControlDigit a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ControlDigit" ;
+    rdfs:comment """1 control digit as usual at the end of the 12 digit UIC
+							identifier. Not used in Planning""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SerialNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SerialNumber" ;
+    rdfs:comment """Three digits representing the serial number of the
+							traction of the series. Optionally used in Planning to identify the
+							subseries. Composite identifier should be unique with the series number
+							within a country.""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SeriesNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SeriesNumber" ;
+    rdfs:comment """4 digits representing the type according to the country
+							rules and based on the national vehicle register of the country
+							indicated with the CountryCode""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeCode1 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeCode1" ;
+    rdfs:comment """Value is 9 as it's written in Part 0 of the Appendix 6 of
+							the decision 2007/756""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeCode2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeCode2" ;
+    rdfs:comment """Type of tractive rolling stock as in Part 8 of the
+							Appendix 6 of the decision 2007/756""" ;
+    rdfs:domain :LocoTypeNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasLocoTypeNumber rdfs:range :LocoTypeNumber .
+
+:LocoTypeNumber a owl:Class ;
+    rdfs:label "LocoTypeNumber" ;
+    rdfs:comment """Composite identifier for the loco types and locomotives. First four
+				elements identify the series of the loco, rest can identify the exact individual
+				locomotive""" .
+
+[] rdf:first :LocoTypeNumber .
+

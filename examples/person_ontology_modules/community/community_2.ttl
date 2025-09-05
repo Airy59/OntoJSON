@@ -1,0 +1,34 @@
+@prefix : <http://example.org/person#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:city a owl:DatatypeProperty ;
+    rdfs:label "City"@en ;
+    rdfs:domain :Address ;
+    rdfs:range xsd:string .
+
+:email rdfs:range xsd:string .
+
+:employeeId rdfs:range xsd:string .
+
+:firstName rdfs:range xsd:string .
+
+:hasAddress rdfs:range :Address .
+
+:lastName rdfs:range xsd:string .
+
+:postalCode a owl:DatatypeProperty ;
+    rdfs:label "Postal Code"@en ;
+    rdfs:domain :Address ;
+    rdfs:range xsd:string .
+
+:street a owl:DatatypeProperty ;
+    rdfs:label "Street"@en ;
+    rdfs:domain :Address ;
+    rdfs:range xsd:string .
+
+:Address a owl:Class ;
+    rdfs:label "Address"@en ;
+    rdfs:comment "A postal address"@en .
+

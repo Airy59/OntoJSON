@@ -1,0 +1,1336 @@
+{
+  "strategy": "hierarchical",
+  "source_file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02.ttl",
+  "partitions": {
+    "GoodsInWagon": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/GoodsInWagon.ttl",
+      "entities": 5,
+      "triples": 33
+    },
+    "PreviousConsignmentNumber": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PreviousConsignmentNumber.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "TypeofService": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TypeofService.ttl",
+      "entities": 4,
+      "triples": 16
+    },
+    "TrainReadyMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainReadyMessage.ttl",
+      "entities": 6,
+      "triples": 40
+    },
+    "WagonData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonData.ttl",
+      "entities": 5,
+      "triples": 24
+    },
+    "InvoicedSection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/InvoicedSection.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "Wagons": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Wagons.ttl",
+      "entities": 2,
+      "triples": 12
+    },
+    "YardArrival": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/YardArrival.ttl",
+      "entities": 2,
+      "triples": 11
+    },
+    "RU_Declarations": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RU_Declarations.ttl",
+      "entities": 3,
+      "triples": 12
+    },
+    "ExceptionalGaugingIdent": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ExceptionalGaugingIdent.ttl",
+      "entities": 2,
+      "triples": 12
+    },
+    "DeliveryPoint": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DeliveryPoint.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "MovementReferenceNumber": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/MovementReferenceNumber.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "TrainRunningData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainRunningData.ttl",
+      "entities": 6,
+      "triples": 30
+    },
+    "ChargesNote": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ChargesNote.ttl",
+      "entities": 3,
+      "triples": 17
+    },
+    "Tariff": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Tariff.ttl",
+      "entities": 8,
+      "triples": 46
+    },
+    "AffectedLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AffectedLocation.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "DepartureInterchangeReport": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DepartureInterchangeReport.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "InterruptionInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/InterruptionInformation.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "StartLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/StartLocation.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "Distance": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Distance.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "TrainReadyStatus": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainReadyStatus.ttl",
+      "entities": 3,
+      "triples": 19
+    },
+    "EventLevelData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/EventLevelData.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "RefusedWagonNumbers": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RefusedWagonNumbers.ttl",
+      "entities": 2,
+      "triples": 12
+    },
+    "Recipient": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Recipient.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "ITU": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ITU.ttl",
+      "entities": 2,
+      "triples": 9
+    },
+    "CarriersInvolved": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/CarriersInvolved.ttl",
+      "entities": 2,
+      "triples": 7
+    },
+    "NextIntermediateDestination": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/NextIntermediateDestination.ttl",
+      "entities": 3,
+      "triples": 15
+    },
+    "ILU": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ILU.ttl",
+      "entities": 2,
+      "triples": 11
+    },
+    "AssociatedAttachedLocationIdent": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AssociatedAttachedLocationIdent.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "LocationPrimaryInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocationPrimaryInformation.ttl",
+      "entities": 8,
+      "triples": 55
+    },
+    "CountryCodeISO": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/CountryCodeISO.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "SpecialProvisionsEnvironment": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/SpecialProvisionsEnvironment.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "TrainRunningInformationMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainRunningInformationMessage.ttl",
+      "entities": 1,
+      "triples": 12
+    },
+    "NoteLocationIdent": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/NoteLocationIdent.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "ControlLabel": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ControlLabel.ttl",
+      "entities": 6,
+      "triples": 35
+    },
+    "DelayEventReport": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DelayEventReport.ttl",
+      "entities": 3,
+      "triples": 15
+    },
+    "YardDeparture": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/YardDeparture.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "ReferenceTrainIDSubCalendar": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ReferenceTrainIDSubCalendar.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "WagonTelematics": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonTelematics.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "JourneySection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/JourneySection.ttl",
+      "entities": 5,
+      "triples": 20
+    },
+    "PossibilityToPreventRegenerativeBrake": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PossibilityToPreventRegenerativeBrake.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "Event": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Event.ttl",
+      "entities": 3,
+      "triples": 16
+    },
+    "ChargingSections": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ChargingSections.ttl",
+      "entities": 4,
+      "triples": 22
+    },
+    "PathInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PathInformation.ttl",
+      "entities": 2,
+      "triples": 9
+    },
+    "LocationModified": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocationModified.ttl",
+      "entities": 2,
+      "triples": 14
+    },
+    "Start": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Start.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "ECMCertificate": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ECMCertificate.ttl",
+      "entities": 8,
+      "triples": 50
+    },
+    "RelatedReference": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RelatedReference.ttl",
+      "entities": 5,
+      "triples": 30
+    },
+    "StartOfSection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/StartOfSection.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "Interruption": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Interruption.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "ConsignorDeclarations": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ConsignorDeclarations.ttl",
+      "entities": 2,
+      "triples": 12
+    },
+    "VesselIndication": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/VesselIndication.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "TrainRunningInterruptionStatus": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainRunningInterruptionStatus.ttl",
+      "entities": 2,
+      "triples": 10
+    },
+    "Error": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Error.ttl",
+      "entities": 5,
+      "triples": 32
+    },
+    "DelayLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DelayLocation.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "AssociatedAttachedTimingAtLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AssociatedAttachedTimingAtLocation.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "WagonStatusMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonStatusMessage.ttl",
+      "entities": 11,
+      "triples": 52
+    },
+    "Identifiers": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Identifiers.ttl",
+      "entities": 3,
+      "triples": 15
+    },
+    "RU_Declaration": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RU_Declaration.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "SpecialTreatments": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/SpecialTreatments.ttl",
+      "entities": 3,
+      "triples": 20
+    },
+    "LoadChangeDevice": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LoadChangeDevice.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "RollingRoadUnitDetails": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RollingRoadUnitDetails.ttl",
+      "entities": 6,
+      "triples": 35
+    },
+    "Examination": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Examination.ttl",
+      "entities": 2,
+      "triples": 12
+    },
+    "TrainRunningForecastMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainRunningForecastMessage.ttl",
+      "entities": 1,
+      "triples": 12
+    },
+    "RequestedCalendar": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RequestedCalendar.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "HandBrake": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/HandBrake.ttl",
+      "entities": 2,
+      "triples": 12
+    },
+    "RID_Checking": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RID_Checking.ttl",
+      "entities": 6,
+      "triples": 33
+    },
+    "FormalReports": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/FormalReports.ttl",
+      "entities": 2,
+      "triples": 13
+    },
+    "MessageReference": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/MessageReference.ttl",
+      "entities": 5,
+      "triples": 32
+    },
+    "RequestedPeriod": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RequestedPeriod.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "PlannedCalendar": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PlannedCalendar.ttl",
+      "entities": 2,
+      "triples": 13
+    },
+    "Station": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Station.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "Attendants": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Attendants.ttl",
+      "entities": 3,
+      "triples": 24
+    },
+    "AttachedDocuments": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AttachedDocuments.ttl",
+      "entities": 6,
+      "triples": 40
+    },
+    "Height": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Height.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "DepartureTrackAtLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DepartureTrackAtLocation.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "PathConfirmedMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PathConfirmedMessage.ttl",
+      "entities": 1,
+      "triples": 14
+    },
+    "RouteSection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RouteSection.ttl",
+      "entities": 4,
+      "triples": 28
+    },
+    "Routing": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Routing.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "WagonJourneyIrregularity": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonJourneyIrregularity.ttl",
+      "entities": 3,
+      "triples": 14
+    },
+    "RollingRoadUnit": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RollingRoadUnit.ttl",
+      "entities": 2,
+      "triples": 10
+    },
+    "CombinedTrafficLoadProfile": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/CombinedTrafficLoadProfile.ttl",
+      "entities": 5,
+      "triples": 31
+    },
+    "COMS": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/COMS.ttl",
+      "entities": 3,
+      "triples": 12
+    },
+    "DelayCauseTime": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DelayCauseTime.ttl",
+      "entities": 4,
+      "triples": 28
+    },
+    "ITU_Details": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ITU_Details.ttl",
+      "entities": 5,
+      "triples": 44
+    },
+    "MessageHeader": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/MessageHeader.ttl",
+      "entities": 4,
+      "triples": 26
+    },
+    "COM": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/COM.ttl",
+      "entities": 24,
+      "triples": 101
+    },
+    "LocationFileDatasetMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocationFileDatasetMessage.ttl",
+      "entities": 4,
+      "triples": 19
+    },
+    "WagonStatusMessages": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonStatusMessages.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "ErrorCauseReference": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ErrorCauseReference.ttl",
+      "entities": 2,
+      "triples": 11
+    },
+    "TrainOperationalIdentification": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainOperationalIdentification.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "TrainInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainInformation.ttl",
+      "entities": 2,
+      "triples": 10
+    },
+    "EventLocationInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/EventLocationInformation.ttl",
+      "entities": 3,
+      "triples": 12
+    },
+    "ArrivalInterchangeReport": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ArrivalInterchangeReport.ttl",
+      "entities": 3,
+      "triples": 20
+    },
+    "Length": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Length.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "Ship": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Ship.ttl",
+      "entities": 3,
+      "triples": 19
+    },
+    "RollingStockDatasetQueryMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RollingStockDatasetQueryMessage.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "TrainJourneyModificationMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainJourneyModificationMessage.ttl",
+      "entities": 4,
+      "triples": 30
+    },
+    "SectionalInvoicing": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/SectionalInvoicing.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "TrainLocationReport": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainLocationReport.ttl",
+      "entities": 1,
+      "triples": 11
+    },
+    "Destination": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Destination.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "Time": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Time.ttl",
+      "entities": 1,
+      "triples": 9
+    },
+    "PaidUpTo": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PaidUpTo.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "EINNumber": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/EINNumber.ttl",
+      "entities": 5,
+      "triples": 29
+    },
+    "CustomsProcedures": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/CustomsProcedures.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "ErrorMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ErrorMessage.ttl",
+      "entities": 3,
+      "triples": 16
+    },
+    "Seals": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Seals.ttl",
+      "entities": 3,
+      "triples": 17
+    },
+    "RelatedTransportOperationalIdentifiers": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RelatedTransportOperationalIdentifiers.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "InterruptionDuration": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/InterruptionDuration.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "DepartureJourneyTrack": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DepartureJourneyTrack.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "ShippingLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ShippingLocation.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "TrainJourneyModification": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainJourneyModification.ttl",
+      "entities": 3,
+      "triples": 15
+    },
+    "ActivityLocationIdent": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ActivityLocationIdent.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "ArrivalTrackAtLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ArrivalTrackAtLocation.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "LocationSubsidiaryIdentification": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocationSubsidiaryIdentification.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "TrainForecastAtReportingLocationMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainForecastAtReportingLocationMessage.ttl",
+      "entities": 2,
+      "triples": 10
+    },
+    "EventLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/EventLocation.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "Timing": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Timing.ttl",
+      "entities": 3,
+      "triples": 17
+    },
+    "FreightCharges": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/FreightCharges.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "TimingAtLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TimingAtLocation.ttl",
+      "entities": 3,
+      "triples": 15
+    },
+    "TrainCompositionMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainCompositionMessage.ttl",
+      "entities": 2,
+      "triples": 14
+    },
+    "WagonAtDeparture": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonAtDeparture.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "Section": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Section.ttl",
+      "entities": 3,
+      "triples": 14
+    },
+    "TrainID": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainID.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "WagonInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonInformation.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "Carriers": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Carriers.ttl",
+      "entities": 6,
+      "triples": 38
+    },
+    "AdministrativeContactInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AdministrativeContactInformation.ttl",
+      "entities": 3,
+      "triples": 22
+    },
+    "EndOfSection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/EndOfSection.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "TrafficType": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrafficType.ttl",
+      "entities": 3,
+      "triples": 16
+    },
+    "LeadCarrier": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LeadCarrier.ttl",
+      "entities": 1,
+      "triples": 12
+    },
+    "AdministrativeDataSet": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AdministrativeDataSet.ttl",
+      "entities": 15,
+      "triples": 95
+    },
+    "AlertMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AlertMessage.ttl",
+      "entities": 3,
+      "triples": 19
+    },
+    "GeographicCoordinates": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/GeographicCoordinates.ttl",
+      "entities": 3,
+      "triples": 20
+    },
+    "ProductionStation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ProductionStation.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "SectionTo": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/SectionTo.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "DangerousGoodsIndication": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DangerousGoodsIndication.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "Dimensions": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Dimensions.ttl",
+      "entities": 4,
+      "triples": 21
+    },
+    "BrakeBlock": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/BrakeBlock.ttl",
+      "entities": 4,
+      "triples": 25
+    },
+    "PlannedChangeOfECM": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PlannedChangeOfECM.ttl",
+      "entities": 3,
+      "triples": 17
+    },
+    "ReceiptConfirmationMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ReceiptConfirmationMessage.ttl",
+      "entities": 2,
+      "triples": 16
+    },
+    "ReferenceOTN": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ReferenceOTN.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "LocoTypeNumber": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocoTypeNumber.ttl",
+      "entities": 6,
+      "triples": 40
+    },
+    "EndLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/EndLocation.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "RouteClassPayloads": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RouteClassPayloads.ttl",
+      "entities": 2,
+      "triples": 11
+    },
+    "Sender": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Sender.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "WagonTypeDetails": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonTypeDetails.ttl",
+      "entities": 2,
+      "triples": 13
+    },
+    "ExceptionReason": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ExceptionReason.ttl",
+      "entities": 3,
+      "triples": 16
+    },
+    "TrainLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainLocation.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "GeoLocalisation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/GeoLocalisation.ttl",
+      "entities": 3,
+      "triples": 15
+    },
+    "PlannedTransportIdentifiers": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PlannedTransportIdentifiers.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "SpecialProvisionsRID": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/SpecialProvisionsRID.ttl",
+      "entities": 5,
+      "triples": 23
+    },
+    "LocationPlannedTrack": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocationPlannedTrack.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "ResponsibilityNextSection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ResponsibilityNextSection.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "TractionDetails": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TractionDetails.ttl",
+      "entities": 2,
+      "triples": 15
+    },
+    "JourneySectionOrigin": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/JourneySectionOrigin.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "Contacts": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Contacts.ttl",
+      "entities": 2,
+      "triples": 13
+    },
+    "AcceptancePoint": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AcceptancePoint.ttl",
+      "entities": 2,
+      "triples": 17
+    },
+    "CommercialSpecifications": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/CommercialSpecifications.ttl",
+      "entities": 3,
+      "triples": 20
+    },
+    "ExceptionalConsignment": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ExceptionalConsignment.ttl",
+      "entities": 2,
+      "triples": 12
+    },
+    "RollingStockDataset": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RollingStockDataset.ttl",
+      "entities": 3,
+      "triples": 12
+    },
+    "DeclarationOfValue": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DeclarationOfValue.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "CashOnDelivery": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/CashOnDelivery.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "IntermediateDestination": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/IntermediateDestination.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "LocationActualTrack": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocationActualTrack.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "TransitPeriodExtensions": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TransitPeriodExtensions.ttl",
+      "entities": 4,
+      "triples": 26
+    },
+    "ConsignmentIdentification": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ConsignmentIdentification.ttl",
+      "entities": 2,
+      "triples": 10
+    },
+    "LoadingTackles": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LoadingTackles.ttl",
+      "entities": 4,
+      "triples": 26
+    },
+    "RemovableAccessories": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RemovableAccessories.ttl",
+      "entities": 3,
+      "triples": 17
+    },
+    "TrainCompositionJourneySection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainCompositionJourneySection.ttl",
+      "entities": 6,
+      "triples": 27
+    },
+    "TrainRunningInterruptionMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainRunningInterruptionMessage.ttl",
+      "entities": 3,
+      "triples": 19
+    },
+    "WagonTechData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonTechData.ttl",
+      "entities": 4,
+      "triples": 32
+    },
+    "OperationalTrainNumberIdentifier": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/OperationalTrainNumberIdentifier.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "PathDetailsMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PathDetailsMessage.ttl",
+      "entities": 1,
+      "triples": 18
+    },
+    "ArrivalAtDestination": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ArrivalAtDestination.ttl",
+      "entities": 2,
+      "triples": 11
+    },
+    "ChangeLog": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ChangeLog.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "Carrier": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Carrier.ttl",
+      "entities": 2,
+      "triples": 11
+    },
+    "Location": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Location.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "RegenerativeBrake": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RegenerativeBrake.ttl",
+      "entities": 3,
+      "triples": 15
+    },
+    "AssociatedAttachedTrainID": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AssociatedAttachedTrainID.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "PlannedTrainData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PlannedTrainData.ttl",
+      "entities": 7,
+      "triples": 35
+    },
+    "InterestInDelivery": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/InterestInDelivery.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "SectionFrom": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/SectionFrom.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "DesignDataSet": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DesignDataSet.ttl",
+      "entities": 37,
+      "triples": 237
+    },
+    "InterruptionPoint": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/InterruptionPoint.ttl",
+      "entities": 4,
+      "triples": 23
+    },
+    "DeliveryAtDestination": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DeliveryAtDestination.ttl",
+      "entities": 2,
+      "triples": 11
+    },
+    "WIMO_Dataset": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WIMO_Dataset.ttl",
+      "entities": 3,
+      "triples": 12
+    },
+    "CustomsData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/CustomsData.ttl",
+      "entities": 5,
+      "triples": 31
+    },
+    "GNSS_DynamicPosition": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/GNSS_DynamicPosition.ttl",
+      "entities": 5,
+      "triples": 27
+    },
+    "WagonEventInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonEventInformation.ttl",
+      "entities": 2,
+      "triples": 12
+    },
+    "Haulier": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Haulier.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "GeoLocalisationOnNetwork": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/GeoLocalisationOnNetwork.ttl",
+      "entities": 3,
+      "triples": 12
+    },
+    "WagonPickupAtOrigin": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonPickupAtOrigin.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "LoadTable": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LoadTable.ttl",
+      "entities": 6,
+      "triples": 32
+    },
+    "Customers": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Customers.ttl",
+      "entities": 3,
+      "triples": 27
+    },
+    "PathPlanningReferenceLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PathPlanningReferenceLocation.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "LocationSubsidiaryInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocationSubsidiaryInformation.ttl",
+      "entities": 1,
+      "triples": 9
+    },
+    "GoodsInContainer": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/GoodsInContainer.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "RID": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RID.ttl",
+      "entities": 13,
+      "triples": 93
+    },
+    "PathNotAvailableMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PathNotAvailableMessage.ttl",
+      "entities": 2,
+      "triples": 19
+    },
+    "DestinationLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DestinationLocation.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "MadeOut": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/MadeOut.ttl",
+      "entities": 2,
+      "triples": 13
+    },
+    "ConsignmentLevelData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ConsignmentLevelData.ttl",
+      "entities": 6,
+      "triples": 36
+    },
+    "IntermodalTransportData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/IntermodalTransportData.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "SummaryOFGoodsWithSameRID": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/SummaryOFGoodsWithSameRID.ttl",
+      "entities": 2,
+      "triples": 14
+    },
+    "ExceptionPoint": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ExceptionPoint.ttl",
+      "entities": 4,
+      "triples": 26
+    },
+    "TrainDelay": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainDelay.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "LoadingFacility": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LoadingFacility.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "ValidityPeriod": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ValidityPeriod.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "DifferentAcceptance": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DifferentAcceptance.ttl",
+      "entities": 3,
+      "triples": 15
+    },
+    "Vehicles": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Vehicles.ttl",
+      "entities": 2,
+      "triples": 14
+    },
+    "AirBrake": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AirBrake.ttl",
+      "entities": 6,
+      "triples": 38
+    },
+    "LocationSubsidiaryCode": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocationSubsidiaryCode.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "Position": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Position.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "PathCanceledMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PathCanceledMessage.ttl",
+      "entities": 1,
+      "triples": 15
+    },
+    "AdditionalCharges": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AdditionalCharges.ttl",
+      "entities": 2,
+      "triples": 16
+    },
+    "DifferentAcceptancePoint": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DifferentAcceptancePoint.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "Packing": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Packing.ttl",
+      "entities": 4,
+      "triples": 29
+    },
+    "RequestedTimeframe": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RequestedTimeframe.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "NetworkSpecificParameter": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/NetworkSpecificParameter.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "Activities": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Activities.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "ILU_Details": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ILU_Details.ttl",
+      "entities": 5,
+      "triples": 44
+    },
+    "LoadTableProduct": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LoadTableProduct.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "AffectedSection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/AffectedSection.ttl",
+      "entities": 3,
+      "triples": 16
+    },
+    "TelematicsDevice": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TelematicsDevice.ttl",
+      "entities": 7,
+      "triples": 43
+    },
+    "TransferPoint": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TransferPoint.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "TrainActivity": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainActivity.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "CheckingLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/CheckingLocation.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "Notes": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Notes.ttl",
+      "entities": 3,
+      "triples": 14
+    },
+    "PathDetailsRefusedMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PathDetailsRefusedMessage.ttl",
+      "entities": 2,
+      "triples": 22
+    },
+    "PlannedTrainTechnicalData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PlannedTrainTechnicalData.ttl",
+      "entities": 12,
+      "triples": 86
+    },
+    "ChangeofTrackMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ChangeofTrackMessage.ttl",
+      "entities": 3,
+      "triples": 22
+    },
+    "SignalQuality": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/SignalQuality.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "JourneySectionDestination": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/JourneySectionDestination.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "TransportOperationalIdentifiers": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TransportOperationalIdentifiers.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "PlannedJourneyLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PlannedJourneyLocation.ttl",
+      "entities": 7,
+      "triples": 46
+    },
+    "WagonDetails": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonDetails.ttl",
+      "entities": 10,
+      "triples": 60
+    },
+    "ReferenceNumbers": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ReferenceNumbers.ttl",
+      "entities": 3,
+      "triples": 16
+    },
+    "NextLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/NextLocation.ttl",
+      "entities": 1,
+      "triples": 4
+    },
+    "PrepaymentCustomer": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PrepaymentCustomer.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "CheckingBody": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/CheckingBody.ttl",
+      "entities": 3,
+      "triples": 17
+    },
+    "GeneralInformation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/GeneralInformation.ttl",
+      "entities": 4,
+      "triples": 25
+    },
+    "TemperatureRange": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TemperatureRange.ttl",
+      "entities": 3,
+      "triples": 17
+    },
+    "Train": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Train.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "COM_Header": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/COM_Header.ttl",
+      "entities": 11,
+      "triples": 69
+    },
+    "TrainAtLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainAtLocation.ttl",
+      "entities": 1,
+      "triples": 12
+    },
+    "WagonOperationalData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonOperationalData.ttl",
+      "entities": 6,
+      "triples": 43
+    },
+    "ChargedMass": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ChargedMass.ttl",
+      "entities": 3,
+      "triples": 16
+    },
+    "End": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/End.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "StatusOfHarmonization": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/StatusOfHarmonization.ttl",
+      "entities": 3,
+      "triples": 18
+    },
+    "DamageCodes": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/DamageCodes.ttl",
+      "entities": 6,
+      "triples": 34
+    },
+    "Customer": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Customer.ttl",
+      "entities": 6,
+      "triples": 45
+    },
+    "WagonETI_ETA_Message": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/WagonETI_ETA_Message.ttl",
+      "entities": 3,
+      "triples": 14
+    },
+    "PrepaymentInstructions": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PrepaymentInstructions.ttl",
+      "entities": 4,
+      "triples": 20
+    },
+    "ConsignmentOrderMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ConsignmentOrderMessage.ttl",
+      "entities": 2,
+      "triples": 8
+    },
+    "ConsignmentNumber": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ConsignmentNumber.ttl",
+      "entities": 1,
+      "triples": 11
+    },
+    "TrainDelayCauseMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainDelayCauseMessage.ttl",
+      "entities": 2,
+      "triples": 15
+    },
+    "NetworkProjectedLocation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/NetworkProjectedLocation.ttl",
+      "entities": 4,
+      "triples": 22
+    },
+    "ResponsibilityActualSection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/ResponsibilityActualSection.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "Goods": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Goods.ttl",
+      "entities": 2,
+      "triples": 18
+    },
+    "LocoIdent": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/LocoIdent.ttl",
+      "entities": 6,
+      "triples": 39
+    },
+    "RollingStockDatasetMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RollingStockDatasetMessage.ttl",
+      "entities": 2,
+      "triples": 9
+    },
+    "PathRequestMessage": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/PathRequestMessage.ttl",
+      "entities": 2,
+      "triples": 22
+    },
+    "RelatedPlannedTransportIdentifiers": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/RelatedPlannedTransportIdentifiers.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "Width": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/Width.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "TrainRunningTechData": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/TrainRunningTechData.ttl",
+      "entities": 3,
+      "triples": 28
+    },
+    "misc": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/hierarchical/misc.ttl",
+      "entities": 726,
+      "triples": 4355
+    }
+  }
+}

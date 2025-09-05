@@ -1,0 +1,516 @@
+{
+  "strategy": "community",
+  "source_file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312.ttl",
+  "partitions": {
+    "temporal_duration": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/temporal_duration.ttl",
+      "entities": 1,
+      "triples": 1016
+    },
+    "person": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/person.ttl",
+      "entities": 1,
+      "triples": 2
+    },
+    "automated_train": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/automated_train.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "brake_related": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/brake_related.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "declarations_verification": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/declarations_verification.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "subsystem_ccs": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/subsystem_ccs.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "contact_line": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/contact_line.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "element_part": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/element_part.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "energy_subsystem": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/energy_subsystem.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "etcs_national": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/etcs_national.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "safety_environment": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/safety_environment.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "subsystem_infra": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/subsystem_infra.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "line_layout": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/line_layout.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "system_degraded": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/system_degraded.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "net_element": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/net_element.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "ocl_separation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/ocl_separation.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "generic_obj": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/generic_obj.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "radio_systems": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/radio_systems.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "pantograph_obj": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/pantograph_obj.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "performance_parameter": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/performance_parameter.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "platform_obj": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/platform_obj.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "requirements_rolling": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/requirements_rolling.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "rinf_technical": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/rinf_technical.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "route_book": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/route_book.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "siding_obj": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/siding_obj.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "signal_obj": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/signal_obj.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "generic_sol": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/generic_sol.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "track_generic": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/track_generic.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "track_obj": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/track_obj.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "track_resistance": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/track_resistance.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "train_detection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/train_detection.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "train_protection": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/train_protection.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "transitions_between": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/transitions_between.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "tsi_compliant": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/tsi_compliant.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "tunnel_obj": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/tunnel_obj.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "vehicle_technical": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/vehicle_technical.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "vehicle_type": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/vehicle_type.ttl",
+      "entities": 1,
+      "triples": 3
+    },
+    "verified_rcc": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/verified_rcc.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "other_train": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/other_train.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "rules_obj": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/rules_obj.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "nvovtrp_d_nvovtrp": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/nvovtrp_d_nvovtrp.ttl",
+      "entities": 1,
+      "triples": 110
+    },
+    "nvpotrp_d_nvpotrp": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/nvpotrp_d_nvpotrp.ttl",
+      "entities": 1,
+      "triples": 109
+    },
+    "nvroll_d_nvroll": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/nvroll_d_nvroll.ttl",
+      "entities": 1,
+      "triples": 111
+    },
+    "length": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/length.ttl",
+      "entities": 1,
+      "triples": 13
+    },
+    "generic_data": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/generic_data.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "pantograph_data": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/pantograph_data.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "platform_data": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/platform_data.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "related_electromagnetic": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/related_electromagnetic.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "rules_data": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/rules_data.ttl",
+      "entities": 1,
+      "triples": 7
+    },
+    "siding_data": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/siding_data.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "fixed_siding": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/fixed_siding.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "signal_data": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/signal_data.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "switches_crossings": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/switches_crossings.ttl",
+      "entities": 1,
+      "triples": 6
+    },
+    "nvcontact_t_nvcontact": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/nvcontact_t_nvcontact.ttl",
+      "entities": 1,
+      "triples": 111
+    },
+    "nvovtrp_t_nvovtrp": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/nvovtrp_t_nvovtrp.ttl",
+      "entities": 1,
+      "triples": 111
+    },
+    "track_data": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/track_data.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "train_integrity": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/train_integrity.ttl",
+      "entities": 1,
+      "triples": 119
+    },
+    "tunnel_data": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/tunnel_data.ttl",
+      "entities": 1,
+      "triples": 8
+    },
+    "nvallowovtrp_v_nvallowovtrp": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/nvallowovtrp_v_nvallowovtrp.ttl",
+      "entities": 1,
+      "triples": 110
+    },
+    "nvsupovtrp_v_nvsupovtrp": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/nvsupovtrp_v_nvsupovtrp.ttl",
+      "entities": 1,
+      "triples": 111
+    },
+    "wkt_aswkt": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/wkt_aswkt.ttl",
+      "entities": 1,
+      "triples": 27
+    },
+    "serialization": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/serialization.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "notation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/notation.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "license": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/license.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "shacl_shape": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/shacl_shape.ttl",
+      "entities": 1,
+      "triples": 5
+    },
+    "contributor": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/contributor.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "created": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/created.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "creator": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/creator.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "date": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/date.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "replaced": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/replaced.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "issued": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/issued.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "modified": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/modified.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "publisher": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/publisher.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "relation": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/relation.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "replaces": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/replaces.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "source": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/source.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "title": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/title.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "version_uri": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/version_uri.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "term_status": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/term_status.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "alt_label": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/alt_label.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "change_note": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/change_note.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "definition": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/definition.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "editorial_note": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/editorial_note.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "example": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/example.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "pref_label": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/pref_label.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "scope_note": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/scope_note.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "member": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/member.ttl",
+      "entities": 1,
+      "triples": 1
+    },
+    "unit_measure": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/unit_measure.ttl",
+      "entities": 3,
+      "triples": 9
+    },
+    "concept_scheme": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/concept_scheme.ttl",
+      "entities": 3,
+      "triples": 10
+    },
+    "time_tiene": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/time_tiene.ttl",
+      "entities": 5,
+      "triples": 36
+    },
+    "line_section": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/line_section.ttl",
+      "entities": 11,
+      "triples": 260
+    },
+    "track_platform": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/track_platform.ttl",
+      "entities": 16,
+      "triples": 322
+    },
+    "vehicle_role": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/vehicle_role.ttl",
+      "entities": 18,
+      "triples": 302
+    },
+    "parameter_location": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/parameter_location.ttl",
+      "entities": 25,
+      "triples": 275
+    },
+    "element_linear": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/element_linear.ttl",
+      "entities": 26,
+      "triples": 414
+    },
+    "tunnel_reference": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/tunnel_reference.ttl",
+      "entities": 28,
+      "triples": 361
+    },
+    "document_conditions": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/document_conditions.ttl",
+      "entities": 38,
+      "triples": 1088
+    },
+    "location_infrastructure": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/location_infrastructure.ttl",
+      "entities": 46,
+      "triples": 733
+    },
+    "maximum_vehicle": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/maximum_vehicle.ttl",
+      "entities": 91,
+      "triples": 1662
+    },
+    "point_radio": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/point_radio.ttl",
+      "entities": 79,
+      "triples": 1833
+    },
+    "info_system": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/info_system.ttl",
+      "entities": 85,
+      "triples": 3063
+    },
+    "system_tsi": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/ERA_ontology_312_modules/community/system_tsi.ttl",
+      "entities": 107,
+      "triples": 4092
+    }
+  }
+}

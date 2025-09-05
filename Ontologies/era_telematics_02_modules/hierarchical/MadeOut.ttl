@@ -1,0 +1,24 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Date a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Date" ;
+    rdfs:comment "Date",
+        """Date at which the
+																consignment note was made out.""" ;
+    rdfs:domain :MadeOut ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasMadeOut rdfs:range :MadeOut .
+
+:MadeOut a owl:Class ;
+    rdfs:label "MadeOut" ;
+    rdfs:comment "Made out" .
+
+[] rdf:first :MadeOut .
+

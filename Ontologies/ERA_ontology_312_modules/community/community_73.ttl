@@ -1,0 +1,34 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:dNvovtrp rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:dNvpotrp rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:dNvroll rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:mNvderun rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:nationalValuesBrakeModel rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:qNvsbtsmperm rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:tNvcontact rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:tNvovtrp rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:vNvallowovtrp rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:vNvsupovtrp rdfs:subPropertyOf :etcsNationalValuesDataParameter .
+
+:etcsNationalValuesDataParameter a owl:DatatypeProperty ;
+    rdfs:label "ETCS National Values"@en ;
+    :rinfIndex "1.1.1.3.2.16",
+        "1.2.1.1.1.16" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter .
+

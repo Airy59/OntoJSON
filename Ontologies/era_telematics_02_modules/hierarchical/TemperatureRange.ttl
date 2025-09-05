@@ -1,0 +1,26 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:MaxTemp a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MaxTemp" ;
+    rdfs:comment "Maximum Temperature in Â°Celsius" ;
+    rdfs:domain :TemperatureRange ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MinTemp a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MinTemp" ;
+    rdfs:comment "Minimum temperature in Â° Celsius" ;
+    rdfs:domain :TemperatureRange ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTemperatureRange rdfs:range :TemperatureRange .
+
+:TemperatureRange a owl:Class ;
+    rdfs:label "TemperatureRange" .
+

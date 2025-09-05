@@ -1,0 +1,129 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:BogieWagonsOnly a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BogieWagonsOnly" ;
+    rdfs:comment """Indicates that the train consists of bogie wagons only or not.
+				â€œYesâ€/â€trueâ€ means always all wagons of the train are bogie wagons. Then content of
+				element is â€œnoâ€/â€falseâ€ or element isnâ€™t used means the train contains of different
+				wagons (not homogeneous only with bogie wagons).""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Coasting a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Coasting" ;
+    rdfs:comment """IM indicates to the RU whether the driver can rely on coasting. This
+				is of both economic and ecological interest, as in many parts of the journey the
+				trains may have enough inertia to be able to match the calculated time of the next
+				location relying on coasting only.""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EmergencyBrakeOverride a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EmergencyBrakeOverride" ;
+    rdfs:comment """Ability of the whole train (all wagons and traction units) to override
+				the emergency brake signal""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HighestPlannedSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HighestPlannedSpeed" ;
+    rdfs:comment """IM may inform the RA (Responsible applicant) on the speed which was
+				the basis for path construction""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LengthOfSetOfCarriages a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LengthOfSetOfCarriages" ;
+    rdfs:comment """The calculated and rounded up maximum length of all wagons/coaches of
+				the train (sum of all length over buffer of the wagons) expressed in metres. This is
+				made optional together with TrainLength, but it could be implemented by applications
+				as mandatory.""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MinBrakedWeightPercent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MinBrakedWeightPercent" ;
+    rdfs:comment "Minimum percentage of braking claimed by IM for safety reasons." ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:OperationalTrainCouplingStrength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OperationalTrainCouplingStrength" ;
+    rdfs:comment """ OperationalTrainCouplingStrength expressed in kN. The operational
+				strength of the train coupling is a crucial technical characteristic for the
+				determination of a freight trainâ€™s tonnage rating """ ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PlannedSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PlannedSpeed" ;
+    rdfs:comment """IM may inform the RA on the speed which was the basis for path
+				construction""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TiltingFunction a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TiltingFunction" ;
+    rdfs:comment "Indicates if a train uses a tilting system" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WeightOfSetOfCarriages a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WeightOfSetOfCarriages" ;
+    rdfs:comment "The calculated maximum weight of all carriages without the traction" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasPlannedTrainTechnicalData rdfs:range :PlannedTrainTechnicalData .
+
+:hasTractionDetails a owl:ObjectProperty ;
+    rdfs:label "has TractionDetails" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range :TractionDetails .
+
+:PlannedTrainTechnicalData a owl:Class ;
+    rdfs:label "PlannedTrainTechnicalData" ;
+    rdfs:comment "Shows the relevant technical data for a running train" .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+

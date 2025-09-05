@@ -1,0 +1,15 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:AcceptanceDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AcceptanceDate" ;
+    rdfs:comment """Date and time (month,
+																day and hour) at which the goods
+																were accepted. """,
+        "Forwarding Date" ;
+    rdfs:domain [ ] ;
+    rdfs:range [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+

@@ -1,0 +1,70 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:JourneyLocationTypeCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "JourneyLocationTypeCode" ;
+    rdfs:comment "None" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:OnDemandPath a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OnDemandPath" ;
+    rdfs:comment """For the use of on demand or optional path (has to be either activated
+				or deactived depending to network rules)""" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreArrangedPath a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreArrangedPath" ;
+    rdfs:comment """Path offered by the IMs with pre-defined frequencies, times of
+				departures and destinations and routings suitable for freight transport services. """ ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ResponsibleApplicant a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ResponsibleApplicant" ;
+    rdfs:comment """This element has to be used for the whle journey where the applicant
+				has made the request""" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasPlannedJourneyLocation rdfs:range :PlannedJourneyLocation .
+
+:hasPlannedTrainData a owl:ObjectProperty ;
+    rdfs:label "has PlannedTrainData" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range :PlannedTrainData .
+
+:hasStatusOfHarmonization a owl:ObjectProperty ;
+    rdfs:label "has StatusOfHarmonization" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range :StatusOfHarmonization .
+
+:PlannedJourneyLocation a owl:Class ;
+    rdfs:label "PlannedJourneyLocation" ;
+    rdfs:comment "Any operation point along the train journey or path" .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PlannedJourneyLocation .
+
+[] rdf:first :PlannedJourneyLocation .
+

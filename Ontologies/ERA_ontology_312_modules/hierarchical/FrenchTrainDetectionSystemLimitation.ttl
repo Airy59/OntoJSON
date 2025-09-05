@@ -1,0 +1,62 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:frenchTrainDetectionSystemLimitationNumber a owl:ObjectProperty ;
+    rdfs:label "Section with train detection limitation number, only for French network"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/train-detection-numbers/FrenchTrainDetectionSystemLimitationNumbers> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FrenchTrainDetectionSystemLimitationNumber>,
+        <http://data.europa.eu/949/shapes/FrenchTrainDetectionSystemLimitationNumberSKOS> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date,
+        "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:relation :frenchTrainDetectionSystemLimitationApplicable,
+        :tdsFrenchTrainDetectionSystemLimitation ;
+    dcterms:replaces :frenchTrainDetectionSystemLimitation ;
+    rdfs:comment """Part of the section with train detection limitation that indicates the type of train detection limitation.
+
+Specific for route compatibility check on French network.
+
+Sections with:
+[1] Tonnage circulated per track is inferior to 15000 tons/day/track
+[2] Directional Interlocking
+[3] 45-second delay for directional interlocking
+[4] Installation with track circuit announcement
+[5] Absence of a shunting assistance pedal in the normal direction of circulation for non-reversible double track lines
+[6] Absence of a shunting assistance pedal regardless of the direction of traffic for single track lines and tracks for two way working
+[7] Absence of a pedal announcement mechanism
+[8] 45-second delay for specific announcement reset devices"""@en ;
+    rdfs:domain :FrenchTrainDetectionSystemLimitation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "stable" .
+
+:frenchTrainDetectionSystemLimitationApplicable a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Section with train detection limitation"@en ;
+    :XMLName "CTD_TCLimitation" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FrenchTrainDetectionSystemLimitationApplicable> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :frenchTrainDetectionSystemLimitation ;
+    rdfs:comment "Part of the section with train detection limitation that indicates if it is applicable. Only for the French network."@en ;
+    rdfs:domain :FrenchTrainDetectionSystemLimitation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" .
+
+:FrenchTrainDetectionSystemLimitation a owl:Class ;
+    rdfs:label "Section with train detection limitation"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FrenchTrainDetectionSystemLimitationShape> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    rdfs:comment "Specific for route compatibility check on French network."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" .
+

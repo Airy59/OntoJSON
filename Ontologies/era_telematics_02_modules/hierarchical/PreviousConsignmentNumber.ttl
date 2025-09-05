@@ -1,0 +1,15 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:PreviousConsignmentNumber a owl:Class,
+        owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreviousConsignmentNumber" ;
+    rdfs:comment """This element shows the previous Reference number assigned to a
+				consignment by a lead RU""" ;
+    rdfs:domain :PreviousConsignmentNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+

@@ -1,0 +1,14 @@
+@prefix : <http://example.org/person#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:ExampleOrg a :Organization .
+
+:hasEmployee rdfs:domain :Organization .
+
+:worksFor rdfs:range :Organization .
+
+:Organization a owl:Class ;
+    rdfs:label "Organization"@en ;
+    rdfs:comment "A company or institution"@en .
+

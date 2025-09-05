@@ -1,0 +1,57 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:maximumMagneticFieldDirectionX a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum magnetic field direction X"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldDirectionX> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:comment "The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band. Direction X."@en ;
+    rdfs:domain :MaximumMagneticField ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The maximumMagneticFieldDirectionX parameter is only applicable for axle counters."@en .
+
+:maximumMagneticFieldDirectionY a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum magnetic field direction Y"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldDirectionY> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:comment "The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band. Direction Y."@en ;
+    rdfs:domain :MaximumMagneticField ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The maximumMagneticFieldDirectionY parameter is only applicable for axle counters."@en .
+
+:maximumMagneticFieldDirectionZ a owl:DatatypeProperty ;
+    rdfs:label "Maximum magnetic field direction Z"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldDirectionZ> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:comment "The maximum magnetic field limits allowed for axle counters (in dB ÂµA/m) for a defined frequency band. Direction Z."@en ;
+    rdfs:domain :MaximumMagneticField ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The maximumMagneticFieldDirectionZ parameter is applicable for axle counters."@en .
+
+:MaximumMagneticField a owl:Class ;
+    rdfs:label "Maximum magnetic field"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldShape> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" .
+

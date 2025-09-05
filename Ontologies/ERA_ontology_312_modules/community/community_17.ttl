@@ -1,0 +1,555 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Bridge owl:disjointWith :OperationalPoint,
+        :SectionOfLine .
+
+:HABD owl:disjointWith :OperationalPoint,
+        :SectionOfLine .
+
+:LevelCrossing owl:disjointWith :OperationalPoint,
+        :SectionOfLine .
+
+:borderPointId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Border point identification"@en ;
+    dcterms:created "2024-11-26"@en ;
+    rdfs:comment "Border point identification in the list of reference border points in the RINF application guide."@en ;
+    rdfs:domain :ReferenceBorderPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    ns1:term_status "stable" .
+
+:digitalSchematicOverview a owl:DatatypeProperty ;
+    rdfs:label "Digital schematic overview"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en ;
+    :rinfIndex "1.2.0.0.0.7.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/DigitalSchematicOverview> ;
+    :tsiOPEAppendixD2Index "2.1" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    rdfs:comment "Diagrammatic representation of the operational point in Well Known Text polyline"@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range geo:wktLiteral ;
+    rdfs:subPropertyOf :opGenericDataParameter ;
+    ns1:term_status "stable" .
+
+:hasLRS a owl:ObjectProperty ;
+    rdfs:label "has linear referencing system"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasLrsCoordinate> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "Specifies the linear referencing system to which the kilometre post is referenced. The linear referencing system is commonly the main railway line and it provides the framework for identifying the post's location along the railway line, using distance measurements rather than geographical coordinates."@en ;
+    rdfs:domain :KilometricPost ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearPositioningSystem .
+
+:hasSchematicOverviewOPDigitalForm a owl:DatatypeProperty ;
+    rdfs:label "Schematic overview of the operational point in digital form"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.2.0.0.0.7" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSchematicOverviewOPDigitalForm> ;
+    :tsiOPEAppendixD2Index "2.1" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "The existence of a schematic overview of the operational point in digital form."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :opGenericDataParameter ;
+    ns1:term_status "stable" .
+
+:lengthOfSectionOfLine a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Length of section of line"@en ;
+    :XMLName "SOLLength" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.0.0.0.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SolLength> ;
+    :tsiOPEAppendixD2Index "3.2.3" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2024-05-16"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    rdfs:comment "Length between operational points at start and end of section of line."@en ;
+    rdfs:domain :SectionOfLine ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :length,
+        :solGenericDataParameter ;
+    ns1:term_status "stable" .
+
+:lineId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "line identifier"@en ;
+    :XMLName "SOLLineIdentification" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.0.0.0.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LineId> ;
+    :tsiOPEAppendixD2Index "2.2.1.1" ;
+    dcterms:modified "2024-11-18"^^xsd:date ;
+    rdfs:comment "Unique line identification or unique line number within Member State."@en ;
+    rdfs:domain :LinearPositioningSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string .
+
+:lrsMethod a owl:ObjectProperty ;
+    rdfs:label "type of line referencing system"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/lines/ReferenceSystems> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LrsMethod>,
+        <http://data.europa.eu/949/shapes/LrsMethodSKOS> ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    dcterms:modified "2024-11-29"^^xsd:date ;
+    rdfs:comment "The preferred line referencing system."@en ;
+    rdfs:domain :LinearPositioningSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    skos:editorialNote "TODO: provide example" .
+
+:opName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Name of operational point"@en ;
+    :XMLName "OPName" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpName> ;
+    :tsiOPEAppendixD2Index "2.3.1" ;
+    dcterms:created "2021-09-13"^^xsd:date ;
+    dcterms:modified "2021-09-13"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Name normally related to the town or village or to traffic control purpose."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :opGenericDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Name of OP may not always exist in common use. In such case IM should propose a name for OP. "@en .
+
+:opType a owl:ObjectProperty ;
+    rdfs:label "Type of operational point"@en ;
+    :XMLName "OPType" ;
+    :applicable "Y" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/op-types/OperationalPointTypes> ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpTypeP>,
+        <http://data.europa.eu/949/shapes/OpTypeSKOS> ;
+    :tsiOPEAppendixD2Index "2.2.2",
+        "2.3.2" ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Type of facility in relation to the dominating operational functions."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :opGenericObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Each existing case has to be approximated to the one of the above defined types by including size, importance and dominating functions. It is most important to recognize the most important role of specific OP in the network. That is why only one type for one OP is permitted.
+
+For purpose of RINF, there were defined the following types of OPs:
+1.	Station - large or major railway node with several functions, important for international traffic, basic for national railway system;
+2.	Passenger terminal - station with dominating function of service for passenger traffic, serving as a central hub for passengers, often integrating rail operations with intermodal transport networks and large-scale passenger facilities, including ticketing, waiting areas, and other passenger services;
+3.	Freight terminal - station dominantly serving for loading and unloading of freight trains;
+4.	Depot or workshop - group of tracks used by depot or workshop for RST maintenance;
+5.	Train technical services - group of tracks for servicing trains (parking, washing, etc.);
+6.	Passenger stop - or halts - small OP consisting of at least one platform, normally serving mostly for local passenger services, without routing, dispatching, or train management facilities;
+7.	Junction - OP consisting of at least one turnout, normally used mostly for changing direction of trains, with reduced or not existing other functions;
+8.	Border point - located in the point where a border between MSs meets a railway line;
+9.	Shunting yard - group of tracks used for shunting trains, mostly related to freight traffic;
+10.	Switch - OP consisting of only one switch and the area around it, delimited and protected by entry signals, normally used for changing direction of trains, with reduced or not existing other functions;
+11.	Domestic border point - designated location on the main lines where the infrastructure responsibilities transition between IMs.
+"""@en .
+
+:opTypeGaugeChangeover a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Type of track gauge changeover facility"@en ;
+    :XMLName "OPTypeGaugeChangeover" ;
+    :applicable "Y/N" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.2.0.0.0.4.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpTypeGaugeChangeover> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2021-08-11"^^xsd:date ;
+    dcterms:modified "2021-08-11"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "Type of track gauge changeover facility."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :opGenericDataParameter ;
+    ns1:term_status "stable" .
+
+:operationalRegimeType a owl:ObjectProperty ;
+    rdfs:label "Operational regime"@en ;
+    :applicable "Y/N/NYA" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/operational-regime-types/OperationalRegimeTypes> ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.0.0.1.3" ;
+    :tsiOPEAppendixD2Index "3.2.7" ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-09-24"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Double track type."@en ;
+    rdfs:domain :SectionOfLine ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :routeBookObjectParameter ;
+    ns1:term_status "unstable" .
+
+:schematicOverviewOP rdfs:domain :OperationalPoint .
+
+:siding rdfs:domain :OperationalPoint .
+
+:solNature a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Nature of Section of Line"@en ;
+    :XMLName "SOLNature" ;
+    :applicable "Y" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/sol-natures/SoLNatures> ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.0.0.0.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SolNature>,
+        <http://data.europa.eu/949/shapes/SolNatureApplicability>,
+        <http://data.europa.eu/949/shapes/SolNatureSKOS> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "Kind of section of line expressing size of presented data which depends on fact whether it connects OPs generated by division of a big node into several OPs or not."@en ;
+    rdfs:domain :SectionOfLine ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :solGenericObjParameter ;
+    ns1:term_status "stable" .
+
+:uopid a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Unique OP ID"@en ;
+    :XMLName "UniqueOPID" ;
+    :applicable "Y" ;
+    :formatNote """CCAAAAAAAAAA
+The first part  CC  is the country code in two-letter system of ISO.
+The second part is alphanumeric OP code within the MS.
+For example, an OP code could be current abbreviation of name used in route books.
+In case of borders point, the code is to be selected in the corresponding list in annex 5.1""" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.0.0.0.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/BorderPointValidCode>,
+        <http://data.europa.eu/949/shapes/BorderPointValidCodeAndCoordinates>,
+        <http://data.europa.eu/949/shapes/UopidMin>,
+        <http://data.europa.eu/949/shapes/UopidP> ;
+    :tsiOPEAppendixD2Index "2.2.2" ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Code composed of country code and alphanumeric operational point code."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:seeAlso "ISO 3166-1 alpha 2" ;
+    rdfs:subPropertyOf :opGenericDataParameter,
+        dcterms:identifier ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Explanation on data presentation: The first two characters represent the country code in two-letter system of ISO.
+The second part  AAAAAAAAAA  is maximum 10 Characters String corresponding to OP code within the MS.
+'LUAB4' or 'LUAB46TH-G' or 'LUAB4/-_ERT7' are accepted by the validation process.
+In case of  borders point , the code is to be selected in the corresponding list in annex 5.1 (this first part  AA  is EU. The second part is  AAAAAAAAAA ). Any OP ID that is not referenced in the annex 5.1 will not be accepted by the validation process.
+In case of  domestic borders point , the code will be selected in the corresponding list in annex 5.2 that will be developed later.
+Any OP ID that is not referenced in the annex 5.1 will not be accepted by the validation process.
+The provided OP ID must be unique within each Member State. The validation has to be made nationally by NRE. The exceptions are  Border point  and  domestic border point  that must be referenced in annex 5.1."""@en .
+
+:KilometricPost owl:disjointWith :OperationalPoint,
+        :SectionOfLine .
+
+:LineReference dcterms:isReplacedBy :LinearPositioningSystem .
+
+:PlatformEdge owl:disjointWith :SectionOfLine .
+
+:PrimaryLocation owl:disjointWith :SectionOfLine .
+
+:RadioBlockCenter owl:disjointWith :SectionOfLine .
+
+:lineNationalId dcterms:isReplacedBy :nationalLine .
+
+:lineReference dcterms:isReplacedBy :nationalLine .
+
+:primaryLocation dcterms:replaces :tafTAPCode .
+
+:primaryLocationCode dcterms:replaces :tafTAPCode .
+
+geo:wktLiteral a rdfs:Datatype .
+
+:borderPointOf a owl:ObjectProperty ;
+    rdfs:label "border point of"@en ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:isReplacedBy :ReferenceBorderPoint,
+        :referenceBorderPoint ;
+    dcterms:modified "2024-10-25"^^xsd:date ;
+    rdfs:comment "Relates the information that each country maintains on a border point, to the operational point that represents the general information on the border point."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :OperationalPoint ;
+    owl:deprecated true ;
+    owl:inverseOf :opInfoPerCountry ;
+    ns1:term_status "stable" .
+
+:referenceBorderPoint a owl:ObjectProperty ;
+    rdfs:label "reference border point"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ReferenceBorderPoint> ;
+    dcterms:created "2024-10-24"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :borderPointOf,
+        :opInfoPerCountry ;
+    rdfs:comment "Relates an operational point that is a border point with an instance of the list of reference border points that are specified in the RINF Application Guide."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :ReferenceBorderPoint .
+
+:tafTAPCode a owl:DatatypeProperty ;
+    rdfs:label "OP primary location code"@en ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:isReplacedBy :primaryLocation,
+        :primaryLocationCode ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-06-03"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    rdfs:comment "Not used anymore. It has been replaced by era:primaryLocationCode."@en,
+        "Primary location code developed for information exchange in accordance with the TSIs relating to the telematics applications subsystem"@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:opEnd a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Operational point at end of section of line"@en ;
+    :XMLName "SOLOPEnd" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.0.0.0.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpEnd>,
+        <http://data.europa.eu/949/shapes/OpEndExists> ;
+    :tsiOPEAppendixD2Index "3.1.2" ;
+    dcterms:created "2021-09-09"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Operational point at the end of section of line (kilometres increasing from start OP to the end OP)."@en ;
+    rdfs:domain :SectionOfLine ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :OperationalPoint ;
+    rdfs:subPropertyOf :solGenericObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Each SoL may have only one end OP, and each OP has unique OP ID within the MS. The â€œuniqueOPIDâ€ is defined in parameter 1.2.0.0.0.2.
+Each SoL has the principal direction of the traffic defined by increasing kilometres running from the start OP to the end OP.
+That is why the end OP is always located at highest kilometre of the line within the SoL.
+No validation will be performed by RINF application regarding which is the start and which the end OP. This requires IM's verification. """@en .
+
+:opInfoPerCountry a owl:ObjectProperty ;
+    rdfs:label "Border point information per country"@en ;
+    dcterms:created "2023-01-20"^^xsd:date ;
+    dcterms:isReplacedBy :ReferenceBorderPoint,
+        :referenceBorderPoint ;
+    dcterms:modified "2024-10-24"^^xsd:date ;
+    rdfs:comment "Relates an operational point that represents the general information of a border point to the information that each country maintains for the border point."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :OperationalPoint ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:opStart a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Operational point at start of section of line"@en ;
+    :XMLName "SOLOPStart" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.0.0.0.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OpStart>,
+        <http://data.europa.eu/949/shapes/OpStartExists> ;
+    :tsiOPEAppendixD2Index "3.1.1" ;
+    dcterms:created "2021-09-09"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Operational point at the start of section of line (kilometres increasing from start OP to the end OP)."@en ;
+    rdfs:domain :SectionOfLine ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :OperationalPoint ;
+    rdfs:subPropertyOf :solGenericObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Each SoL may have only one start OP, and each OP has unique OP ID within the MS. The â€œuniqueOPIDâ€ is defined in parameter 1.2.0.0.0.2.
+Each SoL has the principal direction of the traffic defined by increasing kilometres running from the start OP to the end OP.
+That is why the start OP is always located at lowest kilometre of the line within the SoL.
+No validation will be performed by RINF application regarding which is the start and which the end OP. This requires IM's verification. """@en .
+
+:ReferenceBorderPoint a owl:Class ;
+    rdfs:label "Reference border point"@en ;
+    dcterms:created "2024-10-24"^^xsd:date ;
+    dcterms:replaces :borderPointOf,
+        :opInfoPerCountry ;
+    rdfs:comment "List of reference border points that are specified in the RINF Application Guide."@en ;
+    rdfs:isDefinedBy : .
+
+:nationalLine a owl:ObjectProperty ;
+    rdfs:label "national line identification"@en ;
+    :XMLName "SOLLineIdentification" ;
+    :rinfIndex "1.1.0.0.0.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NationalLineSoL> ;
+    dcterms:created "2024-05-24"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date,
+        "2024-11-18"^^xsd:date,
+        "2024-11-29"^^xsd:date,
+        "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :lineNationalId,
+        :lineReference ;
+    rdfs:comment """Indicates a relationship with a national railway line at a specific kilometer point.
+For a Section of Line: unique line identification or unique line number within Member State."""@en ;
+    rdfs:domain :SectionOfLine ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearPositioningSystem ;
+    rdfs:subPropertyOf :solGenericObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Each SoL can belong to only one national line.
+
+In case when SoL is the track connecting between OPs within big node (resulting from division of big station into several smaller) the line can be identified using the name of this track."""@en .
+
+:LinearPositioningSystem a owl:Class ;
+    rdfs:label "Linear Positioning System"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearPositioningSystemShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :LineReference ;
+    rdfs:comment """Represents a linear positioning system used for referencing positions on the network.
+It can also represent a sequence of one or more sections of line, used for regular railway operations."""@en ;
+    rdfs:isDefinedBy : ;
+    owl:disjointWith :LinearPositioningSystemCoordinate .
+
+:SectionOfLine a owl:Class ;
+    rdfs:label "Section Of Line"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SectionOfLineShape> ;
+    dcterms:created "2021-04-02"^^xsd:date ;
+    dcterms:modified "2022-07-07"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "A section of line means the part of line between adjacent operational points and may consist of several tracks."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf [ owl:onClass :LinearPositioningSystem ;
+            owl:onProperty :nationalLine ],
+        [ owl:onClass :OperationalPoint ;
+            owl:onProperty :opEnd ],
+        [ owl:onClass :OperationalPoint ;
+            owl:onProperty :opStart ],
+        [ owl:onClass :LinearPositioningSystem ;
+            owl:onProperty :nationalLine ],
+        [ owl:onClass :OperationalPoint ;
+            owl:onProperty :opEnd ],
+        [ owl:onClass :OperationalPoint ;
+            owl:onProperty :opStart ],
+        [ owl:onClass :LinearPositioningSystem ;
+            owl:onProperty :nationalLine ],
+        [ owl:onClass :OperationalPoint ;
+            owl:onProperty :opEnd ],
+        [ owl:onClass :OperationalPoint ;
+            owl:onProperty :opStart ],
+        :InfrastructureElement ;
+    owl:disjointWith :Signal,
+        :SpecialArea,
+        :Switch,
+        :Track,
+        :Tunnel ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Each network shall be described using as many SoLs as necessary. Each SoL   is generated and identified by OP IDs at start and at end. A SoL only belongs to one Line."@en .
+
+:OperationalPoint a owl:Class ;
+    rdfs:label "Operational Point"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OperationalPointShape> ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2022-07-07"^^xsd:date,
+        "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    rdfs:comment "An operational point (OP) means any location for train service operations, where train services may begin and end or change route, and where passenger or freight services may be provided; operational point also means any location at boundaries between Member States or infrastructure managers."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :PlatformEdge,
+        :PrimaryLocation,
+        :RadioBlockCenter,
+        :SectionOfLine,
+        :Signal,
+        :SpecialArea,
+        :Switch,
+        :Track,
+        :Tunnel ;
+    ns1:term_status "stable" .
+
+[] rdf:first :LinearPositioningSystem .
+
+[] rdf:first :SectionOfLine .
+
+[] rdf:first :SectionOfLine .
+
+[] rdf:first :OperationalPoint .
+
+[] rdf:first :LinearPositioningSystem .
+
+[] rdf:first :OperationalPoint .
+
+[] rdf:first :SectionOfLine .
+
+[] rdf:first :SectionOfLine .
+
+[] rdf:first :OperationalPoint .
+
+[] rdf:first :OperationalPoint .
+
+[] rdf:first :SectionOfLine .
+
+[] rdf:first :SectionOfLine .
+
+[] rdf:first :OperationalPoint .
+
+[] rdf:first :LinearPositioningSystem .
+
+[] rdf:first :OperationalPoint .
+
+[] rdf:first :SectionOfLine .
+
+[] rdf:first :OperationalPoint .
+
+[] rdf:first :SectionOfLine .
+
+[] rdf:first :SectionOfLine .
+
+[] rdf:first :OperationalPoint .
+
+[] rdf:first :OperationalPoint .
+

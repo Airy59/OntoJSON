@@ -1,0 +1,224 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:alternativeName rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:altitudeRange rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:altitudeRangeDetail rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:axleSpacing rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:boardingAids rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:brakeWeightPercentage rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:cantDefficiency rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:catenaryMaxRatedCurrent rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:conditionsTrainFormation rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:dangerousGoodsTankCode rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:designMassExceptionalPayload rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:designMassNormalPayload rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:designMassWorkingOrder rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:drivingCabs rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:eddyCurrentBrakePrevention rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:eddyCurrentBrakingFitted rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:emergencyBrake rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:energyMeterInstalled rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:energySupplyMaxPower rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:etcsDataCommApp rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:etcsNationalApplications rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:etcsOnBoardImplementation rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:ferromagneticWheelMaterial rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:fixedSeats rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:flangeLubricationFitted rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:gsmRSetsInDrivingCab rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasAutomaticDroppingDevice rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasCantDefficiencyCompensation rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasCurrentLimitation rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasLubricationDevicePrevention rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasParkingBrake rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasRegenerativeBrake rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasSandingPrevention rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasShuntingRestrictions rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasTrainIntegrityConfirmation rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:hasWheelSlideProtectionSystem rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:letterMarking rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:loadingPlatformHeight rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:magneticBrakePrevention rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:magneticBrakingFitted rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:massPerWheel rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maxCurrentStandstillPantograph rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maxDistConsecutiveAxles rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maxFlangeHeight rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maxLengthVehicleNose rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maximumAverageDeceleration rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maximumBrakeThermalEnergyCapacity rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maximumContactWireHeight rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maximumDesignSpeed rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maximumLocomotivesCoupled rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maximumServiceBrake rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:maximumSpeedEmpty rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:meetsRequirementVehicleAuthorisation rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minDistConsecutiveAxles rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minDistFirstLastAxle rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minFlangeHeight rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minFlangeThickness rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minWheelDiameter rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minimumConcaveVerticalRadius rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minimumContactWireHeight rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minimumConvexVerticalRadius rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minimumHorizontalRadius rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:minimumWheelDiameter rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:nonCodedRestrictions rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:numberElementsRakeFreightWagons rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:numberOfPantographsInContactWithOCL rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:numberOfToilets rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:oclType rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:otherTrainDetectionSystemsDataParameter rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:parkingBrake rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:parkingBrakeMandatory rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:parkingBrakeMaximumGradient rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:passByNoiseLevel rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:permissiblePayload rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:portableBoardingAids rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:preventRegenerativeBrakeUse rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:prioritySeats rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:prmAccessibleToilets rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:quasiStaticGuidingForce rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:radioSwitchOverSpecialConditions rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:referencePassByNoiseLevel rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:shortestDistanceBetweenPantographsInContactWithOCL rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:sleepingPlaces rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:startingNoiseLevel rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:staticAxleLoadExceptionalPayload rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:staticAxleLoadNormalPayload rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:staticAxleLoadWorkingOrder rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:stationaryNoiseLevel rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:structuralCategory rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:thermalCapacityDistance rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:thermalCapacityGradient rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:thermalCapacitySpeed rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:thermalCapacityTime rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:totalVehicleMass rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:trainControlSwitchOverSpecialConditions rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:transportableOnFerry rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:typeVersionNumber rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:vehicleContactForce rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:vehicleKinematicGaugeOther rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:vehicleMaxSandingOutput rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:vehiclePantographHead rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:vehicleTypeMaximumCantDeficiency rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:vehicleTypeMaximumSpeed rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:vehiclesComposingFixedFormation rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:voiceOperationalCommImpl rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:wheelSetGaugeTransformationMethod rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:wheelchairSleepingPlaces rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:wheelchairSpaces rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic .
+
+:vehicleTypeTechnicalDataCharacteristic a owl:DatatypeProperty ;
+    rdfs:label "Vehicle type technical characteristic"@en ;
+    rdfs:isDefinedBy : .
+

@@ -1,0 +1,27 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:NumberOfSeals a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfSeals" ;
+    rdfs:comment "Number of the seals attached by the original consignor." ;
+    rdfs:domain :Seals ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SealsDescription a owl:DatatypeProperty ;
+    rdfs:label "SealsDescription" ;
+    rdfs:comment """Additional information of the original consignor regarding
+							the attached seals.""" ;
+    rdfs:domain :Seals ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasSeals rdfs:range :Seals .
+
+:Seals a owl:Class ;
+    rdfs:label "Seals" ;
+    rdfs:comment "Describes the seals used for the consignment" .
+

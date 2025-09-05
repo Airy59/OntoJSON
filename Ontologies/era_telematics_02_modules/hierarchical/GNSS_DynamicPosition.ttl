@@ -1,0 +1,43 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AntennaDistanceFromFrontOfTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AntennaDistanceFromFrontOfTrain" ;
+    rdfs:comment """Distance of the defined coordinates from the front of the
+							train, in meters.""" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CurrentSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CurrentSpeed" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Heading a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Heading" ;
+    rdfs:comment """Direction towards which the train is going. Expressed in
+							degrees from North (examples : 0 = North, 90 = East, 180 = South, 270 =
+							West)""" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasGNSS_DynamicPosition rdfs:range :GNSS_DynamicPosition .
+
+:hasSignalQuality a owl:ObjectProperty ;
+    rdfs:label "has SignalQuality" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:range :SignalQuality .
+
+:GNSS_DynamicPosition a owl:Class ;
+    rdfs:label "GNSS_DynamicPosition" .
+
+[] rdf:first :GNSS_DynamicPosition .
+

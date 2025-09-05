@@ -1,0 +1,64 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasJourneySection a owl:ObjectProperty ;
+    rdfs:label "has JourneySection" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :JourneySection .
+
+:hasJourneySectionDestination a owl:ObjectProperty ;
+    rdfs:label "has JourneySectionDestination" ;
+    rdfs:domain :JourneySection ;
+    rdfs:range :JourneySectionDestination .
+
+:hasJourneySectionOrigin a owl:ObjectProperty ;
+    rdfs:label "has JourneySectionOrigin" ;
+    rdfs:domain :JourneySection ;
+    rdfs:range :JourneySectionOrigin .
+
+:hasResponsibilityActualSection a owl:ObjectProperty ;
+    rdfs:label "has ResponsibilityActualSection" ;
+    rdfs:domain :JourneySection ;
+    rdfs:range :ResponsibilityActualSection .
+
+:hasResponsibilityNextSection a owl:ObjectProperty ;
+    rdfs:label "has ResponsibilityNextSection" ;
+    rdfs:domain :JourneySection ;
+    rdfs:range :ResponsibilityNextSection .
+
+:JourneySectionDestination a owl:Class ;
+    rdfs:label "JourneySectionDestination" ;
+    rdfs:comment "Destination of the section on which train composition is unchanged" .
+
+:JourneySectionOrigin a owl:Class ;
+    rdfs:label "JourneySectionOrigin" ;
+    rdfs:comment "Origin of the section on which train composition is unchanged" .
+
+:ResponsibilityActualSection a owl:Class ;
+    rdfs:label "ResponsibilityActualSection" ;
+    rdfs:comment """This element identifies the responsible RU or IM for the actual path
+				section""" .
+
+:ResponsibilityNextSection a owl:Class ;
+    rdfs:label "ResponsibilityNextSection" ;
+    rdfs:comment """This element identifies the responsible RU and IM for the following
+				path section""" .
+
+:JourneySection a owl:Class ;
+    rdfs:label "JourneySection" ;
+    rdfs:comment "Defines the data provided by the IM for a journey section" .
+
+[] rdf:first :JourneySectionDestination .
+
+[] rdf:first :JourneySectionOrigin .
+
+[] rdf:first :ResponsibilityActualSection .
+
+[] rdf:first :ResponsibilityNextSection .
+
+[] rdf:first :ResponsibilityActualSection .
+
+[] rdf:first :ResponsibilityNextSection .
+

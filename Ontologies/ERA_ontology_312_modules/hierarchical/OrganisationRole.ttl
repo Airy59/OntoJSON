@@ -1,0 +1,128 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:hasOrganisationRole a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has organisation role"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/organisation-roles/OrgRoles> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasOrganisationRole>,
+        <http://data.europa.eu/949/shapes/HasOrganisationRoleSKOS> ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    rdfs:comment "Relates the Organisation role instance (the role played by an Organisation)  with the specific role in the taxonomy of organisation roles."@en ;
+    rdfs:domain :OrganisationRole ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:roleOf a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "role of"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RoleOf> ;
+    dcterms:created "2024-10-24"^^xsd:date ;
+    rdfs:comment "Indicates the corresponding Body that plays a certain organisation role."@en ;
+    rdfs:domain :OrganisationRole ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Body .
+
+:imCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Infrastructure manager (IM)'s code"@en ;
+    dcterms:created "2021-08-02"^^xsd:date ;
+    dcterms:isReplacedBy :organisationCode ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-06-03"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-10-30"^^xsd:date,
+        "2024-11-12"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/dec_impl/2018/1614>,
+        <http://data.europa.eu/eli/dir/2012/34/oj>,
+        <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment """Infrastructure manager means any body or firm responsible in particular for establishing, managing and maintaining railway infrastructure, including traffic management and control-command signalling;
+the functions of the infrastructure manager on a network or part of a network may be allocated to different bodies or firms. Definition in (Article 3(2))"""@en ;
+    rdfs:domain :OrganisationRole ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/dir/2012/34/oj#d1e885-32-1"^^xsd:anyURI ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:organisationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "organisation code" ;
+    :XMLName "OPSidingIMCode",
+        "OPSidingTunnelIMCode",
+        "OPTrackIMCode",
+        "OPTrackPlatformIMCode",
+        "OPTrackTunnelIMCode",
+        "SOLIMCode",
+        "SOLTunnelIMCode" ;
+    :applicable "Y" ;
+    :formatNote "AAAA" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.0.0.0.1",
+        "1.1.1.1.8.1",
+        "1.2.1.0.0.1",
+        "1.2.1.0.5.1",
+        "1.2.1.0.6.1",
+        "1.2.2.0.0.1",
+        "1.2.2.0.5.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OrganisationCode> ;
+    :tsiOPEAppendixD2Index "1.1" ;
+    dcterms:created "2024-06-03"^^xsd:date ;
+    dcterms:modified "2024-11-06"^^xsd:date,
+        "2024-11-12"^^xsd:date,
+        "2025-02-18"^^xsd:date,
+        "2025-03-08"^^xsd:date ;
+    dcterms:replaces :imCode ;
+    dcterms:source <http://data.europa.eu/eli/dec_impl/2018/1614>,
+        <http://data.europa.eu/eli/dir/2012/34/oj>,
+        <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment """Four alpha-numeric code allocated by ERA to a body. It represents the Infrastructure Manager (IM) code in RINF.
+Infrastructure manager means any body or firm responsible in particular for establishing, managing and maintaining railway infrastructure, including traffic management and control-command signalling;
+the functions of the infrastructure manager on a network or part of a network may be allocated to different bodies or firms. Definition in (Article 3(2))"""@en,
+        "Infrastructure manager means any body or undertaking that is responsible in particular for establishing and maintaining railway infrastructure or a part thereof."@en ;
+    rdfs:domain :OrganisationRole ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/dir/2012/34/oj#d1e885-32-1"^^xsd:anyURI ;
+    rdfs:subPropertyOf :platformDataParameter,
+        :sidingDataParameter,
+        :solGenericDataParameter,
+        :trackGenericDataParameter,
+        :tunnelDataParameter,
+        dcterms:identifier ;
+    skos:altLabel "IM's code"@en ;
+    skos:example """Simplified example:
+:ABCD_IM rdf:type era:OrganisationRole;
+	era:hasOrganisationRole era-skos:InfrastructureManager.
+	era:organisationCode "ABCD".
+
+:0000_IM rdf:type era:OrganisationRole;
+	era:hasOrganisationRole era-skos:InfrastructureManager.
+	era:organisationCode "0000".
+
+:imNetwork rdf:type era:SubsetWithCommonCharacteristics;
+	era:infrastructureManager :ABCD_IM.
+#IM code parameter as a common characteristic
+:track1 rdf:type era:Track;
+	era:belongsTo :imNetwork.
+#IM Code parameter - directly attached to a track
+:track2 rdf:type era:Track;
+	era:infrastructureManager :0000_IM.""" ;
+    skos:scopeNote """The Code is a unique identifier for the Infrastructure Manager and it shall be verified on national level.
+- If the IM is subject to TAF/TAP TSIs, it corresponds to the code used in TAF/TAP TSIs.
+- In other cases, it corresponds to the "organisation code" assigned by the Agency for the specific needs of the RINF.
+Each Section of Line shall concern only one IM.
+To be able to follow the "only once" principle, the infrastructure manager code is a property of the organisation having the role of infrastructuer manager. For data provision, a subset of elements with common characteristics should be created with the era:infrastructureManager property having as value the instance of the infrastructure mananger role."""@en .
+
+:OrganisationRole a owl:Class ;
+    rdfs:label "Organisation Role"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OrganisationRoleShape> ;
+    rdfs:comment "Represents an n-ary relationship between a Body and a role"@en ;
+    rdfs:isDefinedBy : .
+

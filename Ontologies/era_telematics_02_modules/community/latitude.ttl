@@ -1,0 +1,13 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Latitude a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Latitude" ;
+    rdfs:comment """Latitudinal Coordinates as expressed in decimal degrees with a
+				precision of 6 decimals.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+

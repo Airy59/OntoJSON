@@ -1,0 +1,45 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DangerousGoodsIndicator a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DangerousGoodsIndicator" ;
+    rdfs:comment """Indicates whether Dangerous Goods are allowed (Yes/No Indicator) If
+				"0", then no dangerous goods are allowed. If "1", then the restricted goods are
+				described in DangerousGoodsIndication""" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ExceptionalGaugingInd a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ExceptionalGaugingInd" ;
+    rdfs:comment """Indicates that an exceptional gauging is in the train or for the wagon
+				- (true/false)""" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasActivities a owl:ObjectProperty ;
+    rdfs:label "has Activities" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range :Activities .
+
+:hasNotes a owl:ObjectProperty ;
+    rdfs:label "has Notes" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range :Notes .
+
+:hasTrainRunningData rdfs:range :TrainRunningData .
+
+:hasTrainRunningTechData a owl:ObjectProperty ;
+    rdfs:label "has TrainRunningTechData" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range :TrainRunningTechData .
+
+:TrainRunningData a owl:Class ;
+    rdfs:label "TrainRunningData" ;
+    rdfs:comment "Train relevant data for a running train" .
+

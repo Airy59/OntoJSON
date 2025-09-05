@@ -1,0 +1,77 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ContainerHandlingFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ContainerHandlingFlag" ;
+    rdfs:comment "This establishment is able to handle container traffic" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:FreightFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FreightFlag" ;
+    rdfs:comment "Identifies that the Entity or Location is for Freight Activity" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HandoverPointFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HandoverPointFlag" ;
+    rdfs:comment "Identifies if the location is a Handover Point from IM to IM" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationPrimaryName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationPrimaryName" ;
+    rdfs:comment """Location Name in an offication language of the Country using the ISO
+				Unicode alphabet""" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NUTS_Code a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NUTS_Code" ;
+    rdfs:comment """Nomiclature for Territoritorial Units for Statistics. A
+							NUTS code begins with a two-letter code referencing the country, which
+							is identical to the ISO 3166-1 alpha-2 code """ ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PassengerFlag a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PassengerFlag" ;
+    rdfs:comment "Identifies that the Entity or Location is for Passenger Activity" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PrimaryLocationNameASCII a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrimaryLocationNameASCII" ;
+    rdfs:comment "the location name in free text, using ASCII character set" ;
+    rdfs:domain :LocationPrimaryInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasLocationPrimaryInformation rdfs:range :LocationPrimaryInformation .
+
+:LocationPrimaryInformation a owl:Class ;
+    rdfs:label "LocationPrimaryInformation" ;
+    rdfs:comment "Required for Primary Location Add, Update, of a Location Primary Code" .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :LocationPrimaryInformation .
+
+[] rdf:first :LocationPrimaryInformation .
+

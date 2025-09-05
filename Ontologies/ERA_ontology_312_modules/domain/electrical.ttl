@@ -1,0 +1,2560 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix ns2: <http://creativecommons.org/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:catenaryMaxRatedCurrent a owl:DatatypeProperty ;
+    rdfs:label "Catenary max rated current"@en ;
+    :eratvIndex "4.10.3" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Maximum rated current from the catenary (to be indicated for each electrical energy supply system the vehicle is equipped for), given in A."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:conditionsChargingElectricEnergyStorage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Permitted conditions for charging electric energy storage for traction purposes at standstill"@en ;
+    :applicable "Y/N" ;
+    :legalDeadline "Contrary to the Regulation, the deadline is not 30 June 2024 at the latest, but 12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.2.1.0.7.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ConditionsChargingElectricEnergyStorage> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    rdfs:comment "Conditions set by IMs according to a standardised document"@en ;
+    rdfs:domain :ContactLineSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf :contactLineSystemDataParameter ;
+    ns1:term_status "stable" .
+
+:contactStripMaterial a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Permitted contact strip material"@en ;
+    :XMLName "EPA_StripMaterial" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory only if â€œOverhead contact line (OCL)â€ is selected in 1.1.1.2.2.1.1, otherwise the parameter is not applicable."@en ;
+    :eratvIndex "4.10.10" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/contact-strip-materials/ContactStripMaterials> ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.3.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ContactStripMaterialApplicability>,
+        <http://data.europa.eu/949/shapes/ContactStripMaterialSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of which contact strip materials are permitted to be used."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack :VehicleType ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso "LOC&PAS TSI: 4.2.8.2.9.4.2" ;
+    rdfs:subPropertyOf :pantographObjParameter,
+        :vehicleTypeTechnicalObjectCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """[NN] for impregnated carbon concern the metallic content in %. In case of selection of this option, the respective value of the metallic content has to be added. [NN] is the maximum percentage allowed.
+
+In case of permitted material different than specified in predefined list, send ERA a change request.
+
+When more than one value of the parameter has to be published, then parameter will to be repeated as many times as the number of values."""@en .
+
+:contactStripMaterialMetallicContent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Contact strip material metallic content"@en ;
+    :XMLName "EPA_StripMaterial" ;
+    :dependencyNote "Mandatory only if impregnated carbon ([NN] % of metallic content)â€ is selected in 1.1.1.2.3.4, otherwise no value should be provided"@en ;
+    :rinfIndex "1.1.1.2.3.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ContactStripMaterialMetallicContent> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-01-25"^^xsd:date ;
+    dcterms:modified "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1302/2023-09-28> ;
+    rdfs:comment "Indication of max. percentage of contact strip material Impregnated Carbon permitted to be used." ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso "LOC&PAS TSI: 4.2.8.2.9.4.2" ;
+    rdfs:subPropertyOf :pantographDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "In case that the value of the property era:contactStripMaterial is \"impregnated carbon\", it is the metallic content in % (this value must be added). This is the maximum percentage allowed."@en .
+
+:currentLimitationRequired a owl:DatatypeProperty ;
+    rdfs:label "Current or power limitation on board required"@en ;
+    :XMLName "ERS_PowerLimitOnBoard" ;
+    :applicable "Y/N" ;
+    :dependencyNote "When \"not electrified\" is chosen in parameter \"Type of contact line system\", then this parameter is not applicable. "@en ;
+    :formatNote "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.5.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/CurrentLimitationRequired>,
+        <http://data.europa.eu/949/shapes/CurrentLimitationRequiredApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment "Indication of whether an on board current or power limitation function on vehicles is required."@en ;
+    rdfs:domain :ContactLineSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso " LOC&PAS TSI: 4.2.8.2.4" ;
+    rdfs:subPropertyOf :requirementsRollingStockDataParameter ;
+    ns1:term_status "stable" .
+
+:currentlyValid a owl:DatatypeProperty ;
+    rdfs:label "Currently valid"@en ;
+    dcterms:created "2022-12-13"^^xsd:date ;
+    rdfs:domain :Feature ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:distSignToPhaseEnd a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Distance between signboard and phase separation ending"@en ;
+    :XMLName "EOS_DistSignToPhaseEnd" ;
+    :applicable "Y/N" ;
+    :dependencyNote "It is applicable ( Y ) only if the value  Overhead contact line (OCL)  is selected for parameter \"Type of contact line system\""@en ;
+    :formatNote "NNN" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.2.4.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/DistSignToPhaseEnd> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date ;
+    rdfs:comment "Distance between the signboard authorizing the driver to  raise pantograph  or  close the circuit breaker  after passing the phase separation and the end of the phase separation section."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :oclSeparationSectionsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Specific for route compatibility check on French network."@en .
+
+:documentRestrictionPowerConsumption a owl:ObjectProperty ;
+    rdfs:label "Document with restriction related to power consumption of specific electric traction unit(s)"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.2.5.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/DocumentRestrictionPowerConsumption> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-11-04"^^xsd:date ;
+    rdfs:comment "Name and/or reference of the document specifying the restriction(s) related to power consumption of specific electric traction unit(s)."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Document ;
+    rdfs:subPropertyOf :requirementsRollingStockObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The value of this parameter should be either a reference to a file name or an external link to a document.
+If a file name is provided, the Infrastructure Manager (IM) must upload a document with the same file name using the "Reference Documents Management" functionality in the RINF application. The document must be in electronic format and available in two official EU languages. In this case, the parameter value must be repeated for each document.
+If an external link is provided, the IM must ensure that the document is available at the provided link."""@en .
+
+:eddyCurrentBrakePrevention a owl:DatatypeProperty ;
+    rdfs:label "Eddy current brake prevention"@en ;
+    :eratvIndex "4.7.4.1.2" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Possibility of preventing the use of the eddy current track brake (only if fitted with eddy current brake)"@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:eddyCurrentBraking a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Use of eddy current brakes"@en ;
+    :applicable "Y/N/NYA" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/eddy-current-braking/EddyCurrentBraking> ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.6.2",
+        "1.2.1.0.4.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EddyCurrentBraking>,
+        <http://data.europa.eu/949/shapes/EddyCurrentBrakingSKOS> ;
+    :tsiOPEAppendixD2Index "3.4.5" ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2022-09-06"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28>,
+        <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of limitations on the use of eddy current brakes."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso """INF TSI: 4.2.6.2.2 (2)
+OPE TSI: 4.2.2.6.2 (1) (iv)""" ;
+    rdfs:subPropertyOf :trackObjParameter,
+        :trackResistanceToAppliedLoadsObjParameter ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "This property has been modified to be a RINF parameter (its eratvIndex is deleted). It is treated as a SKOS by RINF and as a boolean by ERATV. A new ERATV datatype property has been defined, eddyCurrentBrakingFitted with boolean values."@en ;
+    skos:scopeNote """The use of both brakes is allowed or not under exterior conditions (depending on the features of the train engines for example).
+The RINF can't be filled without more precisions."""@en .
+
+:eddyCurrentBrakingConditionsDocument a owl:ObjectProperty ;
+    rdfs:label "Document with the conditions for the use of eddy current brakes"@en ;
+    :XMLName "ILR_ECBDocRef" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory value to be provided when 1.1.1.1.6.2/Use of eddy current brakes is  allowed under conditions  or  allowed under conditions only for emergency brake"@en ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.6.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EddyCurrentBrakingConditionsDocument>,
+        <http://data.europa.eu/949/shapes/EddyCurrentBrakingConditionsDocumentApplicability> ;
+    :tsiOPEAppendixD2Index "3.4.5" ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-04-23"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Electronic document available in two EU languages from the IM stored by the Agency with conditions for the use of eddy current brakes identified in 1.1.1.1.6.2."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Document ;
+    rdfs:subPropertyOf :trackResistanceToAppliedLoadsObjParameter ;
+    ns1:term_status "stable" ;
+    skos:changeNote "Change from datatype property to object property in order to point to the class Document (reference document)"@en ;
+    skos:scopeNote """If there exist conditions to allow the use of eddy current brakes.
+
+The value of this parameter should be either a reference to a file name or an external link to a document.
+If a file name is provided, the Infrastructure Manager (IM) must upload a document with the same file name using the "Reference Documents Management" functionality in the RINF application. The document must be in electronic format and available in two official EU languages. In this case, the parameter value must be repeated for each document.
+If an external link is provided, the IM must ensure that the document is available at the provided link."""@en .
+
+:eddyCurrentBrakingFitted a owl:DatatypeProperty ;
+    rdfs:label "Eddy current braking fitted"@en ;
+    :eratvIndex "4.7.4.1.1" ;
+    dcterms:created "2022-09-06"^^xsd:date ;
+    rdfs:comment "Eddy current track brake fitted. New property defined to distinguish it from eddyCurrentBraking which is a RINF SKOS property."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:energyMeterInstalled a owl:DatatypeProperty ;
+    rdfs:label "Energy meter installed"@en ;
+    :eratvIndex "4.10.12" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "TSI conform energy meter for billing purposes installed on board."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:energySupplyMaxPower a owl:DatatypeProperty ;
+    rdfs:label "Energy supply max power"@en ;
+    :eratvIndex "4.10.2" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Maximum power (to be indicated for each energy supply system the vehicle is equipped for), given in kW."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:energySupplySystem a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Energy supply system (Voltage and frequency)"@en ;
+    :XMLName "ECS_VoltFreq" ;
+    :applicable "Y/N" ;
+    :dependencyNote "When `not electrified` is chosen in parameter 1.1.1.2.2.1.1, then this parameter is not applicable."@en ;
+    :eratvIndex "4.10.1" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/energy-supply-systems/EnergySupplySystems> ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.2.1.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EnergySupplySystem>,
+        <http://data.europa.eu/949/shapes/EnergySupplySystemSKOS> ;
+    :tsiOPEAppendixD2Index "3.3.1" ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1301/2023-09-28>,
+        <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of the traction supply system (nominal voltage and frequency)."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso """EN 50163:2004+A1:2007+A2:2020+A3:2022: clause 4
+ENE TSI:4.2.3""" ;
+    rdfs:subPropertyOf :contactLineSystemObjParameter,
+        :vehicleTypeTechnicalObjectCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """If the real values exceed range of the EN 50163:2004+A1:2007+A2:2020+A3:2022, they could be introduced by the Agency on request via a process of change request.
+See: ENE TSI: 4.2.3 and EN 50163:2004: clause 4
+
+For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, an XML attribute called â€œSetâ€ will be used to link the value of this parameter to the parameter 1.1.1.2.2.1.1 / ECS_SystemType"""@en .
+
+:energySupplySystemTSICompliant a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Energy supply system TSI compliant"@en ;
+    :XMLName "ECS_TSIVoltFreq" ;
+    :rinfIndex "1.1.1.2.2.1.2.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EnergySupplySystemTSICompliant> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-08-06"^^xsd:date,
+        "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication if the traction supply system (nominal voltage and frequency) is fully compliant with TSI."@en ;
+    rdfs:domain :ContactLineSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :contactLineSystemDataParameter ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:hasCurrentLimitation a owl:DatatypeProperty ;
+    rdfs:label "Has current limitation"@en ;
+    :eratvIndex "4.10.14" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Electric units equipped with power or current limitation function."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:hasPhaseSeparation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase separation"@en ;
+    :XMLName "EOS_Phase" ;
+    :applicable "Y/N" ;
+    :dependencyNote "A value is mandatory only if 1.1.1.2.2.1.1 parameter values is  Overhead contact line (OCL) , otherwise applicability flag is \"N\" (not applicable)"@en ;
+    :formatNote "in XML: Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.4.1.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasPhaseSeparation>,
+        <http://data.europa.eu/949/shapes/HasPhaseSeparationApplicability> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of existence of phase separation and required information."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :oclSeparationSectionsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "In case of existence of phase separation on the track or on the section of the line the option  True  shall be selected."@en .
+
+:mNvcontact a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "M_NVCONTACT"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/etcs-reactions-contact/ETCSReactionsNVContact> ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.2.16.9",
+        "1.2.1.1.1.16.9" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MNvcontact>,
+        <http://data.europa.eu/949/shapes/MNvcontactApplicability>,
+        <http://data.europa.eu/949/shapes/MNvcontactSKOS> ;
+    :tsiOPEAppendixD3Index "1.5.9" ;
+    dcterms:created "2022-11-07"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-04-18"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment """On-Board system reaction when T_NVCONTACT expires
+According to the specification referenced in Appendix A-1, index [C]"""@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+    rdfs:subPropertyOf :etcsNationalValuesObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "See: TSI CCS (Subset-026, chapter 7. 7.5.1.74 M_NVCONTACT)"@en .
+
+:maxCurrentStandstillPantograph a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum current at standstill per pantograph"@en ;
+    :XMLName "ECS_MaxStandstillCurrent" ;
+    :applicable "Y/N" ;
+    :dependencyNote """This parameter is applicable only the type of contact line system is 'Overhead contact line (OCL)'
+In sidings, it may be not applicable, in the following cases:
+- siding is not electrified
+- Siding is destined to freight traffic, whose trains have a low consumption in stationary (the maximum demand of energy is due to air conditioning systems, which is not significant in these trains).
+- Siding is used in access to depots or workshops."""@en ;
+    :eratvIndex "4.10.4" ;
+    :formatNote "NNN" ;
+    :legalDeadline """In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest for DC systems
+30 June 2024 for AC systems"""@en ;
+    :rinfIndex "1.1.1.2.2.3",
+        "1.2.2.0.6.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaxCurrentStandstillPantograph>,
+        <http://data.europa.eu/949/shapes/MaxCurrentStandstillPantographApplicability>,
+        <http://data.europa.eu/949/shapes/MaxCurrentStandstillPantographS> ;
+    :tsiOPEAppendixD2Index "3.3.8" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/A> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-05-16"^^xsd:date,
+        "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of the maximum allowable train current at standstill expressed in amperes."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:seeAlso "ENE TSI: 4.2.5, LOC&PAS TSI: 4.2.8.2.5" ;
+    rdfs:subPropertyOf :contactLineSystemDataParameter,
+        :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Parameter related to current taken by the vehicle when it is not in a traction or regenerative mode, e.g. preheating, air-condition, etc.
+Due to operational reasons, trains can get stuck on SoL for hours, and in some cases, this parameter is even the reason the air-condition is shut down"""@en .
+
+:maximumBrakeThermalEnergyCapacity a owl:DatatypeProperty ;
+    rdfs:label "Maximum brake thermal energy capacity"@en ;
+    :eratvIndex "4.7.2.1.6" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloJ> ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date,
+        "2024-06-26"^^xsd:date ;
+    rdfs:comment "Maximum brake thermal energy capacity given in kJ"@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:maximumContactWireHeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum contact wire height"@en ;
+    :XMLName "ECS_MaxWireHeight" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory only if â€œOverhead contact line (OCL)â€ is selected in 1.1.1.2.2.1.1, otherwise the parameter is not applicable."@en ;
+    :eratvIndex "4.10.5" ;
+    :formatNote "N.NN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.2.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumContactWireHeight>,
+        <http://data.europa.eu/949/shapes/MaximumContactWireHeightApplicability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of the maximum contact wire height expressed in metres."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :Siding :VehicleType ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :contactLineSystemDataParameter,
+        :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The value given can be design value or the last known measured value. If there is no change in height, nominal value will be given.
+
+Values shall be given in metres with precision of 0.01 m."""@en .
+
+:minimumContactWireHeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Minimum contact wire height"@en ;
+    :XMLName "ECS_MinWireHeight" ;
+    :applicable "Y/N" ;
+    :dependencyNote "When `not electrified` is chosen in parameter 1.1.1.2.2.1.1, then this parameter is not applicable."@en ;
+    :eratvIndex "4.10.5" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.2.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumContactWireHeight>,
+        <http://data.europa.eu/949/shapes/MinimumContactWireHeightApplicability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2024-09-25"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of the minimum contact wire height expressed in metres."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :ContactLineSystem :VehicleType ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :contactLineSystemDataParameter,
+        :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The value given can be design value or the last known measured value. If there is no change in height, nominal value will be given.
+
+Values shall be given in metres with precision of 0.01 m."""@en .
+
+:numberOfPantographsInContactWithOCL a owl:DatatypeProperty ;
+    rdfs:label "Number of pantographs in contact with OCL"@en ;
+    :eratvIndex "4.10.7" ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2020-11-19"^^xsd:date ;
+    rdfs:comment "Number of pantographs in contact with the overhead contact line (OCL) (to be indicated for each energy supply system the vehicle is equipped for)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:otherPantographHead a owl:ObjectProperty ;
+    rdfs:label "Accepted other pantograph heads"@en ;
+    :XMLName "EPA_OtherHeads" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory only if â€œOverhead contact line (OCL)â€ is selected in 1.1.1.2.2.1.1, otherwise the parameter is not applicable."@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/other-pantograph-heads/OtherPantographHeads> ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.3.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OtherPantographHeadApplicability>,
+        <http://data.europa.eu/949/shapes/OtherPantographHeadSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2022-06-03"^^xsd:date ;
+    dcterms:modified "2022-06-03"^^xsd:date,
+        "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1302/2023-09-28> ;
+    rdfs:comment "Indication of pantograph heads which are allowed to be used."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso """EN 50367:2020+A1:2022: Annex B3
+LOC&PAS TSI: 7.3.2.14 (specific cases)""" ;
+    rdfs:subPropertyOf :pantographObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The parameter may contain more than one type of the pantograph head - all of them shall be indicated by repetition of the parameter with different single selections.
+Additional values than the already identified in the list above are possible. They will be introduced by the Agency on request via a process of change request."""@en .
+
+:permissionChargingElectricEnergyTractionStandstill a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Permission for charging electric energy storage for traction purposes at standstill"@en ;
+    :applicable "Y/N" ;
+    :legalDeadline "Contrary to the Regulation, the deadline is not 30 June 2024 at the latest, but 12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.2.1.0.7.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PermissionChargingElectricEnergyTractionStandstill> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    rdfs:comment "Point at which IM authorises charging of electric energy storage for traction purposes at standstill."@en ;
+    rdfs:domain :ContactLineSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :contactLineSystemDataParameter ;
+    ns1:term_status "stable" .
+
+:permittedContactForce a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Contact force permitted"@en ;
+    :XMLName "ERS_ContactForce" ;
+    :applicable "Y/N" ;
+    :dependencyNote "A value is mandatory if the value  Overhead contact line (OCL)  is selected for parameter \"Type of contact line system\""@en ;
+    :formatNote "The force is either given as: a value of the static force and of the maximum force expressed in newtons, or as a formula for function of the speed" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.5.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PermittedContactForce>,
+        <http://data.europa.eu/949/shapes/PermittedContactForceApplicability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/N> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date ;
+    rdfs:comment "Indication of contact force allowed expressed in newton."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:seeAlso """LOC&PAS TSI: 4.2.8.2.9.6
+ENE TSI: 4.2.11
+EN 50367:2020+A1:2022 Table 6""" ;
+    rdfs:subPropertyOf :requirementsRollingStockDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The formula of the function shall represent the curve describing the value of the contact force in relation to the speed.
+Static and maximum forces are given only for the maximum permitted line speed (see parameter number 1.1.1.1.2.5)."""@en .
+
+:phaseInfoChangeSupplySystem a owl:DatatypeProperty ;
+    rdfs:label "Phase info change supply system"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoChangeSupplySystem> ;
+    dcterms:created "2024-02-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date,
+        "2025-06-09"^^xsd:date ;
+    rdfs:comment "Part of the phase info of a track that corresponds to the single selection of Y=yes or N=no to show if the energy supply system changes"@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoDistanceType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info distance type"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoDistanceType> ;
+    dcterms:created "2024-02-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    rdfs:comment "Part of the phase info of a track that corresponds to the single selection of 'MIN=minimum' or 'MAX=maximum' to show whether the length is a minimum distance between the inner contact strips of the pantographs or a maximum distance between the outer contact strips of the pantographs. Multiple strings for this parameter are accepted."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:raisedPantographsDistance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Requirements for spacing between raised pantographs, at the given speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsDistance> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Part of the raised pantographs distance and speed of a track that corresponds to the minimum distance between pantographs, in metres."@en ;
+    rdfs:domain :RaisedPantographsDistanceAndSpeed ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:definition "The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en .
+
+:raisedPantographsDistanceAndSpeed a owl:DatatypeProperty ;
+    rdfs:label "(deprecated) Requirements for number of raised pantographs and spacing between them, at the given speed"@en ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2023-04-05"^^xsd:date ;
+    rdfs:comment "Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "Deprecated because of replacement by a class and three integer properties The reason is that the property is composed of three values: [N] is number of pantographs; [NNN] is minimum distance between pantographs, in metres; [NNN] is the speed considered in km/h."@en .
+
+:raisedPantographsNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Requirements for number of raised pantographs, at the given speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsNumber> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Part of the raised pantographs distance and speed of a track that corresponds to the number of pantographs."@en ;
+    rdfs:domain :RaisedPantographsDistanceAndSpeed ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:definition "The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en .
+
+:raisedPantographsSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Raised pantographs speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsSpeed> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/KiloM-PER-HR> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date,
+        "2025-05-12"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en ;
+    rdfs:domain :RaisedPantographsDistanceAndSpeed ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:definition "The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en .
+
+:shortestDistanceBetweenPantographsInContactWithOCL a owl:DatatypeProperty ;
+    rdfs:label "Shortest distance between pantographs in contact with OCL"@en ;
+    :eratvIndex "4.10.8" ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-15"^^xsd:date ;
+    rdfs:comment "Shortest distance between two pantographs in contact with the OCL (to be indicated for each energy supply system the vehicle is equipped for; to be indicated for single and, if applicable, multiple operation) (only if number of raised pantographs is more than 1)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:systemSeparationInfoPantographLowered a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation info  pantograph lowered"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoPantographLowered> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    rdfs:comment """Part of the system separation info of a track that shows whether the pantograph has to be lowered.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" .
+
+:tNvcontact a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "T_NVCONTACT"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+    :formatNote "NNN, with N as a digit from 0 to 9. Value NNN = 255 means âˆž (infinity), so values cannot be higher." ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.2.16.8",
+        "1.2.1.1.1.16.8" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TNvcontact>,
+        <http://data.europa.eu/949/shapes/TNvcontactApplicability> ;
+    :tsiOPEAppendixD3Index "1.5.8" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/SEC> ;
+    dcterms:created "2022-11-07"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-12-05"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment """Maximum time without a safe message from Radio Block Center before train reacts in seconds.
+According to the specification referenced in Appendix A-1, index [C]"""@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "255"^^xsd:unsignedInt ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "255"^^xsd:unsignedInt ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "255"^^xsd:unsignedInt ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "255"^^xsd:unsignedInt ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:unsignedInt ;
+            owl:withRestrictions ( [ xsd:minInclusive "0"^^xsd:unsignedInt ] [ xsd:maxInclusive "255"^^xsd:unsignedInt ] ) ] ;
+    rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+    rdfs:subPropertyOf :etcsNationalValuesDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Precision: [NNN], with N a decimal number (0Ã·9), NNN = 255 means âˆž seconds, so values cannot be higher.
+
+See: TSI CCS (Subset 26, chapter 7. 7.5.1.148 T_NVCONTACT)"""@en .
+
+:trackRaisedPantographsDistanceAndSpeed a owl:ObjectProperty ;
+    rdfs:label "Requirements for number of raised pantographs and spacing between them, at the given speed"@en ;
+    :XMLName "EPA_NumRaisedSpeed" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory only if â€œOverhead contact line (OCL)â€ is selected in 1.1.1.2.2.1.1, otherwise the parameter is not applicable."@en ;
+    :formatNote "Three values: [N] is number of pantographs; [NNN] is minimum distance between pantographs, in metres; [NNN] is the speed considered in km/h." ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.3.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrackRaisedPantographDistanceAndSpeedApplicability>,
+        <http://data.europa.eu/949/shapes/TrackRaisedPantographsDistanceAndSpeed> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1301/2023-09-28>,
+        <http://data.europa.eu/eli/reg/2014/1302/2023-09-28> ;
+    rdfs:comment "Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :RaisedPantographsDistanceAndSpeed ;
+    rdfs:seeAlso """ENE TSI: 4.2.13 ;
+LOC&PAS TSI: 4.2.8.2.9.7""" ;
+    rdfs:subPropertyOf :pantographObjParameter ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "Relates the track with the class RaisedPantographsDistanceAndSpeed." ;
+    skos:scopeNote """This parameter gives the information about the number of pantographs and the distance between them at a given speed for which the Overhead Contact Line (OCL) has been designed.
+
+As for different speeds different combinations of number of pantographs and distance between them may exist, so this parameter can be repeated to present all of them.
+
+The raised pantographs distance and speed is the indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed.
+
+See 4.2.13 (TSI ENE) and 4.2.8.2.9.7 (TSI LOC&PAS)"""@en .
+
+:tsiPantographHead a owl:ObjectProperty ;
+    rdfs:label "Accepted TSI compliant pantograph heads"@en ;
+    :XMLName "EPA_TSIHeads" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory only if â€œOverhead contact line (OCL)â€ is selected in 1.1.1.2.2.1.1, otherwise the parameter is not applicable."@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/compliant-pantograph-heads/CompliantPantographHeads> ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.3.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TsiPantographHeadApplicability>,
+        <http://data.europa.eu/949/shapes/TsiPantographHeadSKOS> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2024-09-25"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1302/2023-09-28> ;
+    rdfs:comment "Indication of TSI compliant pantograph heads which are allowed to be used."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso """LOC&PAS TSI: 4.2.8.2.9.2
+EN 50367 (2012): Annex A.2 and EN 50206-1 (2010): 4.2 and 6.2.3""" ;
+    rdfs:subPropertyOf :pantographObjParameter ;
+    ns1:term_status "stable" ;
+    skos:editorialNote "The allowed values for this property belong to the SKOS Concept Scheme http://data.europa.eu/949/concepts/compliant-pantograph-heads/CompliantPantographHeads."@en ;
+    skos:scopeNote """The parameter can contain more than one pantograph defined in LOC&PAS TSI. Presentation of those pantographs is done by repetition of the parameter with a single selection.
+If declaring acceptance of pantograph heads 1950 (type 1), both insulated and conductive horns shall be accepted.
+The head geometry of pantograph type 1600 mm is as depicted in the points 4.2.8.2.9.2.1 of LOC&PAS TSI which refers to EN 50367:2020+A1:2022 Annex A.2 Figure A.6.
+The head geometry of pantograph type 1950 mm is as depicted in the points 4.2.8.2.9.2.2 of LOC&PAS TSI which refers to EN 50367:2020+A1:2022 Annex A.2 Figure A.7.
+The head geometry for pantograph type 2000/2260 mm is depicted in the point 4.2.8.2.9.2.3 of LOC&PAS TSI."""@en .
+
+:energySubsystemDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Energy subsystem"@en ;
+    :rinfIndex "1.1.1.2" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalDataCharacteristic .
+
+:energySubsystemObjParameter a owl:ObjectProperty ;
+    rdfs:label "Energy subsystem"@en ;
+    :rinfIndex "1.1.1.2" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :rinfTechnicalObjectCharacteristic .
+
+:maximumInterferenceCurrent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum interference current"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Evaluation parameters must be added if preferred bands are not used."@en ;
+    :formatNote "NNN. An optional value could be filled in era:maximumInterferenceCurrentEvaluation" ;
+    :legalDeadline """For train detection system compliant with TSIs: 12 months after publication of Article 7 Guide.
+For train detection system not TSI compliant: in relation to article 13 of TSI CCS"""@en ;
+    :rinfIndex "1.1.1.3.4.2.1",
+        "1.2.1.1.3.2.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumInterferenceCurrent> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/A-PER-M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :maximumInterferenceCurrentEvaluation,
+        :trainDetectionSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Maximum interference current limits allowed for track circuits for a defined frequency band."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """To be expressed in A/m. Verification of compliance with TSI includes application of notified national rules (when they exist).
+
+Evaluation parameters must be added if preferred bands are not used. """@en .
+
+:maximumInterferenceCurrentEvaluation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Evaluation parameters if maximum interference current is not measured in the preferred bands"@en ;
+    :dependencyNote """If the preferred frequency bands are not used, (mandatory) description of the parameters for evaluation of compliance.
+If the preferred frequency bands are used, this parameter is optional."""@en ;
+    :rinfIndex "1.1.1.3.4.2.1",
+        "1.2.1.1.3.2.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumInterferenceCurrentEvaluation> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    dcterms:relation :maximumInterferenceCurrent,
+        :trainDetectionSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Maximum interference current limits allowed for track circuits for a defined frequency band. "@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsDataParameter ;
+    ns1:term_status "stable" .
+
+:pantographDataParameter a owl:DatatypeProperty ;
+    rdfs:label "Pantograph"@en ;
+    :rinfIndex "1.1.1.2.3" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :energySubsystemDataParameter .
+
+:phaseInfoKm a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info Km"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoKm> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that indicates the location from the start of the line where the new value is valid."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info length"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoLength> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that corresponds to the length of the phase separation in metres."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoPantographLowered a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info pantograph lowered"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoPantographLowered> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that shows whether a pantograph has to be lowered."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:trackPhaseInfo a owl:ObjectProperty ;
+    rdfs:label "Information on phase separation"@en ;
+    :XMLName "EOS_InfoPhase" ;
+    :applicable "Y/N" ;
+    :dependencyNote "A value is mandatory only if 1.1.1.2.4.1.1 parameter \"Phase separation\" value is \"Y\" (true), otherwise applicability flag is \"N\" (not applicable)"@en ;
+    :formatNote """In RDF the range is an instance of the era:PhaseInfo class with all its properties.
+
+For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, the data format is a character string with the following structure: distance type [MIN/MAX] + length [NNN] + switch off breaker [Y/N] + lower pantograph [Y/N] + km [NNN.NNN]. The structure of the string is as follows:
+- distance type [MIN/MAX] - single selection of 'MIN=minimum' or 'MAX=maximum' to show whether the length is a minimum distance between the inner contact strips of the pantographs or a maximum distance between the outer contact strips of the pantographs. Multiple strings for this parameter are accepted;
+- length [NNN] - the length of the phase separation in meters;
+- switch off breaker [Y/N], single selection of 'yes' or 'no' to show whether the breaker has to be switched off;
+- lower pantograph [Y/N], single selection of 'yes' or 'no' to show whether the pantograph has to be lowered,
+- Km [NNN.NNN] - the location from the start of the line where the new value is valid."""@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.4.1.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrackPhaseInfo>,
+        <http://data.europa.eu/949/shapes/TrackPhaseInfoApplicability> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-06-09"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Relates the Track with PhaseInfo. Indication of required several information on phase separation."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :PhaseInfo ;
+    rdfs:seeAlso "ENE TSI: 4.2.15" ;
+    rdfs:subPropertyOf :oclSeparationSectionsObjParameter ;
+    ns1:term_status "stable" .
+
+:RaisedPantographsDistanceAndSpeed a owl:Class ;
+    rdfs:label "Requirements for number of raised pantographs and spacing between them, at the given speed"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RaisedPantographsDistanceAndSpeedShape> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    rdfs:comment """Indication of maximum number of raised pantographs per train allowed and minimum spacing centre line to centre line of adjacent pantograph heads, expressed in metres, at the given speed.
+Each track can have several raised pantographs per train allowed (structured) values, and each one has values for number of pantographs, minimum distance between pantographs, in metres, and speed considered in km/h."""@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """This class gives the information about the number of pantographs and the distance between them at a given speed for which the Overhead Contact Line (OCL) has been designed.
+As for different speeds different combinations of number of pantographs and distance between them may exist, so this class can be repeated to present all of them."""@en .
+
+:pantographObjParameter a owl:ObjectProperty ;
+    rdfs:label "Pantograph"@en ;
+    :rinfIndex "1.1.1.2.3" ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:subPropertyOf :energySubsystemObjParameter .
+
+:phaseInfo a owl:DatatypeProperty ;
+    rdfs:label "Information on phase separation"@en ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:isReplacedBy :PhaseInfo,
+        :phaseInfoKm,
+        :phaseInfoLength,
+        :phaseInfoPantographLowered,
+        :phaseInfoSwitchOffBreaker,
+        :trackPhaseInfo ;
+    dcterms:modified "2023-04-05"^^xsd:date ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:editorialNote """ Deprecated because of replacement by three properties. The reason is that the property is composed of three values: length [NNN] - the length of the phase separation in metres; switch off breaker [Y/N], single selection of 'yes' or 'no' to show whether the breaker has to be switched off; and lower pantograph [Y/N], single selection of 'yes' or 'no' to show whether the pantograph has to be lowered,
+                   Km [NNN.NNN] - the location from the start of the line where the new value is valid."""@en .
+
+:PhaseInfo a owl:Class ;
+    rdfs:label "Phase info"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoShape> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Indication of required several information on phase separation."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status :stable .
+
+: a owl:Ontology ;
+    rdfs:label "ERA Ontology"@en ;
+    ns2:license <http://data.europa.eu/eli/dec_impl/2017/863/oj> ;
+    dcterms:contributor [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    dcterms:creator [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    dcterms:issued "2024-04-18"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date,
+        "2024-05-24"^^xsd:date,
+        "2024-06-03"^^xsd:date,
+        "2024-06-05"^^xsd:date,
+        "2024-07-05"^^xsd:date,
+        "2024-08-02"^^xsd:date,
+        "2024-08-12"^^xsd:date,
+        "2024-08-13"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-09-20"^^xsd:date,
+        "2024-09-24"^^xsd:date,
+        "2024-09-25"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2024-10-28"^^xsd:date,
+        "2024-10-29"^^xsd:date,
+        "2024-10-30"^^xsd:date,
+        "2024-10-31"^^xsd:date,
+        "2024-11-04"^^xsd:date,
+        "2024-11-05"^^xsd:date,
+        "2024-11-12"^^xsd:date,
+        "2024-11-20"^^xsd:date,
+        "2024-11-22"^^xsd:date,
+        "2024-11-26"^^xsd:date,
+        "2024-11-27"^^xsd:date,
+        "2024-12-02"^^xsd:date,
+        "2024-12-03"^^xsd:date,
+        "2024-12-05"^^xsd:date,
+        "2024-12-10"^^xsd:date,
+        "2024-12-12"^^xsd:date,
+        "2024-12-13"^^xsd:date,
+        "2025-01-30"^^xsd:date,
+        "2025-02-11"^^xsd:date,
+        "2025-02-13"^^xsd:date,
+        "2025-02-18"^^xsd:date,
+        "2025-02-20"^^xsd:date,
+        "2025-03-01"^^xsd:date,
+        "2025-03-05"^^xsd:date,
+        "2025-03-07"^^xsd:date,
+        "2025-03-10"^^xsd:date,
+        "2025-03-11"^^xsd:date,
+        "2025-03-17"^^xsd:date,
+        "2025-03-24"^^xsd:date,
+        "2025-03-26"^^xsd:date,
+        "2025-04-25"^^xsd:date,
+        "2025-05-05"^^xsd:date,
+        "2025-05-06"^^xsd:date,
+        "2025-05-09"^^xsd:date,
+        "2025-05-21"^^xsd:date,
+        "2025-05-26"^^xsd:date,
+        "2025-06-06"^^xsd:date,
+        "2025-06-09"^^xsd:date,
+        "2025-06-16"^^xsd:date ;
+    dcterms:publisher "European Union Agency for Railways" ;
+    dcterms:title "ERA Ontology"@en ;
+    rdfs:comment """This is the human and machine-readable Ontology governed by the European Union Agency for Railways (https://www.era.europa.eu/). It represents the concepts and relationships linked to the sectorial legal framework and the use cases under the AgencyÂ´s remit, as described in the Commission Implementing Regulation (EU) [to be updated after publication] on the common specifications for the register of railway infrastructure [to be updated after publication].
+
+
+Currently, this Ontology covers the European railway infrastructure and the vehicle types authorized to operate over it. It is a semantic/browsable representation of the RINF application guide (1) and ERATV application guide (2) that were built by domain experts in the RINF and ERATV working parties.
+
+The Ontology also includes the route book concepts described in appendix D2 "Elements the infrastructure manager has to provide to the railway undertaking for the Route Book" as presented in the Commission Implementing Regulation (EU) [to be updated after publication] 2019/773 of 16 May 2019 on the technical specification for interoperability relating to the operation and traffic management subsystem of the rail system within the European Union and [to be updated after publication] and the Appendix D3 [to be updated after publication]."""@en ;
+    rdfs:seeAlso "https://www.era.europa.eu/sites/default/files/registers/docs/iu-eratv_application_guide_for_register_2016-797_en.pdf"^^xsd:anyURI,
+        "https://www.era.europa.eu/sites/default/files/registers/docs/rinf_application_guide_for_register_en.pdf"^^xsd:anyURI ;
+    owl:priorVersion "https://gitlab.com/era-europa-eu/public/interoperable-data-programme/era-ontology/era-ontology/-/releases/v3.1.0"^^xsd:anyURI ;
+    owl:versionInfo "v3.1.2" ;
+    owl:versionURI <https://gitlab.com/era-europa-eu/public/interoperable-data-programme/era-ontology/era-ontology/-/releases/v3.1.2> ;
+    skos:changeNote """
+Revision 16-06-2025
+- Added SHACL constraint for era:redLightsRequired country applicability
+
+Revision 09-06-2025
+- Updated the formatNote of era:trackPhaseInfo and era:trackSystemSeparationInfo
+- Deprecated era:phaseInfoChangeSupplySystem and era:systemSeparationInfoChangeSupplySystem
+- Fixed unitOfMeasure annotations that used https://qudt.org/vocab/unit/ (with https) instead of the defined prefix unit (which is with http)
+
+Revision 06-06-2025
+- Add missing axiom era:PrimaryLocation rdfs:subClassOf era:InfrastructureElement
+
+Revision 26-05-2025
+- Fixed the typo in the name of existanceOfIndustrialRisk (-> existenceOfIndustrialRisk) and corrected the legalDeadline according to the legislation
+
+Revision 21-05-2025
+-Removed the XMLName annotation from the new entities
+
+Revision 09-05-2025
+- Added rdfs:label, rdfs:comment, and rdfs:seeAlso to era:vehicleCategory and era:vehicleSubCategory
+
+Revision 06-05-2025
+- Removed the rdfs:subPropertyOf annotation from era:minVehicleImpedanceVoltages
+
+Revision 05-05-2025
+- Removed the RINF annotations (XMLname, rinfIndex, and legalDeadline) from etcsNationalPacket44Function
+- Added the deprecated and isReplacedBy annotations to etcsNationalPacket44 that was missing, and the respective dct:replaces annotations to etcsNationalPacket44Function and hasEtcsNationalPacket44
+- Removed the RINF annotations (XMLname, rinfIndex, and legalDeadline) from etcsRestrictionsConditionsDoc
+
+Revision 30-04-2025
+- added rdfs:subClassOf era:Feature annotation for era:InfrastructureElement and era:NetElement
+
+Revision 25-04-2025
+ - fixed double type on some properties;
+ - added SubsidiaryLocation ->subclass of era:Feature
+ - removed transitivity to fix the reasoner issue
+ - removed the parent-child relation from the era:PrimaryLocation
+
+Revision 26-03-2025
+- remove external unused external classes and properties
+- remove the wgs: prefix and include sf: prefix for the sf:Point
+
+Revision 24-03-2025
+- small revision based on the input of the internal control group
+
+Revision 17-03-2025
+- harmonize the explanation on the RINF parameters as documents
+- remove any unnecessary dcterms:description annotations.
+- overall review of general explanations, examples, following the input of ERA TSI experts
+
+Revision 11-03-2025: annotations harmonization
+- Removed dcterms:source duplicates with same URI different by https
+- Reused rdfs:seeAlso instead of dcterms:source pointing to URLs different from ELI URI legal reference
+- Simple editorial changes based on orthography review
+- Add missing levels in the parameters hierarchy and link them to properties representing RINF parameters
+- Reintroduction of rinfINndex annotations to the hierarchical properties
+
+Revision 10-03-2025
+- Changed the axiom for the era:SubsidiaryLocation
+- Fixes on the relations between kilometric posts and the linear positioning system
+- Property era:inCountry can be part of a subset with common characteristics
+- Property era:infrastructureManager was missing the domain of infrastructure elements
+- Addition of the era:connectedTo property to address a simple connectivity between tracks, as RINF parameter 'internal connectivity'.
+- Adding missing domains on the properties for the RINF parameters 1.1.1.5.x
+- Adding missing domains on the era:notApplicable and era:notYetAvailable property flags
+- Adding axioms on the NetRelation to ensure that all properties are provided
+- Removed duplicate values for era:applicable
+
+Revision 07-03-2025
+- Removed grouping Object properties without subproperties in use:
+   + era:switchesAndCrossingsObjParameter
+   + era:relatedElectromagneticInterferencesObjParameter
+   + era:energySubsystemDeclarationsVerificationTrackObjParameter
+   + era:infraSubsystemDeclarationsVerificationTrackObjParameter
+
+
+Revision 05-03-2025
+- Deprecated era:cantDefficiency
+
+Revision 01-03-2025
+- Updated disjointWith axioms in the following cases:
+  + all subclasses of era:InfrastructureElement
+  + era:Body, era:InfrastructureElement
+  + era:SubsidiaryLocation, era:PrimaryLocation
+  + era:NetRelation and era:NetElement
+  + era:LinearPositioningSystem and era:LinearPositioningSystemCoordinate
+  + era:Feature and era:TemporalFeature
+  + all subclasses of era:NetElement
+
+Revision 28-02-2025
+- General review of the RINF parameters following the comments received from the RINF Work Group and topical Working Groups members and the ERA experts.
+- Additions on the general explanations, format notes and dependency nodes, cleanup duplicate applicability flags, doubles definitions, etc.
+- Addition of missing unit of measure for era:cantDeficiencyBasicSSP
+- Change the domain of some properties to point to the correctgroup of parameters (era:ContactLineSystem)
+- Addition of explanation whenever the XML data set upload is maintained
+
+Revision 20-02-2025
+- Introduction of the era:HABD class for representing the Hot Axle Box Detector
+- Introduction of the era:tracksideHabd property for linking the InfrastructureElement with the HABD
+
+Revision 18-02-2025
+- Added era:inSKOSConceptScheme for the property standardCombinedTransportContainers
+- Updated to stable the term_status for the properties standardCombinedTransportContainers and standardCombinedTransportRollerUnits.
+
+Revision 18-02-2025
+- Added dcterms:replaces in cases where there was a dcterms:isReplacedBy pointing to an entity, but no corresponding replaces in the opposite direction, and vice versa.
+- Removed dcterms:isReplacedBy statements that pointed to entities no longer present in the ontology.
+
+Revision 13-02-2025
+- Deprecation of era:category and era:subCategory and creation of era:vehicleCategory and era:vehicleSubCategory.
+
+Revision 11-02-2025
+- Added annotations to era:etcsNationalPacket44
+- Fixed label and definition of era:linesideDistanceIndication 1.1.1.0.0.3
+- Changed the domain of era:reasonsEtcsRadioBlockCenterReject 1.1.1.3.2.15, 1.2.1.1.1.15 to era:RadioBlockCenter
+- Added axiom subpropertyOf contactLineSystemObjParameter to era:conditionsAppliedRegenerativeBraking 1.1.1.2.2.4.1
+- Deleted editorial note from era:minimumVerticalRadius 1.2.2.0.3.3
+- Added axiom subpropertyOf tunnelDataParameter to era:hasWalkway 1.1.1.1.8.12
+- Removed RINF index from properties used to represent the data format of the RINF parameters (i.e. all ObjParameter and DataParameter properties)
+
+Revision 30-01-2025
+- Fix Issue #145 - remove the era:BasicElement and era:AggregatedElement classes and move the properties with them as domain to the super-class InfrastructureElement. Update of all the classes concerned by the hierarchy of InfrastructureElement based on sub-classes.
+- Partially fix issue #148 with comment: topology is on micro level
+- Changed the range of era:startOffsetFromOrigin and era:endOffsetFromOrigin into xsd:double and the unit of measure M was added for clarification.
+- Added era:existanceOfIndustrialRisk property for defining the RINF parameter 1.1.0.0.1.1
+- Changed era:linesideDistanceIndication according to the decisions of TWG for route book
+- Added era:routeBookDataParameter for the route book parameters hierarchy
+- Added domains for era:operatingLanguage and era:operationalRegimeType
+- Added hierarchy for generic route book related parameter
+- Remove the era:SignalsGrid and all the relations, following the request during a bilateral meeting with Infrabel
+- remove redundant era:kilometerNumber and add more details on era:kilometer
+- Fix issue #104 - adding era:carrierLinearElement
+
+Revision 13-12-2024
+- Added annotations for all SHACL shapes
+
+Revision 12-12-2024:
+- deleted deprecated property http://data.europa.eu/949/signallingSystemType following review, there is no instance of it.
+- Deleted annotation XMLName from properties that are part of FrenchTrainDetectionSystemLimitation, LoadCapability, MaximumMagneticField, MinVehicleImpedance, PhaseInfo, RaisedPantographsDistanceAndSpeed, SystemSeparationInfo
+
+Revision 10-12-2024:
+ - Added the axiom era:Applicability subClassOf era:TemporalFeature
+ - Added range of era:ofParameter
+ - Renamed era:bridge property to era:hasBridge
+ - Added a property era:parameterValue(era:Applicability, rdfs:Resource)
+
+Revision 05-12-2024:
+ - Added restricted ranges for the dataproperties era:dNvovtrp, era:dNvpotrp, era:dNvroll, era:tNvcontact, era:tNvovtrp,
+era:vNvallowovtrp and era:vNvsupovtrp. This partially solves issue #135 for our needs.
+
+Revision 03-12-2024:
+- Fixed domain kmPostName to KilometricPost or LinearPositioningSystem
+- Deleted RINF index for "parts" of compund properties: PhaseInfo, RaisedPantographsDistanceAndSpeed, SystemSeparationInfo, MinVehicleImpedance, frenchTrainDetectionSystemLimitationApplicable, LoadCapability, MaximumMagneticField.
+- Completed some missing property and classes definitions.
+- fix explicit definition of the primary and subsidiary locations.
+- Added era:formatNote property and annotations.
+
+Revision 02-12-2024:
+  - added the Turtle file generated from excel file annotated by ERA.
+  - added annotation era:dependencyNote + language tag @en for corresponding annotations
+
+Revision 27-11-2024
+- Introduced topology and positioning classes and properties (closer to well known topological models)
+- Removed obsolete classes and properties involved in topology and positioning
+- Introduced era:parameterValueType to describe parameter applicability value meaning
+- Bug fixes
+- renamed era:tsiOPEappendixD1Index to era:tsiOPEAppendixD1Index, same for era:tsiOPEappendixD2Index to era:tsiOPEAppendixD2Index and s/era:tsiOPEappendixD3Index/era:tsiOPEAppendixD3Index
+
+Revision 26-11-2024
+- Added definitions to object properties that denote relationships among classes
+- Fixes in hierarchies of CCS, Energy and Infra subsystems
+- Added CommonCharacteristicsSubset to domain of parameterApplicability
+- Added functional property axiom to some properties with domain TrainDetectionSystem and ContactLineSystem
+- Added porperty borderPointId to the class ReferenceBorderPoint
+- Fix RINF index 1.1.1.3.14.5 to 1.1.1.3.14.6 for location
+- Added definition to class Track
+- Renamed the annotation properties era:appendixD2Index and era:appendixD3Index to the corresponding era:tsiOPEAppendixD2Index and era:tsiOPEAppendixD3Index. Created  annotation properties era:tsiOPEappendixD1Index
+
+Revision 22-11-2024
+- Added two annotation properties: era:applicable and era:legalDeadline
+
+Revision 20-11-2024
+- Fix on hierarchy transitionsBetweenSystems parameters and its subproperties
+- Fix domain etcsSytemCompatibilitiy, etcsTransmitsTrackConditions, ETCSTransmittedTrackConditions to ETCS
+- Delete property hasSetOfParameters (duplicate with belongsTo)
+- Added CommonCharacteristics subset to domain of some of the parameters of PlatformEdge, Siding, and Tunnel parameters
+- Removed CommonCharacteristicsSubset from domain of ContactLineSystem, Train DetectionSystem and ETCS
+- Fix 1.1.1.1.8 delete @en tag in RINF index
+- Removed annotation RINF index and change Domain from those RINF parameters that have been deprecated but that are maintained because there also ERATV and removed Track, CommonCharacteristicsSubset from Domain
+- Remove deprecated axiom from trainDetectionSystemSpecificCheck, 1.1.1.3.8.2
+- Added transitive axiom to subsetOf property between two CommonCharacteristicsSubset
+- Deleted datatype property NationalLineIdentification, its metadata added to object property nationalLine netween (Position or SectionOfLin)e and NationalRailwayLine. Added metadata to nationalLineId of NationalRailwayLine.
+-Added functional property axiom to: errorCorrectionsOnBoard, errorCorrectionsOnboardExplanation, conditionsSwitchClassBSystems, roleOf
+- Added CommonCharacteristicsSybset to domain of localRulesOrRestrictions, localRulesOrRestrictionsDoc
+- Modified accelerationLevelCrossing to an object property with range Document
+- Added Siding to domain maxCurrentStandstillPantograph
+- Fix on hierarchy transitionsBetweenSystems Obj and Data properties and its subProperties
+- Added functional property axiom to properties where the domain is ETCS
+- Added rbcID axiom subproperty of dcterms:identifier
+- Added VehicleType to domain in TemperatureRange
+- Divided etcsNationalPacket44 (deprecated) into boolean  hasEtcsNationalPacket44 etcsNationalPacket44Function that points to a taxonomy.
+- Create placeholder skos concept scheme forETCS national packet 44 functions.
+- Changed range hasETCSRestrictionConditions to boolean. Created an object property etcsRestrictionConditionsDoc to point to its Document.
+
+Revision 12-11-2024
+- Deprecated era:imCode. Replaced by organisationCode
+
+Revision 04-11-2024
+- Added metadata (dcterms:modified and  rdfs:isDefinedBy to all ObjParameter and DataParameter properties in the hierarchy of Energy, Infra and CCS subsystems
+- Deleted annotation properties dcterms:modifief and dcterms:modifed
+- Added annotation properties era:affectedProperty, era:affectedClass, era:scope for annotating SHACL shapes
+- Added annotation property era:shaclShapeValidationRule to point from properties to the corresponding shape.
+- Added functional axiom to properties according to RINF app guide (1.6.1) to those properties that have "Can be repeated: N"
+- Removed metadata from length, now a grouping property and place the relevant definitions in the corresponding subproperties. Added subproperty lengthOfVehicle
+- Imported propeties time:hasBeginning and time:hasEnd from Time ontology
+- Updated domain to the class ETCS: era:etcsInfill, era:etcsMVersion, era:etcsSystemCompatibility,  era:etcsTransmittedTrackConditions
+- Changed domain kilometer and kmPostName to Position
+- Changed data properties instructionsSwitchRadioSystems, documentRestrictionPowerConsumption, documentRestrictionPositionContactLineSeparation, conditionsSwitchClassBSystems, conditionsAppliedRegenerativeBraking to object properties with range era:Document
+
+Revision 31-10-2024
+- Added hierarchies for Vehicle and VehicleType characteristics.
+- Deprecated datatype property trainDetectionSystemSpecificCheck, as the same object property exists (points to a SKOS concept scheme)
+- Changes in network and subset with common characteristics proposal (decision meeting 31-10-2024)
+
+Revision 30-10-2024
+- Created the hierarchy of object and datatype properties for CCS system. Updated domain to Track. Added Subset of Common characteristics to domain. Deleted the class CCS subsystem
+- Changed names for classes InfrastructureObject to InfrastructureElement and also their subclasses now BasicElement and AggregatedElement.
+- Axiom for deprecation was deleted for imCode. Its domain is OrganisationRole.
+- Deleted the class TechnicalCharacteristic. Change all domain and ranges where this class appears. Delete the era:parameter property.
+- Deprecated properties certificate, state of VehicleType as the class Certificate was also deprecated. The skos concept scheme for certificate states is moved to folder of deprecated skos.
+- Deleted the property organization between InfrastructureElement and Body (now infrastructureManager is the property that relates the Infrastructure element with the organisation role)
+- Deleted RINF indexes from minAxleLoad and minDistConsecutiveAxles. Properties remain as there are also eratv properties.
+- Deleted lineNationalId as lineNationalIdentification also exists (with complete metadata)
+- Changed name of class and property ETCSLevel and etcsLevel to ETCS and etcs respectively.
+- Added deprecated axiom to property platformEdge.
+
+Revision 29-10-2024
+- Created hierarchy of properties for ccs subsystem and energy subsystem object parameters and ccs subsystem and energy subsystem data parameters. Changed domain to corresponding infrastructure object  and added SubsetWithCommonCharacteristics to domain of these properties.
+- Changed names clases InfrastructureObject, BasicObject and AggregatedObject to InfrastructureElement, BasicElement and AggregatedElement
+
+Revision 28-10-2024
+- Move company code categories SKOS to deprecated SKOS as corresponding property has been deprecated.
+- Deprecated lineNationalId, replaced by nationalLine property. Create a string datatype property nationalLineIdentfication with same annotations than lineNationalId
+- Created property hasOrientation between Signal and Orientation
+- Fixed dcterms:isReplacedBy to hasPosition in deprecated lineReference property
+
+Proposal representation of hierarchy of parameters in the RINF app guide:
+- Add RINF index 1.1.0.0.0.1 and 1.1.1.1.8.1 to the property infrastructureManager
+- Created hierarchy of properties for infrastructure subsystem object parameters and infrastructure subsystem data parameters. Changed domain to corresponding infrastructure object  and added SubsetWithCommonCharacteristics to domain of these properties.
+
+- Proposal for BaseLocation, PrimaryLocation and SubsidiaryLocation
++  Linear Location is now a subclass of BaseLocation
++ Changed domain of location from TopologicalObject to InfrstructureObject
++ Delete axiom InfrastructureObject is subclass of Feature.
++ PrimaryLocation is now a subclass of SpotLocation (no more subclass of an AggregatedObject)
++ Created linkedToPrimaryLocation between a SubsidiaryLocation and a PrimaryLocation
++ Added domain PrimaryLocation to hasPosition
+
+- Proposal on applicability
++ Changed the name of the class Applicability to ParameterApplicability.
++ Changed the name of the property applicability to parameterApplicability with domain InfrastructureObject and range ParameterApplicability
++ Created property era:ofparameter to relate the ParameterApplicability to the parameter it is denoting (a property in the ontology)
+
+
+Revision 25-10-2024
+-Changes according to agreed Organisation proposal:
++ Changed domain of property infrastructureManager to include Network or PrimaryLocation or InfrastructureObject
++ Added roleOf as an inverse property of role. Relation that goes from OrganisationRole to Organisation
++ Updated range of properties vehicleKeeper, manufacturer, allocationCompany to OrganisationRole
+
+- Changes according to agreed Border point proposal:
++ Created class ReferenceBorderPoint that will contain all the listed border points in the RINF application guide.
++ Created object property referenceBorderPoint relating an OP with a reference border point.
++ Deprecated properties opInfoPerCountry and borderPointOf
+
+- property companyCodeCategory was deprecated. companu code categories SKOS was moved to the folder of deprectaed SKOS
+- Class Certificate is deprecated, belongs to the EVR ontology.
+- Properties vehicleTypesCompatibleTrafficLoad and vehiclesCompatibleTrafficLoad are now object properties pointing to the classes VehicleType and Vehicle respectively
+
+Revision 24-10-2024
+- Fix skos:definition to rdfs:label in era:direction property
+
+- Change in Network and Network Resource proposal:
+  + Deleted class NetworkResource
+  + belongsTo has as domain InfrastructureObject
+  + added new property subNetworkOf that relates two networks.
+  + added new property infrastructureManager to relate Network with the Organisation (OrganisationRole).
+  + Add axiom Network is a subclass of AreaLocation
+
+- Change in Position layer proposal
+  + Deprecated LineReference class and lineReference property
+  + Created LinePosition and TrackPosition as subclasses of Position.
+  + Deleted the Referent class.
+  + The domain of kilometer and kmPostName is now LinePosition.
+  + Deleted the carrierObject property
+  + Changed domain of hasPosition to InfrastructureObject
+   + Changed domain of nationalLine to LinePosition
+   + Changed range of lineReferenceTunnelStart and lineReferenceTunnelEnd to LinePosition. Subproperties of hasPosition.
+  + Changed domain and range of referent property to TrackPosition and Track respectively.
+
+Revision 25-09-2024
+- Deprecated minimumTemperature and maximumTemperature as both RINF and ERATV define a temprature range with a list of predefined values.
+- Changed era:trainDetectionSystemSpecificChecks from a data property to an object property (It is a list of predefined values). Added the pointer to its SKOS Concept Scheme.
+- Fixed annotation inSKOSConceptScheme for property era:osmClass
+- Deleted from definitions (rdfs:comment) URIs referring to the source and  added them as dcterms:source annotations. Replaced all rdfs:seeAlso to dcterms:source for consistency in the annotations.
+- Removed duplicate properties appendixD2Index and appendixD3Index, fixed references to point to remaining properties.
+- Fixed 1.2.1.1.2.12 Specific constraints imposed by the GSM-R network, deleted  1.1... RINF index. Fixed 1.1.1.3.3.12 & 1.2.1.1.2.13 as the correct RINF indexes  of "Radio Network ID".
+- Added isReplacedBy annotations to deprecated classes era:Manufacturer and era.VehicleKeeper.
+- Fixed typo ammendment for amendment.
+- Added annotation dcterms:isReplacedBy era:errorCorrectionsOnBoard for era:gsmrErrorCorrectionsOnBoard, era:etcsErrorCorrectionsOnBoard, era:ertmsErrorCorrectionsOnBoard.
+
+Revision 24-09-2024
+- Add annotation in SKOSConceptScheme to era:operationalRegimeType, era:subsidiaryLocationType, era:conditionsUseReflectivePlates, era:standardCombinedTransportRollerUnit, era:linesideDistanceIndicationAppearance  (currently placeholder concept schemes to be developed)
+- Deleted foaf:Project, no Usage in ontology and the concept is not part of the domain.
+- Fix bug era:direction, change skos:definition to rdfs:label
+- Fix Typo definition NationalRailwayLine, Network
+- According to conceptual design import gsp:SpatialObject  sf:LineString, sf:MultiPolygon, sf:Point and also other superclasses in the hierarchy of these classes.
+
+
+Revision 20-09-2024
+- Change era:qNvdriverAdhes to an object property that points to a SKOS concept scheme   (currently a boolean data property)
+- Add era:inSkosConceptScheme for  era:hasOrganisationRole
+- Add era:inSkosConceptScheme for era:operatingLanguage: http://publications.europa.eu/resource/authority/language
+
+Revision 19-09-2024:
+- Added annotations for use of ontology as the RINF AG technical annex;
+- `dcterms:source` refers to ELI URI of the applicable reference legislation (TSI's, regulations)
+- Fixed anyURI for links using skos:seeAlso
+
+
+Revision 13-08-2024:
+- clarified the comment and label for ORG pattern as per issue #74.
+- renamed prefix qudt: to unit: to avoid confusion as per issue #47.
+- merged annexD2Index with appendixD2index as per issue #50.
+- added range and/or domain for annotation properties as per issue #56.
+- fixed label and comment for the properties era:ETCSLevel and era:ETCSLevelType as per issue #60.
+
+Revision 12-08-2024:
+- removed owl:incompatibleWith in a property as per issue #71.
+- Reduced some long labels + split off notes from definition (see issue #45)
+
+Revision 02-08-2024:
+- removed comments from wgs ontology, keeping mininal annotations (issue #51)
+- removed owl:imports axiom (issue #73)
+- Added annotations of time classes used (time:TemporalDuration and time:TemporalEntity)
+- Replaced dcterms:requires by skos:scopeNote per suggested in issue #58.
+- Fixed typos in the range of the properties era:side, era:orientation, era:lrsMethod and era:direction. (issue #69)
+
+Revision 05-07-2024:
+- removed empty prefix and base
+- Changed the reference to previous version to point to release in Github
+- changed dcterms:description with skos:changeNote.
+- removed owl:topDataProperty , owl:topObjectProperty and ^^rdfs:Literal
+
+Revision 05-06-2024:
+- linked with existing (updated) or new SKOS Concepts, related to the TWG RINF CCS;
+- included references and guidelines as in Table 5 of the RINF Application Guide.
+
+Revision 03-06-2024:
+- added properties for the primary and subsidiary locations
+- reuse the organisation ontology to address the ERA stakeholder organisations (bodies) and their roles
+- deprecated classes related to organisation
+- error corrections
+- added several definitions
+
+Revision 24-05-2024:
+- remove of the owl:FunctionalProperty from every object or data property;
+- addition of new classes for the purpose of the Topical Wrokgroup micro-level;
+- reshaping the topology layer, deprecating unused properties and renaming some of the classes
+- reuse of the time ontology for addressing the validity and applicability;
+- remove of the axiom era:TopologicalObject as subclass of era:Feature;
+- changing the domains of multiple data and object properties to subclasses of era:TechnicalCharacteristics;
+- removed some of the relations between tracks, sidings, tunnels, etc.;
+- deprecated the properties addressing the validity;
+- TODO: deprecate unused properties from version 3.0.0;
+
+Revision 18-04-2024:
+- updated as per results of the Topical Working Group RINF-CCS (Draft report 0.2);
+- include upcoming remarks from TWG members (inclusing those as documented in Report 0.3);
+- linked with existing (updated) or new SKOS Concepts, related to the TWG RINF CCS;
+- included references and guidelines as in Table 5 of the RINF Application Guide."""@en .
+

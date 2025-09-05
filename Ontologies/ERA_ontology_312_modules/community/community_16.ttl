@@ -1,0 +1,1209 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Bridge owl:disjointWith :PlatformEdge,
+        :RunningTrack,
+        :Siding,
+        :Track .
+
+:HABD owl:disjointWith :PlatformEdge,
+        :Track .
+
+:KilometricPost owl:disjointWith :PlatformEdge,
+        :Track .
+
+:LevelCrossing owl:disjointWith :PlatformEdge,
+        :RunningTrack,
+        :Siding,
+        :Track .
+
+:connectedTo a owl:IrreflexiveProperty,
+        owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "connected to"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.0.1.2",
+        "1.2.4.1" ;
+    dcterms:created "2025-03-10"^^xsd:date ;
+    rdfs:comment "Represents a bidirectional connection between two Track instances."@en ;
+    rdfs:domain :Track ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Track ;
+    rdfs:seeAlso :NetElement,
+        :NetRelation ;
+    rdfs:subPropertyOf :trackGenericObjParameter ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Internal connection"@en,
+        "Tracks connectivity to operational points"@en ;
+    skos:example "Track_A connectedTo Track_B implies Track_B connectedTo Track_A."@en ;
+    skos:scopeNote """This property defines a connection between two tracks. It is symmetric, meaning if a track A is connected to track B, then track B is also connected to track A. A track cannot be connected to itself (irreflexive property).
+Used to indicate connectivity between track instances in a network, ensuring that connections are non-self-referential and in the normal running direction of the track.
+
+This is a simplistic representation of the internal connectivity of the tracks in an operational point or the connectivity of the tracks between operational points and sections of line.
+For a more detailed representation of connectivity and navigability, this information should be available on the topology of the network."""@en .
+
+:hasBridge a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Has bridge"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasBridge> ;
+    dcterms:created "2024-12-10"^^xsd:date ;
+    rdfs:domain :RunningTrack ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" ;
+    skos:definition "Whether or not a track is associated with a bridge."@en .
+
+:lengthOfPlatform a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Usable length of platform"@en ;
+    :XMLName "IPL_Length" ;
+    :applicable "Y/N" ;
+    :formatNote "NNNN" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.1.0.6.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LengthP> ;
+    :tsiOPEAppendixD2Index "2.3.6",
+        "3.2.3" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2024-05-16"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28>,
+        <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "The maximum continuous length (expressed in metres) of that part of platform in front of which a train is intended to remain stationary in normal operating conditions for passengers to board and alight from the train, making appropriate allowance for stopping tolerances."@en ;
+    rdfs:domain :PlatformEdge ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:seeAlso """INF TSI: 4.2.1, 4.2.9.1
+OPE TSI: 4.2.2.5.2, 4.2.2.7.2""" ;
+    rdfs:subPropertyOf :length,
+        :platformDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Platform dimensions are always related to one neighbouring track at a time.
+So, if two tracks are along a platform, this platform should be divided into two RINF platforms to have precise description of each."""@en .
+
+:lengthOfSiding a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Usable length of siding"@en ;
+    :XMLName "IPP_Length" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.2.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LengthS> ;
+    :tsiOPEAppendixD2Index "3.2.3" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2024-05-16"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Total length of the siding/stabling track expressed in metres where trains can be parked safely."@en ;
+    rdfs:domain :Siding ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :length,
+        :sidingDataParameter ;
+    ns1:term_status "stable" .
+
+:passesThroughTunnel a owl:ObjectProperty ;
+    rdfs:label "Passes through tunnel"@en ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    rdfs:comment "References a tunnel that a track goes through."@en ;
+    rdfs:domain :RunningTrack ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Tunnel ;
+    owl:deprecated true .
+
+:platformEdge a owl:ObjectProperty ;
+    rdfs:label "Platform edge"@en ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2023-11-10"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    rdfs:comment "Reference to a related platform edge."@en ;
+    rdfs:domain :RunningTrack ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :PlatformEdge ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:platformId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Identification of platform"@en ;
+    :XMLName "OPTrackPlatformIdentification" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.1.0.6.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NoRepeatedPlatformIdsOP>,
+        <http://data.europa.eu/949/shapes/PlatformId> ;
+    :tsiOPEAppendixD2Index "2.3.5" ;
+    dcterms:created "2021-09-13"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Unique platform identification or unique platform number within an Operational Point."@en ;
+    rdfs:domain :PlatformEdge ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :platformDataParameter ;
+    ns1:term_status "stable" .
+
+:sidingId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Identification of siding"@en ;
+    :XMLName "OPSidingIdentification" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.0.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NoRepeatedSidingIds>,
+        <http://data.europa.eu/949/shapes/SidingId> ;
+    :tsiOPEAppendixD2Index "2.2.1",
+        "2.2.1.4" ;
+    dcterms:created "2021-09-13"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Unique siding identification or number within an Operational Point."@en ;
+    rdfs:domain :Siding ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :sidingDataParameter,
+        dcterms:identifier ;
+    ns1:term_status "stable" .
+
+:trackDirection a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Normal running direction"@en ;
+    :XMLName "SOLTrackDirection" ;
+    :applicable "Y" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/track-running-directions/TrackRunningDirections> ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.0.0.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SoLTrackDirectionMaxCount>,
+        <http://data.europa.eu/949/shapes/SoLTrackDirectionMinCount>,
+        <http://data.europa.eu/949/shapes/TrackDirectionSKOS> ;
+    :tsiOPEAppendixD2Index "2.2.1.1" ;
+    dcterms:created "2021-09-09"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment """The normal running direction is:
+- the same as the direction defined by the start and end of the SoL: (N)
+- the opposite to the direction defined by the start and end of the SoL: (O)
+- both directions: (B)"""@en ;
+    rdfs:domain :RunningTrack ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    rdfs:subPropertyOf :trackGenericObjParameter ;
+    ns1:term_status "stable" .
+
+:trackId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Identification of track"@en ;
+    :XMLName "OPTrackIdentification",
+        "SOLTrackIdentification" ;
+    :applicable "Y" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.0.0.1",
+        "1.2.1.0.0.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NoRepeatedTrackIdsOP>,
+        <http://data.europa.eu/949/shapes/NoRepeatedTrackIdsSoL>,
+        <http://data.europa.eu/949/shapes/TrackId> ;
+    :tsiOPEAppendixD2Index "2.2.1.1" ;
+    dcterms:created "2021-09-09"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-08"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Unique track identification or unique track number within operational point or section of line"@en ;
+    rdfs:domain :RunningTrack ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :trackGenericDataParameter,
+        dcterms:identifier ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Each track shall have unique identification or number within the SoL. This number cannot be used for naming any other track in the same SoL.
+The check regarding the uniqueness of the ID within the SoL has to be done on national level (preferably by IM)."""@en .
+
+:OperationalPoint owl:disjointWith :PlatformEdge,
+        :Track .
+
+:PrimaryLocation owl:disjointWith :Track .
+
+:RadioBlockCenter owl:disjointWith :Track .
+
+:SectionOfLine owl:disjointWith :Track .
+
+:SpecialArea owl:disjointWith :Track .
+
+:siding a owl:ObjectProperty ;
+    rdfs:label "Siding"@en ;
+    dcterms:created "2021-08-10"^^xsd:date ;
+    dcterms:isReplacedBy :hasPart ;
+    dcterms:modified "2021-08-10"^^xsd:date,
+        "2024-11-11"^^xsd:date ;
+    rdfs:comment "Reference to a related siding."@en ;
+    rdfs:domain :OperationalPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Siding ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:track a owl:ObjectProperty ;
+    rdfs:label "Track"@en ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:isReplacedBy :hasPart ;
+    dcterms:modified "2021-09-09"^^xsd:date,
+        "2024-11-11"^^xsd:date ;
+    rdfs:comment "Reference to a related railway track."@en ;
+    rdfs:domain [ ],
+        [ ],
+        [ ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :RunningTrack ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:hasPart dcterms:replaces :siding,
+        :track .
+
+:Signal owl:disjointWith :Track .
+
+:Switch owl:disjointWith :Track .
+
+:PlatformEdge a owl:Class ;
+    rdfs:label "Platform edge"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PlatformEdgeShape> ;
+    dcterms:created "2021-08-02"^^xsd:date ;
+    dcterms:modified "2023-11-10"^^xsd:date,
+        "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    rdfs:comment "Platform for the purpose of RINF is understood as a platform edge. A platform concerns only the part of the structure neighbouring to the track (interfaced with trains)."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :PrimaryLocation,
+        :RadioBlockCenter,
+        :RunningTrack,
+        :SectionOfLine,
+        :Siding,
+        :Signal,
+        :SpecialArea,
+        :Switch,
+        :Track,
+        :Tunnel ;
+    ns1:term_status "stable" .
+
+:Track a owl:Class ;
+    rdfs:label "Track"@en ;
+    dcterms:created "2024-11-20"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    rdfs:comment "A pair of rails over which rail borne vehicles can run."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :Tunnel .
+
+:Siding a owl:Class ;
+    rdfs:label "Siding"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SidingShape> ;
+    dcterms:created "2021-08-10"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-11-20"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/2020-06-16> ;
+    rdfs:comment "Sidings are all those tracks where running trains in service movements ends and which are not used for operational routing of a train."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :Track ;
+    owl:disjointWith :Signal,
+        :Switch,
+        :Tunnel ;
+    ns1:term_status "stable" ;
+    skos:definition "Siding - Any track(s) within an operational point which is not used for operational routing of a train."@en .
+
+:RunningTrack a owl:Class ;
+    rdfs:label "Running track"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RunningTrackShape> ;
+    dcterms:created "2020-07-29"^^xsd:date ;
+    dcterms:modified "2022-07-07"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2024-11-20"^^xsd:date ;
+    rdfs:comment "A running track means any track used for train service movements; passing loops and meeting loops on plain line or track connections only required for train operation are not published"@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :Track ;
+    owl:disjointWith :Siding,
+        :Signal,
+        :Switch,
+        :Tunnel ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "There might be more than one track within the Section of Line, so then the whole set of data for track has to be repeated for each track within the SoL."@en .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :Track .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Track .
+
+[] rdf:first :Track .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Track .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :Track .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :Siding .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Track .
+
+[] rdf:first :Track .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Track .
+
+[] rdf:first :Track .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Track .
+
+[] rdf:first :Track .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :Siding .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Track .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Track .
+
+[] rdf:first :Track .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Track .
+
+[] rdf:first :Track .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :Track .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :Siding .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Siding .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :PlatformEdge .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :Track .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+
+[] rdf:first :RunningTrack .
+

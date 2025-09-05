@@ -1,0 +1,46 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasAffectedLocation a owl:ObjectProperty ;
+    rdfs:label "has AffectedLocation" ;
+    rdfs:domain :ReceiptConfirmationMessage ;
+    rdfs:range :AffectedLocation .
+
+:AffectedLocation a owl:Class ;
+    rdfs:label "AffectedLocation" ;
+    rdfs:comment "Affected location " .
+
+:ReceiptConfirmationMessage a owl:Class ;
+    rdfs:label "ReceiptConfirmationMessage" ;
+    rdfs:comment """This message is sent from the recipient of a message to the original
+				sender of the message when the required response cannot be made available within 5
+				minutes as defined by the TAF TSI chapter 4.4. The identifiers in this message have
+				to be same as those that have come from sender. The same applies to type-of-request
+				and type-of-information.""" .
+
+[] rdf:first :ReceiptConfirmationMessage .
+
+[] rdf:first :AffectedLocation .
+
+[] rdf:first :ReceiptConfirmationMessage .
+
+[] rdf:first :ReceiptConfirmationMessage .
+
+[] rdf:first :ReceiptConfirmationMessage .
+
+[] rdf:first :ReceiptConfirmationMessage .
+
+[] rdf:first :AffectedLocation .
+
+[] rdf:first :ReceiptConfirmationMessage .
+
+[] rdf:first :ReceiptConfirmationMessage .
+
+[] rdf:first :ReceiptConfirmationMessage .
+
+[] rdf:first :AffectedLocation .
+
+[] rdf:first :ReceiptConfirmationMessage .
+

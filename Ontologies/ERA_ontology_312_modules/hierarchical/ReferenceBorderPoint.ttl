@@ -1,0 +1,26 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:borderPointId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Border point identification"@en ;
+    dcterms:created "2024-11-26"@en ;
+    rdfs:comment "Border point identification in the list of reference border points in the RINF application guide."@en ;
+    rdfs:domain :ReferenceBorderPoint ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    ns1:term_status "stable" .
+
+:ReferenceBorderPoint a owl:Class ;
+    rdfs:label "Reference border point"@en ;
+    dcterms:created "2024-10-24"^^xsd:date ;
+    dcterms:replaces :borderPointOf,
+        :opInfoPerCountry ;
+    rdfs:comment "List of reference border points that are specified in the RINF Application Guide."@en ;
+    rdfs:isDefinedBy : .
+

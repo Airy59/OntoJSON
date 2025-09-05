@@ -1,0 +1,238 @@
+###  http://creativecommons.org/ns#license
+<http://creativecommons.org/ns#license> rdf:type owl:AnnotationProperty .
+
+
+###  http://data.europa.eu/949/XMLName
+:XMLName rdf:type owl:AnnotationProperty ;
+         <http://purl.org/dc/terms/created> "2023-05-26"^^xsd:date ;
+         <http://purl.org/dc/terms/modified> "2024-08-13"^^xsd:date ;
+         rdfs:comment "Corresponding XML name as indicated in the RINF application guide"@en ;
+         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+         rdfs:label "XML name"@en ;
+         rdfs:seeAlso "https://www.era.europa.eu/sites/default/files/registers/docs/rinf_application_guide_for_register_en.pdf"^^xsd:anyURI ;
+         rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/affectedClass
+:affectedClass rdf:type owl:AnnotationProperty ;
+               <http://purl.org/dc/terms/created> "2024-11-04"^^xsd:date ;
+               rdfs:comment "Annotation property used in SHACL shapes. Name of the classes that are the subject of properties that are being validated in a SHACL shape."@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "affected Class"@en ;
+               rdfs:range xsd:anyURI .
+
+
+###  http://data.europa.eu/949/affectedProperty
+:affectedProperty rdf:type owl:AnnotationProperty ;
+                  <http://purl.org/dc/terms/created> "2024-11-04"^^xsd:date ;
+                  rdfs:comment "Annotation property used in SHACL shapes. Name of the properties that are being validated in a SHACL shape."@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "affected Property"@en ;
+                  rdfs:range xsd:anyURI .
+
+
+###  http://data.europa.eu/949/applicable
+:applicable rdf:type owl:AnnotationProperty ;
+            <http://purl.org/dc/terms/created> "2024-11-22"^^xsd:date ;
+            rdfs:comment "Annotation used to point to the applicability of a parameter in RINF. Values are Y/N/NYA"@en ;
+            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+            rdfs:label "applicable"@en ;
+            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+            rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/canonicalURI
+:canonicalURI rdf:type owl:AnnotationProperty ;
+              <http://purl.org/dc/terms/created> "2022-12-13"^^xsd:date ;
+              <http://purl.org/dc/terms/modified> "2024-02-06"^^xsd:date ;
+              rdfs:comment """The canonical URI is defined for each instance of an Infrastructure element, e.g. section of line, operational point, track, tunnel, siding.
+Objects of the infrastructure generated through RML mappings include (when provided) their validity start and end dates. With its identifier, plus all identifiers of its \"parent\" elements, and its validity dates, a hash URI is generated.
+The canonical URI is the element's URI with its identifiers and without the validity dates. All of the hash URIs of an element point to its canonical URI.
+Additionally, SoLs point to the canonical URIs of their start OP and end OP."""@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "Canonical URI"@en ;
+              rdfs:range xsd:anyURI ;
+              rdfs:domain :InfrastructureElement .
+
+
+###  http://data.europa.eu/949/dependencyNote
+:dependencyNote rdf:type owl:AnnotationProperty ;
+                <http://purl.org/dc/terms/created> "2024-12-02"^^xsd:date ;
+                rdfs:comment "This property is used to specify dependencies in natural language not covered by skos:scopeNote"@en ;
+                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                rdfs:label "dependency note"@en ;
+                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/eratvIndex
+:eratvIndex rdf:type owl:AnnotationProperty ;
+            <http://purl.org/dc/terms/created> "2020-11-03"^^xsd:date ;
+            <http://purl.org/dc/terms/modified> "2020-11-03"^^xsd:date ,
+                                                "2024-08-13"^^xsd:date ;
+            rdfs:comment "Index code used in the original definition of a parameter in ERATV."@en ;
+            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+            rdfs:label "ERATV index"@en ;
+            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+            rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/formatNote
+:formatNote rdf:type owl:AnnotationProperty ;
+            <http://purl.org/dc/terms/created> "2024-12-03"^^xsd:date ;
+            rdfs:comment "This property is used to annotate in human readable the format of parameters"@en ;
+            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+            rdfs:label "format note"@en ;
+            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+            rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/hashSource
+:hashSource rdf:type owl:AnnotationProperty ;
+            <http://purl.org/dc/terms/created> "2024-02-06"^^xsd:date ;
+            rdfs:comment "This property indicates for each infrastructure element, the source, i.e. the identifier  or key that was input to the hash function in order to generate the hash value that is part of the hash URI."@en ;
+            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+            rdfs:label "Hash source"@en ;
+            rdfs:range xsd:string ;
+            rdfs:domain :InfrastructureElement .
+
+
+###  http://data.europa.eu/949/inSkosConceptScheme
+:inSkosConceptScheme rdf:type owl:AnnotationProperty ;
+                     <http://purl.org/dc/terms/created> "2022-11-17"^^xsd:date ;
+                     <http://purl.org/dc/terms/modified> "2024-08-13"^^xsd:date ;
+                     rdfs:comment "Property that links an object SKOS property to a the URI of the corresponding SKOS Concept Scheme."@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "in SKOS Concept Scheme"@en ;
+                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                     rdfs:range <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
+                     rdfs:domain owl:ObjectProperty .
+
+
+###  http://data.europa.eu/949/legalDeadline
+:legalDeadline rdf:type owl:AnnotationProperty ;
+               <http://purl.org/dc/terms/created> "2024-11-22"^^xsd:date ;
+               rdfs:comment "Annotation used to point to legal obligation of a parameter in RINF"@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "legal deadline"@en ;
+               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+               rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/rinfIndex
+:rinfIndex rdf:type owl:AnnotationProperty ;
+           <http://purl.org/dc/terms/created> "2020-11-03"^^xsd:date ;
+           <http://purl.org/dc/terms/modified> "2020-11-03"^^xsd:date ,
+                                               "2024-08-13"^^xsd:date ;
+           rdfs:comment "Index code used in the original definition of a parameter in RINF."@en ;
+           rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+           rdfs:label "RINF index"@en ;
+           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+           rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/scope
+:scope rdf:type owl:AnnotationProperty ;
+       <http://purl.org/dc/terms/created> "2024-11-04"^^xsd:date ;
+       rdfs:comment "Annotation property used in SHACL shapes. Indicates if the SHACL shape is validating a property of a specific instance (\"local\"), or if it needs to check other instances (\"global\"). For example, SHACL shape to validate no repeated ids within a specific track."@en ;
+       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+       rdfs:label "scope"@en ;
+       rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/shaclShapeValidationRule
+:shaclShapeValidationRule rdf:type owl:AnnotationProperty ;
+                          <http://purl.org/dc/terms/created> "2024-11-04"^^xsd:date ;
+                          rdfs:comment "Annotation used to point to the SHACL shape that implements the validation for a certain RINF parameter (property). Each shape contains constraints for valid datatypes, patterns, min and max count, valid SKOS values and business rules."@en ;
+                          rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                          rdfs:label "SHACL shape validation rule"@en .
+
+
+###  http://data.europa.eu/949/tentReference
+:tentReference rdf:type owl:AnnotationProperty ;
+               <http://purl.org/dc/terms/created> "2024-11-26"^^xsd:date ;
+               rdfs:comment "Used to annotate properties coming from the TenT regulations, to be used for monitoring the provision of the data."@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "TenT reference"@en ;
+               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+               rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/tsiOPEAppendixD1Index
+:tsiOPEAppendixD1Index rdf:type owl:AnnotationProperty ;
+                       <http://purl.org/dc/terms/created> "2024-11-26"^^xsd:date ;
+                       rdfs:comment "The index of a vocabulary term in Appendix D1 Vehicle and train Route compatibility checks."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "TSI operation appendix D1 index"@en ;
+                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                       <http://www.w3.org/2004/02/skos/core#altLabel> "Appendix D1 index"@en ;
+                       rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/tsiOPEAppendixD2Index
+:tsiOPEAppendixD2Index rdf:type owl:AnnotationProperty ;
+                       <http://purl.org/dc/terms/created> "2022-11-04"^^xsd:date ;
+                       <http://purl.org/dc/terms/modified> "2024-08-13"^^xsd:date ,
+                                                           "2024-11-26"^^xsd:date ;
+                       rdfs:comment "The index of a vocabulary term in Appendix D2 Elements the infrastructure manager has to provide to the railway undertaking for the Route Book from the document Commission Implementing Regulation (EU) 2019/773 of 16 May 2019 on the technical specification for interoperability relating to the operation and traffic management subsystem of the rail system within the European Union and repealing Decision 2012/757/EU."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "TSI operation appendix D2 index"@en ;
+                       <http://www.w3.org/2004/02/skos/core#altLabel> "Appendix D2 index"@en ;
+                       <http://www.w3.org/2004/02/skos/core#definition> "The index of a vocabulary term in Appendix D2 Elements the infrastructure manager has to provide to the railway undertaking for the Route Book from the document Commission Implementing Regulation (EU) 2019/773 of 16 May 2019 on the technical specification for interoperability relating to the operation and traffic management subsystem of the rail system within the European Union and repealing Decision 2012/757/EU."@en ;
+                       rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/tsiOPEAppendixD3Index
+:tsiOPEAppendixD3Index rdf:type owl:AnnotationProperty ;
+                       <http://purl.org/dc/terms/created> "2022-11-04"^^xsd:date ;
+                       <http://purl.org/dc/terms/modified> "2024-08-13"^^xsd:date ,
+                                                           "2024-11-26"^^xsd:date ;
+                       rdfs:comment "The index of a vocabulary term in Appendix D3 ERTMS trackside engineering information relevant to operation that the infrastructure manager shall provide to the railway undertaking."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "TSI operation appendix D3 index"@en ;
+                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                       <http://www.w3.org/2004/02/skos/core#altLabel> "Appendix D3 index"@en ;
+                       rdfs:range xsd:string .
+
+
+###  http://data.europa.eu/949/unitOfMeasure
+:unitOfMeasure rdf:type owl:AnnotationProperty ;
+               <http://purl.org/dc/terms/created> "2024-05-16"^^xsd:date ;
+               <http://purl.org/dc/terms/modified> "2024-08-13"^^xsd:date ;
+               rdfs:comment "Magnitude of a quantity, defined and adopted by convention or by law, that is used as a standard for measurement of the same kind of quantity."@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "Unit of measure"@en ;
+               rdfs:range <http://qudt.org/vocab/unit/> ;
+               rdfs:domain owl:DatatypeProperty .
+
+
+###  http://data.europa.eu/949/usedInRCCCalculations
+:usedInRCCCalculations rdf:type owl:AnnotationProperty ;
+                       <http://purl.org/dc/terms/created> "2023-04-12"^^xsd:date ;
+                       rdfs:comment "Indicates whether a RINF parameter is used in Route Compatibility Check calculations according to Commission Implementing Regulation (EU) 2019/773 of 16 May 2019 on the technical specification for interoperability relating to the operation and traffic management subsystem of the rail system within the European Union and repealing Decision."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Parameter is used in Route Compatibility Check (RCC) calculations"@en ;
+                       rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg_impl/2019/773/oj#:~:text=Commission%20Implementing%20Regulation"^^xsd:anyURI ;
+                       rdfs:range xsd:boolean .
+
+
+###  http://purl.org/dc/terms/contributor
+<http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/created
+<http://purl.org/dc/terms/created> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/date
+<http://purl.org/dc/terms/date> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/isReplacedBy
+<http://purl.org/dc/terms/isReplacedBy> rdf:type owl:AnnotationProperty .
+
+

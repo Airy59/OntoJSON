@@ -1,0 +1,60 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:CheckingDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CheckingDateTime" ;
+    rdfs:comment "Date and Time when the check was performed" ;
+    rdfs:domain :RID_Checking ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CheckingResults a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CheckingResults" ;
+    rdfs:comment """Description of the checks' results (in conjunction with
+							the element CheckingType) and possible need for follow-up: 01 Results
+							OK, no follow up needed during transportation 02 Results OK, but follow
+							up needed during transportation 03 Results not OK, transportation
+							rejected""" ;
+    rdfs:domain :RID_Checking ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CheckingType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CheckingType" ;
+    rdfs:comment """Following types of checks are authorised (RID 1.4.3):
+							Carrier: 01 Prescribed documentation attached to transport docuemnt 02
+							Defects, leackages, cracks, missing equipment on wagons or equipment
+							Loader: 11 Damage of packing 12 Compliance with prohibition on mixed
+							loading 13 Uncleaned empty package Filler: 21 Date of next inspection of
+							wagons 22 DG is filled only into authorized tanks 23 Permissible level
+							of filling 24 Plackards, plates from RID chapter 5.3 are visible on
+							wagon 25 Correct Closure of wagons / tanks 26 Leackage on wagons / tanks
+							Unloader: 31 Damage of packages or of tanks 32 Required DG documentation
+							available 33 Cleaning, degasing, decontamination of wagons from residues
+							34 Plackards, plates from RID chapter 5.3 are removed from wagon """ ;
+    rdfs:domain :RID_Checking ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCheckingBody a owl:ObjectProperty ;
+    rdfs:label "has CheckingBody" ;
+    rdfs:domain :RID_Checking ;
+    rdfs:range :CheckingBody .
+
+:hasCheckingLocation a owl:ObjectProperty ;
+    rdfs:label "has CheckingLocation" ;
+    rdfs:domain :RID_Checking ;
+    rdfs:range :CheckingLocation .
+
+:hasRID_Checking rdfs:range :RID_Checking .
+
+:RID_Checking a owl:Class ;
+    rdfs:label "RID_Checking" ;
+    rdfs:comment """When RID DG is transported in the train the Ru has to transmit here
+				the RID check results from the Carrier, Loader, Filler and Unloader """ .
+

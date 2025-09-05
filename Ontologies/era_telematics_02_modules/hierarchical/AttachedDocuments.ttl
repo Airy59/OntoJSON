@@ -1,0 +1,64 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DocumentInformation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DocumentInformation" ;
+    rdfs:comment """Additional information
+																regarding the attached document may
+																be entered here.""" ;
+    rdfs:domain :AttachedDocuments ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DocumentType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DocumentType" ;
+    rdfs:comment """Type code of attached
+																document. The UN/DIFACT 1001 list of
+																codes is to be used to code
+																accompanying documents.""" ;
+    rdfs:domain :AttachedDocuments ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DocumentTypeDescription a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DocumentTypeDescription" ;
+    rdfs:comment """Description of
+																document type, when it is not in the
+																UN/EDIFACT 1001 list included.""" ;
+    rdfs:domain :AttachedDocuments ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Filename a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Filename" ;
+    rdfs:comment """Filename of embedded
+																pdf in legacy system""" ;
+    rdfs:domain :AttachedDocuments ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:StatusOfDocument a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "StatusOfDocument" ;
+    rdfs:comment """ Enumerated value for the status of the attached document 1 = not
+				electronical attached 2 embedded in ECTD, ECN or PCN """ ;
+    rdfs:domain :AttachedDocuments ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasAttachedDocuments rdfs:range :AttachedDocuments .
+
+:AttachedDocuments a owl:Class ;
+    rdfs:label "AttachedDocuments" ;
+    rdfs:comment """Paper documents accompanying the
+													transport""" .
+
+[] rdf:first :AttachedDocuments .
+

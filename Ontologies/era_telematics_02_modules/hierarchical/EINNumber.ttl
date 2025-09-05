@@ -1,0 +1,44 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:CounterAcreditedRecognizedBody a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CounterAcreditedRecognizedBody" ;
+    rdfs:domain :EINNumber ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EINCounter a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EINCounter" ;
+    rdfs:domain :EINNumber ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EINYear a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EINYear" ;
+    rdfs:domain :EINNumber ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeDocumentEIN a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeDocumentEIN" ;
+    rdfs:comment """Code List Candidate:
+																31, 34""" ;
+    rdfs:domain :EINNumber ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasEINNumber rdfs:range :EINNumber .
+
+:EINNumber a owl:Class ;
+    rdfs:label "EINNumber" ;
+    rdfs:comment """ECM certificate reference number
+													NOTE: this is a placeholder! CR 335 by ERA is
+													containing this element and its full description
+													and code lists.""" .
+

@@ -1,0 +1,27 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:EventType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EventType" ;
+    rdfs:comment "Type of event" ;
+    rdfs:domain :Event ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasEvent rdfs:range :Event .
+
+:hasEventLocationInformation a owl:ObjectProperty ;
+    rdfs:label "has EventLocationInformation" ;
+    rdfs:domain :Event ;
+    rdfs:range :EventLocationInformation .
+
+:Event a owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "Information belonging to the event" .
+
+[] rdf:first :Event .
+

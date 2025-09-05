@@ -1,0 +1,38 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:WagonTrainPosition a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonTrainPosition" ;
+    rdfs:comment """Identifies the position of a wagon within a train. Sequential number
+				starting with the first wagon at the front of train as NÂ°1.""" ;
+    rdfs:domain :WagonData ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasIntermodalTransportData a owl:ObjectProperty ;
+    rdfs:label "has IntermodalTransportData" ;
+    rdfs:domain :WagonData ;
+    rdfs:range :IntermodalTransportData .
+
+:hasWagonData rdfs:range :WagonData .
+
+:hasWagonOperationalData a owl:ObjectProperty ;
+    rdfs:label "has WagonOperationalData" ;
+    rdfs:domain :WagonData ;
+    rdfs:range :WagonOperationalData .
+
+:hasWagonTechData a owl:ObjectProperty ;
+    rdfs:label "has WagonTechData" ;
+    rdfs:domain :WagonData ;
+    rdfs:range :WagonTechData .
+
+:WagonData a owl:Class ;
+    rdfs:label "WagonData" ;
+    rdfs:comment "Wagon relevant data for the wagons within a running train" .
+
+[] rdf:first :WagonData .
+

@@ -1,0 +1,60 @@
+{
+  "source_file": "../examples/person_ontology.owl",
+  "total_classes": 4,
+  "total_properties": 11,
+  "total_individuals": 2,
+  "strategies": {
+    "hierarchical": {
+      "metrics": {
+        "partitions": 3,
+        "inter_edges": 6,
+        "intra_edges": 9,
+        "coupling": 0.4,
+        "cohesion": 0.6,
+        "min_size": 2,
+        "max_size": 13,
+        "avg_size": 6.333333333333333
+      },
+      "partitions": {
+        "Address": 4,
+        "Organization": 2,
+        "misc": 13
+      }
+    },
+    "community": {
+      "metrics": {
+        "partitions": 5,
+        "inter_edges": 6,
+        "intra_edges": 17,
+        "coupling": 0.2608695652173913,
+        "cohesion": 0.7391304347826086,
+        "min_size": 1,
+        "max_size": 7,
+        "avg_size": 3.8
+      },
+      "partitions": {
+        "community_0": 7,
+        "community_1": 5,
+        "community_2": 5,
+        "community_4": 1,
+        "community_3": 1
+      }
+    },
+    "domain": {
+      "metrics": {
+        "partitions": 2,
+        "inter_edges": 2,
+        "intra_edges": 13,
+        "coupling": 0.13333333333333333,
+        "cohesion": 0.8666666666666667,
+        "min_size": 1,
+        "max_size": 14,
+        "avg_size": 7.5
+      },
+      "partitions": {
+        "administrative": 1,
+        "general": 14
+      }
+    }
+  }
+}

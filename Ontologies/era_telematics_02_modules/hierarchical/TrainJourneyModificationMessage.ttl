@@ -1,0 +1,51 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ModificationReason a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ModificationReason" ;
+    rdfs:comment "Identifiies the reason for the train journey being modified" ;
+    rdfs:domain :TrainJourneyModificationMessage ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainJourneyModificationTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainJourneyModificationTime" ;
+    rdfs:comment """Indicates the time time when the modification was made to the train
+				journey""" ;
+    rdfs:domain :TrainJourneyModificationMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTrainJourneyModification a owl:ObjectProperty ;
+    rdfs:label "has TrainJourneyModification" ;
+    rdfs:domain :TrainJourneyModificationMessage ;
+    rdfs:range :TrainJourneyModification .
+
+:TrainJourneyModificationMessage a owl:Class ;
+    rdfs:label "TrainJourneyModificationMessage" ;
+    rdfs:comment """ This message is issued to show, in real time, that the train is
+				reroouted-cancelled-stopping pattern is changed""" .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+

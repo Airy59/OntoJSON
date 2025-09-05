@@ -1,0 +1,28 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:NumberOfAccessorOfSpecType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfAccessorOfSpecType" ;
+    rdfs:comment """Number of specified accessory
+													equipped on the wagon""" ;
+    rdfs:domain :RemovableAccessories ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TypeOfRemovableAccessories a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TypeOfRemovableAccessories" ;
+    rdfs:comment """Specification of removable accessory.
+Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
+    rdfs:domain :RemovableAccessories ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasRemovableAccessories rdfs:range :RemovableAccessories .
+
+:RemovableAccessories a owl:Class ;
+    rdfs:label "RemovableAccessories" .
+

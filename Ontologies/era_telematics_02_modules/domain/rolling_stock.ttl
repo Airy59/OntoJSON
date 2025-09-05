@@ -1,0 +1,1668 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ActionRequiredFromCarrier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ActionRequiredFromCarrier" ;
+    rdfs:comment """Special action required by the carrier according to
+							chapter 5.4.1.2.5.2 RID""" ;
+    rdfs:domain :RID ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AgainstBooked rdfs:domain :TrainDelay .
+
+:AgainstReferenced rdfs:domain :TrainDelay .
+
+:AirBrakeSpecialCharacteristic rdfs:domain :WagonTechData .
+
+:AntennaDistanceFromFrontOfTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AntennaDistanceFromFrontOfTrain" ;
+    rdfs:comment """Distance of the defined coordinates from the front of the
+							train, in meters.""" ;
+    rdfs:domain :GNSS_DynamicPosition ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AssociatedAttachedTrainID a owl:Class ;
+    rdfs:label "AssociatedAttachedTrainID" ;
+    :domain "Telematics" ;
+    rdfs:comment "TrainID of the Associated Train in an Attach Activity" .
+
+:AssociatedAttachedTrainServiceNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AssociatedAttachedTrainServiceNumber" ;
+    rdfs:comment """Identifies the associated train service line number for the train
+				activity connecting service""" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BogiePitch a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BogiePitch" ;
+    rdfs:comment "Bogie Wheelbase measured in mm" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BogiePivotPitch a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BogiePivotPitch" ;
+    rdfs:comment """Largest distance between two adjacent bogie
+										pitches in mm""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BogieWagonsOnly a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BogieWagonsOnly" ;
+    rdfs:comment """Indicates that the train consists of bogie wagons only or not.
+				â€œYesâ€/â€trueâ€ means always all wagons of the train are bogie wagons. Then content of
+				element is â€œnoâ€/â€falseâ€ or element isnâ€™t used means the train contains of different
+				wagons (not homogeneous only with bogie wagons).""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BookingNumber rdfs:domain :WagonDetails .
+
+:CarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CarrierCode" ;
+    rdfs:comment """Code of the carrier
+														undertaking the examination (see CIM Article
+														11 sections 2 and 3). """,
+        """Code of the carrier who made
+														it out.""",
+        """Code of the shipping
+																carrier mentioned in the consignment
+																number.""",
+        """Contractual carrier,
+																railway undertaking (Railway Code).""",
+        """Railway Undertaking
+																(Railway Code)""",
+        """additional carrier
+																code belonging to the given contract
+																number""" ;
+    rdfs:domain [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CarrierName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CarrierName" ;
+    rdfs:comment "Name of Carrier",
+        """Name of contractual
+																carrier""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CarrierStatus a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CarrierStatus" ;
+    rdfs:comment """Status of the carrier during the transport 0 Contractual carrier /
+				Lead carrier 1 Succesive carrier 2 Substitute carrier 3 to be used for all other
+				partners (e.g. subcontractors, relevant applicants) beside the carriers in role 0, 1
+				and 2 (which have to be mentioned in the consignment note)""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Coasting rdfs:domain :PlannedTrainTechnicalData .
+
+:CommercialTrafficType rdfs:domain :PlannedTrainData .
+
+:ContainerNumber rdfs:domain :GoodsInWagon .
+
+:ContractualCarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ContractualCarrierCode" ;
+    rdfs:comment "Contractual Carrier Code" ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CoversNonTankWagonsForDangerousGoods a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CoversNonTankWagonsForDangerousGoods" ;
+    rdfs:comment """Certificate covers other wagons
+													specialised in transport of dangerous goods""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CoversTankWagonsForDangerousGoods a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CoversTankWagonsForDangerousGoods" ;
+    rdfs:comment """Certificate covers tank wagons for
+													dangerous goods""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CustomerReference rdfs:domain :WagonDetails .
+
+:DangerousGoodsIndicator rdfs:domain :TrainRunningData .
+
+:EmergencyBrakeOverride rdfs:domain :PlannedTrainTechnicalData .
+
+:ExceptionalGaugingInd rdfs:domain :TrainRunningData .
+
+:ExceptionalGaugingProfile rdfs:domain :WagonOperationalData .
+
+:ForwardingTrainNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ForwardingTrainNumber" ;
+    rdfs:comment """Train number at
+																shipping """ ;
+    rdfs:domain :AcceptancePoint ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:GCUWagon a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GCUWagon" ;
+    rdfs:comment """Indication if wagon is operated under the GCU
+										contract""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:HandBrakeBrakedWeight rdfs:domain :WagonTechData .
+
+:HighestPlannedSpeed rdfs:domain :PlannedTrainTechnicalData .
+
+:InfoOnGoodsShapeTypeDanger rdfs:domain :WagonOperationalData .
+
+:InnerWheelbase a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InnerWheelbase" ;
+    rdfs:comment """Maximum distance between two adjacent axles in
+										mm""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InvoicingCarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InvoicingCarrierCode" ;
+    rdfs:comment """Sectional
+																			invoicing by""" ;
+    rdfs:domain :Section ;
+    rdfs:subPropertyOf :dataProperties .
+
+:IsAbleToRun rdfs:domain :WagonJourneyIrregularity .
+
+:LengthOfSetOfCarriages a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LengthOfSetOfCarriages" ;
+    rdfs:comment """The calculated and rounded up maximum length of all wagons/coaches of
+				the train (sum of all length over buffer of the wagons) expressed in metres. This is
+				made optional together with TrainLength, but it could be implemented by applications
+				as mandatory.""" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LivestockOrPeopleIndicator rdfs:domain :TrainCompositionJourneySection .
+
+:LoadLimit rdfs:domain :WagonDetails .
+
+:MaxAxleWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MaxAxleWeight" ;
+    rdfs:comment "Indicates the maximum design axle weight (to)." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MaxLengthOfLoad a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MaxLengthOfLoad" ;
+    rdfs:comment "Measured in mm" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MessageCreationDateTime rdfs:domain :WagonStatusMessage .
+
+:MinBrakedWeightPercent rdfs:domain :PlannedTrainTechnicalData .
+
+:ModificationReason rdfs:domain :TrainJourneyModificationMessage .
+
+:NumberOfAxles a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfAxles" ;
+    rdfs:comment "The sum of number of axles of all wagons and all traction units" ;
+    rdfs:domain :TrainRunningTechData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfBogies a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfBogies" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfVehicles a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfVehicles" ;
+    rdfs:comment "The sum of number of wagons and number of traction units" ;
+    rdfs:domain :TrainRunningTechData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberPlate rdfs:domain :Vehicles .
+
+:OperationalTrainCouplingStrength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OperationalTrainCouplingStrength" ;
+    rdfs:comment """ OperationalTrainCouplingStrength expressed in kN. The operational
+				strength of the train coupling is a crucial technical characteristic for the
+				determination of a freight trainâ€™s tonnage rating """ ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:OperationalTrainNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "OperationalTrainNumber" ;
+    rdfs:comment """Identifies the train for traffic management purposes by the
+				Dispatcher, GSMR services, etc.""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PlannedSpeed rdfs:domain :PlannedTrainTechnicalData .
+
+:PrepaidcodeCarrier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PrepaidcodeCarrier" ;
+    rdfs:comment "Prepaidcode (given by the railway)" ;
+    rdfs:domain :PrepaymentInstructions ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreviousWagonNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreviousWagonNumber" ;
+    rdfs:domain :ConsignmentLevelData ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PreviousWagonNumberFreight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PreviousWagonNumberFreight" ;
+    rdfs:comment """For identification of a wagon after
+										renumbering""" ;
+    rdfs:domain :AdministrativeDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PushPullTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PushPullTrain" ;
+    rdfs:comment """Indicates that the train can change direction without shunting. This
+				flag can be used only with TractionMode 1X, 2X, 5X.""" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RU rdfs:domain :Carrier .
+
+:RefusalCode rdfs:domain :RefusedWagonNumbers .
+
+:ReportingRU rdfs:domain :WagonStatusMessage .
+
+:ResponsibleCarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ResponsibleCarrierCode" ;
+    rdfs:comment """Railway Undertaking
+																(Railway Code) of the carrier in
+																charge.""" ;
+    rdfs:domain :Carriers ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RestrictionsDueToLoadOrDamage rdfs:domain :WagonOperationalData .
+
+:RollingRoadUnitType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RollingRoadUnitType" ;
+    rdfs:comment "AMEND: ",
+        "CODE:",
+        "READ: ",
+        "Type of Rolling Road unit on Wagon",
+        "WRITE: " ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ScheduledDateTimeAtTransfer rdfs:domain :OperationalTrainNumberIdentifier .
+
+:ScheduledTimeAtHandover rdfs:domain :OperationalTrainNumberIdentifier .
+
+:SectionCarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SectionCarrierCode" ;
+    rdfs:comment """Invoiced
+																						section
+																						specified by
+																						carrier""" ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShippingCarrier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShippingCarrier" ;
+    rdfs:comment """RICS Code of the RU
+																who created the consignment
+																identification (not necessarily the
+																first carrier in the transport
+																chain)""" ;
+    rdfs:domain :ControlLabel ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShuntingModalLabel rdfs:domain :WagonDetails .
+
+:SubContractNumber_SplitContract rdfs:domain :Carriers .
+
+:TareWeightVehicle a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TareWeightVehicle" ;
+    rdfs:comment """Total weight [kg] of vehicle (truck and
+										trailer).""" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TechnicalRestrictions rdfs:domain :WagonTechData .
+
+:TiltingFunction rdfs:domain :PlannedTrainTechnicalData .
+
+:TotalLoadWeight rdfs:domain :WagonOperationalData .
+
+:TractionPositionInTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TractionPositionInTrain" ;
+    rdfs:comment """Identifies position of intermediate traction unit(s) in the train
+				indicating after which wagon (specified by order number) the unit is placed.""" ;
+    rdfs:domain :LocoIdent ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainActivityType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainActivityType" ;
+    rdfs:comment """Indicates certain treatments or operations required for a train. If
+				national codes are used, the first 2 position will be the ISO country code, followed
+				by 00-99. 0001 Commercial stop RU Board/disembark passenger train, load/unload
+				freight train 0002 Operational stop IM Stops needed by the IM (e.g. overpassing by
+				another train) 0003 Service stop RU/IM Stops which are used for non-commercial
+				activities (e.g. boarding of staff) 0004 System stop RU/IM allowing the RU to change
+				a system (e.g. signalling system, safety system) 0005 Reversing stop RU/IM stop to
+				enable train unit to run in the opposite direction (without change of engine) 0006
+				Stops for reversing move or driver change ends RU stop to enable train unit to run
+				in the opposite direction (with using another engine at the other end of the train
+				and change of driver) 0007 Stops for locomotive to run round train RU stop to enable
+				train unit to run in the opposite direction (with using the same engine at the other
+				end of the train) 0008 Technical check/inspection coaches/wagons RU/IM e.g. at
+				origin or intermediate station: brake test, checking load 0009 Change gauge RU/IM
+				continuation on a network with a different gauge with change of bogies or adaptation
+				of the axles (F->E, SVE->FI) 0010 attach engine/unit RU Unit not previously in
+				service 0011 detach engine/unit RU Unit no longer in service 0012 change engine RU
+				0013 attach coach/wagon RU 0014 detach coach/wagon RU 0015 attach and detach
+				coach/wagon RU 0016 attach train Operational Train (in service) 0017 split train
+				Operational Train (in service) 0018 Parking of vehicle RU e.g. need to park the
+				train/composition midway for several hours 0019 Mail/parcel services RU 0020
+				shunting RU actual activity of shunting 0021 shunting service RU Request for
+				shunting service (if offered by the IM or a third party) 0022 Terminal service
+				(terminal in the meaning of final destination) RU Request for services at the end of
+				a train run (if offered by the IM or a third party) 0023 Loco driver change RU 0024
+				Loco driver break RU legal issue, e.g. to respect working law 0025 Crew change RU
+				different to loco driver change as for the change of the crew a platform will be
+				needed 0026 Custom and passport facilities RU 0027 Other stop reason (miscellaneous)
+				RU/IM 0028 Boarding only RU 0029 Disembarking only RU 0030 Stop on request RU 0031
+				Departure equals to arrival time RU If in some stations only arrival times are
+				published, this activity code may used to indicate that the train cannot continue
+				before the published arrival time in case of an early arrival. 0032 Departure after
+				disembarking RU mainly used at the end of train run, train may continue as soon as
+				all passengers have disembarked 0033 No waiting for connection RU 0034 Watering RU
+				Indicates the IM that a track with water access will be needed. 0035 Heating
+				Indicates the IM that a track with heating equipment will be needed. 0036 Cleaning /
+				disinfecting RU 0037 Treatment on plants and live animals RU Watering, Foddering,
+				Milking, Spraying, Closing ventilation flaps, Opening ventilation flaps 0038
+				Treatment of perishable goods RU Checking the temperature, Re-icing, Heating,
+				Checking the proper functioning of the mechanical refrigeration equipment,
+				Refuelling machinery, Switching machinery on or off 0039 Administrative operations
+				RU Weighing, Re-forwarding, Submission to phytosanitary inspections 0040 Run Through
+				(Passing Time) IM 0041 Photo run-by / Photo-stop 0042 Train Waiting Waiting
+				according to local rules 0043 Train running with another train RU Where trains have
+				been attached at a previous location on the schedule 0044 Dependency between trains
+				(rolling stock). The same wagon/train/trainset is used for the next train service.
+				RU 0045 Dependency between trains (rolling stock). The same wagon/train/trainset is
+				reused from the previous train service. RU 0046 Dependency between trains
+				(passengers/goods). Passengers/goods change from this train to another. RU 0047
+				Dependency between trains (passengers/goods). Passengers/goods change from another
+				train to this train. RU 0048 Linkage of OTNs belonging to the same transport if no
+				TrainID is present 0049 Loco battery charging National / company codes: Examples:
+				Numbers 00 to 99 may be used by an IM for Network national purposes, just adding ISO
+				country code CZ01 Stops from new stop opening day UK55 Stop shorter than 1/2 min
+				IT72 Train report stop cancelled """ ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainCC_System a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainCC_System" ;
+    rdfs:comment "Identifies the command control system of the train in coded values." ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainContactDetails a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainContactDetails" ;
+    rdfs:comment """Contact to driver of leading traction unit. This contact can be mobile
+				phone number, GSM-R call number or e.g. details for an analogue radio call.""" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainDepartureDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainDepartureDate" ;
+    rdfs:comment """Out only: Departure Date of the
+													Train """,
+        """use here the date the train left
+													origin using this train number""" ;
+    rdfs:domain :Train ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainInterrupted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainInterrupted" ;
+    rdfs:comment "None" ;
+    rdfs:domain :TrainRunningInterruptionStatus ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainJourneyModificationIndicator a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainJourneyModificationIndicator" ;
+    rdfs:comment """This indicates what has changed in the train running e.g. rerouting,
+				cancellation etc..""" ;
+    rdfs:domain :TrainJourneyModification ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainJourneyModificationTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainJourneyModificationTime" ;
+    rdfs:comment """Indicates the time time when the modification was made to the train
+				journey""" ;
+    rdfs:domain :TrainJourneyModificationMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainJourneyStartTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainJourneyStartTime" ;
+    rdfs:comment """The precise time at which the train should present itself on the
+				network""" ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainLength" ;
+    rdfs:comment """The calculated Length of a train (sum of all length over buffer of the
+				wagons and traction units). Expressed in Metres""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainLocationStatus a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainLocationStatus" ;
+    rdfs:comment """Identifies the status of a train related to the actual time at a
+				reporting point""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainMaxSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainMaxSpeed" ;
+    rdfs:comment "The max. possible speed of a train in km/h" ;
+    rdfs:domain [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainNotAtInterruptionPoint a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainNotAtInterruptionPoint" ;
+    rdfs:comment """It is already known that train running might be interrupted in
+				interruption point although the train has not arrived to interruption point yet""" ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainNotReadyDescription a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainNotReadyDescription" ;
+    rdfs:comment """Description of the reason why the train is not
+										ready.""" ;
+    rdfs:domain :TrainReadyStatus ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainOperatingRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainOperatingRU" ;
+    rdfs:domain :Train ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainRadioSystem a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainRadioSystem" ;
+    rdfs:comment "The on board radio system of the train in coded format" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainReady a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainReady" ;
+    rdfs:comment "0=Not Ready 1=Ready" ;
+    rdfs:domain :TrainReadyStatus ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainReadyTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainReadyTime" ;
+    rdfs:comment """It indicates date/time when the train will be ready for
+							departure. IM contract will define if this element can be used. Only to
+							be used if this time is in future (sent in advance). Purpose of this
+							element is to short the train stay. """ ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainStartTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainStartTime" ;
+    rdfs:comment "The Date and Time at which the tain actually started the journey" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainType" ;
+    rdfs:comment """Element TrainType defines the main purpose of the train in a fundamental way. These purposes are:
+Transport of passengers
+Transport of freight/goods
+Transport of passengers and freight/goods
+Train only for run of traction unit/locomotive
+Train of the IM in case of emergency
+The element is not repeatable, and it does not support any overlapping meaning.
+""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainWeight" ;
+    rdfs:comment "The sum of all weights of wagons and traction units" ;
+    rdfs:domain [ ] ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonEvent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonEvent" ;
+    rdfs:domain :WagonEventInformation ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonGroupInfo a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonGroupInfo" ;
+    rdfs:comment """Consignor information
+																regarding the whole consignment.
+																Comparable with the element
+																WagonInfo, but for all wagons.""" ;
+    rdfs:domain :GeneralInformation ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonInfo a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonInfo" ;
+    rdfs:comment """Additional information, concerning the
+											goods of the whole wagon. """ ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonInterruptionReason a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonInterruptionReason" ;
+    rdfs:domain :ExceptionReason ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonLength" ;
+    rdfs:comment "Length over buffers in cms" ;
+    rdfs:domain :WagonTypeDetails ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonLocationStatus a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonLocationStatus" ;
+    rdfs:comment """identifies the status of a wagon, related to the actual time at a
+				reporting point""" ;
+    rdfs:domain :ExceptionPoint ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonMaxSpeed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonMaxSpeed" ;
+    rdfs:comment """Maximum allowed speed of the wagon according to the load and entry in
+				the Rolling Stock Databases. In kmh""" ;
+    rdfs:domain :WagonOperationalData ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonNumberFreight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonNumberFreight" ;
+    rdfs:comment "Identifies uniquely the freight wagon by its number" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonNumberOfAxles a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonNumberOfAxles" ;
+    rdfs:comment "Number of Axels for a wagon" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonPreviousNumberFreight a owl:DatatypeProperty ;
+    rdfs:label "WagonPreviousNumberFreight" ;
+    rdfs:comment """Identifies the previous freight
+													wagon if a shipment or Intermodal unit has
+													changed the wagon during its journey""" ;
+    rdfs:domain :COM ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonTrainPosition a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonTrainPosition" ;
+    rdfs:comment """Identifies the position of a wagon within a train. Sequential number
+				starting with the first wagon at the front of train as NÂ°1.""" ;
+    rdfs:domain :WagonData ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonWeightEmpty a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonWeightEmpty" ;
+    rdfs:comment """The weight of an empty wagon according to the entry in the rolling
+				stock database""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WeightOfSetOfCarriages a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WeightOfSetOfCarriages" ;
+    rdfs:comment "The calculated maximum weight of all carriages without the traction" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WheelDiameter a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WheelDiameter" ;
+    rdfs:comment """Diameter of wheels meausured in mm. Reference wheel diameter at
+				maximum. """ ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WheelSetTransformationMethod a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WheelSetTransformationMethod" ;
+    rdfs:comment "Description of the wheel set transformation method for wagons with a changeable wheel set gauge." ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WheelSetType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WheelSetType" ;
+    rdfs:comment """Type name of the wheel sets, and the name of
+										the type depends on the manufacturer.""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WheelsetGauge a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WheelsetGauge" ;
+    rdfs:comment """Track Gauge measured in mm; multi-entry for wagons with changeable
+				wheel set gauge""" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasActivities rdfs:domain :TrainRunningData .
+
+:hasAdministrativeDataSet rdfs:domain :RollingStockDataset .
+
+:hasArrivalInterchangeReport rdfs:domain :WagonETI_ETA_Message .
+
+:hasAttendants rdfs:domain :RollingRoadUnitDetails .
+
+:hasCarrier a owl:ObjectProperty ;
+    rdfs:label "has Carrier" ;
+    rdfs:domain :CarriersInvolved ;
+    rdfs:range :Carrier .
+
+:hasCarriers a owl:ObjectProperty ;
+    rdfs:label "has Carriers" ;
+    rdfs:domain :COM ;
+    rdfs:range :Carriers .
+
+:hasCarriersInvolved a owl:ObjectProperty ;
+    rdfs:label "has CarriersInvolved" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :CarriersInvolved .
+
+:hasCombinedTrafficLoadProfile rdfs:domain :PlannedTrainData .
+
+:hasConsignmentIdentification rdfs:domain :WagonStatusMessage .
+
+:hasDamageCodes rdfs:domain :WagonJourneyIrregularity .
+
+:hasDelayEventReport rdfs:domain :TrainDelayCauseMessage .
+
+:hasDepartureInterchangeReport rdfs:domain :WagonETI_ETA_Message .
+
+:hasDesignDataSet rdfs:domain :RollingStockDataset .
+
+:hasDestinationLocation rdfs:domain :WagonStatusMessage .
+
+:hasEvent rdfs:domain :WagonStatusMessage .
+
+:hasExamination rdfs:domain :WagonDetails .
+
+:hasExceptionalConsignment rdfs:domain :WagonDetails .
+
+:hasFormalReports rdfs:domain :WagonDetails .
+
+:hasGoodsInContainer rdfs:domain :GoodsInWagon .
+
+:hasGoodsInWagon a owl:ObjectProperty ;
+    rdfs:label "has GoodsInWagon" ;
+    rdfs:domain [ ] ;
+    rdfs:range :GoodsInWagon .
+
+:hasHaulier rdfs:domain :RollingRoadUnitDetails .
+
+:hasILU rdfs:domain :GoodsInWagon .
+
+:hasIntermodalTransportData rdfs:domain :WagonData .
+
+:hasInterruptionPoint rdfs:domain :TrainRunningInterruptionMessage .
+
+:hasJourneySection rdfs:domain :TrainCompositionJourneySection .
+
+:hasLeadCarrier a owl:ObjectProperty ;
+    rdfs:label "has LeadCarrier" ;
+    rdfs:domain :COM ;
+    rdfs:range :LeadCarrier .
+
+:hasLocationModified rdfs:domain :TrainJourneyModification .
+
+:hasLocoIdent rdfs:domain :TrainCompositionJourneySection .
+
+:hasNotes rdfs:domain :TrainRunningData .
+
+:hasOperationalTrainNumberIdentifier a owl:ObjectProperty ;
+    rdfs:label "has OperationalTrainNumberIdentifier" ;
+    rdfs:domain [ ] ;
+    rdfs:range :OperationalTrainNumberIdentifier .
+
+:hasPathPlanningReferenceLocation rdfs:domain :TrainInformation .
+
+:hasPlannedTrainData a owl:ObjectProperty ;
+    rdfs:label "has PlannedTrainData" ;
+    rdfs:domain :PlannedJourneyLocation ;
+    rdfs:range :PlannedTrainData .
+
+:hasPlannedTrainTechnicalData a owl:ObjectProperty ;
+    rdfs:label "has PlannedTrainTechnicalData" ;
+    rdfs:domain :PlannedTrainData ;
+    rdfs:range :PlannedTrainTechnicalData .
+
+:hasReferenceTrainIDSubCalendar a owl:ObjectProperty ;
+    rdfs:label "has ReferenceTrainIDSubCalendar" ;
+    rdfs:domain [ ] ;
+    rdfs:range :ReferenceTrainIDSubCalendar .
+
+:hasRefusedWagonNumbers a owl:ObjectProperty ;
+    rdfs:label "has RefusedWagonNumbers" ;
+    rdfs:domain :RollingStockDatasetMessage ;
+    rdfs:range :RefusedWagonNumbers .
+
+:hasRelatedTransportOperationalIdentifiers rdfs:domain :TrainOperationalIdentification .
+
+:hasRollingRoadUnit a owl:ObjectProperty ;
+    rdfs:label "has RollingRoadUnit" ;
+    rdfs:domain :GoodsInWagon ;
+    rdfs:range :RollingRoadUnit .
+
+:hasRollingRoadUnitDetails a owl:ObjectProperty ;
+    rdfs:label "has RollingRoadUnitDetails" ;
+    rdfs:domain :RollingRoadUnit ;
+    rdfs:range :RollingRoadUnitDetails .
+
+:hasRollingStockDataset a owl:ObjectProperty ;
+    rdfs:label "has RollingStockDataset" ;
+    rdfs:domain [ ] ;
+    rdfs:range :RollingStockDataset .
+
+:hasRouting rdfs:domain :WagonStatusMessage .
+
+:hasSectionFrom rdfs:domain :Carriers .
+
+:hasSectionTo rdfs:domain :Carriers .
+
+:hasShippingLocation rdfs:domain :WagonStatusMessage .
+
+:hasTractionDetails rdfs:domain :PlannedTrainTechnicalData .
+
+:hasTrafficType rdfs:domain :PlannedTrainData .
+
+:hasTrain a owl:ObjectProperty ;
+    rdfs:label "has Train" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :Train .
+
+:hasTrainActivity a owl:ObjectProperty ;
+    rdfs:label "has TrainActivity" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TrainActivity .
+
+:hasTrainAtLocation a owl:ObjectProperty ;
+    rdfs:label "has TrainAtLocation" ;
+    rdfs:domain :TrainForecastAtReportingLocationMessage ;
+    rdfs:range :TrainAtLocation .
+
+:hasTrainCompositionJourneySection a owl:ObjectProperty ;
+    rdfs:label "has TrainCompositionJourneySection" ;
+    rdfs:domain :TrainCompositionMessage ;
+    rdfs:range :TrainCompositionJourneySection .
+
+:hasTrainDelay a owl:ObjectProperty ;
+    rdfs:label "has TrainDelay" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TrainDelay .
+
+:hasTrainID a owl:ObjectProperty ;
+    rdfs:label "has TrainID" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TrainID .
+
+:hasTrainInformation a owl:ObjectProperty ;
+    rdfs:label "has TrainInformation" ;
+    rdfs:domain :PathRequestMessage ;
+    rdfs:range :TrainInformation .
+
+:hasTrainJourneyModification a owl:ObjectProperty ;
+    rdfs:label "has TrainJourneyModification" ;
+    rdfs:domain :TrainJourneyModificationMessage ;
+    rdfs:range :TrainJourneyModification .
+
+:hasTrainLocation a owl:ObjectProperty ;
+    rdfs:label "has TrainLocation" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range :TrainLocation .
+
+:hasTrainLocationReport a owl:ObjectProperty ;
+    rdfs:label "has TrainLocationReport" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TrainLocationReport .
+
+:hasTrainOperationalIdentification a owl:ObjectProperty ;
+    rdfs:label "has TrainOperationalIdentification" ;
+    rdfs:domain [ ] ;
+    rdfs:range :TrainOperationalIdentification .
+
+:hasTrainReadyStatus a owl:ObjectProperty ;
+    rdfs:label "has TrainReadyStatus" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range :TrainReadyStatus .
+
+:hasTrainRunningData a owl:ObjectProperty ;
+    rdfs:label "has TrainRunningData" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :TrainRunningData .
+
+:hasTrainRunningInterruptionStatus a owl:ObjectProperty ;
+    rdfs:label "has TrainRunningInterruptionStatus" ;
+    rdfs:domain :TrainRunningInterruptionMessage ;
+    rdfs:range :TrainRunningInterruptionStatus .
+
+:hasTrainRunningTechData a owl:ObjectProperty ;
+    rdfs:label "has TrainRunningTechData" ;
+    rdfs:domain :TrainRunningData ;
+    rdfs:range :TrainRunningTechData .
+
+:hasTypeofService rdfs:domain :PlannedTrainData .
+
+:hasVehicles a owl:ObjectProperty ;
+    rdfs:label "has Vehicles" ;
+    rdfs:domain :RollingRoadUnitDetails ;
+    rdfs:range :Vehicles .
+
+:hasWagonData a owl:ObjectProperty ;
+    rdfs:label "has WagonData" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :WagonData .
+
+:hasWagonDetails a owl:ObjectProperty ;
+    rdfs:label "has WagonDetails" ;
+    rdfs:domain :Wagons ;
+    rdfs:range :WagonDetails .
+
+:hasWagonEventInformation a owl:ObjectProperty ;
+    rdfs:label "has WagonEventInformation" ;
+    rdfs:domain :EventLevelData ;
+    rdfs:range :WagonEventInformation .
+
+:hasWagonInformation a owl:ObjectProperty ;
+    rdfs:label "has WagonInformation" ;
+    rdfs:domain [ ] ;
+    rdfs:range :WagonInformation .
+
+:hasWagonJourneyIrregularity a owl:ObjectProperty ;
+    rdfs:label "has WagonJourneyIrregularity" ;
+    rdfs:domain :WagonStatusMessage ;
+    rdfs:range :WagonJourneyIrregularity .
+
+:hasWagonOperationalData a owl:ObjectProperty ;
+    rdfs:label "has WagonOperationalData" ;
+    rdfs:domain :WagonData ;
+    rdfs:range :WagonOperationalData .
+
+:hasWagonStatusMessage a owl:ObjectProperty ;
+    rdfs:label "has WagonStatusMessage" ;
+    rdfs:domain :WagonStatusMessages ;
+    rdfs:range :WagonStatusMessage .
+
+:hasWagonTechData a owl:ObjectProperty ;
+    rdfs:label "has WagonTechData" ;
+    rdfs:domain :WagonData ;
+    rdfs:range :WagonTechData .
+
+:hasWagonTelematics a owl:ObjectProperty ;
+    rdfs:label "has WagonTelematics" ;
+    rdfs:domain :DesignDataSet ;
+    rdfs:range :WagonTelematics .
+
+:hasWagonTypeDetails a owl:ObjectProperty ;
+    rdfs:label "has WagonTypeDetails" ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range :WagonTypeDetails .
+
+:hasWagons a owl:ObjectProperty ;
+    rdfs:label "has Wagons" ;
+    rdfs:domain :COM ;
+    rdfs:range :Wagons .
+
+:sequenceID rdfs:domain :Carriers .
+
+:TrainActivity a owl:Class ;
+    rdfs:label "TrainActivity" ;
+    rdfs:comment """Since the activites can be related to attaching / detaching of wagons
+				and/or cars to different trains, the reference to other trains should be possible to
+				be indicated.""" .
+
+:TrainID a owl:Class ;
+    rdfs:label "TrainID" .
+
+:TrainLocation a owl:Class ;
+    rdfs:label "TrainLocation" ;
+    rdfs:comment """Handover, Interchange, Handling and Reporting point: if
+							needed, track could be identify directly via subsidiar code """ .
+
+:WagonTelematics a owl:Class ;
+    rdfs:label "WagonTelematics" ;
+    rdfs:comment """Information about telematics
+										devices mounted on the wagon.""" .
+
+:CarriersInvolved a owl:Class ;
+    rdfs:label "CarriersInvolved" .
+
+:RollingStockDatasetQueryMessage a owl:Class ;
+    rdfs:label "RollingStockDatasetQueryMessage" ;
+    rdfs:comment "Rolling Stock adminsitrative and Technical Dataset" .
+
+:TrainRunningInterruptionStatus a owl:Class ;
+    rdfs:label "TrainRunningInterruptionStatus" .
+
+:Vehicles a owl:Class ;
+    rdfs:label "Vehicles" ;
+    rdfs:comment """List of vehicles loaded (i.e. truck and
+										trailer).""" .
+
+:WagonAtDeparture a owl:Class ;
+    rdfs:label "WagonAtDeparture" ;
+    rdfs:comment "Departure point of a wagon with location and departure time" .
+
+:WagonPickupAtOrigin a owl:Class ;
+    rdfs:label "WagonPickupAtOrigin" ;
+    rdfs:comment """Place and Date and Time of when the wagon is ready to be taken over by
+				the RU/Service Provider at the customer sidings""" .
+
+:WagonStatusMessages a owl:Class ;
+    rdfs:label "WagonStatusMessages" ;
+    rdfs:comment """Always MANDATORY, independent whether only one or more messages are in
+				the file """ .
+
+:Carrier a owl:Class ;
+    rdfs:label "Carrier" ;
+    rdfs:comment "Carrier(s) involved" .
+
+:ReferenceTrainIDSubCalendar a owl:Class ;
+    rdfs:label "ReferenceTrainIDSubCalendar" ;
+    rdfs:comment """ReferenceTrainIDSubCalendar contains all days of Reference Train
+				(TRIDv00) for days provided in PlannedCalendar. The days in PlannedCalendar may
+				shifted depending on value in element OffsetToReference, ie the following condition
+				must always be true : ReferenceTrainIDSubCalendar + OffsetToReference =
+				PlannedCalender\"""" .
+
+:RollingStockDataset a owl:Class ;
+    rdfs:label "RollingStockDataset" ;
+    rdfs:comment "Rolling Stock adminsitrative and Technical Dataset" .
+
+:RollingStockDatasetMessage a owl:Class ;
+    rdfs:label "RollingStockDatasetMessage" ;
+    rdfs:comment "Rolling Stock adminsitrative and Technical Dataset" .
+
+:TrainDelay a owl:Class ;
+    rdfs:label "TrainDelay" ;
+    rdfs:comment """Identifies the Delta delay time of a train against the booked schedule
+				as well as against the referenced time """ .
+
+:TrainJourneyModification a owl:Class ;
+    rdfs:label "TrainJourneyModification" ;
+    rdfs:comment """This element shows which locations are changed during the running of a
+				train""" .
+
+:TrainOperationalIdentification a owl:Class ;
+    rdfs:label "TrainOperationalIdentification" .
+
+:WagonJourneyIrregularity a owl:Class ;
+    rdfs:label "WagonJourneyIrregularity" .
+
+:OperationalTrainNumberIdentifier a owl:Class ;
+    rdfs:label "OperationalTrainNumberIdentifier" .
+
+:RefusedWagonNumbers a owl:Class ;
+    rdfs:label "RefusedWagonNumbers" .
+
+:RollingRoadUnit a owl:Class ;
+    rdfs:label "RollingRoadUnit" ;
+    rdfs:comment "Describes the type and content of a Rolling road unit" .
+
+:TrainForecastAtReportingLocationMessage a owl:Class ;
+    rdfs:label "TrainForecastAtReportingLocationMessage" ;
+    rdfs:comment """This message is issued following receipt of an enquiry about train
+				forecasts at a particular reporting location. It gives a report of the forecasted
+				time for all trains of the enquirer at a specified location. """ .
+
+:TrainInformation a owl:Class ;
+    rdfs:label "TrainInformation" ;
+    rdfs:comment """Train information provided by the RUs as an overview for the entire
+				train journey from origin to destination""" .
+
+:WagonEventInformation a owl:Class ;
+    rdfs:label "WagonEventInformation" ;
+    rdfs:comment """This is a WIMO element that is derived from the Wagon Release Notice
+				and Event Messages""" .
+
+:WagonTypeDetails a owl:Class ;
+    rdfs:label "WagonTypeDetails" ;
+    rdfs:comment """These elements are only needed, if the
+											wagon has to be treated as CUV (empty wagon).""" .
+
+:Train a owl:Class ;
+    rdfs:label "Train" .
+
+:TrainReadyStatus a owl:Class ;
+    rdfs:label "TrainReadyStatus" .
+
+:WagonETI_ETA_Message a owl:Class ;
+    rdfs:label "WagonETI_ETA_Message" ;
+    rdfs:comment """This message is sent by the RU to the next RU in the transport chain
+				to give him the calculation of its ETI. The last RU sends this message with ETA to
+				the Lead RU, which may inform its customer. Following the handover information from
+				the IM, the RU sends with this message also the updated ETI to the next RU and the
+				last RU sends the updated ETA to the LRU.""" .
+
+:WagonInformation a owl:Class ;
+    rdfs:label "WagonInformation" ;
+    rdfs:comment """This element shows the unique wagon number together with the
+				transportation units, loaded on the wagon, the used capacity and the weight of the
+				complete load of the wagon""" .
+
+:TrainCompositionJourneySection a owl:Class ;
+    rdfs:label "TrainCompositionJourneySection" ;
+    rdfs:comment "Defines the make up of a train for each section of its journey" .
+
+:TrainRunningData a owl:Class ;
+    rdfs:label "TrainRunningData" ;
+    rdfs:comment "Train relevant data for a running train" .
+
+:WagonData a owl:Class ;
+    rdfs:label "WagonData" ;
+    rdfs:comment "Wagon relevant data for the wagons within a running train" .
+
+:Wagons a owl:Class ;
+    rdfs:label "Wagons" ;
+    rdfs:comment "Content of the wagon" .
+
+:RollingRoadUnitDetails a owl:Class ;
+    rdfs:label "RollingRoadUnitDetails" ;
+    rdfs:comment "Details for Rolling Road units on wagon" .
+
+:TrainCompositionMessage a owl:Class ;
+    rdfs:label "TrainCompositionMessage" ;
+    rdfs:comment """This message is sent from an RU to an IM defining the composition of
+				the proposed train.""" .
+
+:TrainLocationReport a owl:Class ;
+    rdfs:label "TrainLocationReport" ;
+    rdfs:comment """Specifies the relevant running data of a train related to a specific
+				location""" .
+
+:LeadCarrier a owl:Class ;
+    rdfs:label "LeadCarrier" ;
+    rdfs:comment "LeadCarrier/ Contractual carrier" .
+
+:TrainAtLocation a owl:Class ;
+    rdfs:label "TrainAtLocation" ;
+    rdfs:comment "Specifies information about a train at a specific location" .
+
+:TrainDelayCauseMessage a owl:Class ;
+    rdfs:label "TrainDelayCauseMessage" ;
+    rdfs:comment """This message is issued to make known the cause for additional delay
+				during the Train's Journey (Changed name of the message from Reason to Cause)
+				Description changed """ .
+
+:TrainRunningForecastMessage a owl:Class ;
+    rdfs:label "TrainRunningForecastMessage" ;
+    rdfs:comment """This message is issued from the IM to the neighbouring IM upon
+				departure from or movement past agreed points or prior to reaching the first
+				reporting point if, owing to a delay, the train has not reached the bilaterally
+				agreed initial running time. This message is also issued from the IM to the RU when,
+				at the next stopping or handling station, out-of-schedule running is anticipated
+				that exceeds the threshold agreed with the RU responsible for the train. This
+				message is also issued in any cases for handover points, interchange points, for the
+				destination point and for each other reporting point predefined by contract""" .
+
+:TrainRunningInformationMessage a owl:Class ;
+    rdfs:label "TrainRunningInformationMessage" ;
+    rdfs:comment """This message is issued upon 1) Arrrival, departure or run-through in
+				agreed reporting points and/or 2) Attainment of the agreed initial running time
+				and/or 3) A new divergence between nominal and actual being achieved in excess of
+				the agreed threshold value 4) as a response to the
+				EnquiryTrainsAtReportingLocationMessage. There will only be one train reported per
+				message and will include one response per train at a location.""" .
+
+:PlannedTrainData a owl:Class ;
+    rdfs:label "PlannedTrainData" ;
+    rdfs:comment "Train relevant data for a planning period" .
+
+:TrainRunningInterruptionMessage a owl:Class ;
+    rdfs:label "TrainRunningInterruptionMessage" ;
+    rdfs:comment """This message is used to inform about the trains which has been already
+				interrupted. Message is sent only for those trains, directly interrupted by the
+				disruption. """ .
+
+:WagonOperationalData a owl:Class ;
+    rdfs:label "WagonOperationalData" ;
+    rdfs:comment """Actual wagon parameters, dependent on load or damage. This group and
+				its elements are optional (contract defines what IM requires). But if there is
+				dangerous goods in the train, then this group is mandatory.""" .
+
+:TrainJourneyModificationMessage a owl:Class ;
+    rdfs:label "TrainJourneyModificationMessage" ;
+    rdfs:comment """ This message is issued to show, in real time, that the train is
+				reroouted-cancelled-stopping pattern is changed""" .
+
+:TrainReadyMessage a owl:Class ;
+    rdfs:label "TrainReadyMessage" ;
+    rdfs:comment """This message is sent from an RU to an IM indicating that the train is
+				ready for access to the network.""" .
+
+:TrainRunningTechData a owl:Class ;
+    rdfs:label "TrainRunningTechData" ;
+    rdfs:comment "Shows the relevant techical data for a running train" .
+
+:WagonStatusMessage a owl:Class ;
+    rdfs:label "WagonStatusMessage" ;
+    rdfs:comment """used to describe one event of one wagon (all bounded
+							elements are bounded to to obligations of legacy systems)""" .
+
+:WagonTechData a owl:Class ;
+    rdfs:label "WagonTechData" ;
+    rdfs:comment """This element shows the wagon relevant technical data for the wagons
+				within a running train""" .
+
+:Carriers a owl:Class ;
+    rdfs:label "Carriers" .
+
+:GoodsInWagon a owl:Class ;
+    rdfs:label "GoodsInWagon" ;
+    rdfs:comment "Goods" .
+
+:WagonDetails a owl:Class ;
+    rdfs:label "WagonDetails" ;
+    rdfs:comment "Details for the specific wagon" .
+
+:PlannedTrainTechnicalData a owl:Class ;
+    rdfs:label "PlannedTrainTechnicalData" ;
+    rdfs:comment "Shows the relevant technical data for a running train" .
+
+[] rdf:first :RollingStockDatasetMessage .
+
+[] rdf:first :RollingStockDatasetQueryMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainForecastAtReportingLocationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInterruptionMessage .
+
+[] rdf:first :WagonETI_ETA_Message .
+
+[] rdf:first :WagonStatusMessages .
+
+[] rdf:first :Train .
+
+[] rdf:first :TrainAtLocation .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInterruptionMessage .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :TrainInformation .
+
+[] rdf:first :TrainInformation .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :TrainAtLocation .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInterruptionMessage .
+
+[] rdf:first :WagonETI_ETA_Message .
+
+[] rdf:first :RollingStockDatasetMessage .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :RollingRoadUnit .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :TrainAtLocation .
+
+[] rdf:first :TrainLocationReport .
+
+[] rdf:first :TrainReadyStatus .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :Train .
+
+[] rdf:first :TrainAtLocation .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInterruptionMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInterruptionMessage .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainOperationalIdentification .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :ReferenceTrainIDSubCalendar .
+
+[] rdf:first :WagonETI_ETA_Message .
+
+[] rdf:first :PlannedTrainData .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :WagonOperationalData .
+
+[] rdf:first :ReferenceTrainIDSubCalendar .
+
+[] rdf:first :TrainAtLocation .
+
+[] rdf:first :TrainLocationReport .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :WagonOperationalData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :WagonOperationalData .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :Carriers .
+
+[] rdf:first :LeadCarrier .
+
+[] rdf:first :Carriers .
+
+[] rdf:first :LeadCarrier .
+
+[] rdf:first :Carrier .
+
+[] rdf:first :Carriers .
+
+[] rdf:first :Carriers .
+
+[] rdf:first :LeadCarrier .
+
+[] rdf:first :Carriers .
+
+[] rdf:first :LeadCarrier .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :PlannedTrainData .
+
+[] rdf:first :WagonOperationalData .
+
+[] rdf:first :TrainReadyStatus .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :WagonAtDeparture .
+
+[] rdf:first :WagonPickupAtOrigin .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :WagonEventInformation .
+
+[] rdf:first :TrainLocationReport .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :RefusedWagonNumbers .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :RollingRoadUnitDetails .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :WagonInformation .
+
+[] rdf:first :WagonStatusMessage .
+
+[] rdf:first :TrainAtLocation .
+
+[] rdf:first :TrainLocationReport .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :RollingRoadUnit .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainForecastAtReportingLocationMessage .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :WagonInformation .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInterruptionMessage .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :OperationalTrainNumberIdentifier .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :GoodsInWagon .
+
+[] rdf:first :TrainAtLocation .
+
+[] rdf:first :TrainLocationReport .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInterruptionMessage .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :LeadCarrier .
+
+[] rdf:first :Carriers .
+
+[] rdf:first :LeadCarrier .
+
+[] rdf:first :Carriers .
+
+[] rdf:first :LeadCarrier .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :WagonInformation .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :TrainAtLocation .
+
+[] rdf:first :TrainLocationReport .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :PlannedTrainData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :PlannedTrainTechnicalData .
+
+[] rdf:first :TrainRunningTechData .
+
+[] rdf:first :TrainCompositionMessage .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :TrainJourneyModificationMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainRunningForecastMessage .
+
+[] rdf:first :TrainRunningInformationMessage .
+
+[] rdf:first :TrainRunningInterruptionMessage .
+
+[] rdf:first :RefusedWagonNumbers .
+
+[] rdf:first :RollingStockDatasetQueryMessage .
+
+[] rdf:first :WagonData .
+
+[] rdf:first :WagonInformation .
+
+[] rdf:first :WagonStatusMessage .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :WagonTypeDetails .
+
+[] rdf:first :WagonTechData .
+
+[] rdf:first :WagonTypeDetails .
+
+[] rdf:first :Carriers .
+
+[] rdf:first :LeadCarrier .
+
+[] rdf:first :TrainForecastAtReportingLocationMessage .
+
+[] rdf:first :TrainLocationReport .
+
+[] rdf:first :WagonAtDeparture .
+
+[] rdf:first :WagonEventInformation .
+
+[] rdf:first :WagonPickupAtOrigin .
+

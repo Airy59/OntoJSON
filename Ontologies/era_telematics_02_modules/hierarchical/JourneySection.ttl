@@ -1,0 +1,30 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:hasJourneySection rdfs:range :JourneySection .
+
+:hasJourneySectionDestination a owl:ObjectProperty ;
+    rdfs:label "has JourneySectionDestination" ;
+    rdfs:domain :JourneySection ;
+    rdfs:range :JourneySectionDestination .
+
+:hasJourneySectionOrigin a owl:ObjectProperty ;
+    rdfs:label "has JourneySectionOrigin" ;
+    rdfs:domain :JourneySection ;
+    rdfs:range :JourneySectionOrigin .
+
+:hasResponsibilityActualSection a owl:ObjectProperty ;
+    rdfs:label "has ResponsibilityActualSection" ;
+    rdfs:domain :JourneySection ;
+    rdfs:range :ResponsibilityActualSection .
+
+:hasResponsibilityNextSection a owl:ObjectProperty ;
+    rdfs:label "has ResponsibilityNextSection" ;
+    rdfs:domain :JourneySection ;
+    rdfs:range :ResponsibilityNextSection .
+
+:JourneySection a owl:Class ;
+    rdfs:label "JourneySection" ;
+    rdfs:comment "Defines the data provided by the IM for a journey section" .
+

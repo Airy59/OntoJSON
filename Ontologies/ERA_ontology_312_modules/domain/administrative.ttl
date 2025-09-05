@@ -1,0 +1,364 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:additionalBrakingInformationDocument a owl:ObjectProperty ;
+    rdfs:label "Documents available by the IM relating to braking performance"@en ;
+    :XMLName "CBP_BrakePerfDocRef" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Only applicable when for parameter 1.1.1.3.11.2 True is selected"@en ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.3.11.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AdditionalBrakingInformationDocument>,
+        <http://data.europa.eu/949/shapes/AdditionalBrakingInformationDocumentApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-04-23"^^xsd:date ;
+    rdfs:comment "Electronic document available in two EU languages from the IM stored by the Agency providing additional information as defined in point (2) of point 4.2.2.6.2 of TSI OPE."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Document ;
+    rdfs:subPropertyOf :brakeRelatedObjParameter ;
+    ns1:term_status "stable" ;
+    skos:changeNote "Change from datatype property to object property in order to point to the class Document (reference document)"@en ;
+    skos:scopeNote """The value of this parameter should be either a reference to a file name or an external link to a document.
+If a file name is provided, the Infrastructure Manager (IM) must upload a document with the same file name using the "Reference Documents Management" functionality in the RINF application. The document must be in electronic format and available in two official EU languages. In this case, the parameter value must be repeated for each document.
+If an external link is provided, the IM must ensure that the document is available at the provided link."""@en .
+
+:certificate a owl:ObjectProperty ;
+    rdfs:label "Certificate"@en ;
+    dcterms:created "2022-06-15"^^xsd:date ;
+    dcterms:modified "2022-11-15"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-10-30"^^xsd:date ;
+    rdfs:comment """For this Vehicle Type, the type or design examination certificate described in the relevant verification module as issued by
+Notified Bodies, supporting the EC Declaration(s) of Verification for the subsystems in scope of the type's authorisation by an authorizing entity."""@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Certificate ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:compatibilityProcedureDocument a owl:ObjectProperty ;
+    rdfs:label "Document with the procedure(s) for static and dynamic route compatibility checks"@en ;
+    :XMLName "IPP_StructureCheckDocRef" ;
+    :applicable "Y/N" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.2.4.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/CompatibilityProcedureDocument> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-23"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment """Electronic document available in two EU languages from the IM stored by the Agency with:
+- precise procedures for the static and dynamic route compatibility checks;
+Or
+- relevant information for carrying out the checks for specific structures."""@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Document ;
+    rdfs:subPropertyOf :performanceObjParameter ;
+    ns1:term_status "stable" ;
+    skos:changeNote "Change from datatype property to object property in order to point to the class Document (reference document)"@en ;
+    skos:scopeNote """The value of this parameter should be either a reference to a file name or an external link to a document.
+If a file name is provided, the Infrastructure Manager (IM) must upload a document with the same file name using the "Reference Documents Management" functionality in the RINF application. The document must be in electronic format and available in two official EU languages. In this case, the parameter value must be repeated for each document.
+If an external link is provided, the IM must ensure that the document is available at the provided link."""@en .
+
+:complianceInfTsi a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Compliance of the tunnel with TSI INF"@en ;
+    :XMLName "ITU_TSITunnel" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if the speed of the line is equal or greater than 200km/h "@en ;
+    :legalDeadline "1 January 2021"@en ;
+    :rinfIndex "1.1.1.1.8.8.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ComplianceInfTsiApplicability>,
+        <http://data.europa.eu/949/shapes/ComplianceInfTsiP> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "Compliance of the tunnel with TSI INF at the maximum permitted speed"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg/2014/1299/2023-09-28#:~:text=4.2.10.1.%C2%A0%C2%A0%C2%A0%20Maximum%20pressure%20variations%20in%20tunnels"^^xsd:anyURI,
+        "[4.2.10.1 of INF TSI on Maximum pressure variations in tunnels | ]" ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" .
+
+:documentUrl a owl:DatatypeProperty ;
+    rdfs:label "Document URL"@en ;
+    dcterms:created "2024-04-23"^^xsd:date ;
+    rdfs:comment "URL that is used to download a document, e.g. url for a reference document in RINF."@en ;
+    rdfs:domain :Document ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:anyURI ;
+    ns1:term_status "stable" .
+
+:gaugingTransversalDocument a owl:ObjectProperty ;
+    rdfs:label "Document with the transversal section of the particular points requiring specific checks"@en ;
+    :XMLName "ILL_GaugeCheckDocRef" ;
+    :applicable "Y/N" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.3.1.3",
+        "1.2.1.0.3.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/GaugingTransversalDocument> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2024-04-23"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "Electronic document available from the IM stored by the Agency with the transversal section of the particular points requiring specific checks due to deviations from gauging referred to in parameter \"Gauging\". Where relevant, guidance for the check with the particular point may be attached to the document with the transversal section."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Document ;
+    rdfs:subPropertyOf :lineLayoutObjParameter ;
+    ns1:term_status "stable" ;
+    skos:changeNote "Change from datatype property to object property in order to point to the class Document (reference document)"@en ;
+    skos:scopeNote """The value of this parameter should be either a reference to a file name or an external link to a document.
+If a file name is provided, the Infrastructure Manager (IM) must upload a document with the same file name using the "Reference Documents Management" functionality in the RINF application. The document must be in electronic format and available in two official EU languages. In this case, the parameter value must be repeated for each document.
+If an external link is provided, the IM must ensure that the document is available at the provided link."""@en .
+
+:highSpeedLoadModelCompliance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Compliance of structures with the High Speed Load Model (HSLM)"@en ;
+    :XMLName "IPP_HSLMCompliant" ;
+    :applicable "Y/N" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.2.4.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HighSpeedLoadModelCompliance> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28#tocId3>,
+        <http://data.europa.eu/eli/reg/2014/1299/2023-09-28#tocId30> ;
+    rdfs:comment "For sections of line with a maximum permitted speed of 200 km/h or more. Information regarding the procedure to be used to perform the dynamic compatibility check."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso """Annex D1 OPE TSI
+INF TSI: 4.2.7.1.2(2)""" ;
+    rdfs:subPropertyOf :performanceDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "(TSI INF 4.2.7.1.2(2)) Applicable if the maximum permitted speed of the running track is more than 200km/h and the structures within the section of line are all compatible with the High Speed Load Model (HSLM); information regarding the procedure to be used to perform the dynamic compatibility check shall be provided as well."@en .
+
+:localRulesOrRestrictionsDoc a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "Documents regarding the rules or restrictions of a strictly local nature available by the IM"@en ;
+    :XMLName "RUL_LocalRulesOrRestrictionsDocRef" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory to provide at least a document if parameter \"Existence of rules and restrictions of a strictly local nature\" value is boolean \"Yes\""@en ;
+    :legalDeadline "1 January 2021"@en ;
+    :rinfIndex "1.1.1.4.2",
+        "1.2.3.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LocalRulesOrRestrictionsDoc> ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2023-01-20"^^xsd:date,
+        "2024-04-23"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "Electronic document available from the IM stored by the Agency providing additional information."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Document ;
+    rdfs:seeAlso "IOD: Notification of national rules Art 14. 11" ;
+    rdfs:subPropertyOf :rulesObjParameter ;
+    ns1:term_status "stable" ;
+    skos:changeNote "Change from datatype property to object property in order to point to the class Document (reference document)"@en ;
+    skos:scopeNote """The value of this parameter should be either a reference to a file name or an external link to a document.
+If a file name is provided, the Infrastructure Manager (IM) must upload a document with the same file name using the "Reference Documents Management" functionality in the RINF application. The document must be in electronic format and available in two official EU languages. In this case, the parameter value must be repeated for each document.
+If an external link is provided, the IM must ensure that the document is available at the provided link.
+
+IOD: Notification of national rules Art 14. 11. Member States may decide not to notify rules and restrictions of a strictly local nature. In such cases, Member States shall mention those rules and restrictions in the registers of infrastructure referred to in Article 49"""@en .
+
+:magneticBrakingConditionsDocument a owl:ObjectProperty ;
+    rdfs:label "Document with the conditions for the use of magnetic brakes"@en ;
+    :XMLName "ILR_MBDocRef" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory value to be provided when 1.1.1.1.6.3 / Use of magnetic brakes is 'allowed under conditions' or 'allowed under conditions only for emergency brake'."@en ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.6.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MagneticBrakingConditionsDocument>,
+        <http://data.europa.eu/949/shapes/MagneticBrakingConditionsDocumentApplicability> ;
+    :tsiOPEAppendixD2Index "3.4.6" ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2024-04-23"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Electronic document available in two EU languages from the IM stored by the Agency with conditions for the use of magnetic brakes identified in 1.1.1.1.6.3."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Document ;
+    rdfs:subPropertyOf :trackResistanceToAppliedLoadsObjParameter ;
+    ns1:term_status "stable" ;
+    skos:changeNote "Change from datatype property to object property in order to point to the class Document (reference document)"@en ;
+    skos:scopeNote """If there exist conditions to allow the use of magnetic brakes.
+
+The value of this parameter should be either a reference to a file name or an external link to a document.
+If a file name is provided, the Infrastructure Manager (IM) must upload a document with the same file name using the "Reference Documents Management" functionality in the RINF application. The document must be in electronic format and available in two official EU languages. In this case, the parameter value must be repeated for each document.
+If an external link is provided, the IM must ensure that the document is available at the provided link."""@en .
+
+:tsiCompliantCompositeBrakeBlocks a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of rules on the use of composite brake blocks"@en ;
+    :XMLName "CTD_TSICompositeBrakeBlocks" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.21" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. TSI compliance of rules on the use of composite brake blocks."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantRSTShuntImpedance a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of rules on combination of RST characteristics influencing shunting impedance"@en ;
+    :XMLName "CTD_TSIRSTShuntImpedance" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.23" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI compliance of rules on combination of RST characteristics influencing shunting impedance. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantSandCharacteristics a owl:ObjectProperty ;
+    rdfs:label "TSI Compliance of rules on sand characteristics"@en ;
+    :XMLName "CTD_TSISandCharacteristics" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.19" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI Compliance of rules on sand characteristics. Deprecated according to the amendment to the Regulation (EU) 2019/777." ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiCompliantSanding a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of sanding"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.16" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "TSI compliance of sanding rules to allow compatibility with track circuits. Too much sand brings the risk of not detecting trains in tracks equipped with track circuits. Deprecated according to the amendment to the Regulation (EU) 2019/777."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "unstable" .
+
+:tsiCompliantShuntDevices a owl:ObjectProperty ;
+    rdfs:label "TSI compliance of rules on shunt assisting devices"@en ;
+    :XMLName "CTD_TSIShuntDevices" ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/tsi-compliances/TSICompliances> ;
+    :rinfIndex "1.1.1.3.7.22" ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. TSI compliance of rules on shunt assisting devices."@en ;
+    rdfs:domain :TrainDetectionSystem ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+org:Organization a owl:Class ;
+    rdfs:label "Organization"@en,
+        "organizaciÃ³n"@es,
+        "Organisation"@fr,
+        "Organizzazione"@it .
+
+:Certificate a owl:Class ;
+    rdfs:label "Certificate"@en ;
+    dcterms:created "2022-06-15"^^xsd:date ;
+    dcterms:modified "2022-06-15"^^xsd:date,
+        "2024-10-24"^^xsd:date ;
+    rdfs:comment "Certificate of a vehicle type. Can be in one of the following states: Amended, New, Suspended, Withdrawn."@en ;
+    rdfs:isDefinedBy : ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+foaf:Document a owl:Class ;
+    rdfs:label "Document"@en .
+
+:Document a owl:Class ;
+    rdfs:label "ERA Document"@en ;
+    dcterms:created "2024-04-23"^^xsd:date ;
+    rdfs:comment "Document in any of the ERA systems, e.g. reference document in RINF."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf foaf:Document ;
+    ns1:term_status "stable" .
+

@@ -1,0 +1,48 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:NatureOfPacking a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NatureOfPacking" ;
+    rdfs:comment """CODE:
+															UN/ECE-Recommendation No. 21""",
+        "CODE: UN/ECE-Recommendation No. 21",
+        """Nature of packing
+															according to the UN/ECE Recommandation
+															No 21""",
+        """Nature of packing according to the UN/ECE
+										Recommandation No 21""" ;
+    rdfs:domain :Packing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NumberOfPackages a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NumberOfPackages" ;
+    rdfs:comment "Number of packages." ;
+    rdfs:domain :Packing ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PackageIdentification a owl:DatatypeProperty ;
+    rdfs:label "PackageIdentification" ;
+    rdfs:comment """Particular marks and
+															numbers to identify less than wagon load
+															assignments.""",
+        """Particular marks and numbers to identify less
+										than wagon load assignments.""" ;
+    rdfs:domain :Packing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasPacking rdfs:range :Packing .
+
+:Packing a owl:Class ;
+    rdfs:label "Packing" ;
+    rdfs:comment "Packing information" .
+
+[] rdf:first :Packing .
+

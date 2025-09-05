@@ -1,0 +1,14 @@
+@prefix : <http://example.org/person#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:JohnDoe a :Employee,
+        owl:NamedIndividual ;
+    rdfs:label "John Doe" ;
+    :age 35 ;
+    :email "john.doe@example.com" ;
+    :employeeId "EMP001" ;
+    :firstName "John" ;
+    :lastName "Doe" .
+

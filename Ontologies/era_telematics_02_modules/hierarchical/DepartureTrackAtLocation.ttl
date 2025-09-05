@@ -1,0 +1,11 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:DepartureTrackAtLocation a owl:Class ;
+    rdfs:label "DepartureTrackAtLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment """Indicates the track ID on which the train runs. The track of the
+				departure of a train at a reporting point. This is indicated in the
+				LocationSubsidiaryCode in conjunction with the LocationPrimaryCode.""" .
+

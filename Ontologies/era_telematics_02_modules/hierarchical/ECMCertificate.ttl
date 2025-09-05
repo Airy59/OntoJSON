@@ -1,0 +1,69 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:CoversNonTankWagonsForDangerousGoods a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CoversNonTankWagonsForDangerousGoods" ;
+    rdfs:comment """Certificate covers other wagons
+													specialised in transport of dangerous goods""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CoversTankWagonsForDangerousGoods a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CoversTankWagonsForDangerousGoods" ;
+    rdfs:comment """Certificate covers tank wagons for
+													dangerous goods""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateECMCertificateSuspended a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateECMCertificateSuspended" ;
+    rdfs:comment """Date of the suspension of the ECM
+													certificate; must be provided in case of
+													suspension""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateSuspended a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ECMCertificateSuspended" ;
+    rdfs:comment """Identification if certificate has
+													been suspended for any reason""" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateValidFrom a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ECMCertificateValidFrom" ;
+    rdfs:comment "Certificate valid from date" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ECMCertificateValidTo a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ECMCertificateValidTo" ;
+    rdfs:comment "Certificate valid to date" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasECMCertificate rdfs:range :ECMCertificate .
+
+:hasEINNumber a owl:ObjectProperty ;
+    rdfs:label "has EINNumber" ;
+    rdfs:domain :ECMCertificate ;
+    rdfs:range :EINNumber .
+
+:ECMCertificate a owl:Class ;
+    rdfs:label "ECMCertificate" ;
+    rdfs:comment "ECM certificate information" .
+

@@ -1,0 +1,32 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:SpecialTreatmentCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SpecialTreatmentCode" ;
+    rdfs:comment "Special Treatment code" ;
+    rdfs:domain :SpecialTreatments ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SpecialTreatmentInformation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SpecialTreatmentInformation" ;
+    rdfs:comment "Additional Text for codes with free text" ;
+    rdfs:domain :SpecialTreatments ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasSpecialTreatments rdfs:range :SpecialTreatments .
+
+:SpecialTreatments a owl:Class ;
+    rdfs:label "SpecialTreatments" ;
+    rdfs:comment "Special treatment" .
+
+[] rdf:first :SpecialTreatments .
+
+[] rdf:first :SpecialTreatments .
+

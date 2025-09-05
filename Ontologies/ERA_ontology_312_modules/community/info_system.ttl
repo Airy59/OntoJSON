@@ -1,0 +1,2040 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:assistanceStartingTrain a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of platform assistance for starting train"@en ;
+    :XMLName "IPL_AssistanceStartingTrain" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.1.0.6.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AssistanceStartingTrain> ;
+    dcterms:created "2021-08-02"^^xsd:date ;
+    dcterms:modified "2021-08-02"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "Indication of existence of equipment or staff supporting the train crew in starting the train."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :platformDataParameter ;
+    ns1:term_status "stable" .
+
+:automaticDroppingDeviceRequired a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Automatic dropping device required"@en ;
+    :XMLName "ERS_AutoDropRequired" ;
+    :applicable "Y/N" ;
+    :dependencyNote "A value is mandatory if the value  Overhead contact line (OCL)  is selected for parameter \"Type of contact line system\""@en ;
+    :formatNote "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.5.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AutomaticDroppingDeviceRequired>,
+        <http://data.europa.eu/949/shapes/AutomaticDroppingDeviceRequiredApplicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date ;
+    rdfs:comment "Indication of whether an automatic dropping device (ADD) required on the vehicle."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso """LOC&PAS TSI: 4.2.8.2.9.10
+EN 50206-1:2010""" ;
+    rdfs:subPropertyOf :requirementsRollingStockDataParameter ;
+    ns1:term_status "stable" .
+
+:bigMetalMass a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Big Metal Mass"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+    :formatNote "Y/N" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en,
+        "12 months after publication of Article 7 Guide for OP tracks"@en ;
+    :rinfIndex "1.1.1.3.2.18",
+        "1.2.1.1.1.18" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/BigMetalMass>,
+        <http://data.europa.eu/949/shapes/BigMetalMassApplicability> ;
+    :tsiOPEAppendixD2Index "3.4.10" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-04-18"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication of existence of metal mass in the vicinity of the location, susceptible of perturbating the reading of balises by the on-board system."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "According to the specification referenced in TSI CCS."@en .
+
+:complianceInfTsi a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Compliance of the tunnel with TSI INF"@en ;
+    :XMLName "ITU_TSITunnel" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if the speed of the line is equal or greater than 200km/h "@en ;
+    :legalDeadline "1 January 2021"@en ;
+    :rinfIndex "1.1.1.1.8.8.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ComplianceInfTsiApplicability>,
+        <http://data.europa.eu/949/shapes/ComplianceInfTsiP> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    rdfs:comment "Compliance of the tunnel with TSI INF at the maximum permitted speed"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg/2014/1299/2023-09-28#:~:text=4.2.10.1.%C2%A0%C2%A0%C2%A0%20Maximum%20pressure%20variations%20in%20tunnels"^^xsd:anyURI,
+        "[4.2.10.1 of INF TSI on Maximum pressure variations in tunnels | ]" ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" .
+
+:dieselThermalAllowed a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Diesel or other thermal traction allowed"@en ;
+    :XMLName "ITU_DieselThermAllowed" ;
+    :applicable "Y/N" ;
+    :legalDeadline "1 January 2021"@en ;
+    :rinfIndex "1.2.1.0.5.9" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/DieselThermalAllowed> ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2021-08-09"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1303/2024-01-29> ;
+    rdfs:comment "Indication whether it is allowed to use diesel or other thermal traction in the tunnel"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" .
+
+:eddyCurrentBrakePrevention a owl:DatatypeProperty ;
+    rdfs:label "Eddy current brake prevention"@en ;
+    :eratvIndex "4.7.4.1.2" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Possibility of preventing the use of the eddy current track brake (only if fitted with eddy current brake)"@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:energyMeterInstalled a owl:DatatypeProperty ;
+    rdfs:label "Energy meter installed"@en ;
+    :eratvIndex "4.10.12" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "TSI conform energy meter for billing purposes installed on board."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:etcsImplementsLevelCrossingProcedure a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ETCS trackside implements level crossing procedure or an equivalent solution"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Applicable and mandatory when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.2.13",
+        "1.2.1.1.1.13" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EtcsImplementsLevelCrossingProcedure>,
+        <http://data.europa.eu/949/shapes/EtcsImplementsLevelCrossingProcedureApplicability> ;
+    :tsiOPEAppendixD3Index "1.2" ;
+    dcterms:created "2022-11-04"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "If the trackside does not implement any solution to cover non-protected LXs (which are normally protected by means of a technical system), then drivers will be required to comply with instructions received from other sources"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+    rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "See: TSI CCS (Subset-026, Chapter 5, section 5.16)"@en .
+
+:etcsInfillLineAccess a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ETCS infill necessary for line access"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1) and the ETCS level is 1."@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.2.3",
+        "1.2.1.1.1.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EtcsInfillLineAccess>,
+        <http://data.europa.eu/949/shapes/EtcsInfillLineAccessApplicability> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication whether infill is required to access the line for safety reasons."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """As indicated in CCS TSI section 7.2.9.1, an ETCS Level 1 trackside application may require that the on-board is equipped with the corresponding in-fill data transmission (Euroloop or radio) if the release speed is set to zero for safety reasons.
+
+See: TSI CCS 7.2.9.1 & 4.2.3 """@en .
+
+:existenceOfIndustrialRisk a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Industrial risks â€” locations where it is dangerous for the driver to step out"@en ;
+    :applicable "Y/N" ;
+    :formatNote "Y/N" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.0.0.1.1" ;
+    :tsiOPEAppendixD2Index "3.2.5" ;
+    dcterms:created "2025-01-30"^^xsd:date ;
+    rdfs:comment "Indication that the full section of line (or a part of it) it is identified by the Infrastructure Managers (and communicated to the RU) where drivers are not supposed to get off the locomotive."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :SectionOfLine ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :routeBookDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Although it is just an indication of existence of an industrial risk, the area covering the industrial risk should be references on the topological network.
+For the route book purpose, the industrial risks should be defined as linear references instead of area. SpecialArea of type "industrial risk" should be used"""@en .
+
+:ferromagneticWheelMaterial a owl:DatatypeProperty ;
+    rdfs:label "Ferromagnetic wheel material"@en ;
+    :eratvIndex "4.14.2.12" ;
+    dcterms:created "2021-09-01"^^xsd:date ;
+    dcterms:modified "2021-09-01"^^xsd:date ;
+    rdfs:comment "Wheel material is ferromagnetic."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:flangeLubeForbidden a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Use of flange lubrication forbidden"@en ;
+    :XMLName "IHS_FlangeLubeForbidden" ;
+    :applicable "Y" ;
+    :formatNote "in XML: Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.7.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FlangeLubeForbidden> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date ;
+    rdfs:comment "Indication whether the use of on-board device for flange lubrication is forbidden."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" .
+
+:flangeLubricationFitted a owl:DatatypeProperty ;
+    rdfs:label "Flange lubrication fitted"@en ;
+    :eratvIndex "4.9.3.1" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Indicates if the vehicle type is fitted for flange lubrication."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:gsmRNoCoverage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "No GSMR coverage"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "GSM-R (parameter 1.1.1.3.3.1) must be installed for this parameter to be applicable."@en,
+        "GSM-R must be installed for this parameter to be applicable"@en ;
+    :legalDeadline "1 January 2021"@en,
+        "12 months after publication of Article 7 Guide for OP tracks"@en ;
+    :rinfIndex "1.1.1.3.3.8",
+        "1.2.1.1.2.8" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/GsmRNoCoverage>,
+        <http://data.europa.eu/949/shapes/GsmRNoCoverageApplicability> ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    rdfs:comment "Indication if there is no GSMR coverage"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :tsiCompliantRadioDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """If GSM-R is not installed, this parameter should not be used.
+This parameter is mainly to capture the case of Radio Hole functionality (lack of GSM-R coverage), that is foreseen in the ETCS specifications as packet 68.
+Another possible use is the declaration of a temporary situation where, although the area is in principle covered by GSM-R, there is a long-term outage or a project for replacement of the radio (i.e. a section that will not be covered with GSM-R for half a year or longer)."""@en .
+
+:gsmrForcedDeregistrationFunctionalNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GSM-R network is configured to allow forced de-registration of a functional number by another driver"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "GSM-R and ETCS L2 must be installed for this parameter to be applicable."@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.3.11",
+        "1.2.1.1.2.11" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/GsmrForcedDeregistrationFunctionalNumber>,
+        <http://data.europa.eu/949/shapes/GsmrForcedDeregistrationFunctionalNumberApplicability> ;
+    :tsiOPEAppendixD3Index "2.1" ;
+    dcterms:created "2022-11-07"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-04-18"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "This feature will determine the applicable operational rules for drivers and signallers when dealing with cab radios registered under wrong numbers."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :tsiCompliantRadioDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "See documents regarding Operational Harmonisation ETCS."@en .
+
+:hasAdditionalBrakingInformation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Availability by the IM of additional information"@en ;
+    :XMLName "CBP_AddInfoAvailable" ;
+    :applicable "Y/N" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.3.11.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasAdditionalBrakingInformation> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date ;
+    rdfs:comment "Availability by the IM of additional information as defined in point (2) of point 4.2.2.6.2 of Regulation (EU) 2023/1693 - TSI OPE"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :brakeRelatedDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "[See TSI OPE 4.2.2.6.2 (2)]"@en .
+
+:hasAutomaticDroppingDevice a owl:DatatypeProperty ;
+    rdfs:label "Has automatic dropping device"@en ;
+    :eratvIndex "4.10.11" ;
+    dcterms:created "2020-08-25"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Automatic dropping device (ADD) fitted (to be indicated for each energy supply system the vehicle is equipped for)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:hasBallast a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of ballast"@en ;
+    :XMLName "ITP_Ballast" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory for tracks with permitted speed (parameter 1.1.1.1.2.5) greater than 250km/h"@en ;
+    :formatNote "in XML: Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.4.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasBallast>,
+        <http://data.europa.eu/949/shapes/HasBallastApplicability> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Specifies whether track construction is with sleepers embedded in ballast or not."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso """Loc&Pas TSI 4.2.6.2.5
+INF TSI : 4.2.10.3""" ;
+    rdfs:subPropertyOf :trackDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """This parameter is related to phenomena of ballast pick-up observed for the high-speed traffic.
+Requirements regarding ballast pick-up reduction at infrastructure subsystem level only applies to lines intended to be operated at speed greater than 250 km/h and is an open point in INF TSI: 4.2.10.3
+The parameter is about the phenomenon of ballast pick-up observed for the high-speed traffic, not about the ballast itself.
+As so far any specifications for mitigation of the problem were disclosed, the only information from RINF will be data about the network where the problems may be faced."""@en .
+
+:hasCurrentLimitation a owl:DatatypeProperty ;
+    rdfs:label "Has current limitation"@en ;
+    :eratvIndex "4.10.14" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2020-11-03"^^xsd:date ;
+    rdfs:comment "Electric units equipped with power or current limitation function."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:hasETCSRestrictionsConditions a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of operating restrictions or conditions"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.2.6",
+        "1.2.1.1.1.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasETCSRestrictionsConditions>,
+        <http://data.europa.eu/949/shapes/HasETCSRestrictionsConditionsApplicability> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-11-20"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication whether restrictions or conditions due to partial compliance with the TSI CCS exist."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://www.era.europa.eu/content/certification-issues"^^xsd:anyURI,
+        "https://www.era.europa.eu/system/files/2022-11/restrictions_and_added_functions_en_1.doc"^^xsd:anyURI ;
+    rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """If operational restrictions and conditions are applicable, a document will be provided as a value of era:era:etcsRestrictionsConditionsDoc property. The RU has to contact the IM to be informed about these conditions.
+
+These conditions and restrictions of use are considered in section 6.4 of the CCS TSI. They should be described using the template available on Agency website (Certification
+and deviations - Guidelines for using the ERA template) with the following link: https://www.era.europa.eu/activities/european-rail-traffic-management-system-ertms_en#meeting6."""@en .
+
+:hasElectricShoreSupply a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of electric shore supply"@en ;
+    :XMLName "ITS_ElectricShoreSupply" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.4.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasElectricShoreSupply> ;
+    dcterms:created "2021-08-10"^^xsd:date ;
+    dcterms:modified "2021-08-10"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Indication whether exists an installation of electric shore supply (fixed installation for servicing trains)."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+    ns1:term_status "stable" .
+
+:hasEmergencyPlan a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of emergency plan"@en ;
+    :XMLName "ITU_EmergencyPlan" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory for tunnels longer than 1 km"@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.8.9",
+        "1.2.1.0.5.6",
+        "1.2.2.0.5.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEmergencyPlan>,
+        <http://data.europa.eu/949/shapes/HasEmergencyPlanApplicability> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2021-08-10"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1303/2024-01-29> ;
+    rdfs:comment "Indication whether emergency plan exists."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso """SRT TSI: 4.4.2
+OPE TSI: 4.2.3.7""" ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """A value may not be applicable for tunnels shorter than 1 km, as for them the fire category according SRT TSI does not exist.
+Emergency plan has to be a document developed for each tunnel under the direction of the IM, in co-operation, where appropriate, with RUs, Rescue services and relevant authorities. It shall be consistent with the self-rescue, evacuation and rescue facilities provided.
+It is applicable for tunnels longer than 1 km, in accordance with section 4.4.2 of SRT TSI, the emergency plan is mandatory only for tunnel length of more than 1km.
+
+SRT TSI: 4.4.2
+OPE TSI: 4.2.3.7"""@en .
+
+:hasEtcsNationalPacket44 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "has ETCS national packet 44 application implemented"@en ;
+    :dependencyNote "Only applicable when selected value for 1.1.1.3.2.1 (ETCS present)."@en ;
+    :rinfIndex "1.1.1.3.2.5",
+        "1.2.1.1.1.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEtcsNationalPacket44>,
+        <http://data.europa.eu/949/shapes/HasEtcsNationalPacket44Applicability> ;
+    dcterms:created "2024-11-20"^^xsd:date ;
+    dcterms:modified "2025-05-05"^^xsd:date ;
+    dcterms:replaces :etcsNationalPacket44 ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication whether data for national packet 44 applications is transmitted between track and train."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+    rdfs:subPropertyOf :tsiCompliantTrainProtectionSystemDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Value can be `false` or a link to the implemented functions. The hasEtcsNationalPacket44 property represents the true or false value. The etcsNationalPacket44Function represents the functions.
+
+Packets 44 are the means to transmit data for national applications between train and track and vice versa, using the data transmission facilities included within the ETCS.
+NID_XUSER values managed by ERA in a document about ETCS variables available on ERA website.
+
+See: TSI CCS (7.4.3 & 6.2.4.2)."""@en .
+
+:hasEvacuationAndRescuePoints a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of evacuation and rescue points"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Mandatory for TSI-compliant tunnels longer than 0.5 km"@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.1.8.13",
+        "1.2.1.0.5.11",
+        "1.2.2.0.5.10" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasEvacuationAndRescuePoints> ;
+    :tsiOPEAppendixD2Index "3.2.3" ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of existence of evacuation and rescue points"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "Point 4.2.1.7.  \"Evacuation and rescue points\" of the Commission Regulation (EU) No 1303/2014 of 18 November 2014 concerning the technical specification for interoperability relating to safety in railway tunnels of the rail system of the European Union|https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1566396648532&uri=CELEX%3A02014R1303-20190616"^^xsd:anyURI ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" .
+
+:hasExternalCleaning a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of external cleaning facilities"@en ;
+    :XMLName "ITS_ExternalCleaning" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.4.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasExternalCleaning> ;
+    dcterms:created "2021-08-10"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Indication whether exists an installation of external cleaning facility (fixed installation for servicing trains) as defined in TSI INF"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+    ns1:term_status "stable" .
+
+:hasHotAxleBoxDetector a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of trackside hot axle box detector (HABD)"@en ;
+    :XMLName "IHS_HABDExist" ;
+    :applicable "Y" ;
+    :formatNote "in XML: Y/N" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.7.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasHotAxleBoxDetector> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment "Existence of trackside HABD"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso """TSI Loc&Pas: 4.2.10.2.3, 4.2.3.3.2
+WAG TSI: 4.2.3.4
+EN 15437-1:2009""" ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The aim of axle bearing condition monitoring is to detect deficient axle box bearings. The TSI Loc&Pas provides with the requirement that units of maximum design speed higher than or equal to 250 km/h, on board detection equipment shall be provided. For units of maximum design speed lower than 250 km/h, and designed to be operated on others track gauge systems than the 1 520 mm system, axle bearing condition monitoring shall be provided and be achieved either by on board equipment or by using track side equipment. Track side equipment (also known as HABD) are defined from the perspective of rolling stock, for which the zone visible to the trackside equipment is defined by the area referred in the standard EN 15437-1:2009, as required by the TSI Loc&Pas.
+This parameter is to indicate whether the section of line is equipped with trackside hot axle box detector (HABD) and is necessary for the route compatibility check."""@en .
+
+:hasLevelCrossings a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of level crossings"@en ;
+    :XMLName "IHS_LevelCrossing" ;
+    :applicable "Y" ;
+    :formatNote "in XML: Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.7.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasLevelCrossings> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2021-09-11"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment "Indication whether level crossings (including pedestrian track crossing) exist on the section of line."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "This parameter concerns the level crossing of the railway with a road or a street. Provision the correct location of the level crossing(s) is not required, but RINF data model allows providing such information on a voluntary basis, and it can be a geographical information and/or a reference to a line referencing system."@en .
+
+:hasLubricationDevicePrevention a owl:DatatypeProperty ;
+    rdfs:label "Has lubrication device prevention"@en ;
+    :eratvIndex "4.9.3.2" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Possibility of preventing the use of the lubrication device (only if fitted with flange lubrication)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:hasOtherTrainProtection a owl:DatatypeProperty ;
+    rdfs:label "Existence of other train protection, control and warning systems installed"@en ;
+    :rinfIndex "1.1.1.3.5.1" ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication if other train protection, control and warning systems in normal operation are installed lineside."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "unstable" .
+
+:hasParkingBrake a owl:DatatypeProperty ;
+    rdfs:label "Has parking brake"@en ;
+    :eratvIndex "4.7.3.4" ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date ;
+    rdfs:comment "Indicates if a vehicle type has parking brake."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:hasPhaseSeparation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase separation"@en ;
+    :XMLName "EOS_Phase" ;
+    :applicable "Y/N" ;
+    :dependencyNote "A value is mandatory only if 1.1.1.2.2.1.1 parameter values is  Overhead contact line (OCL) , otherwise applicability flag is \"N\" (not applicable)"@en ;
+    :formatNote "in XML: Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.4.1.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasPhaseSeparation>,
+        <http://data.europa.eu/949/shapes/HasPhaseSeparationApplicability> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date ;
+    dcterms:relation :contactLineSystemType ;
+    rdfs:comment "Indication of existence of phase separation and required information."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :oclSeparationSectionsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "In case of existence of phase separation on the track or on the section of the line the option  True  shall be selected."@en .
+
+:hasPlatformCurvature a owl:DatatypeProperty ;
+    rdfs:label "Curvature of the platform"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.2.1.0.6.8" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasPlatformCurvature> ;
+    :tsiOPEAppendixD2Index "2.3.8" ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of the existence of the curvature of the platform."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :PlatformEdge ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :platformDataParameter ;
+    ns1:term_status "stable" .
+
+:hasRefuelling a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of refuelling"@en ;
+    :XMLName "ITS_Refuelling" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.4.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasRefuelling> ;
+    dcterms:created "2021-08-10"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Indication whether exists an installation of refuelling (fixed installation for servicing trains) as defined in TSI INF."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+    ns1:term_status "stable" .
+
+:hasRegenerativeBrake a owl:DatatypeProperty ;
+    rdfs:label "Permission for regenerative braking"@en ;
+    :eratvIndex "4.7.4.3.1" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-08-06"^^xsd:date ;
+    rdfs:comment "Indication whether regenerative braking is permitted or not."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:hasSandRestocking a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of sand restocking"@en ;
+    :XMLName "ITS_SandRestocking" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.4.5" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSandRestocking> ;
+    dcterms:created "2021-08-10"^^xsd:date ;
+    dcterms:modified "2021-08-10"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "Indication whether an installation of sand restocking exists (fixed installation for servicing trains)."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+    ns1:term_status "stable" .
+
+:hasSandingPrevention a owl:DatatypeProperty ;
+    rdfs:label "Has sanding prevention"@en ;
+    :eratvIndex "4.14.2.12" ;
+    dcterms:created "2021-09-01"^^xsd:date ;
+    dcterms:modified "2021-09-01"^^xsd:date ;
+    rdfs:comment "Possibility of preventing the use of sanding."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:hasSevereWeatherConditions a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of severe climatic conditions"@en ;
+    :XMLName "IPP_SevereClimateCon" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.2.8" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSevereWeatherConditions> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1302/2023-09-28> ;
+    rdfs:comment "Climatic conditions on the line are severe according to European standard."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso """EN 50125-1 (2014): 4.7
+LOC&PAS TSI:4.2.6.1.2""" ;
+    rdfs:subPropertyOf :performanceDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Value 'true' shall be selected in case there are possible severe climatic conditions to be expected, i.e. a significant amount of snow or ice is to be expected during winter and vehicle should be designed accordingly to be able to run in such conditions. (compliance to 4.2.6.1.2(3),(4) of TSI Loc&Pas required). 'False' to be selected otherwise.
+
+Nominal and severe conditions are defined at TSI Loc&Pas level, section 4.2.6.1.2, which requires that the applicant declares to which snow conditions a vehicle complies with : either "nominal" or "severe" conditions. This technical aspect is reflected in the parameter 4.3.3 "Snow, ice and hail conditions" of ERATV , which will provide the two possible values:
+- Nominal conditions correspond to compliance with clause 4.7 of EN 50125 as referred in the Â§4.2.6.1.2 (1) of TSI Loc&Pas.
+To be noted: It is not required to precise the categorisation S1, S2 or S3 as mentioned in the EN 50125.
+- Severe conditions correspond to compliance with Â§4.2.6.1.2 (3) and (4) : the applicant designs and tests its vehicle according to the different scenarios mentioned in the TSI Â§4.2.6.1.2 (3) (snowdrift, powder snow, temperature gradient, etc.) and set the related provisions to achieve this as required by Â§4.2.6.1.2 (4) (obstacle deflector of sufficient size, effect of ice and snow on running gear and brake function, etc.)."""@en .
+
+:hasShuntingRestrictions a owl:DatatypeProperty ;
+    rdfs:label "Has shunting restrictions"@en ;
+    :eratvIndex "4.8.3" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Indicates the presence of shunting restrictions."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:hasSystemSeparation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation"@en ;
+    :XMLName "EOS_System" ;
+    :applicable "Y/N" ;
+    :dependencyNote "It is applicable ( Y ) only if the value  Overhead contact line (OCL)  is selected for parameter \"Type of contact line system\""@en ;
+    :formatNote "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.4.2.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasSystemSeparation>,
+        <http://data.europa.eu/949/shapes/HasSystemSeparationApplicability> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date ;
+    rdfs:comment "Indication of existence of system separation"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :oclSeparationSectionsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "In case of existence of system separation on the track or on the section of the line and required information on the section of the line, the option  Y=yes  shall be selected."@en .
+
+:hasTSITrainDetection a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of train detection system fully compliant with the TSI"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.4.1",
+        "1.2.1.1.3.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasTSITrainDetection> ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication if there is any train detection system installed and fully compliant with the TSI CCS"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :trainDetectionSystemBasedFrequencyBandsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Verification of compliance with TSI includes application of notified national rules (when they exist).
+
+See: (Annex I, Appendix A, Table A.2 -Index 77)."""@en .
+
+:hasToiletDischarge a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of toilet discharge"@en ;
+    :XMLName "ITS_ToiletDischarge" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.4.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasToiletDischarge> ;
+    dcterms:created "2021-08-10"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Indication whether exists an installation of toilet discharge (fixed installation for servicing trains) as defined in TSI INF"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+    ns1:term_status "stable" .
+
+:hasTrainIntegrityConfirmation a owl:DatatypeProperty ;
+    rdfs:label "Has train integrity confirmation"@en ;
+    :eratvIndex "4.13.1.9" ;
+    dcterms:created "2020-08-31"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date ;
+    rdfs:comment "Indication of on-board management system about completeness of the train information."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:hasWalkway a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of walkways"@en ;
+    :applicable "Y/NYA" ;
+    :dependencyNote "Mandatory for TSI-compliant tunnels longer than 0.5 km"@en ;
+    :formatNote """[Y/N]
+
+If =Y then TSI-Compliant OR NON-TSI-Compliant""" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.1.8.12",
+        "1.2.1.0.5.10",
+        "1.2.2.0.5.9" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasWalkway> ;
+    :tsiOPEAppendixD2Index "3.2.3" ;
+    dcterms:created "2022-10-27"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Indication of existence of walkways"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Tunnel ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "Point 4.2.1.6. \"Escape walkways\" of the Commission Regulation (EU) No 1303/2014 of 18 November 2014 concerning the technical specification for interoperability relating to safety in railway tunnels of the rail system of the European Union|https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1566396648532&uri=CELEX%3A02014R1303-20190616 "^^xsd:anyURI ;
+    rdfs:subPropertyOf :tunnelDataParameter ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Existence of walkways in tunnel"@en ;
+    skos:scopeNote """Indicates the existence of "Escape walkways", if the tunnel is longer than 0.5km then definition from Section 4.2.1.6 of TSI SRT applies.
+If the selected value is "true", provide the boolean value for "Is TSI compliant".
+On top of the requirements set out in the TSI SRT, the application guide to the TSI allows to use a ballastless track as a walkway. So, a 'Yes' in this parameters might not result in a physical standalone walkway.
+
+For Siding the mechanism to locate a specific object is different depending on the member state. The TWG is still working on it."""@en .
+
+:hasWaterRestocking a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of water restocking"@en ;
+    :XMLName "ITS_WaterRestocking" ;
+    :applicable "Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.2.2.0.4.3" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HasWaterRestocking> ;
+    dcterms:created "2021-08-10"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Indication whether exists an installation of water restocking (fixed installation for servicing trains) as defined in TSI INF"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Siding ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :sidingFixedInstalationsDataParameter ;
+    ns1:term_status "stable" .
+
+:hasWheelSlideProtectionSystem a owl:DatatypeProperty ;
+    rdfs:label "Has wheel slide protection system"@en ;
+    :eratvIndex "4.7.8" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Indicates the presence of a wheel slide protection system."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:highSpeedLoadModelCompliance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Compliance of structures with the High Speed Load Model (HSLM)"@en ;
+    :XMLName "IPP_HSLMCompliant" ;
+    :applicable "Y/N" ;
+    :legalDeadline "16 January 2020"@en ;
+    :rinfIndex "1.1.1.1.2.4.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/HighSpeedLoadModelCompliance> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2024-09-19"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28#tocId3>,
+        <http://data.europa.eu/eli/reg/2014/1299/2023-09-28#tocId30> ;
+    rdfs:comment "For sections of line with a maximum permitted speed of 200 km/h or more. Information regarding the procedure to be used to perform the dynamic compatibility check."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso """Annex D1 OPE TSI
+INF TSI: 4.2.7.1.2(2)""" ;
+    rdfs:subPropertyOf :performanceDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "(TSI INF 4.2.7.1.2(2)) Applicable if the maximum permitted speed of the running track is more than 200km/h and the structures within the section of line are all compatible with the High Speed Load Model (HSLM); information regarding the procedure to be used to perform the dynamic compatibility check shall be provided as well."@en .
+
+:isQuietRoute a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Belonging to a quieter route"@en ;
+    :XMLName "IHS_QuietRoute" ;
+    :applicable "Y" ;
+    :formatNote "in XML: Y/N" ;
+    :legalDeadline "1 January 2021"@en ;
+    :rinfIndex "1.1.1.1.7.11" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/IsQuietRoute> ;
+    dcterms:created "2020-11-04"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    rdfs:comment "Belonging to a 'quieter route' in accordance with Article 5b of TSI NOI."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "Art 5b of Regulation (EU) 1304/2014 (amended by Regulation (EU) 2019/774) of 16 May 2019" ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Art 5B: A quieter route means a part of the railway infrastructure with a minimum length of 20 km on which the average number of daily operated freight trains during the night-time as defined in national legislation transposing Directive 2002/49/EC of the European Parliament and of the Council (5) was higher than 12. The freight traffic in the years 2015, 2016 and 2017 shall be the basis for the calculation of that average number. In case the freight traffic due to exceptional circumstances diverges in a given year from that average number by more than 25 %, the Member State concerned can calculate the average number on the basis of the remaining two years.
+Art 5.C 1:   Member States shall designate quieter routes in accordance with Article 5b and the procedure set out in Appendix D.1 of the Annex. They shall provide the European Union Agency for Railways ( the Agency ) with a list of quieter routes six months after the date of publication of this Regulation at the latest. The Agency shall publish those lists on its website."""@en .
+
+:localRulesOrRestrictions a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of rules and restrictions of a strictly local nature"@en ;
+    :XMLName "RUL_LocalRulesOrRestrictions" ;
+    :applicable "Y/N" ;
+    :formatNote "Y/N" ;
+    :legalDeadline "1 January 2021"@en ;
+    :rinfIndex "1.1.1.4.1",
+        "1.2.3.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LocalRulesOrRestrictions> ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "Existence of rules and restrictions of a strictly local nature"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :OperationalPoint :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :rulesDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """There is a general obligation for Member States to notify existing national rules but:  Member States may decide not to notify rules and restrictions of a strictly local nature. In such cases, Member States shall mention those rules and restrictions in the registers of infrastructure.
+In this eventuality, this parameter allows the IM accordingly to its Member State decision to declare the existence of such rules and to provide them with the parameter 'Documents regarding the rules or restrictions of a strictly local nature available by the IM'"""@en .
+
+:mNvderun a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "M_NVDERUN"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.2.16.10",
+        "1.2.1.1.1.16.10" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MNvderun>,
+        <http://data.europa.eu/949/shapes/MNvderunApplicability> ;
+    :tsiOPEAppendixD3Index "1.5.10" ;
+    dcterms:created "2022-11-07"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2023-04-18"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Entry of Driver ID permitted while running According to the specification referenced in Appendix A-1, index [C]"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+    rdfs:subPropertyOf :etcsNationalValuesDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "See: TSI CCS (Subset 26, chapter 7. 7.5.1.75 M_NVDERUN)"@en .
+
+:magneticBrakePrevention a owl:DatatypeProperty ;
+    rdfs:label "Magnetic brake prevention"@en ;
+    :eratvIndex "4.7.4.2.2" ;
+    dcterms:created "2020-08-24"^^xsd:date ;
+    dcterms:modified "2021-04-13"^^xsd:date ;
+    rdfs:comment "Possibility of preventing the use of the magnetic track brake (only if fitted with magnetic brake)"@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:magneticBrakingFitted a owl:DatatypeProperty ;
+    rdfs:label "Magnetic braking fitted"@en ;
+    :eratvIndex "4.7.4.2.1" ;
+    dcterms:created "2022-09-12"^^xsd:date ;
+    rdfs:comment "Magnetic track brake fitted. New property defined to distinguish it from magneticBraking which is a RINF SKOS property."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:multipleTrainProtectionRequired a owl:DatatypeProperty ;
+    rdfs:label "Need for more than one train protection, control and warning system required on board"@en ;
+    :rinfIndex "1.1.1.3.5.2" ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication whether more than one train protection, control and warning system is required to be on-board and active simultaneously."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "unstable" .
+
+:parkingBrakeMandatory a owl:DatatypeProperty ;
+    rdfs:label "Parking brake mandatory"@en ;
+    :eratvIndex "4.7.3.1" ;
+    dcterms:created "2021-08-26"^^xsd:date ;
+    dcterms:modified "2021-08-26"^^xsd:date ;
+    rdfs:comment "All vehicles of this type must be equipped with a parking brake (parking brake mandatory for vehicles of this type)."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:permitUseReflectivePlates a owl:DatatypeProperty ;
+    rdfs:label "Permit of use of reflective plates"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.1.7.12" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    rdfs:comment "Sections where is permitted to use the reflective plates on rail freight corridors, with a view to prioritise the current bottlenecks. Specific case for Belgium, France, Italy, Portugal and Spain until 1.1.2026"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "4.2.2.1.3.2 of TSI OPE (Commission Implementing Regulation (EU) 2019/773 of 16 May 2019)" ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "From TSI OPE: Member States shall in particular endeavour to permit the use of reflective plates on rail freight corridors, with a view to prioritise the current bottlenecks. These sections and details of any conditions pertaining to them shall be recorded in the RINF. Until the information is encoded in RINF, the infrastructure manager shall ensure the information is communicated to railway undertakings by other appropriate means. The infrastructure manager shall identify the sections of lines on which 2 steady red lights are required in the RINF. "@en .
+
+:phaseInfoChangeSupplySystem a owl:DatatypeProperty ;
+    rdfs:label "Phase info change supply system"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoChangeSupplySystem> ;
+    dcterms:created "2024-02-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date,
+        "2025-06-09"^^xsd:date ;
+    rdfs:comment "Part of the phase info of a track that corresponds to the single selection of Y=yes or N=no to show if the energy supply system changes"@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoDistanceType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info distance type"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoDistanceType> ;
+    dcterms:created "2024-02-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    rdfs:comment "Part of the phase info of a track that corresponds to the single selection of 'MIN=minimum' or 'MAX=maximum' to show whether the length is a minimum distance between the inner contact strips of the pantographs or a maximum distance between the outer contact strips of the pantographs. Multiple strings for this parameter are accepted."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoKm a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info Km"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoKm> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that indicates the location from the start of the line where the new value is valid."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info length"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoLength> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that corresponds to the length of the phase separation in metres."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoPantographLowered a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info pantograph lowered"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoPantographLowered> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that shows whether a pantograph has to be lowered."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:phaseInfoSwitchOffBreaker a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Phase info switch off breaker"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoSwitchOffBreaker> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Part of the phase info of a track that shows whether the breaker has to be switched off."@en ;
+    rdfs:domain :PhaseInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" ;
+    skos:scopeNote " The phase info is the indication of required several information on phase separation."@en .
+
+:publicNetworkRoaming a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of GSM-R roaming to public networks"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "GSM-R must be installed for this parameter to be applicable"@en ;
+    :legalDeadline "1 January 2021"@en,
+        "12 months after publication of Article 7 Guide for OP tracks"@en ;
+    :rinfIndex "1.1.1.3.3.6",
+        "1.2.1.1.2.6" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PublicNetworkRoaming>,
+        <http://data.europa.eu/949/shapes/PublicNetworkRoamingApplicability> ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :publicNetworkRoamingDetails ;
+    rdfs:comment """Existence of roaming to a public network.
+
+                         In case of Y, provide the name of the public network(s) under parameter "Details on GSM-R roaming to public networks"."""@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :tsiCompliantRadioDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Sections of EIRENE not covered by references in TSI."@en .
+
+:qNvsbtsmperm a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Q_NVSBTSMPERM"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "A value has to be provided when ETCS is present (a value is provided on 1.1.1.3.2.1)."@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.2.16.12",
+        "1.2.1.1.1.16.12" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/QNvsbtsmperm>,
+        <http://data.europa.eu/949/shapes/QNvsbtsmpermApplicability> ;
+    :tsiOPEAppendixD3Index "1.5.12" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Permission to use service brake in target speed monitoring"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://www.era.europa.eu/domains/technical-specifications-interoperability/control-command-and-signalling-tsi_en#oe-content-paragraph-1632"^^xsd:anyURI ;
+    rdfs:subPropertyOf :etcsNationalValuesDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "See: TSI CCS (Subset-026, chapter 7. 7.5.1.124 Q_NVSBTSMPERM)"@en .
+
+:redLightsRequired a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Steady red lights required"@en ;
+    :XMLName "IHS_RedLights" ;
+    :applicable "Y/N" ;
+    :formatNote "in XML: Y/N" ;
+    :legalDeadline "1 January 2021"@en ;
+    :rinfIndex "1.1.1.1.7.10" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RedLightsRequired>,
+        <http://data.europa.eu/949/shapes/RedLightsRequiredCountryApplicability> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2024-01-08"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-06-16"^^xsd:date ;
+    rdfs:comment "Sections where two steady red lights are required in accordance with TSI OPE"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "art 4.2.2.1.3.2. of Implementing Regulation (EU) 2019/773 'Freight trains'" ;
+    rdfs:subPropertyOf :healthSafetyAndEnvironmentDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Regulation (EU) 2019/773 says:
+Specific case:
+Belgium, France, Italy, Portugal, Spain and UK may continue to apply notified national rules that require freight trains to be equipped with 2 steady red lights as a condition to run on sections of their network, where this is justified by operating practices already in place and/or national rules notified before end of January 2019.
+Cooperation with neighbouring countries:
+In the meantime Member States concerned, in particular at the request of the railway undertakings, shall perform an assessment with a view to accept the use of 2 reflective plates in one or more sections of their network if the result of the assessment is positive and define appropriate conditions, which shall be based upon an assessment of the risks and operational requirements. This assessment shall be completed within a maximum period of 6 months after receiving the railway undertaking's request. The acceptance of reflective plates shall be granted, unless the Member State can duly justify the refusal based on the negative result of the assessment.
+Member States shall in particular endeavour to permit the use of reflective plates on rail freight corridors, with a view to prioritise the current bottlenecks. These sections and details of any conditions pertaining to them shall be recorded in the RINF. Until the information is encoded in RINF, the infrastructure manager shall ensure the information is communicated to railway undertakings by other appropriate means. The infrastructure manager shall identify the sections of lines on which 2 steady red lights are required in the RINF."""@en .
+
+:referencePassByNoiseLevel a owl:DatatypeProperty ;
+    rdfs:label "Reference pass-by noise level"@en ;
+    :eratvIndex "4.11.2" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Pass-by noise level was measured under reference conditions."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:switchProtectControlWarning a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of switch over between different protection, control and warning systems while running"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Applicable when at least two different protection, control and warning systems exist."@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.8.1",
+        "1.2.1.1.7.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SwitchProtectControlWarning>,
+        <http://data.europa.eu/949/shapes/SwitchProtectControlWarningApplicability> ;
+    :tsiOPEAppendixD2Index "3.4.2" ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :conditionsSwitchTrainProtectionSystems ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj>,
+        <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication whether a switch over between different systems whilst running exists."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :transitionsBetweenSystemsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Switch over between different systems whilst running. Installation depends on local conditions. "@en .
+
+:switchRadioSystem a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence of switch over between different radio systems"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Applicable when at least two different radio systems exist. "@en ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.8.2",
+        "1.2.1.1.7.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SwitchRadioSystem>,
+        <http://data.europa.eu/949/shapes/SwitchRadioSystemApplicability> ;
+    :tsiOPEAppendixD2Index "3.4.4" ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :legacyRadioSystem ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj>,
+        <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication whether a switch over between different radio systems and no communication system whilst running exists."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :Track ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :transitionsBetweenSystemsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Switch over between different radio systems and no communication system whilst running. Installation depends on local conditions.
+
+The "Indication if other radio systems in normal operation are installed line-side" is given in parameter 1.1.1.3.6.1 / SOL Track Parameter CRS_Installed"""@en .
+
+:systemSeparationInfoChangeSupplySystem a owl:DatatypeProperty ;
+    rdfs:label "System separation info change supply system"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoChangeSupplySystem> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date,
+        "2025-06-09"^^xsd:date ;
+    rdfs:comment """Part of the system separation info of a track that shows whether the supply system has to be changed.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:systemSeparationInfoKm a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation info Km"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoKm> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :systemSeparationInfo ;
+    rdfs:comment """Part of the system separation info of a track. Indicates the location from the start of the line where the new value is valid.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" .
+
+:systemSeparationInfoLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation info length"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoLength> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :systemSeparationInfo ;
+    rdfs:comment """Part of the system separation info of a track that shows the length of the system separation in metres.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    ns1:term_status "stable" .
+
+:systemSeparationInfoPantographLowered a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation info  pantograph lowered"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoPantographLowered> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-03-11"^^xsd:date ;
+    rdfs:comment """Part of the system separation info of a track that shows whether the pantograph has to be lowered.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" .
+
+:systemSeparationInfoSwitchOffBreaker a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "System separation info switch off breaker"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoSwitchOffBreaker> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    dcterms:replaces :systemSeparationInfo ;
+    rdfs:comment """Part of the system separation info of a track that shows whether the breaker has to be switched off.
+The system separation info is the Indication of required several information on system separation."""@en ;
+    rdfs:domain :SystemSeparationInfo ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    ns1:term_status "stable" .
+
+:tiltingSupported a owl:DatatypeProperty ;
+    rdfs:label "Indication whether tilting functions are supported by ETCS"@en ;
+    :rinfIndex "1.1.1.3.12.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TiltingSupported> ;
+    dcterms:created "2021-08-09"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "Deprecated according to the amendment to the Regulation (EU) 2019/777. Indication whether tilting functions are supported by ETCS."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:trackPhaseInfo a owl:ObjectProperty ;
+    rdfs:label "Information on phase separation"@en ;
+    :XMLName "EOS_InfoPhase" ;
+    :applicable "Y/N" ;
+    :dependencyNote "A value is mandatory only if 1.1.1.2.4.1.1 parameter \"Phase separation\" value is \"Y\" (true), otherwise applicability flag is \"N\" (not applicable)"@en ;
+    :formatNote """In RDF the range is an instance of the era:PhaseInfo class with all its properties.
+
+For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, the data format is a character string with the following structure: distance type [MIN/MAX] + length [NNN] + switch off breaker [Y/N] + lower pantograph [Y/N] + km [NNN.NNN]. The structure of the string is as follows:
+- distance type [MIN/MAX] - single selection of 'MIN=minimum' or 'MAX=maximum' to show whether the length is a minimum distance between the inner contact strips of the pantographs or a maximum distance between the outer contact strips of the pantographs. Multiple strings for this parameter are accepted;
+- length [NNN] - the length of the phase separation in meters;
+- switch off breaker [Y/N], single selection of 'yes' or 'no' to show whether the breaker has to be switched off;
+- lower pantograph [Y/N], single selection of 'yes' or 'no' to show whether the pantograph has to be lowered,
+- Km [NNN.NNN] - the location from the start of the line where the new value is valid."""@en ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.4.1.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrackPhaseInfo>,
+        <http://data.europa.eu/949/shapes/TrackPhaseInfoApplicability> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-06-09"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Relates the Track with PhaseInfo. Indication of required several information on phase separation."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :PhaseInfo ;
+    rdfs:seeAlso "ENE TSI: 4.2.15" ;
+    rdfs:subPropertyOf :oclSeparationSectionsObjParameter ;
+    ns1:term_status "stable" .
+
+:trackSystemSeparationInfo a owl:ObjectProperty ;
+    rdfs:label "Information on system separation"@en ;
+    :XMLName "EOS_InfoSystem" ;
+    :applicable "Y/N" ;
+    :dependencyNote "Mandatory if there is an indication of existence of system separation (parameter 1.1.1.2.4.2.1)"@en ;
+    :formatNote """In RDF, the range is an instance of the era:SystemSeparationInfo class with all its properties.
+
+For RINF XML data sets:
+As long as the data provision through XML data sets is allowed, the data format is a character string with the following structure: length [NNN] + switch off breaker [Y/N] + lower pantograph [Y/N] + km [NNN.NNN] """ ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.2.4.2.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TrackSystemSeparationInfo>,
+        <http://data.europa.eu/949/shapes/TrackSystemSeparationInfoApplicability> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date,
+        "2025-02-28"^^xsd:date,
+        "2025-06-09"^^xsd:date ;
+    dcterms:replaces :systemSeparationInfo ;
+    rdfs:comment "Indication of required several information on system separation"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :SystemSeparationInfo ;
+    rdfs:seeAlso "ENE TSI: 4.2.16" ;
+    rdfs:subPropertyOf :oclSeparationSectionsObjParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Length - the length of the system separation in meters
+Switch off breaker - single selection of  Y=yes  or  N=no  to show whether the breaker has to be switched off
+Lower pantograph - single selection of  Y=yes  or  N=no  to show whether the pantograph has to be lowered
+Km - the location from the start of the line where the new value is valid """@en .
+
+:transportableOnFerry a owl:DatatypeProperty ;
+    rdfs:label "Transportable on ferry"@en ;
+    :eratvIndex "4.8.8" ;
+    dcterms:created "2021-08-31"^^xsd:date ;
+    dcterms:modified "2021-08-31"^^xsd:date ;
+    rdfs:comment "Indicates the suitability for transport on ferries."@en ;
+    rdfs:domain :VehicleType ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :vehicleTypeTechnicalDataCharacteristic ;
+    ns1:term_status "stable" .
+
+:tsiCompliant a owl:DatatypeProperty ;
+    rdfs:label "Tsi compliant"@en ;
+    dcterms:created "2020-11-03"^^xsd:date ;
+    dcterms:modified "2023-01-23"^^xsd:date ;
+    rdfs:comment "Indicates if a certain property is TSI compliant.The reason for deprecation is that it is used in SKOS \"OtherPantographHeads\" and \"TsiPantographHeads\" to indicate in the first case if a SKOS concept is not tsiCompliant (false) and in the second case that the concept is tsiCompliant (true). These two SKOS were originally one SKOS, \"PantographHeads\". Currently with the two SKOS the property is redundant."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:tsiMagneticFields a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence and TSI compliance of rules for magnetic fields emitted by a vehicle"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "Applicable ( Y ) only when for parameter 1.1.1.3.7.1 the selected option is wheel detector. The parameter is not applicable when the rules do not exist."@en ;
+    :formatNote "Y/N" ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.9.1",
+        "1.2.1.1.8.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TsiMagneticFields>,
+        <http://data.europa.eu/949/shapes/TsiMagneticFieldsApplicability> ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-02-18"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    dcterms:replaces :TSIMagneticFields ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication whether rules exist and are compliant with the TSI."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    rdfs:subPropertyOf :relatedElectromagneticInterferencesDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """The electromagnetic fields generated by rolling stock can interfere with the operation of axle counters and wheel detectors.
+                      'True' means the rules exist and are compliant with the frequency management specified in the TSI.
+                      'False' means the rules exist and are not compliant with the frequency management specified in the TSI.
+
+                      Verification of compliance with TSI includes application of notified national rules (when they exist) in case of part covered by open point."""@en .
+
+:tsiSwitchCrossing a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TSI compliance of in-service values for switches and crossings"@en ;
+    :XMLName "ISC_TSISwitchCrossing" ;
+    :applicable "Y" ;
+    :formatNote "in XML: Y/N" ;
+    :legalDeadline "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.1.5.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TSISwitchCrossing> ;
+    dcterms:created "2021-08-03"^^xsd:date ;
+    dcterms:modified "2021-09-10"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-02-28"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg/2014/1299/2023-09-28> ;
+    rdfs:comment "Switches and crossings are maintained to in service limit dimension as specified in TSI."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "INF TSI: 4.2.5 and 4.2.8.6" ;
+    rdfs:subPropertyOf :switchesAndCrossingsDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "If for existing track at least one parameter has less strict value than specified in the TSI, then 'N' (false) shall be selected."@en .
+
+:tsiTractionHarmonics a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Existence and TSI compliance of limits in harmonics in the traction current of vehicles"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "In accordance with Implementing Decision 2014/880/EU and by 16 March 2019 at the latest"@en ;
+    :rinfIndex "1.1.1.3.9.2",
+        "1.2.1.1.8.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TsiTractionHarmonics>,
+        <http://data.europa.eu/949/shapes/TsiTractionHarmonicsApplicability> ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date,
+        "2025-02-18"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    dcterms:replaces :TSITractionHarmonics ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication whether rules exist and are compliant with the TSI."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :relatedElectromagneticInterferencesDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Compatibility with track circuits and wheel detectors of axle counters.
+
+The harmonics in the traction current in the rails can interfere with the operation of track circuits. The DC current in the rails may saturate the detectors of the axle counters, preventing their operation.
+
+'Y' means the rules exist and are compliant with the frequency management specified in the TSI.
+'N' 'means the rules exist and are not compliant with the frequency management specified in the TSI.
+
+Verification of compliance with TSI includes application of notified national rules (when they exist) in case of part covered by open point.
+LOC&PAS TSI : Appendix J-2, index 1, clause 3.2.2"""@en .
+
+:usedInRCCCalculations a owl:AnnotationProperty ;
+    rdfs:label "Parameter is used in Route Compatibility Check (RCC) calculations"@en ;
+    dcterms:created "2023-04-12"^^xsd:date ;
+    rdfs:comment "Indicates whether a RINF parameter is used in Route Compatibility Check calculations according to Commission Implementing Regulation (EU) 2019/773 of 16 May 2019 on the technical specification for interoperability relating to the operation and traffic management subsystem of the rail system within the European Union and repealing Decision."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://eur-lex.europa.eu/eli/reg_impl/2019/773/oj#:~:text=Commission%20Implementing%20Regulation"^^xsd:anyURI .
+
+:usesGroup555 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GSM-R use of group 555"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "GSM-R and ETCS L2 must be installed for this parameter to be applicable."@en ;
+    :eratvIndex "4.13.2.12" ;
+    :legalDeadline "12 months after publication of Article 7 Guide for OP tracks"@en,
+        "16 January 2020"@en ;
+    :rinfIndex "1.1.1.3.3.4",
+        "1.2.1.1.2.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/UsesGroup555>,
+        <http://data.europa.eu/949/shapes/UsesGroup555Applicability> ;
+    :usedInRCCCalculations true ;
+    dcterms:created "2020-08-31"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :etcsLevelType ;
+    rdfs:comment "Indication if group 555 is used."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :tsiCompliantRadioDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Sections of EIRENE not covered by references in TSI. GSM-R (parameter 1.1.1.3.3.1) and ETCS L2 (parameter 1.1.1.3.2.1) must be installed for this parameter to be applicable."@en .
+
+:gprsForETCS a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GPRS for ETCS"@en ;
+    :applicable "Y/N/NYA" ;
+    :dependencyNote "GSM-R and ETCS L2 must be installed for this parameter to be applicable."@en ;
+    :legalDeadline "1 January 2021"@en,
+        "12 months after publication of Article 7 Guide for OP tracks"@en ;
+    :rinfIndex "1.1.1.3.3.3.2",
+        "1.2.1.1.2.3.2" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/GprsForETCS>,
+        <http://data.europa.eu/949/shapes/GprsForETCSApplicability> ;
+    dcterms:created "2021-08-08"^^xsd:date ;
+    dcterms:modified "2021-09-12"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2025-03-04"^^xsd:date ;
+    dcterms:relation :etcsLevelType,
+        :gprsForETCS ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment "Indication if GPRS can be used for ETCS"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :CommonCharacteristicsSubset :RunningTrack ) ] ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :tsiCompliantRadioDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Sections of EIRENE and ETCS subsets for trackside in TSI"@en .
+
+:SystemSeparationInfo a owl:Class ;
+    rdfs:label "System separation info"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SystemSeparationInfoShape> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :systemSeparationInfo ;
+    rdfs:comment "Indication of required several information on system separation."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status "stable" .
+
+:PhaseInfo a owl:Class ;
+    rdfs:label "Phase info"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/PhaseInfoShape> ;
+    dcterms:created "2023-04-05"^^xsd:date ;
+    dcterms:modified "2025-02-18"^^xsd:date ;
+    dcterms:replaces :phaseInfo ;
+    rdfs:comment "Indication of required several information on phase separation."@en ;
+    rdfs:isDefinedBy : ;
+    ns1:term_status :stable .
+

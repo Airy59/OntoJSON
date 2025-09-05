@@ -1,0 +1,114 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:contains a owl:ObjectProperty ;
+    rdfs:label "contains"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Contains> ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    rdfs:comment "Indicates that a subset with common characteristics contains a certain infrastructure element."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :InfrastructureElement .
+
+:railSystemType a owl:DatatypeProperty ;
+    rdfs:label "Rail system type"@en ;
+    dcterms:created "2022-11-04"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date ;
+    rdfs:comment "(deprecated) Type of railway system. Can be \"High-speed\" or \"Conventional\". Deprecated due to the lack of information"@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:subsetName a owl:DatatypeProperty ;
+    rdfs:label "Name of a subset with common characteristics"@en ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    rdfs:comment "A subset of elements with common characteristics could be identified with a unique name/id."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    ns1:term_status "stable" ;
+    skos:example "Example: \"ETCSbaseline2\": describes all ETCS National values (1.1.1.3.2.16 group) "@en .
+
+:subsetOf a owl:IrreflexiveProperty,
+        owl:ObjectProperty ;
+    rdfs:label "subset of"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SubsetOf> ;
+    dcterms:created "2024-10-31"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "Relates a subset with common characteristics with another subset with common characteristics."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :CommonCharacteristicsSubset ;
+    skos:scopeNote "Whenever a subset (A) is a subset of another subset (B), then the subset (A) inherits all the common characteristics of subset (B), which is that all the infrastructure elements belonging to subset (A) will have as common characteristics the union of parameters (A) and (B)."@en .
+
+:vehicleTypesCompatibleTrafficLoad a owl:ObjectProperty ;
+    rdfs:label "List of vehicle types already identified as compatible with Traffic load and load carrying capacity of infrastructure and train detection systems"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.5.1" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date,
+        "2025-03-10"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "The infrastructure managers shall provide through RINF the information to the RU regarding list of vehicle types compatible with the route for which they have already verified compatibility for parameter Traffic load and load carrying capacity of infrastructure and train detection systems, where such information is available."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :VehicleType ) ] ;
+    rdfs:subPropertyOf :verifiedRccObjParameter ;
+    ns1:term_status "unstable" .
+
+:vehiclesCompatibleTrafficLoad a owl:ObjectProperty ;
+    rdfs:label "List of vehicles already identified as compatible with Traffic load and load carrying capacity of infrastructure and train detection systems"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.5.2" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-10-24"^^xsd:date,
+        "2025-03-10"^^xsd:date,
+        "2025-03-11"^^xsd:date ;
+    rdfs:comment "The infrastructure managers shall provide through RINF the information or a document to the RU regarding list of vehicles compatible with the route for which they have already verified compatibility for parameter Traffic load and load carrying capacity of infrastructure and train detection systems, where such information is available."@en ;
+    rdfs:domain :CommonCharacteristicsSubset ;
+    rdfs:isDefinedBy : ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ],
+        [ a owl:Class ;
+            owl:unionOf ( :Document :Vehicle ) ] ;
+    rdfs:subPropertyOf :verifiedRccObjParameter ;
+    ns1:term_status "unstable" .
+
+rdf:List a owl:Class .
+
+:CommonCharacteristicsSubset a owl:Class ;
+    rdfs:label "Subset with common characteristics"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/CommonCharacteristicsSubsetShape> ;
+    dcterms:created "2022-11-04"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-10-31"^^xsd:date ;
+    rdfs:comment "A set of different infrastructure objects sharing the same common technical characteristics. The parameters may not be restricted to only one railway subsystem, but it can include common characteristics from each one of them (infrastructure, energy, track-side CCS)"@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf rdf:List ;
+    ns1:term_status "stable" .
+

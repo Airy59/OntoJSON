@@ -1,0 +1,68 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:minVehicleImpedanceVoltages a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "minimum Vehicle Impedance (Voltage applicable)"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/energy-supply-systems/EnergySupplySystems> ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleImpedanceVoltages>,
+        <http://data.europa.eu/949/shapes/MinVehicleImpedanceVoltagesApplicability>,
+        <http://data.europa.eu/949/shapes/MinVehicleImpedanceVoltagesSKOS> ;
+    dcterms:created "2024-05-30"^^xsd:date ;
+    dcterms:modified "2024-09-19"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:domain :MinVehicleImpedance ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "stable" .
+
+:minVehicleInputCapacitance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "minimal vehicle input capacitance"@en ;
+    :formatNote "For the selected DC voltage: [CCCC], as input capacitance [CCCC](Cin)"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleInputCapacitance>,
+        <http://data.europa.eu/949/shapes/MinVehicleInputCapacitanceApplicability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/NanoFARAD> ;
+    dcterms:created "2024-05-30"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:domain :MinVehicleImpedance ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" .
+
+:minVehicleInputImpedance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "minimal vehicle input impedance"@en ;
+    :formatNote "For the selected DC voltage: [ZZZZ], as input impedance [ZZZZ](Zin)"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleInputImpedance>,
+        <http://data.europa.eu/949/shapes/MinVehicleInputImpedanceApplicability> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/MilliH> ;
+    dcterms:created "2024-05-30"^^xsd:date ;
+    dcterms:relation :trainDetectionSystemType ;
+    rdfs:domain :MinVehicleImpedance ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    ns1:term_status "stable" .
+
+:MinVehicleImpedance a owl:Class ;
+    rdfs:label "Minimum Vehicle Impedance"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleImpedanceShape> ;
+    dcterms:created "2024-05-30"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    rdfs:comment """Impedance as defined in the TSI CCS (Annex I, Appendix A, Table A.2 -Index 77).
+
+Minimum vehicle impedance (between wheels and pantograph) (only for vehicles equipped for 1500V or 3000V DC).
+
+Per Voltage:
+[1500]: [CCCC]+[ZZZZ], with input capacitance [CCCC](Cin) and input impedance [ZZZZ](Zin)
+[3000]: [CCCC]+[ZZZZ], idem."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "The MinVehicleImpedance class is applicable for track circuits."@en .
+

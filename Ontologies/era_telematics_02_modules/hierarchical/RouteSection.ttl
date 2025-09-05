@@ -1,0 +1,47 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:RouteCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RouteCode" ;
+    rdfs:comment "Route code (International RouteCode)" ;
+    rdfs:domain :RouteSection ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RouteText a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RouteText" ;
+    rdfs:comment """Description of the
+																	specific route section""",
+        "Description of the specific route section" ;
+    rdfs:domain :RouteSection ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SequenceID a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SequenceID" ;
+    rdfs:comment """Position of the route
+																section in transport chain. Used to
+																determine the exact way of the
+																transport for customs purposes.""",
+        """Position of the route section in transport
+										chain. Used to determine the exact way of the transport for
+										customs purposes.""" ;
+    rdfs:domain :RouteSection ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasRouteSection rdfs:range :RouteSection .
+
+:RouteSection a owl:Class ;
+    rdfs:label "RouteSection" ;
+    rdfs:comment "Route sequence",
+        """Route sequence Sequential
+													information about the complete routing of the
+													consignment, the LeadRu decides wether to
+													provide this information or not""" .
+

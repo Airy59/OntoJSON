@@ -1,0 +1,633 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ActualETA a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ActualETA" ;
+    rdfs:comment """Identifies the actual ETA date and time of arrival of the Wagon or
+				Unit on the final destination of the customer siding.""" ;
+    rdfs:domain :AlertMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ActualETI a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ActualETI" ;
+    rdfs:comment """Identifies the actual valid estimated date and time of interchange of
+				the Wagon or Unit at an interchange point""" ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ActualEndDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ActualEndDateTime" ;
+    rdfs:comment """Identifies the actual date and time of arrival of the Wagon or Unit on
+				the final destination of the customer siding.""" ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:AgreedTimeOfDelivery a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AgreedTimeOfDelivery" ;
+    rdfs:comment """The requested Date and Time for the delivery of a wagon/Shipment or
+				Intermodal untis at customer sidings""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ArrivalTimeAtDestination a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ArrivalTimeAtDestination" ;
+    rdfs:comment """The actual Date and Time of the arrival of wagons by train at its
+				final destination yard""" ;
+    rdfs:domain :ArrivalAtDestination ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ArrivalTimeAtLocation rdfs:range xsd:dateTime .
+
+:ArrivalTimeAtLocationActual a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ArrivalTimeAtLocationActual" ;
+    rdfs:comment "The actual arrival date and time at the defined location" ;
+    rdfs:domain :YardArrival ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Beginning a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Beginning" ;
+    rdfs:comment """Beginning of the
+																extension.""" ;
+    rdfs:domain :TransitPeriodExtensions ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:BookedLocationDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BookedLocationDateTime" ;
+    rdfs:comment """Scheduled Date and Time of a train at a speciied location as defined
+				in the path contract""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:COM_PreparationDatetime rdfs:range xsd:dateTime .
+
+:CheckingDateTime rdfs:range xsd:dateTime .
+
+:ClosingTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ClosingTime" ;
+    rdfs:comment """The closing Date and Time of the port for the delivery of the shipment
+				by rail to a vessel.""" ;
+    rdfs:domain :VesselIndication ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CodeOfCause a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CodeOfCause" ;
+    rdfs:comment "Code of reason for extension" ;
+    rdfs:domain :TransitPeriodExtensions ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CommitmentETA a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CommitmentETA" ;
+    rdfs:comment """Identifies the commitment to the customer regarding date and time of
+				the arrival date and time of the Wagon or Unit on the final destination of the
+				customer siding.""" ;
+    rdfs:domain :AlertMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CreateDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CreateDateTime" ;
+    rdfs:comment "Date and Time of creation of data " ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateTime rdfs:range xsd:dateTime .
+
+:DelayCodingDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DelayCodingDateTime" ;
+    rdfs:comment "Date and Time of the coding of the delay" ;
+    rdfs:domain :DelayCauseTime ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DelayEventDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DelayEventDateTime" ;
+    rdfs:comment "Date and Time of delay event " ;
+    rdfs:domain :DelayCauseTime ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DelayMinutes a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DelayMinutes" ;
+    rdfs:comment "Identifieis the delay (in minutes) of a train for a specified cause" ;
+    rdfs:domain :DelayCauseTime ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DeliveryTimeAtDestination a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeliveryTimeAtDestination" ;
+    rdfs:comment """The actual Date and Time when the wagon is delivered to the customer
+				siding or when the wagon is ready for pick-up by the customer""" ;
+    rdfs:domain :DeliveryAtDestination ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DeliveryTimeAtInterchange rdfs:range xsd:dateTime .
+
+:DepartureTimeAtLocation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DepartureTimeAtLocation" ;
+    rdfs:comment "the scheduled departure date and time at a defined location" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DifferentAcceptanceDate rdfs:range xsd:dateTime .
+
+:EarliestEndDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EarliestEndDateTime" ;
+    rdfs:comment """Forecasted earliest time for end of
+										interruption""" ;
+    rdfs:domain :InterruptionDuration ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EndDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EndDateTime" ;
+    rdfs:comment "The end date/time in effect" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Ending a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Ending" ;
+    rdfs:comment "End of extension." ;
+    rdfs:domain :TransitPeriodExtensions ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EstimatedEndDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EstimatedEndDateTime" ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:EventDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "EventDateTime" ;
+    rdfs:comment "Event Time Stamp " ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ExceptionTimeAtLocation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ExceptionTimeAtLocation" ;
+    rdfs:comment """The Date and Time when something unexpected happns during the
+				transportation related to a location""" ;
+    rdfs:domain :ExceptionPoint ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InterruptionDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InterruptionDateTime" ;
+    rdfs:comment "Date and Time when the Train was interrupted" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LastModifiedDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LastModifiedDateTime" ;
+    rdfs:comment "Date and Time of last update or modification of data" ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LatestEndDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LatestEndDateTime" ;
+    rdfs:comment "Forecasted latest time for end of interruption" ;
+    rdfs:domain :InterruptionDuration ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LocationDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LocationDateTime" ;
+    rdfs:comment """Identifies the actual or forecasted Date / Time at a specific
+				reporting point""" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MessageCreationDateTime rdfs:range xsd:dateTime .
+
+:MessageDateTime rdfs:range xsd:dateTime .
+
+:MessageDateTimeCreated a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageDateTimeCreated" ;
+    rdfs:comment "Date and time when the message was created by the legacy system" ;
+    rdfs:domain :MessageHeader ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MessageRoutingID a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MessageRoutingID" ;
+    rdfs:comment """Additional information used to route the message to the correct
+				recieving application (if needed)""" ;
+    rdfs:domain :MessageHeader ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PickupTimeAtLocation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PickupTimeAtLocation" ;
+    rdfs:comment "The date and time of the release of a wagon at customer sidings" ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ReferencedLocationDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ReferencedLocationDateTime" ;
+    rdfs:comment """Reference to original planned Date and Time agreed by all involved IMs
+				and RUs. """ ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RelatedIdentifier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RelatedIdentifier" ;
+    rdfs:domain :RelatedReference ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RelatedMessageDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RelatedMessageDateTime" ;
+    rdfs:comment "Date Time of related message. " ;
+    rdfs:domain :RelatedReference ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RelatedSenderReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RelatedSenderReference" ;
+    rdfs:comment "Sender reference given by the Sender" ;
+    rdfs:domain :RelatedReference ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RelatedType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RelatedType" ;
+    rdfs:domain :RelatedReference ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ScheduledDateTimeAtTransfer a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ScheduledDateTimeAtTransfer" ;
+    rdfs:comment """The referenced date and time of arrival or exit at the border between
+				two different IMs""" ;
+    rdfs:domain :OperationalTrainNumberIdentifier ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ScheduledTimeAtHandover a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ScheduledTimeAtHandover" ;
+    rdfs:comment """The referenced date and time of departure or entrance at the border
+				between two different IMs""" ;
+    rdfs:domain :OperationalTrainNumberIdentifier ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ScheduledTimeAtLocation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ScheduledTimeAtLocation" ;
+    rdfs:comment """Scheduled Date and Time at a location related to the status of the
+				train or wagon at the given location""" ;
+    rdfs:domain :ExceptionPoint ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SenderReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SenderReference" ;
+    rdfs:comment "reference used by the sender (e.g. FTP file name)" ;
+    rdfs:domain :MessageHeader ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:StartDateTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "StartDateTime" ;
+    rdfs:comment "The start of the date/time in effect" ;
+    rdfs:domain [ ] ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainContactDetails a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainContactDetails" ;
+    rdfs:comment """Contact to driver of leading traction unit. This contact can be mobile
+				phone number, GSM-R call number or e.g. details for an analogue radio call.""" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainJourneyModificationTime rdfs:range xsd:dateTime .
+
+:TrainJourneyStartTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainJourneyStartTime" ;
+    rdfs:comment """The precise time at which the train should present itself on the
+				network""" ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainNotReadyDescription a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainNotReadyDescription" ;
+    rdfs:comment """Description of the reason why the train is not
+										ready.""" ;
+    rdfs:domain :TrainReadyStatus ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainReady a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainReady" ;
+    rdfs:comment "0=Not Ready 1=Ready" ;
+    rdfs:domain :TrainReadyStatus ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainReadyTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainReadyTime" ;
+    rdfs:comment """It indicates date/time when the train will be ready for
+							departure. IM contract will define if this element can be used. Only to
+							be used if this time is in future (sent in advance). Purpose of this
+							element is to short the train stay. """ ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TrainStartTime a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TrainStartTime" ;
+    rdfs:comment "The Date and Time at which the tain actually started the journey" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:VesselName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "VesselName" ;
+    rdfs:comment """This element identifies the vessel by name according the Lloyd
+				register, if the shipment has to change the transportation mode from rail to sea""" ;
+    rdfs:domain :VesselIndication ;
+    rdfs:range xsd:Name ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonLocationStatus a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonLocationStatus" ;
+    rdfs:comment """identifies the status of a wagon, related to the actual time at a
+				reporting point""" ;
+    rdfs:domain :ExceptionPoint ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasDelayCauseTime a owl:ObjectProperty ;
+    rdfs:label "has DelayCauseTime" ;
+    rdfs:domain :DelayEventReport ;
+    rdfs:range :DelayCauseTime .
+
+:hasDelayEventReport a owl:ObjectProperty ;
+    rdfs:label "has DelayEventReport" ;
+    rdfs:domain :TrainDelayCauseMessage ;
+    rdfs:range :DelayEventReport .
+
+:hasDelayLocation a owl:ObjectProperty ;
+    rdfs:label "has DelayLocation" ;
+    rdfs:domain :DelayEventReport ;
+    rdfs:range :DelayLocation .
+
+:hasInterruptionDuration rdfs:range :InterruptionDuration .
+
+:hasMessageHeader a owl:ObjectProperty ;
+    rdfs:label "has MessageHeader" ;
+    rdfs:domain [ ] ;
+    rdfs:range :MessageHeader .
+
+:hasOperationalTrainNumberIdentifier a owl:ObjectProperty ;
+    rdfs:label "has OperationalTrainNumberIdentifier" ;
+    rdfs:domain [ ] ;
+    rdfs:range :OperationalTrainNumberIdentifier .
+
+:hasRelatedReference a owl:ObjectProperty ;
+    rdfs:label "has RelatedReference" ;
+    rdfs:domain [ ] ;
+    rdfs:range :RelatedReference .
+
+:hasTrainLocation a owl:ObjectProperty ;
+    rdfs:label "has TrainLocation" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range :TrainLocation .
+
+:hasTrainReadyStatus a owl:ObjectProperty ;
+    rdfs:label "has TrainReadyStatus" ;
+    rdfs:domain :TrainReadyMessage ;
+    rdfs:range :TrainReadyStatus .
+
+:hasTransitPeriodExtensions a owl:ObjectProperty ;
+    rdfs:label "has TransitPeriodExtensions" ;
+    rdfs:domain :COM ;
+    rdfs:range :TransitPeriodExtensions .
+
+:hasVesselIndication a owl:ObjectProperty ;
+    rdfs:label "has VesselIndication" ;
+    rdfs:domain [ ] ;
+    rdfs:range :VesselIndication .
+
+:DelayLocation a owl:Class ;
+    rdfs:label "DelayLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment "Location where the Delay occured" .
+
+:TrainLocation a owl:Class ;
+    rdfs:label "TrainLocation" ;
+    rdfs:comment """Handover, Interchange, Handling and Reporting point: if
+							needed, track could be identify directly via subsidiar code """ .
+
+:ArrivalAtDestination a owl:Class ;
+    rdfs:label "ArrivalAtDestination" ;
+    rdfs:comment """Arrival of a wagon at its destnation point with Date and Time. The
+				location is not the final destination at ustomer sidings, but he location of the
+				last RU which has to organise the final delivery of the wagon to customer sidings""" .
+
+:DeliveryAtDestination a owl:Class ;
+    rdfs:label "DeliveryAtDestination" ;
+    rdfs:comment """Place, Date and Time when the wagon is ready to be picked up by the
+				customer""" .
+
+:YardArrival a owl:Class ;
+    rdfs:label "YardArrival" ;
+    rdfs:comment """The arrival point of a wagon and the Date and Time when the wagon is
+				taken over by the RU/Service Provider""" .
+
+:InterruptionDuration a owl:Class ;
+    rdfs:label "InterruptionDuration" ;
+    rdfs:comment "To specifiy the probable duration of the interruption" .
+
+:VesselIndication a owl:Class ;
+    rdfs:label "VesselIndication" ;
+    rdfs:comment """This element identifies to which extent the transportation unit is
+				used""" .
+
+:AlertMessage a owl:Class ;
+    rdfs:label "AlertMessage" ;
+    rdfs:comment """Following the comparison betzeen the acual ETA and the commitment to
+				the customer, the Lead RU sends this Alert Message to the actual RU in charge and to
+				all following RUs involved in the transport chain""" .
+
+:OperationalTrainNumberIdentifier a owl:Class ;
+    rdfs:label "OperationalTrainNumberIdentifier" .
+
+:ExceptionPoint a owl:Class ;
+    rdfs:label "ExceptionPoint" ;
+    rdfs:comment """Describes the interruption points with location and the time of the
+				interruption""" .
+
+:MessageHeader a owl:Class ;
+    rdfs:label "MessageHeader" ;
+    rdfs:comment "Used for all messages" .
+
+:RelatedReference a owl:Class ;
+    rdfs:label "RelatedReference" ;
+    rdfs:comment "Identifies the message to which the actual message refers" .
+
+:TrainReadyStatus a owl:Class ;
+    rdfs:label "TrainReadyStatus" .
+
+:DelayEventReport a owl:Class ;
+    rdfs:label "DelayEventReport" ;
+    rdfs:comment """Provides the detailed information about a single delay event (Replaced
+				DelayReasonReport)""" .
+
+:TransitPeriodExtensions a owl:Class ;
+    rdfs:label "TransitPeriodExtensions" .
+
+:DelayCauseTime a owl:Class ;
+    rdfs:label "DelayCauseTime" ;
+    rdfs:comment """Identifies the delay of a train due to a specified reason. In addition
+				it allows to put in a more detailed description (Changed from DelayReasonTime)""" .
+
+:TrainDelayCauseMessage a owl:Class ;
+    rdfs:label "TrainDelayCauseMessage" ;
+    rdfs:comment """This message is issued to make known the cause for additional delay
+				during the Train's Journey (Changed name of the message from Reason to Cause)
+				Description changed """ .
+
+:TrainReadyMessage a owl:Class ;
+    rdfs:label "TrainReadyMessage" ;
+    rdfs:comment """This message is sent from an RU to an IM indicating that the train is
+				ready for access to the network.""" .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :MessageHeader .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainReadyStatus .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first xsd:dateTime .
+
+[] rdf:first :DelayEventReport .
+
+[] rdf:first :ArrivalAtDestination .
+
+[] rdf:first :DeliveryAtDestination .
+
+[] rdf:first :DelayCauseTime .
+
+[] rdf:first :TrainReadyStatus .
+
+[] rdf:first :TransitPeriodExtensions .
+
+[] rdf:first :DelayCauseTime .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :OperationalTrainNumberIdentifier .
+
+[] rdf:first :TransitPeriodExtensions .
+
+[] rdf:first :DelayEventReport .
+
+[] rdf:first :DelayCauseTime .
+
+[] rdf:first :ExceptionPoint .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :DelayEventReport .
+
+[] rdf:first :TrainDelayCauseMessage .
+
+[] rdf:first :TrainReadyMessage .
+
+[] rdf:first :AlertMessage .
+
+[] rdf:first :ExceptionPoint .
+
+[] rdf:first :YardArrival .
+
+[] rdf:first :AlertMessage .
+

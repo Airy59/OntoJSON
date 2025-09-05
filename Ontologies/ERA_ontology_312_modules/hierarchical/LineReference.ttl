@@ -1,0 +1,21 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:LineReference a owl:Class ;
+    rdfs:label "(deprecated) Railway location"@en ;
+    dcterms:created "2021-01-29"^^xsd:date ;
+    dcterms:isReplacedBy :LinearPositioningSystem ;
+    dcterms:modified "2021-01-29"^^xsd:date,
+        "2024-10-24"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    rdfs:comment "A reference to a specific railway line."@en ;
+    rdfs:isDefinedBy : ;
+    owl:deprecated true ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Line reference" .
+

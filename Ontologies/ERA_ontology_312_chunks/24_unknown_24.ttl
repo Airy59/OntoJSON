@@ -1,0 +1,432 @@
+###  http://data.europa.eu/949/ETCS
+:ETCS rdf:type owl:Class ;
+      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ETCSShape> ;
+      <http://purl.org/dc/terms/created> "2021-08-07"^^xsd:date ;
+      <http://purl.org/dc/terms/modified> "2021-08-07"^^xsd:date ;
+      rdfs:comment "TSI compliant train protection system ERTMS / ETCS application level and baseline related to the track side equipment."@en ;
+      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+      rdfs:label "ETCS"@en ;
+      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/Feature
+:Feature rdf:type owl:Class ;
+         rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Feature> ;
+         owl:disjointWith :TemporalFeature ;
+         :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FeatureShape> ;
+         <http://purl.org/dc/terms/created> "2022-07-07"^^xsd:date ;
+         <http://purl.org/dc/terms/modified> "2022-10-27"^^xsd:date ;
+         rdfs:comment "Class that encompasses the features that are part of the physical infrastructure (class InfrastructureElement) and the topological objects (class TopologicalObject). It is a subclass of the geographical Feature class that has a spatial representation."@en ;
+         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+         rdfs:label "ERA Feature"@en .
+
+
+###  http://data.europa.eu/949/FrenchTrainDetectionSystemLimitation
+:FrenchTrainDetectionSystemLimitation rdf:type owl:Class ;
+                                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/FrenchTrainDetectionSystemLimitationShape> ;
+                                      <http://purl.org/dc/terms/created> "2023-04-05"^^xsd:date ;
+                                      rdfs:comment "Specific for route compatibility check on French network."@en ;
+                                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                      rdfs:label "Section with train detection limitation"@en ;
+                                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/HABD
+:HABD rdf:type owl:Class ;
+      rdfs:subClassOf :InfrastructureElement ;
+      owl:disjointWith :KilometricPost ,
+                       :LevelCrossing ,
+                       :OperationalPoint ,
+                       :PlatformEdge ,
+                       :PrimaryLocation ,
+                       :RadioBlockCenter ,
+                       :SectionOfLine ,
+                       :Signal ,
+                       :SpecialArea ,
+                       :Switch ,
+                       :Track ,
+                       :Tunnel ;
+      <http://purl.org/dc/terms/created> "2025-02-20"^^xsd:date ;
+      <http://purl.org/dc/terms/modified> "2025-03-01"^^xsd:date ;
+      rdfs:comment """A trackside Hot Axle Box Detector (HABD), necessary for the route compatibility check.
+Specific for the French, Italian and Swedish networks"""@en ;
+      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+      rdfs:label "Hot Axle Box Detector"@en .
+
+
+###  http://data.europa.eu/949/InfrastructureElement
+:InfrastructureElement rdf:type owl:Class ;
+                       rdfs:subClassOf :Feature ;
+                       :shaclShapeValidationRule <http://data.europa.eu/949/shapes/InfrastructureElementShape> ;
+                       <http://purl.org/dc/terms/created> "2022-07-07"^^xsd:date ;
+                       <http://purl.org/dc/terms/modified> "2022-10-27"^^xsd:date ,
+                                                           "2024-10-28"^^xsd:date ,
+                                                           "2025-04-30"^^xsd:date ;
+                       rdfs:comment """This class encompasses all those classes that represent features that are  implemented in the European railway infrastructure. It is a subclass of the ERA Feature that has a spatial representation. It covers tracks, platforms, signals, tunnels, operational points, and sections of line.
+A feature that belongs to the infrastructure can be abstracted (hasAbstraction) as a topological object. It also is related to the infrastructure manager through the property infrastructureMgr."""@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Infrastructure element"@en .
+
+
+###  http://data.europa.eu/949/InfrastructureManager
+:InfrastructureManager rdf:type owl:Class ;
+                       rdfs:subClassOf <http://www.w3.org/ns/org#Organization> ;
+                       <http://purl.org/dc/terms/isReplacedBy> :Body ;
+                       rdfs:comment "(deprecated) The infrastructure manager owns and operates the railway network and related infrastructure."@en ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Infrastructure manager"@en ;
+                       owl:deprecated "true"^^xsd:boolean ;
+                       <http://www.w3.org/2004/02/skos/core#scopeNote> "See point (2) of Article 3 of Directive 2012/34/EU of the European Parliament and of the Council establishing a single European railway area."@en .
+
+
+###  http://data.europa.eu/949/KilometricPost
+:KilometricPost rdf:type owl:Class ;
+                rdfs:subClassOf :InfrastructureElement ;
+                owl:disjointWith :LevelCrossing ,
+                                 :OperationalPoint ,
+                                 :PlatformEdge ,
+                                 :PrimaryLocation ,
+                                 :RadioBlockCenter ,
+                                 :SectionOfLine ,
+                                 :Signal ,
+                                 :SpecialArea ,
+                                 :Switch ,
+                                 :Track ,
+                                 :Tunnel ;
+                :shaclShapeValidationRule <http://data.europa.eu/949/shapes/KilometricPostShape> ;
+                <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                <http://purl.org/dc/terms/modified> "2025-01-30"^^xsd:date ,
+                                                    "2025-03-01"^^xsd:date ;
+                rdfs:comment "Represents a kilometric post in the linear positioning system."@en ;
+                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                rdfs:label "Kilometric Post"@en .
+
+
+###  http://data.europa.eu/949/LevelCrossing
+:LevelCrossing rdf:type owl:Class ;
+               rdfs:subClassOf :InfrastructureElement ;
+               owl:disjointWith :OperationalPoint ,
+                                :PlatformEdge ,
+                                :PrimaryLocation ,
+                                :RadioBlockCenter ,
+                                :RunningTrack ,
+                                :SectionOfLine ,
+                                :Siding ,
+                                :Signal ,
+                                :SpecialArea ,
+                                :Switch ,
+                                :Track ,
+                                :Tunnel ;
+               <http://purl.org/dc/terms/modified> "2025-01-30"^^xsd:date ,
+                                                   "2025-03-01"^^xsd:date ;
+               rdfs:comment "A level crossing is an intersection where a railway line crosses a road or a path at the same level. It can be used for the implementation of the ETCS trackside or to identify potential collision scenarios"@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "Level crossing"@en .
+
+
+###  http://data.europa.eu/949/LineReference
+:LineReference rdf:type owl:Class ;
+               <http://purl.org/dc/terms/created> "2021-01-29"^^xsd:date ;
+               <http://purl.org/dc/terms/isReplacedBy> :LinearPositioningSystem ;
+               <http://purl.org/dc/terms/modified> "2021-01-29"^^xsd:date ,
+                                                   "2024-10-24"^^xsd:date ,
+                                                   "2024-11-29"^^xsd:date ;
+               rdfs:comment "A reference to a specific railway line."@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "(deprecated) Railway location"@en ;
+               owl:deprecated "true"^^xsd:boolean ;
+               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+               <http://www.w3.org/2004/02/skos/core#altLabel> "Line reference" .
+
+
+###  http://data.europa.eu/949/LinearElement
+:LinearElement rdf:type owl:Class ;
+               rdfs:subClassOf :NetElement ;
+               owl:disjointWith :NonLinearElement ;
+               :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearElementShape> ;
+               <http://purl.org/dc/terms/modified> "2024-11-29"^^xsd:date ,
+                                                   "2025-03-01"^^xsd:date ;
+               rdfs:comment "Pieces of tracks composing the topology"@en ;
+               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+               rdfs:label "Linear Element"@en ;
+               <http://www.w3.org/2004/02/skos/core#scopeNote> "This class represents an edge in the topological graph. It represents a linear element in the network."@en .
+
+
+###  http://data.europa.eu/949/LinearElementSection
+:LinearElementSection rdf:type owl:Class ;
+                      rdfs:subClassOf :LinearElement ;
+                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearElementSectionShape> ;
+                      rdfs:comment "Represents a section of a linear element."@en ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Linear Element Section"@en ;
+                      <http://www.w3.org/2004/02/skos/core#scopeNote> "A linear element section is a finer granularity of a linear element, representing a specific portion of it. This concept is introduced to address the cases when a linear element needs to be split such as a part of it is used by a net referencing (more in the paragraph describing the positioning on the network). By using start and end offsets measured from origin of the element in ascending order, sections eliminate the need for intrinsic coordinates and instead rely on distances along the linear element."@en .
+
+
+###  http://data.europa.eu/949/LinearPositioningSystem
+:LinearPositioningSystem rdf:type owl:Class ;
+                         owl:disjointWith :LinearPositioningSystemCoordinate ;
+                         :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearPositioningSystemShape> ;
+                         <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                         <http://purl.org/dc/terms/modified> "2025-02-18"^^xsd:date ;
+                         <http://purl.org/dc/terms/replaces> :LineReference ;
+                         rdfs:comment """Represents a linear positioning system used for referencing positions on the network.
+It can also represent a sequence of one or more sections of line, used for regular railway operations."""@en ;
+                         rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                         rdfs:label "Linear Positioning System"@en .
+
+
+###  http://data.europa.eu/949/LinearPositioningSystemCoordinate
+:LinearPositioningSystemCoordinate rdf:type owl:Class ;
+                                   :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearPositioningSystemCoordinateShape> ;
+                                   <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                                   rdfs:comment "Represents coordinates in a linear positioning system."@en ;
+                                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                                   rdfs:label "Linear Positioning System Coordinate"@en .
+
+
+###  http://data.europa.eu/949/LinesideDistanceIndication
+:LinesideDistanceIndication rdf:type owl:Class ;
+                            :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinesideDistanceIndicationShape> ;
+                            <http://purl.org/dc/terms/created> "2024-12-12"^^xsd:date ;
+                            <http://purl.org/dc/terms/modified> "2025-01-30"^^xsd:date ;
+                            rdfs:comment """Frequency, appearance and positioning of a sign indicating distance as reference post. Two types of signs are normally available: kilometre post and hectometre post.
+- A kilometre post is a lineside sign indicating the distance from a specific point, usually being the starting point of the railway line.
+- A hectometre post is a lineside sign indicating a relative distance."""@en ;
+                            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                            rdfs:label "Lineside indications of distance"@en .
+
+
+###  http://data.europa.eu/949/LoadCapability
+:LoadCapability rdf:type owl:Class ;
+                :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LoadCapabilityShape> ;
+                <http://purl.org/dc/terms/created> "2023-03-14"^^xsd:date ;
+                <http://purl.org/dc/terms/modified> "2024-09-19"^^xsd:date ,
+                                                    "2025-02-18"^^xsd:date ;
+                <http://purl.org/dc/terms/replaces> :loadCapability ;
+                rdfs:comment """A combination of the line category and speed at the weakest point of the track.
+Each track can have several load capability (structured) values, and each one has values for load model line category and load model speed."""@en ,
+                             "This class together with properties loadCapabilityLineCategory and loadCapabilitySpeed replaces the previous loadCapability SKOS property."@en ;
+                rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                rdfs:label "Load capability"@en ;
+                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                <http://www.w3.org/2004/02/skos/core#scopeNote> """At this step, RINF does not allow to enter additional data referred to additional speed regulations and operating requirements relating to locomotives (e.g., locomotive classes and associated maximum speed) or traffic types (e.g., maximum speed of freight traffic or passenger traffic).
+
+The load capability describes the weakest point of this track within this section of line (which is normally a bridge or other sub-track structure). It is expressed as a combination of the line category and speed permitted for trains exerting loads defined for this line category. The result of the classification process is set out in EN 15528:2021 (Annex A) and referred to in that standard as â€œLine Categoryâ€.
+
+It represents the ability of the infrastructure to withstand the vertical loads imposed by vehicles on the track for regular service as a combination of Line Category with a permitted speed according to EN 15528:2021
+
+More than one combination may be published for the same track if applicable, but it has to be done by repetition of the parameter with one value selected only - that is why 'Y' is given in line 'Can be repeated'.
+
+For the following cases, it is not possible to use EN 15528:20021categories of line classification:
+- TSI categories of line P1520 and F1520 (passenger traffic or freight traffic at any speed)
+- TSI categories of line P1600 and F1600 (passenger traffic or freight traffic at any speed)"""@en .
+
+
+###  http://data.europa.eu/949/Manufacturer
+:Manufacturer rdf:type owl:Class ;
+              rdfs:subClassOf <http://www.w3.org/ns/org#Organization> ;
+              <http://purl.org/dc/terms/created> "2020-11-19"^^xsd:date ;
+              <http://purl.org/dc/terms/isReplacedBy> :Body ,
+                                                      :manufacturer ;
+              <http://purl.org/dc/terms/modified> "2020-11-19"^^xsd:date ,
+                                                  "2024-06-03"^^xsd:date ;
+              rdfs:comment "(deprecated) Replaced by the era:Body class and era:manufacturer property. A company or organization that manufactures vehicles."@en ;
+              rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+              rdfs:label "(deprecated) Manufacturer"@en ;
+              owl:deprecated "true"^^xsd:boolean ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/MaximumMagneticField
+:MaximumMagneticField rdf:type owl:Class ;
+                      :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MaximumMagneticFieldShape> ;
+                      <http://purl.org/dc/terms/created> "2023-03-14"^^xsd:date ;
+                      <http://purl.org/dc/terms/relation> :trainDetectionSystemType ;
+                      rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                      rdfs:label "Maximum magnetic field"@en ;
+                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/MaximumSpeedAndCantDeficiency
+:MaximumSpeedAndCantDeficiency rdf:type owl:Class ;
+                               <http://purl.org/dc/terms/created> "2023-04-05"^^xsd:date ;
+                               <http://purl.org/dc/terms/modified> "2025-02-18"^^xsd:date ;
+                               <http://purl.org/dc/terms/replaces> :maximumSpeedAndCantDeficiency ;
+                               rdfs:comment "Combination of maximum speed and maximum cant deficiency for which the vehicle was assessed."@en ;
+                               rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                               rdfs:label "Maximum speed and cant deficiency"@en ;
+                               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/MinAxleLoadVehicleCategory
+:MinAxleLoadVehicleCategory rdf:type owl:Class ;
+                            <http://purl.org/dc/terms/created> "2023-01-25"^^xsd:date ;
+                            <http://purl.org/dc/terms/modified> "2023-03-14"^^xsd:date ;
+                            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                            rdfs:label "(deprecated) Min axle load vehicle category"@en ;
+                            owl:deprecated "true"^^xsd:boolean ;
+                            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/MinVehicleImpedance
+:MinVehicleImpedance rdf:type owl:Class ;
+                     :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinVehicleImpedanceShape> ;
+                     <http://purl.org/dc/terms/created> "2024-05-30"^^xsd:date ;
+                     <http://purl.org/dc/terms/source> <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+                     rdfs:comment """Impedance as defined in the TSI CCS (Annex I, Appendix A, Table A.2 -Index 77).
+
+Minimum vehicle impedance (between wheels and pantograph) (only for vehicles equipped for 1500V or 3000V DC).
+
+Per Voltage:
+[1500]: [CCCC]+[ZZZZ], with input capacitance [CCCC](Cin) and input impedance [ZZZZ](Zin)
+[3000]: [CCCC]+[ZZZZ], idem."""@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "Minimum Vehicle Impedance"@en ;
+                     rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index077_-_ERA_ERTMS_033281_v5.pdf"^^xsd:anyURI ;
+                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                     <http://www.w3.org/2004/02/skos/core#scopeNote> "The MinVehicleImpedance class is applicable for track circuits."@en .
+
+
+###  http://data.europa.eu/949/MinimumVerticalRadius
+:MinimumVerticalRadius rdf:type owl:Class ;
+                       :shaclShapeValidationRule <http://data.europa.eu/949/shapes/MinimumVerticalRadiusShape> ;
+                       <http://purl.org/dc/terms/created> "2021-12-12"^^xsd:date ;
+                       rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                       rdfs:label "Minimum radius of vertical curve"@en ;
+                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+                       <http://www.w3.org/2004/02/skos/core#scopeNote> "Presentation of parameter 1.2.2.0.3.3 'Minimum radius of vertical curve'"@en .
+
+
+###  http://data.europa.eu/949/NationalRailwayLine
+:NationalRailwayLine rdf:type owl:Class ;
+                     rdfs:subClassOf :InfrastructureElement ;
+                     owl:disjointWith :PrimaryLocation ;
+                     <http://purl.org/dc/terms/created> "2021-01-25"^^xsd:date ;
+                     <http://purl.org/dc/terms/modified> "2021-08-03"^^xsd:date ,
+                                                         "2024-11-29"^^xsd:date ;
+                     rdfs:comment """Railway line within a member state.
+A line is a sequence of one or more sections of line, which connects operational points and which may consist of several tracks used for regular railway operation."""@en ;
+                     rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                     rdfs:label "(deprecated) National railway line"@en ;
+                     owl:deprecated "true"^^xsd:boolean ;
+                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  http://data.europa.eu/949/NetAreaReference
+:NetAreaReference rdf:type owl:Class ;
+                  rdfs:subClassOf :NetBasicReference ;
+                  :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetAreaReferenceShape> ;
+                  <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                  rdfs:comment "Represents an area reference in the network."@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "Net Area Reference"@en ;
+                  <http://www.w3.org/2004/02/skos/core#example> "Example: non-stopping area, cross section area, area of implementation of GPRS etc."@en ;
+                  <http://www.w3.org/2004/02/skos/core#scopeNote> "It is used for infrastructure elements positioned in relation to the topology as a subnetwork. (e.g.: tunnels, non-stopping area, stations etc.)"@en .
+
+
+###  http://data.europa.eu/949/NetBasicReference
+:NetBasicReference rdf:type owl:Class ;
+                   rdfs:subClassOf :Feature ;
+                   :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetBasicReferenceShape> ;
+                   <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                   rdfs:comment "Basic positioning reference within the ERA ontology. It represents different types of geographical locations. Geographical coordinates are provided according to the standard World Geodetic System (WGS84)."@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "Net Basic Reference"@en ;
+                   rdfs:seeAlso "https://wiki.railtopomodel.org/wiki/Object_positioning_in_the_network"^^xsd:anyURI ;
+                   <http://www.w3.org/2004/02/skos/core#scopeNote> ""@en .
+
+
+###  http://data.europa.eu/949/NetElement
+:NetElement rdf:type owl:Class ;
+            rdfs:subClassOf :Feature ;
+            owl:disjointWith :NetRelation ;
+            :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetElementShape> ;
+            <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+            <http://purl.org/dc/terms/modified> "2025-04-30"^^xsd:date ;
+            rdfs:comment "It is a representation of all building blocks of the topology. It references an associated topological network element."@en ;
+            rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+            rdfs:label "Net element"@en ;
+            rdfs:seeAlso "https://wiki.railtopomodel.org/wiki/Topological_structure_(network)"^^xsd:anyURI .
+
+
+###  http://data.europa.eu/949/NetLinearReference
+:NetLinearReference rdf:type owl:Class ;
+                    rdfs:subClassOf :NetBasicReference ;
+                    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetLinearReferenceShape> ;
+                    <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                    rdfs:comment "Represents a linear reference in the network."@en ;
+                    rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                    rdfs:label "Net Linear Reference"@en ;
+                    <http://www.w3.org/2004/02/skos/core#example> "Example: tracks, tunnels, bridges, platform edges etc."@en ;
+                    <http://www.w3.org/2004/02/skos/core#scopeNote> "It is used for infrastructure elements positioned in relation to the topology as a line, or along a path. (e.g.: tracks, bridges, platform edges, etc.)"@en .
+
+
+###  http://data.europa.eu/949/NetPointReference
+:NetPointReference rdf:type owl:Class ;
+                   rdfs:subClassOf :NetBasicReference ;
+                   :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetPointReferenceShape> ;
+                   <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                   rdfs:comment "Represents a point reference in the network."@en ;
+                   rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                   rdfs:label "Net Point Reference"@en ;
+                   <http://www.w3.org/2004/02/skos/core#scopeNote> "It is used for infrastructure elements positioned in relation to the topology as a point. (e.g.: signals, ETCS balises, buffer stops, etc.)"@en .
+
+
+###  http://data.europa.eu/949/NetRelation
+:NetRelation rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                               owl:onProperty :elementA ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :LinearElement
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :elementB ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :LinearElement
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :navigability ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass <http://www.w3.org/2004/02/skos/core#Concept>
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :isOnOriginOfElementA ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:boolean
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :isOnOriginOfElementB ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:boolean
+                             ] ;
+             :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetRelationShape> ;
+             <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+             <http://purl.org/dc/terms/modified> "2025-03-10"^^xsd:date ;
+             rdfs:comment "Defines a relation between two elements."@en ;
+             rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+             rdfs:label "Net Relation"@en ;
+             rdfs:seeAlso "https://wiki.railtopomodel.org/wiki/Topological_structure_(network)"^^xsd:anyURI ;
+             <http://www.w3.org/2004/02/skos/core#scopeNote> """Connectivity and the navigability between consecutive linear elements are resolved by using net relations. It models how different elements are related to each other, representing a transition from one element to another.
+Net relations specify where two linear elements connect. This could be at the origin of one element, the end of another, or even at specific offsets along their lengths. For example, two tracks might connect at a junction, with one ending at offset 1500 and the other beginning at offset 0.
+NetRelation explicitly models these connections by linking two linear elements (elementA and elementB) and defining their physical or logical relationship.
+Net relations also specify the permitted directions of travel:
+â€¢	AB: Trains can move from element A to element B.
+â€¢	BA: Trains can move from element B to element A.
+â€¢	Both: Movement is bidirectional.
+â€¢	None: No movement is allowed between the two elements.
+To make this even more precise, net relations include information about whether the connection is at the origin of each element. For example, a relation might indicate that Track A ends at its origin (offset 0) and connects to Track B at its start (isOnOriginOfElementA and isOnOriginOfElementB).
+"""@en .
+
+
+###  http://data.europa.eu/949/NonLinearElement
+:NonLinearElement rdf:type owl:Class ;
+                  rdfs:subClassOf :NetElement ;
+                  :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NonLinearElementShape> ;
+                  <http://purl.org/dc/terms/created> "2024-11-29"^^xsd:date ;
+                  rdfs:comment "Represents a non-linear element in the network."@en ;
+                  rdfs:isDefinedBy <http://data.europa.eu/949/> ;
+                  rdfs:label "Non-Linear Element"@en ;
+                  <http://www.w3.org/2004/02/skos/core#scopeNote> "Non-linear elements complement the linear structure by serving as connection or interaction points. They represent features such as stations, depots, or complex junctions. They often serve as aggregation points for linear elements, where multiple tracks meet or like logical entities that support operations like passenger boarding or train storage. These elements may optionally aggregate linear elements."@en .
+
+
+###  http://data.europa.eu/949/OperationalPoint

@@ -1,0 +1,116 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ExchangeRate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ExchangeRate" ;
+    rdfs:comment """Exchange
+																			rate for amounts to be
+																			paid by the consignor or
+																			consignee which are not
+																			expressed in the
+																			invoicing currency.""" ;
+    rdfs:domain :Tariff ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Fee a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Fee" ;
+    rdfs:comment """Supplements,
+																			fees, deductions""" ;
+    rdfs:domain :Tariff ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:NHMCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NHMCode" ;
+    rdfs:comment """NHM code
+																			determining the charges
+																			applicable.""" ;
+    rdfs:domain :Tariff ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:TariffNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TariffNumber" ;
+    rdfs:comment """Customer
+																			agreement or tariff
+																			applied""",
+        "Number of the tariff." ;
+    rdfs:domain :Tariff ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasChargedMass a owl:ObjectProperty ;
+    rdfs:label "has ChargedMass" ;
+    rdfs:domain :Tariff ;
+    rdfs:range :ChargedMass .
+
+:hasDistance a owl:ObjectProperty ;
+    rdfs:label "has Distance" ;
+    rdfs:domain :Tariff ;
+    rdfs:range :Distance .
+
+:hasFreightCharges a owl:ObjectProperty ;
+    rdfs:label "has FreightCharges" ;
+    rdfs:domain :Tariff ;
+    rdfs:range :FreightCharges .
+
+:hasTariff a owl:ObjectProperty ;
+    rdfs:label "has Tariff" ;
+    rdfs:domain [ ] ;
+    rdfs:range :Tariff .
+
+:measure a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "measure" ;
+    rdfs:domain :ChargedMass ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:value a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "value" ;
+    rdfs:domain :ChargedMass ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Distance a owl:Class ;
+    rdfs:label "Distance" ;
+    :domain "Telematics" ;
+    rdfs:comment """Tariff
+																			distance, expressed in
+																			km or zones, between the
+																			stations or points
+																			corresponding to the
+																			beginning and end of the
+																			charging section.""" .
+
+:FreightCharges a owl:Class ;
+    rdfs:label "FreightCharges" ;
+    :domain "Telematics" ;
+    rdfs:comment """Freight
+																			Charges (paid and due)""" .
+
+:ChargedMass a owl:Class ;
+    rdfs:label "ChargedMass" ;
+    rdfs:comment """Charged
+																			mass [weight in kg]. As
+																			appropriate, area in mÂ²
+																			or the volume of the
+																			wagon or goods in mÂ³ if
+																			used as the basis for
+																			charging.""" .
+
+:Tariff a owl:Class ;
+    rdfs:label "Tariff" ;
+    rdfs:comment """Freight Charges
+																Section Tariff""",
+        """Number of customer agreement or
+													tariff""" .
+

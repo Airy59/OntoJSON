@@ -1,0 +1,29 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DifferentAcceptanceDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DifferentAcceptanceDate" ;
+    rdfs:comment """Variance
+																			of acceptance date given
+																			structure
+																			AcceptancePoint.""" ;
+    rdfs:domain :DifferentAcceptance ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasDifferentAcceptance rdfs:range :DifferentAcceptance .
+
+:hasDifferentAcceptancePoint a owl:ObjectProperty ;
+    rdfs:label "has DifferentAcceptancePoint" ;
+    rdfs:domain :DifferentAcceptance ;
+    rdfs:range :DifferentAcceptancePoint .
+
+:DifferentAcceptance a owl:Class ;
+    rdfs:label "DifferentAcceptance" ;
+    rdfs:comment """Details of the changes
+																of the acceptance point given by the
+																consignor.""" .
+

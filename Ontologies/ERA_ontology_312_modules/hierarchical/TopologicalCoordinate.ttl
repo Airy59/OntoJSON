@@ -1,0 +1,33 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:offsetFromOrigin a owl:DatatypeProperty ;
+    rdfs:label "offset from origin"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OffsetFromOrigin> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date ;
+    rdfs:comment "Offset from the origin in a topological coordinate."@en ;
+    rdfs:domain :TopologicalCoordinate ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:positiveInteger .
+
+:onLinearElement a owl:ObjectProperty ;
+    rdfs:label "on linear element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OnLinearElement> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the linear element a coordinate is associated with."@en ;
+    rdfs:domain :TopologicalCoordinate ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearElement .
+
+:TopologicalCoordinate a owl:Class ;
+    rdfs:label "Topological Coordinate"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/TopologicalCoordinateShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents a topological coordinate."@en ;
+    rdfs:isDefinedBy : .
+

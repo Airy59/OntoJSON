@@ -1,0 +1,439 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:aggregates a owl:ObjectProperty ;
+    rdfs:label "aggregates"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Aggregates> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the linear elements aggregated by a non-linear element."@en ;
+    rdfs:domain :NonLinearElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearElement .
+
+:appliesInBothDirections a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "applies in both directions"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/AppliesInBothDirections> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies if the section applies in both directions (optional)."@en ;
+    rdfs:domain :LinearElementSection ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean .
+
+:carrierLinearElement a owl:ObjectProperty ;
+    rdfs:label "carrier linear element"@en ;
+    dcterms:created "2025-01-30"^^xsd:date ;
+    rdfs:comment "The carrier linear element in relation to which the orientation is based on"@en ;
+    rdfs:domain :Orientation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearElement .
+
+:direction a owl:ObjectProperty ;
+    rdfs:label "direction"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/orientations/OrientationDirections> ;
+    dcterms:created "2024-04-23"^^xsd:date ;
+    rdfs:comment "The direction of the orientation of a railway element, in relation to the carrier linear element"@en ;
+    rdfs:domain :Orientation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    skos:editorialNote "To review the orientation direction" .
+
+:endOffsetFromOrigin a owl:DatatypeProperty ;
+    rdfs:label "end offset from the origin."@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/EndOffsetFromOrigin> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date ;
+    rdfs:comment "End offset of the section from the origin."@en ;
+    rdfs:domain :LinearElementSection ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double .
+
+:hasOrientation a owl:ObjectProperty ;
+    rdfs:label "has orientation"@en ;
+    dcterms:created "2024-10-28"^^xsd:date ;
+    rdfs:domain :Signal ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :Orientation .
+
+:lengthOfNetLinearElement a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "length of net linear element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LengthOfNetLinearElement> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Length of a topological linear element."@en ;
+    rdfs:domain :LinearElement ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf :length .
+
+:onElement a owl:ObjectProperty ;
+    rdfs:label "on element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OnElement> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the linear element a section belongs to."@en ;
+    rdfs:domain :LinearElementSection ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearElement .
+
+:onLinearElement a owl:ObjectProperty ;
+    rdfs:label "on linear element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/OnLinearElement> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Specifies the linear element a coordinate is associated with."@en ;
+    rdfs:domain :TopologicalCoordinate ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearElement .
+
+:orientation a owl:ObjectProperty ;
+    rdfs:label "orientation"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/orientations/OrientationDirections> ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    rdfs:comment "The orientation of the object in relation to the carrier linear element. Possible values: Normal, Opposite, Both"@en ;
+    rdfs:domain :Orientation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:relativeDistanceDangerPoint a owl:DatatypeProperty ;
+    rdfs:label "Relative distance of the danger point"@en ;
+    :applicable "Y/N/NYA" ;
+    :formatNote "NNN" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.14.4",
+        "1.2.1.0.8.4" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/RelativeDistanceDangerPoint> ;
+    :tsiOPEAppendixD2Index "2.2.3",
+        "2.3.3" ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Distance in meters to the danger point"@en ;
+    rdfs:domain :Signal ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :signalDataParameter ;
+    ns1:term_status "stable" ;
+    skos:scopeNote """Danger point is defined in ERTMS/ETCS - Glossary of Terms and Abbreviations - version  4.0.0 - date 05/07/2023. For installations without ERTMS, the signalling definition is equivalent.
+See: TSI OPE Appendix D2 (2.3.3), the danger point relative distance from the signal itself."""@en .
+
+:side a owl:ObjectProperty ;
+    rdfs:label "on side"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/orientations/Sides> ;
+    dcterms:created "2024-04-18"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "Indication of the position of the signal in relation to the track in the running direction from the origin of the referencing system (e.g., direction of the main line)"@en ;
+    rdfs:domain :Orientation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept .
+
+:signalId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Name of signal"@en ;
+    :applicable "Y/N/NYA" ;
+    :legalDeadline "12 months after publication of Article 7 Guide"@en ;
+    :rinfIndex "1.1.1.3.14.1",
+        "1.2.1.0.8.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SignalId> ;
+    :tsiOPEAppendixD2Index "2.2.3",
+        "2.3.3" ;
+    dcterms:created "2023-03-14"^^xsd:date ;
+    dcterms:modified "2024-04-18"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/oj> ;
+    rdfs:comment "Identifier of signal."@en ;
+    rdfs:domain :Signal ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :signalDataParameter,
+        dcterms:identifier ;
+    ns1:term_status "stable" ;
+    skos:scopeNote "Operational identifier of the signal (on the track or in OP), as in the operational and maintenance provisions."@en .
+
+:startOffsetFromOrigin a owl:DatatypeProperty ;
+    rdfs:label "start offset from origin"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/StartOffsetFromOrigin> ;
+    :unitOfMeasure <http://qudt.org/vocab/unit/M> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-01-30"^^xsd:date ;
+    rdfs:comment "Start offset of the section from the origin."@en ;
+    rdfs:domain :LinearElementSection ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:double .
+
+:NetElement a owl:Class ;
+    rdfs:label "Net element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetElementShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-04-30"^^xsd:date ;
+    rdfs:comment "It is a representation of all building blocks of the topology. It references an associated topological network element."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "https://wiki.railtopomodel.org/wiki/Topological_structure_(network)"^^xsd:anyURI ;
+    rdfs:subClassOf :Feature ;
+    owl:disjointWith :NetRelation .
+
+:NonLinearElement a owl:Class ;
+    rdfs:label "Non-Linear Element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NonLinearElementShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    rdfs:comment "Represents a non-linear element in the network."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :NetElement ;
+    skos:scopeNote "Non-linear elements complement the linear structure by serving as connection or interaction points. They represent features such as stations, depots, or complex junctions. They often serve as aggregation points for linear elements, where multiple tracks meet or like logical entities that support operations like passenger boarding or train storage. These elements may optionally aggregate linear elements."@en .
+
+:Signal a owl:Class ;
+    rdfs:label "Signal"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/SignalShape> ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2022-10-27"^^xsd:date,
+        "2024-09-19"^^xsd:date,
+        "2025-01-30"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2019/773/2023-09-28> ;
+    rdfs:comment "A railway signal is a visual display device (next to the tracks or via a DMI in the cabin) that conveys instructions or provides advance warning of instructions regarding the driver's authority to proceed."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "https://www.era.europa.eu/system/files/2023-09/index003_-_SUBSET-023_v400.pdf"^^xsd:anyURI ;
+    rdfs:subClassOf :InfrastructureElement ;
+    owl:disjointWith :SpecialArea,
+        :Switch,
+        :Track,
+        :Tunnel ;
+    ns1:term_status "stable" ;
+    skos:definition "Apparatus by means of which a conventional visual or acoustic indication is given, generally concerning the movements/movement authorities of railway vehicles."@en .
+
+:LinearElementSection a owl:Class ;
+    rdfs:label "Linear Element Section"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearElementSectionShape> ;
+    rdfs:comment "Represents a section of a linear element."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :LinearElement ;
+    skos:scopeNote "A linear element section is a finer granularity of a linear element, representing a specific portion of it. This concept is introduced to address the cases when a linear element needs to be split such as a part of it is used by a net referencing (more in the paragraph describing the positioning on the network). By using start and end offsets measured from origin of the element in ascending order, sections eliminate the need for intrinsic coordinates and instead rely on distances along the linear element."@en .
+
+:Orientation a owl:Class ;
+    rdfs:label "Orientation"@en ;
+    rdfs:comment "Represents the orientation of a railway object in relation to a carrier linear element. It can be described by direction, orientation and side."@en ;
+    rdfs:isDefinedBy : .
+
+:elementA a owl:ObjectProperty ;
+    rdfs:label "Element A"@en ;
+    :rinfIndex "1.1.1.0.1.2",
+        "1.2.4.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ElementA> ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    rdfs:comment """References the first topological element in an oriented relation.
+For example, it may indicate the object that corresponds to a section of line, an operational point or a track inside an operational point connected at start."""@en ;
+    rdfs:domain :NetRelation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearElement ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Internal connection"@en .
+
+:elementB a owl:ObjectProperty ;
+    rdfs:label "Element B"@en ;
+    :rinfIndex "1.1.1.0.1.2",
+        "1.2.4.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/ElementB> ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    rdfs:comment """References the second topological linear element in an oriented relation.
+For example, it may indicate the object that corresponds to a section of line, an operational point or a track inside an operational point connected at end."""@en ;
+    rdfs:domain :NetRelation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :LinearElement ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Internal connection"@en .
+
+:isOnOriginOfElementA a owl:DatatypeProperty ;
+    rdfs:label "is on origin of element A"@en ;
+    :rinfIndex "1.1.1.0.1.2",
+        "1.2.4.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/IsOnOriginOfElementA> ;
+    dcterms:created "2021-04-03"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    rdfs:comment "Determines if the position of the topological element A in a relation is the origin of element A."@en ;
+    rdfs:domain :NetRelation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://rsm-evolution.org/220927_RSM/EARoot/EA2/EA2/EA291.html"^^xsd:anyURI ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Internal connection"@en .
+
+:isOnOriginOfElementB a owl:DatatypeProperty ;
+    rdfs:label "is on origin of element B"@en ;
+    :rinfIndex "1.1.1.0.1.2",
+        "1.2.4.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/IsOnOriginOfElementB> ;
+    dcterms:created "2021-04-03"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    rdfs:comment "Determines if the position of the topological element B in a relation is the origin of element B."@en ;
+    rdfs:domain :NetRelation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range xsd:boolean ;
+    rdfs:seeAlso "https://rsm-evolution.org/220927_RSM/EARoot/EA2/EA2/EA291.html"^^xsd:anyURI ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Internal connection"@en .
+
+:navigability a owl:ObjectProperty ;
+    rdfs:label "Navigability"@en ;
+    :inSkosConceptScheme <http://data.europa.eu/949/concepts/navigabilities/Navigabilities> ;
+    :rinfIndex "1.1.1.0.1.2",
+        "1.2.4.1" ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/Navigability>,
+        <http://data.europa.eu/949/shapes/NavigabilitySKOS> ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2021-08-03"^^xsd:date,
+        "2024-11-29"^^xsd:date ;
+    rdfs:comment "Indicates the navigation possibilities between two related topological linear elements."@en ;
+    rdfs:domain :NetRelation ;
+    rdfs:isDefinedBy : ;
+    rdfs:range skos:Concept ;
+    ns1:term_status "stable" ;
+    skos:altLabel "Internal connection"@en ;
+    skos:scopeNote """â€¢	AB: Trains can move from element A to element B.
+â€¢	BA: Trains can move from element B to element A.
+â€¢	Both: Movement is bidirectional.
+â€¢	None: No movement is allowed between the two elements.
+"""@en .
+
+:NetRelation a owl:Class ;
+    rdfs:label "Net Relation"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/NetRelationShape> ;
+    dcterms:created "2024-11-29"^^xsd:date ;
+    dcterms:modified "2025-03-10"^^xsd:date ;
+    rdfs:comment "Defines a relation between two elements."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:seeAlso "https://wiki.railtopomodel.org/wiki/Topological_structure_(network)"^^xsd:anyURI ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass skos:Concept ;
+            owl:onProperty :navigability ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass skos:Concept ;
+            owl:onProperty :navigability ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass skos:Concept ;
+            owl:onProperty :navigability ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass skos:Concept ;
+            owl:onProperty :navigability ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :LinearElement ;
+            owl:onProperty :elementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass skos:Concept ;
+            owl:onProperty :navigability ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementA ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty :isOnOriginOfElementB ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ] ;
+    skos:scopeNote """Connectivity and the navigability between consecutive linear elements are resolved by using net relations. It models how different elements are related to each other, representing a transition from one element to another.
+Net relations specify where two linear elements connect. This could be at the origin of one element, the end of another, or even at specific offsets along their lengths. For example, two tracks might connect at a junction, with one ending at offset 1500 and the other beginning at offset 0.
+NetRelation explicitly models these connections by linking two linear elements (elementA and elementB) and defining their physical or logical relationship.
+Net relations also specify the permitted directions of travel:
+â€¢	AB: Trains can move from element A to element B.
+â€¢	BA: Trains can move from element B to element A.
+â€¢	Both: Movement is bidirectional.
+â€¢	None: No movement is allowed between the two elements.
+To make this even more precise, net relations include information about whether the connection is at the origin of each element. For example, a relation might indicate that Track A ends at its origin (offset 0) and connects to Track B at its start (isOnOriginOfElementA and isOnOriginOfElementB).
+"""@en .
+
+:LinearElement a owl:Class ;
+    rdfs:label "Linear Element"@en ;
+    :shaclShapeValidationRule <http://data.europa.eu/949/shapes/LinearElementShape> ;
+    dcterms:modified "2024-11-29"^^xsd:date,
+        "2025-03-01"^^xsd:date ;
+    rdfs:comment "Pieces of tracks composing the topology"@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf :NetElement ;
+    owl:disjointWith :NonLinearElement ;
+    skos:scopeNote "This class represents an edge in the topological graph. It represents a linear element in the network."@en .
+

@@ -1,0 +1,17 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:netElement a owl:ObjectProperty ;
+    rdfs:label "Net element"@en ;
+    dcterms:created "2021-04-01"^^xsd:date ;
+    dcterms:modified "2022-09-06"^^xsd:date ;
+    rdfs:comment """References an associated topological object.
+The reason for deprecating this property is that it is defined as "References an associated topological object." and the vocabulary has already a property "hasAbstraction" which relates the implementation layer with the topological layer, https://citnet.tech.ec.europa.eu/CITnet/confluence/pages/viewpage.action?pageId=1122974879."""@en ;
+    rdfs:isDefinedBy : ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+

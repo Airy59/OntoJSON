@@ -1,0 +1,77 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Manufacturer a owl:Class ;
+    rdfs:label "(deprecated) Manufacturer"@en ;
+    dcterms:created "2020-11-19"^^xsd:date ;
+    dcterms:isReplacedBy :Body,
+        :manufacturer ;
+    dcterms:modified "2020-11-19"^^xsd:date,
+        "2024-06-03"^^xsd:date ;
+    rdfs:comment "(deprecated) Replaced by the era:Body class and era:manufacturer property. A company or organization that manufactures vehicles."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf org:Organization ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:VehicleKeeper a owl:Class ;
+    rdfs:label "(deprecated) Vehicle Keeper"@en ;
+    dcterms:created "2020-11-23"^^xsd:date ;
+    dcterms:isReplacedBy :Body,
+        :vehicleKeeper ;
+    dcterms:modified "2020-11-23"^^xsd:date,
+        "2024-04-18"^^xsd:date,
+        "2024-06-03"^^xsd:date ;
+    rdfs:comment """The natural or legal person that, being the owner of a vehicle or having the right to use it,
+exploits the vehicle as a means of transport and is registered as such in a vehicle register referred to in Article 47 of (EU)2016/797."""@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf org:Organization ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+:definesSubset a owl:ObjectProperty ;
+    rdfs:label "Defines subset"@en ;
+    dcterms:created "2022-11-04"^^xsd:date ;
+    dcterms:modified "2023-03-14"^^xsd:date ;
+    rdfs:comment "(deprecated) not in use anymore. For the purposes of the register of infrastructure, each infrastructure manager may describe its railway network optionally via common characteristic subsets."@en ;
+    rdfs:domain :InfrastructureManager ;
+    rdfs:isDefinedBy : ;
+    rdfs:range :CommonCharacteristicsSubset ;
+    owl:deprecated true ;
+    ns1:term_status "stable" .
+
+org:identifier a owl:DatatypeProperty ;
+    rdfs:label "identifier"@en,
+        "tiene identificador"@es,
+        "identifiant"@fr,
+        "identificatore"@it ;
+    rdfs:comment "Gives an identifier, such as a company registration number, that can be used to used to uniquely identify the organization. Many different national and international identier schemes are available. The org ontology is neutral to which schemes are used. The particular identifier scheme should be indicated by the datatype of the identifier value.  Using datatypes to distinguish the notation scheme used is consistent with recommended best practice for `skos:notation` of which this property is a specialization."@en,
+        "CÃ³digo o identificador, como por ejemplo el CIF de una empresa, que permite identificar de forma inequÃ­voca a una organizaciÃ³n. Existen muchos cÃ³digos de identificaciÃ³n tanto nacionales como internacionales. Esta ontologÃ­a no obliga al uso de ningÃºn esquema en concreto. Los cÃ³digos de identificaciÃ³n utilizados en cada caso se deberÃ­an indicar mediante el uso de la propiedad â€œdatatypeâ€ del valor del identificador. El uso de la propiedad â€œdatatypeâ€ para especificar el esquema de notaciÃ³n utilizado estÃ¡ en consonancia con las buenas prÃ¡cticas recomendadas para el uso de la propiedad `skos:notation`, de la que esta propiedad es una especializaciÃ³n."@es,
+        "Donne un identifiant, comme par exemple le numÃ©ro d'enregistrement d'une entreprise, qui peut Ãªtre utilisÃ© comme identifiant unique pour l'Organisation. De nombreux schÃ©mas nationaux et internationaux sont disponibles. Cette ontologie reste neutre par rapport au schÃ©ma utilisÃ©. Le schÃ©ma particulier utilisÃ© devrait Ãªtre indiquÃ© par le `datatype` de la valeur de l'identifiant. Utiliser les datatypes pour distinguer les schÃ©mas de notation est cohÃ©rent avec les bonnes pratiques pour `skos:notation` dont cette propriÃ©tÃ© est une spÃ©cialisation."@fr,
+        "Indica un identificatore univoco per l'organizzazione, come ad esempio la partita IVA di un'azienda. Molti schemi di identificazione a livello nazionale e internazionale sono disponibili allo scopo. L'ontologia ORG Ã¨ neutrale rispetto allo schema da utilizzare. Lo schema di identificazione dovrebbe essere indicato dal datatype del valore dell'identificatore. L'uso del datatype per distinguere lo schema di identificazione Ã¨ coerente con le best practice per `skos:notation`, di cui questa proprietÃ  Ã¨ una specializzazione."@it,
+        "çµ„ç¹”ã‚’ä¸€æ„ã«è­˜åˆ¥ã™ã‚‹ãŸã‚ã«ä½¿ç”¨ã§ãã‚‹ä¼šç¤¾ç™»éŒ²ç•ªå·ãªã©ã®è­˜åˆ¥å­ã‚’ä¸Žãˆã¾ã™ã€‚"@ja ;
+    rdfs:domain org:Organization ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/org> ;
+    rdfs:subPropertyOf skos:notation .
+
+:InfrastructureManager a owl:Class ;
+    rdfs:label "Infrastructure manager"@en ;
+    dcterms:isReplacedBy :Body ;
+    rdfs:comment "(deprecated) The infrastructure manager owns and operates the railway network and related infrastructure."@en ;
+    rdfs:isDefinedBy : ;
+    rdfs:subClassOf org:Organization ;
+    owl:deprecated true ;
+    skos:scopeNote "See point (2) of Article 3 of Directive 2012/34/EU of the European Parliament and of the Council establishing a single European railway area."@en .
+
+org:Organization a owl:Class ;
+    rdfs:label "Organization"@en,
+        "organizaciÃ³n"@es,
+        "Organisation"@fr,
+        "Organizzazione"@it .
+

@@ -1,0 +1,173 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:BookingNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "BookingNumber" ;
+    rdfs:comment "XrailBooking number for the consignment" ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CreationDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CreationDate" ;
+    rdfs:comment """Date when the report was made
+														out.""" ;
+    rdfs:domain :FormalReports ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CustomerReference a owl:DatatypeProperty ;
+    rdfs:label "CustomerReference" ;
+    rdfs:comment """Supplied by the customer. Reference number
+											to link the ECN and delivery note to the same
+											consignment on the customer side.""" ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:LoadLimit a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "LoadLimit" ;
+    rdfs:comment """Load limit from table of load limits in
+											[t].""" ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf :dataProperties .
+
+:PermissionNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "PermissionNumber" ;
+    rdfs:comment """Reference/permission number of
+														the exceptional consignment.""" ;
+    rdfs:domain :ExceptionalConsignment ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Result a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Result" ;
+    rdfs:comment """Details of the results of any
+														examination (see CIM Article 11 sections 2
+														and 3).""" ;
+    rdfs:domain :Examination ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ShuntingModalLabel a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ShuntingModalLabel" ;
+    rdfs:comment """Shunting modal label according to chapter
+											5.3.4 RID""" ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonInfo a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonInfo" ;
+    rdfs:comment """Additional information, concerning the
+											goods of the whole wagon. """ ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WagonLength" ;
+    rdfs:comment "Length over buffers in cms" ;
+    rdfs:domain :WagonTypeDetails ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasExamination a owl:ObjectProperty ;
+    rdfs:label "has Examination" ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range :Examination .
+
+:hasExceptionalConsignment a owl:ObjectProperty ;
+    rdfs:label "has ExceptionalConsignment" ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range :ExceptionalConsignment .
+
+:hasFormalReports a owl:ObjectProperty ;
+    rdfs:label "has FormalReports" ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range :FormalReports .
+
+:hasWagonDetails a owl:ObjectProperty ;
+    rdfs:label "has WagonDetails" ;
+    rdfs:domain :Wagons ;
+    rdfs:range :WagonDetails .
+
+:hasWagonTypeDetails a owl:ObjectProperty ;
+    rdfs:label "has WagonTypeDetails" ;
+    rdfs:domain :WagonDetails ;
+    rdfs:range :WagonTypeDetails .
+
+:hasWagons a owl:ObjectProperty ;
+    rdfs:label "has Wagons" ;
+    rdfs:domain :COM ;
+    rdfs:range :Wagons .
+
+:Examination a owl:Class ;
+    rdfs:label "Examination" ;
+    rdfs:comment "Examination" .
+
+:ExceptionalConsignment a owl:Class ;
+    rdfs:label "ExceptionalConsignment" ;
+    rdfs:comment "Exceptional Consignment" .
+
+:FormalReports a owl:Class ;
+    rdfs:label "FormalReports" ;
+    rdfs:comment "Formal report" .
+
+:WagonTypeDetails a owl:Class ;
+    rdfs:label "WagonTypeDetails" ;
+    rdfs:comment """These elements are only needed, if the
+											wagon has to be treated as CUV (empty wagon).""" .
+
+:Wagons a owl:Class ;
+    rdfs:label "Wagons" ;
+    rdfs:comment "Content of the wagon" .
+
+:WagonDetails a owl:Class ;
+    rdfs:label "WagonDetails" ;
+    rdfs:comment "Details for the specific wagon" .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :Examination .
+
+[] rdf:first :FormalReports .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :ExceptionalConsignment .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :FormalReports .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :WagonDetails .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :Wagons .
+
+[] rdf:first :WagonTypeDetails .
+
+[] rdf:first :WagonTypeDetails .
+

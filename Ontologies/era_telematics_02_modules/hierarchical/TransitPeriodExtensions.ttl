@@ -1,0 +1,40 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Beginning a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Beginning" ;
+    rdfs:comment """Beginning of the
+																extension.""" ;
+    rdfs:domain :TransitPeriodExtensions ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CodeOfCause a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CodeOfCause" ;
+    rdfs:comment "Code of reason for extension" ;
+    rdfs:domain :TransitPeriodExtensions ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Ending a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Ending" ;
+    rdfs:comment "End of extension." ;
+    rdfs:domain :TransitPeriodExtensions ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasTransitPeriodExtensions rdfs:range :TransitPeriodExtensions .
+
+:TransitPeriodExtensions a owl:Class ;
+    rdfs:label "TransitPeriodExtensions" .
+
+[] rdf:first :TransitPeriodExtensions .
+
+[] rdf:first :TransitPeriodExtensions .
+
