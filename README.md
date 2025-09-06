@@ -37,10 +37,15 @@ A powerful, configurable transformation engine for converting RDF/OWL ontologies
 - **Step 3 - JSON Instance Generation**: Transform A-box to JSON/JSON-LD instances with validation
 
 ### Application Features
-- **GUI Application**: User-friendly desktop application with three-step workflow
+- **Multi-Platform Support**:
+  - Desktop GUI Application (PyQt6) with three-step workflow
+  - Web Interface (Flask) for browser-based access
+  - Command-line Interface (CLI) for automation
+  - REST API for programmatic integration
 - **Standalone Distributions**: Pre-built applications for macOS, Windows, and Linux (no Python required)
 - **Extensible Design**: Easy to add custom transformation rules and extend functionality
 - **Multiple Output Formats**: Support for JSON Schema, YAML, JSON-LD, and more
+- **Async Processing**: Background task processing for large transformations (web interface)
 
 ## 📦 Installation
 
@@ -82,11 +87,21 @@ pip install -e .
 pip install -e ".[gui]"
 ```
 
+#### Installation with Web Interface Support
+
+```bash
+# Install with Flask web interface
+pip install -e ".[web]"
+
+# Or install all interfaces
+pip install -e ".[gui,web]"
+```
+
 #### Development Installation
 
 ```bash
 # Install with all development dependencies
-pip install -e ".[dev,gui]"
+pip install -e ".[dev,gui,web]"
 ```
 
 ## 🖥️ Usage
@@ -183,6 +198,26 @@ owl2jsonschema-gui
 - **Export Options**:
   - Multiple format support
   - Save at any workflow step
+
+### Web Interface
+
+OntoJSON now includes a web interface for browser-based access:
+
+```bash
+# Start the web server
+python src/owl2jsonschema_web/app.py
+
+# Navigate to http://localhost:5000 in your browser
+```
+
+#### Web Interface Features
+- Drag-and-drop file upload
+- Real-time transformation progress
+- REST API endpoints for integration
+- Async task processing for large files
+- Configuration profiles management
+
+For detailed web interface documentation, see [WEB_APP_GUIDE.md](WEB_APP_GUIDE.md).
 
 ### Command Line Interface (CLI)
 
@@ -402,6 +437,7 @@ For detailed build instructions, see [build_system/README.md](build_system/READM
 
 ## 📚 Documentation
 
+- **[Web Application Guide](WEB_APP_GUIDE.md)**: Complete guide for using the web interface
 - **[Transformation Rules](transformation_rules.md)**: Complete list of available transformation rules
 - **[Architecture](architecture.md)**: System architecture and design patterns
 - **[Build System](build_system/README.md)**: Instructions for building standalone applications
@@ -423,6 +459,11 @@ OntoJSON/
 │   │   │   ├── class_rules.py
 │   │   │   ├── property_rules.py
 │   │   │   └── structural_rules.py
+│   │   ├── services/             # Platform-agnostic services
+│   │   │   ├── __init__.py
+│   │   │   ├── transformation_service.py
+│   │   │   ├── file_service.py
+│   │   │   └── configuration_service.py
 │   │   ├── __init__.py
 │   │   ├── abox_generator.py     # ABox generation utilities
 │   │   ├── abox_to_json.py       # ABox to JSON conversion
@@ -435,11 +476,27 @@ OntoJSON/
 │   │   ├── parser.py              # Ontology parser with import resolution
 │   │   ├── reasoner.py            # OWL reasoning utilities
 │   │   └── visitor.py             # Visitor pattern implementation
-│   └── owl2jsonschema_gui/       # GUI application
+│   ├── owl2jsonschema_gui/       # GUI application
+│   │   ├── __init__.py
+│   │   ├── app.py                 # Application entry point
+│   │   ├── editor_selector.py     # External editor selection dialog
+│   │   └── main_window.py         # Main window implementation
+│   └── owl2jsonschema_web/       # Web application
+│       ├── api/                   # REST API endpoints
+│       │   ├── __init__.py
+│       │   ├── routes.py
+│       │   ├── transformation.py
+│       │   ├── configuration.py
+│       │   └── tasks.py
+│       ├── templates/             # HTML templates
+│       │   ├── base.html
+│       │   ├── index.html
+│       │   └── transform.html
 │       ├── __init__.py
-│       ├── app.py                 # Application entry point
-│       ├── editor_selector.py     # External editor selection dialog
-│       └── main_window.py         # Main window implementation
+│       ├── app.py                 # Flask application
+│       ├── config.py              # Web app configuration
+│       ├── tasks.py               # Celery async tasks
+│       └── views.py               # Web views
 ├── OntologyPartitioning/          # Ontology partitioning system
 │   ├── ontology_chunker.py       # Efficient chunker for large files
 │   ├── semantic_partitioner.py   # Semantic partitioning engine
@@ -578,5 +635,5 @@ See [credits.txt](credits.txt) for acknowledgments and third-party licenses.
 - ✅ GUI application: **Stable**
 - ✅ macOS build system: **Stable**
 - ✅ Windows build system: **Ready** (requires Windows to build)
+- ✅ Web interface: **Stable** (Flask-based)
 - 🚧 Linux build system: **In Development**
-- 🚧 Web version: **Planned**

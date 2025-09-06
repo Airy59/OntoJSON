@@ -1,0 +1,453 @@
+{% extends "base.html" %}
+
+{% block title %}Transform - OntoJSON{% endblock %}
+
+{% block extra_css %}
+<style>
+    .drop-zone {
+        border: 2px dashed #ccc;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .drop-zone:hover,
+    .drop-zone.dragover {
+        border-color: #007bff;
+        background-color: #f0f8ff;
+    }
+    .file-list {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .code-output {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+        max-height: 500px;
+        overflow: auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Transform Ontology to JSON Schema</h1>
+    
+    <!-- Step 1: Input Sources -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-file-import"></i> Step 1: Input Sources</h5>
+        </div>
+        <div class="card-body">
+            <!-- File Upload Area -->
+            <div id="dropZone" class="drop-zone mb-3">
+                <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                <p>Drag and drop ontology files here or click to browse</p>
+                <input type="file" id="fileInput" multiple accept=".ttl,.rdf,.owl,.xml,.n3,.nt,.jsonld" style="display: none;">
+            </div>
+            
+            <!-- URL Input -->
+            <div class="mb-3">
+                <label for="urlInput" class="form-label">Or enter ontology URLs (one per line):</label>
+                <textarea class="form-control" id="urlInput" rows="3" placeholder="https://example.com/ontology.ttl"></textarea>
+            </div>
+            
+            <!-- File List -->
+            <div id="fileList" class="file-list">
+                <h6>Selected Sources:</h6>
+                <ul id="sourcesList" class="list-group"></ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Step 2: Configuration -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-cog"></i> Step 2: Configuration</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="configProfile" class="form-label">Configuration Profile:</label>
+                        <select class="form-select" id="configProfile">
+                            <option value="default">Default</option>
+                            <option value="minimal">Minimal</option>
+                            <option value="full">Full Features</option>
+                            <option value="custom">Custom...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="language" class="form-label">Language:</label>
+                        <select class="form-select" id="language">
+                            <option value="en">English</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="es">Spanish</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Advanced Options (Collapsible) -->
+            <div class="accordion" id="advancedOptions">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#advancedCollapse">
+                            Advanced Options
+                        </button>
+                    </h2>
+                    <div id="advancedCollapse" class="accordion-collapse collapse" data-bs-parent="#advancedOptions">
+                        <div class="accordion-body">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="includeUri">
+                                <label class="form-check-label" for="includeUri">
+                                    Include URI references in output
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="generateInstances" checked>
+                                <label class="form-check-label" for="generateInstances">
+                                    Generate sample instances
+                                </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="instanceCount" class="form-label">Number of instances:</label>
+                                <input type="number" class="form-control" id="instanceCount" value="10" min="1" max="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Step 3: Transform -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-magic"></i> Step 3: Transform</h5>
+        </div>
+        <div class="card-body">
+            <button id="transformBtn" class="btn btn-primary btn-lg w-100" disabled>
+                <i class="fas fa-play"></i> Start Transformation
+            </button>
+            
+            <!-- Progress Bar -->
+            <div id="progressContainer" class="mt-3" style="display: none;">
+                <div class="progress">
+                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+                         role="progressbar" style="width: 0%"></div>
+                </div>
+                <p id="progressMessage" class="text-center mt-2 text-muted"></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results -->
+    <div id="resultsContainer" class="card" style="display: none;">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-check-circle text-success"></i> Results</h5>
+        </div>
+        <div class="card-body">
+            <!-- Result Tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#schemaTab" type="button">
+                        JSON Schema
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#instancesTab" type="button">
+                        Sample Instances
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#metadataTab" type="button">
+                        Metadata
+                    </button>
+                </li>
+            </ul>
+            
+            <div class="tab-content mt-3">
+                <div class="tab-pane fade show active" id="schemaTab">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>JSON Schema Output</h6>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('schemaOutput')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <pre id="schemaOutput" class="code-output bg-light p-3 rounded"></pre>
+                </div>
+                <div class="tab-pane fade" id="instancesTab">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>Sample Instances</h6>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('instancesOutput')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <pre id="instancesOutput" class="code-output bg-light p-3 rounded"></pre>
+                </div>
+                <div class="tab-pane fade" id="metadataTab">
+                    <div id="metadataOutput"></div>
+                </div>
+            </div>
+            
+            <!-- Download Options -->
+            <div class="mt-3">
+                <button id="downloadSchema" class="btn btn-success me-2">
+                    <i class="fas fa-download"></i> Download Schema
+                </button>
+                <button id="downloadInstances" class="btn btn-success">
+                    <i class="fas fa-download"></i> Download Instances
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// File handling
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+const sourcesList = document.getElementById('sourcesList');
+const transformBtn = document.getElementById('transformBtn');
+let selectedFiles = [];
+let uploadedFiles = [];
+
+// Drag and drop
+dropZone.addEventListener('click', () => fileInput.click());
+
+dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+});
+
+dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('dragover');
+});
+
+dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    handleFiles(e.dataTransfer.files);
+});
+
+fileInput.addEventListener('change', (e) => {
+    handleFiles(e.target.files);
+});
+
+function handleFiles(files) {
+    for (let file of files) {
+        selectedFiles.push(file);
+        uploadFile(file);
+    }
+    updateSourcesList();
+}
+
+function uploadFile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            uploadedFiles = uploadedFiles.concat(data.files);
+            updateTransformButton();
+        }
+    })
+    .catch(error => console.error('Upload error:', error));
+}
+
+function updateSourcesList() {
+    sourcesList.innerHTML = '';
+    
+    selectedFiles.forEach((file, index) => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        li.innerHTML = `
+            <span>${file.name}</span>
+            <button class="btn btn-sm btn-danger" onclick="removeFile(${index})">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        sourcesList.appendChild(li);
+    });
+    
+    updateTransformButton();
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    uploadedFiles.splice(index, 1);
+    updateSourcesList();
+}
+
+function updateTransformButton() {
+    transformBtn.disabled = selectedFiles.length === 0 && !document.getElementById('urlInput').value;
+}
+
+// URL input handling
+document.getElementById('urlInput').addEventListener('input', updateTransformButton);
+
+// Transformation
+transformBtn.addEventListener('click', performTransformation);
+
+async function performTransformation() {
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressMessage = document.getElementById('progressMessage');
+    const resultsContainer = document.getElementById('resultsContainer');
+    
+    // Show progress
+    progressContainer.style.display = 'block';
+    resultsContainer.style.display = 'none';
+    transformBtn.disabled = true;
+    
+    // Prepare sources
+    const sources = [];
+    
+    // Add uploaded files
+    uploadedFiles.forEach(file => sources.push(file.path));
+    
+    // Add URLs
+    const urls = document.getElementById('urlInput').value.split('\n').filter(url => url.trim());
+    sources.push(...urls);
+    
+    // Prepare configuration
+    const config = {
+        language: document.getElementById('language').value,
+        include_uri: document.getElementById('includeUri').checked
+    };
+    
+    // Create task
+    updateProgress(10, 'Creating transformation task...');
+    
+    try {
+        const response = await fetch('/api/tasks', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                sources: sources,
+                config: config,
+                pipeline: {
+                    generate_instances: document.getElementById('generateInstances').checked,
+                    instance_count: parseInt(document.getElementById('instanceCount').value)
+                }
+            })
+        });
+        
+        const task = await response.json();
+        
+        if (task.task_id) {
+            // Poll for results
+            pollTaskStatus(task.task_id);
+        }
+    } catch (error) {
+        console.error('Transformation error:', error);
+        alert('Transformation failed: ' + error.message);
+        progressContainer.style.display = 'none';
+        transformBtn.disabled = false;
+    }
+}
+
+async function pollTaskStatus(taskId) {
+    const interval = setInterval(async () => {
+        try {
+            const response = await fetch(`/api/tasks/${taskId}`);
+            const task = await response.json();
+            
+            updateProgress(task.progress, task.message);
+            
+            if (task.status === 'completed') {
+                clearInterval(interval);
+                displayResults(task.result);
+            } else if (task.status === 'failed') {
+                clearInterval(interval);
+                alert('Transformation failed: ' + task.result.error);
+                document.getElementById('progressContainer').style.display = 'none';
+                transformBtn.disabled = false;
+            }
+        } catch (error) {
+            clearInterval(interval);
+            console.error('Poll error:', error);
+        }
+    }, 1000);
+}
+
+function updateProgress(percent, message) {
+    document.getElementById('progressBar').style.width = percent + '%';
+    document.getElementById('progressMessage').textContent = message;
+}
+
+function displayResults(result) {
+    document.getElementById('progressContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'block';
+    
+    // Display schema
+    document.getElementById('schemaOutput').textContent = JSON.stringify(result.schema, null, 2);
+    
+    // Display instances if available
+    if (result.instances) {
+        document.getElementById('instancesOutput').textContent = JSON.stringify(result.instances, null, 2);
+    }
+    
+    // Display metadata
+    if (result.metadata) {
+        const metadataHtml = Object.entries(result.metadata).map(([key, value]) => 
+            `<p><strong>${key}:</strong> ${value}</p>`
+        ).join('');
+        document.getElementById('metadataOutput').innerHTML = metadataHtml;
+    }
+    
+    transformBtn.disabled = false;
+}
+
+// Copy to clipboard
+function copyToClipboard(elementId) {
+    const text = document.getElementById(elementId).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+    });
+}
+
+// Download functions
+document.getElementById('downloadSchema').addEventListener('click', () => {
+    const content = document.getElementById('schemaOutput').textContent;
+    downloadFile(content, 'schema.json', 'application/json');
+});
+
+document.getElementById('downloadInstances').addEventListener('click', () => {
+    const content = document.getElementById('instancesOutput').textContent;
+    downloadFile(content, 'instances.json', 'application/json');
+});
+
+function downloadFile(content, filename, mimeType) {
+    const blob = new Blob([content], {type: mimeType});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Check for quick start URL
+window.addEventListener('load', () => {
+    const quickStartUrl = sessionStorage.getItem('quickStartUrl');
+    if (quickStartUrl) {
+        document.getElementById('urlInput').value = quickStartUrl;
+        sessionStorage.removeItem('quickStartUrl');
+        updateTransformButton();
+    }
+});
+</script>
+{% endblock %}
