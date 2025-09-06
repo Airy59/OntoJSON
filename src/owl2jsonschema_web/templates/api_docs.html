@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}API Documentation - OntoJSON{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <h1 class="mb-4">REST API Documentation</h1>
+            
+            <div class="alert alert-info">
+                <strong>Base URL:</strong> <code>http://localhost:5001/api</code><br>
+                <strong>Content-Type:</strong> <code>application/json</code>
+            </div>
+
+            <!-- Transform Endpoints -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Transformation Endpoints</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h3 class="h6">POST /api/transform</h3>
+                        <p>Transform a single ontology to JSON Schema</p>
+                        <pre class="bg-light p-3"><code>{
+    "source": "https://example.org/ontology.ttl",
+    "format": "turtle",
+    "language": "en",
+    "config": {
+        "rules": ["class_to_object", "labels_to_titles"]
+    }
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre class="bg-light p-3"><code>{
+    "success": true,
+    "schema": { ... },
+    "metadata": {
+        "classes_count": 10,
+        "properties_count": 25
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="h6">POST /api/transform/multiple</h3>
+                        <p>Transform multiple ontologies into a composite JSON Schema</p>
+                        <pre class="bg-light p-3"><code>{
+    "sources": [
+        "https://example.org/onto1.ttl",
+        "https://example.org/onto2.ttl"
+    ],
+    "composite_metadata": {
+        "title": "Combined Ontology",
+        "description": "Merged ontologies"
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Management -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Asynchronous Task Management</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h3 class="h6">POST /api/tasks</h3>
+                        <p>Create a new transformation task for async processing</p>
+                        <pre class="bg-light p-3"><code>{
+    "sources": ["https://example.org/ontology.ttl"],
+    "config": {
+        "language": "en"
+    }
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre class="bg-light p-3"><code>{
+    "task_id": "f75f07bf-1ca0-4376-b306-5496dce16aca",
+    "status": "pending",
+    "message": "Task created successfully"
+}</code></pre>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="h6">GET /api/tasks/{task_id}</h3>
+                        <p>Get the status of a transformation task</p>
+                        <p><strong>Response:</strong></p>
+                        <pre class="bg-light p-3"><code>{
+    "task_id": "f75f07bf-1ca0-4376-b306-5496dce16aca",
+    "status": "completed",
+    "progress": 100,
+    "message": "Transformation complete",
+    "result": {
+        "success": true,
+        "schema": { ... }
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="h6">POST /api/tasks/{task_id}/cancel</h3>
+                        <p>Cancel a running task</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="h6">GET /api/tasks</h3>
+                        <p>List all tasks</p>
+                        <p><strong>Query Parameters:</strong></p>
+                        <ul>
+                            <li><code>status</code> - Filter by status (pending, in_progress, completed, failed)</li>
+                            <li><code>limit</code> - Maximum number of results (default: 20)</li>
+                            <li><code>offset</code> - Offset for pagination</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuration -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Configuration Management</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h3 class="h6">GET /api/configurations</h3>
+                        <p>List available transformation configurations</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="h6">POST /api/configurations</h3>
+                        <p>Create a new configuration preset</p>
+                        <pre class="bg-light p-3"><code>{
+    "name": "my-config",
+    "description": "Custom configuration",
+    "rules": {
+        "class_to_object": true,
+        "labels_to_titles": {
+            "enabled": true,
+            "language": "en"
+        }
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utility Endpoints -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Utility Endpoints</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h3 class="h6">GET /api/rules</h3>
+                        <p>Get list of available transformation rules</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="h6">POST /api/validate</h3>
+                        <p>Validate an ontology source</p>
+                        <pre class="bg-light p-3"><code>{
+    "source": "https://example.org/ontology.ttl"
+}</code></pre>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="h6">POST /api/generate/abox</h3>
+                        <p>Generate sample instances from a JSON Schema</p>
+                        <pre class="bg-light p-3"><code>{
+    "schema": { ... },
+    "instance_count": 10,
+    "seed": 42
+}</code></pre>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="h6">GET /api/health</h3>
+                        <p>Health check endpoint</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Handling -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Error Handling</h2>
+                </div>
+                <div class="card-body">
+                    <p>All error responses follow this format:</p>
+                    <pre class="bg-light p-3"><code>{
+    "error": "Error message describing what went wrong",
+    "details": {
+        "field": "Additional error details"
+    }
+}</code></pre>
+                    
+                    <h3 class="h6 mt-3">Common HTTP Status Codes</h3>
+                    <ul>
+                        <li><code>200 OK</code> - Request successful</li>
+                        <li><code>202 Accepted</code> - Task created for async processing</li>
+                        <li><code>400 Bad Request</code> - Invalid request parameters</li>
+                        <li><code>404 Not Found</code> - Resource not found</li>
+                        <li><code>500 Internal Server Error</code> - Server error</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Examples -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Example: Full Workflow</h2>
+                </div>
+                <div class="card-body">
+                    <pre class="bg-light p-3"><code># 1. Create a transformation task
+curl -X POST http://localhost:5001/api/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"sources": ["https://example.org/ontology.ttl"]}'
+
+# 2. Check task status
+curl http://localhost:5001/api/tasks/TASK_ID
+
+# 3. Get the result when completed
+curl http://localhost:5001/api/tasks/TASK_ID/result
+
+# 4. Generate sample data
+curl -X POST http://localhost:5001/api/generate/abox \
+  -H "Content-Type: application/json" \
+  -d '{"schema": RESULT_SCHEMA, "instance_count": 5}'</code></pre>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a href="/" class="btn btn-secondary">Back to Home</a>
+                <a href="/transform" class="btn btn-primary">Try the API</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

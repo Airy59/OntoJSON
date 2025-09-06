@@ -2,6 +2,7 @@
 Asynchronous tasks API endpoints.
 """
 
+import os
 from flask import request, jsonify, current_app
 from . import api_bp
 from owl2jsonschema.services import TransformationService, FileService, ConfigurationService
@@ -10,6 +11,16 @@ from owl2jsonschema.services.file_service import WebUploadAdapter
 
 # Task storage (in production, use Redis or database)
 _tasks = {}
+
+# Shared transformation service instance
+_transformation_service = None
+
+def get_transformation_service():
+    """Get or create the shared transformation service instance."""
+    global _transformation_service
+    if _transformation_service is None:
+        _transformation_service = TransformationService()
+    return _transformation_service
 
 
 @api_bp.route('/tasks', methods=['POST'])
@@ -26,7 +37,7 @@ def create_task():
         if not request.json or 'sources' not in request.json:
             return jsonify({'error': 'No sources provided'}), 400
         
-        transformation_service = TransformationService()
+        transformation_service = get_transformation_service()
         
         # Create task
         task_id = transformation_service.create_task(
@@ -62,7 +73,7 @@ def create_task():
 def get_task_status(task_id):
     """Get the status of a transformation task."""
     try:
-        transformation_service = TransformationService()
+        transformation_service = get_transformation_service()
         task = transformation_service.get_task(task_id)
         
         if not task:
@@ -96,7 +107,7 @@ def get_task_status(task_id):
 def cancel_task(task_id):
     """Cancel a running task."""
     try:
-        transformation_service = TransformationService()
+        transformation_service = get_transformation_service()
         task = transformation_service.get_task(task_id)
         
         if not task:
@@ -133,7 +144,7 @@ def list_tasks():
     - offset: Offset for pagination (default: 0)
     """
     try:
-        transformation_service = TransformationService()
+        transformation_service = get_transformation_service()
         
         # Get query parameters
         status_filter = request.args.get('status')
@@ -187,7 +198,7 @@ def list_tasks():
 def get_task_result(task_id):
     """Get the result of a completed task."""
     try:
-        transformation_service = TransformationService()
+        transformation_service = get_transformation_service()
         task = transformation_service.get_task(task_id)
         
         if not task:
@@ -225,7 +236,7 @@ def _process_task_sync(task_id, params):
     try:
         # Initialize services
         file_service = FileService(WebUploadAdapter(current_app.config['UPLOAD_FOLDER']))
-        transformation_service = TransformationService()
+        transformation_service = get_transformation_service()
         config_service = ConfigurationService()
         
         # Update task status
@@ -236,8 +247,19 @@ def _process_task_sync(task_id, params):
         resolved_sources = []
         
         for source in sources:
-            resolved_source, _ = file_service.resolve_source(source)
-            resolved_sources.append(resolved_source)
+            # Check if source is an uploaded file (starts with UUID pattern)
+            if '/' not in source and '_' in source:
+                # This looks like an uploaded file, prepend upload directory
+                full_path = os.path.join(current_app.config['UPLOAD_FOLDER'], source)
+                if os.path.exists(full_path):
+                    resolved_sources.append(full_path)
+                else:
+                    # Try to resolve normally
+                    resolved_source, _ = file_service.resolve_source(source)
+                    resolved_sources.append(resolved_source)
+            else:
+                resolved_source, _ = file_service.resolve_source(source)
+                resolved_sources.append(resolved_source)
         
         transformation_service.update_task_progress(task_id, 30, 'Sources resolved')
         
@@ -285,7 +307,7 @@ def cleanup_tasks():
     """
     try:
         from datetime import datetime, timedelta
-        transformation_service = TransformationService()
+        transformation_service = get_transformation_service()
         
         # Get parameters
         older_than = request.json.get('older_than') if request.json else None

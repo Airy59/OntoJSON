@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% block title %}Documentation - OntoJSON{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <h1 class="mb-4">OntoJSON Documentation</h1>
+            
+            <!-- Quick Start -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Quick Start</h2>
+                </div>
+                <div class="card-body">
+                    <h3 class="h6">Web Interface</h3>
+                    <ol>
+                        <li>Navigate to the <a href="/transform">Transform page</a></li>
+                        <li>Upload your ontology file or enter a URL</li>
+                        <li>Configure transformation options (optional)</li>
+                        <li>Click "Transform" to generate JSON Schema</li>
+                        <li>Download or copy the resulting schema</li>
+                    </ol>
+
+                    <h3 class="h6 mt-3">Command Line</h3>
+                    <pre class="bg-light p-3"><code># Transform a single ontology
+owl2jsonschema transform input.ttl -o schema.json
+
+# Transform multiple ontologies
+owl2jsonschema transform onto1.ttl onto2.ttl -o composite.json
+
+# Generate sample instances
+owl2jsonschema generate-abox schema.json -n 10 -o instances.json</code></pre>
+
+                    <h3 class="h6 mt-3">REST API</h3>
+                    <pre class="bg-light p-3"><code>curl -X POST http://localhost:5001/api/transform \
+  -H "Content-Type: application/json" \
+  -d '{"source": "https://example.org/ontology.ttl"}'</code></pre>
+                </div>
+            </div>
+
+            <!-- Supported Formats -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Supported Formats</h2>
+                </div>
+                <div class="card-body">
+                    <h3 class="h6">Input Formats</h3>
+                    <ul>
+                        <li><strong>Turtle (.ttl)</strong> - Terse RDF Triple Language</li>
+                        <li><strong>RDF/XML (.rdf, .owl)</strong> - RDF XML syntax</li>
+                        <li><strong>JSON-LD (.jsonld)</strong> - JSON for Linked Data</li>
+                        <li><strong>N-Triples (.nt)</strong> - Line-based RDF format</li>
+                        <li><strong>N3 (.n3)</strong> - Notation3</li>
+                        <li><strong>RDFa</strong> - RDF in attributes</li>
+                    </ul>
+
+                    <h3 class="h6 mt-3">Output Formats</h3>
+                    <ul>
+                        <li><strong>JSON Schema</strong> - Draft-07 (default), Draft-04, 2019-09, 2020-12</li>
+                        <li><strong>JSON</strong> - Generated instances</li>
+                        <li><strong>JSON-LD</strong> - Linked data format</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Transformation Rules -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Transformation Rules</h2>
+                </div>
+                <div class="card-body">
+                    <p>OntoJSON applies various transformation rules to convert OWL/RDF constructs to JSON Schema:</p>
+                    
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>OWL/RDF Construct</th>
+                                <th>JSON Schema Equivalent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>owl:Class</td>
+                                <td>Object type with properties</td>
+                            </tr>
+                            <tr>
+                                <td>rdfs:subClassOf</td>
+                                <td>allOf with $ref</td>
+                            </tr>
+                            <tr>
+                                <td>owl:DatatypeProperty</td>
+                                <td>Property with type constraint</td>
+                            </tr>
+                            <tr>
+                                <td>owl:ObjectProperty</td>
+                                <td>Property with $ref to object</td>
+                            </tr>
+                            <tr>
+                                <td>owl:minCardinality</td>
+                                <td>minItems / required</td>
+                            </tr>
+                            <tr>
+                                <td>owl:maxCardinality</td>
+                                <td>maxItems</td>
+                            </tr>
+                            <tr>
+                                <td>owl:oneOf</td>
+                                <td>enum</td>
+                            </tr>
+                            <tr>
+                                <td>owl:unionOf</td>
+                                <td>anyOf</td>
+                            </tr>
+                            <tr>
+                                <td>owl:intersectionOf</td>
+                                <td>allOf</td>
+                            </tr>
+                            <tr>
+                                <td>rdfs:label</td>
+                                <td>title</td>
+                            </tr>
+                            <tr>
+                                <td>rdfs:comment</td>
+                                <td>description</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Configuration Options -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Configuration Options</h2>
+                </div>
+                <div class="card-body">
+                    <h3 class="h6">Rule Configuration</h3>
+                    <p>Each transformation rule can be individually enabled/disabled and configured:</p>
+                    <pre class="bg-light p-3"><code>{
+    "rules": {
+        "class_to_object": true,
+        "labels_to_titles": {
+            "enabled": true,
+            "language": "en",
+            "fallback_language": "en"
+        },
+        "property_cardinality": {
+            "enabled": true,
+            "strict": false
+        }
+    }
+}</code></pre>
+
+                    <h3 class="h6 mt-3">Global Options</h3>
+                    <ul>
+                        <li><code>language</code> - Preferred language for multilingual content</li>
+                        <li><code>base_uri</code> - Base URI for resolving relative references</li>
+                        <li><code>schema_version</code> - JSON Schema specification version</li>
+                        <li><code>include_metadata</code> - Include ontology metadata in output</li>
+                        <li><code>generate_examples</code> - Generate example values for properties</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Advanced Usage -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Advanced Usage</h2>
+                </div>
+                <div class="card-body">
+                    <h3 class="h6">Composite Ontologies</h3>
+                    <p>Combine multiple ontologies into a single schema:</p>
+                    <pre class="bg-light p-3"><code>from owl2jsonschema.services import TransformationService
+
+service = TransformationService()
+result = service.transform_multiple(
+    sources=[
+        "https://example.org/onto1.ttl",
+        "https://example.org/onto2.ttl"
+    ],
+    composite_metadata={
+        "title": "Combined Ontology",
+        "description": "Merged ontologies for application"
+    }
+)</code></pre>
+
+                    <h3 class="h6 mt-3">Pipeline Processing</h3>
+                    <p>Execute the full transformation pipeline:</p>
+                    <pre class="bg-light p-3"><code># T-box → A-box → JSON instances
+tbox_result, abox_result, json_result = service.full_pipeline(
+    sources=["ontology.ttl"],
+    generate_instances=True,
+    instance_count=10,
+    output_format="json"
+)</code></pre>
+
+                    <h3 class="h6 mt-3">Custom Rules</h3>
+                    <p>Extend OntoJSON with custom transformation rules:</p>
+                    <pre class="bg-light p-3"><code>from owl2jsonschema.rules import TransformationRule
+
+class CustomRule(TransformationRule):
+    def apply(self, ontology, schema):
+        # Custom transformation logic
+        return schema
+
+# Register and use the custom rule
+config = TransformationConfig()
+config.add_rule(CustomRule())</code></pre>
+                </div>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Troubleshooting</h2>
+                </div>
+                <div class="card-body">
+                    <h3 class="h6">Common Issues</h3>
+                    
+                    <div class="mb-3">
+                        <strong>Q: Transformation fails with "Parse error"</strong><br>
+                        A: Ensure your ontology file is valid RDF. Try validating it with an RDF validator first.
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Q: Missing properties in output schema</strong><br>
+                        A: Check that the relevant transformation rules are enabled in your configuration.
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Q: Labels/descriptions are in wrong language</strong><br>
+                        A: Set the correct language preference in configuration options.
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Q: Task stays in "pending" status</strong><br>
+                        A: For async processing, ensure Redis/Celery are running. Otherwise, use synchronous mode.
+                    </div>
+
+                    <h3 class="h6 mt-3">Debug Mode</h3>
+                    <p>Enable debug logging for detailed transformation information:</p>
+                    <pre class="bg-light p-3"><code>import logging
+logging.basicConfig(level=logging.DEBUG)
+
+# Or in CLI
+owl2jsonschema transform --debug input.ttl</code></pre>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Additional Resources</h2>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><a href="/api-docs">REST API Documentation</a></li>
+                        <li><a href="https://github.com/username/ontojson">GitHub Repository</a></li>
+                        <li><a href="https://json-schema.org">JSON Schema Specification</a></li>
+                        <li><a href="https://www.w3.org/OWL/">OWL Web Ontology Language</a></li>
+                        <li><a href="https://www.w3.org/RDF/">RDF Resource Description Framework</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a href="/" class="btn btn-secondary">Back to Home</a>
+                <a href="/transform" class="btn btn-primary">Start Transforming</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

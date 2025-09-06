@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+
+{% block title %}Configuration - OntoJSON{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <h1 class="mb-4">Transformation Configuration</h1>
+            
+            <form id="configForm">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h2 class="h5 mb-0">Transformation Rules</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Select which transformation rules to apply:</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="classToObject" checked>
+                                    <label class="form-check-label" for="classToObject">
+                                        <strong>Classes to Objects</strong><br>
+                                        <small class="text-muted">Transform OWL classes to JSON Schema objects</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="classHierarchy" checked>
+                                    <label class="form-check-label" for="classHierarchy">
+                                        <strong>Class Hierarchy</strong><br>
+                                        <small class="text-muted">Preserve class inheritance relationships</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="objectProperty" checked>
+                                    <label class="form-check-label" for="objectProperty">
+                                        <strong>Object Properties</strong><br>
+                                        <small class="text-muted">Transform object properties to references</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="datatypeProperty" checked>
+                                    <label class="form-check-label" for="datatypeProperty">
+                                        <strong>Datatype Properties</strong><br>
+                                        <small class="text-muted">Transform datatype properties to JSON properties</small>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="labelsToTitles" checked>
+                                    <label class="form-check-label" for="labelsToTitles">
+                                        <strong>Labels to Titles</strong><br>
+                                        <small class="text-muted">Use RDFS labels as JSON Schema titles</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="commentsToDescriptions" checked>
+                                    <label class="form-check-label" for="commentsToDescriptions">
+                                        <strong>Comments to Descriptions</strong><br>
+                                        <small class="text-muted">Use RDFS comments as descriptions</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="propertyCardinality" checked>
+                                    <label class="form-check-label" for="propertyCardinality">
+                                        <strong>Property Cardinality</strong><br>
+                                        <small class="text-muted">Apply min/max cardinality constraints</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="enumerationToEnum">
+                                    <label class="form-check-label" for="enumerationToEnum">
+                                        <strong>Enumerations</strong><br>
+                                        <small class="text-muted">Convert OWL enumerations to JSON enum</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h2 class="h5 mb-0">Language Settings</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="language" class="form-label">Preferred Language</label>
+                                    <select class="form-select" id="language">
+                                        <option value="en" selected>English</option>
+                                        <option value="fr">French</option>
+                                        <option value="de">German</option>
+                                        <option value="es">Spanish</option>
+                                        <option value="it">Italian</option>
+                                    </select>
+                                    <small class="text-muted">Language for labels and descriptions</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="fallbackLanguage" class="form-label">Fallback Language</label>
+                                    <select class="form-select" id="fallbackLanguage">
+                                        <option value="en" selected>English</option>
+                                        <option value="">None</option>
+                                    </select>
+                                    <small class="text-muted">Use if preferred language not available</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h2 class="h5 mb-0">Output Options</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="schemaVersion" class="form-label">JSON Schema Version</label>
+                                    <select class="form-select" id="schemaVersion">
+                                        <option value="draft-07" selected>Draft-07</option>
+                                        <option value="draft-04">Draft-04</option>
+                                        <option value="2019-09">2019-09</option>
+                                        <option value="2020-12">2020-12</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="indentation" class="form-label">Indentation</label>
+                                    <select class="form-select" id="indentation">
+                                        <option value="2" selected>2 spaces</option>
+                                        <option value="4">4 spaces</option>
+                                        <option value="tab">Tab</option>
+                                        <option value="0">Minified</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="includeMetadata" checked>
+                            <label class="form-check-label" for="includeMetadata">
+                                Include ontology metadata in schema
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="generateExamples">
+                            <label class="form-check-label" for="generateExamples">
+                                Generate example values
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="loadDefaults()">
+                        Reset to Defaults
+                    </button>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary" onclick="exportConfig()">
+                            Export Configuration
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Save Configuration
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('configForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Gather configuration
+    const config = gatherConfiguration();
+    // Save to localStorage or send to server
+    localStorage.setItem('ontojson-config', JSON.stringify(config));
+    alert('Configuration saved successfully!');
+});
+
+function gatherConfiguration() {
+    return {
+        rules: {
+            classToObject: document.getElementById('classToObject').checked,
+            classHierarchy: document.getElementById('classHierarchy').checked,
+            objectProperty: document.getElementById('objectProperty').checked,
+            datatypeProperty: document.getElementById('datatypeProperty').checked,
+            labelsToTitles: document.getElementById('labelsToTitles').checked,
+            commentsToDescriptions: document.getElementById('commentsToDescriptions').checked,
+            propertyCardinality: document.getElementById('propertyCardinality').checked,
+            enumerationToEnum: document.getElementById('enumerationToEnum').checked
+        },
+        language: {
+            preferred: document.getElementById('language').value,
+            fallback: document.getElementById('fallbackLanguage').value
+        },
+        output: {
+            schemaVersion: document.getElementById('schemaVersion').value,
+            indentation: document.getElementById('indentation').value,
+            includeMetadata: document.getElementById('includeMetadata').checked,
+            generateExamples: document.getElementById('generateExamples').checked
+        }
+    };
+}
+
+function loadDefaults() {
+    // Reset all checkboxes to defaults
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = cb.hasAttribute('checked');
+    });
+    // Reset selects
+    document.querySelectorAll('select').forEach(sel => {
+        sel.selectedIndex = 0;
+    });
+}
+
+function exportConfig() {
+    const config = gatherConfiguration();
+    const blob = new Blob([JSON.stringify(config, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ontojson-config.json';
+    a.click();
+}
+</script>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}About - OntoJSON{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h1 class="mb-4">About OntoJSON</h1>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="h4 card-title">What is OntoJSON?</h2>
+                    <p class="card-text">
+                        OntoJSON is a powerful transformation engine that converts OWL/RDF ontologies into JSON Schema documents. 
+                        It bridges the gap between semantic web technologies and modern web applications, enabling seamless 
+                        integration of ontological knowledge into JSON-based systems.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="h4 card-title">Key Features</h2>
+                    <ul>
+                        <li><strong>Multi-format Support:</strong> Handles Turtle, RDF/XML, JSON-LD, N-Triples, and more</li>
+                        <li><strong>Flexible Rules Engine:</strong> Configurable transformation rules for different use cases</li>
+                        <li><strong>Multi-platform:</strong> Available as Desktop GUI, CLI tool, and Web application</li>
+                        <li><strong>Composite Ontologies:</strong> Combine multiple ontologies into a single schema</li>
+                        <li><strong>Instance Generation:</strong> Automatically generate sample data from schemas</li>
+                        <li><strong>REST API:</strong> Programmatic access for integration with other systems</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="h4 card-title">Use Cases</h2>
+                    <ul>
+                        <li>API Development: Generate JSON Schema for API validation</li>
+                        <li>Data Integration: Convert semantic models to JSON structures</li>
+                        <li>Documentation: Create human-readable schemas from ontologies</li>
+                        <li>Testing: Generate test data conforming to ontological constraints</li>
+                        <li>Knowledge Management: Bridge semantic and document-oriented databases</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="h4 card-title">Technology Stack</h2>
+                    <p class="card-text">
+                        OntoJSON is built with Python and leverages industry-standard libraries including RDFLib for 
+                        ontology parsing and manipulation. The web interface uses Flask for the backend and Bootstrap 
+                        for responsive UI design.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a href="/" class="btn btn-secondary">Back to Home</a>
+                <a href="/documentation" class="btn btn-primary">View Documentation</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

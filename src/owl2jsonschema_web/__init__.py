@@ -64,9 +64,13 @@ def init_extensions(app):
     
     # Initialize SocketIO for real-time updates (optional)
     if app.config.get('ENABLE_SOCKETIO', False):
-        from flask_socketio import SocketIO
-        socketio = SocketIO(app, cors_allowed_origins="*")
-        app.socketio = socketio
+        try:
+            from flask_socketio import SocketIO
+            socketio = SocketIO(app, cors_allowed_origins="*")
+            app.socketio = socketio
+        except ImportError:
+            # SocketIO not installed, skip
+            pass
 
 
 def register_blueprints(app):

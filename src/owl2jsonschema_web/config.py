@@ -63,8 +63,8 @@ class DevelopmentConfig(Config):
     # Enable hot reloading
     TEMPLATES_AUTO_RELOAD = True
     
-    # Enable SocketIO for development
-    ENABLE_SOCKETIO = True
+    # Disable SocketIO by default (requires additional install)
+    ENABLE_SOCKETIO = False
     
     # More verbose logging
     LOG_LEVEL = 'DEBUG'
@@ -87,8 +87,15 @@ class ProductionConfig(Config):
     
     # Production settings
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    if not SECRET_KEY:
-        raise ValueError("SECRET_KEY environment variable must be set in production")
+    
+    @classmethod
+    def init_app(cls, app):
+        """Initialize production environment."""
+        Config.init_app(app)
+        
+        # Only validate SECRET_KEY when actually running in production
+        if not cls.SECRET_KEY:
+            raise ValueError("SECRET_KEY environment variable must be set in production")
     
     # Use environment variables for sensitive settings
     UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER') or '/var/ontojson/uploads'

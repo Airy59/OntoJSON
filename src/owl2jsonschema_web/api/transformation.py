@@ -57,8 +57,14 @@ def transform_single():
         elif request.json and 'source' in request.json:
             # Handle URL or path
             source = request.json['source']
-            # Resolve the source (download if URL)
-            source, is_remote = file_service.resolve_source(source)
+            
+            # Check if it's a local file that exists
+            if os.path.exists(source):
+                # Use the file directly
+                source = os.path.abspath(source)
+            else:
+                # Try to resolve as URL or uploaded file
+                source, is_remote = file_service.resolve_source(source)
         
         else:
             return jsonify({'error': 'No ontology source provided'}), 400
