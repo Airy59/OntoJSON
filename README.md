@@ -241,6 +241,49 @@ owl2jsonschema input.owl -o output.yaml --format yaml
 owl2jsonschema input.owl -o output.json --language fr
 ```
 
+### 3. Web Interface
+
+Start the web server:
+
+```bash
+# Default port 5000 (may conflict with macOS AirPlay)
+python src/owl2jsonschema_web/app.py
+
+# Or specify a different port
+PORT=5001 python src/owl2jsonschema_web/app.py
+```
+
+Access the web interface at `http://localhost:5001`
+
+Features:
+- Drag-and-drop file upload
+- URL-based ontology loading
+- Interactive configuration
+- Real-time transformation
+- REST API endpoints
+- Async task processing
+
+#### REST API
+
+The web interface includes a comprehensive REST API:
+
+```bash
+# Transform a single ontology
+curl -X POST http://localhost:5001/api/transform \
+  -H "Content-Type: application/json" \
+  -d '{"source": "ontology.ttl", "format": "turtle"}'
+
+# Create an async transformation task
+curl -X POST http://localhost:5001/api/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"sources": ["onto1.ttl", "onto2.ttl"]}'
+
+# Check task status
+curl http://localhost:5001/api/tasks/{task_id}
+```
+
+Full API documentation available at `http://localhost:5001/api-docs`
+
 ### Python API
 
 #### Single Ontology Transformation
