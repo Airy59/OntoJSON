@@ -13,6 +13,7 @@ from ..model import (
     OntologyClass,
     CardinalityRestriction
 )
+from ..utils import clean_string
 
 
 class ObjectPropertyRule(TransformationRule):
@@ -66,9 +67,11 @@ class ObjectPropertyRule(TransformationRule):
             # Add description that clarifies the target type
             base_description = f"Reference to {range_class} or @id"
             if property.comment:
-                schema["description"] = property.get_comment(self.get_option("language", "en")) + f" ({base_description})"
+                comment = property.get_comment(self.get_option("language", "en"))
+                # Clean the comment to remove tab sequences
+                schema["description"] = clean_string(f"{comment} ({base_description})")
             else:
-                schema["description"] = base_description
+                schema["description"] = clean_string(base_description)
         else:
             # Generic object reference with oneOf pattern
             schema = {
@@ -88,7 +91,8 @@ class ObjectPropertyRule(TransformationRule):
                 ]
             }
             if property.comment:
-                schema["description"] = property.get_comment(self.get_option("language", "en"))
+                # Clean the comment to remove tab sequences
+                schema["description"] = clean_string(property.get_comment(self.get_option("language", "en")))
         
         # Add title if available
         if property.label:
@@ -193,7 +197,8 @@ class ObjectPropertyRule(TransformationRule):
             schema["title"] = property.get_label(self.get_option("language", "en"))
         
         if property.comment:
-            schema["description"] = property.get_comment(self.get_option("language", "en"))
+            # Clean the comment to remove tab sequences
+            schema["description"] = clean_string(property.get_comment(self.get_option("language", "en")))
         
         # Handle functional properties (max cardinality 1)
         if is_functional:
@@ -294,7 +299,8 @@ class DatatypePropertyRule(TransformationRule):
             schema["title"] = property.get_label(self.get_option("language", "en"))
         
         if property.comment:
-            schema["description"] = property.get_comment(self.get_option("language", "en"))
+            # Clean the comment to remove tab sequences
+            schema["description"] = clean_string(property.get_comment(self.get_option("language", "en")))
         
         return {
             "property": prop_name,
@@ -315,7 +321,8 @@ class DatatypePropertyRule(TransformationRule):
             schema["title"] = property.get_label(self.get_option("language", "en"))
         
         if property.comment:
-            schema["description"] = property.get_comment(self.get_option("language", "en"))
+            # Clean the comment to remove tab sequences
+            schema["description"] = clean_string(property.get_comment(self.get_option("language", "en")))
         
         # Handle functional properties
         if property.functional:

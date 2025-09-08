@@ -19,6 +19,7 @@ from .model import (
     CardinalityRestriction,
     ValueRestriction
 )
+from .utils import clean_string, clean_language_tagged_value, clean_annotation_text
 
 
 class OntologyParser:
@@ -535,10 +536,12 @@ class OntologyParser:
         labels = {}
         for label in self.graph.objects(subject, RDFS.label):
             if isinstance(label, Literal):
+                # Clean the label text to remove tab sequences
+                cleaned_label = clean_string(str(label))
                 if label.language:
-                    labels[label.language] = str(label)
+                    labels[label.language] = cleaned_label
                 else:
-                    labels["default"] = str(label)
+                    labels["default"] = cleaned_label
         
         if len(labels) == 1 and "default" in labels:
             return labels["default"]
@@ -552,10 +555,12 @@ class OntologyParser:
         comments = {}
         for comment in self.graph.objects(subject, RDFS.comment):
             if isinstance(comment, Literal):
+                # Clean the comment text to remove tab sequences
+                cleaned_comment = clean_string(str(comment))
                 if comment.language:
-                    comments[comment.language] = str(comment)
+                    comments[comment.language] = cleaned_comment
                 else:
-                    comments["default"] = str(comment)
+                    comments["default"] = cleaned_comment
         
         if len(comments) == 1 and "default" in comments:
             return comments["default"]
@@ -579,9 +584,16 @@ class OntologyParser:
             if pred not in skip_predicates:
                 pred_str = self._shorten_uri(str(pred))
                 if isinstance(obj, Literal):
-                    annotations[pred_str] = obj.value
+                    # Clean text values in annotations (e.g., definitions)
+                    if any(text_key in pred_str.lower() for text_key in ['definition', 'description', 'comment', 'label', 'title']):
+                        annotations[pred_str] = clean_string(str(obj.value)) if isinstance(obj.value, str) else obj.value
+                    else:
+                        annotations[pred_str] = obj.value
                 else:
                     annotations[pred_str] = str(obj)
+        
+        # Apply cleanup to all text annotations
+        annotations = clean_annotation_text(annotations)
         
         return annotations
     

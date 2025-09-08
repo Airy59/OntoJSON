@@ -8,6 +8,7 @@ from typing import Any, Dict, List, Optional
 from ..visitor import TransformationRule
 from ..model import OntologyModel, OntologyClass, OntologyRestriction
 from ..builder import ReferenceResolver
+from ..utils import clean_string
 
 
 class ClassToObjectRule(TransformationRule):
@@ -51,7 +52,8 @@ class ClassToObjectRule(TransformationRule):
         # Add description from comment if available
         comment = owl_class.get_comment(self.get_option("language", "en"))
         if comment:
-            schema["description"] = comment
+            # Clean the comment to remove tab sequences
+            schema["description"] = clean_string(comment)
         
         # Store the OWL class URI for later processing
         # The engine will convert this to appropriate metadata
@@ -270,7 +272,8 @@ class ClassRestrictionsRule(TransformationRule):
                 # So we should default to arrays unless explicitly set to single value
                 schema["type"] = "array"
                 schema["items"] = filler_ref
-                schema["description"] = f"Array of {self._get_property_name(restriction.filler)} or @id references"
+                # Clean any potential tabs in the generated description
+                schema["description"] = clean_string(f"Array of {self._get_property_name(restriction.filler)} or @id references")
             
             elif restriction.restriction_type == "someValuesFrom":
                 # At least one value must be from the specified class/type
