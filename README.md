@@ -204,10 +204,14 @@ owl2jsonschema-gui
 OntoJSON now includes a web interface for browser-based access:
 
 ```bash
-# Start the web server
-python src/owl2jsonschema_web/app.py
+# Smart launcher (automatically finds available port)
+python src/owl2jsonschema_web/launch_web.py
 
-# Navigate to http://localhost:5000 in your browser
+# Or specify a port manually
+python src/owl2jsonschema_web/app.py --port 8080
+
+# Navigate to http://localhost:9090 in your browser (default)
+# Note: Port 5000 is avoided on macOS due to AirPlay conflict
 ```
 
 #### Web Interface Features
@@ -241,19 +245,28 @@ owl2jsonschema input.owl -o output.yaml --format yaml
 owl2jsonschema input.owl -o output.json --language fr
 ```
 
-### 3. Web Interface
+### Web Interface
 
 Start the web server:
 
 ```bash
-# Default port 5000 (may conflict with macOS AirPlay)
+# Recommended: Use smart launcher (finds available port automatically)
+python src/owl2jsonschema_web/launch_web.py
+
+# Manual port selection
+python src/owl2jsonschema_web/app.py --port 8080
+
+# Using environment variable
+export PORT=8080
 python src/owl2jsonschema_web/app.py
 
-# Or specify a different port
-PORT=5001 python src/owl2jsonschema_web/app.py
+# Force-free a stuck port
+python src/owl2jsonschema_web/launch_web.py --port 8080 --force
 ```
 
-Access the web interface at `http://localhost:5001`
+Access the web interface at `http://localhost:9090` (default) or the port shown in terminal.
+
+**Note:** On macOS, port 5000 is used by AirPlay. The app now defaults to port 9090 to avoid conflicts.
 
 Features:
 - Drag-and-drop file upload
@@ -269,20 +282,20 @@ The web interface includes a comprehensive REST API:
 
 ```bash
 # Transform a single ontology
-curl -X POST http://localhost:5001/api/transform \
+curl -X POST http://localhost:9090/api/transform \
   -H "Content-Type: application/json" \
   -d '{"source": "ontology.ttl", "format": "turtle"}'
 
 # Create an async transformation task
-curl -X POST http://localhost:5001/api/tasks \
+curl -X POST http://localhost:9090/api/tasks \
   -H "Content-Type: application/json" \
   -d '{"sources": ["onto1.ttl", "onto2.ttl"]}'
 
 # Check task status
-curl http://localhost:5001/api/tasks/{task_id}
+curl http://localhost:9090/api/tasks/{task_id}
 ```
 
-Full API documentation available at `http://localhost:5001/api-docs`
+Full API documentation available at `http://localhost:9090/api-docs`
 
 ### Python API
 
@@ -537,6 +550,7 @@ OntoJSON/
 │       │   └── transform.html
 │       ├── __init__.py
 │       ├── app.py                 # Flask application
+│       ├── launch_web.py          # Smart launcher with port detection
 │       ├── config.py              # Web app configuration
 │       ├── tasks.py               # Celery async tasks
 │       └── views.py               # Web views

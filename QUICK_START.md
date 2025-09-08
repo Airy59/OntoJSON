@@ -24,7 +24,8 @@
 ```bash
 git clone <repo-url>
 cd OntoJSON
-pip install -e ".[gui]"
+pip install -e ".[gui]"  # For GUI
+pip install -e ".[web]"  # For Web App
 ```
 
 #### Quick Run
@@ -32,13 +33,57 @@ pip install -e ".[gui]"
 # GUI
 python owl2jsonschema_gui.py
 
+# Web App (Browser-based)
+python src/owl2jsonschema_web/launch_web.py
+# Or with specific port:
+python src/owl2jsonschema_web/app.py --port 8080
+
 # CLI
 owl2jsonschema input.owl -o output.json
 ```
 
 ## 📋 Common Tasks
 
-### 1. Convert OWL to JSON Schema (GUI)
+### 1. Convert OWL to JSON Schema (Web App)
+
+The web application provides a browser-based interface accessible from any device:
+
+#### Starting the Web App
+```bash
+# Automatic port selection (avoids conflicts)
+python src/owl2jsonschema_web/launch_web.py
+
+# Manual port selection
+python src/owl2jsonschema_web/app.py --port 8080
+
+# Force-free a specific port if stuck
+python src/owl2jsonschema_web/launch_web.py --port 8080 --force
+```
+
+**Note:** On macOS, port 5000 is used by AirPlay. The app defaults to port 9090 to avoid conflicts.
+
+#### Using the Web Interface
+1. Open your browser to `http://localhost:9090` (or the port shown in terminal)
+2. **Upload** ontology files or enter URLs
+3. **Configure** transformation options
+4. **Transform** and view results in browser
+5. **Download** JSON Schema, sample instances, or JSON-LD
+
+#### REST API
+The web app also provides a REST API:
+```bash
+# Transform a local file
+curl -X POST -F "file=@ontology.ttl" http://localhost:9090/api/transform
+
+# Transform from URL
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"source": "http://example.com/ontology.ttl"}' \
+  http://localhost:9090/api/transform
+```
+
+See [Web App Guide](WEB_APP_GUIDE.md) for full documentation.
+
+### 2. Convert OWL to JSON Schema (GUI)
 
 #### Single Ontology
 1. Launch OntoJSON
@@ -92,7 +137,7 @@ The GUI supports a complete three-step workflow for generating test data:
 5. Validate against the generated schema
 6. Save as JSON or JSON-LD
 
-### 2. Convert OWL to JSON Schema (CLI)
+### 3. Convert OWL to JSON Schema (CLI)
 
 #### Single Ontology
 ```bash
@@ -106,7 +151,7 @@ owl2jsonschema myontology.owl -o schema.json
 # (Currently requires using Python API - see below)
 ```
 
-### 3. Convert with Specific Rules
+### 4. Convert with Specific Rules
 ```bash
 # Enable only specific rules
 owl2jsonschema input.owl -o output.json \
@@ -114,7 +159,7 @@ owl2jsonschema input.owl -o output.json \
   --enable-rule property_cardinality
 ```
 
-### 4. Build Standalone App
+### 5. Build Standalone App
 
 #### Simple Method (macOS)
 ```bash
@@ -315,6 +360,27 @@ file:///C:/Users/Name/Documents/onto.owl
 
 ## 🆘 Troubleshooting
 
+### Web App Issues
+
+#### Port Already in Use
+```bash
+# Use the smart launcher to find available port
+python src/owl2jsonschema_web/launch_web.py
+
+# Or force-free a specific port
+python src/owl2jsonschema_web/launch_web.py --port 8080 --force
+
+# On macOS, avoid port 5000 (used by AirPlay)
+```
+
+#### Flask Not Found
+```bash
+# Install web dependencies
+pip install -e ".[web]"
+# Or manually:
+pip install Flask flask-cors flask-session
+```
+
 ### GUI Won't Start
 ```bash
 # Check PyQt6 installation
@@ -365,6 +431,7 @@ python -c "import owl2jsonschema; print(owl2jsonschema.__file__)"
 ## 📚 Learn More
 
 - [Full Documentation](README.md)
+- [Web App Guide](WEB_APP_GUIDE.md)
 - [Transformation Rules](transformation_rules.md)
 - [Architecture Guide](architecture.md)
 - [Build System](build_system/README.md)
