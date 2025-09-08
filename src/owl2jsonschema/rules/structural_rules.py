@@ -131,40 +131,79 @@ class IndividualsToExamplesRule(TransformationRule):
 class OntologyMetadataRule(TransformationRule):
     """Transform ontology metadata to JSON Schema metadata."""
     
+    def _serialize_value(self, value: Any) -> Any:
+        """Convert values to JSON-serializable format."""
+        from datetime import datetime, date
+        if isinstance(value, (datetime, date)):
+            return value.isoformat()
+        elif isinstance(value, dict):
+            return {k: self._serialize_value(v) for k, v in value.items()}
+        elif isinstance(value, (list, tuple)):
+            return [self._serialize_value(v) for v in value]
+        else:
+            return str(value) if value is not None else None
+    
     def visit_ontology(self, ontology: OntologyModel) -> Dict[str, Any]:
         """Extract and transform ontology metadata."""
         if not self.is_enabled():
             return None
         
         metadata = {}
+        result = {}
+        
+        # Title information (from composite metadata)
+        if "label" in ontology.annotations:
+            result["title"] = ontology.annotations["label"]
+        elif "dc:title" in ontology.annotations:
+            result["title"] = ontology.annotations["dc:title"]
+        elif "title" in ontology.annotations:
+            result["title"] = ontology.annotations["title"]
+        
+        # Description information (from composite metadata)
+        if "comment" in ontology.annotations:
+            result["description"] = ontology.annotations["comment"]
+        elif "dc:description" in ontology.annotations:
+            result["description"] = ontology.annotations["dc:description"]
+        elif "description" in ontology.annotations:
+            result["description"] = ontology.annotations["description"]
         
         # Version information
         if "versionInfo" in ontology.annotations:
             metadata["version"] = ontology.annotations["versionInfo"]
+        elif "version" in ontology.annotations:
+            metadata["version"] = ontology.annotations["version"]
         
-        # Creator information
+        # Creator/Author information (from composite metadata)
         if "creator" in ontology.annotations:
             metadata["author"] = ontology.annotations["creator"]
         elif "dc:creator" in ontology.annotations:
             metadata["author"] = ontology.annotations["dc:creator"]
+        elif "author" in ontology.annotations:
+            metadata["author"] = ontology.annotations["author"]
         
         # License information
         if "license" in ontology.annotations:
             metadata["license"] = ontology.annotations["license"]
         elif "dc:rights" in ontology.annotations:
             metadata["license"] = ontology.annotations["dc:rights"]
+        elif "dcterms:license" in ontology.annotations:
+            metadata["license"] = ontology.annotations["dcterms:license"]
         
-        # Creation date
+        # Creation date (from composite metadata)
         if "created" in ontology.annotations:
-            metadata["created"] = ontology.annotations["created"]
+            metadata["created"] = self._serialize_value(ontology.annotations["created"])
         elif "dc:date" in ontology.annotations:
-            metadata["created"] = ontology.annotations["dc:date"]
+            metadata["created"] = self._serialize_value(ontology.annotations["dc:date"])
+        elif "dcterms:created" in ontology.annotations:
+            metadata["created"] = self._serialize_value(ontology.annotations["dcterms:created"])
         
-        # Modified date
+        # Modified date (from composite metadata)
         if "modified" in ontology.annotations:
-            metadata["modified"] = ontology.annotations["modified"]
+            metadata["modified"] = self._serialize_value(ontology.annotations["modified"])
         elif "dc:modified" in ontology.annotations:
-            metadata["modified"] = ontology.annotations["dc:modified"]
+            metadata["modified"] = self._serialize_value(ontology.annotations["dc:modified"])
+        elif "dcterms:modified" in ontology.annotations:
+            metadata["modified"] = self._serialize_value(ontology.annotations["dcterms:modified"])
         
         # Contributors
         if "contributor" in ontology.annotations:
@@ -178,6 +217,14 @@ class OntologyMetadataRule(TransformationRule):
         elif "dc:source" in ontology.annotations:
             metadata["source"] = ontology.annotations["dc:source"]
         
+        # Composite-specific metadata (from CompositeOntologyBuilder)
+        if "composite:note" in ontology.annotations:
+            metadata["compositeNote"] = ontology.annotations["composite:note"]
+        
+        # Check for composite source annotation
+        if "compositeSource" in ontology.annotations:
+            metadata["compositeSource"] = ontology.annotations["compositeSource"]
+        
         # Add namespace information if requested
         if self.get_option("include_namespaces", False):
             # This would need to be passed from the parser
@@ -189,31 +236,49 @@ class OntologyMetadataRule(TransformationRule):
         # Add other annotations if configured
         if self.get_option("include_all_annotations", False):
             for key, value in ontology.annotations.items():
-                if key not in ["versionInfo", "creator", "dc:creator", "license", 
-                              "dc:rights", "created", "dc:date", "modified", 
+                if key not in ["versionInfo", "creator", "dc:creator", "license",
+                              "dc:rights", "created", "dc:date", "modified",
                               "dc:modified", "contributor", "dc:contributor",
-                              "source", "dc:source", "title", "description", "comment"]:
+                              "source", "dc:source", "title", "description", "comment",
+                              "label", "dc:title", "dc:description", "dcterms:created",
+                              "dcterms:modified", "dcterms:license", "composite:note",
+                              "compositeSource", "version", "author"]:
                     # Use a custom prefix for other annotations
                     metadata[f"owl:{key}"] = value
         
+        # Add metadata to result based on placement preference
         if metadata:
             # Decide where to put the metadata
             placement = self.get_option("placement", "root")
             
             if placement == "root":
-                # Add directly to root schema
-                return metadata
+                # Add metadata fields directly to root schema
+                # But preserve them in a special $metadata field for full preservation
+                if metadata:
+                    result["$metadata"] = metadata
+                # Also add key fields directly for JSON Schema validators
+                if "version" in metadata:
+                    result["$schema-version"] = metadata["version"]
+                if "author" in metadata:
+                    result["$schema-author"] = metadata["author"]
+                if "created" in metadata:
+                    result["$schema-created"] = metadata["created"]
+                if "modified" in metadata:
+                    result["$schema-modified"] = metadata["modified"]
+                if "license" in metadata:
+                    result["$schema-license"] = metadata["license"]
             elif placement == "info":
                 # Group under an "info" field (similar to OpenAPI)
-                return {"info": metadata}
+                result["info"] = metadata
             elif placement == "comment":
                 # Add as a comment
                 import json
-                return {"$comment": f"Metadata: {json.dumps(metadata)}"}
+                result["$comment"] = f"Metadata: {json.dumps(metadata)}"
             else:
-                return metadata
+                # Default: add metadata as a special field
+                result["$metadata"] = metadata
         
-        return None
+        return result if result else None
 
 
 class ThingWithUriRule(TransformationRule):

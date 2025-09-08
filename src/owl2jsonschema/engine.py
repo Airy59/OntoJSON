@@ -226,13 +226,21 @@ class TransformationEngine:
         elif rule_id == "ontology_metadata":
             # Metadata goes into the root schema
             if isinstance(result, dict):
-                # Only add valid JSON Schema root properties
+                # Add both standard JSON Schema properties and our custom metadata fields
                 valid_root_properties = {
                     "title", "description", "$id", "$comment",
                     "$defs", "additionalProperties", "type"
                 }
+                # Also allow our custom metadata fields
+                custom_metadata_properties = {
+                    "$metadata", "$schema-version", "$schema-author",
+                    "$schema-created", "$schema-modified", "$schema-license",
+                    "info"  # For OpenAPI-style metadata grouping
+                }
+                allowed_properties = valid_root_properties | custom_metadata_properties
+                
                 for key, value in result.items():
-                    if key in valid_root_properties:
+                    if key in allowed_properties:
                         self.schema_builder.add_to_root(key, value)
         
         elif rule_id == "thing_with_uri":
