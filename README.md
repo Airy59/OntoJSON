@@ -30,6 +30,7 @@ A powerful, configurable transformation engine for converting RDF/OWL ontologies
   - Custom metadata support (title, version, author, description)
   - Temporary file management for processing
   - Support for heterogeneous sources (mix local files and remote URIs)
+  - **Unified workflow**: All transformations use composite builder for consistency and metadata storage
 
 ### Complete T-box/A-box Workflow
 - **Step 1 - T-box Transformation**: Convert OWL ontologies to JSON Schema
@@ -148,7 +149,7 @@ owl2jsonschema-gui
   - Single source → Direct transformation
   - Multiple sources → Composite creation dialog
 
-##### Composite Ontology Features (Auto-triggered for 2+ sources)
+##### Metadata and Composite Features (Always Available)
 - **Metadata Dialog**:
   - Title, version, author fields
   - Description and comments
@@ -331,55 +332,51 @@ with open("output.json", "w") as f:
     json.dump(json_schema, f, indent=2)
 ```
 
-#### Multiple Ontology Transformation (Composite Creation)
+#### Unified Ontology Transformation
 
-When transforming multiple ontologies, OntoJSON automatically creates a composite ontology that can be persisted:
+OntoJSON uses a unified workflow for all ontologies, creating a composite structure that ensures metadata preservation:
 
 ```python
 from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyParser
 from owl2jsonschema.composite_builder import CompositeOntologyBuilder
 import json
 
-# Multiple ontology sources (local files and/or URIs)
+# Ontology sources (can be single or multiple)
 ontology_sources = [
     "/path/to/ontology1.owl",
-    "https://example.org/ontology2.rdf",
-    "/path/to/ontology3.ttl"
+    # Optionally add more:
+    # "https://example.org/ontology2.rdf",
+    # "/path/to/ontology3.ttl"
 ]
 
-# Only needed for multiple sources - single sources are processed directly
-if len(ontology_sources) > 1:
-    # Add metadata for the composite
-    metadata = {
-        "title": "Unified Domain Model",
-        "version": "1.0.0",
-        "author": "Your Organization",
-        "description": "A composite ontology combining multiple domain models"
-    }
-    
-    # Build the composite ontology with imports
-    builder = CompositeOntologyBuilder.create_composite(
-        ontology_sources,
-        metadata=metadata
-    )
-    
-    # Save composite to file (both temporary and persistent options)
-    temp_file = builder.save_to_temp_file(format="turtle")
-    
-    # Optionally save permanently for reuse
-    builder.save_to_file("composite_ontology.ttl", format="turtle")
-    
-    # Parse the composite (imports are resolved automatically)
-    parser = OntologyParser()
-    ontology = parser.parse(temp_file)
-    
-    # Clean up temporary file (persistent file remains)
-    import os
-    os.remove(temp_file)
-else:
-    # Single ontology - process directly
-    parser = OntologyParser()
-    ontology = parser.parse(ontology_sources[0])
+# Always use composite builder for consistency
+# Add metadata for documentation and traceability
+metadata = {
+    "title": "My Domain Model",
+    "version": "1.0.0",
+    "author": "Your Organization",
+    "description": "Ontology for domain modeling"
+}
+
+# Build the composite ontology (works for single or multiple sources)
+builder = CompositeOntologyBuilder.create_composite(
+    ontology_sources,
+    metadata=metadata
+)
+
+# Save composite to file (both temporary and persistent options)
+temp_file = builder.save_to_temp_file(format="turtle")
+
+# Optionally save permanently for reuse
+builder.save_to_file("ontology_with_metadata.ttl", format="turtle")
+
+# Parse the composite (imports are resolved automatically)
+parser = OntologyParser()
+ontology = parser.parse(temp_file)
+
+# Clean up temporary file (persistent file remains)
+import os
+os.remove(temp_file)
 
 # Transform to JSON Schema (same for single or composite)
 config = TransformationConfig()
@@ -391,10 +388,11 @@ with open("output_schema.json", "w") as f:
     json.dump(json_schema, f, indent=2)
 ```
 
-**Key Differences:**
-- **Single ontology**: Parsed and transformed directly, preserving original structure
-- **Multiple ontologies**: Composite wrapper created with `owl:imports` statements
-- **Import resolution**: Automatic in both cases via the parser
+**Unified Approach Benefits:**
+- **Consistent metadata**: All ontologies have proper documentation
+- **Future-proof**: Ready for ontology modules and partitioning features
+- **Traceability**: Clear versioning and authorship information
+- **Simplicity**: One workflow for all scenarios
 
 ## ⚙️ Configuration
 

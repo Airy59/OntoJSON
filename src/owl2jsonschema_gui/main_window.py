@@ -44,13 +44,17 @@ class CompositeMetadataDialog(QDialog):
         """Initialize the user interface."""
         layout = QVBoxLayout()
         
-        # Title
-        title_label = QLabel("Composite Ontology Configuration")
+        # Title - adjust based on number of files
+        if len(self.file_paths) == 1:
+            title_label = QLabel("Ontology Metadata Configuration")
+        else:
+            title_label = QLabel("Composite Ontology Configuration")
         title_label.setStyleSheet("font-size: 14px; font-weight: bold; padding: 10px;")
         layout.addWidget(title_label)
         
         # Show selected files
-        files_group = QGroupBox("Selected Ontologies")
+        files_label = "Selected Ontology" if len(self.file_paths) == 1 else "Selected Ontologies"
+        files_group = QGroupBox(files_label)
         files_layout = QVBoxLayout()
         files_text = QTextEdit()
         files_text.setReadOnly(True)
@@ -69,7 +73,10 @@ class CompositeMetadataDialog(QDialog):
         # Title field
         metadata_layout.addWidget(QLabel("Title:"), 0, 0)
         self.title_input = QLineEdit()
-        self.title_input.setPlaceholderText(f"Composite of {len(self.file_paths)} ontologies")
+        if len(self.file_paths) == 1:
+            self.title_input.setPlaceholderText("Ontology title")
+        else:
+            self.title_input.setPlaceholderText(f"Composite of {len(self.file_paths)} ontologies")
         metadata_layout.addWidget(self.title_input, 0, 1)
         
         # Version field
@@ -1584,67 +1591,51 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, "Warning", "Please add at least one ontology source first.")
             return
         
-        # Detect if we need to create a composite ontology
-        if len(self.ontology_list) > 1:
-            # Multiple sources - create composite
-            try:
-                # Create composite ontology dialog for metadata
-                dialog = CompositeMetadataDialog(self, self.ontology_list)
-                if dialog.exec() != QDialog.DialogCode.Accepted:
-                    return  # User cancelled
-                
-                metadata = dialog.get_metadata()
-                
-                # Create the composite ontology
-                self.status_message.setText("Creating composite ontology...")
-                QApplication.processEvents()
-                
-                # Use the class method to create composite builder
-                builder = CompositeOntologyBuilder.create_composite(
-                    self.ontology_list,
-                    metadata=metadata
-                )
-                
-                # Store the builder for later saving
-                self.composite_builder = builder
-                
-                # Save to temporary file
-                temp_file = builder.save_to_temp_file(format="turtle")
-                
-                # Clean up previous temp file if it exists
-                self._cleanup_temp_file()
-                
-                # Use the temporary file as input
-                self.input_file = temp_file
-                self.temp_composite_file = temp_file  # Track for cleanup
-                self.is_composite = True
-                
-                # Display the composite ontology
-                composite_content = builder.serialize(format="turtle")
-                self.input_text.setPlainText(composite_content[:5000])
-                
-                # Enable save composite ontology menu
-                self.save_ontology_action.setEnabled(True)
-                
-            except Exception as e:
-                QMessageBox.critical(self, "Error",
-                                   f"Failed to create composite ontology:\n{str(e)}")
-                return
-        else:
-            # Single source
-            self.input_file = self.ontology_list[0]
-            self.is_composite = False
+        # Always use composite workflow for consistency
+        # This provides metadata storage and future extensibility even for single ontologies
+        try:
+            # Create composite ontology dialog for metadata
+            dialog = CompositeMetadataDialog(self, self.ontology_list)
+            if dialog.exec() != QDialog.DialogCode.Accepted:
+                return  # User cancelled
             
-            # Display file content if it's a local file
-            if not self.input_file.startswith(('http://', 'https://', 'ftp://')):
-                try:
-                    with open(self.input_file, 'r') as f:
-                        content = f.read()
-                        self.input_text.setPlainText(content[:5000])
-                except Exception as e:
-                    self.input_text.setPlainText(f"File: {self.input_file}\n\n(Content will be loaded during transformation)")
-            else:
-                self.input_text.setPlainText(f"URL: {self.input_file}\n\n(Content will be loaded during transformation)")
+            metadata = dialog.get_metadata()
+            
+            # Create the composite ontology
+            self.status_message.setText("Creating composite ontology...")
+            QApplication.processEvents()
+            
+            # Use the class method to create composite builder
+            builder = CompositeOntologyBuilder.create_composite(
+                self.ontology_list,
+                metadata=metadata
+            )
+            
+            # Store the builder for later saving
+            self.composite_builder = builder
+            
+            # Save to temporary file
+            temp_file = builder.save_to_temp_file(format="turtle")
+            
+            # Clean up previous temp file if it exists
+            self._cleanup_temp_file()
+            
+            # Use the temporary file as input
+            self.input_file = temp_file
+            self.temp_composite_file = temp_file  # Track for cleanup
+            self.is_composite = True
+            
+            # Display the composite ontology
+            composite_content = builder.serialize(format="turtle")
+            self.input_text.setPlainText(composite_content[:5000])
+            
+            # Enable save composite ontology menu
+            self.save_ontology_action.setEnabled(True)
+            
+        except Exception as e:
+            QMessageBox.critical(self, "Error",
+                               f"Failed to create composite ontology:\n{str(e)}")
+            return
         
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)

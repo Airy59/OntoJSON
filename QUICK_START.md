@@ -310,9 +310,10 @@ file:///home/user/ontology5.n3
 file:///C:/Users/Name/Documents/onto.owl
 ```
 
-**Smart Processing:**
-- **1 source**: Direct transformation, no modification
-- **2+ sources**: Automatic composite creation with imports
+**Unified Processing:**
+- **All sources**: Metadata dialog for documentation
+- **Single source**: Metadata wrapper for consistency
+- **Multiple sources**: Composite with imports
 - **Mixed sources**: Combine local and remote in one transformation
 - **Composite Persistence**: Save composite ontology with all metadata for reuse
 
