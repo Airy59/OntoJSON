@@ -32,7 +32,7 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="mb-4">Transform Ontology to JSON Schema</h1>
+    <h1 class="mb-4">Generate JSON Schema Conforming Selected Ontologies</h1>
     
     <!-- Input Sources Section -->
     <div class="card mb-4">
@@ -121,6 +121,55 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Assembly Section -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-layer-group"></i> Assembly</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Create a composite ontology from your input sources and validate its consistency.</p>
+            
+            <!-- Assemble Button -->
+            <button id="assembleBtn" class="btn btn-info btn-lg w-100 mb-3" disabled>
+                <i class="fas fa-wrench"></i> Assemble Composite Ontology
+            </button>
+            
+            <!-- Assembly Progress -->
+            <div id="assemblyProgress" class="mt-3" style="display: none;">
+                <div class="progress mb-2">
+                    <div id="assemblyProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                         role="progressbar" style="width: 0%"></div>
+                </div>
+                <p id="assemblyMessage" class="text-center text-muted"></p>
+            </div>
+            
+            <!-- Validation Result -->
+            <div id="validationResult" class="alert" style="display: none;">
+                <h6 class="alert-heading">
+                    <i id="validationIcon" class="fas"></i>
+                    <span id="validationTitle"></span>
+                </h6>
+                <p id="validationMessage" class="mb-0"></p>
+            </div>
+            
+            <!-- Composite Ontology Viewer -->
+            <div id="compositeOntologyContainer" style="display: none;">
+                <div class="d-flex justify-content-between mb-2">
+                    <h6>Composite Ontology</h6>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary me-2" onclick="copyToClipboard('compositeOntologyOutput')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button id="downloadComposite" class="btn btn-sm btn-outline-success">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+                <pre id="compositeOntologyOutput" class="code-output bg-light p-3 rounded" style="max-height: 300px; overflow: auto;"></pre>
             </div>
         </div>
     </div>
@@ -290,11 +339,134 @@ function removeFile(index) {
 }
 
 function updateTransformButton() {
-    transformBtn.disabled = selectedFiles.length === 0 && !document.getElementById('urlInput').value;
+    const hasInput = selectedFiles.length > 0 || document.getElementById('urlInput').value.trim() !== '';
+    assembleBtn.disabled = !hasInput;
+    transformBtn.disabled = !compositeOntologyPath; // Only enable after assembly
 }
 
 // URL input handling
 document.getElementById('urlInput').addEventListener('input', updateTransformButton);
+
+// Assembly
+const assembleBtn = document.getElementById('assembleBtn');
+let assembledOntology = null;
+let compositeOntologyPath = null;
+
+assembleBtn.addEventListener('click', performAssembly);
+
+async function performAssembly() {
+    const assemblyProgress = document.getElementById('assemblyProgress');
+    const assemblyProgressBar = document.getElementById('assemblyProgressBar');
+    const assemblyMessage = document.getElementById('assemblyMessage');
+    const validationResult = document.getElementById('validationResult');
+    const compositeOntologyContainer = document.getElementById('compositeOntologyContainer');
+    
+    // Show progress
+    assemblyProgress.style.display = 'block';
+    validationResult.style.display = 'none';
+    compositeOntologyContainer.style.display = 'none';
+    assembleBtn.disabled = true;
+    
+    // Prepare sources
+    const sources = [];
+    uploadedFiles.forEach(file => sources.push(file.path));
+    const urls = document.getElementById('urlInput').value.split('\n').filter(url => url.trim());
+    sources.push(...urls);
+    
+    try {
+        // Step 1: Create composite ontology
+        updateAssemblyProgress(30, 'Creating composite ontology...');
+        
+        const assembleResponse = await fetch('/api/assemble', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                sources: sources,
+                metadata: {
+                    title: 'Composite Ontology',
+                    version: '1.0.0',
+                    author: 'OntoJSON Web',
+                    description: 'Automatically generated composite ontology'
+                }
+            })
+        });
+        
+        const assembleResult = await assembleResponse.json();
+        
+        if (!assembleResult.success) {
+            throw new Error(assembleResult.error || 'Assembly failed');
+        }
+        
+        assembledOntology = assembleResult.ontology;
+        compositeOntologyPath = assembleResult.path;
+        
+        // Step 2: Validate with reasoner
+        updateAssemblyProgress(60, 'Validating consistency with reasoner...');
+        
+        const validateResponse = await fetch('/api/validate-consistency', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                ontology_path: compositeOntologyPath
+            })
+        });
+        
+        const validateResult = await validateResponse.json();
+        
+        // Step 3: Display results
+        updateAssemblyProgress(100, 'Complete!');
+        
+        // Show validation result
+        const validationIcon = document.getElementById('validationIcon');
+        const validationTitle = document.getElementById('validationTitle');
+        const validationMessage = document.getElementById('validationMessage');
+        
+        if (validateResult.consistent) {
+            validationResult.className = 'alert alert-success';
+            validationIcon.className = 'fas fa-check-circle';
+            validationTitle.textContent = 'Ontology is Consistent';
+            validationMessage.textContent = 'The composite ontology passed all consistency checks.';
+        } else {
+            validationResult.className = 'alert alert-warning';
+            validationIcon.className = 'fas fa-exclamation-triangle';
+            validationTitle.textContent = 'Consistency Issues Found';
+            validationMessage.textContent = validateResult.message || 'The ontology contains inconsistencies.';
+        }
+        validationResult.style.display = 'block';
+        
+        // Show composite ontology
+        document.getElementById('compositeOntologyOutput').textContent = assembledOntology;
+        compositeOntologyContainer.style.display = 'block';
+        
+        // Enable transform button
+        transformBtn.disabled = false;
+        
+    } catch (error) {
+        console.error('Assembly error:', error);
+        
+        // Show error
+        validationResult.className = 'alert alert-danger';
+        document.getElementById('validationIcon').className = 'fas fa-times-circle';
+        document.getElementById('validationTitle').textContent = 'Assembly Failed';
+        document.getElementById('validationMessage').textContent = error.message;
+        validationResult.style.display = 'block';
+    } finally {
+        assemblyProgress.style.display = 'none';
+        assembleBtn.disabled = false;
+    }
+}
+
+function updateAssemblyProgress(percent, message) {
+    document.getElementById('assemblyProgressBar').style.width = percent + '%';
+    document.getElementById('assemblyMessage').textContent = message;
+}
+
+// Download composite ontology
+document.getElementById('downloadComposite').addEventListener('click', () => {
+    if (assembledOntology) {
+        downloadFile(assembledOntology, 'composite_ontology.ttl', 'text/turtle');
+    }
+});
 
 // Transformation
 transformBtn.addEventListener('click', performTransformation);
@@ -305,20 +477,19 @@ async function performTransformation() {
     const progressMessage = document.getElementById('progressMessage');
     const resultsContainer = document.getElementById('resultsContainer');
     
+    // Check if composite ontology is available
+    if (!compositeOntologyPath) {
+        alert('Please assemble the composite ontology first.');
+        return;
+    }
+    
     // Show progress
     progressContainer.style.display = 'block';
     resultsContainer.style.display = 'none';
     transformBtn.disabled = true;
     
-    // Prepare sources
-    const sources = [];
-    
-    // Add uploaded files
-    uploadedFiles.forEach(file => sources.push(file.path));
-    
-    // Add URLs
-    const urls = document.getElementById('urlInput').value.split('\n').filter(url => url.trim());
-    sources.push(...urls);
+    // Use the composite ontology as source
+    const sources = [compositeOntologyPath];
     
     // Prepare configuration
     const config = {

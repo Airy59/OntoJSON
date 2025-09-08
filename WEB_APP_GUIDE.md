@@ -115,20 +115,26 @@ Navigate to `http://localhost:5000` to access the OntoJSON web interface.
 1. **Upload Ontologies**
    - Drag and drop ontology files (.ttl, .rdf, .owl, etc.)
    - Or enter URLs for remote ontologies
-   - Multiple ontologies are automatically combined
+   - Support for multiple ontology sources
 
 2. **Configure Transformation**
    - Select a configuration profile
    - Choose language for labels/comments
    - Adjust advanced options as needed
 
-3. **Execute Transformation**
-   - Click "Start Transformation"
+3. **Assemble Composite Ontology** (NEW)
+   - Click "Assemble Composite Ontology" to merge multiple sources
+   - View consistency validation results
+   - Copy or download the assembled composite ontology
+
+4. **Execute Transformation**
+   - Click "Start Transformation" (enabled after assembly)
    - Monitor progress in real-time
    - View results in different formats
 
-4. **Download Results**
+5. **Download Results**
    - Download JSON Schema
+   - Download composite ontology
    - Download sample instances
    - Export as JSON-LD
 
@@ -163,6 +169,32 @@ Content-Type: application/json
     "description": "..."
   },
   "config": {...}
+}
+```
+
+#### Assemble Composite Ontology
+```http
+POST /api/assemble
+Content-Type: application/json
+
+{
+  "sources": ["file1.ttl", "url2"],
+  "metadata": {
+    "title": "Composite Ontology",
+    "version": "1.0.0",
+    "author": "OntoJSON Web",
+    "description": "Automatically generated composite ontology"
+  }
+}
+```
+
+#### Validate Ontology Consistency
+```http
+POST /api/validate-consistency
+Content-Type: application/json
+
+{
+  "ontology_path": "/path/to/composite_ontology.ttl"
 }
 ```
 
@@ -313,14 +345,20 @@ server {
 ### Multi-Platform Support
 - **CLI**: Command-line interface for automation
 - **Desktop GUI**: PyQt6-based native application
-- **Web Interface**: Browser-based interface
+- **Web Interface**: Browser-based interface with Assembly feature
 - **REST API**: Programmatic access for integration
 
 ### File Handling
 - Local file uploads
 - Remote URL fetching
 - Multiple file processing
-- Automatic composite creation
+- Automatic composite creation with validation
+
+### Ontology Assembly
+- Create composite ontologies from multiple sources
+- Consistency validation using reasoner
+- Visual feedback on assembly status
+- Download assembled composite ontology
 
 ### Async Processing
 - Long-running transformations in background
