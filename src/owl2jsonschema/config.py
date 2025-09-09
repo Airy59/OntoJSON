@@ -245,7 +245,9 @@ class TransformationConfig:
                 },
                 "ontology_metadata": {
                     "enabled": True,
-                    "options": {}
+                    "options": {
+                        "placement": "x-metadata"  # Default to Draft 7 compliant x-metadata
+                    }
                 }
             },
             

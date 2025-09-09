@@ -231,16 +231,17 @@ class TransformationEngine:
                     "title", "description", "$id", "$comment",
                     "$defs", "additionalProperties", "type"
                 }
-                # Also allow our custom metadata fields
+                # Also allow our custom metadata fields and Draft 7 compliant extensions
                 custom_metadata_properties = {
                     "$metadata", "$schema-version", "$schema-author",
                     "$schema-created", "$schema-modified", "$schema-license",
+                    "x-metadata",  # Draft 7 compliant custom property
                     "info"  # For OpenAPI-style metadata grouping
                 }
                 allowed_properties = valid_root_properties | custom_metadata_properties
                 
                 for key, value in result.items():
-                    if key in allowed_properties:
+                    if key in allowed_properties or key.startswith("x-"):
                         self.schema_builder.add_to_root(key, value)
         
         elif rule_id == "thing_with_uri":

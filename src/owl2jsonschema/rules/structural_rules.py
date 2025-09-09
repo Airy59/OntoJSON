@@ -249,7 +249,7 @@ class OntologyMetadataRule(TransformationRule):
         # Add metadata to result based on placement preference
         if metadata:
             # Decide where to put the metadata
-            placement = self.get_option("placement", "root")
+            placement = self.get_option("placement", "x-metadata")
             
             if placement == "root":
                 # Add metadata fields directly to root schema
@@ -267,16 +267,27 @@ class OntologyMetadataRule(TransformationRule):
                     result["$schema-modified"] = metadata["modified"]
                 if "license" in metadata:
                     result["$schema-license"] = metadata["license"]
+            elif placement == "x-metadata":
+                # Use x-metadata (Draft 7 allows custom properties starting with x-)
+                result["x-metadata"] = metadata
             elif placement == "info":
                 # Group under an "info" field (similar to OpenAPI)
                 result["info"] = metadata
             elif placement == "comment":
-                # Add as a comment
+                # Add as a comment (fully Draft 7 compliant)
                 import json
                 result["$comment"] = f"Metadata: {json.dumps(metadata)}"
+            elif placement == "defs":
+                # Store in $defs as a special definition (Draft 7 compliant)
+                result["$defs"] = {
+                    "_metadata": metadata
+                }
+            elif placement == "none":
+                # Don't include metadata at all
+                pass
             else:
-                # Default: add metadata as a special field
-                result["$metadata"] = metadata
+                # Default: use x-metadata for Draft 7 compatibility
+                result["x-metadata"] = metadata
         
         return result if result else None
 
