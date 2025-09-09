@@ -680,8 +680,8 @@ See [credits.txt](credits.txt) for acknowledgments and third-party licenses.
 
 ## 🐛 Support
 
-- **Issues**: Report bugs via [GitHub Issues](https://github.com/username/OntoJSON/issues)
-- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/username/OntoJSON/discussions)
+- **Issues**: Report bugs via [GitHub Issues](https://github.com/Airy59/OntoJSON/issues)
+- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/Airy59/OntoJSON/discussions)
 - **Email**: Contact the maintainer at [email](mailto:airy-services@hotmail.com)
 
 ## 🚦 Project Status
