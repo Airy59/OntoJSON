@@ -249,7 +249,7 @@ class OntologyMetadataRule(TransformationRule):
         # Add metadata to result based on placement preference
         if metadata:
             # Decide where to put the metadata
-            placement = self.get_option("placement", "x-metadata")
+            placement = self.get_option("placement", "comment")
             
             if placement == "root":
                 # Add metadata fields directly to root schema

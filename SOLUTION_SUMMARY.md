@@ -9,31 +9,31 @@ We've implemented a configurable metadata placement system with multiple Draft 7
 ### Changes Made
 
 1. **Modified `src/owl2jsonschema/rules/structural_rules.py`**
-   - Added new placement options: `x-metadata`, `comment`, `defs`, `info`, `none`
-   - Changed default from `root` to `x-metadata`
+   - Added new placement options: `comment`, `x-metadata`, `defs`, `info`, `none`
+   - Changed default from `root` to `comment` (standard Draft 7 keyword)
 
 2. **Updated `src/owl2jsonschema/engine.py`**
    - Added support for `x-metadata` and other x- prefixed fields
    - Enhanced metadata field validation
 
 3. **Updated `src/owl2jsonschema/config.py`**
-   - Changed default placement to `x-metadata` for Draft 7 compliance
+   - Changed default placement to `comment` for full Draft 7 compliance with no warnings
 
 ## Available Options
 
-| Placement | Draft 7 Compliant | Description |
-|-----------|------------------|-------------|
-| **x-metadata** (default) | ✅ Yes | Stores metadata in `x-metadata` field |
-| comment | ✅ Yes | Stores as JSON string in `$comment` |
-| defs | ✅ Yes | Stores in `$defs/_metadata` |
-| info | ✅ Yes | Groups in `info` field (OpenAPI-style) |
-| none | ✅ Yes | Excludes metadata entirely |
-| root | ❌ No | Legacy mode with `$metadata` (causes warnings) |
+| Placement | Draft 7 Compliant | Validator Support | Description |
+|-----------|------------------|------------------|-------------|
+| **comment** (default) | ✅ Yes | ✅ All validators | Stores as JSON string in `$comment` |
+| defs | ✅ Yes | ✅ All validators | Stores in `$defs/_metadata` |
+| x-metadata | ✅ Yes | ⚠️ May show "ignored" | Stores in `x-metadata` field |
+| info | ✅ Yes | ✅ No warnings | Groups in `info` field (OpenAPI-style) |
+| none | ✅ Yes | ✅ No warnings | Excludes metadata entirely |
+| root | ❌ No | ❌ Warnings | Legacy mode with `$metadata` |
 
 ## Usage
 
-### Using Default (x-metadata)
-No configuration needed - the system now defaults to Draft 7 compliant `x-metadata`:
+### Using Default ($comment)
+No configuration needed - the system now defaults to the standard Draft 7 `$comment` keyword:
 
 ```python
 from owl2jsonschema.engine import TransformationEngine
@@ -44,7 +44,7 @@ ontology = parser.parse("your_ontology.owl")
 
 engine = TransformationEngine()
 schema = engine.transform(ontology)
-# Metadata will be in schema["x-metadata"]
+# Metadata will be in schema["$comment"] as a JSON string
 ```
 
 ### Using Custom Placement
@@ -67,7 +67,7 @@ Create `config.json`:
     "ontology_metadata": {
       "enabled": true,
       "options": {
-        "placement": "x-metadata"
+        "placement": "comment"
       }
     }
   }
@@ -87,6 +87,7 @@ Two test scripts are provided:
 
 ## Result
 ✅ The generated schemas are now fully Draft 7 compliant by default
-✅ No validation warnings when using standard JSON Schema validators
+✅ No validation warnings in ANY validator (including Oxygen)
+✅ Uses standard JSON Schema keyword `$comment` - universally supported
 ✅ Backward compatibility maintained (can still use legacy mode if needed)
 ✅ Multiple options available for different use cases

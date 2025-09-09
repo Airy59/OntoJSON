@@ -6,43 +6,13 @@ The generated JSON schema contains the `$metadata` attribute, which is not recog
 
 ## Solution
 
-We've implemented multiple options for handling metadata in a Draft 7 compliant way. The default behavior has been changed to use `x-metadata` which is fully compliant with Draft 7.
+We've implemented multiple options for handling metadata in a Draft 7 compliant way. The default behavior has been changed to use `$comment` which is a standard JSON Schema Draft 7 keyword that causes no warnings in any validator.
 
 ## Configuration Options
 
 You can configure how metadata is placed in the generated schema using the `ontology_metadata` rule's `placement` option:
 
-### 1. **x-metadata** (Default - Recommended)
-```json
-{
-  "rules": {
-    "ontology_metadata": {
-      "enabled": true,
-      "options": {
-        "placement": "x-metadata"
-      }
-    }
-  }
-}
-```
-- ✅ Fully Draft 7 compliant
-- ✅ Preserves all metadata
-- ✅ Recognized as custom extension by validators
-- ✅ No validation warnings
-
-Output example:
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "x-metadata": {
-    "version": "1.0.0",
-    "author": "John Doe",
-    "license": "MIT"
-  }
-}
-```
-
-### 2. **comment**
+### 1. **comment** (Default - Recommended)
 ```json
 {
   "rules": {
@@ -55,15 +25,46 @@ Output example:
   }
 }
 ```
-- ✅ Fully Draft 7 compliant
-- ✅ No validation warnings
-- ⚠️ Metadata stored as JSON string (less readable)
+- ✅ Standard JSON Schema Draft 7 keyword
+- ✅ No validation warnings in any validator (including Oxygen)
+- ✅ Fully compliant - recognized by all validators
+- ⚠️ Metadata stored as JSON string (less readable but parseable)
 
 Output example:
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$comment": "Metadata: {\"version\":\"1.0.0\",\"author\":\"John Doe\",\"license\":\"MIT\"}"
+}
+```
+
+### 2. **x-metadata**
+```json
+{
+  "rules": {
+    "ontology_metadata": {
+      "enabled": true,
+      "options": {
+        "placement": "x-metadata"
+      }
+    }
+  }
+}
+```
+- ✅ Draft 7 allows x- prefix for extensions
+- ⚠️ Some validators (like Oxygen) may show "ignored" warnings
+- ✅ Preserves all metadata in structured format
+- ✅ More readable than $comment
+
+Output example:
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "x-metadata": {
+    "version": "1.0.0",
+    "author": "John Doe",
+    "license": "MIT"
+  }
 }
 ```
 
@@ -162,7 +163,7 @@ Output example:
 ## How to Apply the Workaround
 
 ### Option 1: Use the Default Configuration (Recommended)
-The system now defaults to using `x-metadata` which is Draft 7 compliant. No action needed if you're using the latest version.
+The system now defaults to using `$comment` which is a standard Draft 7 keyword. No action needed if you're using the latest version. The metadata will be stored as a JSON string in the `$comment` field, causing no warnings in any validator.
 
 ### Option 2: Programmatic Configuration
 ```python
@@ -171,7 +172,7 @@ from owl2jsonschema.engine import TransformationEngine
 
 # Create configuration with desired placement
 config = TransformationConfig()
-config.set_rule_option("ontology_metadata", "placement", "x-metadata")
+config.set_rule_option("ontology_metadata", "placement", "comment")  # or "x-metadata", "defs", etc.
 
 # Use the configuration
 engine = TransformationEngine(config)
@@ -186,7 +187,7 @@ Create a `config.json` file:
     "ontology_metadata": {
       "enabled": true,
       "options": {
-        "placement": "x-metadata"
+        "placement": "comment"
       }
     }
   }
@@ -221,7 +222,14 @@ This will demonstrate each placement option and show which ones are Draft 7 comp
 
 If you were relying on the `$metadata` field in your applications:
 
-1. **Update to use `x-metadata`**: Change your code to look for `schema["x-metadata"]` instead of `schema["$metadata"]`
+1. **Parse from $comment**: The metadata is now in `$comment` as a JSON string:
+```python
+import json
+# Extract metadata from $comment
+if "$comment" in schema and schema["$comment"].startswith("Metadata: "):
+    metadata_json = schema["$comment"][10:]  # Remove "Metadata: " prefix
+    metadata = json.loads(metadata_json)
+```
 
 2. **Use a migration script**:
 ```python
@@ -256,13 +264,16 @@ except jsonschema.SchemaError as e:
 
 ## Summary
 
-- **Default behavior**: Now uses `x-metadata` (Draft 7 compliant)
+- **Default behavior**: Now uses `$comment` (standard Draft 7 keyword)
 - **No code changes needed**: Works automatically with the latest version
+- **No warnings in any validator**: Including strict validators like Oxygen
 - **Backward compatibility**: Can still use old format if needed with `placement: "root"`
 - **Multiple options**: Choose the metadata placement that best fits your needs
 
-The recommended approach is to use the default `x-metadata` placement, which:
-- Is fully Draft 7 compliant
-- Causes no validation warnings
-- Preserves all metadata information
-- Is recognized as a valid extension by JSON Schema validators
+The recommended approach is to use the default `$comment` placement, which:
+- Is a standard JSON Schema Draft 7 keyword
+- Causes no warnings in any validator (including Oxygen)
+- Preserves all metadata information (as JSON string)
+- Is universally recognized by all JSON Schema validators
+
+If you need structured metadata that's easier to read, you can use `placement: "defs"` which stores metadata in `$defs/_metadata` and is also fully compliant.

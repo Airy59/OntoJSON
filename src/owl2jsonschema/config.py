@@ -246,7 +246,7 @@ class TransformationConfig:
                 "ontology_metadata": {
                     "enabled": True,
                     "options": {
-                        "placement": "x-metadata"  # Default to Draft 7 compliant x-metadata
+                        "placement": "comment"  # Use $comment - fully standard Draft 7 keyword
                     }
                 }
             },
