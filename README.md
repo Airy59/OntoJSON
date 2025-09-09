@@ -11,7 +11,7 @@ A powerful, configurable transformation engine for converting RDF/OWL ontologies
 - **Full Inheritance Support**: Correctly handles complex class hierarchies including multiple inheritance
 - **RDF/Turtle Support**: Import and transform RDF Turtle files (.ttl) with proper namespace handling
 - **Import Resolution**: Automatic resolution and loading of imported ontologies
-- **Ontology Partitioning**: Split large ontologies into semantically coherent modules
+- **Ontology Partitioning** (quite experimental, not for production): Split large ontologies into semantically coherent modules
   - Efficient chunking for files exceeding memory/token limits
   - Multiple partitioning strategies (community detection, domain-based, hierarchical)
   - Preserves semantic completeness (annotations, restrictions, domains/ranges)
