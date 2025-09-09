@@ -7,22 +7,72 @@ This module provides JSON Schema validation functionality for the web applicatio
 import json
 from typing import Dict, Any, List, Optional
 import jsonschema
-from jsonschema import validate, ValidationError, Draft7Validator
+from jsonschema import validate, ValidationError, Draft7Validator, Draft4Validator, Draft6Validator
+from jsonschema.validators import Draft201909Validator, Draft202012Validator
 
 
 class JSONSchemaValidator:
     """Validates JSON data against a JSON Schema."""
     
-    def __init__(self, schema: Dict[str, Any]):
+    def __init__(self, schema: Dict[str, Any], schema_version: Optional[str] = None):
         """
         Initialize the validator with a JSON Schema.
         
         Args:
             schema: The JSON Schema to validate against
+            schema_version: The JSON Schema version to use (e.g., 'draft-04', 'draft-06', 'draft-07', '2019-09', '2020-12')
+                          If None, will try to detect from schema's $schema property or default to draft-07
         """
         self.schema = schema
+        
+        # Determine which validator to use
+        if schema_version:
+            validator_class = self._get_validator_class(schema_version)
+        else:
+            # Try to detect from schema
+            schema_uri = schema.get('$schema', '')
+            if 'draft-04' in schema_uri or 'draft/4' in schema_uri:
+                validator_class = Draft4Validator
+            elif 'draft-06' in schema_uri or 'draft/6' in schema_uri:
+                validator_class = Draft6Validator
+            elif 'draft-07' in schema_uri or 'draft/7' in schema_uri:
+                validator_class = Draft7Validator
+            elif '2019-09' in schema_uri:
+                validator_class = Draft201909Validator
+            elif '2020-12' in schema_uri:
+                validator_class = Draft202012Validator
+            else:
+                # Default to Draft 7
+                validator_class = Draft7Validator
+        
         # Pre-compile the validator for better performance
-        self.validator = Draft7Validator(schema)
+        self.validator = validator_class(schema)
+    
+    @staticmethod
+    def _get_validator_class(schema_version: str):
+        """Get the appropriate validator class for the schema version."""
+        version_map = {
+            'draft-04': Draft4Validator,
+            'draft-4': Draft4Validator,
+            'json-schema-draft-04': Draft4Validator,
+            'draft-06': Draft6Validator,
+            'draft-6': Draft6Validator,
+            'json-schema-draft-06': Draft6Validator,
+            'draft-07': Draft7Validator,
+            'draft-7': Draft7Validator,
+            'json-schema-draft-07': Draft7Validator,
+            '2019-09': Draft201909Validator,
+            'draft-2019-09': Draft201909Validator,
+            '2020-12': Draft202012Validator,
+            'draft-2020-12': Draft202012Validator,
+        }
+        
+        validator_class = version_map.get(schema_version.lower())
+        if not validator_class:
+            # Default to Draft 7 if unknown version
+            validator_class = Draft7Validator
+        
+        return validator_class
     
     def validate_instance(self, instance: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -130,8 +180,9 @@ class JSONSchemaValidator:
                 "$ref": f"#/definitions/{type_name}"
             }
             
-            # Create a validator for this type
-            type_validator = JSONSchemaValidator(type_schema)
+            # Create a validator for this type (inherit the same schema version)
+            schema_version = self.schema.get('$schema', '')
+            type_validator = JSONSchemaValidator(type_schema, schema_version=None)
             
             # Validate instances of this type
             type_results = type_validator.validate_batch(instances)
@@ -147,12 +198,13 @@ class JSONSchemaValidator:
         return results
     
     @staticmethod
-    def check_schema_validity(schema: Dict[str, Any]) -> Dict[str, Any]:
+    def check_schema_validity(schema: Dict[str, Any], schema_version: Optional[str] = None) -> Dict[str, Any]:
         """
-        Check if a JSON Schema itself is valid according to Draft 7.
+        Check if a JSON Schema itself is valid.
         
         Args:
             schema: The JSON Schema to check
+            schema_version: The JSON Schema version to validate against (optional)
             
         Returns:
             Dictionary with schema validity results
@@ -164,8 +216,28 @@ class JSONSchemaValidator:
         }
         
         try:
+            # Determine which validator to use
+            if schema_version:
+                validator_class = JSONSchemaValidator._get_validator_class(schema_version)
+            else:
+                # Try to detect from schema
+                schema_uri = schema.get('$schema', '')
+                if 'draft-04' in schema_uri or 'draft/4' in schema_uri:
+                    validator_class = Draft4Validator
+                elif 'draft-06' in schema_uri or 'draft/6' in schema_uri:
+                    validator_class = Draft6Validator
+                elif 'draft-07' in schema_uri or 'draft/7' in schema_uri:
+                    validator_class = Draft7Validator
+                elif '2019-09' in schema_uri:
+                    validator_class = Draft201909Validator
+                elif '2020-12' in schema_uri:
+                    validator_class = Draft202012Validator
+                else:
+                    # Default to Draft 7
+                    validator_class = Draft7Validator
+            
             # Check if the schema is valid
-            Draft7Validator.check_schema(schema)
+            validator_class.check_schema(schema)
             
             # Check for non-standard keywords that might cause warnings
             non_standard_keywords = []
@@ -277,7 +349,8 @@ class SchemaValidationService:
     @staticmethod
     def validate_json_against_schema(
         json_data: Any,
-        schema: Dict[str, Any]
+        schema: Dict[str, Any],
+        schema_version: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Validate JSON data against a schema.
@@ -285,11 +358,12 @@ class SchemaValidationService:
         Args:
             json_data: The JSON data to validate (can be a single instance, list, or dict of types)
             schema: The JSON Schema to validate against
+            schema_version: The JSON Schema version to use (optional, will auto-detect if not provided)
             
         Returns:
             Validation results
         """
-        validator = JSONSchemaValidator(schema)
+        validator = JSONSchemaValidator(schema, schema_version)
         
         # Check what type of data we have
         if isinstance(json_data, dict):
@@ -310,14 +384,15 @@ class SchemaValidationService:
             }
     
     @staticmethod
-    def validate_schema(schema: Dict[str, Any]) -> Dict[str, Any]:
+    def validate_schema(schema: Dict[str, Any], schema_version: Optional[str] = None) -> Dict[str, Any]:
         """
         Validate that a JSON Schema itself is valid.
         
         Args:
             schema: The JSON Schema to validate
+            schema_version: The JSON Schema version to validate against (optional)
             
         Returns:
             Schema validation results
         """
-        return JSONSchemaValidator.check_schema_validity(schema)
+        return JSONSchemaValidator.check_schema_validity(schema, schema_version)

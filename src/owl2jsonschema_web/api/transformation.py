@@ -26,6 +26,7 @@ def transform_single():
     
     Expects either:
     - A file upload with key 'file'
+    - A multipart form with 'ontology' field (text content)
     - A JSON body with 'source' (URL or path)
     """
     try:
@@ -54,6 +55,15 @@ def transform_single():
             else:
                 return jsonify({'error': 'Invalid file or file type'}), 400
         
+        elif 'ontology' in request.form:
+            # Handle ontology content directly from form data
+            import tempfile
+            ontology_content = request.form['ontology']
+            # Save to a temporary file
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.ttl', delete=False) as tmp_file:
+                tmp_file.write(ontology_content)
+                source = tmp_file.name
+        
         elif request.json and 'source' in request.json:
             # Handle URL or path
             source = request.json['source']
@@ -69,13 +79,22 @@ def transform_single():
         else:
             return jsonify({'error': 'No ontology source provided'}), 400
         
-        # Get configuration
-        config_dict = request.json.get('config') if request.json else None
-        config = config_service.create_config_from_dict(config_dict)
+        # Get configuration from request or session
+        if request.is_json:
+            config_dict = request.json.get('config')
+            language = request.json.get('language', 'en')
+            rdf_format = request.json.get('format', 'auto')
+        else:
+            # For multipart/form-data, get from form or session
+            config_dict = None
+            language = request.form.get('language', 'en')
+            rdf_format = request.form.get('format', 'auto')
         
-        # Get optional parameters
-        language = request.json.get('language', 'en') if request.json else 'en'
-        rdf_format = request.json.get('format', 'auto') if request.json else 'auto'
+        if not config_dict:
+            # Try to get from session
+            config_dict = session.get('config')
+        
+        config = config_service.create_config_from_dict(config_dict)
         
         # Perform transformation
         result = transformation_service.transform_single(

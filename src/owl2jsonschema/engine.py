@@ -23,7 +23,10 @@ class TransformationEngine:
         """
         self.config = config or TransformationConfig()
         self.rules: List[TransformationRule] = []
-        self.schema_builder = SchemaBuilder()
+        # Get schema format from configuration
+        output_config = self.config.get_output_config()
+        schema_format = output_config.get("format", "json-schema-draft-07")
+        self.schema_builder = SchemaBuilder(schema_format)
         self._initialize_rules()
     
     def _initialize_rules(self):
@@ -102,8 +105,10 @@ class TransformationEngine:
         Returns:
             The resulting JSON Schema
         """
-        # Reset the schema builder
-        self.schema_builder = SchemaBuilder()
+        # Reset the schema builder with the configured schema format
+        output_config = self.config.get_output_config()
+        schema_format = output_config.get("format", "json-schema-draft-07")
+        self.schema_builder = SchemaBuilder(schema_format)
         
         # Check if ThingWithUriRule is enabled
         thing_rule = self.get_rule("thing_with_uri")

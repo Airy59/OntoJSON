@@ -19,8 +19,9 @@ class OntologyToDocumentRule(TransformationRule):
         
         document = {}
         
-        # Add schema version
-        document["$schema"] = "http://json-schema.org/draft-07/schema#"
+        # Add schema version from configuration
+        schema_format = self.get_option("schema_format", "json-schema-draft-07")
+        document["$schema"] = self._get_schema_uri(schema_format)
         
         # Add ID from ontology URI
         if ontology.uri:
@@ -43,6 +44,23 @@ class OntologyToDocumentRule(TransformationRule):
             document["$comment"] = f"Imports: {', '.join(ontology.imports)}"
         
         return document
+    
+    def _get_schema_uri(self, schema_format: str) -> str:
+        """Get the JSON Schema $schema URI for the specified format."""
+        schema_uri_map = {
+            "json-schema-draft-04": "http://json-schema.org/draft-04/schema#",
+            "json-schema-draft-06": "http://json-schema.org/draft-06/schema#",
+            "json-schema-draft-07": "http://json-schema.org/draft-07/schema#",
+            "json-schema-2019-09": "https://json-schema.org/draft/2019-09/schema",
+            "json-schema-2020-12": "https://json-schema.org/draft/2020-12/schema",
+            # Also support short format names
+            "draft-04": "http://json-schema.org/draft-04/schema#",
+            "draft-06": "http://json-schema.org/draft-06/schema#",
+            "draft-07": "http://json-schema.org/draft-07/schema#",
+            "2019-09": "https://json-schema.org/draft/2019-09/schema",
+            "2020-12": "https://json-schema.org/draft/2020-12/schema"
+        }
+        return schema_uri_map.get(schema_format, "http://json-schema.org/draft-07/schema#")
     
     def _get_name_from_uri(self, uri: str) -> str:
         """Extract a name from URI."""

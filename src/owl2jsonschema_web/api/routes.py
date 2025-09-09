@@ -243,6 +243,7 @@ def validate_json():
     """
     try:
         from owl2jsonschema.services.validation_service import SchemaValidationService
+        from flask import session
         
         payload = request.get_json()
         
@@ -267,8 +268,41 @@ def validate_json():
                 'error': 'No data provided to validate'
             }), 400
         
-        # Validate the data
-        validation_results = SchemaValidationService.validate_json_against_schema(data, schema)
+        # Get the JSON Schema version from session configuration or use default
+        schema_version = None
+        
+        # Try to get from session first
+        session_config = session.get('config', {})
+        output_format = session_config.get('output', {}).get('format', '')
+        
+        # If not in session, check if it's in the schema itself
+        if not output_format and isinstance(schema, dict):
+            schema_uri = schema.get('$schema', '')
+            if 'draft-04' in schema_uri or 'draft/4' in schema_uri:
+                schema_version = 'draft-04'
+            elif 'draft-06' in schema_uri or 'draft/6' in schema_uri:
+                schema_version = 'draft-06'
+            elif 'draft-07' in schema_uri or 'draft/7' in schema_uri:
+                schema_version = 'draft-07'
+            elif '2019-09' in schema_uri:
+                schema_version = '2019-09'
+            elif '2020-12' in schema_uri:
+                schema_version = '2020-12'
+        else:
+            # Extract from output format configuration
+            if 'draft-04' in output_format:
+                schema_version = 'draft-04'
+            elif 'draft-06' in output_format:
+                schema_version = 'draft-06'
+            elif 'draft-07' in output_format:
+                schema_version = 'draft-07'
+            elif '2019-09' in output_format:
+                schema_version = '2019-09'
+            elif '2020-12' in output_format:
+                schema_version = '2020-12'
+        
+        # Validate the data with the detected or configured schema version
+        validation_results = SchemaValidationService.validate_json_against_schema(data, schema, schema_version)
         
         # Format the response
         response = {
@@ -295,7 +329,7 @@ def validate_json():
 @api_bp.route('/validate/schema', methods=['POST'])
 def validate_schema():
     """
-    Validate that a JSON Schema itself is valid according to Draft 7.
+    Validate that a JSON Schema itself is valid.
     
     Expected payload:
     {
@@ -304,6 +338,7 @@ def validate_schema():
     """
     try:
         from owl2jsonschema.services.validation_service import SchemaValidationService
+        from flask import session
         
         payload = request.get_json()
         
@@ -321,8 +356,41 @@ def validate_schema():
                 'error': 'No schema provided'
             }), 400
         
-        # Validate the schema
-        validation_results = SchemaValidationService.validate_schema(schema)
+        # Get the JSON Schema version from session configuration or auto-detect
+        schema_version = None
+        
+        # Try to get from session first
+        session_config = session.get('config', {})
+        output_format = session_config.get('output', {}).get('format', '')
+        
+        # If not in session, check if it's in the schema itself
+        if not output_format and isinstance(schema, dict):
+            schema_uri = schema.get('$schema', '')
+            if 'draft-04' in schema_uri or 'draft/4' in schema_uri:
+                schema_version = 'draft-04'
+            elif 'draft-06' in schema_uri or 'draft/6' in schema_uri:
+                schema_version = 'draft-06'
+            elif 'draft-07' in schema_uri or 'draft/7' in schema_uri:
+                schema_version = 'draft-07'
+            elif '2019-09' in schema_uri:
+                schema_version = '2019-09'
+            elif '2020-12' in schema_uri:
+                schema_version = '2020-12'
+        else:
+            # Extract from output format configuration
+            if 'draft-04' in output_format:
+                schema_version = 'draft-04'
+            elif 'draft-06' in output_format:
+                schema_version = 'draft-06'
+            elif 'draft-07' in output_format:
+                schema_version = 'draft-07'
+            elif '2019-09' in output_format:
+                schema_version = '2019-09'
+            elif '2020-12' in output_format:
+                schema_version = '2020-12'
+        
+        # Validate the schema with the detected or configured version
+        validation_results = SchemaValidationService.validate_schema(schema, schema_version)
         
         return jsonify({
             'success': True,
@@ -346,6 +414,27 @@ def validate_json_file():
     """
     try:
         from owl2jsonschema.services.validation_service import SchemaValidationService
+        from flask import session
+        
+        # Get the JSON Schema version from session configuration or auto-detect
+        schema_version = None
+        
+        # Try to get from session first
+        session_config = session.get('config', {})
+        output_format = session_config.get('output', {}).get('format', '')
+        
+        if output_format:
+            # Extract from output format configuration
+            if 'draft-04' in output_format:
+                schema_version = 'draft-04'
+            elif 'draft-06' in output_format:
+                schema_version = 'draft-06'
+            elif 'draft-07' in output_format:
+                schema_version = 'draft-07'
+            elif '2019-09' in output_format:
+                schema_version = '2019-09'
+            elif '2020-12' in output_format:
+                schema_version = '2020-12'
         
         # Check if files are uploaded
         schema_file = request.files.get('schema')
@@ -403,8 +492,8 @@ def validate_json_file():
                 'error': 'Schema and data are required'
             }), 400
         
-        # Validate the data
-        validation_results = SchemaValidationService.validate_json_against_schema(data, schema)
+        # Validate the data with the detected or configured schema version
+        validation_results = SchemaValidationService.validate_json_against_schema(data, schema, schema_version)
         
         # Format the response
         response = {

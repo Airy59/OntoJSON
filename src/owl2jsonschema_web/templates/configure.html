@@ -131,10 +131,11 @@
                                 <div class="mb-3">
                                     <label for="schemaVersion" class="form-label">JSON Schema Version</label>
                                     <select class="form-select" id="schemaVersion">
-                                        <option value="draft-07" selected>Draft-07</option>
-                                        <option value="draft-04">Draft-04</option>
-                                        <option value="2019-09">2019-09</option>
-                                        <option value="2020-12">2020-12</option>
+                                        <option value="json-schema-draft-07" selected>Draft-07</option>
+                                        <option value="json-schema-draft-04">Draft-04</option>
+                                        <option value="json-schema-draft-06">Draft-06</option>
+                                        <option value="json-schema-2019-09">2019-09</option>
+                                        <option value="json-schema-2020-12">2020-12</option>
                                     </select>
                                 </div>
                             </div>
@@ -186,36 +187,144 @@
 </div>
 
 <script>
-document.getElementById('configForm').addEventListener('submit', function(e) {
+// Load configuration on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadSessionConfiguration();
+});
+
+document.getElementById('configForm').addEventListener('submit', async function(e) {
     e.preventDefault();
+    
     // Gather configuration
     const config = gatherConfiguration();
-    // Save to localStorage or send to server
-    localStorage.setItem('ontojson-config', JSON.stringify(config));
-    alert('Configuration saved successfully!');
+    
+    try {
+        // Save to session via API
+        const response = await fetch('/api/configurations/session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(config)
+        });
+        
+        if (response.ok) {
+            // Also save to localStorage as backup
+            localStorage.setItem('ontojson-config', JSON.stringify(config));
+            alert('Configuration saved successfully!');
+        } else {
+            const error = await response.json();
+            alert('Failed to save configuration: ' + (error.error || 'Unknown error'));
+        }
+    } catch (err) {
+        console.error('Error saving configuration:', err);
+        // Fall back to localStorage
+        localStorage.setItem('ontojson-config', JSON.stringify(config));
+        alert('Configuration saved locally.');
+    }
 });
+
+async function loadSessionConfiguration() {
+    try {
+        // Try to load from session first
+        const response = await fetch('/api/configurations/session');
+        if (response.ok) {
+            const data = await response.json();
+            if (data.config && Object.keys(data.config).length > 0) {
+                applyConfiguration(data.config);
+                return;
+            }
+        }
+    } catch (err) {
+        console.error('Error loading session configuration:', err);
+    }
+    
+    // Fall back to localStorage
+    const savedConfig = localStorage.getItem('ontojson-config');
+    if (savedConfig) {
+        try {
+            const config = JSON.parse(savedConfig);
+            applyConfiguration(config);
+        } catch (err) {
+            console.error('Error parsing saved configuration:', err);
+        }
+    }
+}
+
+function applyConfiguration(config) {
+    // Apply rules configuration
+    if (config.rules) {
+        for (const [key, value] of Object.entries(config.rules)) {
+            // Handle both nested and flat rule structure
+            const enabled = typeof value === 'boolean' ? value : value.enabled;
+            const element = document.getElementById(key.replace(/_/g, ''));
+            if (!element) {
+                // Try with underscores converted to camelCase
+                const camelKey = key.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
+                const camelElement = document.getElementById(camelKey);
+                if (camelElement) {
+                    camelElement.checked = enabled;
+                }
+            } else {
+                element.checked = enabled;
+            }
+        }
+    }
+    
+    // Apply language configuration
+    if (config.language) {
+        if (config.language.preferred) {
+            document.getElementById('language').value = config.language.preferred;
+        }
+        if (config.language.fallback) {
+            document.getElementById('fallbackLanguage').value = config.language.fallback;
+        }
+    }
+    
+    // Apply output configuration
+    if (config.output) {
+        if (config.output.format) {
+            document.getElementById('schemaVersion').value = config.output.format;
+        } else if (config.output.schemaVersion) {
+            document.getElementById('schemaVersion').value = config.output.schemaVersion;
+        }
+        if (config.output.indentation !== undefined) {
+            document.getElementById('indentation').value = config.output.indentation;
+        } else if (config.output.indent !== undefined) {
+            document.getElementById('indentation').value = config.output.indent;
+        }
+        if (config.output.includeMetadata !== undefined) {
+            document.getElementById('includeMetadata').checked = config.output.includeMetadata;
+        }
+        if (config.output.generateExamples !== undefined) {
+            document.getElementById('generateExamples').checked = config.output.generateExamples;
+        }
+    }
+}
 
 function gatherConfiguration() {
     return {
         rules: {
-            classToObject: document.getElementById('classToObject').checked,
-            classHierarchy: document.getElementById('classHierarchy').checked,
-            objectProperty: document.getElementById('objectProperty').checked,
-            datatypeProperty: document.getElementById('datatypeProperty').checked,
-            labelsToTitles: document.getElementById('labelsToTitles').checked,
-            commentsToDescriptions: document.getElementById('commentsToDescriptions').checked,
-            propertyCardinality: document.getElementById('propertyCardinality').checked,
-            enumerationToEnum: document.getElementById('enumerationToEnum').checked
-        },
-        language: {
-            preferred: document.getElementById('language').value,
-            fallback: document.getElementById('fallbackLanguage').value
+            class_to_object: { enabled: document.getElementById('classToObject').checked },
+            class_hierarchy: { enabled: document.getElementById('classHierarchy').checked },
+            object_property: { enabled: document.getElementById('objectProperty').checked },
+            datatype_property: { enabled: document.getElementById('datatypeProperty').checked },
+            labels_to_titles: {
+                enabled: document.getElementById('labelsToTitles').checked,
+                language: document.getElementById('language').value
+            },
+            comments_to_descriptions: {
+                enabled: document.getElementById('commentsToDescriptions').checked,
+                language: document.getElementById('language').value
+            },
+            property_cardinality: { enabled: document.getElementById('propertyCardinality').checked },
+            enumeration_to_enum: { enabled: document.getElementById('enumerationToEnum').checked }
         },
         output: {
-            schemaVersion: document.getElementById('schemaVersion').value,
-            indentation: document.getElementById('indentation').value,
-            includeMetadata: document.getElementById('includeMetadata').checked,
-            generateExamples: document.getElementById('generateExamples').checked
+            format: document.getElementById('schemaVersion').value,
+            indent: parseInt(document.getElementById('indentation').value) || 2,
+            include_metadata: document.getElementById('includeMetadata').checked,
+            generate_examples: document.getElementById('generateExamples').checked
         }
     };
 }

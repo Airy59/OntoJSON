@@ -218,6 +218,50 @@ def merge_configurations():
         return jsonify({'error': str(e)}), 500
 
 
+@api_bp.route('/configurations/session', methods=['POST'])
+def save_session_configuration():
+    """
+    Save configuration to the current session.
+    
+    Expects JSON body with configuration dictionary.
+    """
+    try:
+        if not request.json:
+            return jsonify({'error': 'No configuration provided'}), 400
+        
+        # Store configuration in session
+        session['config'] = request.json
+        session.permanent = True  # Make session persistent
+        
+        return jsonify({
+            'success': True,
+            'message': 'Configuration saved to session',
+            'config': session['config']
+        })
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@api_bp.route('/configurations/session', methods=['GET'])
+def get_session_configuration():
+    """Get configuration from the current session."""
+    try:
+        config = session.get('config', {})
+        
+        # If no config in session, return default
+        if not config:
+            config_service = ConfigurationService()
+            config = config_service.default_config
+        
+        return jsonify({
+            'config': config
+        })
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 def _get_timestamp():
     """Get current timestamp."""
     from datetime import datetime

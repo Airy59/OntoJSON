@@ -27,6 +27,7 @@ from owl2jsonschema import TransformationEngine, TransformationConfig, OntologyP
 from owl2jsonschema.reasoner import ABoxValidator
 from owl2jsonschema.abox_to_json import ABoxToJSONConverter
 from owl2jsonschema.composite_builder import CompositeOntologyBuilder
+from owl2jsonschema.services.validation_service import JSONSchemaValidator, SchemaValidationService
 
 
 class CompositeMetadataDialog(QDialog):
@@ -2090,17 +2091,14 @@ class MainWindow(QMainWindow):
             self.json_validation_status.setStyleSheet("color: blue;")
             QApplication.processEvents()
             
-            # Get base URI from the A-box generator settings
-            base_uri = self.base_uri_input.text().strip() or "https://example.org#"
-            
-            # Create converter for validation
-            converter = ABoxToJSONConverter(self.transformation_result, base_uri)
-            
             # Get the JSON instances (not JSON-LD)
             json_instances = self.json_instances.get('instances', self.json_instances)
             
-            # Validate
-            validation_results = converter.validate(json_instances)
+            # Use the new validation service
+            validation_results = SchemaValidationService.validate_json_against_schema(
+                json_instances,
+                self.transformation_result
+            )
             
             # Update validation status
             if validation_results['valid']:
@@ -2108,21 +2106,21 @@ class MainWindow(QMainWindow):
                 self.json_validation_status.setStyleSheet("color: green; font-weight: bold;")
                 
                 # Show success message
+                valid_count = validation_results.get('valid_count', validation_results.get('valid_instances', 0))
+                total_count = validation_results.get('total', validation_results.get('total_instances', 1))
                 QMessageBox.information(
                     self,
                     "Validation Successful",
                     f"✅ All JSON instances are valid according to the JSON Schema.\n\n"
-                    f"Validated {validation_results['validated_count']} instances successfully.\n"
+                    f"Validated {valid_count}/{total_count} instances successfully.\n"
                     "The instances conform to all schema constraints."
                 )
             else:
                 self.json_validation_status.setText("❌ Invalid")
                 self.json_validation_status.setStyleSheet("color: red; font-weight: bold;")
                 
-                # Format error report using the JSONInstanceFormatter
-                from owl2jsonschema.abox_to_json import JSONInstanceFormatter
-                formatter = JSONInstanceFormatter()
-                error_report = formatter.generate_validation_report(validation_results)
+                # Format error report using the validator's formatter
+                error_report = JSONSchemaValidator.format_validation_report(validation_results)
                 
                 # Create a custom dialog for better display
                 error_dialog = QDialog(self)
@@ -2149,10 +2147,18 @@ class MainWindow(QMainWindow):
                 layout.addWidget(context_label)
                 
                 # Summary label
+                valid_count = validation_results.get('valid_count', validation_results.get('valid_instances', 0))
+                invalid_count = validation_results.get('invalid_count', validation_results.get('invalid_instances', 0))
+                total_count = validation_results.get('total', validation_results.get('total_instances', valid_count + invalid_count))
+                
+                success_rate = 0
+                if total_count > 0:
+                    success_rate = int(valid_count/total_count*100)
+                
                 summary_label = QLabel(
                     f"📊 VALIDATION RESULTS:\n"
-                    f"{validation_results['validated_count']}/{validation_results['total_count']} instances passed validation "
-                    f"({int(validation_results['validated_count']/validation_results['total_count']*100)}% success rate)\n\n"
+                    f"{valid_count}/{total_count} instances passed validation "
+                    f"({success_rate}% success rate)\n\n"
                     f"The schema validator is functioning correctly by identifying constraint violations."
                 )
                 summary_label.setWordWrap(True)

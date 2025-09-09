@@ -90,7 +90,7 @@ class ConfigurationService:
             },
             "output": {
                 "include_uri": False,
-                "format": "json",
+                "format": "json-schema-draft-07",
                 "indent": 2
             }
         }

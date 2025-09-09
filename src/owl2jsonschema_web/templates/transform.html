@@ -49,7 +49,7 @@
             
             <!-- URL Input -->
             <div class="mb-3">
-                <label for="urlInput" class="form-label">Or enter ontology URLs (one per line):</label>
+                <label for="urlInput" class="form-label">and/or enter ontology URLs (one per line):</label>
                 <textarea class="form-control" id="urlInput" rows="3" placeholder="https://example.com/ontology.ttl"></textarea>
             </div>
             
@@ -491,11 +491,27 @@ async function performTransformation() {
     // Use the composite ontology as source
     const sources = [compositeOntologyPath];
     
-    // Prepare configuration
-    const config = {
-        language: document.getElementById('language').value,
-        include_uri: document.getElementById('includeUri').checked
-    };
+    // Get session configuration and merge with local settings
+    let config = {};
+    try {
+        // Fetch current session configuration
+        const configResponse = await fetch('/api/configurations/session', {
+            method: 'GET',
+            credentials: 'same-origin'
+        });
+        if (configResponse.ok) {
+            const sessionData = await configResponse.json();
+            config = sessionData.config || {};
+        }
+    } catch (error) {
+        console.error('Failed to fetch session config:', error);
+    }
+    
+    // Merge with local settings (but keep session config for output format)
+    config.language = document.getElementById('language').value;
+    if (!config.output) config.output = {};
+    config.output.include_uri = document.getElementById('includeUri').checked;
+    // Keep the JSON Schema format from session configuration
     
     // Create task
     updateProgress(10, 'Creating transformation task...');
@@ -611,14 +627,79 @@ function downloadFile(content, filename, mimeType) {
     URL.revokeObjectURL(url);
 }
 
-// Check for quick start URL
+// Save and restore page state
+function savePageState() {
+    const state = {
+        urlInput: document.getElementById('urlInput').value,
+        language: document.getElementById('language').value,
+        configProfile: document.getElementById('configProfile').value,
+        includeUri: document.getElementById('includeUri').checked,
+        generateInstances: document.getElementById('generateInstances').checked,
+        instanceCount: document.getElementById('instanceCount').value,
+        // Store file names for reference (files themselves can't be stored)
+        fileNames: selectedFiles.map(f => f.name)
+    };
+    sessionStorage.setItem('transformPageState', JSON.stringify(state));
+}
+
+function restorePageState() {
+    const stateStr = sessionStorage.getItem('transformPageState');
+    if (stateStr) {
+        try {
+            const state = JSON.parse(stateStr);
+            document.getElementById('urlInput').value = state.urlInput || '';
+            document.getElementById('language').value = state.language || 'en';
+            document.getElementById('configProfile').value = state.configProfile || 'default';
+            document.getElementById('includeUri').checked = state.includeUri || false;
+            document.getElementById('generateInstances').checked = state.generateInstances !== false;
+            document.getElementById('instanceCount').value = state.instanceCount || '10';
+            
+            // Show file names as reference (files need to be re-uploaded)
+            if (state.fileNames && state.fileNames.length > 0) {
+                const notice = document.createElement('div');
+                notice.className = 'alert alert-info mt-2';
+                notice.innerHTML = `<small>Previously selected files: ${state.fileNames.join(', ')}. Please re-upload if needed.</small>`;
+                dropZone.parentElement.insertBefore(notice, dropZone.nextSibling);
+                setTimeout(() => notice.remove(), 5000);
+            }
+            
+            updateTransformButton();
+        } catch (error) {
+            console.error('Failed to restore page state:', error);
+        }
+    }
+}
+
+// Save state on any input change
+document.getElementById('urlInput').addEventListener('input', savePageState);
+document.getElementById('language').addEventListener('change', savePageState);
+document.getElementById('configProfile').addEventListener('change', savePageState);
+document.getElementById('includeUri').addEventListener('change', savePageState);
+document.getElementById('generateInstances').addEventListener('change', savePageState);
+document.getElementById('instanceCount').addEventListener('input', savePageState);
+
+// Save state when files change
+const originalUpdateSourcesList = updateSourcesList;
+updateSourcesList = function() {
+    originalUpdateSourcesList();
+    savePageState();
+};
+
+// Check for quick start URL or restore state
 window.addEventListener('load', () => {
     const quickStartUrl = sessionStorage.getItem('quickStartUrl');
     if (quickStartUrl) {
         document.getElementById('urlInput').value = quickStartUrl;
         sessionStorage.removeItem('quickStartUrl');
         updateTransformButton();
+        savePageState();
+    } else {
+        // Restore previous state if no quick start
+        restorePageState();
     }
 });
+
+// Save state before leaving the page
+window.addEventListener('beforeunload', savePageState);
 </script>
 {% endblock %}

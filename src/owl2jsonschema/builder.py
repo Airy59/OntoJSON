@@ -12,10 +12,11 @@ from copy import deepcopy
 class SchemaBuilder:
     """Builds the final JSON Schema document from transformation results."""
     
-    def __init__(self):
+    def __init__(self, schema_format: str = "json-schema-draft-07"):
         """Initialize the schema builder."""
+        self.schema_format = schema_format
         self.schema = {
-            "$schema": "http://json-schema.org/draft-07/schema#"
+            "$schema": self._get_schema_uri(schema_format)
         }
         self.definitions = {}
         self.properties = {}
@@ -226,10 +227,27 @@ class SchemaBuilder:
         
         return name
     
+    def _get_schema_uri(self, schema_format: str) -> str:
+        """Get the JSON Schema $schema URI for the specified format."""
+        schema_uri_map = {
+            "json-schema-draft-04": "http://json-schema.org/draft-04/schema#",
+            "json-schema-draft-06": "http://json-schema.org/draft-06/schema#",
+            "json-schema-draft-07": "http://json-schema.org/draft-07/schema#",
+            "json-schema-2019-09": "https://json-schema.org/draft/2019-09/schema",
+            "json-schema-2020-12": "https://json-schema.org/draft/2020-12/schema",
+            # Also support short format names
+            "draft-04": "http://json-schema.org/draft-04/schema#",
+            "draft-06": "http://json-schema.org/draft-06/schema#",
+            "draft-07": "http://json-schema.org/draft-07/schema#",
+            "2019-09": "https://json-schema.org/draft/2019-09/schema",
+            "2020-12": "https://json-schema.org/draft/2020-12/schema"
+        }
+        return schema_uri_map.get(schema_format, "http://json-schema.org/draft-07/schema#")
+    
     def reset(self):
         """Reset the builder to start fresh."""
         self.schema = {
-            "$schema": "http://json-schema.org/draft-07/schema#"
+            "$schema": self._get_schema_uri(self.schema_format)
         }
         self.definitions = {}
         self.properties = {}

@@ -5,10 +5,6 @@
 {% block content %}
 <div class="container-fluid px-4">
     <h1 class="mt-4">JSON Schema Validation</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Validate</li>
-    </ol>
 
     <!-- Validation Options -->
     <div class="row">
@@ -21,22 +17,53 @@
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="validationTabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="validate-json-tab" data-bs-toggle="tab" 
-                                    data-bs-target="#validate-json" type="button" role="tab">
-                                Validate JSON Data
+                            <button class="nav-link active" id="validate-schema-tab" data-bs-toggle="tab"
+                                    data-bs-target="#validate-schema" type="button" role="tab">
+                                Validate Schema
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="validate-schema-tab" data-bs-toggle="tab" 
-                                    data-bs-target="#validate-schema" type="button" role="tab">
-                                Validate Schema
+                            <button class="nav-link" id="validate-json-tab" data-bs-toggle="tab"
+                                    data-bs-target="#validate-json" type="button" role="tab">
+                                Validate JSON Data
                             </button>
                         </li>
                     </ul>
                     
                     <div class="tab-content mt-3" id="validationTabContent">
+                        <!-- Validate Schema Tab -->
+                        <div class="tab-pane fade show active" id="validate-schema" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>JSON Schema to Validate</h5>
+                                    <div class="mb-3">
+                                        <label for="schemaOnlyInput" class="form-label">
+                                            Paste your JSON Schema to check if it's valid:
+                                        </label>
+                                        <textarea class="form-control font-monospace" id="schemaOnlyInput"
+                                                  rows="15" placeholder='{"$schema": "http://json-schema.org/draft-07/schema#", ...}'></textarea>
+                                        <div class="mt-2">
+                                            <input type="file" class="form-control" id="schemaOnlyFile" accept=".json">
+                                            <small class="text-muted">Or upload a JSON Schema file</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <button class="btn btn-primary" onclick="validateSchemaOnly()">
+                                        <i class="fas fa-check-double me-1"></i>Validate Schema
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="clearSchemaValidation()">
+                                        <i class="fas fa-eraser me-1"></i>Clear
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- Validate JSON Data Tab -->
-                        <div class="tab-pane fade show active" id="validate-json" role="tabpanel">
+                        <div class="tab-pane fade" id="validate-json" role="tabpanel">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5>JSON Schema</h5>
@@ -78,37 +105,6 @@
                                         <i class="fas fa-file-code me-1"></i>Load Example
                                     </button>
                                     <button class="btn btn-outline-secondary" onclick="clearValidation()">
-                                        <i class="fas fa-eraser me-1"></i>Clear
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Validate Schema Tab -->
-                        <div class="tab-pane fade" id="validate-schema" role="tabpanel">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5>JSON Schema to Validate</h5>
-                                    <div class="mb-3">
-                                        <label for="schemaOnlyInput" class="form-label">
-                                            Paste your JSON Schema to check if it's valid Draft 7:
-                                        </label>
-                                        <textarea class="form-control font-monospace" id="schemaOnlyInput" 
-                                                  rows="15" placeholder='{"$schema": "http://json-schema.org/draft-07/schema#", ...}'></textarea>
-                                        <div class="mt-2">
-                                            <input type="file" class="form-control" id="schemaOnlyFile" accept=".json">
-                                            <small class="text-muted">Or upload a JSON Schema file</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <button class="btn btn-primary" onclick="validateSchemaOnly()">
-                                        <i class="fas fa-check-double me-1"></i>Validate Schema
-                                    </button>
-                                    <button class="btn btn-outline-secondary" onclick="clearSchemaValidation()">
                                         <i class="fas fa-eraser me-1"></i>Clear
                                     </button>
                                 </div>
@@ -253,6 +249,7 @@ async function validateSchemaOnly() {
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'same-origin',
             body: JSON.stringify({
                 schema: schema
             })
@@ -261,7 +258,7 @@ async function validateSchemaOnly() {
         const result = await response.json();
         
         if (result.success) {
-            displaySchemaValidationResults(result.validation);
+            displaySchemaValidationResults(result.validation, schema);
         } else {
             showError('Schema validation failed: ' + result.error);
         }
@@ -350,7 +347,7 @@ function displayValidationResults(validation, report) {
     }
 }
 
-function displaySchemaValidationResults(validation) {
+function displaySchemaValidationResults(validation, schema) {
     const resultsCard = document.getElementById('resultsCard');
     const resultsDiv = document.getElementById('validationResults');
     const reportDiv = document.getElementById('validationReport');
@@ -358,13 +355,32 @@ function displaySchemaValidationResults(validation) {
     resultsCard.style.display = 'block';
     reportDiv.style.display = 'none';
     
+    // Determine which JSON Schema version was used for validation
+    let schemaVersion = 'draft-07'; // default
+    if (validation.schema_version) {
+        schemaVersion = validation.schema_version;
+    } else if (schema && schema['$schema']) {
+        const schemaUri = schema['$schema'];
+        if (schemaUri.includes('draft-04') || schemaUri.includes('draft/04')) {
+            schemaVersion = 'draft-04';
+        } else if (schemaUri.includes('draft-06') || schemaUri.includes('draft/06')) {
+            schemaVersion = 'draft-06';
+        } else if (schemaUri.includes('draft-07') || schemaUri.includes('draft/07')) {
+            schemaVersion = 'draft-07';
+        } else if (schemaUri.includes('2019-09')) {
+            schemaVersion = '2019-09';
+        } else if (schemaUri.includes('2020-12')) {
+            schemaVersion = '2020-12';
+        }
+    }
+    
     let html = '';
     
     if (validation.valid) {
         html = `
             <div class="alert alert-success" role="alert">
                 <h4 class="alert-heading"><i class="fas fa-check-circle me-2"></i>Valid JSON Schema!</h4>
-                <p>The schema is valid according to JSON Schema Draft 7 specification.</p>
+                <p>The schema is valid according to the JSON Schema specification, version ${schemaVersion}.</p>
             </div>
         `;
         
@@ -383,7 +399,7 @@ function displaySchemaValidationResults(validation) {
         html = `
             <div class="alert alert-danger" role="alert">
                 <h4 class="alert-heading"><i class="fas fa-times-circle me-2"></i>Invalid Schema</h4>
-                <p>The schema is not valid according to JSON Schema Draft 7 specification.</p>
+                <p>The schema is not valid according to the JSON Schema specification.</p>
         `;
         
         if (validation.errors && validation.errors.length > 0) {

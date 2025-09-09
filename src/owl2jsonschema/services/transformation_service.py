@@ -169,7 +169,7 @@ class TransformationService:
             # Serialize to temporary file or specified path
             if save_composite and composite_output_path:
                 composite_path = composite_output_path
-                builder.serialize_to_file(str(composite_path))
+                builder.save_to_file(str(composite_path))
             else:
                 temp_file = tempfile.NamedTemporaryFile(
                     mode='w',

@@ -245,13 +245,16 @@ class WebUploadAdapter(FileServiceAdapter):
         
         # Generate unique filename to avoid collisions
         unique_filename = f"{uuid.uuid4().hex}_{filename}"
-        file_path = str(unique_filename)
+        file_path = self.upload_dir / unique_filename
         
         # Read and save content
         content = file_obj.read()
-        self.write(file_path, content)
+        file_path.write_bytes(content)
         
-        return file_path
+        # Store in memory as well for quick access
+        self.memory_storage[unique_filename] = content
+        
+        return str(file_path)
 
 
 class FileService:
