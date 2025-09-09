@@ -7,6 +7,7 @@ from . import api_bp
 import os
 import tempfile
 from pathlib import Path
+import json
 
 
 @api_bp.route('/', methods=['GET'])
@@ -23,7 +24,9 @@ def api_info():
             'validate': '/api/validate',
             'rules': '/api/rules',
             'configurations': '/api/configurations',
-            'tasks': '/api/tasks'
+            'tasks': '/api/tasks',
+            'validate_json': '/api/validate/json',
+            'validate_schema': '/api/validate/schema'
         }
     })
 
@@ -224,6 +227,204 @@ def validate_ontology_consistency():
             'consistent': True,
             'message': f'Validation skipped (reasoner integration pending). Composite ontology created successfully.'
         })
+
+
+@api_bp.route('/validate/json', methods=['POST'])
+def validate_json():
+    """
+    Validate JSON data against a JSON Schema.
+    
+    Expected payload:
+    {
+        "schema": {...},  // The JSON Schema
+        "data": {...} or [...] or {"type1": [...], "type2": [...]},  // Data to validate
+        "format": "simple" | "typed" | "batch"  // Optional, auto-detected if not provided
+    }
+    """
+    try:
+        from owl2jsonschema.services.validation_service import SchemaValidationService
+        
+        payload = request.get_json()
+        
+        if not payload:
+            return jsonify({
+                'success': False,
+                'error': 'No data provided'
+            }), 400
+        
+        schema = payload.get('schema')
+        data = payload.get('data')
+        
+        if not schema:
+            return jsonify({
+                'success': False,
+                'error': 'No schema provided'
+            }), 400
+        
+        if data is None:
+            return jsonify({
+                'success': False,
+                'error': 'No data provided to validate'
+            }), 400
+        
+        # Validate the data
+        validation_results = SchemaValidationService.validate_json_against_schema(data, schema)
+        
+        # Format the response
+        response = {
+            'success': True,
+            'validation': validation_results
+        }
+        
+        # Add formatted report if requested
+        if payload.get('include_report', False):
+            from owl2jsonschema.services.validation_service import JSONSchemaValidator
+            response['report'] = JSONSchemaValidator.format_validation_report(validation_results)
+        
+        return jsonify(response)
+        
+    except Exception as e:
+        import traceback
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'traceback': traceback.format_exc()
+        }), 500
+
+
+@api_bp.route('/validate/schema', methods=['POST'])
+def validate_schema():
+    """
+    Validate that a JSON Schema itself is valid according to Draft 7.
+    
+    Expected payload:
+    {
+        "schema": {...}  // The JSON Schema to validate
+    }
+    """
+    try:
+        from owl2jsonschema.services.validation_service import SchemaValidationService
+        
+        payload = request.get_json()
+        
+        if not payload:
+            return jsonify({
+                'success': False,
+                'error': 'No data provided'
+            }), 400
+        
+        schema = payload.get('schema')
+        
+        if not schema:
+            return jsonify({
+                'success': False,
+                'error': 'No schema provided'
+            }), 400
+        
+        # Validate the schema
+        validation_results = SchemaValidationService.validate_schema(schema)
+        
+        return jsonify({
+            'success': True,
+            'validation': validation_results
+        })
+        
+    except Exception as e:
+        import traceback
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'traceback': traceback.format_exc()
+        }), 500
+
+
+@api_bp.route('/validate/file', methods=['POST'])
+def validate_json_file():
+    """
+    Validate a JSON file against a schema file.
+    Both files should be uploaded or their paths provided.
+    """
+    try:
+        from owl2jsonschema.services.validation_service import SchemaValidationService
+        
+        # Check if files are uploaded
+        schema_file = request.files.get('schema')
+        data_file = request.files.get('data')
+        
+        if schema_file and data_file:
+            # Handle file upload
+            try:
+                schema = json.load(schema_file)
+                data = json.load(data_file)
+            except json.JSONDecodeError as e:
+                return jsonify({
+                    'success': False,
+                    'error': f'Invalid JSON format: {str(e)}'
+                }), 400
+        else:
+            # Check for JSON payload with file paths or content
+            payload = request.get_json()
+            if not payload:
+                return jsonify({
+                    'success': False,
+                    'error': 'No files or data provided'
+                }), 400
+            
+            schema = payload.get('schema')
+            data = payload.get('data')
+            
+            # If paths are provided, try to read the files
+            schema_path = payload.get('schema_path')
+            data_path = payload.get('data_path')
+            
+            if schema_path:
+                try:
+                    with open(schema_path, 'r') as f:
+                        schema = json.load(f)
+                except (FileNotFoundError, json.JSONDecodeError) as e:
+                    return jsonify({
+                        'success': False,
+                        'error': f'Error reading schema file: {str(e)}'
+                    }), 400
+            
+            if data_path:
+                try:
+                    with open(data_path, 'r') as f:
+                        data = json.load(f)
+                except (FileNotFoundError, json.JSONDecodeError) as e:
+                    return jsonify({
+                        'success': False,
+                        'error': f'Error reading data file: {str(e)}'
+                    }), 400
+        
+        if not schema or data is None:
+            return jsonify({
+                'success': False,
+                'error': 'Schema and data are required'
+            }), 400
+        
+        # Validate the data
+        validation_results = SchemaValidationService.validate_json_against_schema(data, schema)
+        
+        # Format the response
+        response = {
+            'success': True,
+            'validation': validation_results
+        }
+        
+        # Add formatted report
+        from owl2jsonschema.services.validation_service import JSONSchemaValidator
+        response['report'] = JSONSchemaValidator.format_validation_report(validation_results)
+        
+        return jsonify(response)
+        
+    except Exception as e:
+        import traceback
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'traceback': traceback.format_exc()
+        }), 500
 
 
 def _get_timestamp():

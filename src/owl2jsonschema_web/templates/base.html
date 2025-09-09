@@ -37,11 +37,15 @@
                            href="{{ url_for('main.transform') }}">Transform</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'main.configure' %}active{% endif %}" 
+                        <a class="nav-link {% if request.endpoint == 'main.configure' %}active{% endif %}"
                            href="{{ url_for('main.configure') }}">Configure</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'main.api_docs' %}active{% endif %}" 
+                        <a class="nav-link {% if request.endpoint == 'main.validate' %}active{% endif %}"
+                           href="{{ url_for('main.validate') }}">Validate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'main.api_docs' %}active{% endif %}"
                            href="{{ url_for('main.api_docs') }}">API</a>
                     </li>
                     <li class="nav-item">

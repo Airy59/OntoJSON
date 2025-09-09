@@ -1,0 +1,489 @@
+{% extends "base.html" %}
+
+{% block title %}Validate JSON{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">JSON Schema Validation</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Validate</li>
+    </ol>
+
+    <!-- Validation Options -->
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-check-circle me-1"></i>
+                    Validation Options
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="validationTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="validate-json-tab" data-bs-toggle="tab" 
+                                    data-bs-target="#validate-json" type="button" role="tab">
+                                Validate JSON Data
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="validate-schema-tab" data-bs-toggle="tab" 
+                                    data-bs-target="#validate-schema" type="button" role="tab">
+                                Validate Schema
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content mt-3" id="validationTabContent">
+                        <!-- Validate JSON Data Tab -->
+                        <div class="tab-pane fade show active" id="validate-json" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>JSON Schema</h5>
+                                    <div class="mb-3">
+                                        <label for="schemaInput" class="form-label">
+                                            Paste your JSON Schema or upload a file:
+                                        </label>
+                                        <textarea class="form-control font-monospace" id="schemaInput" 
+                                                  rows="10" placeholder='{"$schema": "http://json-schema.org/draft-07/schema#", ...}'></textarea>
+                                        <div class="mt-2">
+                                            <input type="file" class="form-control" id="schemaFile" accept=".json">
+                                            <small class="text-muted">Or upload a JSON Schema file</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h5>JSON Data to Validate</h5>
+                                    <div class="mb-3">
+                                        <label for="dataInput" class="form-label">
+                                            Paste your JSON data or upload a file:
+                                        </label>
+                                        <textarea class="form-control font-monospace" id="dataInput" 
+                                                  rows="10" placeholder='{"property": "value", ...}'></textarea>
+                                        <div class="mt-2">
+                                            <input type="file" class="form-control" id="dataFile" accept=".json">
+                                            <small class="text-muted">Or upload a JSON data file</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <button class="btn btn-primary" onclick="validateJSON()">
+                                        <i class="fas fa-check me-1"></i>Validate JSON
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="loadExample()">
+                                        <i class="fas fa-file-code me-1"></i>Load Example
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="clearValidation()">
+                                        <i class="fas fa-eraser me-1"></i>Clear
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Validate Schema Tab -->
+                        <div class="tab-pane fade" id="validate-schema" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>JSON Schema to Validate</h5>
+                                    <div class="mb-3">
+                                        <label for="schemaOnlyInput" class="form-label">
+                                            Paste your JSON Schema to check if it's valid Draft 7:
+                                        </label>
+                                        <textarea class="form-control font-monospace" id="schemaOnlyInput" 
+                                                  rows="15" placeholder='{"$schema": "http://json-schema.org/draft-07/schema#", ...}'></textarea>
+                                        <div class="mt-2">
+                                            <input type="file" class="form-control" id="schemaOnlyFile" accept=".json">
+                                            <small class="text-muted">Or upload a JSON Schema file</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <button class="btn btn-primary" onclick="validateSchemaOnly()">
+                                        <i class="fas fa-check-double me-1"></i>Validate Schema
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="clearSchemaValidation()">
+                                        <i class="fas fa-eraser me-1"></i>Clear
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Validation Results -->
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card mb-4" id="resultsCard" style="display: none;">
+                <div class="card-header">
+                    <i class="fas fa-clipboard-check me-1"></i>
+                    Validation Results
+                </div>
+                <div class="card-body">
+                    <div id="validationResults"></div>
+                    <div id="validationReport" class="mt-3" style="display: none;">
+                        <h5>Detailed Report</h5>
+                        <pre class="bg-light p-3 rounded" id="reportContent"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// File upload handlers
+document.getElementById('schemaFile').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('schemaInput').value = e.target.result;
+        };
+        reader.readAsText(file);
+    }
+});
+
+document.getElementById('dataFile').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('dataInput').value = e.target.result;
+        };
+        reader.readAsText(file);
+    }
+});
+
+document.getElementById('schemaOnlyFile').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('schemaOnlyInput').value = e.target.result;
+        };
+        reader.readAsText(file);
+    }
+});
+
+// Validation functions
+async function validateJSON() {
+    const schemaText = document.getElementById('schemaInput').value.trim();
+    const dataText = document.getElementById('dataInput').value.trim();
+    
+    if (!schemaText || !dataText) {
+        showError('Please provide both JSON Schema and JSON data to validate.');
+        return;
+    }
+    
+    let schema, data;
+    
+    try {
+        schema = JSON.parse(schemaText);
+    } catch (e) {
+        showError('Invalid JSON Schema format: ' + e.message);
+        return;
+    }
+    
+    try {
+        data = JSON.parse(dataText);
+    } catch (e) {
+        showError('Invalid JSON data format: ' + e.message);
+        return;
+    }
+    
+    showLoading();
+    
+    try {
+        const response = await fetch('/api/validate/json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                schema: schema,
+                data: data,
+                include_report: true
+            })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            displayValidationResults(result.validation, result.report);
+        } else {
+            showError('Validation failed: ' + result.error);
+        }
+    } catch (error) {
+        showError('Error during validation: ' + error.message);
+    }
+}
+
+async function validateSchemaOnly() {
+    const schemaText = document.getElementById('schemaOnlyInput').value.trim();
+    
+    if (!schemaText) {
+        showError('Please provide a JSON Schema to validate.');
+        return;
+    }
+    
+    let schema;
+    
+    try {
+        schema = JSON.parse(schemaText);
+    } catch (e) {
+        showError('Invalid JSON format: ' + e.message);
+        return;
+    }
+    
+    showLoading();
+    
+    try {
+        const response = await fetch('/api/validate/schema', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                schema: schema
+            })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            displaySchemaValidationResults(result.validation);
+        } else {
+            showError('Schema validation failed: ' + result.error);
+        }
+    } catch (error) {
+        showError('Error during schema validation: ' + error.message);
+    }
+}
+
+function displayValidationResults(validation, report) {
+    const resultsCard = document.getElementById('resultsCard');
+    const resultsDiv = document.getElementById('validationResults');
+    const reportDiv = document.getElementById('validationReport');
+    const reportContent = document.getElementById('reportContent');
+    
+    resultsCard.style.display = 'block';
+    
+    let html = '';
+    
+    if (validation.valid) {
+        html = `
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading"><i class="fas fa-check-circle me-2"></i>Validation Successful!</h4>
+                <p>All JSON data is valid according to the schema.</p>
+        `;
+        
+        if (validation.valid_count !== undefined) {
+            html += `<hr><p class="mb-0">Validated ${validation.valid_count} instance(s) successfully.</p>`;
+        }
+        
+        html += '</div>';
+    } else {
+        html = `
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading"><i class="fas fa-times-circle me-2"></i>Validation Failed</h4>
+        `;
+        
+        if (validation.total !== undefined) {
+            html += `<p>${validation.invalid_count} of ${validation.total} instances failed validation.</p>`;
+        }
+        
+        if (validation.errors && validation.errors.length > 0) {
+            html += '<hr><h5>Errors:</h5><ul>';
+            validation.errors.forEach(error => {
+                let errorMsg = error.message;
+                if (error.path && error.path.length > 0) {
+                    errorMsg = `At ${error.path.join('.')}: ${errorMsg}`;
+                }
+                if (error.instance_index !== undefined) {
+                    errorMsg = `Instance ${error.instance_index}: ${errorMsg}`;
+                }
+                html += `<li>${escapeHtml(errorMsg)}</li>`;
+            });
+            html += '</ul>';
+        }
+        
+        html += '</div>';
+    }
+    
+    // Handle validation by type
+    if (validation.types) {
+        html += '<h5>Validation by Type:</h5>';
+        for (const [typeName, typeResults] of Object.entries(validation.types)) {
+            const badge = typeResults.valid ? 
+                '<span class="badge bg-success">Valid</span>' : 
+                '<span class="badge bg-danger">Invalid</span>';
+            
+            html += `<div class="mb-2"><strong>${typeName}</strong> ${badge}`;
+            
+            if (typeResults.error) {
+                html += `<br><small class="text-danger">${escapeHtml(typeResults.error)}</small>`;
+            } else if (typeResults.total) {
+                html += `<br><small>${typeResults.valid_count}/${typeResults.total} valid</small>`;
+            }
+            
+            html += '</div>';
+        }
+    }
+    
+    resultsDiv.innerHTML = html;
+    
+    if (report) {
+        reportDiv.style.display = 'block';
+        reportContent.textContent = report;
+    } else {
+        reportDiv.style.display = 'none';
+    }
+}
+
+function displaySchemaValidationResults(validation) {
+    const resultsCard = document.getElementById('resultsCard');
+    const resultsDiv = document.getElementById('validationResults');
+    const reportDiv = document.getElementById('validationReport');
+    
+    resultsCard.style.display = 'block';
+    reportDiv.style.display = 'none';
+    
+    let html = '';
+    
+    if (validation.valid) {
+        html = `
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading"><i class="fas fa-check-circle me-2"></i>Valid JSON Schema!</h4>
+                <p>The schema is valid according to JSON Schema Draft 7 specification.</p>
+            </div>
+        `;
+        
+        if (validation.warnings && validation.warnings.length > 0) {
+            html += `
+                <div class="alert alert-warning" role="alert">
+                    <h5><i class="fas fa-exclamation-triangle me-2"></i>Warnings:</h5>
+                    <ul class="mb-0">
+            `;
+            validation.warnings.forEach(warning => {
+                html += `<li>${escapeHtml(warning)}</li>`;
+            });
+            html += '</ul></div>';
+        }
+    } else {
+        html = `
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading"><i class="fas fa-times-circle me-2"></i>Invalid Schema</h4>
+                <p>The schema is not valid according to JSON Schema Draft 7 specification.</p>
+        `;
+        
+        if (validation.errors && validation.errors.length > 0) {
+            html += '<hr><h5>Errors:</h5><ul>';
+            validation.errors.forEach(error => {
+                html += `<li>${escapeHtml(error.message || JSON.stringify(error))}</li>`;
+            });
+            html += '</ul>';
+        }
+        
+        html += '</div>';
+    }
+    
+    resultsDiv.innerHTML = html;
+}
+
+function loadExample() {
+    // Load example schema and data
+    const exampleSchema = {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "title": "Person",
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "The person's name"
+            },
+            "age": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "The person's age"
+            },
+            "email": {
+                "type": "string",
+                "format": "email",
+                "description": "The person's email address"
+            }
+        },
+        "required": ["name", "age"]
+    };
+    
+    const exampleData = {
+        "name": "John Doe",
+        "age": 30,
+        "email": "john.doe@example.com"
+    };
+    
+    document.getElementById('schemaInput').value = JSON.stringify(exampleSchema, null, 2);
+    document.getElementById('dataInput').value = JSON.stringify(exampleData, null, 2);
+}
+
+function clearValidation() {
+    document.getElementById('schemaInput').value = '';
+    document.getElementById('dataInput').value = '';
+    document.getElementById('schemaFile').value = '';
+    document.getElementById('dataFile').value = '';
+    document.getElementById('resultsCard').style.display = 'none';
+}
+
+function clearSchemaValidation() {
+    document.getElementById('schemaOnlyInput').value = '';
+    document.getElementById('schemaOnlyFile').value = '';
+    document.getElementById('resultsCard').style.display = 'none';
+}
+
+function showLoading() {
+    const resultsCard = document.getElementById('resultsCard');
+    const resultsDiv = document.getElementById('validationResults');
+    
+    resultsCard.style.display = 'block';
+    resultsDiv.innerHTML = `
+        <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Validating...</span>
+            </div>
+            <p class="mt-2">Validating...</p>
+        </div>
+    `;
+    
+    document.getElementById('validationReport').style.display = 'none';
+}
+
+function showError(message) {
+    const resultsCard = document.getElementById('resultsCard');
+    const resultsDiv = document.getElementById('validationResults');
+    
+    resultsCard.style.display = 'block';
+    resultsDiv.innerHTML = `
+        <div class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>${escapeHtml(message)}
+        </div>
+    `;
+    
+    document.getElementById('validationReport').style.display = 'none';
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+</script>
+{% endblock %}

@@ -82,6 +82,12 @@ def documentation():
     return render_template('documentation.html')
 
 
+@main_bp.route('/validate')
+def validate():
+    """JSON Schema validation page."""
+    return render_template('validate.html')
+
+
 @main_bp.route('/api-docs')
 def api_docs():
     """API documentation page."""
