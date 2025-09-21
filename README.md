@@ -70,16 +70,24 @@ Download the standalone application for your platform:
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/Airy59/OntoJSON.git
 cd OntoJSON
 
-# Create and activate a virtual environment
+# Create and activate a virtual environment (Python 3.8+ required)
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# For convenience, use the activation helper script:
+source activate_env.sh  # Shows Python version and helpful commands
 
 # Install the package
 pip install -e .
 ```
+
+**Note:** The project includes an `activate_env.sh` helper script that:
+- Activates the virtual environment
+- Shows the Python version
+- Displays helpful commands for running the applications
 
 #### Installation with GUI Support
 
@@ -122,6 +130,9 @@ The OntoJSON GUI provides an intuitive interface for transforming ontologies:
 **From Python Installation:**
 
 ```bash
+# First activate the virtual environment
+source .venv/bin/activate  # Or: source activate_env.sh
+
 # Launch the GUI application
 python owl2jsonschema_gui.py
 
@@ -130,6 +141,9 @@ owl2jsonschema-gui
 
 # Or using the launcher script
 ./launch_ontojson.py
+
+# Or directly from source
+python src/owl2jsonschema_gui/app.py
 ```
 
 #### GUI Features
@@ -205,6 +219,9 @@ owl2jsonschema-gui
 OntoJSON now includes a web interface for browser-based access:
 
 ```bash
+# First activate the virtual environment
+source .venv/bin/activate  # Or: source activate_env.sh
+
 # Smart launcher (automatically finds available port)
 python src/owl2jsonschema_web/launch_web.py
 
@@ -606,8 +623,10 @@ OntoJSON/
 │   ├── test_properties_assignment.py
 │   └── test_thing_inheritance.py
 ├── .gitignore                     # Git ignore file
+├── .venv/                         # Virtual environment (not in git)
 ├── .vscode/                       # VS Code settings
 ├── .idea/                         # PyCharm/IntelliJ settings
+├── activate_env.sh                # Virtual environment helper script
 ├── architecture.md                # Architecture documentation
 ├── create_app_bundle.sh           # macOS app bundle creator
 ├── credits.txt                    # Credits and acknowledgments
