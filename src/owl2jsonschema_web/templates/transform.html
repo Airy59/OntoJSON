@@ -705,18 +705,29 @@ function copyToClipboard(elementId) {
 
 // Download all schemas button handler
 document.getElementById('downloadAllSchemas').addEventListener('click', () => {
-    if (!transformationResult) return;
+    if (!transformationResult) {
+        alert('No transformation result available.');
+        return;
+    }
     
-    // Since we can't create ZIP files in browser without additional libraries,
-    // we'll download each schema individually
+    console.log('Transform result:', transformationResult);
+    console.log('Has component_schemas:', !!transformationResult.component_schemas);
+    if (transformationResult.component_schemas) {
+        console.log('Component schema keys:', Object.keys(transformationResult.component_schemas));
+    }
+    
+    // Collect all schemas
     const schemas = {
         'composite_schema': transformationResult.schema
     };
     
-    if (transformationResult.component_schemas) {
+    if (transformationResult.component_schemas && Object.keys(transformationResult.component_schemas).length > 0) {
         Object.entries(transformationResult.component_schemas).forEach(([name, schema]) => {
-            schemas[`${name}_schema`] = schema;
+            schemas[name + '_schema'] = schema;
         });
+    } else {
+        console.warn('No component schemas found in result. Please restart the web server to use the updated code.');
+        alert('⚠️ Component schemas not available.\n\nThis may be because:\n1. The web server needs to be restarted\n2. Component transformation failed\n\nOnly the composite schema will be downloaded.\n\nCheck the browser console for details.');
     }
     
     // Download each schema with a small delay between downloads
@@ -724,12 +735,14 @@ document.getElementById('downloadAllSchemas').addEventListener('click', () => {
     Object.entries(schemas).forEach(([name, schema]) => {
         setTimeout(() => {
             const content = JSON.stringify(schema, null, 2);
-            downloadFile(content, `${name}.json`, 'application/json');
+            downloadFile(content, name + '.json', 'application/json');
         }, delay);
         delay += 300; // 300ms delay between downloads
     });
     
-    alert(`Downloading ${Object.keys(schemas).length} schema file(s). Check your downloads folder.`);
+    const schemaCount = Object.keys(schemas).length;
+    const componentCount = schemaCount - 1; // Subtract composite
+    alert(`📥 Downloading ${schemaCount} schema file(s):\n• 1 composite schema\n• ${componentCount} component schema(s)\n\nCheck your downloads folder.`);
 });
 
 // Download functions
