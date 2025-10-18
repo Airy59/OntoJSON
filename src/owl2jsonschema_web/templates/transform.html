@@ -502,8 +502,11 @@ async function performTransformation() {
     resultsContainer.style.display = 'none';
     transformBtn.disabled = true;
     
-    // Use the composite ontology as source
-    const sources = [compositeOntologyPath];
+    // Use the ORIGINAL sources for component transformation, not the composite
+    const sources = [];
+    uploadedFiles.forEach(file => sources.push(file.path));
+    const urls = document.getElementById('urlInput').value.split('\n').filter(url => url.trim());
+    sources.push(...urls);
     
     // Get session configuration and merge with local settings
     let config = {};
