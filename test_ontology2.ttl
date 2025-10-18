@@ -1,0 +1,40 @@
+@prefix : <http://example.org/test2#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/test2> a owl:Ontology ;
+    rdfs:label "Test Ontology 2" ;
+    rdfs:comment "Second test ontology for component schema testing" .
+
+:Vehicle a owl:Class ;
+    rdfs:label "Vehicle" ;
+    rdfs:comment "A means of transportation" .
+
+:Car a owl:Class ;
+    rdfs:label "Car" ;
+    rdfs:comment "A four-wheeled vehicle" ;
+    rdfs:subClassOf :Vehicle .
+
+:Bicycle a owl:Class ;
+    rdfs:label "Bicycle" ;
+    rdfs:comment "A two-wheeled vehicle" ;
+    rdfs:subClassOf :Vehicle .
+
+:brand a owl:DatatypeProperty ;
+    rdfs:label "brand" ;
+    rdfs:comment "The brand name" ;
+    rdfs:domain :Vehicle ;
+    rdfs:range xsd:string .
+
+:year a owl:DatatypeProperty ;
+    rdfs:label "year" ;
+    rdfs:comment "The year of manufacture" ;
+    rdfs:domain :Vehicle ;
+    rdfs:range xsd:integer .
+
+:hasOwner a owl:ObjectProperty ;
+    rdfs:label "has owner" ;
+    rdfs:comment "The owner of the vehicle" ;
+    rdfs:domain :Vehicle .

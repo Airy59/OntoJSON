@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional, Union, Tuple
 from dataclasses import dataclass
 from enum import Enum
+import re
 
 from ..engine import TransformationEngine
 from ..config import TransformationConfig
@@ -18,6 +19,54 @@ from ..parser import OntologyParser
 from ..composite_builder import CompositeOntologyBuilder
 from ..abox_generator import ABoxGenerator
 from ..abox_to_json import ABoxToJSONConverter
+
+
+def normalize_line_endings(file_path: Union[str, Path]) -> str:
+    """
+    Normalize line endings in a file to Unix-style (LF).
+    
+    This function handles Windows (CRLF), old Mac (CR), and mixed line endings,
+    converting them all to Unix-style (LF). It also removes any duplicate line
+    endings that might cause parsing issues.
+    
+    Args:
+        file_path: Path to the file to normalize
+        
+    Returns:
+        Path to a temporary file with normalized content
+    """
+    try:
+        # Read the file in binary mode to preserve encoding
+        with open(file_path, 'rb') as f:
+            content = f.read()
+        
+        # Decode with error handling for different encodings
+        try:
+            text = content.decode('utf-8')
+        except UnicodeDecodeError:
+            try:
+                text = content.decode('latin-1')
+            except UnicodeDecodeError:
+                text = content.decode('utf-8', errors='replace')
+        
+        # Normalize all line endings to \n
+        # First, replace \r\n with \n (Windows)
+        text = text.replace('\r\n', '\n')
+        # Then replace remaining \r with \n (old Mac)
+        text = text.replace('\r', '\n')
+        # Remove any duplicate newlines that might have been created
+        text = re.sub(r'\n\n+', '\n\n', text)
+        
+        # Create a temporary file with normalized content
+        suffix = Path(file_path).suffix
+        with tempfile.NamedTemporaryFile(mode='w', suffix=suffix, delete=False, encoding='utf-8') as temp_file:
+            temp_file.write(text)
+            return temp_file.name
+            
+    except Exception as e:
+        print(f"Warning: Could not normalize line endings for {file_path}: {e}")
+        # Return original file path if normalization fails
+        return str(file_path)
 
 
 class TransformationStatus(Enum):
@@ -37,12 +86,15 @@ class TransformationResult:
     error: Optional[str] = None
     warnings: List[str] = None
     metadata: Dict[str, Any] = None
+    component_schemas: Optional[Dict[str, Dict[str, Any]]] = None  # Maps component name to schema
     
     def __post_init__(self):
         if self.warnings is None:
             self.warnings = []
         if self.metadata is None:
             self.metadata = {}
+        if self.component_schemas is None:
+            self.component_schemas = {}
 
 
 @dataclass
@@ -91,6 +143,7 @@ class TransformationService:
         Returns:
             TransformationResult with the schema or error information
         """
+        normalized_file = None
         try:
             # Use default config if not provided
             if config is None:
@@ -100,11 +153,18 @@ class TransformationService:
             config.set_rule_option("labels_to_titles", "language", language)
             config.set_rule_option("comments_to_descriptions", "language", language)
             
+            # Normalize line endings for local files
+            source_to_parse = source
+            if not str(source).startswith(('http://', 'https://', 'ftp://')):
+                normalized_file = normalize_line_endings(source)
+                source_to_parse = normalized_file
+                print(f"Normalized line endings for: {Path(source).name}")
+            
             # Parse the ontology
             if rdf_format == "auto":
-                ontology = self.parser.parse(source)
+                ontology = self.parser.parse(source_to_parse)
             else:
-                ontology = self.parser.parse(source, format=rdf_format)
+                ontology = self.parser.parse(source_to_parse, format=rdf_format)
             
             # Create and run the transformation engine
             engine = TransformationEngine(config)
@@ -130,6 +190,13 @@ class TransformationService:
                 success=False,
                 error=str(e)
             )
+        finally:
+            # Clean up normalized temp file
+            if normalized_file and Path(normalized_file).exists():
+                try:
+                    Path(normalized_file).unlink()
+                except Exception:
+                    pass
     
     def transform_multiple(
         self,
@@ -138,10 +205,15 @@ class TransformationService:
         config: Optional[TransformationConfig] = None,
         language: str = "en",
         save_composite: bool = False,
-        composite_output_path: Optional[Path] = None
+        composite_output_path: Optional[Path] = None,
+        transform_components: bool = True
     ) -> TransformationResult:
         """
         Transform multiple ontology sources to JSON Schema.
+        
+        Creates schemas for:
+        1. The composite ontology (imports all sources)
+        2. Each individual component ontology (if transform_components=True)
         
         Args:
             sources: List of paths or URIs to ontologies
@@ -150,20 +222,32 @@ class TransformationService:
             language: Language for labels and comments
             save_composite: Whether to save the composite ontology
             composite_output_path: Path to save the composite ontology
+            transform_components: Whether to also transform individual components
             
         Returns:
-            TransformationResult with the schema or error information
+            TransformationResult with the composite schema and component schemas
         """
         temp_file = None
+        normalized_files = []
         try:
-            # Create composite ontology
+            # Normalize line endings for all local source files
+            normalized_sources = []
+            for source in sources:
+                if not str(source).startswith(('http://', 'https://', 'ftp://')):
+                    normalized = normalize_line_endings(source)
+                    normalized_files.append(normalized)
+                    normalized_sources.append(normalized)
+                    print(f"Normalized line endings for: {Path(source).name}")
+                else:
+                    normalized_sources.append(source)
+            # Create composite ontology using normalized sources
             builder = CompositeOntologyBuilder()
             
             # Add metadata if provided
             if composite_metadata:
                 builder.add_metadata(composite_metadata)
             
-            # Add imports for all sources
+            # Add imports for all sources (use original paths for imports)
             builder.add_imports(sources)
             
             # Serialize to temporary file or specified path
@@ -188,11 +272,47 @@ class TransformationService:
                 rdf_format="turtle"
             )
             
+            # Transform each individual component if requested
+            component_schemas = {}
+            if transform_components and result.success:
+                for i, source in enumerate(sources):
+                    source_path = Path(source)
+                    component_name = source_path.stem
+                    
+                    # Use normalized source for transformation
+                    source_to_transform = normalized_sources[i]
+                    
+                    try:
+                        # Transform this component (it will normalize again if needed, but that's ok)
+                        component_result = self.transform_single(
+                            source_to_transform,
+                            config=config,
+                            language=language
+                        )
+                        
+                        if component_result.success:
+                            component_schemas[component_name] = component_result.schema
+                            print(f"✓ Component '{component_name}' transformed successfully")
+                        else:
+                            # Log warning but continue with other components
+                            warning_msg = f"Failed to transform component '{component_name}': {component_result.error}"
+                            result.warnings.append(warning_msg)
+                            print(f"✗ Component '{component_name}' failed: {component_result.error}")
+                    except Exception as e:
+                        warning_msg = f"Exception transforming component '{component_name}': {str(e)}"
+                        result.warnings.append(warning_msg)
+                        print(f"✗ Component '{component_name}' exception: {str(e)}")
+            
+            # Add component schemas to result
+            result.component_schemas = component_schemas
+            
             # Add composite-specific metadata
             if result.success and result.metadata:
                 result.metadata["is_composite"] = True
                 result.metadata["source_count"] = len(sources)
                 result.metadata["sources"] = [str(s) for s in sources]
+                result.metadata["component_count"] = len(component_schemas)
+                result.metadata["component_names"] = list(component_schemas.keys())
                 if save_composite:
                     result.metadata["composite_saved_to"] = str(composite_output_path)
             
@@ -204,9 +324,18 @@ class TransformationService:
                 error=str(e)
             )
         finally:
-            # Clean up temporary file if created
+            # Clean up temporary files
             if temp_file and Path(temp_file.name).exists():
-                Path(temp_file.name).unlink()
+                try:
+                    Path(temp_file.name).unlink()
+                except Exception:
+                    pass
+            for normalized_file in normalized_files:
+                if Path(normalized_file).exists():
+                    try:
+                        Path(normalized_file).unlink()
+                    except Exception:
+                        pass
     
     def generate_abox(
         self,
@@ -445,3 +574,51 @@ class TransformationService:
             self.tasks[task_id].result = result
             self.tasks[task_id].progress = 100
             self.tasks[task_id].completed_at = datetime.utcnow().isoformat()
+    
+    def save_transformation_results(
+        self,
+        result: TransformationResult,
+        output_dir: Union[str, Path],
+        composite_filename: str = "composite_schema.json",
+        component_prefix: str = "",
+        component_suffix: str = "_schema.json"
+    ) -> Dict[str, str]:
+        """
+        Save transformation results to separate files.
+        
+        Saves:
+        1. The composite schema to a file
+        2. Each component schema to separate files
+        
+        Args:
+            result: TransformationResult containing schemas
+            output_dir: Directory where to save the schemas
+            composite_filename: Filename for the composite schema
+            component_prefix: Prefix for component schema filenames
+            component_suffix: Suffix for component schema filenames
+            
+        Returns:
+            Dictionary mapping schema name to saved file path
+        """
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+        
+        saved_files = {}
+        
+        # Save composite schema
+        if result.schema:
+            composite_path = output_path / composite_filename
+            with open(composite_path, 'w', encoding='utf-8') as f:
+                json.dump(result.schema, f, indent=2)
+            saved_files["composite"] = str(composite_path)
+        
+        # Save component schemas
+        if result.component_schemas:
+            for component_name, component_schema in result.component_schemas.items():
+                filename = f"{component_prefix}{component_name}{component_suffix}"
+                component_path = output_path / filename
+                with open(component_path, 'w', encoding='utf-8') as f:
+                    json.dump(component_schema, f, indent=2)
+                saved_files[component_name] = str(component_path)
+        
+        return saved_files

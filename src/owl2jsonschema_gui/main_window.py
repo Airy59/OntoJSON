@@ -435,14 +435,18 @@ class TransformationWorker(QThread):
     error = pyqtSignal(str)
     finished = pyqtSignal(dict)
     
-    def __init__(self, input_source: str, config: Dict[str, Any]):
+    def __init__(self, input_source: str, config: Dict[str, Any], ontology_list: List[str] = None):
         super().__init__()
         self.input_source = input_source.strip()
         self.config = config
+        self.ontology_list = ontology_list or []
+        self.transformation_service_result = None
     
     def run(self):
         """Run the transformation in a separate thread."""
         try:
+            from owl2jsonschema.services.transformation_service import TransformationService
+            
             # Check if input is a URL
             is_url = self.input_source.startswith(('http://', 'https://', 'ftp://'))
             
@@ -503,10 +507,45 @@ class TransformationWorker(QThread):
             # Store ontology model for A-box generation
             self.ontology_model = ontology
             
-            self.progress.emit("Running transformation...")
-            config = TransformationConfig(self.config)
-            engine = TransformationEngine(config)
-            result = engine.transform(ontology)
+            # Use transformation service for multi-ontology support
+            service = TransformationService()
+            transformation_config = TransformationConfig(self.config)
+            
+            # Debug output
+            print(f"DEBUG Worker: ontology_list = {self.ontology_list}")
+            print(f"DEBUG Worker: len(ontology_list) = {len(self.ontology_list) if self.ontology_list else 0}")
+            
+            # Always use transform_multiple to get both composite and component schemas
+            if self.ontology_list and len(self.ontology_list) > 0:
+                num_ontologies = len(self.ontology_list)
+                if num_ontologies > 1:
+                    self.progress.emit(f"Transforming composite with {num_ontologies} component ontologies...")
+                else:
+                    self.progress.emit("Transforming ontology (composite + component schemas)...")
+                
+                print(f"DEBUG Worker: Calling transform_multiple with {num_ontologies} sources")
+                service_result = service.transform_multiple(
+                    sources=self.ontology_list,
+                    config=transformation_config,
+                    transform_components=True
+                )
+                print(f"DEBUG Worker: transform_multiple returned, success={service_result.success}")
+                print(f"DEBUG Worker: component_schemas keys: {list(service_result.component_schemas.keys()) if service_result.component_schemas else 'None'}")
+            else:
+                # Fallback to single transformation (shouldn't happen in normal flow)
+                print(f"DEBUG Worker: Falling back to transform_single")
+                self.progress.emit("Running transformation...")
+                service_result = service.transform_single(
+                    source=self.input_source,
+                    config=transformation_config
+                )
+            
+            if not service_result.success:
+                raise Exception(service_result.error)
+            
+            # Store the full service result for later use
+            self.transformation_service_result = service_result
+            result = service_result.schema
             
             self.progress.emit("Transformation completed!")
             self.finished.emit(result)
@@ -654,9 +693,9 @@ class MainWindow(QMainWindow):
         
         file_menu.addSeparator()
         
-        save_schema_action = QAction("Save JSON &Schema...", self)
+        save_schema_action = QAction("Save JSON &Schema(s)...", self)
         save_schema_action.setShortcut("Ctrl+S")
-        save_schema_action.triggered.connect(self.save_schema)
+        save_schema_action.triggered.connect(self.save_schemas)
         save_schema_action.setEnabled(False)
         self.save_schema_action = save_schema_action
         file_menu.addAction(save_schema_action)
@@ -1677,7 +1716,7 @@ class MainWindow(QMainWindow):
         }
         
         # Create and start worker thread
-        self.worker = TransformationWorker(self.input_file, config)
+        self.worker = TransformationWorker(self.input_file, config, self.ontology_list)
         self.worker.progress.connect(self.on_progress)
         self.worker.error.connect(self.on_error)
         self.worker.finished.connect(self.on_transformation_complete)
@@ -1840,26 +1879,82 @@ class MainWindow(QMainWindow):
         
         return "\n".join(stats)
     
-    def save_schema(self):
-        """Save the JSON Schema."""
+    def save_schemas(self):
+        """Save the JSON Schema(s) to a directory."""
         if not self.transformation_result:
             QMessageBox.warning(self, "Warning", "No schema to save. Please run the transformation first.")
             return
         
-        file_path, _ = QFileDialog.getSaveFileName(
+        # Diagnostic check before asking for directory
+        diagnostic_info = []
+        diagnostic_info.append(f"Has worker: {hasattr(self, 'worker')}")
+        if hasattr(self, 'worker'):
+            diagnostic_info.append(f"Worker has transformation_service_result: {hasattr(self.worker, 'transformation_service_result')}")
+            if hasattr(self.worker, 'transformation_service_result') and self.worker.transformation_service_result:
+                result = self.worker.transformation_service_result
+                diagnostic_info.append(f"Result.success: {result.success}")
+                diagnostic_info.append(f"Result has component_schemas: {result.component_schemas is not None}")
+                if result.component_schemas:
+                    diagnostic_info.append(f"Number of component schemas: {len(result.component_schemas)}")
+                    diagnostic_info.append(f"Component names: {list(result.component_schemas.keys())}")
+                else:
+                    diagnostic_info.append("Component schemas is None or empty")
+        
+        # Show diagnostic
+        QMessageBox.information(self, "Diagnostic Info", "\n".join(diagnostic_info))
+        
+        # Ask user to select a directory
+        directory = QFileDialog.getExistingDirectory(
             self,
-            "Save JSON Schema",
-            "schema.json",
-            "JSON Files (*.json);;All Files (*.*)"
+            "Select Directory to Save JSON Schema(s)",
+            "",
+            QFileDialog.Option.ShowDirsOnly
         )
         
-        if file_path:
+        if directory:
             try:
-                with open(file_path, 'w') as f:
-                    json.dump(self.transformation_result, f, indent=2)
-                QMessageBox.information(self, "Success", f"Schema saved to:\n{file_path}")
+                from owl2jsonschema.services.transformation_service import TransformationService
+                service = TransformationService()
+                
+                # Check if we have a transformation result with component schemas
+                # The worker should have stored this information
+                if hasattr(self.worker, 'transformation_service_result') and self.worker.transformation_service_result:
+                    result = self.worker.transformation_service_result
+                    
+                    saved_files = service.save_transformation_results(
+                        result=result,
+                        output_dir=directory,
+                        composite_filename="composite_schema.json",
+                        component_suffix="_schema.json"
+                    )
+                    
+                    # Check for warnings
+                    warnings_msg = ""
+                    if result.warnings:
+                        warnings_msg = "\n\n⚠️ Warnings:\n" + "\n".join([f"  • {w}" for w in result.warnings])
+                else:
+                    # Fallback: just save the main schema
+                    composite_path = Path(directory) / "composite_schema.json"
+                    with open(composite_path, 'w', encoding='utf-8') as f:
+                        json.dump(self.transformation_result, f, indent=2)
+                    saved_files = {"composite": str(composite_path)}
+                    warnings_msg = ""
+                
+                # Build success message
+                file_list = "\n".join([f"  • {name}: {Path(path).name}"
+                                      for name, path in saved_files.items()])
+                
+                message = f"Saved {len(saved_files)} schema file(s) to:\n{directory}\n\n{file_list}{warnings_msg}"
+                
+                QMessageBox.information(
+                    self,
+                    "Schemas Saved",
+                    message
+                )
             except Exception as e:
-                QMessageBox.critical(self, "Save Error", f"Failed to save file:\n{str(e)}")
+                import traceback
+                error_details = traceback.format_exc()
+                QMessageBox.critical(self, "Save Error", f"Failed to save schemas:\n{str(e)}\n\n{error_details}")
     
     def generate_abox(self):
         """Generate the A-box based on the T-box."""

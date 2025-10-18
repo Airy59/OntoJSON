@@ -390,6 +390,7 @@ class DatatypePropertyRule(TransformationRule):
             "http://www.w3.org/2001/XMLSchema#date": {"type": "string", "format": "date"},
             "http://www.w3.org/2001/XMLSchema#time": {"type": "string", "format": "time"},
             "http://www.w3.org/2001/XMLSchema#dateTime": {"type": "string", "format": "date-time"},
+            "http://www.w3.org/2001/XMLSchema#dateTimeStamp": {"type": "string", "format": "date-time"},
             "http://www.w3.org/2001/XMLSchema#duration": {"type": "string"},
             "http://www.w3.org/2001/XMLSchema#anyURI": {"type": "string", "format": "uri"},
         }
@@ -581,7 +582,9 @@ class PropertyRestrictionsRule(TransformationRule):
             "http://www.w3.org/2001/XMLSchema#decimal": {"type": "number"},
             "http://www.w3.org/2001/XMLSchema#boolean": {"type": "boolean"},
             "http://www.w3.org/2001/XMLSchema#date": {"type": "string", "format": "date"},
+            "http://www.w3.org/2001/XMLSchema#time": {"type": "string", "format": "time"},
             "http://www.w3.org/2001/XMLSchema#dateTime": {"type": "string", "format": "date-time"},
+            "http://www.w3.org/2001/XMLSchema#dateTimeStamp": {"type": "string", "format": "date-time"},
         }
         
         if type_uri in xsd_types:
