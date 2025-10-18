@@ -276,6 +276,7 @@ class TransformationService:
             component_schemas = {}
             if transform_components and result.success:
                 for i, source in enumerate(sources):
+                    # Use ORIGINAL source for naming (not normalized temp file)
                     source_path = Path(source)
                     component_name = source_path.stem
                     
