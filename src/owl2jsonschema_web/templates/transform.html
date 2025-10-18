@@ -701,6 +701,7 @@ function copyToClipboard(elementId) {
     navigator.clipboard.writeText(text).then(() => {
         alert('Copied to clipboard!');
     });
+}
 
 // Download all schemas button handler
 document.getElementById('downloadAllSchemas').addEventListener('click', () => {
@@ -730,8 +731,6 @@ document.getElementById('downloadAllSchemas').addEventListener('click', () => {
     
     alert(`Downloading ${Object.keys(schemas).length} schema file(s). Check your downloads folder.`);
 });
-
-}
 
 // Download functions
 document.getElementById('downloadSchema').addEventListener('click', () => {
