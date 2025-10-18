@@ -205,7 +205,12 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#schemaTab" type="button">
-                        JSON Schema
+                        Composite Schema
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button id="componentSchemasTabBtn" class="nav-link" data-bs-toggle="tab" data-bs-target="#componentSchemasTab" type="button" style="display: none;">
+                        Component Schemas
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -223,12 +228,18 @@
             <div class="tab-content mt-3">
                 <div class="tab-pane fade show active" id="schemaTab">
                     <div class="d-flex justify-content-between mb-2">
-                        <h6>JSON Schema Output</h6>
+                        <h6>Composite JSON Schema</h6>
                         <button class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('schemaOutput')">
                             <i class="fas fa-copy"></i> Copy
                         </button>
                     </div>
                     <pre id="schemaOutput" class="code-output bg-light p-3 rounded"></pre>
+                </div>
+                <div class="tab-pane fade" id="componentSchemasTab">
+                    <div class="mb-2">
+                        <h6>Component Schemas (<span id="componentCount">0</span>)</h6>
+                    </div>
+                    <div id="componentSchemasList"></div>
                 </div>
                 <div class="tab-pane fade" id="instancesTab">
                     <div class="d-flex justify-content-between mb-2">
@@ -247,7 +258,10 @@
             <!-- Download Options -->
             <div class="mt-3">
                 <button id="downloadSchema" class="btn btn-success me-2">
-                    <i class="fas fa-download"></i> Download Schema
+                    <i class="fas fa-download"></i> Download Composite Schema
+                </button>
+                <button id="downloadAllSchemas" class="btn btn-success me-2" style="display: none;">
+                    <i class="fas fa-download"></i> Download All Schemas (ZIP)
                 </button>
                 <button id="downloadInstances" class="btn btn-success">
                     <i class="fas fa-download"></i> Download Instances
@@ -573,12 +587,22 @@ function updateProgress(percent, message) {
     document.getElementById('progressMessage').textContent = message;
 }
 
+let transformationResult = null;
+
 function displayResults(result) {
     document.getElementById('progressContainer').style.display = 'none';
     document.getElementById('resultsContainer').style.display = 'block';
     
-    // Display schema
+    // Store result globally for downloads
+    transformationResult = result;
+    
+    // Display composite schema
     document.getElementById('schemaOutput').textContent = JSON.stringify(result.schema, null, 2);
+    
+    // Display component schemas if available
+    if (result.component_schemas) {
+        displayComponentSchemas(result.component_schemas);
+    }
     
     // Display instances if available
     if (result.instances) {
@@ -587,13 +611,88 @@ function displayResults(result) {
     
     // Display metadata
     if (result.metadata) {
-        const metadataHtml = Object.entries(result.metadata).map(([key, value]) => 
-            `<p><strong>${key}:</strong> ${value}</p>`
+        const metadataHtml = Object.entries(result.metadata).map(([key, value]) =>
+            `<p><strong>${key}:</strong> ${JSON.stringify(value)}</p>`
         ).join('');
         document.getElementById('metadataOutput').innerHTML = metadataHtml;
     }
     
     transformBtn.disabled = false;
+}
+
+function displayComponentSchemas(componentSchemas) {
+    const componentSchemasTabBtn = document.getElementById('componentSchemasTabBtn');
+    const componentSchemasList = document.getElementById('componentSchemasList');
+    const componentCount = document.getElementById('componentCount');
+    const downloadAllSchemasBtn = document.getElementById('downloadAllSchemas');
+    
+    // Show the component schemas tab
+    componentSchemasTabBtn.style.display = 'block';
+    downloadAllSchemasBtn.style.display = 'inline-block';
+    
+    // Update count
+    const count = Object.keys(componentSchemas).length;
+    componentCount.textContent = count;
+    
+    // Clear previous content
+    componentSchemasList.innerHTML = '';
+    
+    // Create accordion for each component
+    const accordionId = 'componentSchemasAccordion';
+    const accordion = document.createElement('div');
+    accordion.className = 'accordion';
+    accordion.id = accordionId;
+    
+    Object.entries(componentSchemas).forEach(([componentName, componentSchema], index) => {
+        const itemId = `component-${index}`;
+        const accordionItem = document.createElement('div');
+        accordionItem.className = 'accordion-item';
+        accordionItem.innerHTML = `
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#${itemId}" aria-expanded="false">
+                    ${componentName}
+                </button>
+            </h2>
+            <div id="${itemId}" class="accordion-collapse collapse" data-bs-parent="#${accordionId}">
+                <div class="accordion-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <small class="text-muted">${Object.keys(componentSchema.definitions || componentSchema.$defs || {}).length} definitions</small>
+                        <div>
+                            <button class="btn btn-sm btn-outline-secondary me-1" onclick="copyComponentSchema('${componentName}')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="btn btn-sm btn-outline-success" onclick="downloadComponentSchema('${componentName}')">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                    <pre class="code-output bg-light p-3 rounded" style="max-height: 400px;">${JSON.stringify(componentSchema, null, 2)}</pre>
+                </div>
+            </div>
+        `;
+        accordion.appendChild(accordionItem);
+    });
+    
+    componentSchemasList.appendChild(accordion);
+}
+
+function copyComponentSchema(componentName) {
+    if (transformationResult && transformationResult.component_schemas) {
+        const schema = transformationResult.component_schemas[componentName];
+        const text = JSON.stringify(schema, null, 2);
+        navigator.clipboard.writeText(text).then(() => {
+            alert(`Copied ${componentName} schema to clipboard!`);
+        });
+    }
+}
+
+function downloadComponentSchema(componentName) {
+    if (transformationResult && transformationResult.component_schemas) {
+        const schema = transformationResult.component_schemas[componentName];
+        const content = JSON.stringify(schema, null, 2);
+        downloadFile(content, `${componentName}_schema.json`, 'application/json');
+    }
 }
 
 // Copy to clipboard
@@ -602,6 +701,36 @@ function copyToClipboard(elementId) {
     navigator.clipboard.writeText(text).then(() => {
         alert('Copied to clipboard!');
     });
+
+// Download all schemas button handler
+document.getElementById('downloadAllSchemas').addEventListener('click', () => {
+    if (!transformationResult) return;
+    
+    // Since we can't create ZIP files in browser without additional libraries,
+    // we'll download each schema individually
+    const schemas = {
+        'composite_schema': transformationResult.schema
+    };
+    
+    if (transformationResult.component_schemas) {
+        Object.entries(transformationResult.component_schemas).forEach(([name, schema]) => {
+            schemas[`${name}_schema`] = schema;
+        });
+    }
+    
+    // Download each schema with a small delay between downloads
+    let delay = 0;
+    Object.entries(schemas).forEach(([name, schema]) => {
+        setTimeout(() => {
+            const content = JSON.stringify(schema, null, 2);
+            downloadFile(content, `${name}.json`, 'application/json');
+        }, delay);
+        delay += 300; // 300ms delay between downloads
+    });
+    
+    alert(`Downloading ${Object.keys(schemas).length} schema file(s). Check your downloads folder.`);
+});
+
 }
 
 // Download functions

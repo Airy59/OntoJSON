@@ -157,22 +157,31 @@ def transform_multiple():
         language = request.json.get('language', 'en')
         save_composite = request.json.get('save_composite', False)
         
-        # Perform transformation
+        # Perform transformation with component schemas
         result = transformation_service.transform_multiple(
             sources=resolved_sources,
             composite_metadata=composite_metadata,
             config=config,
             language=language,
-            save_composite=save_composite
+            save_composite=save_composite,
+            transform_components=True  # Enable component transformation
         )
         
         if result.success:
-            return jsonify({
+            response = {
                 'success': True,
                 'schema': result.schema,
                 'metadata': result.metadata,
                 'warnings': result.warnings
-            })
+            }
+            
+            # Include component schemas if available
+            if result.component_schemas:
+                response['component_schemas'] = result.component_schemas
+                response['component_count'] = len(result.component_schemas)
+                response['component_names'] = list(result.component_schemas.keys())
+            
+            return jsonify(response)
         else:
             return jsonify({
                 'success': False,
