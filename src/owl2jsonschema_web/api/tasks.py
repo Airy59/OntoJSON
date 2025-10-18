@@ -96,6 +96,12 @@ def get_task_status(task_id):
                 'warnings': task.result.warnings,
                 'metadata': task.result.metadata
             }
+            
+            # Include component schemas if available
+            if task.result.component_schemas:
+                response['result']['component_schemas'] = task.result.component_schemas
+                response['result']['component_count'] = len(task.result.component_schemas)
+                response['result']['component_names'] = list(task.result.component_schemas.keys())
         
         return jsonify(response)
     
@@ -269,17 +275,12 @@ def _process_task_sync(task_id, params):
         
         transformation_service.update_task_progress(task_id, 50, 'Performing transformation')
         
-        # Perform transformation
-        if len(resolved_sources) == 1:
-            result = transformation_service.transform_single(
-                source=resolved_sources[0],
-                config=config
-            )
-        else:
-            result = transformation_service.transform_multiple(
-                sources=resolved_sources,
-                config=config
-            )
+        # Always use transform_multiple to get component schemas
+        result = transformation_service.transform_multiple(
+            sources=resolved_sources,
+            config=config,
+            transform_components=True
+        )
         
         transformation_service.update_task_progress(task_id, 90, 'Finalizing')
         

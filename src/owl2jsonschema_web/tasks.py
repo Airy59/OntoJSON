@@ -147,19 +147,14 @@ def process_transformation(self, task_id: str, params: Dict[str, Any]):
                 meta={'current': 70, 'total': 100, 'status': 'Transforming ontology...'}
             )
             
-            if len(resolved_sources) == 1:
-                transform_result = transformation_service.transform_single(
-                    source=resolved_sources[0],
-                    config=config,
-                    language=params.get('language', 'en')
-                )
-            else:
-                transform_result = transformation_service.transform_multiple(
-                    sources=resolved_sources,
-                    composite_metadata=params.get('composite_metadata'),
-                    config=config,
-                    language=params.get('language', 'en')
-                )
+            # Always use transform_multiple to get component schemas
+            transform_result = transformation_service.transform_multiple(
+                sources=resolved_sources,
+                composite_metadata=params.get('composite_metadata'),
+                config=config,
+                language=params.get('language', 'en'),
+                transform_components=True
+            )
             
             result = {
                 'success': transform_result.success,
@@ -168,6 +163,12 @@ def process_transformation(self, task_id: str, params: Dict[str, Any]):
                 'metadata': transform_result.metadata,
                 'warnings': transform_result.warnings
             }
+            
+            # Include component schemas if available
+            if transform_result.component_schemas:
+                result['component_schemas'] = transform_result.component_schemas
+                result['component_count'] = len(transform_result.component_schemas)
+                result['component_names'] = list(transform_result.component_schemas.keys())
         
         # Update final progress
         self.update_state(
