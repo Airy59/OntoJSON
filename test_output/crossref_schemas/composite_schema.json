@@ -94,6 +94,19 @@
       "title": "Organization",
       "description": "A group of people with a common purpose"
     },
+    "Vehicle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ],
+      "title": "Vehicle",
+      "description": "A means of transportation"
+    },
     "Driver": {
       "type": "object",
       "properties": {
@@ -120,19 +133,6 @@
           "properties": {}
         }
       ]
-    },
-    "Vehicle": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/_Thing"
-        },
-        {
-          "type": "object",
-          "properties": {}
-        }
-      ],
-      "title": "Vehicle",
-      "description": "A means of transportation"
     },
     "_Thing": {
       "type": "object",

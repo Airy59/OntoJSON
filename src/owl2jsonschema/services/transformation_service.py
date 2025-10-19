@@ -276,6 +276,7 @@ class TransformationService:
             # Transform each individual component if requested
             component_schemas = {}
             crossref_resolver = CrossReferenceResolver()
+            component_source_map = {}  # Map component names to original sources
             
             if transform_components and result.success:
                 # First pass: Transform all components and register classes
@@ -284,6 +285,9 @@ class TransformationService:
                     # Use ORIGINAL source for naming (not normalized temp file)
                     source_path = Path(source)
                     component_name = source_path.stem
+                    
+                    # Store the mapping of component name to original source
+                    component_source_map[component_name] = str(source)
                     
                     # Use normalized source for transformation
                     source_to_transform = normalized_sources[i]
@@ -342,6 +346,7 @@ class TransformationService:
                 result.metadata["sources"] = [str(s) for s in sources]
                 result.metadata["component_count"] = len(component_schemas)
                 result.metadata["component_names"] = list(component_schemas.keys())
+                result.metadata["component_source_map"] = component_source_map  # Add source mapping
                 if save_composite:
                     result.metadata["composite_saved_to"] = str(composite_output_path)
             
