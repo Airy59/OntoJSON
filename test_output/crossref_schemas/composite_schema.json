@@ -1,6 +1,19 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "Organization": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ],
+      "title": "Organization",
+      "description": "A group of people with a common purpose"
+    },
     "Person": {
       "allOf": [
         {
@@ -59,14 +72,6 @@
                 "description": "A person owns a vehicle"
               }
             },
-            "name": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "title": "name",
-                "description": "The name of something"
-              }
-            },
             "age": {
               "type": "array",
               "items": {
@@ -74,25 +79,20 @@
                 "title": "age",
                 "description": "The age in years"
               }
+            },
+            "name": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "name",
+                "description": "The name of something"
+              }
             }
           }
         }
       ],
       "title": "Person",
       "description": "A human being"
-    },
-    "Organization": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/_Thing"
-        },
-        {
-          "type": "object",
-          "properties": {}
-        }
-      ],
-      "title": "Organization",
-      "description": "A group of people with a common purpose"
     },
     "Vehicle": {
       "allOf": [

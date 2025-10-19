@@ -736,6 +736,8 @@ class OntologyParser:
                     if file_path.startswith('/') and ':' in file_path[1:3]:
                         file_path = file_path[1:]
                     
+                    print(f"  DEBUG: Attempting to load file: {file_path}")
+                    print(f"  DEBUG: File exists: {Path(file_path).exists()}")
                     temp_graph.parse(file_path)
                 else:
                     # Try to parse as-is (HTTP, HTTPS, or local path)
@@ -748,5 +750,7 @@ class OntologyParser:
                 print(f"  Successfully loaded {len(temp_graph)} triples from {import_str}")
                 
             except Exception as e:
-                print(f"  Warning: Could not resolve import {import_str}: {e}")
+                print(f"  ERROR: Could not resolve import {import_str}: {e}")
+                import traceback
+                traceback.print_exc()
                 # Continue processing even if one import fails

@@ -249,6 +249,7 @@ class TransformationService:
                 builder.add_metadata(composite_metadata)
             
             # Add imports for all sources (use original paths for imports)
+            print(f"DEBUG: Adding imports for sources: {sources}")
             builder.add_imports(sources)
             
             # Serialize to temporary file or specified path
