@@ -248,9 +248,9 @@ class TransformationService:
             if composite_metadata:
                 builder.add_metadata(composite_metadata)
             
-            # Add imports for all sources (use original paths for imports)
-            print(f"DEBUG: Adding imports for sources: {sources}")
-            builder.add_imports(sources)
+            # Add imports using NORMALIZED sources (not originals) to avoid line ending issues
+            print(f"DEBUG: Adding imports for normalized sources: {normalized_sources}")
+            builder.add_imports(normalized_sources)
             
             # Serialize to temporary file or specified path
             if save_composite and composite_output_path:
