@@ -282,9 +282,8 @@ class TransformationService:
                 # First pass: Transform all components and register classes
                 parsed_ontologies = []
                 for i, source in enumerate(sources):
-                    # Use ORIGINAL source for naming (not normalized temp file)
-                    source_path = Path(source)
-                    component_name = source_path.stem
+                    # Extract meaningful name from original source (handles URIs and file paths)
+                    component_name = self._extract_name_from_source(source)
                     
                     # Store the mapping of component name to original source
                     component_source_map[component_name] = str(source)
@@ -656,6 +655,48 @@ class TransformationService:
                 saved_files[component_name] = str(component_path)
         
         return saved_files
+    
+    def _extract_name_from_source(self, source: Union[str, Path]) -> str:
+        """
+        Extract a meaningful name from a source (file path or URI).
+        
+        Args:
+            source: The source path or URI
+            
+        Returns:
+            A clean, meaningful name for the component
+        """
+        source_str = str(source)
+        
+        # Check if source is a URL
+        if source_str.startswith(('http://', 'https://', 'ftp://')):
+            # Try to get fragment (after #) first
+            if '#' in source_str:
+                fragment = source_str.split('#')[-1]
+                if fragment and not fragment.startswith('http'):
+                    # Remove file extension if present
+                    fragment = re.sub(r'\.(ttl|rdf|owl|xml|n3|nt|jsonld)$', '', fragment, flags=re.IGNORECASE)
+                    if fragment:
+                        return fragment
+            
+            # Fall back to last path segment (after last /)
+            path_parts = source_str.split('/')
+            last_name = path_parts[-1] if path_parts else ''
+            
+            # Remove query parameters and fragments
+            last_name = last_name.split('?')[0].split('#')[0]
+            
+            # Remove file extension
+            last_name = re.sub(r'\.(ttl|rdf|owl|xml|n3|nt|jsonld)$', '', last_name, flags=re.IGNORECASE)
+            
+            if last_name:
+                return last_name
+            
+            # Final fallback for URIs
+            return 'ontology'
+        else:
+            # It's a file path - extract filename without extension
+            return Path(source).stem
     
     def _clean_definition_name(self, name: str) -> str:
         """
