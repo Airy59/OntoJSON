@@ -5,6 +5,7 @@ This module implements the parser for loading OWL/RDF ontologies into the object
 """
 
 from typing import Optional, Dict, Any, List
+from pathlib import Path
 from rdflib import Graph, Namespace, URIRef, Literal, BNode
 from rdflib.namespace import RDF, RDFS, OWL, XSD
 import ssl
