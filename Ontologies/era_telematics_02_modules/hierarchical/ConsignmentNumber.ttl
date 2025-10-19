@@ -4,8 +4,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:hasConsignmentNumber rdfs:range :ConsignmentNumber .
-
 :ConsignmentNumber a owl:Class,
         owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -17,9 +15,8 @@
 																Format: NNNNNC The number consists
 																of NNNNN = running number C = check
 																digit, """ ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AcceptancePoint :ConsignmentNumber ) ] ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
-
-[] rdf:first :ConsignmentNumber .
 

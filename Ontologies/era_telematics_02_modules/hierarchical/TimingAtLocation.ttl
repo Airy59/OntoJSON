@@ -16,8 +16,6 @@
     rdfs:domain :TimingAtLocation ;
     rdfs:range :Timing .
 
-:hasTimingAtLocation rdfs:range :TimingAtLocation .
-
 :TimingAtLocation a owl:Class ;
     rdfs:label "TimingAtLocation" ;
     rdfs:comment """Timing at an operation point It has an attribute TimerQualifierCode

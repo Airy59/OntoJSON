@@ -22,8 +22,6 @@
     rdfs:range xsd:int ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasChangeLog rdfs:range :ChangeLog .
-
 :ChangeLog a owl:Class ;
     rdfs:label "ChangeLog" ;
     rdfs:comment """Log of changes made by the LeadRU

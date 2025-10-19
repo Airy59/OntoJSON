@@ -2,8 +2,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-:hasNoteLocationIdent rdfs:range :NoteLocationIdent .
-
 :NoteLocationIdent a owl:Class ;
     rdfs:label "NoteLocationIdent" ;
     rdfs:comment "Identification of location for which is note valid" .

@@ -18,8 +18,6 @@
     rdfs:domain :NextIntermediateDestination ;
     rdfs:range :IntermediateDestination .
 
-:hasNextIntermediateDestination rdfs:range :NextIntermediateDestination .
-
 :NextIntermediateDestination a owl:Class ;
     rdfs:label "NextIntermediateDestination" ;
     rdfs:comment "Identifies next stopping point on the route of a train" .

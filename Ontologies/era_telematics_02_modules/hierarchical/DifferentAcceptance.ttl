@@ -14,8 +14,6 @@
     rdfs:range xsd:dateTime ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasDifferentAcceptance rdfs:range :DifferentAcceptance .
-
 :hasDifferentAcceptancePoint a owl:ObjectProperty ;
     rdfs:label "has DifferentAcceptancePoint" ;
     rdfs:domain :DifferentAcceptance ;

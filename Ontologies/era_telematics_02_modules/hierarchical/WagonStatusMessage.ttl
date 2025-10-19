@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -63,14 +62,8 @@
     rdfs:domain :WagonStatusMessage ;
     rdfs:range :WagonJourneyIrregularity .
 
-:hasWagonStatusMessage rdfs:range :WagonStatusMessage .
-
 :WagonStatusMessage a owl:Class ;
     rdfs:label "WagonStatusMessage" ;
     rdfs:comment """used to describe one event of one wagon (all bounded
 							elements are bounded to to obligations of legacy systems)""" .
-
-[] rdf:first :WagonStatusMessage .
-
-[] rdf:first :WagonStatusMessage .
 

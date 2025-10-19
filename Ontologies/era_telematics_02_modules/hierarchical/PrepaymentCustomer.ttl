@@ -19,8 +19,6 @@
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasPrepaymentCustomer rdfs:range :PrepaymentCustomer .
-
 :PrepaymentCustomer a owl:Class ;
     rdfs:label "PrepaymentCustomer" ;
     rdfs:comment """Prepaidcode (given by

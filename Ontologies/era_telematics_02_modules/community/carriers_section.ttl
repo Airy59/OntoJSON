@@ -1,0 +1,64 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ResponsibleCarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ResponsibleCarrierCode" ;
+    rdfs:comment """Railway Undertaking
+																(Railway Code) of the carrier in
+																charge.""" ;
+    rdfs:domain :Carriers ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SubContractNumber_SplitContract a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SubContractNumber_SplitContract" ;
+    rdfs:comment """Number of customer
+																agreement between the responsible
+																and the operating carrier""" ;
+    rdfs:domain :Carriers ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasCarriers a owl:ObjectProperty ;
+    rdfs:label "has Carriers" ;
+    rdfs:domain :COM ;
+    rdfs:range :Carriers .
+
+:hasSectionFrom a owl:ObjectProperty ;
+    rdfs:label "has SectionFrom" ;
+    rdfs:domain :Carriers ;
+    rdfs:range :SectionFrom .
+
+:hasSectionTo a owl:ObjectProperty ;
+    rdfs:label "has SectionTo" ;
+    rdfs:domain :Carriers ;
+    rdfs:range :SectionTo .
+
+:sequenceID a owl:DatatypeProperty ;
+    rdfs:label "sequenceID" ;
+    rdfs:comment """Position of carrier during
+															transport. """ ;
+    rdfs:domain :Carriers ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SectionFrom a owl:Class ;
+    rdfs:label "SectionFrom" ;
+    rdfs:comment """Start of section to be
+																performed by the carrier. This can
+																be a station OR a border crossing
+																point.""" .
+
+:SectionTo a owl:Class ;
+    rdfs:label "SectionTo" ;
+    rdfs:comment """End of section to be
+																performed by the carrier. This can
+																be a station OR a border crossing
+																point.""" .
+
+:Carriers a owl:Class ;
+    rdfs:label "Carriers" .
+

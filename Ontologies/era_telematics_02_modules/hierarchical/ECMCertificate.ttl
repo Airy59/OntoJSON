@@ -56,8 +56,6 @@
     rdfs:range xsd:date ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasECMCertificate rdfs:range :ECMCertificate .
-
 :hasEINNumber a owl:ObjectProperty ;
     rdfs:label "has EINNumber" ;
     rdfs:domain :ECMCertificate ;

@@ -1,7 +1,25 @@
 @prefix : <http://data.europa.eu/949/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://creativecommons.org/ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology ;
+    rdfs:label "Telematics ontology covering TAF-TAP TSI"@en ;
+    ns1:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:created "2024-10-06"^^xsd:date ;
+    dcterms:creator [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ] ;
+    dcterms:modified "2025-02-10"^^xsd:date ;
+    dcterms:publisher "European Union Agency for Railways" ;
+    dcterms:title "Telematics ontology for railways" ;
+    rdfs:comment "EDIT: The Ontology covers the telematics concepts described in Commission Regulation (EU) No 1305/2014 of 11 December 2014 on the technical specification for interoperability relating to the telematics applications for freight subsystem of the rail system in the European Union and repealing the Regulation (EC) No 62/2006 Text with EEA relevance (1) and Commission Regulation (EU) No 454/2011 of 5 May 2011 on the technical specification for interoperability relating to the subsystem â€˜telematics applications for passenger servicesâ€™ of the trans-European rail system Text with EEA relevance (2)"@en ;
+    owl:versionIRI <http://data.europa.eu/949/Telematics/6.0> ;
+    owl:versionInfo "6.0" .
 
 :CustomsEndorsements a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -40,8 +58,6 @@
     rdfs:domain :CustomsData ;
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
-
-:hasCustomsData rdfs:range :CustomsData .
 
 :CustomsData a owl:Class ;
     rdfs:label "CustomsData" ;

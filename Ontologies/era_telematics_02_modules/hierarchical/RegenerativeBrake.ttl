@@ -16,8 +16,6 @@
     rdfs:domain :RegenerativeBrake ;
     rdfs:range :PossibilityToPreventRegenerativeBrake .
 
-:hasRegenerativeBrake rdfs:range :RegenerativeBrake .
-
 :RegenerativeBrake a owl:Class ;
     rdfs:label "RegenerativeBrake" ;
     rdfs:comment """Information of the Regenerative Brake, only for locomotives/vehicles

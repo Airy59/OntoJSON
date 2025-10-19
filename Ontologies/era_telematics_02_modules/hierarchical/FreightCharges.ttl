@@ -2,8 +2,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-:hasFreightCharges rdfs:range :FreightCharges .
-
 :FreightCharges a owl:Class ;
     rdfs:label "FreightCharges" ;
     :domain "Telematics" ;

@@ -86,44 +86,6 @@
     rdfs:domain :WagonStatusMessage ;
     rdfs:subPropertyOf :dataProperties .
 
-:ShippingCarrier a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "ShippingCarrier" ;
-    rdfs:comment """RICS Code of the RU
-																who created the consignment
-																identification (not necessarily the
-																first carrier in the transport
-																chain)""" ;
-    rdfs:domain :ControlLabel ;
-    rdfs:subPropertyOf :dataProperties .
-
-:ShippingCountry a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "ShippingCountry" ;
-    rdfs:comment """Forwarding UIC Country
-																Code""" ;
-    rdfs:domain :ControlLabel ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf :dataProperties .
-
-:ShippingStationCode a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "ShippingStationCode" ;
-    rdfs:comment """UIC Code of the
-																shipping station""" ;
-    rdfs:domain :ControlLabel ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf :dataProperties .
-
-:ShippingStationName a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "ShippingStationName" ;
-    rdfs:comment """Name of the shipping
-																station""" ;
-    rdfs:domain :ControlLabel ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf :dataProperties .
-
 :TrainDepartureDate a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "TrainDepartureDate" ;
@@ -146,7 +108,8 @@
     rdfs:label "TypeOfRequest" ;
     rdfs:comment """Enumeration for the 3 different basic types of the planning processes
 				types in the planning: Study (1), Request (2), Modification (3) """ ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PathCanceledMessage :PathConfirmedMessage :PathDetailsMessage :PathDetailsRefusedMessage :PathNotAvailableMessage :PathRequestMessage :ReceiptConfirmationMessage ) ] ;
     rdfs:range xsd:short ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -164,11 +127,6 @@
     rdfs:label "has ConsignmentIdentification" ;
     rdfs:domain :WagonStatusMessage ;
     rdfs:range :ConsignmentIdentification .
-
-:hasConsignmentNumber a owl:ObjectProperty ;
-    rdfs:label "has ConsignmentNumber" ;
-    rdfs:domain :ControlLabel ;
-    rdfs:range :ConsignmentNumber .
 
 :hasControlLabel a owl:ObjectProperty ;
     rdfs:label "has ControlLabel" ;
@@ -244,35 +202,23 @@
     rdfs:comment """Location where the
 																event happend""" .
 
+:Position a owl:Class ;
+    rdfs:label "Position" ;
+    rdfs:comment """Geo coordinates of the
+																wagon event location in WGS84 as
+																used in the CRD""" .
+
+:Routing a owl:Class ;
+    rdfs:label "Routing" ;
+    rdfs:comment """Sequential information about the complete routing of the consignment,
+				the LeadRu decides wether to provide this information or not""" .
+
 :ShippingLocation a owl:Class ;
     rdfs:label "ShippingLocation" ;
     rdfs:comment """Shipping Station ( TAF location code with
 										optional SLC type 42 or 36)""",
         """use here the station code of the station the
 										wagon has started its transport run""" .
-
-:CarriersInvolved a owl:Class ;
-    rdfs:label "CarriersInvolved" .
-
-:ConsignmentNumber a owl:Class,
-        owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "ConsignmentNumber" ;
-    rdfs:comment "Reference number assigned to a consignment by a lead RU",
-        """Running number and
-																check digit of the consignment
-																between Lead RU and customer.
-																Format: NNNNNC The number consists
-																of NNNNN = running number C = check
-																digit, """ ;
-    rdfs:domain [ ] ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf :dataProperties .
-
-:Routing a owl:Class ;
-    rdfs:label "Routing" ;
-    rdfs:comment """Sequential information about the complete routing of the consignment,
-				the LeadRu decides wether to provide this information or not""" .
 
 :WagonStatusMessages a owl:Class ;
     rdfs:label "WagonStatusMessages" ;
@@ -282,6 +228,9 @@
 :Carrier a owl:Class ;
     rdfs:label "Carrier" ;
     rdfs:comment "Carrier(s) involved" .
+
+:CarriersInvolved a owl:Class ;
+    rdfs:label "CarriersInvolved" .
 
 :ConsignmentIdentification a owl:Class ;
     rdfs:label "ConsignmentIdentification" ;
@@ -293,6 +242,10 @@
         """consignment note number (without carrier (due
 										to history))""" .
 
+:Event a owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "Information belonging to the event" .
+
 :EventLocationInformation a owl:Class ;
     rdfs:label "EventLocationInformation" ;
     rdfs:comment """Information concerning the event
@@ -302,58 +255,19 @@
 													elements EventLocation or Position should be
 													sent""" .
 
-:Position a owl:Class ;
-    rdfs:label "Position" ;
-    rdfs:comment """Geo coordinates of the
-																wagon event location in WGS84 as
-																used in the CRD""" .
+:Train a owl:Class ;
+    rdfs:label "Train" .
 
 :WagonJourneyIrregularity a owl:Class ;
     rdfs:label "WagonJourneyIrregularity" .
-
-:Event a owl:Class ;
-    rdfs:label "Event" ;
-    rdfs:comment "Information belonging to the event" .
-
-:Train a owl:Class ;
-    rdfs:label "Train" .
 
 :DamageCodes a owl:Class ;
     rdfs:label "DamageCodes" ;
     rdfs:comment """List of Damage Codes according to
 													description in GCU Appendix 9 Annex 1""" .
 
-:ControlLabel a owl:Class ;
-    rdfs:label "ControlLabel" .
-
 :WagonStatusMessage a owl:Class ;
     rdfs:label "WagonStatusMessage" ;
     rdfs:comment """used to describe one event of one wagon (all bounded
 							elements are bounded to to obligations of legacy systems)""" .
-
-[] rdf:first :WagonStatusMessages .
-
-[] rdf:first :Train .
-
-[] rdf:first :Routing .
-
-[] rdf:first :Train .
-
-[] rdf:first :ControlLabel .
-
-[] rdf:first :Carrier .
-
-[] rdf:first :ConsignmentNumber .
-
-[] rdf:first :ConsignmentIdentification .
-
-[] rdf:first :Event .
-
-[] rdf:first :Position .
-
-[] rdf:first :WagonStatusMessage .
-
-[] rdf:first :Position .
-
-[] rdf:first :WagonStatusMessage .
 

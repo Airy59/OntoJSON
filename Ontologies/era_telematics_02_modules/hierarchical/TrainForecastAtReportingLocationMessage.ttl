@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 :hasTrainAtLocation a owl:ObjectProperty ;
@@ -13,10 +12,4 @@
     rdfs:comment """This message is issued following receipt of an enquiry about train
 				forecasts at a particular reporting location. It gives a report of the forecasted
 				time for all trains of the enquirer at a specified location. """ .
-
-[] rdf:first :TrainForecastAtReportingLocationMessage .
-
-[] rdf:first :TrainForecastAtReportingLocationMessage .
-
-[] rdf:first :TrainForecastAtReportingLocationMessage .
 

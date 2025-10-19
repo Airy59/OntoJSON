@@ -5,7 +5,8 @@
 
 :hasPathInformation a owl:ObjectProperty ;
     rdfs:label "has PathInformation" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PathDetailsMessage :PathRequestMessage ) ] ;
     rdfs:range :PathInformation .
 
 :hasRequestedCalendar a owl:ObjectProperty ;
@@ -18,12 +19,4 @@
 
 :PathInformation a owl:Class ;
     rdfs:label "PathInformation" .
-
-[] rdf:first :PathInformation .
-
-[] rdf:first :PathInformation .
-
-[] rdf:first :RequestedCalendar .
-
-[] rdf:first :RequestedCalendar .
 

@@ -33,8 +33,6 @@
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasRelatedReference rdfs:range :RelatedReference .
-
 :RelatedReference a owl:Class ;
     rdfs:label "RelatedReference" ;
     rdfs:comment "Identifies the message to which the actual message refers" .

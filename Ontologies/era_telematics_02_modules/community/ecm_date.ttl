@@ -69,8 +69,6 @@
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
 
-:CreationDate rdfs:range xsd:date .
-
 :CurrentECMAssignedUntil a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "CurrentECMAssignedUntil" ;
@@ -79,8 +77,6 @@
     rdfs:domain :PlannedChangeOfECM ;
     rdfs:range xsd:date ;
     rdfs:subPropertyOf :dataProperties .
-
-:Date rdfs:range xsd:date .
 
 :DateECMCertificateSuspended a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -115,8 +111,6 @@
     rdfs:domain :DesignDataSet ;
     rdfs:range xsd:date ;
     rdfs:subPropertyOf :dataProperties .
-
-:DateOfReturn rdfs:range xsd:date .
 
 :DatePutIntoService a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -265,8 +259,6 @@
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
 
-:TrainDepartureDate rdfs:range xsd:date .
-
 :hasAdministrativeDataSet a owl:ObjectProperty ;
     rdfs:label "has AdministrativeDataSet" ;
     rdfs:domain :RollingStockDataset ;
@@ -287,8 +279,6 @@
     rdfs:domain :AdministrativeDataSet ;
     rdfs:range :ECMCertificate .
 
-:hasEINNumber rdfs:domain :ECMCertificate .
-
 :hasPlannedChangeOfECM a owl:ObjectProperty ;
     rdfs:label "has PlannedChangeOfECM" ;
     rdfs:domain :AdministrativeDataSet ;
@@ -296,7 +286,8 @@
 
 :hasRollingStockDataset a owl:ObjectProperty ;
     rdfs:label "has RollingStockDataset" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :RollingStockDatasetMessage :WIMO_Dataset ) ] ;
     rdfs:range :RollingStockDataset .
 
 :PlannedChangeOfECM a owl:Class ;
@@ -314,14 +305,8 @@
     rdfs:label "ECMCertificate" ;
     rdfs:comment "ECM certificate information" .
 
-:AdministrativeDataSet a owl:Class ;
-    rdfs:label "AdministrativeDataSet" .
-
 xsd:date a rdfs:Datatype .
 
-[] rdf:first xsd:date .
-
-[] rdf:first :AdministrativeDataSet .
-
-[] rdf:first :AdministrativeDataSet .
+:AdministrativeDataSet a owl:Class ;
+    rdfs:label "AdministrativeDataSet" .
 

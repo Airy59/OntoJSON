@@ -15,8 +15,6 @@
     rdfs:domain :Notes ;
     rdfs:range :NoteLocationIdent .
 
-:hasNotes rdfs:range :Notes .
-
 :Notes a owl:Class ;
     rdfs:label "Notes" ;
     rdfs:comment "Remarks to be transmitted to IM" .

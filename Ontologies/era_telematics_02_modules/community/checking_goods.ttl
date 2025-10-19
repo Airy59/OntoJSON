@@ -70,7 +70,8 @@
 
 :hasGoods a owl:ObjectProperty ;
     rdfs:label "has Goods" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ConsignmentLevelData :ILU :ITU :RollingRoadUnit ) ] ;
     rdfs:range :Goods .
 
 :hasRID_Checking a owl:ObjectProperty ;
@@ -83,6 +84,10 @@
     :domain "Telematics" ;
     rdfs:comment "The location where the check took place" .
 
+:Goods a owl:Class ;
+    rdfs:label "Goods" ;
+    rdfs:comment "Describes the goods inside the means of transport" .
+
 :CheckingBody a owl:Class ;
     rdfs:label "CheckingBody" ;
     rdfs:comment "Identification of the body which performed the RID check" .
@@ -91,28 +96,4 @@
     rdfs:label "RID_Checking" ;
     rdfs:comment """When RID DG is transported in the train the Ru has to transmit here
 				the RID check results from the Carrier, Loader, Filler and Unloader """ .
-
-:Goods a owl:Class ;
-    rdfs:label "Goods" ;
-    rdfs:comment "Describes the goods inside the means of transport" .
-
-[] rdf:first :Goods .
-
-[] rdf:first :Goods .
-
-[] rdf:first :Goods .
-
-[] rdf:first :Goods .
-
-[] rdf:first :Goods .
-
-[] rdf:first :Goods .
-
-[] rdf:first :Goods .
-
-[] rdf:first :Goods .
-
-[] rdf:first :Goods .
-
-[] rdf:first :Goods .
 

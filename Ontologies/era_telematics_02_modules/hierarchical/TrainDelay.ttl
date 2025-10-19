@@ -19,8 +19,6 @@
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasTrainDelay rdfs:range :TrainDelay .
-
 :TrainDelay a owl:Class ;
     rdfs:label "TrainDelay" ;
     rdfs:comment """Identifies the Delta delay time of a train against the booked schedule

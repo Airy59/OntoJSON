@@ -33,8 +33,6 @@
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasEINNumber rdfs:range :EINNumber .
-
 :EINNumber a owl:Class ;
     rdfs:label "EINNumber" ;
     rdfs:comment """ECM certificate reference number

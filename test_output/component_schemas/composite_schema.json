@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Test Composite Ontology",
+  "description": "Composite ontology for testing component schema generation",
+  "$comment": "Metadata: {\"version\": \"1.0.0\", \"created\": \"2025-10-19T12:17:01.503353\", \"modified\": \"2025-10-19T12:17:01.504336\"}",
+  "definitions": {
+    "Organization": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ],
+      "title": "Organization",
+      "description": "A group of people with a common purpose"
+    },
+    "Person": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "worksFor": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/Organization"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    },
+                    "required": [
+                      "@id"
+                    ],
+                    "additionalProperties": false
+                  }
+                ],
+                "title": "works for",
+                "description": "The organization a person works for"
+              }
+            },
+            "name": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "name",
+                "description": "The name of something"
+              }
+            },
+            "age": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "title": "age",
+                "description": "The age in years"
+              }
+            }
+          }
+        }
+      ],
+      "title": "Person",
+      "description": "A human being"
+    },
+    "Vehicle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "hasOwner": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    },
+                    "required": [
+                      "@id"
+                    ],
+                    "additionalProperties": false
+                  }
+                ],
+                "title": "has owner",
+                "description": "The owner of the vehicle"
+              }
+            },
+            "year": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "title": "year",
+                "description": "The year of manufacture"
+              }
+            },
+            "brand": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "brand",
+                "description": "The brand name"
+              }
+            }
+          }
+        }
+      ],
+      "title": "Vehicle",
+      "description": "A means of transportation"
+    },
+    "Car": {
+      "type": "object",
+      "properties": {},
+      "title": "Car",
+      "description": "A four-wheeled vehicle",
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "$ref": "#/definitions/Vehicle"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ]
+    },
+    "Bicycle": {
+      "type": "object",
+      "properties": {},
+      "title": "Bicycle",
+      "description": "A two-wheeled vehicle",
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "$ref": "#/definitions/Vehicle"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ]
+    },
+    "_Thing": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI identifier for this instance"
+        }
+      },
+      "required": [],
+      "description": "Base object that all classes inherit from",
+      "title": "_Thing"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

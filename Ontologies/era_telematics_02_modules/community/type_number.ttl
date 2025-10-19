@@ -26,17 +26,17 @@
         owl:FunctionalProperty ;
     rdfs:label "AirBrakeType" ;
     rdfs:comment "Classification of air brake." ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AirBrake :WagonTechData ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:BrakeSpecialCharacteristics rdfs:range xsd:token .
 
 :BrakeType a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "BrakeType" ;
     rdfs:comment "Type of braking system." ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PlannedTrainTechnicalData :TrainRunningTechData :WagonOperationalData ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -56,13 +56,10 @@
 				Lead carrier 1 Succesive carrier 2 Substitute carrier 3 to be used for all other
 				partners (e.g. subcontractors, relevant applicants) beside the carriers in role 0, 1
 				and 2 (which have to be mentioned in the consignment note)""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :Carrier :Carriers ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:CodeOfCause rdfs:range xsd:token .
-
-:CommercialSpecificationCode rdfs:range xsd:token .
 
 :ConsignmentOrderType a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -74,31 +71,23 @@
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
-:ConsignorDeclarationCode rdfs:range xsd:token .
-
 :CouplingType a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "CouplingType" ;
     rdfs:comment "Classification of coupling" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :DesignDataSet :WagonTechData ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:CustomerType rdfs:range xsd:token .
-
-:DangerLabel rdfs:range xsd:token .
 
 :DelayCause a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "DelayCause" ;
     rdfs:comment "This element identifies the reason for a delay (modified DelayReason)" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :DelayCauseTime :TrainReadyStatus ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:EmptyPackingCode rdfs:range xsd:token .
-
-:EventType rdfs:range xsd:token .
 
 :ExceptionalGaugingProfile a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -113,7 +102,8 @@
         owl:FunctionalProperty ;
     rdfs:label "HandBrakeType" ;
     rdfs:comment "Classification of hand brake" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :HandBrake :WagonTechData ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -132,8 +122,6 @@
     rdfs:domain :ILU_Details ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:ITU_TypeDetail rdfs:range xsd:token .
 
 :IncotermCode a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -163,7 +151,8 @@
     rdfs:label "InterruptionReason" ;
     rdfs:comment """This element identifies the reason for an interruption of the train
 				running""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ChangeofTrackMessage :Interruption :InterruptionInformation ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -173,8 +162,6 @@
     rdfs:domain :ExceptionReason ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:JourneyLocationTypeCode rdfs:range xsd:token .
 
 :LoadUnitNumber a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -211,7 +198,8 @@
         owl:FunctionalProperty ;
     rdfs:label "Measure" ;
     rdfs:comment "Measure used, either ft or mm" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :Height :Length :Width ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -230,11 +218,10 @@
         owl:FunctionalProperty ;
     rdfs:label "MessageStatus" ;
     rdfs:comment "Assigned by the Sender 1=creation, 2=modification, 3=deletion" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ChangeofTrackMessage :ErrorMessage :LocationFileDatasetMessage :PathCanceledMessage :PathConfirmedMessage :PathDetailsMessage :PathDetailsRefusedMessage :PathNotAvailableMessage :PathRequestMessage :TrainCompositionMessage :TrainDelayCauseMessage :TrainForecastAtReportingLocationMessage :TrainJourneyModificationMessage :TrainReadyMessage :TrainRunningForecastMessage :TrainRunningInformationMessage :TrainRunningInterruptionMessage ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:ModificationReason rdfs:range xsd:token .
 
 :NormalLoadingGauge a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -242,7 +229,8 @@
     rdfs:comment """
 			All codes are defined in the UIC leaflet 505-1 and 503, as well as in the EN 15273-2:2013. For details please refer to EN 15273-2:2013 (Railway applications - Gauges - Part 2: Rolling stock gauge). For the existing gauges in the list, the Annex B.3 should be used.
 			""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :DesignDataSet :WagonTechData ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -250,7 +238,8 @@
         owl:FunctionalProperty ;
     rdfs:label "PackingGroup" ;
     rdfs:comment "The Packing Group according to the RID chapter 3.2, table A, column 4. Possible values are \"I\", \"II\" or \"III\", otherwise the Packing Group have to be omitted. Mandatory, if it's foreseen in column 4, except it concerns a declaration of an empty packaging of the type \"EMPTY PACKAGING\", \"EMPTY RECEPTACLE <=1000L\", \"EMPTY IBC\" or \"EMPTY LARGE PACKAGING\"." ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :RID :SummaryOFGoodsWithSameRID ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -287,11 +276,10 @@
         owl:FunctionalProperty ;
     rdfs:label "ProcessType" ;
     rdfs:comment "Business process type to further distinguish among type of requests." ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PathCanceledMessage :PathConfirmedMessage :PathDetailsMessage :PathDetailsRefusedMessage :PathNotAvailableMessage :PathRequestMessage ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:RU_DeclarationCode rdfs:range xsd:token .
 
 :ReceivingRU a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -331,14 +319,6 @@
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
-:ShuntingModalLabel rdfs:range xsd:token .
-
-:StatusOfDocument rdfs:range xsd:token .
-
-:TechnicalForwardingRestrictions rdfs:range xsd:token .
-
-:TimingQualifierCode rdfs:range xsd:token .
-
 :TotalLoadWeight a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "TotalLoadWeight" ;
@@ -348,13 +328,12 @@
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:TractionType rdfs:range xsd:token .
-
 :TrainCC_System a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "TrainCC_System" ;
     rdfs:comment "Identifies the command control system of the train in coded values." ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PlannedTrainTechnicalData :TrainRunningTechData ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -363,7 +342,8 @@
     rdfs:label "TrainLocationStatus" ;
     rdfs:comment """Identifies the status of a train related to the actual time at a
 				reporting point""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ChangeofTrackMessage :DelayEventReport :LocationModified :TrainAtLocation :TrainLocationReport ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -371,11 +351,10 @@
         owl:FunctionalProperty ;
     rdfs:label "TrainRadioSystem" ;
     rdfs:comment "The on board radio system of the train in coded format" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PlannedTrainTechnicalData :TrainRunningTechData ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:Type rdfs:range xsd:token .
 
 :TypeOfLoadUnit a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -383,13 +362,12 @@
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
-:TypeOfRemovableAccessories rdfs:range xsd:token .
-
 :TypeOfUsedHybridPowerunit a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "TypeOfUsedHybridPowerunit" ;
     rdfs:comment "information about the type of power unit in case of using a hybrid locomotive" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :LocoIdent :TractionDetails ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -404,16 +382,12 @@
     rdfs:range xsd:int ;
     rdfs:subPropertyOf :dataProperties .
 
-:WagonEvent rdfs:range xsd:token .
-
 :WagonInterruptionReason a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "WagonInterruptionReason" ;
     rdfs:domain :ExceptionReason ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:WagonLocationStatus rdfs:range xsd:token .
 
 :WagonMaxSpeed a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -423,14 +397,6 @@
     rdfs:domain :WagonOperationalData ;
     rdfs:range xsd:int ;
     rdfs:subPropertyOf :dataProperties .
-
-:WheelSetTransformationMethod rdfs:range xsd:token .
-
-:hasCOM_Header rdfs:range :COM_Header .
-
-:hasChangeLog rdfs:domain :COM_Header .
-
-:hasILU_Details rdfs:range :ILU_Details .
 
 :hasMovementReferenceNumber a owl:ObjectProperty ;
     rdfs:label "has MovementReferenceNumber" ;
@@ -454,12 +420,9 @@
 
 :hasReferenceNumbers a owl:ObjectProperty ;
     rdfs:label "has ReferenceNumbers" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :GoodsInWagon :ILU_Details :ITU_Details :Packing ) ] ;
     rdfs:range :ReferenceNumbers .
-
-:hasWagonOperationalData rdfs:range :WagonOperationalData .
-
-:measure rdfs:range xsd:token .
 
 :PaidUpTo a owl:Class ;
     rdfs:label "PaidUpTo" ;
@@ -495,6 +458,10 @@
     rdfs:label "PrepaymentInstructions" ;
     rdfs:comment "Prepayment" .
 
+:ILU_Details a owl:Class ;
+    rdfs:label "ILU_Details" ;
+    rdfs:comment "Details for ILU on wagon" .
+
 :WagonOperationalData a owl:Class ;
     rdfs:label "WagonOperationalData" ;
     rdfs:comment """Actual wagon parameters, dependent on load or damage. This group and
@@ -506,50 +473,4 @@
     rdfs:comment """Additional Header containing consignment
 										related key data such as dossiernumber, version number and a
 										change log for modifications""" .
-
-:ILU_Details a owl:Class ;
-    rdfs:label "ILU_Details" ;
-    rdfs:comment "Details for ILU on wagon" .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :WagonOperationalData .
-
-[] rdf:first :WagonOperationalData .
-
-[] rdf:first :WagonOperationalData .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :WagonOperationalData .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :COM_Header .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :ExceptionReason .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first xsd:token .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :ILU_Details .
-
-[] rdf:first :PrepaymentInstructions .
 

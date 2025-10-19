@@ -10,7 +10,8 @@
 
 :hasTrainOperationalIdentification a owl:ObjectProperty ;
     rdfs:label "has TrainOperationalIdentification" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ChangeofTrackMessage :Train :TrainAtLocation :TrainDelayCauseMessage :TrainJourneyModificationMessage :TrainRunningForecastMessage :TrainRunningInformationMessage :TrainRunningInterruptionMessage ) ] ;
     rdfs:range :TrainOperationalIdentification .
 
 :RelatedTransportOperationalIdentifiers a owl:Class ;
@@ -18,6 +19,4 @@
 
 :TrainOperationalIdentification a owl:Class ;
     rdfs:label "TrainOperationalIdentification" .
-
-[] rdf:first :TrainOperationalIdentification .
 

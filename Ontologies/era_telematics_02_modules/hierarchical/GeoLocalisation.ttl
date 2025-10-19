@@ -16,8 +16,6 @@
     rdfs:domain :GeoLocalisation ;
     rdfs:range :GNSS_DynamicPosition .
 
-:hasGeoLocalisation rdfs:range :GeoLocalisation .
-
 :GeoLocalisation a owl:Class ;
     rdfs:label "GeoLocalisation" ;
     rdfs:comment "Geolocalisation that may be between two identified locations. " .

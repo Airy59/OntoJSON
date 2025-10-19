@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -72,46 +71,6 @@
     rdfs:range xsd:date ;
     rdfs:subPropertyOf :dataProperties .
 
-:DocumentInformation a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "DocumentInformation" ;
-    rdfs:comment """Additional information
-																regarding the attached document may
-																be entered here.""" ;
-    rdfs:domain :AttachedDocuments ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf :dataProperties .
-
-:DocumentType a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "DocumentType" ;
-    rdfs:comment """Type code of attached
-																document. The UN/DIFACT 1001 list of
-																codes is to be used to code
-																accompanying documents.""" ;
-    rdfs:domain :AttachedDocuments ;
-    rdfs:range xsd:int ;
-    rdfs:subPropertyOf :dataProperties .
-
-:DocumentTypeDescription a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "DocumentTypeDescription" ;
-    rdfs:comment """Description of
-																document type, when it is not in the
-																UN/EDIFACT 1001 list included.""" ;
-    rdfs:domain :AttachedDocuments ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf :dataProperties .
-
-:Filename a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "Filename" ;
-    rdfs:comment """Filename of embedded
-																pdf in legacy system""" ;
-    rdfs:domain :AttachedDocuments ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf :dataProperties .
-
 :ForwardingTrainNumber a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "ForwardingTrainNumber" ;
@@ -129,6 +88,15 @@
     rdfs:domain :Section ;
     rdfs:subPropertyOf :dataProperties .
 
+:ResponsibleCarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ResponsibleCarrierCode" ;
+    rdfs:comment """Railway Undertaking
+																(Railway Code) of the carrier in
+																charge.""" ;
+    rdfs:domain :Carriers ;
+    rdfs:subPropertyOf :dataProperties .
+
 :SpecificationText a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "SpecificationText" ;
@@ -138,13 +106,14 @@
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
 
-:StatusOfDocument a owl:DatatypeProperty,
+:SubContractNumber_SplitContract a owl:DatatypeProperty,
         owl:FunctionalProperty ;
-    rdfs:label "StatusOfDocument" ;
-    rdfs:comment """ Enumerated value for the status of the attached document 1 = not
-				electronical attached 2 embedded in ECTD, ECN or PCN """ ;
-    rdfs:domain :AttachedDocuments ;
-    rdfs:range xsd:token ;
+    rdfs:label "SubContractNumber_SplitContract" ;
+    rdfs:comment """Number of customer
+																agreement between the responsible
+																and the operating carrier""" ;
+    rdfs:domain :Carriers ;
+    rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
 
 :WagonPreviousNumberFreight a owl:DatatypeProperty ;
@@ -159,11 +128,6 @@
     rdfs:label "has AcceptancePoint" ;
     rdfs:domain :COM ;
     rdfs:range :AcceptancePoint .
-
-:hasAttachedDocuments a owl:ObjectProperty ;
-    rdfs:label "has AttachedDocuments" ;
-    rdfs:domain :COM ;
-    rdfs:range :AttachedDocuments .
 
 :hasCOM a owl:ObjectProperty ;
     rdfs:label "has COM" ;
@@ -180,7 +144,10 @@
     rdfs:domain :COMS ;
     rdfs:range :COM_Header .
 
-:hasCarriers rdfs:domain :COM .
+:hasCarriers a owl:ObjectProperty ;
+    rdfs:label "has Carriers" ;
+    rdfs:domain :COM ;
+    rdfs:range :Carriers .
 
 :hasCashOnDelivery a owl:ObjectProperty ;
     rdfs:label "has CashOnDelivery" ;
@@ -212,8 +179,6 @@
     rdfs:domain :COM ;
     rdfs:range :Customers .
 
-:hasCustomsData rdfs:domain :COM .
-
 :hasCustomsProcedures a owl:ObjectProperty ;
     rdfs:label "has CustomsProcedures" ;
     rdfs:domain :COM ;
@@ -233,8 +198,6 @@
     rdfs:label "has End" ;
     rdfs:domain :ChargingSections ;
     rdfs:range :End .
-
-:hasGeneralInformation rdfs:domain :COM .
 
 :hasInterestInDelivery a owl:ObjectProperty ;
     rdfs:label "has InterestInDelivery" ;
@@ -256,14 +219,20 @@
     rdfs:domain :COM ;
     rdfs:range :MadeOut .
 
-:hasPrepaymentInstructions rdfs:domain :COM .
-
-:hasRU_Declarations rdfs:domain :COM .
-
 :hasSection a owl:ObjectProperty ;
     rdfs:label "has Section" ;
     rdfs:domain :SectionalInvoicing ;
     rdfs:range :Section .
+
+:hasSectionFrom a owl:ObjectProperty ;
+    rdfs:label "has SectionFrom" ;
+    rdfs:domain :Carriers ;
+    rdfs:range :SectionFrom .
+
+:hasSectionTo a owl:ObjectProperty ;
+    rdfs:label "has SectionTo" ;
+    rdfs:domain :Carriers ;
+    rdfs:range :SectionTo .
 
 :hasSectionalInvoicing a owl:ObjectProperty ;
     rdfs:label "has SectionalInvoicing" ;
@@ -275,56 +244,22 @@
     rdfs:domain :ChargingSections ;
     rdfs:range :Start .
 
-:hasTransitPeriodExtensions rdfs:domain :COM .
-
-:hasWagons rdfs:domain :COM .
-
-:End a owl:Class ;
-    rdfs:label "End" ;
-    :domain "Telematics" ;
-    rdfs:comment """End of the charging
-																section""" .
-
-:InvoicedSection a owl:Class ;
-    rdfs:label "InvoicedSection" ;
-    :domain "Telematics" ;
-    rdfs:comment """Information
-																			about the section to be
-																			invoiced.""" .
-
-:Start a owl:Class ;
-    rdfs:label "Start" ;
-    rdfs:comment """Start of the charging
-																section""" .
-
-:ConsignmentOrderMessage a owl:Class ;
-    rdfs:label "ConsignmentOrderMessage" ;
-    rdfs:comment "Consignment Order Message from Lead RU to RU" .
-
-:SectionalInvoicing a owl:Class ;
-    rdfs:label "SectionalInvoicing" ;
-    rdfs:comment "Sectional Invoicing" .
-
-:COMS a owl:Class ;
-    rdfs:label "COMS" ;
-    rdfs:comment """Message (all bounded optional elements are bounded to to
-							obligations of legacy systems)""" .
+:sequenceID a owl:DatatypeProperty ;
+    rdfs:label "sequenceID" ;
+    rdfs:comment """Position of carrier during
+															transport. """ ;
+    rdfs:domain :Carriers ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
 
 :CashOnDelivery a owl:Class ;
     rdfs:label "CashOnDelivery" ;
     rdfs:comment """Details of the amount to be
 													collected on delivery and the currency code.""" .
 
-:ChargesNote a owl:Class ;
-    rdfs:label "ChargesNote" ;
-    rdfs:comment "Charges note" .
-
-:ConsignorDeclarations a owl:Class ;
-    rdfs:label "ConsignorDeclarations" ;
-    rdfs:comment """Consignors declarartions, this
-													element contains either declarations of the
-													original consignor or declarations of the LeadRU
-													as consignor""" .
+:ConsignmentOrderMessage a owl:Class ;
+    rdfs:label "ConsignmentOrderMessage" ;
+    rdfs:comment "Consignment Order Message from Lead RU to RU" .
 
 :CustomsProcedures a owl:Class ;
     rdfs:label "CustomsProcedures" ;
@@ -336,149 +271,101 @@
 													and the currency code when the value exceeds the
 													limit given in CIM Article 30 section 2.""" .
 
-:InterestInDelivery a owl:Class ;
-    rdfs:label "InterestInDelivery" ;
-    rdfs:comment """Details of the amount and currency
-													code of a special interest in delivery.""" .
-
-:MadeOut a owl:Class ;
-    rdfs:label "MadeOut" ;
-    rdfs:comment "Made out" .
-
-:Section a owl:Class ;
-    rdfs:label "Section" ;
-    rdfs:comment "Sectional Invoicing" .
-
 :DeliveryPoint a owl:Class ;
     rdfs:label "DeliveryPoint" ;
     rdfs:comment """Description of location and time
 													for the hand over of the consignment""" .
 
-:CommercialSpecifications a owl:Class ;
-    rdfs:label "CommercialSpecifications" ;
-    rdfs:comment "Commercial Specification" .
+:End a owl:Class ;
+    rdfs:label "End" ;
+    :domain "Telematics" ;
+    rdfs:comment """End of the charging
+																section""" .
 
-:AttachedDocuments a owl:Class ;
-    rdfs:label "AttachedDocuments" ;
-    rdfs:comment """Paper documents accompanying the
-													transport""" .
+:InterestInDelivery a owl:Class ;
+    rdfs:label "InterestInDelivery" ;
+    rdfs:comment """Details of the amount and currency
+													code of a special interest in delivery.""" .
 
-:ChargingSections a owl:Class ;
-    rdfs:label "ChargingSections" ;
-    rdfs:comment "Charging section" .
+:InvoicedSection a owl:Class ;
+    rdfs:label "InvoicedSection" ;
+    :domain "Telematics" ;
+    rdfs:comment """Information
+																			about the section to be
+																			invoiced.""" .
+
+:LeadCarrier a owl:Class ;
+    rdfs:label "LeadCarrier" ;
+    rdfs:comment "LeadCarrier/ Contractual carrier" .
+
+:SectionFrom a owl:Class ;
+    rdfs:label "SectionFrom" ;
+    rdfs:comment """Start of section to be
+																performed by the carrier. This can
+																be a station OR a border crossing
+																point.""" .
+
+:SectionTo a owl:Class ;
+    rdfs:label "SectionTo" ;
+    rdfs:comment """End of section to be
+																performed by the carrier. This can
+																be a station OR a border crossing
+																point.""" .
+
+:Start a owl:Class ;
+    rdfs:label "Start" ;
+    rdfs:comment """Start of the charging
+																section""" .
 
 :AcceptancePoint a owl:Class ;
     rdfs:label "AcceptancePoint" ;
     rdfs:comment """Description of location and time
 													for the take over of the consignment""" .
 
-:LeadCarrier a owl:Class ;
-    rdfs:label "LeadCarrier" ;
-    rdfs:comment "LeadCarrier/ Contractual carrier" .
+:ConsignorDeclarations a owl:Class ;
+    rdfs:label "ConsignorDeclarations" ;
+    rdfs:comment """Consignors declarartions, this
+													element contains either declarations of the
+													original consignor or declarations of the LeadRU
+													as consignor""" .
+
+:MadeOut a owl:Class ;
+    rdfs:label "MadeOut" ;
+    rdfs:comment "Made out" .
+
+:SectionalInvoicing a owl:Class ;
+    rdfs:label "SectionalInvoicing" ;
+    rdfs:comment "Sectional Invoicing" .
+
+:COMS a owl:Class ;
+    rdfs:label "COMS" ;
+    rdfs:comment """Message (all bounded optional elements are bounded to to
+							obligations of legacy systems)""" .
+
+:ChargesNote a owl:Class ;
+    rdfs:label "ChargesNote" ;
+    rdfs:comment "Charges note" .
+
+:CommercialSpecifications a owl:Class ;
+    rdfs:label "CommercialSpecifications" ;
+    rdfs:comment "Commercial Specification" .
 
 :Customers a owl:Class ;
     rdfs:label "Customers" ;
     rdfs:comment "Information about the consignor, consignee and freight payers." .
 
+:Section a owl:Class ;
+    rdfs:label "Section" ;
+    rdfs:comment "Sectional Invoicing" .
+
+:ChargingSections a owl:Class ;
+    rdfs:label "ChargingSections" ;
+    rdfs:comment "Charging section" .
+
+:Carriers a owl:Class ;
+    rdfs:label "Carriers" .
+
 :COM a owl:Class ;
     rdfs:label "COM" ;
     rdfs:comment "Consignment order message" .
-
-[] rdf:first :Customers .
-
-[] rdf:first :AcceptancePoint .
-
-[] rdf:first :DeliveryPoint .
-
-[] rdf:first :COM .
-
-[] rdf:first :COM .
-
-[] rdf:first :AcceptancePoint .
-
-[] rdf:first :DeliveryPoint .
-
-[] rdf:first :COM .
-
-[] rdf:first :ChargingSections .
-
-[] rdf:first :AcceptancePoint .
-
-[] rdf:first :COM .
-
-[] rdf:first :CashOnDelivery .
-
-[] rdf:first :DeclarationOfValue .
-
-[] rdf:first :InterestInDelivery .
-
-[] rdf:first :AcceptancePoint .
-
-[] rdf:first :CommercialSpecifications .
-
-[] rdf:first :LeadCarrier .
-
-[] rdf:first :LeadCarrier .
-
-[] rdf:first :Customers .
-
-[] rdf:first :LeadCarrier .
-
-[] rdf:first :AcceptancePoint .
-
-[] rdf:first :CommercialSpecifications .
-
-[] rdf:first :Customers .
-
-[] rdf:first :LeadCarrier .
-
-[] rdf:first :CashOnDelivery .
-
-[] rdf:first :ChargingSections .
-
-[] rdf:first :DeclarationOfValue .
-
-[] rdf:first :InterestInDelivery .
-
-[] rdf:first :Customers .
-
-[] rdf:first :ConsignorDeclarations .
-
-[] rdf:first :Customers .
-
-[] rdf:first :Customers .
-
-[] rdf:first :MadeOut .
-
-[] rdf:first :AttachedDocuments .
-
-[] rdf:first :AcceptancePoint .
-
-[] rdf:first :DeliveryPoint .
-
-[] rdf:first :CustomsProcedures .
-
-[] rdf:first :Customers .
-
-[] rdf:first :LeadCarrier .
-
-[] rdf:first :Customers .
-
-[] rdf:first :LeadCarrier .
-
-[] rdf:first :Customers .
-
-[] rdf:first :LeadCarrier .
-
-[] rdf:first :ChargingSections .
-
-[] rdf:first :CustomsProcedures .
-
-[] rdf:first :Customers .
-
-[] rdf:first :Customers .
-
-[] rdf:first :LeadCarrier .
-
-[] rdf:first :ConsignmentOrderMessage .
 

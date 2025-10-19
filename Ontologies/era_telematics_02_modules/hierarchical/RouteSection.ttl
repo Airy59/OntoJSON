@@ -35,8 +35,6 @@
     rdfs:range xsd:int ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasRouteSection rdfs:range :RouteSection .
-
 :RouteSection a owl:Class ;
     rdfs:label "RouteSection" ;
     rdfs:comment "Route sequence",

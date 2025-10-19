@@ -54,7 +54,8 @@
         "Type of Rolling Road unit on Wagon",
         "WRITE: " ;
     rdfs:domain :RollingRoadUnitDetails ;
-    rdfs:range [ ] ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:unionOf ( xsd:string xsd:token ) ] ;
     rdfs:subPropertyOf :dataProperties .
 
 :TareWeightVehicle a owl:DatatypeProperty,
@@ -78,7 +79,8 @@
 
 :hasGoodsInWagon a owl:ObjectProperty ;
     rdfs:label "has GoodsInWagon" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :WagonInformation :Wagons ) ] ;
     rdfs:range :GoodsInWagon .
 
 :hasHaulier a owl:ObjectProperty ;
@@ -111,9 +113,20 @@
     rdfs:domain :RollingRoadUnitDetails ;
     rdfs:range :Vehicles .
 
+:GoodsInContainer a owl:Class ;
+    rdfs:label "GoodsInContainer" .
+
 :Haulier a owl:Class ;
     rdfs:label "Haulier" ;
     rdfs:comment "Information concerning the haulier." .
+
+:ILU a owl:Class ;
+    rdfs:label "ILU" ;
+    rdfs:comment "Describes the type and content of an IntermodalTransportUnit" .
+
+:RollingRoadUnit a owl:Class ;
+    rdfs:label "RollingRoadUnit" ;
+    rdfs:comment "Describes the type and content of a Rolling road unit" .
 
 :Vehicles a owl:Class ;
     rdfs:label "Vehicles" ;
@@ -124,62 +137,11 @@
     rdfs:label "Attendants" ;
     rdfs:comment "Attendants during the transport." .
 
-:GoodsInContainer a owl:Class ;
-    rdfs:label "GoodsInContainer" .
-
-:RollingRoadUnit a owl:Class ;
-    rdfs:label "RollingRoadUnit" ;
-    rdfs:comment "Describes the type and content of a Rolling road unit" .
-
-:ILU a owl:Class ;
-    rdfs:label "ILU" ;
-    rdfs:comment "Describes the type and content of an IntermodalTransportUnit" .
-
-:RollingRoadUnitDetails a owl:Class ;
-    rdfs:label "RollingRoadUnitDetails" ;
-    rdfs:comment "Details for Rolling Road units on wagon" .
-
 :GoodsInWagon a owl:Class ;
     rdfs:label "GoodsInWagon" ;
     rdfs:comment "Goods" .
 
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :ILU .
-
-[] rdf:first :RollingRoadUnit .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :GoodsInContainer .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :ILU .
-
-[] rdf:first :RollingRoadUnitDetails .
-
-[] rdf:first :RollingRoadUnit .
-
-[] rdf:first :GoodsInContainer .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :Haulier .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :GoodsInWagon .
-
-[] rdf:first :ILU .
+:RollingRoadUnitDetails a owl:Class ;
+    rdfs:label "RollingRoadUnitDetails" ;
+    rdfs:comment "Details for Rolling Road units on wagon" .
 

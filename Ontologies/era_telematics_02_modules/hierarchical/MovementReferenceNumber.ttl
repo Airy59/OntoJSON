@@ -20,8 +20,6 @@
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasMovementReferenceNumber rdfs:range :MovementReferenceNumber .
-
 :MovementReferenceNumber a owl:Class ;
     rdfs:label "MovementReferenceNumber" ;
     rdfs:comment "Movement Reference Number according to NCTS" .

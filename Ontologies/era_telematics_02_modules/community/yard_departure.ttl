@@ -1,14 +1,9 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 :YardDeparture a owl:Class ;
     rdfs:label "YardDeparture" ;
     rdfs:comment """The departure point of a wagon and the Date and Time when the wagon is
 				taken over by the RU/Service Provider""" .
-
-[] rdf:first :YardDeparture .
-
-[] rdf:first :YardDeparture .
 

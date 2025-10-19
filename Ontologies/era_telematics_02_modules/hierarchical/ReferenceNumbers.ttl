@@ -18,8 +18,6 @@
     rdfs:domain :ReferenceNumbers ;
     rdfs:range :MovementReferenceNumber .
 
-:hasReferenceNumbers rdfs:range :ReferenceNumbers .
-
 :ReferenceNumbers a owl:Class ;
     rdfs:label "ReferenceNumbers" ;
     rdfs:comment """This element contains references according to NCTS or EMCS law.This

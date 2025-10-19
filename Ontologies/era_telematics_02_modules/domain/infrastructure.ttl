@@ -38,14 +38,6 @@
 				departure of a train at a reporting point. This is indicated in the
 				LocationSubsidiaryCode in conjunction with the LocationPrimaryCode.""" .
 
-:DistancePrecision rdfs:domain :NetworkProjectedLocation .
-
-:MaxPayload rdfs:domain :RouteClassPayloads .
-
-:NumberOfVisibleSatellites rdfs:domain :SignalQuality .
-
-:ProportionOfDistanceBetweenLocations rdfs:domain :NetworkProjectedLocation .
-
 :QuieterRoutesExemptionCountry a owl:DatatypeProperty ;
     rdfs:label "QuieterRoutesExemptionCountry" ;
     rdfs:comment """ISO code of country where the wagon has an
@@ -60,7 +52,8 @@
     rdfs:label "RouteClass" ;
     rdfs:comment """Indication of the route class (based on CEN EN 15528: line categories for managing the interface between load limits of vehicles on infrastructure). All the codes in this code list refer to CEN EN 15528: line categories for managing the interface between load limits of vehicles on infrastructure.
 CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems which only support two character codes.""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PlannedTrainTechnicalData :RouteClassPayloads ) ] ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -90,10 +83,6 @@ CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
 
-:SatelliteHDOP rdfs:domain :SignalQuality .
-
-:SequenceID rdfs:domain :RouteSection .
-
 :ShippingStationCode a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "ShippingStationCode" ;
@@ -122,11 +111,10 @@ CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems
     rdfs:domain :TrafficType ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasGeoLocalisation rdfs:domain :GeoLocalisationOnNetwork .
-
 :hasGeoLocalisationOnNetwork a owl:ObjectProperty ;
     rdfs:label "has GeoLocalisationOnNetwork" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :InterruptionPoint :TrainLocationReport ) ] ;
     rdfs:range :GeoLocalisationOnNetwork .
 
 :hasLocationActualTrack a owl:ObjectProperty ;
@@ -146,14 +134,14 @@ CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems
 
 :hasNetworkSpecificParameter a owl:ObjectProperty ;
     rdfs:label "has NetworkSpecificParameter" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AffectedSection :PathDetailsMessage :PathRequestMessage :PlannedJourneyLocation ) ] ;
     rdfs:range :NetworkSpecificParameter .
-
-:hasNextLocation rdfs:domain :NetworkProjectedLocation .
 
 :hasProductionStation a owl:ObjectProperty ;
     rdfs:label "has ProductionStation" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AcceptancePoint :DeliveryPoint ) ] ;
     rdfs:range :ProductionStation .
 
 :hasRouteClassPayloads a owl:ObjectProperty ;
@@ -163,7 +151,8 @@ CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems
 
 :hasRouteSection a owl:ObjectProperty ;
     rdfs:label "has RouteSection" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :COM :Routing ) ] ;
     rdfs:range :RouteSection .
 
 :hasSignalQuality a owl:ObjectProperty ;
@@ -173,7 +162,8 @@ CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems
 
 :hasStation a owl:ObjectProperty ;
     rdfs:label "has Station" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AcceptancePoint :DeliveryPoint ) ] ;
     rdfs:range :Station .
 
 :LocationActualTrack a owl:Class ;
@@ -184,13 +174,9 @@ CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems
     rdfs:label "LocationPlannedTrack" ;
     :domain "Telematics" .
 
-:Station a owl:Class ;
-    rdfs:label "Station" ;
-    rdfs:comment "Details of station serving the point" .
-
-:GeoLocalisationOnNetwork a owl:Class ;
-    rdfs:label "GeoLocalisationOnNetwork" ;
-    rdfs:comment "Geolocalisation information crossed with network data. " .
+:NetworkProjectedLocation a owl:Class ;
+    rdfs:label "NetworkProjectedLocation" ;
+    rdfs:comment "Projection of a geographical position on a network line. " .
 
 :NetworkSpecificParameter a owl:Class ;
     rdfs:label "NetworkSpecificParameter" ;
@@ -202,16 +188,25 @@ CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems
     rdfs:comment """Details of production station serving the point, this element is used
 				if the productional station differs from the commercial station""" .
 
-:RouteClassPayloads a owl:Class ;
-    rdfs:label "RouteClassPayloads" .
-
 :SignalQuality a owl:Class ;
     rdfs:label "SignalQuality" ;
     rdfs:comment "Indicates satellite communication signal quality" .
 
-:NetworkProjectedLocation a owl:Class ;
-    rdfs:label "NetworkProjectedLocation" ;
-    rdfs:comment "Projection of a geographical position on a network line. " .
+:Station a owl:Class ;
+    rdfs:label "Station" ;
+    rdfs:comment "Details of station serving the point" .
+
+:ChangeofTrackMessage a owl:Class ;
+    rdfs:label "ChangeofTrackMessage" ;
+    rdfs:comment """ This message is issued to show that the train is arriving at another
+				platform to the one that was scheduled""" .
+
+:GeoLocalisationOnNetwork a owl:Class ;
+    rdfs:label "GeoLocalisationOnNetwork" ;
+    rdfs:comment "Geolocalisation information crossed with network data. " .
+
+:RouteClassPayloads a owl:Class ;
+    rdfs:label "RouteClassPayloads" .
 
 :RouteSection a owl:Class ;
     rdfs:label "RouteSection" ;
@@ -220,41 +215,4 @@ CM2, CM3 and CM 4 equal M2, M3 and M4 which might be used in some legacy systems
 													information about the complete routing of the
 													consignment, the LeadRu decides wether to
 													provide this information or not""" .
-
-:ChangeofTrackMessage a owl:Class ;
-    rdfs:label "ChangeofTrackMessage" ;
-    rdfs:comment """ This message is issued to show that the train is arriving at another
-				platform to the one that was scheduled""" .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :NetworkSpecificParameter .
-
-[] rdf:first :ProductionStation .
-
-[] rdf:first :RouteClassPayloads .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :NetworkSpecificParameter .
-
-[] rdf:first :ProductionStation .
-
-[] rdf:first :ChangeofTrackMessage .
 

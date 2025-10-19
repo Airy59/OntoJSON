@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 :TrainRunningForecastMessage a owl:Class ;
@@ -13,22 +12,4 @@
 				that exceeds the threshold agreed with the RU responsible for the train. This
 				message is also issued in any cases for handover points, interchange points, for the
 				destination point and for each other reporting point predefined by contract""" .
-
-[] rdf:first :TrainRunningForecastMessage .
-
-[] rdf:first :TrainRunningForecastMessage .
-
-[] rdf:first :TrainRunningForecastMessage .
-
-[] rdf:first :TrainRunningForecastMessage .
-
-[] rdf:first :TrainRunningForecastMessage .
-
-[] rdf:first :TrainRunningForecastMessage .
-
-[] rdf:first :TrainRunningForecastMessage .
-
-[] rdf:first :TrainRunningForecastMessage .
-
-[] rdf:first :TrainRunningForecastMessage .
 

@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -93,8 +92,6 @@ Second digit (definitions in chapter 2.2.2 of the LOC and PAS TSI 1302/2014):
     rdfs:domain :TrainCompositionJourneySection ;
     rdfs:range :LocoIdent .
 
-:hasRegenerativeBrake rdfs:domain :LocoIdent .
-
 :hasResponsibilityActualSection a owl:ObjectProperty ;
     rdfs:label "has ResponsibilityActualSection" ;
     rdfs:domain :JourneySection ;
@@ -110,11 +107,6 @@ Second digit (definitions in chapter 2.2.2 of the LOC and PAS TSI 1302/2014):
     rdfs:domain :TrainCompositionMessage ;
     rdfs:range :TrainCompositionJourneySection .
 
-:hasTrainRunningData a owl:ObjectProperty ;
-    rdfs:label "has TrainRunningData" ;
-    rdfs:domain :TrainCompositionJourneySection ;
-    rdfs:range :TrainRunningData .
-
 :hasWagonData a owl:ObjectProperty ;
     rdfs:label "has WagonData" ;
     rdfs:domain :TrainCompositionJourneySection ;
@@ -124,8 +116,6 @@ Second digit (definitions in chapter 2.2.2 of the LOC and PAS TSI 1302/2014):
     rdfs:label "has WagonOperationalData" ;
     rdfs:domain :WagonData ;
     rdfs:range :WagonOperationalData .
-
-:hasWagonTechData rdfs:domain :WagonData .
 
 :IntermodalTransportData a owl:Class ;
     rdfs:label "IntermodalTransportData" ;
@@ -149,59 +139,25 @@ Second digit (definitions in chapter 2.2.2 of the LOC and PAS TSI 1302/2014):
     rdfs:comment """This element identifies the responsible RU and IM for the following
 				path section""" .
 
-:JourneySection a owl:Class ;
-    rdfs:label "JourneySection" ;
-    rdfs:comment "Defines the data provided by the IM for a journey section" .
-
-:TrainCompositionJourneySection a owl:Class ;
-    rdfs:label "TrainCompositionJourneySection" ;
-    rdfs:comment "Defines the make up of a train for each section of its journey" .
+:TrainCompositionMessage a owl:Class ;
+    rdfs:label "TrainCompositionMessage" ;
+    rdfs:comment """This message is sent from an RU to an IM defining the composition of
+				the proposed train.""" .
 
 :WagonData a owl:Class ;
     rdfs:label "WagonData" ;
     rdfs:comment "Wagon relevant data for the wagons within a running train" .
 
-:TrainCompositionMessage a owl:Class ;
-    rdfs:label "TrainCompositionMessage" ;
-    rdfs:comment """This message is sent from an RU to an IM defining the composition of
-				the proposed train.""" .
+:JourneySection a owl:Class ;
+    rdfs:label "JourneySection" ;
+    rdfs:comment "Defines the data provided by the IM for a journey section" .
 
 :LocoIdent a owl:Class ;
     rdfs:label "LocoIdent" ;
     rdfs:comment """Defines the actual Type, the number and the mode of
 							deployment of a traction unit of the freight train""" .
 
-[] rdf:first :TrainCompositionMessage .
-
-[] rdf:first :TrainCompositionMessage .
-
-[] rdf:first :TrainCompositionMessage .
-
-[] rdf:first :TrainCompositionMessage .
-
-[] rdf:first :TrainCompositionMessage .
-
-[] rdf:first :JourneySectionDestination .
-
-[] rdf:first :JourneySectionOrigin .
-
-[] rdf:first :TrainCompositionMessage .
-
-[] rdf:first :ResponsibilityActualSection .
-
-[] rdf:first :ResponsibilityNextSection .
-
-[] rdf:first :ResponsibilityActualSection .
-
-[] rdf:first :ResponsibilityNextSection .
-
-[] rdf:first :LocoIdent .
-
-[] rdf:first :TrainCompositionMessage .
-
-[] rdf:first :LocoIdent .
-
-[] rdf:first :WagonData .
-
-[] rdf:first :LocoIdent .
+:TrainCompositionJourneySection a owl:Class ;
+    rdfs:label "TrainCompositionJourneySection" ;
+    rdfs:comment "Defines the make up of a train for each section of its journey" .
 

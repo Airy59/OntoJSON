@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -49,19 +48,9 @@
     rdfs:range xsd:int ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasWagonOperationalData rdfs:range :WagonOperationalData .
-
 :WagonOperationalData a owl:Class ;
     rdfs:label "WagonOperationalData" ;
     rdfs:comment """Actual wagon parameters, dependent on load or damage. This group and
 				its elements are optional (contract defines what IM requires). But if there is
 				dangerous goods in the train, then this group is mandatory.""" .
-
-[] rdf:first :WagonOperationalData .
-
-[] rdf:first :WagonOperationalData .
-
-[] rdf:first :WagonOperationalData .
-
-[] rdf:first :WagonOperationalData .
 

@@ -28,8 +28,6 @@
     rdfs:range xsd:positiveInteger ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasLoadTable rdfs:range :LoadTable .
-
 :hasLoadTableProduct a owl:ObjectProperty ;
     rdfs:label "has LoadTableProduct" ;
     rdfs:domain :LoadTable ;

@@ -7,8 +7,6 @@
     rdfs:domain :COMS ;
     rdfs:range :COM .
 
-:hasCOMS rdfs:range :COMS .
-
 :hasCOM_Header a owl:ObjectProperty ;
     rdfs:label "has COM_Header" ;
     rdfs:domain :COMS ;

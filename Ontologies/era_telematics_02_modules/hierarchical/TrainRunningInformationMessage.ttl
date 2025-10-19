@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 :TrainRunningInformationMessage a owl:Class ;
@@ -11,22 +10,4 @@
 				the agreed threshold value 4) as a response to the
 				EnquiryTrainsAtReportingLocationMessage. There will only be one train reported per
 				message and will include one response per train at a location.""" .
-
-[] rdf:first :TrainRunningInformationMessage .
-
-[] rdf:first :TrainRunningInformationMessage .
-
-[] rdf:first :TrainRunningInformationMessage .
-
-[] rdf:first :TrainRunningInformationMessage .
-
-[] rdf:first :TrainRunningInformationMessage .
-
-[] rdf:first :TrainRunningInformationMessage .
-
-[] rdf:first :TrainRunningInformationMessage .
-
-[] rdf:first :TrainRunningInformationMessage .
-
-[] rdf:first :TrainRunningInformationMessage .
 

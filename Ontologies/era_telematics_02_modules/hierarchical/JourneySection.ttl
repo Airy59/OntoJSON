@@ -2,8 +2,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-:hasJourneySection rdfs:range :JourneySection .
-
 :hasJourneySectionDestination a owl:ObjectProperty ;
     rdfs:label "has JourneySectionDestination" ;
     rdfs:domain :JourneySection ;

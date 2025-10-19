@@ -5,15 +5,12 @@
 
 :hasNetworkSpecificParameter a owl:ObjectProperty ;
     rdfs:label "has NetworkSpecificParameter" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AffectedSection :PathDetailsMessage :PathRequestMessage :PlannedJourneyLocation ) ] ;
     rdfs:range :NetworkSpecificParameter .
 
 :NetworkSpecificParameter a owl:Class ;
     rdfs:label "NetworkSpecificParameter" ;
     rdfs:comment """The usage of this element must be specified in national rules and has
 				to be defined by each IM""" .
-
-[] rdf:first :NetworkSpecificParameter .
-
-[] rdf:first :NetworkSpecificParameter .
 

@@ -21,8 +21,6 @@
     rdfs:range xsd:Name ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasVesselIndication rdfs:range :VesselIndication .
-
 :VesselIndication a owl:Class ;
     rdfs:label "VesselIndication" ;
     rdfs:comment """This element identifies to which extent the transportation unit is

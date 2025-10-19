@@ -8,7 +8,8 @@
         owl:FunctionalProperty ;
     rdfs:label "Amount" ;
     rdfs:comment "Amount" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :CashOnDelivery :DeclarationOfValue :InterestInDelivery ) ] ;
     rdfs:range xsd:decimal ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -67,8 +68,6 @@
     rdfs:range xsd:decimal ;
     rdfs:subPropertyOf :dataProperties .
 
-:LoadLimit rdfs:range xsd:decimal .
-
 :LoadingCapacity a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "LoadingCapacity" ;
@@ -81,11 +80,10 @@
         owl:FunctionalProperty ;
     rdfs:label "MaxAxleWeight" ;
     rdfs:comment "Indicates the maximum design axle weight (to)." ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :DesignDataSet :PlannedTrainTechnicalData :TrainRunningTechData ) ] ;
     rdfs:range xsd:decimal ;
     rdfs:subPropertyOf :dataProperties .
-
-:MaxPayload rdfs:range xsd:decimal .
 
 :NHMCode a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -110,7 +108,8 @@
     rdfs:comment """Indicates the parking brake force of the hand brake (kN). When the
 				parking brake force is marked on the wagon the information must be provided in the
 				RSRD message.""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :HandBrake :WagonTechData ) ] ;
     rdfs:range xsd:decimal ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -128,8 +127,6 @@
 																						currency.""" ;
     rdfs:range xsd:decimal ;
     rdfs:subPropertyOf :dataProperties .
-
-:SatelliteHDOP rdfs:range xsd:decimal .
 
 :TariffNumber a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -186,7 +183,8 @@
 
 :hasTariff a owl:ObjectProperty ;
     rdfs:label "has Tariff" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :COM :ChargingSections ) ] ;
     rdfs:range :Tariff .
 
 :hasTiming a owl:ObjectProperty ;
@@ -196,7 +194,8 @@
 
 :hasTimingAtLocation a owl:ObjectProperty ;
     rdfs:label "has TimingAtLocation" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AssociatedAttachedTimingAtLocation :PlannedJourneyLocation ) ] ;
     rdfs:range :TimingAtLocation .
 
 :measure a owl:DatatypeProperty,
@@ -240,6 +239,12 @@
 																			used as the basis for
 																			charging.""" .
 
+:HandBrake a owl:Class ;
+    rdfs:label "HandBrake" .
+
+:Timing a owl:Class ;
+    rdfs:label "Timing" .
+
 :TimingAtLocation a owl:Class ;
     rdfs:label "TimingAtLocation" ;
     rdfs:comment """Timing at an operation point It has an attribute TimerQualifierCode
@@ -249,30 +254,10 @@
 				LLD = Latest Location Departure ERT = Earliest Run Through ART = Actual Run Through
 				LRT = Latest Run Through """ .
 
-:HandBrake a owl:Class ;
-    rdfs:label "HandBrake" .
-
-:Timing a owl:Class ;
-    rdfs:label "Timing" .
-
 :Tariff a owl:Class ;
     rdfs:label "Tariff" ;
     rdfs:comment """Freight Charges
 																Section Tariff""",
         """Number of customer agreement or
 													tariff""" .
-
-[] rdf:first :Timing .
-
-[] rdf:first :Timing .
-
-[] rdf:first :HandBrake .
-
-[] rdf:first xsd:decimal .
-
-[] rdf:first xsd:decimal .
-
-[] rdf:first :HandBrake .
-
-[] rdf:first xsd:decimal .
 

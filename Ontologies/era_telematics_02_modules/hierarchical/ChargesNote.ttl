@@ -21,8 +21,6 @@
     rdfs:range xsd:date ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasChargesNote rdfs:range :ChargesNote .
-
 :ChargesNote a owl:Class ;
     rdfs:label "ChargesNote" ;
     rdfs:comment "Charges note" .

@@ -17,8 +17,6 @@
     rdfs:domain :TypeofService ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasTypeofService rdfs:range :TypeofService .
-
 :TypeofService a owl:Class ;
     rdfs:label "TypeofService" ;
     rdfs:comment """Information about the services available on a train. Used for

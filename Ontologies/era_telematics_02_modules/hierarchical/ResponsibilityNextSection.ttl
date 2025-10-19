@@ -1,16 +1,9 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-
-:hasResponsibilityNextSection rdfs:range :ResponsibilityNextSection .
 
 :ResponsibilityNextSection a owl:Class ;
     rdfs:label "ResponsibilityNextSection" ;
     rdfs:comment """This element identifies the responsible RU and IM for the following
 				path section""" .
-
-[] rdf:first :ResponsibilityNextSection .
-
-[] rdf:first :ResponsibilityNextSection .
 

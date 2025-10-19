@@ -1,0 +1,53 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ARC a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ARC" ;
+    rdfs:comment """Administrative Reference CodeEMCS (Excise Movement and
+							Control System)""",
+        "CODE: EU (EC) No 684/2009" ;
+    rdfs:domain :ReferenceNumbers ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MRN_Number a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MRN_Number" ;
+    rdfs:comment """Movement reference number. Data element in
+										accordance with Regulation (EC) 1875/2006).""" ;
+    rdfs:domain :MovementReferenceNumber ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:MRN_Type a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "MRN_Type" ;
+    rdfs:comment "Type of MRN given, CODE: CIT GLV-CIM appendix 2" ;
+    rdfs:domain :MovementReferenceNumber ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasMovementReferenceNumber a owl:ObjectProperty ;
+    rdfs:label "has MovementReferenceNumber" ;
+    rdfs:domain :ReferenceNumbers ;
+    rdfs:range :MovementReferenceNumber .
+
+:hasReferenceNumbers a owl:ObjectProperty ;
+    rdfs:label "has ReferenceNumbers" ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :GoodsInWagon :ILU_Details :ITU_Details :Packing ) ] ;
+    rdfs:range :ReferenceNumbers .
+
+:MovementReferenceNumber a owl:Class ;
+    rdfs:label "MovementReferenceNumber" ;
+    rdfs:comment "Movement Reference Number according to NCTS" .
+
+:ReferenceNumbers a owl:Class ;
+    rdfs:label "ReferenceNumbers" ;
+    rdfs:comment """This element contains references according to NCTS or EMCS law.This
+				element MUST NOT be empty!""" .
+

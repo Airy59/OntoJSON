@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 :hasLocationActualTrack a owl:ObjectProperty ;
@@ -17,26 +16,4 @@
     rdfs:label "ChangeofTrackMessage" ;
     rdfs:comment """ This message is issued to show that the train is arriving at another
 				platform to the one that was scheduled""" .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
-
-[] rdf:first :ChangeofTrackMessage .
 

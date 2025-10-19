@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -39,16 +38,8 @@
     rdfs:domain :TrainRunningInterruptionMessage ;
     rdfs:range :TrainRunningInterruptionStatus .
 
-:TrainRunningInterruptionStatus a owl:Class ;
-    rdfs:label "TrainRunningInterruptionStatus" .
-
 :Interruption a owl:Class ;
     rdfs:label "Interruption" .
-
-:InterruptionPoint a owl:Class ;
-    rdfs:label "InterruptionPoint" ;
-    rdfs:comment """describes the interruption points with location and the reason for the
-				interruption""" .
 
 :TrainRunningInterruptionMessage a owl:Class ;
     rdfs:label "TrainRunningInterruptionMessage" ;
@@ -56,37 +47,11 @@
 				interrupted. Message is sent only for those trains, directly interrupted by the
 				disruption. """ .
 
-[] rdf:first :TrainRunningInterruptionMessage .
+:TrainRunningInterruptionStatus a owl:Class ;
+    rdfs:label "TrainRunningInterruptionStatus" .
 
-[] rdf:first :TrainRunningInterruptionMessage .
-
-[] rdf:first :TrainRunningInterruptionMessage .
-
-[] rdf:first :TrainRunningInterruptionMessage .
-
-[] rdf:first :TrainRunningInterruptionMessage .
-
-[] rdf:first :InterruptionPoint .
-
-[] rdf:first :InterruptionPoint .
-
-[] rdf:first :Interruption .
-
-[] rdf:first :Interruption .
-
-[] rdf:first :Interruption .
-
-[] rdf:first :Interruption .
-
-[] rdf:first :TrainRunningInterruptionMessage .
-
-[] rdf:first :InterruptionPoint .
-
-[] rdf:first :InterruptionPoint .
-
-[] rdf:first :TrainRunningInterruptionMessage .
-
-[] rdf:first :TrainRunningInterruptionMessage .
-
-[] rdf:first :InterruptionPoint .
+:InterruptionPoint a owl:Class ;
+    rdfs:label "InterruptionPoint" ;
+    rdfs:comment """describes the interruption points with location and the reason for the
+				interruption""" .
 

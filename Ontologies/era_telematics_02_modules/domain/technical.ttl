@@ -20,8 +20,6 @@
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:LengthCode rdfs:domain :Dimensions .
-
 :LimitedQuantityIndicator a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "LimitedQuantityIndicator" ;
@@ -65,24 +63,15 @@
 
 :hasDimensions a owl:ObjectProperty ;
     rdfs:label "has Dimensions" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ILU_Details :ITU_Details ) ] ;
     rdfs:range :Dimensions .
-
-:hasHeight rdfs:domain :Dimensions .
-
-:hasWidth rdfs:domain :Dimensions .
-
-:CommercialSpecifications a owl:Class ;
-    rdfs:label "CommercialSpecifications" ;
-    rdfs:comment "Commercial Specification" .
 
 :Dimensions a owl:Class ;
     rdfs:label "Dimensions" ;
     rdfs:comment "Dimensions of the UTI." .
 
-[] rdf:first :CommercialSpecifications .
-
-[] rdf:first :CommercialSpecifications .
-
-[] rdf:first :Dimensions .
+:CommercialSpecifications a owl:Class ;
+    rdfs:label "CommercialSpecifications" ;
+    rdfs:comment "Commercial Specification" .
 

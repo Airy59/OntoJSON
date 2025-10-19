@@ -2,8 +2,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-:hasNextLocation rdfs:range :NextLocation .
-
 :NextLocation a owl:Class ;
     rdfs:label "NextLocation" ;
     rdfs:comment """Next location forecasted to be encountered by the train.

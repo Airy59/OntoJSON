@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -12,14 +11,10 @@
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasConsignorDeclarations rdfs:range :ConsignorDeclarations .
-
 :ConsignorDeclarations a owl:Class ;
     rdfs:label "ConsignorDeclarations" ;
     rdfs:comment """Consignors declarartions, this
 													element contains either declarations of the
 													original consignor or declarations of the LeadRU
 													as consignor""" .
-
-[] rdf:first :ConsignorDeclarations .
 

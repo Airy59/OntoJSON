@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Driver": {
+      "type": "object",
+      "properties": {
+        "licenseNumber": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "title": "license number",
+            "description": "The driver's license number"
+          }
+        }
+      },
+      "title": "Driver",
+      "description": "A person who drives vehicles",
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "$ref": "test_ontology1_schema.json#/definitions/Person"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ]
+    },
+    "Vehicle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ],
+      "title": "Vehicle",
+      "description": "A means of transportation"
+    },
+    "_Thing": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI identifier for this instance"
+        }
+      },
+      "required": [],
+      "description": "Base object that all classes inherit from",
+      "title": "_Thing"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

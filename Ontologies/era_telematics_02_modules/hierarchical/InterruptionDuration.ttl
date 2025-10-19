@@ -20,8 +20,6 @@
     rdfs:range xsd:dateTime ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasInterruptionDuration rdfs:range :InterruptionDuration .
-
 :InterruptionDuration a owl:Class ;
     rdfs:label "InterruptionDuration" ;
     rdfs:comment "To specifiy the probable duration of the interruption" .

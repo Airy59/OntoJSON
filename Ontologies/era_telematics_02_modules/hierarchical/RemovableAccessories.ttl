@@ -21,8 +21,6 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasRemovableAccessories rdfs:range :RemovableAccessories .
-
 :RemovableAccessories a owl:Class ;
     rdfs:label "RemovableAccessories" .
 

@@ -1,0 +1,34 @@
+@prefix : <http://example.org/test_crossref#> .
+@prefix test1: <http://example.org/test1#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/test_crossref> a owl:Ontology ;
+    rdfs:label "Test Ontology with Cross References" ;
+    rdfs:comment "Ontology that references classes from test_ontology1" ;
+    owl:imports <http://example.org/test1> .
+
+# Driver is a subclass of Person from test1
+:Driver a owl:Class ;
+    rdfs:label "Driver" ;
+    rdfs:comment "A person who drives vehicles" ;
+    rdfs:subClassOf test1:Person .
+
+# Vehicle ownership property - Person (from test1) owns Vehicle (from test2)
+:owns a owl:ObjectProperty ;
+    rdfs:label "owns" ;
+    rdfs:comment "A person owns a vehicle" ;
+    rdfs:domain test1:Person ;
+    rdfs:range :Vehicle .
+
+:Vehicle a owl:Class ;
+    rdfs:label "Vehicle" ;
+    rdfs:comment "A means of transportation" .
+
+:licenseNumber a owl:DatatypeProperty ;
+    rdfs:label "license number" ;
+    rdfs:comment "The driver's license number" ;
+    rdfs:domain :Driver ;
+    rdfs:range xsd:string .

@@ -89,7 +89,8 @@ DE07 = PathID from a framework contract
 
 :hasIdentifiers a owl:ObjectProperty ;
     rdfs:label "has Identifiers" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PathCanceledMessage :PathConfirmedMessage :PathDetailsMessage :PathDetailsRefusedMessage :PathNotAvailableMessage :PathRequestMessage :ReceiptConfirmationMessage ) ] ;
     rdfs:range :Identifiers .
 
 :hasRelatedPlannedTransportIdentifiers a owl:ObjectProperty ;
@@ -102,6 +103,4 @@ DE07 = PathID from a framework contract
 
 :Identifiers a owl:Class ;
     rdfs:label "Identifiers" .
-
-[] rdf:first :Identifiers .
 

@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Vehicle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "hasOwner": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    },
+                    "required": [
+                      "@id"
+                    ],
+                    "additionalProperties": false
+                  }
+                ],
+                "title": "has owner",
+                "description": "The owner of the vehicle"
+              }
+            },
+            "brand": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "brand",
+                "description": "The brand name"
+              }
+            },
+            "year": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "title": "year",
+                "description": "The year of manufacture"
+              }
+            }
+          }
+        }
+      ],
+      "title": "Vehicle",
+      "description": "A means of transportation"
+    },
+    "Car": {
+      "type": "object",
+      "properties": {},
+      "title": "Car",
+      "description": "A four-wheeled vehicle",
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "$ref": "#/definitions/Vehicle"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ]
+    },
+    "Bicycle": {
+      "type": "object",
+      "properties": {},
+      "title": "Bicycle",
+      "description": "A two-wheeled vehicle",
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "$ref": "#/definitions/Vehicle"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ]
+    },
+    "_Thing": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI identifier for this instance"
+        }
+      },
+      "required": [],
+      "description": "Base object that all classes inherit from",
+      "title": "_Thing"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

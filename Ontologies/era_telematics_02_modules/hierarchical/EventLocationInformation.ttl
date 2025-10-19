@@ -7,8 +7,6 @@
     rdfs:domain :EventLocationInformation ;
     rdfs:range :EventLocation .
 
-:hasEventLocationInformation rdfs:range :EventLocationInformation .
-
 :hasPosition a owl:ObjectProperty ;
     rdfs:label "has Position" ;
     rdfs:domain :EventLocationInformation ;

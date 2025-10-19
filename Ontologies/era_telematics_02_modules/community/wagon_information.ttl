@@ -5,7 +5,8 @@
 
 :hasWagonInformation a owl:ObjectProperty ;
     rdfs:label "has WagonInformation" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ConsignmentLevelData :WagonETI_ETA_Message ) ] ;
     rdfs:range :WagonInformation .
 
 :WagonInformation a owl:Class ;
@@ -13,12 +14,4 @@
     rdfs:comment """This element shows the unique wagon number together with the
 				transportation units, loaded on the wagon, the used capacity and the weight of the
 				complete load of the wagon""" .
-
-[] rdf:first :WagonInformation .
-
-[] rdf:first :WagonInformation .
-
-[] rdf:first :WagonInformation .
-
-[] rdf:first :WagonInformation .
 

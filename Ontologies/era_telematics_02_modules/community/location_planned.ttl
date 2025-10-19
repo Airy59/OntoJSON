@@ -4,8 +4,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:ATEXCertified rdfs:range xsd:boolean .
-
 :BogieWagonsOnly a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "BogieWagonsOnly" ;
@@ -17,14 +15,10 @@
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
 
-:ChannelTunnelPermitted rdfs:range xsd:boolean .
-
 :CharacteristicDescriptionCode a owl:DatatypeProperty ;
     rdfs:label "CharacteristicDescriptionCode" ;
     rdfs:domain :TypeofService ;
     rdfs:subPropertyOf :dataProperties .
-
-:ChargesNoteAvailable rdfs:range xsd:boolean .
 
 :Coasting a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -43,8 +37,6 @@
     rdfs:domain :PlannedTrainData ;
     rdfs:subPropertyOf :dataProperties .
 
-:CompositeBrakeBlockRetrofitted rdfs:range xsd:boolean .
-
 :ContainerHandlingFlag a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "ContainerHandlingFlag" ;
@@ -52,10 +44,6 @@
     rdfs:domain :LocationPrimaryInformation ;
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
-
-:CoversNonTankWagonsForDangerousGoods rdfs:range xsd:boolean .
-
-:CoversTankWagonsForDangerousGoods rdfs:range xsd:boolean .
 
 :CustomsEndorsements a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -87,8 +75,6 @@
     rdfs:domain :TrainRunningData ;
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
-
-:ECMCertificateSuspended rdfs:range xsd:boolean .
 
 :EmergencyBrakeOverride a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -134,8 +120,6 @@
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
 
-:GCUWagon rdfs:range xsd:boolean .
-
 :HandoverHarmonized a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "HandoverHarmonized" ;
@@ -171,8 +155,6 @@
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
 
-:IsAbleToRun rdfs:range xsd:boolean .
-
 :JourneyLocationTypeCode a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "JourneyLocationTypeCode" ;
@@ -191,8 +173,6 @@
     rdfs:domain :PlannedTrainTechnicalData ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:LimitedQuantityIndicator rdfs:range xsd:boolean .
 
 :LocationPrimaryCode a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -368,8 +348,6 @@
     rdfs:domain :TypeofService ;
     rdfs:subPropertyOf :dataProperties .
 
-:SuspensionOfAuthorisation rdfs:range xsd:boolean .
-
 :TelematicsOnBoard a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "TelematicsOnBoard" ;
@@ -412,9 +390,13 @@
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
 
-:Waste rdfs:range xsd:boolean .
-
-:WeightOfSetOfCarriages rdfs:domain :PlannedTrainTechnicalData .
+:WeightOfSetOfCarriages a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "WeightOfSetOfCarriages" ;
+    rdfs:comment "The calculated maximum weight of all carriages without the traction" ;
+    rdfs:domain :PlannedTrainTechnicalData ;
+    rdfs:range xsd:int ;
+    rdfs:subPropertyOf :dataProperties .
 
 :hasActivities a owl:ObjectProperty ;
     rdfs:label "has Activities" ;
@@ -425,8 +407,6 @@
     rdfs:label "has ActivityLocationIdent" ;
     rdfs:domain :Activities ;
     rdfs:range :ActivityLocationIdent .
-
-:hasCombinedTrafficLoadProfile rdfs:domain :PlannedTrainData .
 
 :hasCustomsData a owl:ObjectProperty ;
     rdfs:label "has CustomsData" ;
@@ -455,7 +435,8 @@
 
 :hasPlannedJourneyLocation a owl:ObjectProperty ;
     rdfs:label "has PlannedJourneyLocation" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PathInformation :TrainInformation ) ] ;
     rdfs:range :PlannedJourneyLocation .
 
 :hasPlannedTrainData a owl:ObjectProperty ;
@@ -483,16 +464,15 @@
     rdfs:domain :PlannedJourneyLocation ;
     rdfs:range :StatusOfHarmonization .
 
-:hasTractionDetails rdfs:domain :PlannedTrainTechnicalData .
-
 :hasTrafficType a owl:ObjectProperty ;
     rdfs:label "has TrafficType" ;
     rdfs:domain :PlannedTrainData ;
     rdfs:range :TrafficType .
 
-:hasTrainRunningData rdfs:range :TrainRunningData .
-
-:hasTrainRunningTechData rdfs:domain :TrainRunningData .
+:hasTrainRunningData a owl:ObjectProperty ;
+    rdfs:label "has TrainRunningData" ;
+    rdfs:domain :TrainCompositionJourneySection ;
+    rdfs:range :TrainRunningData .
 
 :hasTypeofService a owl:ObjectProperty ;
     rdfs:label "has TypeofService" ;
@@ -503,12 +483,26 @@
     rdfs:label "ActivityLocationIdent" ;
     :domain "Telematics" .
 
+:LocationSubsidiaryInformation a owl:Class ;
+    rdfs:label "LocationSubsidiaryInformation" ;
+    rdfs:comment """Required for Add, Update of a Location Subsidiary Code (modified to
+				global element)""" .
+
 :NoteLocationIdent a owl:Class ;
     rdfs:label "NoteLocationIdent" ;
     rdfs:comment "Identification of location for which is note valid" .
 
+:PathDetailsRefusedMessage a owl:Class ;
+    rdfs:label "PathDetailsRefusedMessage" ;
+    rdfs:comment """This message is used by the RU to inform the IM that the PathDetails
+				(with changed values to the request or to earlier booked path) are not acceptable""" .
+
 :Activities a owl:Class ;
     rdfs:label "Activities" .
+
+:LocationFileDatasetMessage a owl:Class ;
+    rdfs:label "LocationFileDatasetMessage" ;
+    rdfs:comment " Used to Create, Modify or Update the LocationIdent Reference File" .
 
 :Notes a owl:Class ;
     rdfs:label "Notes" ;
@@ -544,15 +538,6 @@
     rdfs:label "CustomsData" ;
     rdfs:comment "Customs Data" .
 
-:LocationFileDatasetMessage a owl:Class ;
-    rdfs:label "LocationFileDatasetMessage" ;
-    rdfs:comment " Used to Create, Modify or Update the LocationIdent Reference File" .
-
-:LocationSubsidiaryInformation a owl:Class ;
-    rdfs:label "LocationSubsidiaryInformation" ;
-    rdfs:comment """Required for Add, Update of a Location Subsidiary Code (modified to
-				global element)""" .
-
 :TrainRunningData a owl:Class ;
     rdfs:label "TrainRunningData" ;
     rdfs:comment "Train relevant data for a running train" .
@@ -561,108 +546,15 @@
     rdfs:label "PlannedTrainData" ;
     rdfs:comment "Train relevant data for a planning period" .
 
-:LocationPrimaryInformation a owl:Class ;
-    rdfs:label "LocationPrimaryInformation" ;
-    rdfs:comment "Required for Primary Location Add, Update, of a Location Primary Code" .
-
-:PathDetailsRefusedMessage a owl:Class ;
-    rdfs:label "PathDetailsRefusedMessage" ;
-    rdfs:comment """This message is used by the RU to inform the IM that the PathDetails
-				(with changed values to the request or to earlier booked path) are not acceptable""" .
-
 :PlannedJourneyLocation a owl:Class ;
     rdfs:label "PlannedJourneyLocation" ;
     rdfs:comment "Any operation point along the train journey or path" .
 
+:LocationPrimaryInformation a owl:Class ;
+    rdfs:label "LocationPrimaryInformation" ;
+    rdfs:comment "Required for Primary Location Add, Update, of a Location Primary Code" .
+
 :PlannedTrainTechnicalData a owl:Class ;
     rdfs:label "PlannedTrainTechnicalData" ;
     rdfs:comment "Shows the relevant technical data for a running train" .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :Activities .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :LocationPrimaryInformation .
-
-[] rdf:first :LocationSubsidiaryInformation .
-
-[] rdf:first :PlannedTrainData .
-
-[] rdf:first :LocationSubsidiaryInformation .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :LocationPrimaryInformation .
-
-[] rdf:first :LocationSubsidiaryInformation .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PlannedTrainData .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :LocationPrimaryInformation .
-
-[] rdf:first :LocationSubsidiaryInformation .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :LocationSubsidiaryInformation .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :LocationFileDatasetMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :LocationPrimaryInformation .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :LocationFileDatasetMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
 

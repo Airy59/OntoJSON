@@ -21,8 +21,6 @@
     rdfs:domain :TrainCompositionJourneySection ;
     rdfs:range :LocoIdent .
 
-:hasTrainCompositionJourneySection rdfs:range :TrainCompositionJourneySection .
-
 :hasTrainRunningData a owl:ObjectProperty ;
     rdfs:label "has TrainRunningData" ;
     rdfs:domain :TrainCompositionJourneySection ;

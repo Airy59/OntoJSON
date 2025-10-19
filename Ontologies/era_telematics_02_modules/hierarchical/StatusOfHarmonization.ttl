@@ -23,8 +23,6 @@
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasStatusOfHarmonization rdfs:range :StatusOfHarmonization .
-
 :StatusOfHarmonization a owl:Class ;
     rdfs:label "StatusOfHarmonization" ;
     rdfs:comment """Does not force harmonization, it just sets an

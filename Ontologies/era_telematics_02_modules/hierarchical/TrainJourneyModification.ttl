@@ -17,8 +17,6 @@
     rdfs:domain :TrainJourneyModification ;
     rdfs:range :LocationModified .
 
-:hasTrainJourneyModification rdfs:range :TrainJourneyModification .
-
 :TrainJourneyModification a owl:Class ;
     rdfs:label "TrainJourneyModification" ;
     rdfs:comment """This element shows which locations are changed during the running of a

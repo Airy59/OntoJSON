@@ -31,8 +31,6 @@
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasBrakeBlock rdfs:range :BrakeBlock .
-
 :BrakeBlock a owl:Class ;
     rdfs:label "BrakeBlock" ;
     rdfs:comment "Characteristics of brake blocks" .

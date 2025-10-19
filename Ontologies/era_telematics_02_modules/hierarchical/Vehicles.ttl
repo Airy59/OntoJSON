@@ -14,8 +14,6 @@
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasVehicles rdfs:range :Vehicles .
-
 :Vehicles a owl:Class ;
     rdfs:label "Vehicles" ;
     rdfs:comment """List of vehicles loaded (i.e. truck and

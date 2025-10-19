@@ -2,40 +2,40 @@
   "strategy": "domain",
   "source_file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02.ttl",
   "partitions": {
-    "operations": {
-      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/operations.ttl",
-      "entities": 53,
-      "triples": 285
-    },
     "rolling_stock": {
       "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/rolling_stock.ttl",
       "entities": 166,
-      "triples": 1060
+      "triples": 1053
+    },
+    "administrative": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/administrative.ttl",
+      "entities": 13,
+      "triples": 77
+    },
+    "geographic": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/geographic.ttl",
+      "entities": 85,
+      "triples": 559
+    },
+    "operations": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/operations.ttl",
+      "entities": 53,
+      "triples": 282
+    },
+    "signaling": {
+      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/signaling.ttl",
+      "entities": 29,
+      "triples": 229
     },
     "technical": {
       "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/technical.ttl",
       "entities": 10,
       "triples": 62
     },
-    "administrative": {
-      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/administrative.ttl",
-      "entities": 13,
-      "triples": 82
-    },
-    "geographic": {
-      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/geographic.ttl",
-      "entities": 85,
-      "triples": 462
-    },
     "infrastructure": {
       "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/infrastructure.ttl",
       "entities": 33,
-      "triples": 173
-    },
-    "signaling": {
-      "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/signaling.ttl",
-      "entities": 29,
-      "triples": 253
+      "triples": 189
     },
     "safety": {
       "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/safety.ttl",
@@ -45,12 +45,12 @@
     "electrical": {
       "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/electrical.ttl",
       "entities": 8,
-      "triples": 49
+      "triples": 72
     },
     "general": {
       "file": "/Users/airymagnien/PycharmProjects/OntoJSON/Ontologies/era_telematics_02_modules/domain/general.ttl",
       "entities": 590,
-      "triples": 3641
+      "triples": 4108
     }
   }
 }

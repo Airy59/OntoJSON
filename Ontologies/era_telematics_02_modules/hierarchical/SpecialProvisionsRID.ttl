@@ -27,8 +27,6 @@
     rdfs:domain :SpecialProvisionsRID ;
     rdfs:range :SpecialProvisionsEnvironment .
 
-:hasSpecialProvisionsRID rdfs:range :SpecialProvisionsRID .
-
 :SpecialProvisionsRID a owl:Class ;
     rdfs:label "SpecialProvisionsRID" .
 

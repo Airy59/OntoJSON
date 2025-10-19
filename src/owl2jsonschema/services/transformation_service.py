@@ -19,6 +19,7 @@ from ..parser import OntologyParser
 from ..composite_builder import CompositeOntologyBuilder
 from ..abox_generator import ABoxGenerator
 from ..abox_to_json import ABoxToJSONConverter
+from ..crossref_resolver import CrossReferenceResolver
 
 
 def normalize_line_endings(file_path: Union[str, Path]) -> str:
@@ -274,7 +275,11 @@ class TransformationService:
             
             # Transform each individual component if requested
             component_schemas = {}
+            crossref_resolver = CrossReferenceResolver()
+            
             if transform_components and result.success:
+                # First pass: Transform all components and register classes
+                parsed_ontologies = []
                 for i, source in enumerate(sources):
                     # Use ORIGINAL source for naming (not normalized temp file)
                     source_path = Path(source)
@@ -284,7 +289,18 @@ class TransformationService:
                     source_to_transform = normalized_sources[i]
                     
                     try:
-                        # Transform this component (it will normalize again if needed, but that's ok)
+                        # Parse the ontology first to register classes
+                        ontology = self.parser.parse(source_to_transform)
+                        parsed_ontologies.append((component_name, ontology))
+                        
+                        # Register all classes from this ontology
+                        for owl_class in ontology.classes:
+                            class_uri = owl_class.uri
+                            # Extract clean class name (same logic as in builder)
+                            class_name = self._clean_definition_name(class_uri)
+                            crossref_resolver.register_class(class_uri, class_name, component_name)
+                        
+                        # Transform this component
                         component_result = self.transform_single(
                             source_to_transform,
                             config=config,
@@ -303,6 +319,18 @@ class TransformationService:
                         warning_msg = f"Exception transforming component '{component_name}': {str(e)}"
                         result.warnings.append(warning_msg)
                         print(f"✗ Component '{component_name}' exception: {str(e)}")
+                
+                # Second pass: Rewrite cross-references in all component schemas
+                print("\n🔗 Resolving cross-references...")
+                for component_name in component_schemas.keys():
+                    original_schema = component_schemas[component_name]
+                    rewritten_schema = crossref_resolver.rewrite_schema_references(
+                        original_schema,
+                        component_name,
+                        component_suffix="_schema.json"
+                    )
+                    component_schemas[component_name] = rewritten_schema
+                    print(f"  ✓ Resolved references for '{component_name}'")
             
             # Add component schemas to result
             result.component_schemas = component_schemas
@@ -623,3 +651,30 @@ class TransformationService:
                 saved_files[component_name] = str(component_path)
         
         return saved_files
+    
+    def _clean_definition_name(self, name: str) -> str:
+        """
+        Clean a name to be a valid JSON Schema definition name.
+        
+        Args:
+            name: The name to clean
+        
+        Returns:
+            The cleaned name
+        """
+        # Remove namespace prefixes if present
+        if ':' in name:
+            name = name.split(':')[-1]
+        
+        # Remove URI parts if present
+        if '/' in name:
+            name = name.split('/')[-1]
+        
+        if '#' in name:
+            name = name.split('#')[-1]
+        
+        # Replace invalid characters
+        name = name.replace(' ', '_')
+        name = name.replace('-', '_')
+        
+        return name

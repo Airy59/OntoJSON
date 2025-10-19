@@ -12,8 +12,6 @@
     rdfs:domain :RollingStockDataset ;
     rdfs:range :DesignDataSet .
 
-:hasRollingStockDataset rdfs:range :RollingStockDataset .
-
 :RollingStockDataset a owl:Class ;
     rdfs:label "RollingStockDataset" ;
     rdfs:comment "Rolling Stock adminsitrative and Technical Dataset" .

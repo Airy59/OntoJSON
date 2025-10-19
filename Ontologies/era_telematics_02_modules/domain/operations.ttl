@@ -29,12 +29,6 @@
     rdfs:range xsd:dateTime ;
     rdfs:subPropertyOf :dataProperties .
 
-:C1 rdfs:domain :CombinedTrafficLoadProfile .
-
-:C2 rdfs:domain :CombinedTrafficLoadProfile .
-
-:CharacteristicDescriptionCode rdfs:domain :TypeofService .
-
 :CommercialTrafficType a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "CommercialTrafficType" ;
@@ -61,7 +55,8 @@
         owl:FunctionalProperty ;
     rdfs:label "DelayCause" ;
     rdfs:comment "This element identifies the reason for a delay (modified DelayReason)" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :DelayCauseTime :TrainReadyStatus ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -95,7 +90,8 @@
     rdfs:comment "CODE: ISO-3166-2",
         "Code of departure country of the ILU.",
         "Code of departure country of the UTI." ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ILU_Details :ITU_Details ) ] ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -108,11 +104,10 @@
         owl:FunctionalProperty ;
     rdfs:label "DepartureTimeAtLocation" ;
     rdfs:comment "the scheduled departure date and time at a defined location" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :DepartureInterchangeReport :WagonAtDeparture :WagonPickupAtOrigin :YardDeparture ) ] ;
     rdfs:range xsd:dateTime ;
     rdfs:subPropertyOf :dataProperties .
-
-:FacilityTypeDescriptionCode rdfs:domain :TypeofService .
 
 :JourneyLocationTypeCode a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -121,20 +116,6 @@
     rdfs:domain :PlannedJourneyLocation ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
-
-:MRN_Number rdfs:domain :MovementReferenceNumber .
-
-:MRN_Type rdfs:domain :MovementReferenceNumber .
-
-:OnDemandPath rdfs:domain :PlannedJourneyLocation .
-
-:P1 rdfs:domain :CombinedTrafficLoadProfile .
-
-:P2 rdfs:domain :CombinedTrafficLoadProfile .
-
-:PreArrangedPath rdfs:domain :PlannedJourneyLocation .
-
-:ResponsibleApplicant rdfs:domain :PlannedJourneyLocation .
 
 :ScheduledDateTimeAtTransfer a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -163,8 +144,6 @@
     rdfs:range xsd:dateTime ;
     rdfs:subPropertyOf :dataProperties .
 
-:Source rdfs:domain :ArrivalInterchangeReport .
-
 :SpecialServiceDescriptionCode a owl:DatatypeProperty ;
     rdfs:label "SpecialServiceDescriptionCode" ;
     rdfs:domain :TypeofService ;
@@ -184,8 +163,6 @@
     rdfs:domain :TrafficType ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
-
-:TrafficTypeNetwork rdfs:domain :TrafficType .
 
 :hasArrivalInterchangeReport a owl:ObjectProperty ;
     rdfs:label "has ArrivalInterchangeReport" ;
@@ -239,21 +216,14 @@
 
 :hasPlannedJourneyLocation a owl:ObjectProperty ;
     rdfs:label "has PlannedJourneyLocation" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PathInformation :TrainInformation ) ] ;
     rdfs:range :PlannedJourneyLocation .
-
-:hasPlannedTrainData rdfs:domain :PlannedJourneyLocation .
 
 :hasRelatedTransportOperationalIdentifiers a owl:ObjectProperty ;
     rdfs:label "has RelatedTransportOperationalIdentifiers" ;
     rdfs:domain :TrainOperationalIdentification ;
     rdfs:range :RelatedTransportOperationalIdentifiers .
-
-:hasResponsibilityActualSection rdfs:domain :JourneySection .
-
-:hasResponsibilityNextSection rdfs:domain :JourneySection .
-
-:hasStatusOfHarmonization rdfs:domain :PlannedJourneyLocation .
 
 :hasTrafficType a owl:ObjectProperty ;
     rdfs:label "has TrafficType" ;
@@ -262,7 +232,8 @@
 
 :hasTransportOperationalIdentifiers a owl:ObjectProperty ;
     rdfs:label "has TransportOperationalIdentifiers" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ErrorMessage :TrainCompositionMessage :TrainOperationalIdentification :TrainReadyMessage ) ] ;
     rdfs:range :TransportOperationalIdentifiers .
 
 :hasTypeofService a owl:ObjectProperty ;
@@ -270,22 +241,25 @@
     rdfs:domain :PlannedTrainData ;
     rdfs:range :TypeofService .
 
-:DelayLocation a owl:Class ;
-    rdfs:label "DelayLocation" ;
-    :domain "Telematics" ;
-    rdfs:comment "Location where the Delay occured" .
-
-:RelatedTransportOperationalIdentifiers a owl:Class ;
-    rdfs:label "RelatedTransportOperationalIdentifiers" .
-
-:TransportOperationalIdentifiers a owl:Class ;
-    rdfs:label "TransportOperationalIdentifiers" .
-
 :ArrivalAtDestination a owl:Class ;
     rdfs:label "ArrivalAtDestination" ;
     rdfs:comment """Arrival of a wagon at its destnation point with Date and Time. The
 				location is not the final destination at ustomer sidings, but he location of the
 				last RU which has to organise the final delivery of the wagon to customer sidings""" .
+
+:CombinedTrafficLoadProfile a owl:Class ;
+    rdfs:label "CombinedTrafficLoadProfile" ;
+    rdfs:comment """This element does refer to combined load units that can be used for Freight Requests only.
+There are two entry options:
+â€¢ One option refers to â€œPâ€ (Semi-trailer/road semi-trailer):
+â€¢ The other option refers to â€œCâ€ (Swap body):
+The RUs may indicate the relevant values if they are familiar with the IMs line profiles. In case there is a path request for a train with combined traffic load, the IM should indicate the possible max. value for all 4 elements (P1, P2, C1, C2). Further information about Combined Traffic Load Profile can be seen in the UIC 596-6 Leaflet.
+""" .
+
+:DelayLocation a owl:Class ;
+    rdfs:label "DelayLocation" ;
+    :domain "Telematics" ;
+    rdfs:comment "Location where the Delay occured" .
 
 :JourneySectionDestination a owl:Class ;
     rdfs:label "JourneySectionDestination" ;
@@ -294,6 +268,16 @@
 :JourneySectionOrigin a owl:Class ;
     rdfs:label "JourneySectionOrigin" ;
     rdfs:comment "Origin of the section on which train composition is unchanged" .
+
+:MovementReferenceNumber a owl:Class ;
+    rdfs:label "MovementReferenceNumber" ;
+    rdfs:comment "Movement Reference Number according to NCTS" .
+
+:RelatedTransportOperationalIdentifiers a owl:Class ;
+    rdfs:label "RelatedTransportOperationalIdentifiers" .
+
+:TransportOperationalIdentifiers a owl:Class ;
+    rdfs:label "TransportOperationalIdentifiers" .
 
 :YardArrival a owl:Class ;
     rdfs:label "YardArrival" ;
@@ -305,100 +289,39 @@
     rdfs:comment """The departure point of a wagon and the Date and Time when the wagon is
 				taken over by the RU/Service Provider""" .
 
-:MovementReferenceNumber a owl:Class ;
-    rdfs:label "MovementReferenceNumber" ;
-    rdfs:comment "Movement Reference Number according to NCTS" .
+:ArrivalInterchangeReport a owl:Class ;
+    rdfs:label "ArrivalInterchangeReport" ;
+    rdfs:comment "The arrival or interchange station where ETI end" .
+
+:DepartureInterchangeReport a owl:Class ;
+    rdfs:label "DepartureInterchangeReport" ;
+    rdfs:comment "Departure or interchange station ETI Orgin" .
+
+:PlannedJourneyLocation a owl:Class ;
+    rdfs:label "PlannedJourneyLocation" ;
+    rdfs:comment "Any operation point along the train journey or path" .
 
 :TrafficType a owl:Class ;
     rdfs:label "TrafficType" ;
     rdfs:comment """information about the type of traffic (combined, rolling highway,
 				etc). It is added here as a placeholder for coded values (e.g. from Merits)""" .
 
-:DepartureInterchangeReport a owl:Class ;
-    rdfs:label "DepartureInterchangeReport" ;
-    rdfs:comment "Departure or interchange station ETI Orgin" .
-
 :TypeofService a owl:Class ;
     rdfs:label "TypeofService" ;
     rdfs:comment """Information about the services available on a train. Used for
 				publication towards the passenger""" .
-
-:ArrivalInterchangeReport a owl:Class ;
-    rdfs:label "ArrivalInterchangeReport" ;
-    rdfs:comment "The arrival or interchange station where ETI end" .
-
-:CombinedTrafficLoadProfile a owl:Class ;
-    rdfs:label "CombinedTrafficLoadProfile" ;
-    rdfs:comment """This element does refer to combined load units that can be used for Freight Requests only.
-There are two entry options:
-â€¢ One option refers to â€œPâ€ (Semi-trailer/road semi-trailer):
-â€¢ The other option refers to â€œCâ€ (Swap body):
-The RUs may indicate the relevant values if they are familiar with the IMs line profiles. In case there is a path request for a train with combined traffic load, the IM should indicate the possible max. value for all 4 elements (P1, P2, C1, C2). Further information about Combined Traffic Load Profile can be seen in the UIC 596-6 Leaflet.
-""" .
-
-:JourneySection a owl:Class ;
-    rdfs:label "JourneySection" ;
-    rdfs:comment "Defines the data provided by the IM for a journey section" .
 
 :DelayEventReport a owl:Class ;
     rdfs:label "DelayEventReport" ;
     rdfs:comment """Provides the detailed information about a single delay event (Replaced
 				DelayReasonReport)""" .
 
+:JourneySection a owl:Class ;
+    rdfs:label "JourneySection" ;
+    rdfs:comment "Defines the data provided by the IM for a journey section" .
+
 :DelayCauseTime a owl:Class ;
     rdfs:label "DelayCauseTime" ;
     rdfs:comment """Identifies the delay of a train due to a specified reason. In addition
 				it allows to put in a more detailed description (Changed from DelayReasonTime)""" .
-
-:PlannedJourneyLocation a owl:Class ;
-    rdfs:label "PlannedJourneyLocation" ;
-    rdfs:comment "Any operation point along the train journey or path" .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :ArrivalInterchangeReport .
-
-[] rdf:first :DepartureInterchangeReport .
-
-[] rdf:first :DelayEventReport .
-
-[] rdf:first :JourneySectionDestination .
-
-[] rdf:first :JourneySectionOrigin .
-
-[] rdf:first :ArrivalAtDestination .
-
-[] rdf:first :DelayCauseTime .
-
-[] rdf:first :DepartureInterchangeReport .
-
-[] rdf:first :YardDeparture .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :DelayCauseTime .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :DelayEventReport .
-
-[] rdf:first :DelayCauseTime .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :PlannedJourneyLocation .
-
-[] rdf:first :DelayEventReport .
-
-[] rdf:first :ArrivalInterchangeReport .
-
-[] rdf:first :DepartureInterchangeReport .
-
-[] rdf:first :YardArrival .
-
-[] rdf:first :YardDeparture .
 

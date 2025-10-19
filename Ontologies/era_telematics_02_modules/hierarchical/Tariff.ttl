@@ -61,8 +61,6 @@
     rdfs:domain :Tariff ;
     rdfs:range :FreightCharges .
 
-:hasTariff rdfs:range :Tariff .
-
 :Tariff a owl:Class ;
     rdfs:label "Tariff" ;
     rdfs:comment """Freight Charges

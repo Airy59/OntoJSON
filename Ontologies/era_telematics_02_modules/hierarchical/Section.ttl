@@ -15,8 +15,6 @@
     rdfs:domain :Section ;
     rdfs:range :InvoicedSection .
 
-:hasSection rdfs:range :Section .
-
 :Section a owl:Class ;
     rdfs:label "Section" ;
     rdfs:comment "Sectional Invoicing" .

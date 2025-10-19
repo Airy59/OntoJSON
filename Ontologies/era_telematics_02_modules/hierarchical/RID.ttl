@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -114,8 +113,6 @@
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasRID rdfs:range :RID .
-
 :hasSpecialProvisionsRID a owl:ObjectProperty ;
     rdfs:label "has SpecialProvisionsRID" ;
     rdfs:domain :RID ;
@@ -128,10 +125,4 @@
 				"DangerousGoodsIndication" which only provides information to be provided to the IM
 				according to chapter 1.4 RID, "RID" contains all information demanded in chapter 5.4
 				RID in order tpo provide all information used for RUs""" .
-
-[] rdf:first :RID .
-
-[] rdf:first :RID .
-
-[] rdf:first :RID .
 

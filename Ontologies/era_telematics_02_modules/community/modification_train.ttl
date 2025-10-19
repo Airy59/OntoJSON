@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -49,42 +48,18 @@
     rdfs:domain :TrainJourneyModificationMessage ;
     rdfs:range :TrainJourneyModification .
 
-:TrainJourneyModification a owl:Class ;
-    rdfs:label "TrainJourneyModification" ;
-    rdfs:comment """This element shows which locations are changed during the running of a
-				train""" .
-
 :LocationModified a owl:Class ;
     rdfs:label "LocationModified" ;
     rdfs:comment """This element shows the Location that has been changed for the train
 				run """ .
 
+:TrainJourneyModification a owl:Class ;
+    rdfs:label "TrainJourneyModification" ;
+    rdfs:comment """This element shows which locations are changed during the running of a
+				train""" .
+
 :TrainJourneyModificationMessage a owl:Class ;
     rdfs:label "TrainJourneyModificationMessage" ;
     rdfs:comment """ This message is issued to show, in real time, that the train is
 				reroouted-cancelled-stopping pattern is changed""" .
-
-[] rdf:first :TrainJourneyModificationMessage .
-
-[] rdf:first :TrainJourneyModificationMessage .
-
-[] rdf:first :TrainJourneyModificationMessage .
-
-[] rdf:first :TrainJourneyModificationMessage .
-
-[] rdf:first :TrainJourneyModificationMessage .
-
-[] rdf:first :LocationModified .
-
-[] rdf:first :TrainJourneyModificationMessage .
-
-[] rdf:first :TrainJourneyModificationMessage .
-
-[] rdf:first :TrainJourneyModificationMessage .
-
-[] rdf:first :LocationModified .
-
-[] rdf:first :TrainJourneyModificationMessage .
-
-[] rdf:first :LocationModified .
 

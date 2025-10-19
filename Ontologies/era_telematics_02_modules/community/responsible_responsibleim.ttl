@@ -1,5 +1,6 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 :ResponsibleIM a owl:DatatypeProperty,
@@ -10,6 +11,7 @@
 				(could even be a network border without stopping of the train) in case where the IM
 				on the oncoming section changes from the legal point of view. This means, the new IM
 				has the legal responsibility for the oncoming section. """ ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :LocationPrimaryInformation :PlannedJourneyLocation :ResponsibilityActualSection :ResponsibilityNextSection ) ] ;
     rdfs:subPropertyOf :dataProperties .
 

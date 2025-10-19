@@ -19,8 +19,6 @@
     rdfs:range xsd:int ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasTemperatureRange rdfs:range :TemperatureRange .
-
 :TemperatureRange a owl:Class ;
     rdfs:label "TemperatureRange" .
 

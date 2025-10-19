@@ -19,8 +19,6 @@
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasSeals rdfs:range :Seals .
-
 :Seals a owl:Class ;
     rdfs:label "Seals" ;
     rdfs:comment "Describes the seals used for the consignment" .

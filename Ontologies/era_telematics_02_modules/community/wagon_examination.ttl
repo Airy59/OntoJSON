@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -138,36 +137,4 @@
 :WagonDetails a owl:Class ;
     rdfs:label "WagonDetails" ;
     rdfs:comment "Details for the specific wagon" .
-
-[] rdf:first :WagonDetails .
-
-[] rdf:first :WagonDetails .
-
-[] rdf:first :Wagons .
-
-[] rdf:first :Examination .
-
-[] rdf:first :FormalReports .
-
-[] rdf:first :WagonDetails .
-
-[] rdf:first :ExceptionalConsignment .
-
-[] rdf:first :WagonDetails .
-
-[] rdf:first :Wagons .
-
-[] rdf:first :FormalReports .
-
-[] rdf:first :WagonDetails .
-
-[] rdf:first :WagonDetails .
-
-[] rdf:first :Wagons .
-
-[] rdf:first :Wagons .
-
-[] rdf:first :WagonTypeDetails .
-
-[] rdf:first :WagonTypeDetails .
 

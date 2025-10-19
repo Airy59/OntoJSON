@@ -21,8 +21,6 @@
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasLoadTableProduct rdfs:range :LoadTableProduct .
-
 :LoadTableProduct a owl:Class ;
     rdfs:label "LoadTableProduct" ;
     rdfs:comment """Product description, only applies

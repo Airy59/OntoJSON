@@ -4,10 +4,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:ActualETA rdfs:domain :AlertMessage .
-
-:CommitmentETA rdfs:domain :AlertMessage .
-
 :ControlDigit a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "ControlDigit" ;
@@ -16,8 +12,6 @@
     rdfs:domain :LocoTypeNumber ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
-
-:LocationPrimaryCode rdfs:domain :LocationFileDatasetMessage .
 
 :MessageCreationDateTime a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -85,7 +79,8 @@
         owl:FunctionalProperty ;
     rdfs:label "MessageStatus" ;
     rdfs:comment "Assigned by the Sender 1=creation, 2=modification, 3=deletion" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ChangeofTrackMessage :ErrorMessage :LocationFileDatasetMessage :PathCanceledMessage :PathConfirmedMessage :PathDetailsMessage :PathDetailsRefusedMessage :PathNotAvailableMessage :PathRequestMessage :TrainCompositionMessage :TrainDelayCauseMessage :TrainForecastAtReportingLocationMessage :TrainJourneyModificationMessage :TrainReadyMessage :TrainRunningForecastMessage :TrainRunningInformationMessage :TrainRunningInterruptionMessage ) ] ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -136,54 +131,22 @@
     rdfs:range xsd:dateTime ;
     rdfs:subPropertyOf :dataProperties .
 
-:RevisedRequest rdfs:domain :PathDetailsRefusedMessage .
-
-:SenderReference rdfs:domain :MessageHeader .
-
-:ShippingCarrier rdfs:domain :ControlLabel .
-
-:ShippingCountry rdfs:domain :ControlLabel .
-
-:ShippingStationCode rdfs:domain :ControlLabel .
-
-:ShippingStationName rdfs:domain :ControlLabel .
-
-:hasAffectedLocation rdfs:domain :ReceiptConfirmationMessage .
-
-:hasCOMS rdfs:domain :ConsignmentOrderMessage .
-
-:hasConsignmentNumber rdfs:domain :ControlLabel .
-
 :hasControlLabel a owl:ObjectProperty ;
     rdfs:label "has ControlLabel" ;
     rdfs:domain :ConsignmentIdentification ;
     rdfs:range :ControlLabel .
 
-:hasError rdfs:domain :ErrorMessage .
-
-:hasErrorCauseReference rdfs:domain :ErrorMessage .
-
-:hasInterruptionInformation rdfs:domain :PathNotAvailableMessage .
-
-:hasLocationPrimaryInformation rdfs:domain :LocationFileDatasetMessage .
-
-:hasLocationSubsidiaryInformation rdfs:domain :LocationFileDatasetMessage .
-
 :hasMessageHeader a owl:ObjectProperty ;
     rdfs:label "has MessageHeader" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AlertMessage :ChangeofTrackMessage :ConsignmentOrderMessage :ErrorMessage :LocationFileDatasetMessage :PathCanceledMessage :PathConfirmedMessage :PathDetailsMessage :PathDetailsRefusedMessage :PathNotAvailableMessage :PathRequestMessage :ReceiptConfirmationMessage :RollingStockDatasetMessage :RollingStockDatasetQueryMessage :TrainCompositionMessage :TrainDelayCauseMessage :TrainForecastAtReportingLocationMessage :TrainJourneyModificationMessage :TrainReadyMessage :TrainRunningForecastMessage :TrainRunningInformationMessage :TrainRunningInterruptionMessage :WagonETI_ETA_Message :WagonStatusMessages ) ] ;
     rdfs:range :MessageHeader .
 
 :hasMessageReference a owl:ObjectProperty ;
     rdfs:label "has MessageReference" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ErrorCauseReference :MessageHeader ) ] ;
     rdfs:range :MessageReference .
-
-:hasTrainInformation rdfs:domain :PathRequestMessage .
-
-:ConsignmentOrderMessage a owl:Class ;
-    rdfs:label "ConsignmentOrderMessage" ;
-    rdfs:comment "Consignment Order Message from Lead RU to RU" .
 
 :AlertMessage a owl:Class ;
     rdfs:label "AlertMessage" ;
@@ -191,26 +154,12 @@
 				the customer, the Lead RU sends this Alert Message to the actual RU in charge and to
 				all following RUs involved in the transport chain""" .
 
-:LocationFileDatasetMessage a owl:Class ;
-    rdfs:label "LocationFileDatasetMessage" ;
-    rdfs:comment " Used to Create, Modify or Update the LocationIdent Reference File" .
-
-:MessageHeader a owl:Class ;
-    rdfs:label "MessageHeader" ;
-    rdfs:comment "Used for all messages" .
-
-:MessageReference a owl:Class ;
-    rdfs:label "MessageReference" ;
-    rdfs:comment "This element identifies the message" .
+:ConsignmentOrderMessage a owl:Class ;
+    rdfs:label "ConsignmentOrderMessage" ;
+    rdfs:comment "Consignment Order Message from Lead RU to RU" .
 
 :ControlLabel a owl:Class ;
     rdfs:label "ControlLabel" .
-
-:ErrorMessage a owl:Class ;
-    rdfs:label "ErrorMessage" ;
-    rdfs:comment """This message should be sent from the receiver to the sender after the
-				processing of the previously sent TAF/TAP message in the backend (legacy) system of
-				the receiver has failed.""" .
 
 :ReceiptConfirmationMessage a owl:Class ;
     rdfs:label "ReceiptConfirmationMessage" ;
@@ -220,15 +169,30 @@
 				to be same as those that have come from sender. The same applies to type-of-request
 				and type-of-information.""" .
 
-:PathConfirmedMessage a owl:Class ;
-    rdfs:label "PathConfirmedMessage" ;
-    rdfs:comment """This message is used by the RU to confirm the proposed path ofthe IM
-				(PathDetailsMessage) in response to an RUs Original Request""" .
+:ErrorMessage a owl:Class ;
+    rdfs:label "ErrorMessage" ;
+    rdfs:comment """This message should be sent from the receiver to the sender after the
+				processing of the previously sent TAF/TAP message in the backend (legacy) system of
+				the receiver has failed.""" .
+
+:LocationFileDatasetMessage a owl:Class ;
+    rdfs:label "LocationFileDatasetMessage" ;
+    rdfs:comment " Used to Create, Modify or Update the LocationIdent Reference File" .
 
 :PathCanceledMessage a owl:Class ;
     rdfs:label "PathCanceledMessage" ;
     rdfs:comment """Path Canceled message according to Short Term Path Request
 				specification (WG5)""" .
+
+:PathConfirmedMessage a owl:Class ;
+    rdfs:label "PathConfirmedMessage" ;
+    rdfs:comment """This message is used by the RU to confirm the proposed path ofthe IM
+				(PathDetailsMessage) in response to an RUs Original Request""" .
+
+:PathDetailsMessage a owl:Class ;
+    rdfs:label "PathDetailsMessage" ;
+    rdfs:comment """This message is used by the IM to the RU confirmaing details of the
+				path in response to an RU request""" .
 
 :PathDetailsRefusedMessage a owl:Class ;
     rdfs:label "PathDetailsRefusedMessage" ;
@@ -240,209 +204,16 @@
     rdfs:comment """Path Not Available message according to Short Term Path Request
 				specification (WG5) """ .
 
-:PathDetailsMessage a owl:Class ;
-    rdfs:label "PathDetailsMessage" ;
-    rdfs:comment """This message is used by the IM to the RU confirmaing details of the
-				path in response to an RU request""" .
-
 :PathRequestMessage a owl:Class ;
     rdfs:label "PathRequestMessage" ;
     rdfs:comment """This message serves to request a train path. The message is sent from
 				the RU to each IM involved.""" .
 
-[] rdf:first :ReceiptConfirmationMessage .
-
-[] rdf:first :ErrorMessage .
-
-[] rdf:first :MessageHeader .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :ErrorMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :ReceiptConfirmationMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :ReceiptConfirmationMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :ReceiptConfirmationMessage .
-
-[] rdf:first :ErrorMessage .
-
-[] rdf:first :ControlLabel .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :ReceiptConfirmationMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :ErrorMessage .
-
-[] rdf:first :LocationFileDatasetMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :ReceiptConfirmationMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :ReceiptConfirmationMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :ReceiptConfirmationMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathRequestMessage .
-
-[] rdf:first :ReceiptConfirmationMessage .
-
-[] rdf:first :AlertMessage .
-
-[] rdf:first :AlertMessage .
-
-[] rdf:first :ConsignmentOrderMessage .
-
-[] rdf:first :ErrorMessage .
-
-[] rdf:first :LocationFileDatasetMessage .
-
-[] rdf:first :PathCanceledMessage .
-
-[] rdf:first :PathConfirmedMessage .
-
-[] rdf:first :PathDetailsMessage .
-
-[] rdf:first :PathDetailsRefusedMessage .
-
-[] rdf:first :PathNotAvailableMessage .
-
-[] rdf:first :PathRequestMessage .
+:MessageHeader a owl:Class ;
+    rdfs:label "MessageHeader" ;
+    rdfs:comment "Used for all messages" .
+
+:MessageReference a owl:Class ;
+    rdfs:label "MessageReference" ;
+    rdfs:comment "This element identifies the message" .
 

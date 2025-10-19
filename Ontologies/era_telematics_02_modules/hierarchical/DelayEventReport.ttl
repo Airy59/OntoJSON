@@ -1,14 +1,11 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 :hasDelayCauseTime a owl:ObjectProperty ;
     rdfs:label "has DelayCauseTime" ;
     rdfs:domain :DelayEventReport ;
     rdfs:range :DelayCauseTime .
-
-:hasDelayEventReport rdfs:range :DelayEventReport .
 
 :hasDelayLocation a owl:ObjectProperty ;
     rdfs:label "has DelayLocation" ;
@@ -19,10 +16,4 @@
     rdfs:label "DelayEventReport" ;
     rdfs:comment """Provides the detailed information about a single delay event (Replaced
 				DelayReasonReport)""" .
-
-[] rdf:first :DelayEventReport .
-
-[] rdf:first :DelayEventReport .
-
-[] rdf:first :DelayEventReport .
 

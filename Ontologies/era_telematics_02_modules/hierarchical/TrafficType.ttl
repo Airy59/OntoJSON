@@ -20,8 +20,6 @@
     rdfs:domain :TrafficType ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasTrafficType rdfs:range :TrafficType .
-
 :TrafficType a owl:Class ;
     rdfs:label "TrafficType" ;
     rdfs:comment """information about the type of traffic (combined, rolling highway,

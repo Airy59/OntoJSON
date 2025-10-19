@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -96,8 +95,6 @@
     rdfs:range xsd:int ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasPlannedTrainTechnicalData rdfs:range :PlannedTrainTechnicalData .
-
 :hasTractionDetails a owl:ObjectProperty ;
     rdfs:label "has TractionDetails" ;
     rdfs:domain :PlannedTrainTechnicalData ;
@@ -106,24 +103,4 @@
 :PlannedTrainTechnicalData a owl:Class ;
     rdfs:label "PlannedTrainTechnicalData" ;
     rdfs:comment "Shows the relevant technical data for a running train" .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
-
-[] rdf:first :PlannedTrainTechnicalData .
 

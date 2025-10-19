@@ -7,8 +7,6 @@
     rdfs:domain :GeoLocalisationOnNetwork ;
     rdfs:range :GeoLocalisation .
 
-:hasGeoLocalisationOnNetwork rdfs:range :GeoLocalisationOnNetwork .
-
 :hasNetworkProjectedLocation a owl:ObjectProperty ;
     rdfs:label "has NetworkProjectedLocation" ;
     rdfs:domain :GeoLocalisationOnNetwork ;

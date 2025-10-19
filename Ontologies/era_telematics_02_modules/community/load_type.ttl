@@ -81,7 +81,8 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
         owl:FunctionalProperty ;
     rdfs:label "BrakingPowerVariationDevice" ;
     rdfs:comment "Coding in 404-2, chapter 1.8" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AirBrake :WagonTechData ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -90,7 +91,8 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:label "BrakingRatio" ;
     rdfs:comment """Minimum percentage of braking. Expressed as an integer value (no
 				percent sign should be added).""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PlannedTrainTechnicalData :TrainRunningTechData ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -137,13 +139,10 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
         owl:FunctionalProperty ;
     rdfs:label "DangerousGoodsWeight" ;
     rdfs:comment "The weight of dangerous goods in kilograms" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :RID :SummaryOFGoodsWithSameRID ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:DateLastOverhaul rdfs:domain :DesignDataSet .
-
-:DateOfNextTankInspection rdfs:domain :DesignDataSet .
 
 :DerailmentDetectionDevice a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -151,8 +150,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:domain :DesignDataSet ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
-
-:DriverIndication rdfs:range xsd:integer .
 
 :EINCounter a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -179,16 +176,13 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:FerryPermittedFlag rdfs:domain :DesignDataSet .
-
-:FerryRampAngle rdfs:domain :DesignDataSet .
-
 :GrossWeight a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "GrossWeight" ;
     rdfs:comment """Total weight of the goods either in a wagon or a transportation unit.
 				It is the booked weight of the goods including packing """ ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :Goods :GoodsInContainer :GoodsInWagon ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -199,8 +193,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:domain :WagonTechData ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:Heading rdfs:range xsd:integer .
 
 :HeightOfLoadingPlaneUnladen a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -220,15 +212,12 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:range xsd:positiveInteger ;
     rdfs:subPropertyOf :dataProperties .
 
-:InteropCapability rdfs:range xsd:integer .
-
-:LengthOfSetOfCarriages rdfs:range xsd:integer .
-
 :LengthOverBuffers a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "LengthOverBuffers" ;
     rdfs:comment "Length over buffers is expressed in cm." ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :DesignDataSet :WagonTechData ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -241,10 +230,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:domain :DesignDataSet ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
-
-:LivestockOrPeopleIndicator rdfs:range xsd:integer .
-
-:LoadArea rdfs:domain :DesignDataSet .
 
 :LoadTableCountry a owl:DatatypeProperty ;
     rdfs:label "LoadTableCountry" ;
@@ -262,19 +247,16 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:LoadingCapacity rdfs:domain :DesignDataSet .
-
 :LoadingStatus a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "LoadingStatus" ;
     rdfs:comment """Loading status of the equipment. 0=Empty,
 										1=Loaded""",
         "Loading status of the equipment. 0=Empty, 1=Loaded" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ILU_Details :ITU_Details :RollingRoadUnitDetails :WagonDetails :WagonInformation :WagonStatusMessage ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:LocationPrimaryCode rdfs:range xsd:positiveInteger .
 
 :MaxDesignSpeed a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -311,10 +293,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:range xsd:decimal ;
     rdfs:subPropertyOf :dataProperties .
 
-:MessageRoutingID rdfs:range xsd:integer .
-
-:MinBrakedWeightPercent rdfs:range xsd:integer .
-
 :MinCurveRadius a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "MinCurveRadius" ;
@@ -330,8 +308,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:domain :DesignDataSet ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:ModificationStatusIndicator rdfs:range xsd:integer .
 
 :Noise a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -364,8 +340,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:NumberOfBogies rdfs:domain :DesignDataSet .
-
 :NumberOfBrakes a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "NumberOfBrakes" ;
@@ -382,10 +356,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:NumberOfVisibleSatellites rdfs:range xsd:integer .
-
-:Offset rdfs:range xsd:integer .
-
 :OffsetToReference a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "OffsetToReference" ;
@@ -398,8 +368,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:domain :PlannedCalendar ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:OperationalTrainCouplingStrength rdfs:range xsd:integer .
 
 :OverhaulValidityPeriod a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -416,8 +384,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:domain :DesignDataSet ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:PlannedDateNextOverhaul rdfs:domain :DesignDataSet .
 
 :ProductRIDName a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -444,8 +410,6 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:domain :RefusedWagonNumbers ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:RelatedType rdfs:range xsd:integer .
 
 :SRID a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -499,11 +463,10 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:label "TareWeight" ;
     rdfs:comment "Tare weight [kg] of ILU.",
         "Tare weight [kg] of UTI." ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ILU_Details :ITU_Details ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:TareWeightVehicle rdfs:range xsd:integer .
 
 :TechnicalForwardingRestrictions a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -546,17 +509,14 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
-:TotalLoadWeight rdfs:range xsd:integer .
-
 :TotalWeight a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "TotalWeight" ;
     rdfs:comment "Total weight of the loaded wagon [kg]. " ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :WagonDetails :WagonInformation ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:TotalWeightLoadingTackles rdfs:range xsd:integer .
 
 :TractionMode a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -565,22 +525,18 @@ General brake characteristics. The values refer to UIC leaflet 920-13.
 First digit â€“ traction role
 Second digit â€“ position in group of traction units with the same role
 """ ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :LocoIdent :TractionDetails ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:TractionPositionInTrain rdfs:range xsd:integer .
-
-:TrainInterrupted rdfs:range xsd:integer .
-
-:TrainJourneyModificationIndicator rdfs:range xsd:integer .
 
 :TrainLength a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "TrainLength" ;
     rdfs:comment """The calculated Length of a train (sum of all length over buffer of the
 				wagons and traction units). Expressed in Metres""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PlannedTrainTechnicalData :TrainRunningTechData ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -591,8 +547,6 @@ Second digit â€“ position in group of traction units with the same role
 				interruption point although the train has not arrived to interruption point yet""" ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:TrainReady rdfs:range xsd:integer .
 
 :TrainType a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -605,7 +559,8 @@ Train only for run of traction unit/locomotive
 Train of the IM in case of emergency
 The element is not repeatable, and it does not support any overlapping meaning.
 """ ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PlannedTrainData :TrainRunningTechData ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -636,7 +591,8 @@ The element is not repeatable, and it does not support any overlapping meaning.
 				planning does the message belong: path study; pre-arranged/catalogue path; (draft)
 				offer; final offer; booked; deleted; utilisation notification; confirmation of
 				utilisation confirmation""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :PathCanceledMessage :PathConfirmedMessage :PathDetailsMessage :PathDetailsRefusedMessage :PathNotAvailableMessage :PathRequestMessage :ReceiptConfirmationMessage ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
 
@@ -649,18 +605,15 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
     rdfs:range xsd:token ;
     rdfs:subPropertyOf :dataProperties .
 
-:VapourReturnSystem rdfs:domain :DesignDataSet .
-
 :WagonWeightEmpty a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "WagonWeightEmpty" ;
     rdfs:comment """The weight of an empty wagon according to the entry in the rolling
 				stock database""" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :DesignDataSet :WagonTechData :WagonTypeDetails ) ] ;
     rdfs:range xsd:integer ;
     rdfs:subPropertyOf :dataProperties .
-
-:WeightNettoExplosiveMass rdfs:range xsd:integer .
 
 :WheelDiameter a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -702,23 +655,16 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
     rdfs:domain :DesignDataSet ;
     rdfs:range :AirBrake .
 
-:hasBrakeBlock rdfs:domain :DesignDataSet .
-
-:hasDesignDataSet rdfs:range :DesignDataSet .
-
 :hasEINNumber a owl:ObjectProperty ;
     rdfs:label "has EINNumber" ;
     rdfs:domain :ECMCertificate ;
     rdfs:range :EINNumber .
 
-:hasError rdfs:range :Error .
-
 :hasGeographicCoordinates a owl:ObjectProperty ;
     rdfs:label "has GeographicCoordinates" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :GNSS_DynamicPosition :LocationPrimaryInformation :LocationSubsidiaryInformation ) ] ;
     rdfs:range :GeographicCoordinates .
-
-:hasHandBrake rdfs:domain :DesignDataSet .
 
 :hasLoadChangeDevice a owl:ObjectProperty ;
     rdfs:label "has LoadChangeDevice" ;
@@ -737,7 +683,8 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
 
 :hasPlannedCalendar a owl:ObjectProperty ;
     rdfs:label "has PlannedCalendar" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :AffectedSection :PathInformation :TrainInformation ) ] ;
     rdfs:range :PlannedCalendar .
 
 :hasRefusedWagonNumbers a owl:ObjectProperty ;
@@ -755,8 +702,6 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
     rdfs:domain :LoadTable ;
     rdfs:range :RouteClassPayloads .
 
-:hasTemperatureRange rdfs:domain :DesignDataSet .
-
 :hasTrainRunningTechData a owl:ObjectProperty ;
     rdfs:label "has TrainRunningTechData" ;
     rdfs:domain :TrainRunningData ;
@@ -772,10 +717,29 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
     rdfs:domain :DesignDataSet ;
     rdfs:range :WagonTelematics .
 
+:RollingStockDatasetMessage a owl:Class ;
+    rdfs:label "RollingStockDatasetMessage" ;
+    rdfs:comment "Rolling Stock adminsitrative and Technical Dataset" .
+
 :WagonTelematics a owl:Class ;
     rdfs:label "WagonTelematics" ;
     rdfs:comment """Information about telematics
 										devices mounted on the wagon.""" .
+
+:PlannedCalendar a owl:Class ;
+    rdfs:label "PlannedCalendar" ;
+    rdfs:comment """This is the calendar item for path request/path details messages -
+				used in planning phase""" .
+
+:RefusedWagonNumbers a owl:Class ;
+    rdfs:label "RefusedWagonNumbers" .
+
+:RouteClassPayloads a owl:Class ;
+    rdfs:label "RouteClassPayloads" .
+
+:GeographicCoordinates a owl:Class ;
+    rdfs:label "GeographicCoordinates" ;
+    rdfs:comment "Latitude and Longitude of location" .
 
 :LoadChangeDevice a owl:Class ;
     rdfs:label "LoadChangeDevice" ;
@@ -789,20 +753,8 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
 :RemovableAccessories a owl:Class ;
     rdfs:label "RemovableAccessories" .
 
-:RollingStockDatasetMessage a owl:Class ;
-    rdfs:label "RollingStockDatasetMessage" ;
-    rdfs:comment "Rolling Stock adminsitrative and Technical Dataset" .
-
-:RouteClassPayloads a owl:Class ;
-    rdfs:label "RouteClassPayloads" .
-
-:PlannedCalendar a owl:Class ;
-    rdfs:label "PlannedCalendar" ;
-    rdfs:comment """This is the calendar item for path request/path details messages -
-				used in planning phase""" .
-
-:RefusedWagonNumbers a owl:Class ;
-    rdfs:label "RefusedWagonNumbers" .
+:Error a owl:Class ;
+    rdfs:label "Error" .
 
 :EINNumber a owl:Class ;
     rdfs:label "EINNumber" ;
@@ -810,13 +762,6 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
 													NOTE: this is a placeholder! CR 335 by ERA is
 													containing this element and its full description
 													and code lists.""" .
-
-:GeographicCoordinates a owl:Class ;
-    rdfs:label "GeographicCoordinates" ;
-    rdfs:comment "Latitude and Longitude of location" .
-
-:Error a owl:Class ;
-    rdfs:label "Error" .
 
 :LoadTable a owl:Class ;
     rdfs:label "LoadTable" ;
@@ -830,13 +775,13 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
 										table need to be provided. The complete load table must be
 										provided including the empty load row (if existent).""" .
 
-:AirBrake a owl:Class ;
-    rdfs:label "AirBrake" ;
-    rdfs:comment "Characteristics of Air Brakes" .
-
 :TrainRunningTechData a owl:Class ;
     rdfs:label "TrainRunningTechData" ;
     rdfs:comment "Shows the relevant techical data for a running train" .
+
+:AirBrake a owl:Class ;
+    rdfs:label "AirBrake" ;
+    rdfs:comment "Characteristics of Air Brakes" .
 
 :WagonTechData a owl:Class ;
     rdfs:label "WagonTechData" ;
@@ -845,78 +790,4 @@ Should be added to Code List. Values refer to UIC Leaflet 920-13""" ;
 
 :DesignDataSet a owl:Class ;
     rdfs:label "DesignDataSet" .
-
-[] rdf:first :RollingStockDatasetMessage .
-
-[] rdf:first :RollingStockDatasetMessage .
-
-[] rdf:first :PlannedCalendar .
-
-[] rdf:first :AirBrake .
-
-[] rdf:first :WagonTechData .
-
-[] rdf:first :PlannedCalendar .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :AirBrake .
-
-[] rdf:first :WagonTechData .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :DesignDataSet .
-
-[] rdf:first :WagonTechData .
-
-[] rdf:first :Error .
-
-[] rdf:first :WagonTechData .
-
-[] rdf:first :RefusedWagonNumbers .
-
-[] rdf:first :GeographicCoordinates .
-
-[] rdf:first :DesignDataSet .
-
-[] rdf:first :WagonTechData .
-
-[] rdf:first :GeographicCoordinates .
-
-[] rdf:first :DesignDataSet .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :DesignDataSet .
-
-[] rdf:first :WagonTechData .
-
-[] rdf:first :WagonTechData .
-
-[] rdf:first :RouteClassPayloads .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :TrainRunningTechData .
-
-[] rdf:first :RefusedWagonNumbers .
-
-[] rdf:first :DesignDataSet .
-
-[] rdf:first :WagonTechData .
-
-[] rdf:first :DesignDataSet .
-
-[] rdf:first :WagonTechData .
 

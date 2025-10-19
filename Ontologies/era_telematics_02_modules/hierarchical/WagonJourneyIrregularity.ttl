@@ -21,8 +21,6 @@
     rdfs:domain :WagonJourneyIrregularity ;
     rdfs:range :DamageCodes .
 
-:hasWagonJourneyIrregularity rdfs:range :WagonJourneyIrregularity .
-
 :WagonJourneyIrregularity a owl:Class ;
     rdfs:label "WagonJourneyIrregularity" .
 

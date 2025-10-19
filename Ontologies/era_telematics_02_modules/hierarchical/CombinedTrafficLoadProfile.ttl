@@ -34,8 +34,6 @@
     rdfs:range xsd:string ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasCombinedTrafficLoadProfile rdfs:range :CombinedTrafficLoadProfile .
-
 :CombinedTrafficLoadProfile a owl:Class ;
     rdfs:label "CombinedTrafficLoadProfile" ;
     rdfs:comment """This element does refer to combined load units that can be used for Freight Requests only.

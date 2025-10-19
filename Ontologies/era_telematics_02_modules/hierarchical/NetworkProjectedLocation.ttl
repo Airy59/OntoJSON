@@ -21,8 +21,6 @@
     rdfs:range xsd:float ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasNetworkProjectedLocation rdfs:range :NetworkProjectedLocation .
-
 :hasNextLocation a owl:ObjectProperty ;
     rdfs:label "has NextLocation" ;
     rdfs:domain :NetworkProjectedLocation ;

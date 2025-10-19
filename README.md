@@ -11,6 +11,11 @@ A powerful, configurable transformation engine for converting RDF/OWL ontologies
 - **Full Inheritance Support**: Correctly handles complex class hierarchies including multiple inheritance
 - **RDF/Turtle Support**: Import and transform RDF Turtle files (.ttl) with proper namespace handling
 - **Import Resolution**: Automatic resolution and loading of imported ontologies
+- **Cross-Reference Support**: Automatic detection and resolution of cross-ontology references in component schemas
+  - Generates modular JSON schemas with external `$ref` URIs
+  - Preserves ontology import structure in generated schemas
+  - Enables independent schema component reuse
+  - See [CROSSREF_FEATURE.md](CROSSREF_FEATURE.md) for details
 - **Ontology Partitioning** (quite experimental, not for production): Split large ontologies into semantically coherent modules
   - Efficient chunking for files exceeding memory/token limits
   - Multiple partitioning strategies (community detection, domain-based, hierarchical)
@@ -509,6 +514,7 @@ For detailed build instructions, see [build_system/README.md](build_system/READM
 ## 📚 Documentation
 
 - **[Web Application Guide](WEB_APP_GUIDE.md)**: Complete guide for using the web interface
+- **[Cross-Reference Feature](CROSSREF_FEATURE.md)**: Guide for multi-ontology transformations with external references
 - **[Transformation Rules](transformation_rules.md)**: Complete list of available transformation rules
 - **[Architecture](architecture.md)**: System architecture and design patterns
 - **[Build System](build_system/README.md)**: Instructions for building standalone applications
@@ -542,6 +548,7 @@ OntoJSON/
 │   │   ├── cli.py                 # Command-line interface
 │   │   ├── composite_builder.py   # Composite ontology builder
 │   │   ├── config.py              # Configuration management
+│   │   ├── crossref_resolver.py   # Cross-reference resolution
 │   │   ├── engine.py              # Main transformation engine
 │   │   ├── model.py               # Data models
 │   │   ├── parser.py              # Ontology parser with import resolution

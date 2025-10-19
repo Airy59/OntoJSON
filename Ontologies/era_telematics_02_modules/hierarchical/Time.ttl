@@ -3,8 +3,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:hasTime rdfs:range :Time .
-
 :Time a owl:Class,
         owl:DatatypeProperty,
         owl:FunctionalProperty ;

@@ -23,8 +23,6 @@
     rdfs:range xsd:boolean ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasPossibilityToPreventRegenerativeBrake rdfs:range :PossibilityToPreventRegenerativeBrake .
-
 :PossibilityToPreventRegenerativeBrake a owl:Class ;
     rdfs:label "PossibilityToPreventRegenerativeBrake" ;
     rdfs:comment """Possibility of preventing the use of the regenerative

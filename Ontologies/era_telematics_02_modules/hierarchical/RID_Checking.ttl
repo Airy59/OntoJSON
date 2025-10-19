@@ -51,8 +51,6 @@
     rdfs:domain :RID_Checking ;
     rdfs:range :CheckingLocation .
 
-:hasRID_Checking rdfs:range :RID_Checking .
-
 :RID_Checking a owl:Class ;
     rdfs:label "RID_Checking" ;
     rdfs:comment """When RID DG is transported in the train the Ru has to transmit here

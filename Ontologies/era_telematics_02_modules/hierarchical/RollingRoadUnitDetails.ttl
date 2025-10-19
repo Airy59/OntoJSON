@@ -13,7 +13,8 @@
         "Type of Rolling Road unit on Wagon",
         "WRITE: " ;
     rdfs:domain :RollingRoadUnitDetails ;
-    rdfs:range [ ] ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:unionOf ( xsd:string xsd:token ) ] ;
     rdfs:subPropertyOf :dataProperties .
 
 :TareWeightVehicle a owl:DatatypeProperty,
@@ -35,8 +36,6 @@
     rdfs:domain :RollingRoadUnitDetails ;
     rdfs:range :Haulier .
 
-:hasRollingRoadUnitDetails rdfs:range :RollingRoadUnitDetails .
-
 :hasVehicles a owl:ObjectProperty ;
     rdfs:label "has Vehicles" ;
     rdfs:domain :RollingRoadUnitDetails ;
@@ -45,6 +44,4 @@
 :RollingRoadUnitDetails a owl:Class ;
     rdfs:label "RollingRoadUnitDetails" ;
     rdfs:comment "Details for Rolling Road units on wagon" .
-
-[] rdf:first :RollingRoadUnitDetails .
 

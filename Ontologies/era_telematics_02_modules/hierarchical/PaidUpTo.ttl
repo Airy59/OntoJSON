@@ -2,8 +2,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-:hasPaidUpTo rdfs:range :PaidUpTo .
-
 :PaidUpTo a owl:Class ;
     rdfs:label "PaidUpTo" ;
     rdfs:comment """Charges Paid Up To ...

@@ -5,11 +5,10 @@
 
 :hasReferenceOTN a owl:ObjectProperty ;
     rdfs:label "has ReferenceOTN" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :ChangeofTrackMessage :TrainAtLocation :TrainCompositionMessage :TrainDelayCauseMessage :TrainJourneyModificationMessage :TrainReadyMessage :TrainRunningForecastMessage :TrainRunningInformationMessage :TrainRunningInterruptionMessage ) ] ;
     rdfs:range :ReferenceOTN .
 
 :ReferenceOTN a owl:Class ;
     rdfs:label "ReferenceOTN" .
-
-[] rdf:first :ReferenceOTN .
 

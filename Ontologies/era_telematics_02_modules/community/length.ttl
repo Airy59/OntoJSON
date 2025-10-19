@@ -5,14 +5,11 @@
 
 :hasLength a owl:ObjectProperty ;
     rdfs:label "has Length" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :Dimensions :TractionDetails ) ] ;
     rdfs:range :Length .
 
 :Length a owl:Class ;
     rdfs:label "Length" ;
     rdfs:comment "Length of ITU." .
-
-[] rdf:first :Length .
-
-[] rdf:first :Length .
 

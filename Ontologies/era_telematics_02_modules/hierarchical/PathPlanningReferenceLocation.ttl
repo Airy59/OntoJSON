@@ -2,8 +2,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-:hasPathPlanningReferenceLocation rdfs:range :PathPlanningReferenceLocation .
-
 :PathPlanningReferenceLocation a owl:Class ;
     rdfs:label "PathPlanningReferenceLocation" ;
     rdfs:comment """It has to be indicated whether the path planning

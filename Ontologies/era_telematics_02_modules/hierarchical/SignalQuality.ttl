@@ -29,8 +29,6 @@
     rdfs:range xsd:decimal ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasSignalQuality rdfs:range :SignalQuality .
-
 :SignalQuality a owl:Class ;
     rdfs:label "SignalQuality" ;
     rdfs:comment "Indicates satellite communication signal quality" .

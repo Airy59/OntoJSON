@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 :hasDelayEventReport a owl:ObjectProperty ;
@@ -13,20 +12,4 @@
     rdfs:comment """This message is issued to make known the cause for additional delay
 				during the Train's Journey (Changed name of the message from Reason to Cause)
 				Description changed """ .
-
-[] rdf:first :TrainDelayCauseMessage .
-
-[] rdf:first :TrainDelayCauseMessage .
-
-[] rdf:first :TrainDelayCauseMessage .
-
-[] rdf:first :TrainDelayCauseMessage .
-
-[] rdf:first :TrainDelayCauseMessage .
-
-[] rdf:first :TrainDelayCauseMessage .
-
-[] rdf:first :TrainDelayCauseMessage .
-
-[] rdf:first :TrainDelayCauseMessage .
 

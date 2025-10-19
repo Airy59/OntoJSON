@@ -1,0 +1,41 @@
+@prefix ex: <http://example.org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Ontology
+ex:TestOntology a owl:Ontology .
+
+# Class definition
+ex:Person a owl:Class .
+
+# Properties
+ex:age a owl:DatatypeProperty ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:integer .
+
+ex:salary a owl:DatatypeProperty ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:decimal .
+
+ex:isActive a owl:DatatypeProperty ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:boolean .
+
+ex:name a owl:DatatypeProperty ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:string .
+
+# Test individual with problematic data types
+ex:John a ex:Person ;
+    ex:age "These are not numbers"^^xsd:string ;  # Should become 999999
+    ex:salary "Not a salary"^^xsd:string ;        # Should become 9999.99
+    ex:isActive "maybe"^^xsd:string ;             # Should become False
+    ex:name "John Doe"^^xsd:string .              # Should work fine
+
+# Normal individual with correct data types
+ex:Jane a ex:Person ;
+    ex:age "30"^^xsd:integer ;
+    ex:salary "75000.50"^^xsd:decimal ;
+    ex:isActive "true"^^xsd:boolean ;
+    ex:name "Jane Smith"^^xsd:string .

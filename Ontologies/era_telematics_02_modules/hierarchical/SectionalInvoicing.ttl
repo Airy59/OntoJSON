@@ -7,8 +7,6 @@
     rdfs:domain :SectionalInvoicing ;
     rdfs:range :Section .
 
-:hasSectionalInvoicing rdfs:range :SectionalInvoicing .
-
 :SectionalInvoicing a owl:Class ;
     rdfs:label "SectionalInvoicing" ;
     rdfs:comment "Sectional Invoicing" .

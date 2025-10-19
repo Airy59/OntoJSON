@@ -12,8 +12,6 @@
     rdfs:domain :RU_Declarations ;
     rdfs:range :RU_Declaration .
 
-:hasRU_Declarations rdfs:range :RU_Declarations .
-
 :RU_Declarations a owl:Class ;
     rdfs:label "RU_Declarations" ;
     rdfs:comment "Carriers declaration" .

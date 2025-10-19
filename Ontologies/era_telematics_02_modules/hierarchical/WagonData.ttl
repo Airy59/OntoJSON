@@ -1,6 +1,5 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -18,8 +17,6 @@
     rdfs:domain :WagonData ;
     rdfs:range :IntermodalTransportData .
 
-:hasWagonData rdfs:range :WagonData .
-
 :hasWagonOperationalData a owl:ObjectProperty ;
     rdfs:label "has WagonOperationalData" ;
     rdfs:domain :WagonData ;
@@ -33,6 +30,4 @@
 :WagonData a owl:Class ;
     rdfs:label "WagonData" ;
     rdfs:comment "Wagon relevant data for the wagons within a running train" .
-
-[] rdf:first :WagonData .
 

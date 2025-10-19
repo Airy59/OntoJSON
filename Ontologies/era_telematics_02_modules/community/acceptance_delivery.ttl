@@ -1,0 +1,383 @@
+@prefix : <http://data.europa.eu/949/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AddidtionalInformation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "AddidtionalInformation" ;
+    rdfs:domain :Customers ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ChargesNoteAvailable a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ChargesNoteAvailable" ;
+    rdfs:domain :ChargesNote ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CommercialRouteCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CommercialRouteCode" ;
+    rdfs:comment """Route code (RIP) when
+																the customer agreement or the tariff
+																applied provide for it. """ ;
+    rdfs:domain :ChargingSections ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CommercialSpecificationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CommercialSpecificationCode" ;
+    rdfs:comment "Commercial specifications code" ;
+    rdfs:domain :CommercialSpecifications ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ConsignorDeclarationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ConsignorDeclarationCode" ;
+    rdfs:comment "Carrier declaration code." ;
+    rdfs:domain :ConsignorDeclarations ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:CustomerType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "CustomerType" ;
+    rdfs:comment "Type of participation" ;
+    rdfs:domain :Customers ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:Date a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Date" ;
+    rdfs:comment "Date",
+        """Date at which the
+																consignment note was made out.""" ;
+    rdfs:domain :MadeOut ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DateOfReturn a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DateOfReturn" ;
+    rdfs:comment """Date, when the
+																destination carrier sent the charges
+																note back to the contractual
+																carrier.""" ;
+    rdfs:domain :ChargesNote ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DeclaringRU a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DeclaringRU" ;
+    rdfs:comment """Code of
+																			carrier, who added the
+																			declaration.""" ;
+    rdfs:domain :RU_Declaration ;
+    rdfs:subPropertyOf :dataProperties .
+
+:DifferentAcceptanceDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "DifferentAcceptanceDate" ;
+    rdfs:comment """Variance
+																			of acceptance date given
+																			structure
+																			AcceptancePoint.""" ;
+    rdfs:domain :DifferentAcceptance ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf :dataProperties .
+
+:ForwardingTrainNumber a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ForwardingTrainNumber" ;
+    rdfs:comment """Train number at
+																shipping """ ;
+    rdfs:domain :AcceptancePoint ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:InvoicingCarrierCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "InvoicingCarrierCode" ;
+    rdfs:comment """Sectional
+																			invoicing by""" ;
+    rdfs:domain :Section ;
+    rdfs:subPropertyOf :dataProperties .
+
+:RU_DeclarationCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "RU_DeclarationCode" ;
+    rdfs:comment "Carrier declaration code. " ;
+    rdfs:domain :RU_Declaration ;
+    rdfs:range xsd:token ;
+    rdfs:subPropertyOf :dataProperties .
+
+:SpecificationText a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "SpecificationText" ;
+    rdfs:comment """Additional Text for
+																codes with free text""" ;
+    rdfs:domain :CommercialSpecifications ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :dataProperties .
+
+:WagonPreviousNumberFreight a owl:DatatypeProperty ;
+    rdfs:label "WagonPreviousNumberFreight" ;
+    rdfs:comment """Identifies the previous freight
+													wagon if a shipment or Intermodal unit has
+													changed the wagon during its journey""" ;
+    rdfs:domain :COM ;
+    rdfs:subPropertyOf :dataProperties .
+
+:hasAcceptancePoint a owl:ObjectProperty ;
+    rdfs:label "has AcceptancePoint" ;
+    rdfs:domain :COM ;
+    rdfs:range :AcceptancePoint .
+
+:hasCOM a owl:ObjectProperty ;
+    rdfs:label "has COM" ;
+    rdfs:domain :COMS ;
+    rdfs:range :COM .
+
+:hasCOMS a owl:ObjectProperty ;
+    rdfs:label "has COMS" ;
+    rdfs:domain :ConsignmentOrderMessage ;
+    rdfs:range :COMS .
+
+:hasCOM_Header a owl:ObjectProperty ;
+    rdfs:label "has COM_Header" ;
+    rdfs:domain :COMS ;
+    rdfs:range :COM_Header .
+
+:hasCashOnDelivery a owl:ObjectProperty ;
+    rdfs:label "has CashOnDelivery" ;
+    rdfs:domain :COM ;
+    rdfs:range :CashOnDelivery .
+
+:hasChargesNote a owl:ObjectProperty ;
+    rdfs:label "has ChargesNote" ;
+    rdfs:domain :COM ;
+    rdfs:range :ChargesNote .
+
+:hasChargingSections a owl:ObjectProperty ;
+    rdfs:label "has ChargingSections" ;
+    rdfs:domain :COM ;
+    rdfs:range :ChargingSections .
+
+:hasCommercialSpecifications a owl:ObjectProperty ;
+    rdfs:label "has CommercialSpecifications" ;
+    rdfs:domain :COM ;
+    rdfs:range :CommercialSpecifications .
+
+:hasConsignorDeclarations a owl:ObjectProperty ;
+    rdfs:label "has ConsignorDeclarations" ;
+    rdfs:domain :COM ;
+    rdfs:range :ConsignorDeclarations .
+
+:hasCustomers a owl:ObjectProperty ;
+    rdfs:label "has Customers" ;
+    rdfs:domain :COM ;
+    rdfs:range :Customers .
+
+:hasCustomsProcedures a owl:ObjectProperty ;
+    rdfs:label "has CustomsProcedures" ;
+    rdfs:domain :COM ;
+    rdfs:range :CustomsProcedures .
+
+:hasDeclarationOfValue a owl:ObjectProperty ;
+    rdfs:label "has DeclarationOfValue" ;
+    rdfs:domain :COM ;
+    rdfs:range :DeclarationOfValue .
+
+:hasDeliveryPoint a owl:ObjectProperty ;
+    rdfs:label "has DeliveryPoint" ;
+    rdfs:domain :COM ;
+    rdfs:range :DeliveryPoint .
+
+:hasDifferentAcceptance a owl:ObjectProperty ;
+    rdfs:label "has DifferentAcceptance" ;
+    rdfs:domain :RU_Declarations ;
+    rdfs:range :DifferentAcceptance .
+
+:hasDifferentAcceptancePoint a owl:ObjectProperty ;
+    rdfs:label "has DifferentAcceptancePoint" ;
+    rdfs:domain :DifferentAcceptance ;
+    rdfs:range :DifferentAcceptancePoint .
+
+:hasEnd a owl:ObjectProperty ;
+    rdfs:label "has End" ;
+    rdfs:domain :ChargingSections ;
+    rdfs:range :End .
+
+:hasInterestInDelivery a owl:ObjectProperty ;
+    rdfs:label "has InterestInDelivery" ;
+    rdfs:domain :COM ;
+    rdfs:range :InterestInDelivery .
+
+:hasInvoicedSection a owl:ObjectProperty ;
+    rdfs:label "has InvoicedSection" ;
+    rdfs:domain :Section ;
+    rdfs:range :InvoicedSection .
+
+:hasLeadCarrier a owl:ObjectProperty ;
+    rdfs:label "has LeadCarrier" ;
+    rdfs:domain :COM ;
+    rdfs:range :LeadCarrier .
+
+:hasMadeOut a owl:ObjectProperty ;
+    rdfs:label "has MadeOut" ;
+    rdfs:domain :COM ;
+    rdfs:range :MadeOut .
+
+:hasRU_Declaration a owl:ObjectProperty ;
+    rdfs:label "has RU_Declaration" ;
+    rdfs:domain :RU_Declarations ;
+    rdfs:range :RU_Declaration .
+
+:hasRU_Declarations a owl:ObjectProperty ;
+    rdfs:label "has RU_Declarations" ;
+    rdfs:domain :COM ;
+    rdfs:range :RU_Declarations .
+
+:hasSection a owl:ObjectProperty ;
+    rdfs:label "has Section" ;
+    rdfs:domain :SectionalInvoicing ;
+    rdfs:range :Section .
+
+:hasSectionalInvoicing a owl:ObjectProperty ;
+    rdfs:label "has SectionalInvoicing" ;
+    rdfs:domain :COM ;
+    rdfs:range :SectionalInvoicing .
+
+:hasStart a owl:ObjectProperty ;
+    rdfs:label "has Start" ;
+    rdfs:domain :ChargingSections ;
+    rdfs:range :Start .
+
+:CashOnDelivery a owl:Class ;
+    rdfs:label "CashOnDelivery" ;
+    rdfs:comment """Details of the amount to be
+													collected on delivery and the currency code.""" .
+
+:ConsignmentOrderMessage a owl:Class ;
+    rdfs:label "ConsignmentOrderMessage" ;
+    rdfs:comment "Consignment Order Message from Lead RU to RU" .
+
+:CustomsProcedures a owl:Class ;
+    rdfs:label "CustomsProcedures" ;
+    rdfs:comment "Customs procedures" .
+
+:DeclarationOfValue a owl:Class ;
+    rdfs:label "DeclarationOfValue" ;
+    rdfs:comment """Details of the value of the goods
+													and the currency code when the value exceeds the
+													limit given in CIM Article 30 section 2.""" .
+
+:DeliveryPoint a owl:Class ;
+    rdfs:label "DeliveryPoint" ;
+    rdfs:comment """Description of location and time
+													for the hand over of the consignment""" .
+
+:DifferentAcceptancePoint a owl:Class ;
+    rdfs:label "DifferentAcceptancePoint" ;
+    :domain "Telematics" ;
+    rdfs:comment """Variance
+																			of acceptance point
+																			given in structure
+																			AcceptancePoint.""" .
+
+:End a owl:Class ;
+    rdfs:label "End" ;
+    :domain "Telematics" ;
+    rdfs:comment """End of the charging
+																section""" .
+
+:InterestInDelivery a owl:Class ;
+    rdfs:label "InterestInDelivery" ;
+    rdfs:comment """Details of the amount and currency
+													code of a special interest in delivery.""" .
+
+:InvoicedSection a owl:Class ;
+    rdfs:label "InvoicedSection" ;
+    :domain "Telematics" ;
+    rdfs:comment """Information
+																			about the section to be
+																			invoiced.""" .
+
+:LeadCarrier a owl:Class ;
+    rdfs:label "LeadCarrier" ;
+    rdfs:comment "LeadCarrier/ Contractual carrier" .
+
+:Start a owl:Class ;
+    rdfs:label "Start" ;
+    rdfs:comment """Start of the charging
+																section""" .
+
+:AcceptancePoint a owl:Class ;
+    rdfs:label "AcceptancePoint" ;
+    rdfs:comment """Description of location and time
+													for the take over of the consignment""" .
+
+:ConsignorDeclarations a owl:Class ;
+    rdfs:label "ConsignorDeclarations" ;
+    rdfs:comment """Consignors declarartions, this
+													element contains either declarations of the
+													original consignor or declarations of the LeadRU
+													as consignor""" .
+
+:MadeOut a owl:Class ;
+    rdfs:label "MadeOut" ;
+    rdfs:comment "Made out" .
+
+:SectionalInvoicing a owl:Class ;
+    rdfs:label "SectionalInvoicing" ;
+    rdfs:comment "Sectional Invoicing" .
+
+:COMS a owl:Class ;
+    rdfs:label "COMS" ;
+    rdfs:comment """Message (all bounded optional elements are bounded to to
+							obligations of legacy systems)""" .
+
+:ChargesNote a owl:Class ;
+    rdfs:label "ChargesNote" ;
+    rdfs:comment "Charges note" .
+
+:CommercialSpecifications a owl:Class ;
+    rdfs:label "CommercialSpecifications" ;
+    rdfs:comment "Commercial Specification" .
+
+:Customers a owl:Class ;
+    rdfs:label "Customers" ;
+    rdfs:comment "Information about the consignor, consignee and freight payers." .
+
+:DifferentAcceptance a owl:Class ;
+    rdfs:label "DifferentAcceptance" ;
+    rdfs:comment """Details of the changes
+																of the acceptance point given by the
+																consignor.""" .
+
+:RU_Declaration a owl:Class ;
+    rdfs:label "RU_Declaration" ;
+    rdfs:comment """Details of the
+																carriers declaration.""" .
+
+:RU_Declarations a owl:Class ;
+    rdfs:label "RU_Declarations" ;
+    rdfs:comment "Carriers declaration" .
+
+:Section a owl:Class ;
+    rdfs:label "Section" ;
+    rdfs:comment "Sectional Invoicing" .
+
+:ChargingSections a owl:Class ;
+    rdfs:label "ChargingSections" ;
+    rdfs:comment "Charging section" .
+
+:COM a owl:Class ;
+    rdfs:label "COM" ;
+    rdfs:comment "Consignment order message" .
+

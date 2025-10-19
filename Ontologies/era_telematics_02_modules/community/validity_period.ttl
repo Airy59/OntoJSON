@@ -5,13 +5,10 @@
 
 :hasValidityPeriod a owl:ObjectProperty ;
     rdfs:label "has ValidityPeriod" ;
-    rdfs:domain [ ] ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( :LocationPrimaryInformation :LocationSubsidiaryInformation :PlannedCalendar :ReferenceTrainIDSubCalendar :RequestedCalendar ) ] ;
     rdfs:range :ValidityPeriod .
 
 :ValidityPeriod a owl:Class ;
     rdfs:label "ValidityPeriod" .
-
-[] rdf:first :ValidityPeriod .
-
-[] rdf:first :ValidityPeriod .
 

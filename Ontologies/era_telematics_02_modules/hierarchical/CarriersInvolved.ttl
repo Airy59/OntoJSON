@@ -7,8 +7,6 @@
     rdfs:domain :CarriersInvolved ;
     rdfs:range :Carrier .
 
-:hasCarriersInvolved rdfs:range :CarriersInvolved .
-
 :CarriersInvolved a owl:Class ;
     rdfs:label "CarriersInvolved" .
 

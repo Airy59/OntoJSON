@@ -38,8 +38,6 @@
     rdfs:range xsd:short ;
     rdfs:subPropertyOf :dataProperties .
 
-:hasDamageCodes rdfs:range :DamageCodes .
-
 :DamageCodes a owl:Class ;
     rdfs:label "DamageCodes" ;
     rdfs:comment """List of Damage Codes according to

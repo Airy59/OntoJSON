@@ -1,7 +1,7 @@
 # Ontology Partitioning Report
 
 **Source Ontology:** era_telematics_02.ttl
-**Date:** 2025-09-05 16:10:45
+**Date:** 2025-09-15 10:37:56
 
 ## Ontology Statistics
 
@@ -62,7 +62,7 @@
 | WagonStatusMessage | 11 |
 | COM_Header | 11 |
 | WagonDetails | 10 |
-| Tariff | 8 |
+| LocationPrimaryInformation | 8 |
 
 ### Community Strategy
 
@@ -70,12 +70,12 @@
 
 | Metric | Value |
 |--------|-------|
-| Number of Partitions | 110 |
+| Number of Partitions | 112 |
 | Cohesion | 0.843 |
 | Coupling | 0.157 |
 | Min Partition Size | 1 |
-| Max Partition Size | 145 |
-| Avg Partition Size | 9.3 |
+| Max Partition Size | 144 |
+| Avg Partition Size | 9.1 |
 | Inter-partition Edges | 189 |
 | Intra-partition Edges | 1013 |
 
@@ -83,9 +83,9 @@
 
 | Category | Count | Sizes |
 |----------|-------|-------|
-| Large (>50) | 8 | [145, 101, 80, 78, 61]... |
-| Medium (10-50) | 10 | [41, 33, 27, 26, 25, 23, 21, 13, 11, 10] |
-| Small (3-9) | 13 | [9, 7, 6, 5, 5, 5, 5, 4, 4, 4]... |
+| Large (>50) | 7 | [144, 113, 82, 78, 63]... |
+| Medium (10-50) | 12 | [41, 41, 26, 26, 23, 21, 19, 17, 14, 13]... |
+| Small (3-9) | 14 | [9, 7, 7, 6, 5, 5, 5, 5, 4, 4]... |
 | Tiny (2) | 17 | - |
 | Singleton (1) | 62 | - |
 
@@ -93,16 +93,16 @@
 
 | Partition Name | Entity Count |
 |----------------|-------------|
-| number_code | 145 |
-| load_type | 101 |
-| location_planned | 80 |
+| number_code | 144 |
+| load_weight | 113 |
+| location_planned | 82 |
 | time_date | 78 |
-| section_delivery | 61 |
-| type_number | 60 |
-| section_seals | 57 |
-| event_position | 51 |
+| section_delivery | 63 |
+| type_timing | 60 |
+| seals_number | 54 |
 | ecm_date | 41 |
-| timing_tariff | 33 |
+| event_location | 41 |
+| localisation_goods | 26 |
 
 ### Domain Strategy
 

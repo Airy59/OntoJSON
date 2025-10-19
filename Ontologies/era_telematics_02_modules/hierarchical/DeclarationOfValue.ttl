@@ -1,17 +1,10 @@
 @prefix : <http://data.europa.eu/949/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-
-:hasDeclarationOfValue rdfs:range :DeclarationOfValue .
 
 :DeclarationOfValue a owl:Class ;
     rdfs:label "DeclarationOfValue" ;
     rdfs:comment """Details of the value of the goods
 													and the currency code when the value exceeds the
 													limit given in CIM Article 30 section 2.""" .
-
-[] rdf:first :DeclarationOfValue .
-
-[] rdf:first :DeclarationOfValue .
 

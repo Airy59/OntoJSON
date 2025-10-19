@@ -32,8 +32,6 @@
     rdfs:domain :TrainRunningData ;
     rdfs:range :Notes .
 
-:hasTrainRunningData rdfs:range :TrainRunningData .
-
 :hasTrainRunningTechData a owl:ObjectProperty ;
     rdfs:label "has TrainRunningTechData" ;
     rdfs:domain :TrainRunningData ;
