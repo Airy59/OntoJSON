@@ -696,7 +696,21 @@ class TransformationService:
             return 'ontology'
         else:
             # It's a file path - extract filename without extension
-            return Path(source).stem
+            name = Path(source).stem
+            
+            # Remove UUID prefixes that may have been added by file upload system
+            # Remove full UUID (with or without dashes): xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx or xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            # Also remove temp file prefixes like tmpXXXXXX
+            name = re.sub(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}[-_]?', '', name, flags=re.IGNORECASE)
+            name = re.sub(r'^[0-9a-f]{32}[-_]?', '', name, flags=re.IGNORECASE)
+            name = re.sub(r'^[0-9a-f]{8}[-_]', '', name, flags=re.IGNORECASE)
+            name = re.sub(r'^tmp[a-z0-9]+[-_]', '', name, flags=re.IGNORECASE)
+            
+            # If nothing remains after cleanup, use fallback
+            if not name:
+                name = 'ontology'
+            
+            return name
     
     def _clean_definition_name(self, name: str) -> str:
         """
