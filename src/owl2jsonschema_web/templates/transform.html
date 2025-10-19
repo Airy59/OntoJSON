@@ -695,7 +695,19 @@ function downloadComponentSchema(componentName) {
         const schema = transformationResult.component_schemas[componentName];
         const content = JSON.stringify(schema, null, 2);
         // Clean up the component name by removing UUID/timestamp prefixes
-        const cleanName = componentName.replace(/^[0-9a-f]{8}[-_]/, '').replace(/^tmp[a-z0-9]+[-_]/, '');
+        // Remove full UUID (with or without dashes): xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx or xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        // Also remove temp file prefixes like tmpXXXXXX
+        let cleanName = componentName
+            .replace(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}[-_]?/i, '')  // Full UUID with dashes
+            .replace(/^[0-9a-f]{32}[-_]?/i, '')  // Full UUID without dashes
+            .replace(/^[0-9a-f]{8}[-_]/i, '')  // Short 8-char hex
+            .replace(/^tmp[a-z0-9]+[-_]/i, '');  // Temp file prefix
+        
+        // If nothing remains after cleanup (file was from URI with no name), use a generic name
+        if (!cleanName || cleanName === '_schema') {
+            cleanName = 'ontology';
+        }
+        
         // Add _schema suffix to match the $ref URIs in the schemas
         downloadFile(content, `${cleanName}_schema.json`, 'application/json');
     }
@@ -730,7 +742,19 @@ document.getElementById('downloadAllSchemas').addEventListener('click', () => {
     if (transformationResult.component_schemas && Object.keys(transformationResult.component_schemas).length > 0) {
         Object.entries(transformationResult.component_schemas).forEach(([name, schema]) => {
             // Clean up the component name by removing UUID/timestamp prefixes
-            const cleanName = name.replace(/^[0-9a-f]{8}[-_]/, '').replace(/^tmp[a-z0-9]+[-_]/, '');
+            // Remove full UUID (with or without dashes): xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx or xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            // Also remove temp file prefixes like tmpXXXXXX
+            let cleanName = name
+                .replace(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}[-_]?/i, '')  // Full UUID with dashes
+                .replace(/^[0-9a-f]{32}[-_]?/i, '')  // Full UUID without dashes
+                .replace(/^[0-9a-f]{8}[-_]/i, '')  // Short 8-char hex
+                .replace(/^tmp[a-z0-9]+[-_]/i, '');  // Temp file prefix
+            
+            // If nothing remains after cleanup (file was from URI with no name), use a generic name with index
+            if (!cleanName || cleanName === '_schema') {
+                cleanName = 'ontology';
+            }
+            
             // Add _schema suffix to match the $ref URIs in the schemas
             schemas[cleanName + '_schema'] = schema;
         });
