@@ -696,7 +696,8 @@ function downloadComponentSchema(componentName) {
         const content = JSON.stringify(schema, null, 2);
         // Clean up the component name by removing UUID/timestamp prefixes
         const cleanName = componentName.replace(/^[0-9a-f]{8}[-_]/, '').replace(/^tmp[a-z0-9]+[-_]/, '');
-        downloadFile(content, `${cleanName}.json`, 'application/json');
+        // Add _schema suffix to match the $ref URIs in the schemas
+        downloadFile(content, `${cleanName}_schema.json`, 'application/json');
     }
 }
 
@@ -730,7 +731,8 @@ document.getElementById('downloadAllSchemas').addEventListener('click', () => {
         Object.entries(transformationResult.component_schemas).forEach(([name, schema]) => {
             // Clean up the component name by removing UUID/timestamp prefixes
             const cleanName = name.replace(/^[0-9a-f]{8}[-_]/, '').replace(/^tmp[a-z0-9]+[-_]/, '');
-            schemas[cleanName] = schema;
+            // Add _schema suffix to match the $ref URIs in the schemas
+            schemas[cleanName + '_schema'] = schema;
         });
     } else {
         console.warn('No component schemas found in result. Please restart the web server to use the updated code.');
