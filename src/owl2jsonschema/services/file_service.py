@@ -323,7 +323,9 @@ class FileService:
         
         if parsed.scheme in ('http', 'https'):
             # Download remote file to temporary location
-            temp_path = self.get_temp_path(suffix='.ttl')
+            # Extract a meaningful name from the URI for the temp file
+            uri_name = self._extract_uri_name(source)
+            temp_path = self.get_temp_path(suffix=f'_{uri_name}.ttl')
             try:
                 response = requests.get(source, timeout=30)
                 response.raise_for_status()
@@ -358,3 +360,40 @@ class FileService:
                 self.delete(path)
             except Exception:
                 pass  # Ignore errors during cleanup
+    
+    def _extract_uri_name(self, uri: str) -> str:
+        """
+        Extract a meaningful name from a URI.
+        
+        Args:
+            uri: The URI to extract name from
+            
+        Returns:
+            A clean name extracted from the URI
+        """
+        import re
+        
+        # Try to get fragment (after #) first
+        if '#' in uri:
+            fragment = uri.split('#')[-1]
+            if fragment and not fragment.startswith('http'):
+                # Remove file extension if present
+                fragment = re.sub(r'\.(ttl|rdf|owl|xml|n3|nt|jsonld)$', '', fragment, flags=re.IGNORECASE)
+                if fragment:
+                    return fragment
+        
+        # Fall back to last path segment (after last /)
+        path_parts = uri.split('/')
+        last_name = path_parts[-1] if path_parts else ''
+        
+        # Remove query parameters and fragments
+        last_name = last_name.split('?')[0].split('#')[0]
+        
+        # Remove file extension
+        last_name = re.sub(r'\.(ttl|rdf|owl|xml|n3|nt|jsonld)$', '', last_name, flags=re.IGNORECASE)
+        
+        if last_name:
+            return last_name
+        
+        # Final fallback
+        return 'ontology'
