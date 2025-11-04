@@ -343,3 +343,116 @@ class ClassRestrictionsRule(TransformationRule):
                 }
             ]
         }
+
+
+class IndividualsToEnumRule(TransformationRule):
+    """
+    Transform OWL individuals to JSON Schema constraints.
+    
+    For classes defined as equivalent to (or subclass of) a disjoint union of individuals,
+    creates a closed enum constraint. For other classes with individuals, adds them as
+    examples/documentation only (open set).
+    """
+    
+    def visit_ontology(self, ontology: OntologyModel) -> Dict[str, Any]:
+        """Process all individuals and add appropriate constraints to their classes."""
+        if not self.is_enabled():
+            return None
+        
+        # Group individuals by their class types
+        individuals_by_class = {}
+        
+        for individual in ontology.individuals:
+            for type_uri in individual.types:
+                class_name = self._get_class_name(type_uri)
+                if class_name not in individuals_by_class:
+                    individuals_by_class[class_name] = []
+                
+                # Store individual URI and label
+                individual_info = {
+                    "uri": individual.uri,
+                    "label": individual.label if individual.label else self._get_class_name(individual.uri)
+                }
+                individuals_by_class[class_name].append(individual_info)
+        
+        if not individuals_by_class:
+            return None
+        
+        # Check which classes have closed vs open sets
+        individuals_constraints = {}
+        for class_name, individuals in individuals_by_class.items():
+            # Find the corresponding class in the ontology
+            owl_class = self._find_class_by_name(ontology, class_name)
+            
+            if owl_class and self._is_closed_enumeration(owl_class):
+                # Closed set: Use enum constraint
+                individuals_constraints[class_name] = self._create_closed_constraint(class_name, individuals)
+            else:
+                # Open set: Add as examples/documentation
+                individuals_constraints[class_name] = self._create_open_constraint(class_name, individuals)
+        
+        return {"individuals_constraints": individuals_constraints} if individuals_constraints else None
+    
+    def _find_class_by_name(self, ontology: OntologyModel, class_name: str) -> Optional[OntologyClass]:
+        """Find a class in the ontology by its local name."""
+        for owl_class in ontology.classes:
+            if self._get_class_name(owl_class.uri) == class_name:
+                return owl_class
+        return None
+    
+    def _is_closed_enumeration(self, owl_class: OntologyClass) -> bool:
+        """
+        Check if a class represents a closed enumeration.
+        
+        A class is closed if it has an 'enumeration' annotation (from oneOf parsing)
+        or if it's equivalent to a oneOf construct.
+        """
+        # Check if the class has an enumeration annotation (from oneOf)
+        if "enumeration" in owl_class.annotations:
+            return True
+        
+        # For now, default to open (conservative approach)
+        # In the future, could add more sophisticated checks for equivalentClass with oneOf
+        return False
+    
+    def _create_closed_constraint(self, class_name: str, individuals: List[Dict[str, str]]) -> Dict[str, Any]:
+        """Create a closed enum constraint (only listed values allowed)."""
+        enum_values = [ind["uri"] for ind in individuals]
+        enum_titles = {ind["uri"]: ind["label"] for ind in individuals}
+        
+        uri_constraint = {
+            "enum": enum_values,
+            "description": f"Must be one of the defined {class_name} individuals (closed set)"
+        }
+        
+        if enum_titles:
+            uri_constraint["x-enum-labels"] = enum_titles
+        
+        return {"uri": uri_constraint}
+    
+    def _create_open_constraint(self, class_name: str, individuals: List[Dict[str, str]]) -> Dict[str, Any]:
+        """
+        Create documentation for an open set (other values are also allowed).
+        
+        Uses x-enum-individuals to list known individuals without restricting to only those.
+        """
+        enum_values = [ind["uri"] for ind in individuals]
+        enum_titles = {ind["uri"]: ind["label"] for ind in individuals}
+        
+        uri_metadata = {
+            "description": f"URI of a {class_name} instance. Known individuals include: {', '.join(enum_titles.values())}",
+            "x-known-individuals": enum_values
+        }
+        
+        if enum_titles:
+            uri_metadata["x-known-individual-labels"] = enum_titles
+        
+        return {"uri": uri_metadata}
+    
+    def _get_class_name(self, uri: str) -> str:
+        """Extract class name from URI."""
+        if '#' in uri:
+            return uri.split('#')[-1]
+        elif '/' in uri:
+            return uri.split('/')[-1]
+        return uri

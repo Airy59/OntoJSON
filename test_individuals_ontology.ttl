@@ -1,0 +1,33 @@
+@prefix ex: <http://example.org/test#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Active a ex:Status,
+        owl:NamedIndividual ;
+    rdfs:label "Active" .
+
+ex:Blue a ex:Color,
+        owl:NamedIndividual ;
+    rdfs:label "Blue" .
+
+ex:Green a ex:Color,
+        owl:NamedIndividual ;
+    rdfs:label "Green" .
+
+ex:Inactive a ex:Status,
+        owl:NamedIndividual ;
+    rdfs:label "Inactive" .
+
+ex:Red a ex:Color,
+        owl:NamedIndividual ;
+    rdfs:label "Red" .
+
+ex:TestOntology a owl:Ontology .
+
+ex:Status a owl:Class ;
+    rdfs:label "Status" .
+
+ex:Color a owl:Class ;
+    rdfs:label "Color" ;
+    rdfs:comment "A color class" .
+

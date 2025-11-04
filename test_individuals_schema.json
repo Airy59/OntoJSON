@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Status": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "uri": {
+              "description": "URI of a Status instance. Known individuals include: Active, Inactive",
+              "x-known-individuals": [
+                "http://example.org/test#Active",
+                "http://example.org/test#Inactive"
+              ],
+              "x-known-individual-labels": {
+                "http://example.org/test#Active": "Active",
+                "http://example.org/test#Inactive": "Inactive"
+              }
+            }
+          }
+        }
+      ],
+      "title": "Status"
+    },
+    "Color": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "uri": {
+              "description": "URI of a Color instance. Known individuals include: Blue, Green, Red",
+              "x-known-individuals": [
+                "http://example.org/test#Blue",
+                "http://example.org/test#Green",
+                "http://example.org/test#Red"
+              ],
+              "x-known-individual-labels": {
+                "http://example.org/test#Blue": "Blue",
+                "http://example.org/test#Green": "Green",
+                "http://example.org/test#Red": "Red"
+              }
+            }
+          }
+        }
+      ],
+      "title": "Color",
+      "description": "A color class"
+    },
+    "_Thing": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI identifier for this instance"
+        }
+      },
+      "required": [],
+      "description": "Base object that all classes inherit from",
+      "title": "_Thing"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

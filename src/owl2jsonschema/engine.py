@@ -32,7 +32,7 @@ class TransformationEngine:
     def _initialize_rules(self):
         """Initialize transformation rules based on configuration."""
         # Import rule implementations
-        from .rules.class_rules import ClassToObjectRule, ClassHierarchyRule, ClassRestrictionsRule
+        from .rules.class_rules import ClassToObjectRule, ClassHierarchyRule, ClassRestrictionsRule, IndividualsToEnumRule
         from .rules.property_rules import ObjectPropertyRule, DatatypePropertyRule, PropertyCardinalityRule
         from .rules.annotation_rules import LabelsToTitlesRule, CommentsToDescriptionsRule
         from .rules.advanced_rules import EnumerationToEnumRule, UnionToAnyOfRule, IntersectionToAllOfRule, DisjointClassesRule
@@ -42,7 +42,8 @@ class TransformationEngine:
         rule_classes = {
             "class_to_object": ClassToObjectRule,
             "class_hierarchy": ClassHierarchyRule,
-            "class_restrictions": ClassRestrictionsRule,  # Added this!
+            "class_restrictions": ClassRestrictionsRule,
+            "individuals_to_enum": IndividualsToEnumRule,
             "object_property": ObjectPropertyRule,
             "datatype_property": DatatypePropertyRule,
             "property_cardinality": PropertyCardinalityRule,
@@ -227,6 +228,28 @@ class TransformationEngine:
                 for class_name, enum_schema in result["enum_updates"].items():
                     # Replace the class definition with the enum schema
                     self.schema_builder.add_definition(class_name, enum_schema)
+        
+        elif rule_id == "individuals_to_enum":
+            # Individuals add enum constraints to the uri property of their class definitions
+            if isinstance(result, dict) and "individuals_constraints" in result:
+                for class_name, property_constraints in result["individuals_constraints"].items():
+                    clean_class_name = self.schema_builder._clean_definition_name(class_name)
+                    if clean_class_name in self.schema_builder.definitions:
+                        # Get existing class definition
+                        class_def = self.schema_builder.definitions[clean_class_name]
+                        
+                        # Ensure properties dict exists
+                        if "properties" not in class_def:
+                            class_def["properties"] = {}
+                        
+                        # Update each property with its constraint
+                        for prop_name, constraint in property_constraints.items():
+                            if prop_name in class_def["properties"]:
+                                # Merge constraint with existing property definition
+                                class_def["properties"][prop_name].update(constraint)
+                            else:
+                                # Add new property with constraint
+                                class_def["properties"][prop_name] = constraint
         
         elif rule_id == "ontology_metadata":
             # Metadata goes into the root schema
