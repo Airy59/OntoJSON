@@ -1,0 +1,37 @@
+@prefix : <http://example.org/test#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://example.org/test> a owl:Ontology .
+
+# Define some classes
+:IntermodalTransportUnit a owl:Class ;
+    rdfs:label "Intermodal Transport Unit" .
+
+:Wagon a owl:Class ;
+    rdfs:label "Wagon" .
+
+:Setting a owl:Class ;
+    rdfs:label "Setting" .
+
+# Define a property
+:isSettingFor a owl:ObjectProperty ;
+    rdfs:label "is setting for" ;
+    rdfs:domain :Setting .
+
+# Define a class with a restriction using a union (blank node)
+:SpecialSetting a owl:Class ;
+    rdfs:label "Special Setting" ;
+    rdfs:subClassOf :Setting ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty :isSettingFor ;
+        owl:allValuesFrom [
+            a owl:Class ;
+            owl:unionOf (
+                :IntermodalTransportUnit
+                :Wagon
+            )
+        ]
+    ] .

@@ -241,6 +241,7 @@ class RulesConfigDialog(QDialog):
         }
         
         self.checkboxes = {}
+        self.individuals_mode_group = None  # Will hold radio button group
         
         for category, rule_ids in categories.items():
             # Create category group
@@ -269,6 +270,43 @@ class RulesConfigDialog(QDialog):
             
             group.setLayout(group_layout)
             scroll_layout.addWidget(group)
+        
+        # Add Individuals Representation section with radio buttons
+        individuals_group = QGroupBox("Individuals Representation")
+        individuals_layout = QVBoxLayout()
+        
+        # Description
+        desc_label = QLabel("Choose how to represent named individuals from the ontology:")
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("color: #666; font-style: italic; margin-bottom: 10px;")
+        individuals_layout.addWidget(desc_label)
+        
+        # Radio buttons
+        self.individuals_mode_group = QButtonGroup()
+        
+        self.individuals_label_radio = QRadioButton("Label-Based Enum (Default)")
+        self.individuals_label_radio.setToolTip("Use human-readable labels as enum values (e.g., 'Red', 'Green', 'Blue')")
+        self.individuals_label_radio.setChecked(True)  # Default
+        self.individuals_mode_group.addButton(self.individuals_label_radio, 0)
+        individuals_layout.addWidget(self.individuals_label_radio)
+        
+        label_desc = QLabel("  Use human-readable labels as enum values")
+        label_desc.setWordWrap(True)
+        label_desc.setStyleSheet("color: #666; margin-left: 20px; margin-bottom: 5px; font-size: 11px;")
+        individuals_layout.addWidget(label_desc)
+        
+        self.individuals_uri_radio = QRadioButton("URI-Based Enum")
+        self.individuals_uri_radio.setToolTip("Use full URIs as enum values (e.g., 'http://example.org#Red')")
+        self.individuals_mode_group.addButton(self.individuals_uri_radio, 1)
+        individuals_layout.addWidget(self.individuals_uri_radio)
+        
+        uri_desc = QLabel("  Use full URIs as enum values")
+        uri_desc.setWordWrap(True)
+        uri_desc.setStyleSheet("color: #666; margin-left: 20px; margin-bottom: 5px; font-size: 11px;")
+        individuals_layout.addWidget(uri_desc)
+        
+        individuals_group.setLayout(individuals_layout)
+        scroll_layout.addWidget(individuals_group)
         
         scroll_widget.setLayout(scroll_layout)
         scroll_area.setWidget(scroll_widget)
@@ -341,6 +379,17 @@ class RulesConfigDialog(QDialog):
             else:
                 # Fallback if the rule is not in the config
                 config[rule_id] = {"enabled": checkbox.isChecked()}
+        
+        # Add individuals mode configuration based on radio buttons
+        if self.individuals_mode_group:
+            # Check which radio button is selected
+            if self.individuals_label_radio.isChecked():
+                config["individuals_to_label_enum"] = {"enabled": True}
+                config["individuals_to_enum"] = {"enabled": False}
+            else:
+                config["individuals_to_label_enum"] = {"enabled": False}
+                config["individuals_to_enum"] = {"enabled": True}
+        
         return config
     
     def save_configuration(self):

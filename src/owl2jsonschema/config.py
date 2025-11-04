@@ -243,11 +243,23 @@ class TransformationConfig:
                     "enabled": False,
                     "options": {}
                 },
+                "individuals_to_enum": {
+                    "enabled": False,  # Disabled by default - use label-based instead
+                    "options": {}
+                },
+                "individuals_to_label_enum": {
+                    "enabled": True,  # Enabled by default - more user-friendly
+                    "options": {}
+                },
                 "ontology_metadata": {
                     "enabled": True,
                     "options": {
                         "placement": "comment"  # Use $comment - fully standard Draft 7 keyword
                     }
+                },
+                "thing_with_uri": {
+                    "enabled": True,  # Enable base _Thing object
+                    "options": {}
                 }
             },
             

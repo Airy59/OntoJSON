@@ -85,8 +85,10 @@ class ConfigurationService:
                 "union_to_anyOf": {"enabled": True},
                 "intersection_to_allOf": {"enabled": True},
                 "disjoint_classes": {"enabled": True},
+                "individuals_to_enum": {"enabled": False},  # URI-based (disabled by default)
+                "individuals_to_label_enum": {"enabled": True},  # Label-based (enabled by default)
                 "ontology_metadata": {"enabled": True},
-                "thing_with_uri": {"enabled": False}
+                "thing_with_uri": {"enabled": True}  # MUST be enabled for _Thing definition
             },
             "output": {
                 "include_uri": False,
@@ -392,13 +394,21 @@ class ConfigurationService:
                 "enabled": True,
                 "use_oneOf": True
             },
+            "individuals_to_enum": {
+                "enabled": False,  # URI-based, disabled by default
+                "open_vs_closed": "auto"
+            },
+            "individuals_to_label_enum": {
+                "enabled": True,  # Label-based, enabled by default
+                "prefer_language": "en"
+            },
             "ontology_metadata": {
                 "enabled": True,
                 "include_version": True,
                 "include_authors": True
             },
             "thing_with_uri": {
-                "enabled": False,
+                "enabled": True,  # MUST be enabled for _Thing definition
                 "uri_property": "@id"
             }
         }

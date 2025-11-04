@@ -309,8 +309,33 @@ class ClassRestrictionsRule(TransformationRule):
             return uri.split('/')[-1]
         return uri
     
-    def _create_type_reference(self, type_uri: str) -> Dict[str, Any]:
-        """Create a type reference for a class or datatype."""
+    def _create_type_reference(self, type_uri: Any) -> Dict[str, Any]:
+        """
+        Create a type reference for a class or datatype.
+        
+        Handles simple types (strings) as well as complex class expressions
+        (dicts with 'unionOf' or 'intersectionOf' keys).
+        """
+        # Check if it's a complex class expression (dict)
+        if isinstance(type_uri, dict):
+            if "unionOf" in type_uri:
+                # Expand union inline as oneOf
+                union_refs = []
+                for class_uri in type_uri["unionOf"]:
+                    # Recursively handle nested expressions
+                    union_refs.append(self._create_type_reference(class_uri))
+                return {"oneOf": union_refs}
+            elif "intersectionOf" in type_uri:
+                # Expand intersection inline as allOf
+                intersection_refs = []
+                for class_uri in type_uri["intersectionOf"]:
+                    # Recursively handle nested expressions
+                    intersection_refs.append(self._create_type_reference(class_uri))
+                return {"allOf": intersection_refs}
+        
+        # Handle simple type URI (string)
+        type_str = str(type_uri)
+        
         # Check if it's an XSD datatype
         xsd_types = {
             "http://www.w3.org/2001/XMLSchema#string": {"type": "string"},
@@ -321,12 +346,17 @@ class ClassRestrictionsRule(TransformationRule):
             "http://www.w3.org/2001/XMLSchema#dateTime": {"type": "string", "format": "date-time"},
         }
         
-        if type_uri in xsd_types:
-            return xsd_types[type_uri]
+        if type_str in xsd_types:
+            return xsd_types[type_str]
         
         # Otherwise, it's a reference to another class
         # Use oneOf pattern: either a full object reference or an @id reference
-        class_name = self._get_property_name(type_uri)
+        class_name = self._get_property_name(type_str)
+        
+        # Special handling for owl:Thing - map to _Thing
+        if type_str == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
+            class_name = "_Thing"
+        
         return {
             "oneOf": [
                 {"$ref": f"#/definitions/{class_name}"},
@@ -469,6 +499,85 @@ class IndividualsToEnumRule(TransformationRule):
             uri_metadata["x-known-individual-labels"] = enum_titles
         
         return {"uri": uri_metadata}
+    
+    def _get_class_name(self, uri: str) -> str:
+        """Extract class name from URI."""
+        if '#' in uri:
+            return uri.split('#')[-1]
+        elif '/' in uri:
+            return uri.split('/')[-1]
+        return uri
+
+
+class IndividualsToLabelEnumRule(TransformationRule):
+    """
+    Transform OWL individuals to JSON Schema enum using labels instead of URIs.
+    
+    This creates a more human-readable enum using the individual labels (preferring English).
+    For closed sets (owl:oneOf), creates enum constraint. For open sets, adds as examples.
+    """
+    
+    def visit_ontology(self, ontology: OntologyModel) -> Dict[str, Any]:
+        """Process all individuals and create label-based enum constraints."""
+        if not self.is_enabled():
+            return None
+        
+        # Group individuals by their class types
+        individuals_by_class = {}
+        
+        for individual in ontology.individuals:
+            for type_uri in individual.types:
+                class_name = self._get_class_name(type_uri)
+                if class_name not in individuals_by_class:
+                    individuals_by_class[class_name] = []
+                
+                # Extract label string (prefer English)
+                label = individual.label
+                if isinstance(label, dict):
+                    label_str = label.get("en", label.get("default", next(iter(label.values()), self._get_class_name(individual.uri))))
+                else:
+                    label_str = str(label) if label else self._get_class_name(individual.uri)
+                
+                individual_info = {
+                    "uri": individual.uri,
+                    "label": label_str
+                }
+                individuals_by_class[class_name].append(individual_info)
+        
+        if not individuals_by_class:
+            return None
+        
+        # Create enum constraints for each class with individuals
+        # By default, always create enums (user-friendly label-based enumerations)
+        individuals_constraints = {}
+        for class_name, individuals in individuals_by_class.items():
+            individuals_constraints[class_name] = self._create_label_enum_constraint(class_name, individuals)
+        
+        return {"individuals_label_constraints": individuals_constraints} if individuals_constraints else None
+    
+    def _find_class_by_name(self, ontology: OntologyModel, class_name: str) -> Optional[OntologyClass]:
+        """Find a class in the ontology by its local name."""
+        for owl_class in ontology.classes:
+            if self._get_class_name(owl_class.uri) == class_name:
+                return owl_class
+        return None
+    
+    def _create_label_enum_constraint(self, class_name: str, individuals: List[Dict[str, str]]) -> Dict[str, Any]:
+        """Create a simple enum constraint using labels."""
+        # Use labels for enum values
+        enum_values = [ind["label"] for ind in individuals]
+        
+        # Map labels back to URIs for reference
+        label_to_uri = {ind["label"]: ind["uri"] for ind in individuals}
+        
+        constraint = {
+            "type": "string",
+            "enum": enum_values,
+            "description": f"Enumeration of {class_name} values",
+            "x-enum-uris": label_to_uri  # Keep URI mapping for reference
+        }
+        
+        return constraint
     
     def _get_class_name(self, uri: str) -> str:
         """Extract class name from URI."""

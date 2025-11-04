@@ -85,6 +85,29 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <hr class="my-3">
+                        
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Individuals Representation:</strong></label>
+                            <p class="text-muted small mb-2">Choose how to represent named individuals from the ontology:</p>
+                            
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="individualsMode" id="individualsLabelEnum" value="label" checked>
+                                <label class="form-check-label" for="individualsLabelEnum">
+                                    <strong>Label-Based Enum</strong> (Default)<br>
+                                    <small class="text-muted">Use human-readable labels as enum values (e.g., "Red", "Green", "Blue")</small>
+                                </label>
+                            </div>
+                            
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="radio" name="individualsMode" id="individualsUriEnum" value="uri">
+                                <label class="form-check-label" for="individualsUriEnum">
+                                    <strong>URI-Based Enum</strong><br>
+                                    <small class="text-muted">Use full URIs as enum values (e.g., "http://example.org#Red")</small>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -269,6 +292,13 @@ function applyConfiguration(config) {
                 element.checked = enabled;
             }
         }
+        
+        // Set individuals mode radio buttons
+        if (config.rules.individuals_to_label_enum && config.rules.individuals_to_label_enum.enabled) {
+            document.getElementById('individualsLabelEnum').checked = true;
+        } else if (config.rules.individuals_to_enum && config.rules.individuals_to_enum.enabled) {
+            document.getElementById('individualsUriEnum').checked = true;
+        }
     }
     
     // Apply language configuration
@@ -303,6 +333,9 @@ function applyConfiguration(config) {
 }
 
 function gatherConfiguration() {
+    // Determine which individuals rule should be enabled
+    const individualsMode = document.querySelector('input[name="individualsMode"]:checked').value;
+    
     return {
         rules: {
             class_to_object: { enabled: document.getElementById('classToObject').checked },
@@ -318,7 +351,9 @@ function gatherConfiguration() {
                 language: document.getElementById('language').value
             },
             property_cardinality: { enabled: document.getElementById('propertyCardinality').checked },
-            enumeration_to_enum: { enabled: document.getElementById('enumerationToEnum').checked }
+            enumeration_to_enum: { enabled: document.getElementById('enumerationToEnum').checked },
+            individuals_to_label_enum: { enabled: individualsMode === 'label' },
+            individuals_to_enum: { enabled: individualsMode === 'uri' }
         },
         output: {
             format: document.getElementById('schemaVersion').value,

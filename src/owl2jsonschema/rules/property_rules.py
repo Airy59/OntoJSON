@@ -137,10 +137,16 @@ class ObjectPropertyRule(TransformationRule):
         
         # Create the property schema with oneOf pattern for object references
         range_class = None
+        range_uri = None
         
         if property.range:
             # If there's a specific range, reference it
-            range_class = self._get_property_name(property.range[0])
+            range_uri = property.range[0]
+            range_class = self._get_property_name(range_uri)
+            
+            # Special handling for owl:Thing - map to _Thing
+            if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
+                range_class = "_Thing"
         else:
             # If no explicit range and has an inverse, try to infer range
             if property.inverse_of:
@@ -148,12 +154,22 @@ class ObjectPropertyRule(TransformationRule):
                 if inverse_prop:
                     if inverse_prop.domain:
                         # The range of a property is the domain of its inverse
-                        range_class = self._get_property_name(inverse_prop.domain[0])
+                        range_uri = inverse_prop.domain[0]
+                        range_class = self._get_property_name(range_uri)
+                        
+                        # Special handling for owl:Thing - map to _Thing
+                        if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
+                            range_class = "_Thing"
                     else:
                         # Try to infer from usage - check which classes use the inverse property
                         inferred_domain = self._infer_property_domain_from_usage(inverse_prop, ontology)
                         if inferred_domain:
-                            range_class = self._get_property_name(inferred_domain[0])
+                            range_uri = inferred_domain[0]
+                            range_class = self._get_property_name(range_uri)
+                            
+                            # Special handling for owl:Thing - map to _Thing
+                            if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
+                                range_class = "_Thing"
         
         # Create oneOf pattern: either a full object reference or an @id reference
         if range_class:
@@ -573,8 +589,33 @@ class PropertyRestrictionsRule(TransformationRule):
             return uri.split('/')[-1]
         return uri
     
-    def _create_type_reference(self, type_uri: str) -> Dict[str, Any]:
-        """Create a type reference for a class or datatype."""
+    def _create_type_reference(self, type_uri: Any) -> Dict[str, Any]:
+        """
+        Create a type reference for a class or datatype.
+        
+        Handles simple types (strings) as well as complex class expressions
+        (dicts with 'unionOf' or 'intersectionOf' keys).
+        """
+        # Check if it's a complex class expression (dict)
+        if isinstance(type_uri, dict):
+            if "unionOf" in type_uri:
+                # Expand union inline as oneOf
+                union_refs = []
+                for class_uri in type_uri["unionOf"]:
+                    # Recursively handle nested expressions
+                    union_refs.append(self._create_type_reference(class_uri))
+                return {"oneOf": union_refs}
+            elif "intersectionOf" in type_uri:
+                # Expand intersection inline as allOf
+                intersection_refs = []
+                for class_uri in type_uri["intersectionOf"]:
+                    # Recursively handle nested expressions
+                    intersection_refs.append(self._create_type_reference(class_uri))
+                return {"allOf": intersection_refs}
+        
+        # Handle simple type URI (string)
+        type_str = str(type_uri)
+        
         # Check if it's an XSD datatype
         xsd_types = {
             "http://www.w3.org/2001/XMLSchema#string": {"type": "string"},
@@ -587,12 +628,17 @@ class PropertyRestrictionsRule(TransformationRule):
             "http://www.w3.org/2001/XMLSchema#dateTimeStamp": {"type": "string", "format": "date-time"},
         }
         
-        if type_uri in xsd_types:
-            return xsd_types[type_uri]
+        if type_str in xsd_types:
+            return xsd_types[type_str]
         
         # Otherwise, it's a reference to another class
         # Use oneOf pattern for object references
-        class_name = self._get_property_name(type_uri)
+        class_name = self._get_property_name(type_str)
+        
+        # Special handling for owl:Thing - map to _Thing
+        if type_str == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
+            class_name = "_Thing"
+        
         return {
             "oneOf": [
                 {"$ref": f"#/definitions/{class_name}"},

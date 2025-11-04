@@ -441,18 +441,28 @@ class OntologyParser:
                     exact_cardinality=obj.value
                 )
             elif pred == OWL.allValuesFrom:
+                # Check if obj is a blank node (complex class expression)
+                if isinstance(obj, BNode):
+                    filler = self._parse_class_expression(obj)
+                else:
+                    filler = str(obj)
                 return ValueRestriction(
                     property_uri=prop_uri,
                     restriction_type="allValuesFrom",
                     value=str(obj),
-                    filler=str(obj)
+                    filler=filler
                 )
             elif pred == OWL.someValuesFrom:
+                # Check if obj is a blank node (complex class expression)
+                if isinstance(obj, BNode):
+                    filler = self._parse_class_expression(obj)
+                else:
+                    filler = str(obj)
                 return ValueRestriction(
                     property_uri=prop_uri,
                     restriction_type="someValuesFrom",
                     value=str(obj),
-                    filler=str(obj)
+                    filler=filler
                 )
             elif pred == OWL.hasValue:
                 return ValueRestriction(
@@ -463,6 +473,54 @@ class OntologyParser:
                 )
         
         return None
+    
+    def _parse_class_expression(self, node: BNode) -> Any:
+        """
+        Parse a complex class expression (unionOf, intersectionOf, etc.) from a blank node.
+        
+        Returns either:
+        - A simple class URI string for named classes
+        - A dict with 'unionOf' key and list of class URIs
+        - A dict with 'intersectionOf' key and list of class URIs
+        """
+        # Check for unionOf
+        for union_list in self.graph.objects(node, OWL.unionOf):
+            classes = self._parse_rdf_list(union_list)
+            return {"unionOf": classes}
+        
+        # Check for intersectionOf
+        for intersection_list in self.graph.objects(node, OWL.intersectionOf):
+            classes = self._parse_rdf_list(intersection_list)
+            return {"intersectionOf": classes}
+        
+        # If no complex expression found, treat as named class
+        # (though this shouldn't happen for blank nodes)
+        return str(node)
+    
+    def _parse_rdf_list(self, list_node) -> List[str]:
+        """Parse an RDF list and return the list of class URIs."""
+        classes = []
+        current = list_node
+        
+        while current and current != RDF.nil:
+            # Get the first element
+            for first in self.graph.objects(current, RDF.first):
+                if isinstance(first, URIRef):
+                    classes.append(str(first))
+                elif isinstance(first, BNode):
+                    # Recursively parse nested expressions
+                    nested = self._parse_class_expression(first)
+                    classes.append(nested)
+                break
+            
+            # Move to the rest of the list
+            next_node = None
+            for rest in self.graph.objects(current, RDF.rest):
+                next_node = rest
+                break
+            current = next_node
+        
+        return classes
     
     def _parse_enumeration(self, node: BNode) -> Optional[List[str]]:
         """Parse an enumeration (oneOf) from a blank node."""

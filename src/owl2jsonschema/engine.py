@@ -32,7 +32,8 @@ class TransformationEngine:
     def _initialize_rules(self):
         """Initialize transformation rules based on configuration."""
         # Import rule implementations
-        from .rules.class_rules import ClassToObjectRule, ClassHierarchyRule, ClassRestrictionsRule, IndividualsToEnumRule
+        from .rules.class_rules import (ClassToObjectRule, ClassHierarchyRule, ClassRestrictionsRule,
+                                        IndividualsToEnumRule, IndividualsToLabelEnumRule)
         from .rules.property_rules import ObjectPropertyRule, DatatypePropertyRule, PropertyCardinalityRule
         from .rules.annotation_rules import LabelsToTitlesRule, CommentsToDescriptionsRule
         from .rules.advanced_rules import EnumerationToEnumRule, UnionToAnyOfRule, IntersectionToAllOfRule, DisjointClassesRule
@@ -43,7 +44,8 @@ class TransformationEngine:
             "class_to_object": ClassToObjectRule,
             "class_hierarchy": ClassHierarchyRule,
             "class_restrictions": ClassRestrictionsRule,
-            "individuals_to_enum": IndividualsToEnumRule,
+            "individuals_to_enum": IndividualsToEnumRule,  # URI-based (disabled by default)
+            "individuals_to_label_enum": IndividualsToLabelEnumRule,  # Label-based (enabled by default)
             "object_property": ObjectPropertyRule,
             "datatype_property": DatatypePropertyRule,
             "property_cardinality": PropertyCardinalityRule,
@@ -250,6 +252,13 @@ class TransformationEngine:
                             else:
                                 # Add new property with constraint
                                 class_def["properties"][prop_name] = constraint
+        
+        elif rule_id == "individuals_to_label_enum":
+            # Individuals create label-based enums (replaces entire class definition)
+            if isinstance(result, dict) and "individuals_label_constraints" in result:
+                for class_name, enum_schema in result["individuals_label_constraints"].items():
+                    # Replace the class definition with the label-based enum
+                    self.schema_builder.add_definition(class_name, enum_schema)
         
         elif rule_id == "ontology_metadata":
             # Metadata goes into the root schema
