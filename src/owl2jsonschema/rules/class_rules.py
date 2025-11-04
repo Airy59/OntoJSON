@@ -418,7 +418,17 @@ class IndividualsToEnumRule(TransformationRule):
     def _create_closed_constraint(self, class_name: str, individuals: List[Dict[str, str]]) -> Dict[str, Any]:
         """Create a closed enum constraint (only listed values allowed)."""
         enum_values = [ind["uri"] for ind in individuals]
-        enum_titles = {ind["uri"]: ind["label"] for ind in individuals}
+        
+        # Handle multi-language labels in enum_titles
+        enum_titles = {}
+        for ind in individuals:
+            label = ind["label"]
+            if isinstance(label, dict):
+                # Multi-language label - prefer English, or use first available
+                label_str = label.get("en", label.get("default", next(iter(label.values()), "")))
+            else:
+                label_str = str(label) if label else ""
+            enum_titles[ind["uri"]] = label_str
         
         uri_constraint = {
             "enum": enum_values,
@@ -439,8 +449,19 @@ class IndividualsToEnumRule(TransformationRule):
         enum_values = [ind["uri"] for ind in individuals]
         enum_titles = {ind["uri"]: ind["label"] for ind in individuals}
         
+        # Extract string labels for description (handle dict labels with multiple languages)
+        label_strings = []
+        for label in enum_titles.values():
+            if isinstance(label, dict):
+                # Multi-language label - prefer English, or use first available
+                label_str = label.get("en", label.get("default", next(iter(label.values()), "")))
+            else:
+                label_str = str(label) if label else ""
+            if label_str:
+                label_strings.append(label_str)
+        
         uri_metadata = {
-            "description": f"URI of a {class_name} instance. Known individuals include: {', '.join(enum_titles.values())}",
+            "description": f"URI of a {class_name} instance. Known individuals include: {', '.join(label_strings) if label_strings else 'various individuals'}",
             "x-known-individuals": enum_values
         }
         
