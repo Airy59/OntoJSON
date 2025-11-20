@@ -109,7 +109,7 @@ class ObjectPropertyRule(TransformationRule):
         prop_name = self._get_property_name(property.uri)
         results = []
         
-        # Determine domain - either explicit or inferred from inverse
+        # Determine domain - either explicit or inferred from inverse or super properties
         domains = list(property.domain) if property.domain else []
         
         # If no explicit domain and has an inverse, infer domain from inverse's range
@@ -118,6 +118,14 @@ class ObjectPropertyRule(TransformationRule):
             if inverse_prop and inverse_prop.range:
                 # The domain of a property is the range of its inverse
                 domains = inverse_prop.range
+        
+        # If still no domain, inherit from super properties (OWL subproperty semantics)
+        if not domains and property.super_properties:
+            for super_prop_uri in property.super_properties:
+                super_prop = self._find_property_by_uri(super_prop_uri, ontology)
+                if super_prop and super_prop.domain:
+                    domains = list(super_prop.domain)
+                    break  # Use first super property with a domain
         
         # Determine if property is functional
         is_functional = property.functional
@@ -170,6 +178,19 @@ class ObjectPropertyRule(TransformationRule):
                             # Special handling for owl:Thing - map to _Thing
                             if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
                                 range_class = "_Thing"
+            
+            # If still no range, inherit from super properties (OWL subproperty semantics)
+            if not range_uri and property.super_properties:
+                for super_prop_uri in property.super_properties:
+                    super_prop = self._find_property_by_uri(super_prop_uri, ontology)
+                    if super_prop and super_prop.range:
+                        range_uri = super_prop.range[0]
+                        range_class = self._get_property_name(range_uri)
+                        
+                        # Special handling for owl:Thing - map to _Thing
+                        if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
+                            range_class = "_Thing"
+                        break  # Use first super property with a range
         
         # Create oneOf pattern: either a full object reference or an @id reference
         if range_class:
@@ -212,9 +233,22 @@ class ObjectPropertyRule(TransformationRule):
         if property.label:
             schema["title"] = property.get_label(self.get_option("language", "en"))
         
+        # Build description with comment and subproperty info
+        description_parts = []
         if property.comment:
             # Clean the comment to remove tab sequences
-            schema["description"] = clean_string(property.get_comment(self.get_option("language", "en")))
+            description_parts.append(clean_string(property.get_comment(self.get_option("language", "en"))))
+        
+        # Add subproperty information
+        if property.super_properties:
+            super_prop_names = [self._get_property_name(uri) for uri in property.super_properties]
+            if len(super_prop_names) == 1:
+                description_parts.append(f"Subproperty of {super_prop_names[0]}")
+            else:
+                description_parts.append(f"Subproperty of {', '.join(super_prop_names)}")
+        
+        if description_parts:
+            schema["description"] = ". ".join(description_parts)
         
         # Handle functional properties (max cardinality 1)
         if is_functional:
@@ -329,16 +363,49 @@ class DatatypePropertyRule(TransformationRule):
         prop_name = self._get_property_name(property.uri)
         results = []
         
+        # Determine domain - explicit or inherited from super properties
+        domains = list(property.domain) if property.domain else []
+        
+        # If no explicit domain, inherit from super properties (OWL subproperty semantics)
+        if not domains and property.super_properties:
+            for super_prop_uri in property.super_properties:
+                super_prop = self._find_datatype_property_by_uri(super_prop_uri, ontology)
+                if super_prop and super_prop.domain:
+                    domains = list(super_prop.domain)
+                    break  # Use first super property with a domain
+        
         # Create the property schema based on its range
-        schema = self._get_datatype_schema(property.range[0] if property.range else None)
+        # First try explicit range, then inherit from super property
+        range_uri = property.range[0] if property.range else None
+        if not range_uri and property.super_properties:
+            for super_prop_uri in property.super_properties:
+                super_prop = self._find_datatype_property_by_uri(super_prop_uri, ontology)
+                if super_prop and super_prop.range:
+                    range_uri = super_prop.range[0]
+                    break  # Use first super property with a range
+        
+        schema = self._get_datatype_schema(range_uri)
         
         # Add title and description if available
         if property.label:
             schema["title"] = property.get_label(self.get_option("language", "en"))
         
+        # Build description with comment and subproperty info
+        description_parts = []
         if property.comment:
             # Clean the comment to remove tab sequences
-            schema["description"] = clean_string(property.get_comment(self.get_option("language", "en")))
+            description_parts.append(clean_string(property.get_comment(self.get_option("language", "en"))))
+        
+        # Add subproperty information
+        if property.super_properties:
+            super_prop_names = [self._get_property_name(uri) for uri in property.super_properties]
+            if len(super_prop_names) == 1:
+                description_parts.append(f"Subproperty of {super_prop_names[0]}")
+            else:
+                description_parts.append(f"Subproperty of {', '.join(super_prop_names)}")
+        
+        if description_parts:
+            schema["description"] = ". ".join(description_parts)
         
         # Handle functional properties
         if property.functional:
@@ -353,8 +420,8 @@ class DatatypePropertyRule(TransformationRule):
             }
         
         # Assign to domain classes
-        if property.domain:
-            for domain_uri in property.domain:
+        if domains:
+            for domain_uri in domains:
                 domain_name = self._get_property_name(domain_uri)
                 results.append({
                     "class": domain_name,
@@ -422,6 +489,13 @@ class DatatypePropertyRule(TransformationRule):
         else:
             # Default to string for unknown types
             return {"type": "string"}
+    
+    def _find_datatype_property_by_uri(self, uri: str, ontology: OntologyModel) -> Optional[DatatypeProperty]:
+        """Find a datatype property by its URI."""
+        for prop in ontology.datatype_properties:
+            if prop.uri == uri:
+                return prop
+        return None
     
     def _get_property_name(self, uri: str) -> str:
         """Extract property name from URI."""
