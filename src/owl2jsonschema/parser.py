@@ -219,6 +219,10 @@ class OntologyParser:
             for range_class in self.graph.objects(prop_uri, RDFS.range):
                 if isinstance(range_class, URIRef):
                     obj_prop.range.append(str(range_class))
+                elif isinstance(range_class, BNode):
+                    # Handle complex class expressions (unionOf, intersectionOf, etc.)
+                    class_expr = self._parse_class_expression(range_class)
+                    obj_prop.range.append(class_expr)
             
             # Get super properties
             for super_prop in self.graph.objects(prop_uri, RDFS.subPropertyOf):

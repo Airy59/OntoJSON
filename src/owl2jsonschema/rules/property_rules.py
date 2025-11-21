@@ -146,15 +146,23 @@ class ObjectPropertyRule(TransformationRule):
         # Create the property schema with oneOf pattern for object references
         range_class = None
         range_uri = None
+        range_schema = None
         
         if property.range:
-            # If there's a specific range, reference it
+            # If there's a specific range, it could be a simple URI or a complex expression
             range_uri = property.range[0]
-            range_class = self._get_property_name(range_uri)
             
-            # Special handling for owl:Thing - map to _Thing
-            if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
-                range_class = "_Thing"
+            # Check if range is a complex class expression (dict)
+            if isinstance(range_uri, dict):
+                # Handle unionOf, intersectionOf, etc.
+                range_schema = self._create_range_schema(range_uri)
+            else:
+                # Simple URI range
+                range_class = self._get_property_name(range_uri)
+                
+                # Special handling for owl:Thing - map to _Thing
+                if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
+                    range_class = "_Thing"
         else:
             # If no explicit range and has an inverse, try to infer range
             if property.inverse_of:
@@ -163,37 +171,52 @@ class ObjectPropertyRule(TransformationRule):
                     if inverse_prop.domain:
                         # The range of a property is the domain of its inverse
                         range_uri = inverse_prop.domain[0]
-                        range_class = self._get_property_name(range_uri)
                         
-                        # Special handling for owl:Thing - map to _Thing
-                        if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
-                            range_class = "_Thing"
-                    else:
-                        # Try to infer from usage - check which classes use the inverse property
-                        inferred_domain = self._infer_property_domain_from_usage(inverse_prop, ontology)
-                        if inferred_domain:
-                            range_uri = inferred_domain[0]
+                        if isinstance(range_uri, dict):
+                            range_schema = self._create_range_schema(range_uri)
+                        else:
                             range_class = self._get_property_name(range_uri)
                             
                             # Special handling for owl:Thing - map to _Thing
                             if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
                                 range_class = "_Thing"
+                    else:
+                        # Try to infer from usage - check which classes use the inverse property
+                        inferred_domain = self._infer_property_domain_from_usage(inverse_prop, ontology)
+                        if inferred_domain:
+                            range_uri = inferred_domain[0]
+                            
+                            if isinstance(range_uri, dict):
+                                range_schema = self._create_range_schema(range_uri)
+                            else:
+                                range_class = self._get_property_name(range_uri)
+                                
+                                # Special handling for owl:Thing - map to _Thing
+                                if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
+                                    range_class = "_Thing"
             
             # If still no range, inherit from super properties (OWL subproperty semantics)
-            if not range_uri and property.super_properties:
+            if not range_uri and not range_schema and property.super_properties:
                 for super_prop_uri in property.super_properties:
                     super_prop = self._find_property_by_uri(super_prop_uri, ontology)
                     if super_prop and super_prop.range:
                         range_uri = super_prop.range[0]
-                        range_class = self._get_property_name(range_uri)
                         
-                        # Special handling for owl:Thing - map to _Thing
-                        if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
-                            range_class = "_Thing"
+                        if isinstance(range_uri, dict):
+                            range_schema = self._create_range_schema(range_uri)
+                        else:
+                            range_class = self._get_property_name(range_uri)
+                            
+                            # Special handling for owl:Thing - map to _Thing
+                            if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
+                                range_class = "_Thing"
                         break  # Use first super property with a range
         
         # Create oneOf pattern: either a full object reference or an @id reference
-        if range_class:
+        if range_schema:
+            # Use the complex range schema (e.g., unionOf)
+            schema = range_schema
+        elif range_class:
             schema = {
                 "oneOf": [
                     {"$ref": f"#/definitions/{range_class}"},
@@ -312,11 +335,101 @@ class ObjectPropertyRule(TransformationRule):
     
     def _get_property_name(self, uri: str) -> str:
         """Extract property name from URI."""
+        # Handle complex class expressions (dict)
+        if isinstance(uri, dict):
+            # For complex expressions, we can't extract a simple name
+            # Return a placeholder or handle specially
+            return str(uri)  # This shouldn't happen for property/class names
+        
         if '#' in uri:
             return uri.split('#')[-1]
         elif '/' in uri:
             return uri.split('/')[-1]
         return uri
+    
+    def _create_range_schema(self, range_expr: Any) -> Dict[str, Any]:
+        """
+        Create JSON Schema for a complex range expression (unionOf, intersectionOf).
+        
+        Args:
+            range_expr: Either a dict with 'unionOf' or 'intersectionOf', or a simple URI string
+            
+        Returns:
+            JSON Schema representation
+        """
+        # Check if it's a complex class expression (dict)
+        if isinstance(range_expr, dict):
+            if "unionOf" in range_expr:
+                # Create oneOf with references to each class in the union
+                union_schemas = []
+                for class_uri in range_expr["unionOf"]:
+                    # Recursively handle nested expressions
+                    if isinstance(class_uri, dict):
+                        union_schemas.append(self._create_range_schema(class_uri))
+                    else:
+                        class_name = self._get_property_name(class_uri)
+                        # Special handling for owl:Thing
+                        if class_uri == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
+                            class_name = "_Thing"
+                        
+                        # Add both full object and @id reference for each class
+                        union_schemas.append({
+                            "oneOf": [
+                                {"$ref": f"#/definitions/{class_name}"},
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "@id": {
+                                            "type": "string",
+                                            "format": "uri"
+                                        }
+                                    },
+                                    "required": ["@id"],
+                                    "additionalProperties": False
+                                }
+                            ]
+                        })
+                
+                return {"oneOf": union_schemas}
+            
+            elif "intersectionOf" in range_expr:
+                # Create allOf with references to each class in the intersection
+                intersection_schemas = []
+                for class_uri in range_expr["intersectionOf"]:
+                    # Recursively handle nested expressions
+                    if isinstance(class_uri, dict):
+                        intersection_schemas.append(self._create_range_schema(class_uri))
+                    else:
+                        class_name = self._get_property_name(class_uri)
+                        # Special handling for owl:Thing
+                        if class_uri == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
+                            class_name = "_Thing"
+                        
+                        intersection_schemas.append({"$ref": f"#/definitions/{class_name}"})
+                
+                return {"allOf": intersection_schemas}
+        
+        # If it's a simple URI string, create basic reference
+        class_name = self._get_property_name(str(range_expr))
+        if str(range_expr) == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
+            class_name = "_Thing"
+        
+        return {
+            "oneOf": [
+                {"$ref": f"#/definitions/{class_name}"},
+                {
+                    "type": "object",
+                    "properties": {
+                        "@id": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": ["@id"],
+                    "additionalProperties": False
+                }
+            ]
+        }
 
 
 class DatatypePropertyRule(TransformationRule):
