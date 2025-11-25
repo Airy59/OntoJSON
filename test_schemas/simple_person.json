@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.org/schemas/simple-person",
+  "title": "Simple Person Schema",
+  "description": "Basic class with properties for testing reverse transformation",
+  "definitions": {
+    "Person": {
+      "type": "object",
+      "title": "Person",
+      "description": "A human being",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Full Name",
+          "description": "The person's full name"
+        },
+        "age": {
+          "type": "integer",
+          "title": "Age",
+          "description": "Age in years",
+          "minimum": 0,
+          "maximum": 150
+        },
+        "email": {
+          "type": "string",
+          "title": "Email Address",
+          "format": "email"
+        },
+        "birthDate": {
+          "type": "string",
+          "title": "Birth Date",
+          "format": "date"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Active Status"
+        }
+      },
+      "required": ["name"]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Priority": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "High",
+            "Low",
+            "Medium"
+          ],
+          "x-enum-uris": {
+            "High": "http://example.org/test#High",
+            "Low": "http://example.org/test#Low",
+            "Medium": "http://example.org/test#Medium"
+          }
+        }
+      ],
+      "title": "Priority Level",
+      "description": "Enumeration of Priority values"
+    },
+    "_Thing": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI identifier for this instance"
+        }
+      },
+      "required": [],
+      "description": "Base object that all classes inherit from",
+      "title": "_Thing"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

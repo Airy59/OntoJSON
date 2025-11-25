@@ -1,0 +1,48 @@
+@prefix : <http://example.org/test#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://example.org/test> a owl:Ontology .
+
+# Base class
+:Person a owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:comment "A human being" .
+
+# Base property
+:hasRelationship a owl:ObjectProperty ;
+    rdfs:label "has relationship" ;
+    rdfs:comment "A relationship between persons" ;
+    rdfs:domain :Person ;
+    rdfs:range :Person .
+
+# Subproperty 1
+:hasFriend a owl:ObjectProperty ;
+    rdfs:label "has friend" ;
+    rdfs:comment "A friendship relationship" ;
+    rdfs:subPropertyOf :hasRelationship ;
+    rdfs:domain :Person ;
+    rdfs:range :Person .
+
+# Subproperty 2
+:hasParent a owl:ObjectProperty ;
+    rdfs:label "has parent" ;
+    rdfs:comment "A parent-child relationship" ;
+    rdfs:subPropertyOf :hasRelationship ;
+    rdfs:domain :Person ;
+    rdfs:range :Person .
+
+# Datatype property base
+:hasAttribute a owl:DatatypeProperty ;
+    rdfs:label "has attribute" ;
+    rdfs:comment "A general attribute" ;
+    rdfs:domain :Person .
+
+# Datatype subproperty
+:hasName a owl:DatatypeProperty ;
+    rdfs:label "has name" ;
+    rdfs:comment "The person's name" ;
+    rdfs:subPropertyOf :hasAttribute ;
+    rdfs:domain :Person ;
+    rdfs:range rdfs:Literal .

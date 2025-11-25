@@ -1,0 +1,24 @@
+@prefix ex: <http://example.org/test#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:High a ex:Priority,
+        owl:NamedIndividual ;
+    rdfs:label "High"@en,
+        "Élevée"@fr .
+
+ex:Low a ex:Priority,
+        owl:NamedIndividual ;
+    rdfs:label "Low"@en,
+        "Basse"@fr .
+
+ex:Medium a ex:Priority,
+        owl:NamedIndividual ;
+    rdfs:label "Medium"@en,
+        "Moyenne"@fr .
+
+ex:TestOntology a owl:Ontology .
+
+ex:Priority a owl:Class ;
+    rdfs:label "Priority Level" .
+

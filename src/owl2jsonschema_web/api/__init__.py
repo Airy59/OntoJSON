@@ -10,6 +10,7 @@ api_bp = Blueprint('api', __name__)
 # Import routes to register them
 from . import routes
 from . import transformation
+from . import reverse_transformation
 from . import configuration
 from . import tasks
 

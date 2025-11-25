@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.org/schemas/basic-person",
+  "title": "Basic Person Example",
+  "definitions": {
+    "Person": {
+      "type": "object",
+      "title": "Person",
+      "description": "Represents a human being",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Full Name"
+        },
+        "age": {
+          "type": "integer",
+          "title": "Age in years"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+      },
+      "required": ["name"]
+    }
+  }
+}

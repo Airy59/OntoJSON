@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.org/schemas/vehicle-union",
+  "title": "Vehicle Union Schema",
+  "description": "Schema demonstrating union types with oneOf",
+  "definitions": {
+    "Car": {
+      "type": "object",
+      "title": "Car",
+      "description": "A road vehicle with wheels",
+      "properties": {
+        "make": {
+          "type": "string",
+          "title": "Manufacturer"
+        },
+        "model": {
+          "type": "string",
+          "title": "Model"
+        },
+        "wheels": {
+          "type": "integer",
+          "title": "Number of Wheels",
+          "enum": [2, 3, 4, 6, 8]
+        },
+        "fuelType": {
+          "type": "string",
+          "enum": ["gasoline", "diesel", "electric", "hybrid"]
+        }
+      },
+      "required": ["make", "model", "wheels"]
+    },
+    "Boat": {
+      "type": "object",
+      "title": "Boat",
+      "description": "A watercraft",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Boat Name"
+        },
+        "length": {
+          "type": "number",
+          "title": "Length in meters",
+          "minimum": 0
+        },
+        "draft": {
+          "type": "number",
+          "title": "Draft in meters",
+          "description": "How deep the boat sits in water",
+          "minimum": 0
+        },
+        "propulsion": {
+          "type": "string",
+          "enum": ["sail", "motor", "paddle", "hybrid"]
+        }
+      },
+      "required": ["name", "length"]
+    },
+    "Aircraft": {
+      "type": "object",
+      "title": "Aircraft",
+      "description": "A flying vehicle",
+      "properties": {
+        "registration": {
+          "type": "string",
+          "title": "Registration Number"
+        },
+        "wingspan": {
+          "type": "number",
+          "title": "Wingspan in meters",
+          "minimum": 0
+        },
+        "maxAltitude": {
+          "type": "number",
+          "title": "Maximum Altitude in meters",
+          "minimum": 0
+        },
+        "aircraftType": {
+          "type": "string",
+          "enum": ["fixed-wing", "rotorcraft", "glider", "lighter-than-air"]
+        }
+      },
+      "required": ["registration", "aircraftType"]
+    },
+    "Vehicle": {
+      "title": "Vehicle",
+      "description": "Any type of vehicle - demonstrates oneOf union",
+      "oneOf": [
+        {"$ref": "#/definitions/Car"},
+        {"$ref": "#/definitions/Boat"},
+        {"$ref": "#/definitions/Aircraft"}
+      ]
+    },
+    "Fleet": {
+      "type": "object",
+      "title": "Fleet",
+      "description": "A collection of vehicles",
+      "properties": {
+        "fleetName": {
+          "type": "string"
+        },
+        "vehicles": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/Vehicle"},
+          "minItems": 1,
+          "maxItems": 100
+        }
+      },
+      "required": ["fleetName", "vehicles"]
+    }
+  }
+}

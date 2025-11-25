@@ -88,6 +88,13 @@ def validate():
     return render_template('validate.html')
 
 
+@main_bp.route('/reverse')
+@main_bp.route('/jsonschema-to-owl')
+def reverse_transform():
+    """Reverse transformation page (JSON Schema to OWL)."""
+    return render_template('reverse_transform.html')
+
+
 @main_bp.route('/api-docs')
 def api_docs():
     """API documentation page."""

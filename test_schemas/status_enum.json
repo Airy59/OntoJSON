@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.org/schemas/status-enum",
+  "title": "Status Enumeration Schema",
+  "description": "Schema demonstrating enumeration patterns",
+  "definitions": {
+    "DocumentStatus": {
+      "type": "string",
+      "title": "Document Status",
+      "description": "The current status of a document",
+      "enum": ["draft", "review", "approved", "published", "archived"]
+    },
+    "Priority": {
+      "type": "integer",
+      "title": "Priority Level",
+      "description": "Priority from 1 (highest) to 5 (lowest)",
+      "enum": [1, 2, 3, 4, 5]
+    },
+    "Category": {
+      "type": "string",
+      "title": "Document Category",
+      "enum": ["technical", "legal", "financial", "administrative", "other"]
+    },
+    "Document": {
+      "type": "object",
+      "title": "Document",
+      "description": "A document with status and metadata",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Document Title"
+        },
+        "status": {
+          "$ref": "#/definitions/DocumentStatus"
+        },
+        "priority": {
+          "$ref": "#/definitions/Priority"
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["title", "status"]
+    },
+    "ReviewState": {
+      "type": "object",
+      "title": "Review State",
+      "description": "The review state with a fixed status",
+      "properties": {
+        "state": {
+          "type": "string",
+          "const": "in-review"
+        },
+        "reviewer": {
+          "type": "string"
+        },
+        "reviewDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["state", "reviewer"]
+    }
+  }
+}

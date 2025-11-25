@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.org/schemas/company-hierarchy",
+  "title": "Company Hierarchy Schema",
+  "description": "Schema demonstrating inheritance with allOf",
+  "definitions": {
+    "Named": {
+      "type": "object",
+      "title": "Named Entity",
+      "description": "Base type for entities with names",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        }
+      },
+      "required": ["name"]
+    },
+    "Timestamped": {
+      "type": "object",
+      "title": "Timestamped Entity",
+      "description": "Base type for entities with timestamps",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "title": "Created At",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "Updated At",
+          "format": "date-time"
+        }
+      }
+    },
+    "Organization": {
+      "allOf": [
+        {"$ref": "#/definitions/Named"},
+        {"$ref": "#/definitions/Timestamped"},
+        {
+          "type": "object",
+          "properties": {
+            "organizationType": {
+              "type": "string",
+              "enum": ["corporation", "partnership", "nonprofit", "government"]
+            },
+            "founded": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      ]
+    },
+    "Person": {
+      "allOf": [
+        {"$ref": "#/definitions/Named"},
+        {
+          "type": "object",
+          "properties": {
+            "employeeId": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        }
+      ]
+    },
+    "Employee": {
+      "allOf": [
+        {"$ref": "#/definitions/Person"},
+        {
+          "type": "object",
+          "properties": {
+            "position": {
+              "type": "string"
+            },
+            "salary": {
+              "type": "number",
+              "minimum": 0
+            },
+            "worksFor": {
+              "$ref": "#/definitions/Organization"
+            }
+          },
+          "required": ["position", "worksFor"]
+        }
+      ]
+    },
+    "Manager": {
+      "allOf": [
+        {"$ref": "#/definitions/Employee"},
+        {
+          "type": "object",
+          "properties": {
+            "manages": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Employee"},
+              "minItems": 1
+            },
+            "department": {
+              "type": "string"
+            }
+          },
+          "required": ["manages"]
+        }
+      ]
+    }
+  }
+}

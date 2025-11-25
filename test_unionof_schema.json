@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "JourneySchedule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "hasJourneySection": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/JourneySection"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "@id": {
+                            "type": "string",
+                            "format": "uri"
+                          }
+                        },
+                        "required": [
+                          "@id"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/StaticSection"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "@id": {
+                            "type": "string",
+                            "format": "uri"
+                          }
+                        },
+                        "required": [
+                          "@id"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                ],
+                "title": "has journey section",
+                "description": "Inverse functional property.. Subproperty of hasItem"
+              }
+            }
+          }
+        }
+      ],
+      "title": "Journey Schedule",
+      "description": "A schedule for a journey"
+    },
+    "JourneySection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ],
+      "title": "Journey Section",
+      "description": "A section of a journey"
+    },
+    "StaticSection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ],
+      "title": "Static Section",
+      "description": "A static section"
+    },
+    "_Thing": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI identifier for this instance"
+        }
+      },
+      "required": [],
+      "description": "Base object that all classes inherit from",
+      "title": "_Thing"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

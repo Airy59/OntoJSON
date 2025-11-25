@@ -1,0 +1,292 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.org/schemas/complex-ontology",
+  "title": "Complex Ontology Schema",
+  "description": "Comprehensive schema demonstrating all transformation patterns",
+  "definitions": {
+    "Identifier": {
+      "type": "object",
+      "title": "Identifier",
+      "description": "Base class for identifiable entities",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Unique Identifier",
+          "format": "uuid"
+        }
+      },
+      "required": ["id"]
+    },
+    "Auditable": {
+      "type": "object",
+      "title": "Auditable",
+      "description": "Mixin for audit trail",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ContactInfo": {
+      "type": "object",
+      "title": "Contact Information",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+?[1-9]\\d{1,14}$"
+        },
+        "address": {
+          "$ref": "#/definitions/Address"
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "title": "Address",
+      "properties": {
+        "street": {"type": "string"},
+        "city": {"type": "string"},
+        "state": {"type": "string"},
+        "zipCode": {"type": "string"},
+        "country": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2
+        }
+      },
+      "required": ["city", "country"]
+    },
+    "Role": {
+      "type": "string",
+      "title": "User Role",
+      "enum": ["admin", "manager", "employee", "contractor", "guest"]
+    },
+    "AccountStatus": {
+      "type": "string",
+      "title": "Account Status",
+      "enum": ["active", "suspended", "inactive", "locked"]
+    },
+    "Person": {
+      "allOf": [
+        {"$ref": "#/definitions/Identifier"},
+        {"$ref": "#/definitions/Auditable"},
+        {
+          "type": "object",
+          "title": "Person",
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "lastName": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "middleName": {
+              "type": "string"
+            },
+            "birthDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "gender": {
+              "type": "string",
+              "enum": ["male", "female", "other", "prefer-not-to-say"]
+            },
+            "contactInfo": {
+              "$ref": "#/definitions/ContactInfo"
+            }
+          },
+          "required": ["firstName", "lastName"]
+        }
+      ]
+    },
+    "Organization": {
+      "allOf": [
+        {"$ref": "#/definitions/Identifier"},
+        {"$ref": "#/definitions/Auditable"},
+        {
+          "type": "object",
+          "title": "Organization",
+          "properties": {
+            "legalName": {
+              "type": "string"
+            },
+            "tradeName": {
+              "type": "string"
+            },
+            "taxId": {
+              "type": "string"
+            },
+            "organizationType": {
+              "type": "string",
+              "enum": ["corporation", "llc", "partnership", "sole-proprietorship", "nonprofit"]
+            },
+            "headquarters": {
+              "$ref": "#/definitions/Address"
+            },
+            "employees": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Employee"},
+              "minItems": 1,
+              "maxItems": 10000
+            }
+          },
+          "required": ["legalName", "organizationType"]
+        }
+      ]
+    },
+    "Employee": {
+      "allOf": [
+        {"$ref": "#/definitions/Person"},
+        {
+          "type": "object",
+          "title": "Employee",
+          "properties": {
+            "employeeNumber": {
+              "type": "string",
+              "pattern": "^EMP-\\d{6}$"
+            },
+            "hireDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "terminationDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "role": {
+              "$ref": "#/definitions/Role"
+            },
+            "accountStatus": {
+              "$ref": "#/definitions/AccountStatus"
+            },
+            "department": {
+              "$ref": "#/definitions/Department"
+            },
+            "manager": {
+              "$ref": "#/definitions/Employee"
+            },
+            "directReports": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Employee"}
+            },
+            "salary": {
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMinimum": true
+            }
+          },
+          "required": ["employeeNumber", "hireDate", "role", "department"]
+        }
+      ]
+    },
+    "Department": {
+      "allOf": [
+        {"$ref": "#/definitions/Identifier"},
+        {
+          "type": "object",
+          "title": "Department",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "code": {
+              "type": "string",
+              "pattern": "^DEPT-[A-Z]{2,4}$"
+            },
+            "budget": {
+              "type": "number",
+              "minimum": 0
+            },
+            "head": {
+              "$ref": "#/definitions/Employee"
+            },
+            "parentDepartment": {
+              "$ref": "#/definitions/Department"
+            },
+            "subDepartments": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Department"}
+            }
+          },
+          "required": ["name", "code"]
+        }
+      ]
+    },
+    "Project": {
+      "allOf": [
+        {"$ref": "#/definitions/Identifier"},
+        {"$ref": "#/definitions/Auditable"},
+        {
+          "type": "object",
+          "title": "Project",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "startDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "endDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "status": {
+              "type": "string",
+              "enum": ["planning", "in-progress", "on-hold", "completed", "cancelled"]
+            },
+            "priority": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "budget": {
+              "type": "number",
+              "minimum": 0
+            },
+            "projectManager": {
+              "$ref": "#/definitions/Employee"
+            },
+            "teamMembers": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Employee"},
+              "minItems": 1,
+              "maxItems": 50,
+              "uniqueItems": true
+            },
+            "sponsor": {
+              "oneOf": [
+                {"$ref": "#/definitions/Employee"},
+                {"$ref": "#/definitions/Organization"}
+              ]
+            }
+          },
+          "required": ["name", "startDate", "status", "projectManager"]
+        }
+      ]
+    }
+  }
+}

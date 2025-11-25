@@ -1,0 +1,43 @@
+@prefix : <https://cdm.ovh/taf/tafp5#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix bag: <http://example.org/bag#> .
+@prefix tafp5: <https://cdm.ovh/taf/tafp5#> .
+
+<https://cdm.ovh/taf/tafp5> a owl:Ontology .
+
+# Classes
+tafp5:JourneySchedule a owl:Class ;
+    rdfs:label "Journey Schedule" ;
+    rdfs:comment "A schedule for a journey" .
+
+tafp5:JourneySection a owl:Class ;
+    rdfs:label "Journey Section" ;
+    rdfs:comment "A section of a journey" .
+
+tafp5:StaticSection a owl:Class ;
+    rdfs:label "Static Section" ;
+    rdfs:comment "A static section" .
+
+# Property with simple range (for comparison)
+bag:hasItem a owl:ObjectProperty ;
+    rdfs:label "has item" ;
+    rdfs:comment "A generic property for items" .
+
+# Property with unionOf range
+tafp5:hasJourneySection a owl:ObjectProperty ;
+    rdfs:subPropertyOf bag:hasItem ;
+    owl:inverseOf tafp5:inJourneySchedule ;
+    rdf:type owl:InverseFunctionalProperty ;
+    rdfs:domain tafp5:JourneySchedule ;
+    rdfs:range [ a owl:Class ;
+                 owl:unionOf ( tafp5:JourneySection
+                               tafp5:StaticSection
+                             )
+               ] ;
+    rdfs:comment "Inverse functional property." ;
+    rdfs:label "has journey section" .
+
+tafp5:inJourneySchedule a owl:ObjectProperty ;
+    rdfs:label "in journey schedule" .

@@ -1,0 +1,511 @@
+{% extends "base.html" %}
+
+{% block title %}JSON Schema to OWL - OntoJSON{% endblock %}
+
+{% block extra_css %}
+<style>
+    .drop-zone {
+        border: 2px dashed #ccc;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .drop-zone:hover,
+    .drop-zone.dragover {
+        border-color: #007bff;
+        background-color: #f0f8ff;
+    }
+    .code-output {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+        max-height: 500px;
+        overflow: auto;
+    }
+    .schema-input {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Generate OWL Ontology from JSON Schema</h1>
+    
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i>
+        <strong>Reverse Transformation:</strong> Convert JSON Schema definitions into OWL classes and properties.
+        Upload a JSON Schema file or paste JSON Schema content to generate an OWL ontology.
+    </div>
+    
+    <!-- Input Section -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-file-import"></i> Input JSON Schema</h5>
+        </div>
+        <div class="card-body">
+            <!-- Tab Selection -->
+            <ul class="nav nav-tabs mb-3" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#uploadTab" type="button">
+                        <i class="fas fa-upload"></i> Upload File
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#pasteTab" type="button">
+                        <i class="fas fa-paste"></i> Paste JSON
+                    </button>
+                </li>
+            </ul>
+            
+            <div class="tab-content">
+                <!-- Upload Tab -->
+                <div class="tab-pane fade show active" id="uploadTab">
+                    <div id="dropZone" class="drop-zone mb-3">
+                        <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                        <p>Drag and drop JSON Schema file here or click to browse</p>
+                        <input type="file" id="fileInput" accept=".json" style="display: none;">
+                    </div>
+                    <div id="fileInfo" class="alert alert-success" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="fileName"></span>
+                    </div>
+                </div>
+                
+                <!-- Paste Tab -->
+                <div class="tab-pane fade" id="pasteTab">
+                    <textarea class="form-control schema-input" id="schemaInput" rows="15" 
+                              placeholder='Paste your JSON Schema here, e.g.:
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Person": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "age": {"type": "number"}
+      },
+      "required": ["name"]
+    }
+  }
+}'></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Configuration Section -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-cog"></i> Transformation Configuration</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="baseNamespace" class="form-label">Base Namespace URI:</label>
+                        <input type="text" class="form-control" id="baseNamespace" 
+                               value="http://example.org/ontology#"
+                               placeholder="http://example.org/ontology#">
+                        <small class="text-muted">Base URI for generated OWL classes and properties</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="language" class="form-label">Language Tag:</label>
+                        <select class="form-select" id="language">
+                            <option value="en" selected>English (en)</option>
+                            <option value="fr">French (fr)</option>
+                            <option value="de">German (de)</option>
+                            <option value="es">Spanish (es)</option>
+                        </select>
+                        <small class="text-muted">Language for labels and descriptions</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="outputFormat" class="form-label">Output Format:</label>
+                        <select class="form-select" id="outputFormat">
+                            <option value="turtle" selected>Turtle (.ttl)</option>
+                            <option value="xml">RDF/XML (.owl)</option>
+                            <option value="json-ld">JSON-LD (.jsonld)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Validation Section -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-check-circle"></i> Validation</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Validate your JSON Schema before transformation</p>
+            <button id="validateBtn" class="btn btn-info" disabled>
+                <i class="fas fa-check"></i> Validate JSON Schema
+            </button>
+            
+            <!-- Validation Result -->
+            <div id="validationResult" class="mt-3" style="display: none;"></div>
+        </div>
+    </div>
+    
+    <!-- Transform Action -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-magic"></i> Transform</h5>
+        </div>
+        <div class="card-body">
+            <button id="transformBtn" class="btn btn-primary btn-lg w-100" disabled>
+                <i class="fas fa-play"></i> Transform to OWL
+            </button>
+            
+            <!-- Progress Bar -->
+            <div id="progressContainer" class="mt-3" style="display: none;">
+                <div class="progress">
+                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+                         role="progressbar" style="width: 0%"></div>
+                </div>
+                <p id="progressMessage" class="text-center mt-2 text-muted"></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results -->
+    <div id="resultsContainer" class="card" style="display: none;">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-check-circle text-success"></i> Transformation Results</h5>
+        </div>
+        <div class="card-body">
+            <!-- Statistics -->
+            <div id="statisticsContainer" class="mb-3">
+                <h6>Statistics:</h6>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h4 id="classCount">0</h4>
+                                <small class="text-muted">Classes</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h4 id="objectPropCount">0</h4>
+                                <small class="text-muted">Object Properties</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h4 id="datatypePropCount">0</h4>
+                                <small class="text-muted">Datatype Properties</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h4 id="individualCount">0</h4>
+                                <small class="text-muted">Individuals</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Warnings -->
+            <div id="warningsContainer" class="alert alert-warning" style="display: none;">
+                <h6 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Warnings</h6>
+                <ul id="warningsList"></ul>
+            </div>
+            
+            <!-- Ontology Output -->
+            <div class="mb-3">
+                <div class="d-flex justify-content-between mb-2">
+                    <h6>Generated OWL Ontology</h6>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary me-2" onclick="copyToClipboard('ontologyOutput')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button id="downloadBtn" class="btn btn-sm btn-outline-success">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+                <pre id="ontologyOutput" class="code-output bg-light p-3 rounded"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// State
+let currentSchema = null;
+let currentFile = null;
+let transformationResult = null;
+
+// File handling
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+const fileInfo = document.getElementById('fileInfo');
+const fileName = document.getElementById('fileName');
+const schemaInput = document.getElementById('schemaInput');
+const validateBtn = document.getElementById('validateBtn');
+const transformBtn = document.getElementById('transformBtn');
+
+// Drag and drop
+dropZone.addEventListener('click', () => fileInput.click());
+
+dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+});
+
+dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('dragover');
+});
+
+dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        handleFile(files[0]);
+    }
+});
+
+fileInput.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+        handleFile(e.target.files[0]);
+    }
+});
+
+function handleFile(file) {
+    if (!file.name.endsWith('.json')) {
+        alert('Please upload a JSON file');
+        return;
+    }
+    
+    currentFile = file;
+    fileName.textContent = file.name;
+    fileInfo.style.display = 'block';
+    
+    // Read file content
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            currentSchema = JSON.parse(e.target.result);
+            enableButtons();
+        } catch (error) {
+            alert('Invalid JSON file: ' + error.message);
+        }
+    };
+    reader.readAsText(file);
+}
+
+// Schema input handling
+schemaInput.addEventListener('input', () => {
+    const content = schemaInput.value.trim();
+    if (content) {
+        try {
+            currentSchema = JSON.parse(content);
+            enableButtons();
+        } catch (error) {
+            disableButtons();
+        }
+    } else {
+        disableButtons();
+    }
+});
+
+function enableButtons() {
+    validateBtn.disabled = false;
+    transformBtn.disabled = false;
+}
+
+function disableButtons() {
+    validateBtn.disabled = true;
+    transformBtn.disabled = true;
+}
+
+// Validation
+validateBtn.addEventListener('click', performValidation);
+
+async function performValidation() {
+    if (!currentSchema) {
+        alert('No schema to validate');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/reverse/validate', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({schema: currentSchema})
+        });
+        
+        const result = await response.json();
+        displayValidationResult(result);
+    } catch (error) {
+        alert('Validation failed: ' + error.message);
+    }
+}
+
+function displayValidationResult(result) {
+    const container = document.getElementById('validationResult');
+    
+    if (result.valid) {
+        container.className = 'alert alert-success mt-3';
+        container.innerHTML = `
+            <h6 class="alert-heading"><i class="fas fa-check-circle"></i> Valid JSON Schema</h6>
+            ${result.schema_version ? `<p>Schema version: ${result.schema_version}</p>` : ''}
+            ${result.warnings && result.warnings.length > 0 ? `
+                <p><strong>Warnings:</strong></p>
+                <ul>
+                    ${result.warnings.map(w => `<li>${w}</li>`).join('')}
+                </ul>
+            ` : '<p>No warnings</p>'}
+        `;
+    } else {
+        container.className = 'alert alert-danger mt-3';
+        container.innerHTML = `
+            <h6 class="alert-heading"><i class="fas fa-times-circle"></i> Invalid JSON Schema</h6>
+            <p>${result.error}</p>
+        `;
+    }
+    
+    container.style.display = 'block';
+}
+
+// Transformation
+transformBtn.addEventListener('click', performTransformation);
+
+async function performTransformation() {
+    if (!currentSchema) {
+        alert('No schema to transform');
+        return;
+    }
+    
+    const progressContainer = document.getElementById('progressContainer');
+    const resultsContainer = document.getElementById('resultsContainer');
+    
+    // Show progress
+    progressContainer.style.display = 'block';
+    resultsContainer.style.display = 'none';
+    transformBtn.disabled = true;
+    
+    updateProgress(25, 'Preparing transformation...');
+    
+    try {
+        // Get configuration
+        const baseNamespace = document.getElementById('baseNamespace').value;
+        const language = document.getElementById('language').value;
+        const format = document.getElementById('outputFormat').value;
+        
+        updateProgress(50, 'Transforming schema to OWL...');
+        
+        const response = await fetch('/api/reverse/transform', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                schema: currentSchema,
+                base_namespace: baseNamespace,
+                language: language,
+                format: format
+            })
+        });
+        
+        const result = await response.json();
+        
+        updateProgress(100, 'Complete!');
+        
+        if (result.success) {
+            displayResults(result);
+        } else {
+            throw new Error(result.error || 'Transformation failed');
+        }
+    } catch (error) {
+        alert('Transformation failed: ' + error.message);
+        progressContainer.style.display = 'none';
+        transformBtn.disabled = false;
+    }
+}
+
+function updateProgress(percent, message) {
+    document.getElementById('progressBar').style.width = percent + '%';
+    document.getElementById('progressMessage').textContent = message;
+}
+
+function displayResults(result) {
+    document.getElementById('progressContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'block';
+    
+    transformationResult = result;
+    
+    // Display statistics
+    const stats = result.statistics || {};
+    document.getElementById('classCount').textContent = stats.classes || 0;
+    document.getElementById('objectPropCount').textContent = stats.object_properties || 0;
+    document.getElementById('datatypePropCount').textContent = stats.datatype_properties || 0;
+    document.getElementById('individualCount').textContent = stats.individuals || 0;
+    
+    // Display warnings
+    if (result.warnings && result.warnings.length > 0) {
+        const warningsContainer = document.getElementById('warningsContainer');
+        const warningsList = document.getElementById('warningsList');
+        warningsList.innerHTML = result.warnings.map(w => `<li>${w}</li>`).join('');
+        warningsContainer.style.display = 'block';
+    }
+    
+    // Display ontology
+    document.getElementById('ontologyOutput').textContent = result.ontology;
+    
+    transformBtn.disabled = false;
+}
+
+// Download
+document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!transformationResult) {
+        return;
+    }
+    
+    const format = document.getElementById('outputFormat').value;
+    const extension = format === 'turtle' ? '.ttl' : format === 'xml' ? '.owl' : '.jsonld';
+    const mimeType = format === 'turtle' ? 'text/turtle' : 
+                     format === 'xml' ? 'application/rdf+xml' : 
+                     'application/ld+json';
+    
+    downloadFile(transformationResult.ontology, 'ontology' + extension, mimeType);
+});
+
+function downloadFile(content, filename, mimeType) {
+    const blob = new Blob([content], {type: mimeType});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Copy to clipboard
+function copyToClipboard(elementId) {
+    const text = document.getElementById(elementId).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+    });
+}
+</script>
+{% endblock %}

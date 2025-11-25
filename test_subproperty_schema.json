@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Person": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_Thing"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "hasRelationship": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/Person"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    },
+                    "required": [
+                      "@id"
+                    ],
+                    "additionalProperties": false
+                  }
+                ],
+                "title": "has relationship",
+                "description": "A relationship between persons"
+              }
+            },
+            "hasFriend": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/Person"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    },
+                    "required": [
+                      "@id"
+                    ],
+                    "additionalProperties": false
+                  }
+                ],
+                "title": "has friend",
+                "description": "A friendship relationship. Subproperty of hasRelationship"
+              }
+            },
+            "hasParent": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/Person"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    },
+                    "required": [
+                      "@id"
+                    ],
+                    "additionalProperties": false
+                  }
+                ],
+                "title": "has parent",
+                "description": "A parent-child relationship. Subproperty of hasRelationship"
+              }
+            },
+            "hasAttribute": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "has attribute",
+                "description": "A general attribute"
+              }
+            },
+            "hasName": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "title": "has name",
+                "description": "The person's name. Subproperty of hasAttribute"
+              }
+            }
+          }
+        }
+      ],
+      "title": "Person",
+      "description": "A human being"
+    },
+    "_Thing": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI identifier for this instance"
+        }
+      },
+      "required": [],
+      "description": "Base object that all classes inherit from",
+      "title": "_Thing"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

@@ -110,7 +110,7 @@ python src/owl2jsonschema_web/app.py
 ### Home Page
 Navigate to `http://localhost:5000` to access the OntoJSON web interface.
 
-### Transformation Workflow
+### OWL to JSON Schema Transformation Workflow
 
 1. **Upload Ontologies**
    - Drag and drop ontology files (.ttl, .rdf, .owl, etc.)
@@ -122,7 +122,7 @@ Navigate to `http://localhost:5000` to access the OntoJSON web interface.
    - Choose language for labels/comments
    - Adjust advanced options as needed
 
-3. **Assemble Composite Ontology** (NEW)
+3. **Assemble Composite Ontology**
    - Click "Assemble Composite Ontology" to merge multiple sources
    - View consistency validation results
    - Copy or download the assembled composite ontology
@@ -137,6 +137,58 @@ Navigate to `http://localhost:5000` to access the OntoJSON web interface.
    - Download composite ontology
    - Download sample instances
    - Export as JSON-LD
+
+### JSON Schema to OWL Reverse Transformation (NEW)
+
+Navigate to the "JSON → OWL" page to perform reverse transformations.
+
+1. **Input JSON Schema**
+   - **Upload File**: Drag and drop or select a JSON Schema file (.json)
+   - **Paste JSON**: Directly paste JSON Schema content into the text area
+
+2. **Configure Transformation**
+   - **Base Namespace URI**: Set the base URI for generated OWL classes and properties
+     - Default: `http://example.org/ontology#`
+     - Should end with `#` or `/`
+   - **Language Tag**: Choose language for labels and descriptions (en, fr, de, es)
+   - **Output Format**: Select output format
+     - Turtle (.ttl) - Default, human-readable
+     - RDF/XML (.owl) - XML-based format
+     - JSON-LD (.jsonld) - JSON-based RDF format
+
+3. **Validate (Optional)**
+   - Click "Validate JSON Schema" to check for issues
+   - View validation results and warnings
+   - Helps identify potential transformation problems
+
+4. **Transform**
+   - Click "Transform to OWL" to start the transformation
+   - View real-time progress
+   - See transformation statistics:
+     - Number of OWL classes generated
+     - Number of object properties created
+     - Number of datatype properties created
+     - Number of individuals defined
+
+5. **Download Results**
+   - Download the generated OWL ontology in selected format
+   - Copy to clipboard for direct use
+   - Review transformation warnings if any
+
+### Transformation Patterns
+
+The reverse transformation maps JSON Schema constructs to OWL as follows:
+
+| JSON Schema | OWL Equivalent | Description |
+|-------------|----------------|-------------|
+| `definitions` | OWL Classes | Each definition becomes a class |
+| `properties` (string/number/boolean) | Datatype Properties | Primitive types map to datatype properties |
+| `properties` (with `$ref`) | Object Properties | References map to object properties |
+| `required` array | Cardinality Restrictions | Required properties get minCardinality 1 |
+| `enum` values | Named Individuals | Enum values become OWL individuals |
+| `allOf` | Class Hierarchy/Intersection | SubClass relationships or intersections |
+| `oneOf` | Class Union | Union of classes |
+| `not` | Class Complement | Complement of a class |
 
 ## REST API Documentation
 
@@ -222,6 +274,101 @@ POST /api/configurations
 GET /api/configurations/{profile_name}
 PUT /api/configurations/{profile_name}
 DELETE /api/configurations/{profile_name}
+```
+
+#### Reverse Transformation: JSON Schema to OWL
+
+##### Transform JSON Schema to OWL
+```http
+POST /api/reverse/transform
+Content-Type: application/json
+
+{
+  "schema": {...},
+  "base_namespace": "http://example.org/ontology#",
+  "language": "en",
+  "format": "turtle"
+}
+```
+
+Response:
+```json
+{
+  "success": true,
+  "ontology": "# OWL ontology in Turtle format\n...",
+  "format": "turtle",
+  "statistics": {
+    "classes": 5,
+    "object_properties": 3,
+    "datatype_properties": 7,
+    "individuals": 0,
+    "total_triples": 45
+  },
+  "warnings": []
+}
+```
+
+##### Validate JSON Schema
+```http
+POST /api/reverse/validate
+Content-Type: application/json
+
+{
+  "schema": {...}
+}
+```
+
+Response:
+```json
+{
+  "valid": true,
+  "error": null,
+  "warnings": [
+    "Missing '$schema' field - schema version is recommended"
+  ],
+  "schema_version": "http://json-schema.org/draft-07/schema#"
+}
+```
+
+##### Preview Transformation Patterns
+```http
+GET /api/reverse/preview
+```
+
+Response:
+```json
+{
+  "patterns": [
+    {
+      "json_schema": "definitions",
+      "owl": "OWL Classes",
+      "description": "Each definition becomes an OWL class",
+      "example": {...}
+    },
+    ...
+  ],
+  "supported_formats": ["turtle", "xml", "json-ld"]
+}
+```
+
+##### Get Available Output Formats
+```http
+GET /api/reverse/formats
+```
+
+Response:
+```json
+{
+  "formats": [
+    {
+      "name": "turtle",
+      "extension": ".ttl",
+      "mime_type": "text/turtle",
+      "description": "Turtle (Terse RDF Triple Language)"
+    },
+    ...
+  ]
+}
 ```
 
 #### Async Tasks

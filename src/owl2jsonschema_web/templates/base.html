@@ -38,7 +38,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.endpoint == 'main.transform' %}active{% endif %}"
-                           href="{{ url_for('main.transform') }}">Transform</a>
+                           href="{{ url_for('main.transform') }}">OWL → JSON</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'main.reverse_transform' %}active{% endif %}"
+                           href="{{ url_for('main.reverse_transform') }}">JSON → OWL</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.endpoint == 'main.validate' %}active{% endif %}"
