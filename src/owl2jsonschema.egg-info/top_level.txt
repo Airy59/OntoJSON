@@ -1,2 +1,3 @@
 owl2jsonschema
 owl2jsonschema_gui
+owl2jsonschema_web
