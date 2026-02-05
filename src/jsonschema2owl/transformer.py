@@ -4,8 +4,9 @@ JSON Schema to OWL transformer: applies rules to a SchemaModel and produces an R
 
 from typing import Any, Dict, List, Optional
 
-from rdflib import Graph, Namespace, URIRef, Literal
+from rdflib import Graph, Namespace, URIRef, Literal, BNode
 from rdflib.namespace import RDF, RDFS, OWL
+from rdflib.collection import Collection
 
 from .model import SchemaModel, SchemaNode
 from .config import JsonSchema2OwlConfig
@@ -84,7 +85,30 @@ class JsonSchema2OwlTransformer:
                 if rule.applies_to(node.node_type):
                     rule.transform(node, context)
 
+        # Post-pass: add a single rdfs:domain per property (union of classes).
+        # In OWL, multiple domain axioms mean intersection; we want union when the same
+        # property is used by multiple classes.
+        self._add_property_domains_as_union(graph, context)
+
         return graph
+
+    @staticmethod
+    def _add_property_domains_as_union(graph: Graph, context: Dict[str, Any]) -> None:
+        """Add one rdfs:domain per property: single class or owl:unionOf if multiple."""
+        property_domains = context.get("property_domains", {})
+        for prop_uri, domain_uris in property_domains.items():
+            if not domain_uris:
+                continue
+            domain_list = list(domain_uris)
+            if len(domain_list) == 1:
+                graph.add((prop_uri, RDFS.domain, domain_list[0]))
+            else:
+                union_class = BNode()
+                graph.add((union_class, RDF.type, OWL.Class))
+                list_bnode = BNode()
+                Collection(graph, list_bnode, domain_list)
+                graph.add((union_class, OWL.unionOf, list_bnode))
+                graph.add((prop_uri, RDFS.domain, union_class))
 
     def transform_file(
         self,

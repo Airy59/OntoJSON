@@ -95,6 +95,42 @@ class TestSchema2Owl(unittest.TestCase):
         self.assertTrue("Foo" in out or "foo" in out)
         self.assertIn("owl:DatatypeProperty", out)
 
+    def test_property_used_by_two_classes_has_union_domain(self):
+        """When two classes A and B both have property X, domain of X must be unionOf(A, B)."""
+        from rdflib.namespace import OWL
+        schema = {
+            "definitions": {
+                "Person": {"type": "object", "title": "Person", "properties": {"name": {"type": "string"}}},
+                "Organization": {"type": "object", "title": "Organization", "properties": {"name": {"type": "string"}}},
+            },
+            "type": "object",
+            "properties": {
+                "owner": {"$ref": "#/definitions/Person"},
+                "org": {"$ref": "#/definitions/Organization"},
+            },
+        }
+        parser = SchemaParser()
+        model = parser.parse(schema)
+        transformer = JsonSchema2OwlTransformer(base_uri="http://example.org/ns#")
+        graph = transformer.transform(model)
+        # Find all rdfs:domain triples for the "name" property (used by Person and Organization)
+        name_uri = transformer.namespace["name"]
+        domains = list(graph.objects(name_uri, RDFS.domain))
+        self.assertEqual(len(domains), 1, "Property 'name' should have exactly one domain axiom")
+        domain = domains[0]
+        # Domain should be an owl:Class (either Person, or a union blank node)
+        types = list(graph.objects(domain, RDF.type))
+        self.assertIn(OWL.Class, types)
+        # If it's a union, it has owl:unionOf
+        union_of = list(graph.objects(domain, OWL.unionOf))
+        self.assertEqual(len(union_of), 1, "Domain should be a union (owl:unionOf)")
+        # The list should contain Person and Organization
+        from rdflib.collection import Collection
+        list_head = union_of[0]
+        coll = Collection(graph, list_head)
+        class_uris = list(coll)
+        self.assertEqual(len(class_uris), 2, "Union should have two classes")
+
 
 if __name__ == "__main__":
     unittest.main()

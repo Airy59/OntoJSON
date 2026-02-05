@@ -126,8 +126,10 @@ class PropertyToOwlPropertyRule(TransformationRule):
             graph.add((prop_uri, RDFS.label, Literal(node.title)))
         if node.description:
             graph.add((prop_uri, RDFS.comment, Literal(node.description)))
+        # Do NOT add rdfs:domain here: multiple domain axioms mean intersection in OWL.
+        # Collect domains per property; transformer will add a single domain (union) in a post-pass.
         if domain_uri:
-            graph.add((prop_uri, RDFS.domain, domain_uri))
+            context.setdefault("property_domains", {}).setdefault(prop_uri, set()).add(domain_uri)
 
     @staticmethod
     def _json_type_to_xsd(json_type: Optional[str], node_type: str):

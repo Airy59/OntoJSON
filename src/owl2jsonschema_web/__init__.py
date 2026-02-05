@@ -57,10 +57,14 @@ def create_app(config=None):
 
 def init_extensions(app):
     """Initialize Flask extensions."""
-    # Initialize session management
-    from flask_session import Session
-    app.config['SESSION_TYPE'] = 'filesystem'
-    Session(app)
+    # Initialize server-side session if flask_session is installed (optional)
+    try:
+        from flask_session import Session
+        app.config['SESSION_TYPE'] = 'filesystem'
+        Session(app)
+    except ImportError:
+        # Use Flask's default cookie-based session (no extra dependency)
+        pass
     
     # Initialize SocketIO for real-time updates (optional)
     if app.config.get('ENABLE_SOCKETIO', False):
