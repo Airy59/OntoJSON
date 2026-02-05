@@ -353,6 +353,61 @@ def full_pipeline():
         return jsonify({'error': str(e)}), 500
 
 
+@api_bp.route('/transform/schema2owl', methods=['POST'])
+def transform_schema2owl():
+    """
+    Transform a JSON Schema to OWL ontology.
+
+    Expects either:
+    - A JSON body with 'schema' (dict) and optional 'base_uri', 'output_format', 'active_rules'
+    - A file upload with key 'file' (JSON Schema .json file)
+    """
+    try:
+        schema = None
+        base_uri = "http://example.org/ns#"
+        output_format = "turtle"
+        active_rules = None
+
+        if request.content_type and "application/json" in request.content_type and request.json:
+            schema = request.json.get("schema")
+            base_uri = request.json.get("base_uri", base_uri)
+            output_format = request.json.get("output_format", output_format)
+            active_rules = request.json.get("active_rules")
+        elif "file" in request.files:
+            file = request.files["file"]
+            if file and file.filename and file.filename.lower().endswith(".json"):
+                import json
+                schema = json.load(file)
+                base_uri = request.form.get("base_uri", base_uri)
+                output_format = request.form.get("output_format", output_format)
+
+        if schema is None:
+            return jsonify({"error": "No JSON Schema provided (use 'schema' in JSON body or upload a .json file)"}), 400
+
+        from jsonschema2owl import SchemaParser, JsonSchema2OwlTransformer
+        from jsonschema2owl.config import JsonSchema2OwlConfig
+
+        config = JsonSchema2OwlConfig(base_uri=base_uri, enabled_rule_ids=active_rules)
+        parser = SchemaParser()
+        model = parser.parse(schema)
+        transformer = JsonSchema2OwlTransformer(base_uri=base_uri, config=config)
+        graph = transformer.transform(model)
+        rdf_content = graph.serialize(format=output_format)
+
+        if request.args.get("download") == "true" or request.headers.get("Accept", "").startswith("text/turtle"):
+            from flask import Response
+            mimetypes = {"turtle": "text/turtle", "xml": "application/rdf+xml", "n3": "text/n3", "nt": "application/n-triples"}
+            ext = {"turtle": ".ttl", "xml": ".rdf", "n3": ".n3", "nt": ".nt"}
+            return Response(
+                rdf_content,
+                mimetype=mimetypes.get(output_format, "text/turtle"),
+                headers={"Content-Disposition": f"attachment; filename=ontology{ext.get(output_format, '.ttl')}"},
+            )
+        return jsonify({"success": True, "ontology": rdf_content, "format": output_format})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @api_bp.route('/validate', methods=['POST'])
 def validate_ontology():
     """

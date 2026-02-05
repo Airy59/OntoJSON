@@ -32,7 +32,22 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="mb-4">Generate JSON Schema Conforming Selected Ontologies</h1>
+    <h1 class="mb-4">Transform</h1>
+
+    <!-- Direction selector -->
+    <ul class="nav nav-tabs mb-4" id="transformDirectionTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="owl2json-tab" data-bs-toggle="tab" data-bs-target="#owl2json-panel" type="button" role="tab">OWL → JSON Schema</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="schema2owl-tab" data-bs-toggle="tab" data-bs-target="#schema2owl-panel" type="button" role="tab">JSON Schema → OWL</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="transformDirectionContent">
+        <!-- OWL to JSON Schema panel -->
+        <div class="tab-pane fade show active" id="owl2json-panel" role="tabpanel">
+    <h2 class="h5 mb-4 text-muted">Generate JSON Schema from selected ontologies</h2>
     
     <!-- Input Sources Section -->
     <div class="card mb-4">
@@ -267,6 +282,65 @@
                     <i class="fas fa-download"></i> Download Instances
                 </button>
             </div>
+        </div>
+    </div>
+        </div>
+        <!-- JSON Schema to OWL panel -->
+        <div class="tab-pane fade" id="schema2owl-panel" role="tabpanel">
+            <h2 class="h5 mb-4 text-muted">Generate OWL ontology from a JSON Schema</h2>
+            <div class="card mb-4">
+                <div class="card-header"><h5 class="mb-0"><i class="fas fa-file-code"></i> JSON Schema Input</h5></div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="schema2owlFile" class="form-label">Upload JSON Schema file:</label>
+                        <input type="file" class="form-control" id="schema2owlFile" accept=".json">
+                    </div>
+                    <div class="mb-3">
+                        <label for="schema2owlPaste" class="form-label">Or paste JSON Schema:</label>
+                        <textarea class="form-control font-monospace" id="schema2owlPaste" rows="12" placeholder='{"type": "object", "properties": {...}}'></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header"><h5 class="mb-0"><i class="fas fa-cog"></i> Options</h5></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="schema2owlBaseUri" class="form-label">Base URI</label>
+                            <input type="text" class="form-control" id="schema2owlBaseUri" value="http://example.org/ns#" placeholder="http://example.org/ns#">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="schema2owlFormat" class="form-label">Output format</label>
+                            <select class="form-select" id="schema2owlFormat">
+                                <option value="turtle">Turtle (.ttl)</option>
+                                <option value="xml">RDF/XML (.rdf)</option>
+                                <option value="n3">N3</option>
+                                <option value="nt">N-Triples</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <button id="schema2owlTransformBtn" class="btn btn-primary btn-lg w-100">
+                        <i class="fas fa-play"></i> Transform to OWL
+                    </button>
+                    <div id="schema2owlProgress" class="mt-3" style="display: none;">
+                        <div class="progress"><div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="schema2owlResultContainer" class="card" style="display: none;">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">OWL Output</h5>
+                    <button id="schema2owlDownload" class="btn btn-sm btn-success"><i class="fas fa-download"></i> Download</button>
+                </div>
+                <div class="card-body">
+                    <pre id="schema2owlOutput" class="code-output bg-light p-3 rounded" style="max-height: 500px; overflow: auto;"></pre>
+                </div>
+            </div>
+            <div id="schema2owlError" class="alert alert-danger" style="display: none;"></div>
         </div>
     </div>
 </div>
@@ -845,6 +919,84 @@ function downloadFile(content, filename, mimeType) {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
+// JSON Schema → OWL
+const schema2owlFileInput = document.getElementById('schema2owlFile');
+const schema2owlPaste = document.getElementById('schema2owlPaste');
+const schema2owlTransformBtn = document.getElementById('schema2owlTransformBtn');
+const schema2owlProgress = document.getElementById('schema2owlProgress');
+const schema2owlResultContainer = document.getElementById('schema2owlResultContainer');
+const schema2owlOutput = document.getElementById('schema2owlOutput');
+const schema2owlError = document.getElementById('schema2owlError');
+const schema2owlDownload = document.getElementById('schema2owlDownload');
+let lastSchema2OwlResult = null;
+
+schema2owlFileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        try {
+            const json = JSON.parse(ev.target.result);
+            schema2owlPaste.value = JSON.stringify(json, null, 2);
+            schema2owlError.style.display = 'none';
+        } catch (err) {
+            schema2owlError.textContent = 'Invalid JSON: ' + err.message;
+            schema2owlError.style.display = 'block';
+        }
+    };
+    reader.readAsText(file);
+});
+
+schema2owlTransformBtn.addEventListener('click', async () => {
+    let schema;
+    try {
+        const text = schema2owlPaste.value.trim();
+        if (!text) {
+            schema2owlError.textContent = 'Please paste a JSON Schema or upload a file.';
+            schema2owlError.style.display = 'block';
+            return;
+        }
+        schema = JSON.parse(text);
+    } catch (err) {
+        schema2owlError.textContent = 'Invalid JSON: ' + err.message;
+        schema2owlError.style.display = 'block';
+        return;
+    }
+    schema2owlError.style.display = 'none';
+    schema2owlResultContainer.style.display = 'none';
+    schema2owlTransformBtn.disabled = true;
+    schema2owlProgress.style.display = 'block';
+    try {
+        const baseUri = document.getElementById('schema2owlBaseUri').value || 'http://example.org/ns#';
+        const outputFormat = document.getElementById('schema2owlFormat').value || 'turtle';
+        const response = await fetch('/api/transform/schema2owl', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ schema: schema, base_uri: baseUri, output_format: outputFormat })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error || 'Transformation failed');
+        }
+        lastSchema2OwlResult = data.ontology;
+        schema2owlOutput.textContent = data.ontology;
+        schema2owlResultContainer.style.display = 'block';
+    } catch (err) {
+        schema2owlError.textContent = err.message || 'Transformation failed';
+        schema2owlError.style.display = 'block';
+    } finally {
+        schema2owlTransformBtn.disabled = false;
+        schema2owlProgress.style.display = 'none';
+    }
+});
+
+schema2owlDownload.addEventListener('click', () => {
+    if (!lastSchema2OwlResult) return;
+    const format = document.getElementById('schema2owlFormat').value || 'turtle';
+    const ext = { turtle: '.ttl', xml: '.rdf', n3: '.n3', nt: '.nt' }[format] || '.ttl';
+    downloadFile(lastSchema2OwlResult, 'ontology' + ext, format === 'turtle' ? 'text/turtle' : 'application/octet-stream');
+});
 
 // Save and restore page state
 function savePageState() {

@@ -477,6 +477,36 @@ class RulesConfigDialog(QDialog):
                 )
 
 
+class Schema2OwlWorker(QThread):
+    """Worker thread for JSON Schema to OWL transformation."""
+
+    progress = pyqtSignal(str)
+    error = pyqtSignal(str)
+    finished = pyqtSignal(str)  # RDF content
+
+    def __init__(self, schema_path: str, base_uri: str = "http://example.org/ns#", output_format: str = "turtle"):
+        super().__init__()
+        self.schema_path = schema_path
+        self.base_uri = base_uri
+        self.output_format = output_format
+
+    def run(self):
+        try:
+            self.progress.emit("Parsing JSON Schema...")
+            from jsonschema2owl import SchemaParser, JsonSchema2OwlTransformer
+            from jsonschema2owl.config import JsonSchema2OwlConfig
+            config = JsonSchema2OwlConfig(base_uri=self.base_uri)
+            parser = SchemaParser()
+            model = parser.parse_file(self.schema_path)
+            self.progress.emit("Transforming to OWL...")
+            transformer = JsonSchema2OwlTransformer(base_uri=self.base_uri, config=config)
+            graph = transformer.transform(model)
+            rdf_content = graph.serialize(format=self.output_format)
+            self.finished.emit(rdf_content)
+        except Exception as e:
+            self.error.emit(str(e))
+
+
 class TransformationWorker(QThread):
     """Worker thread for running the transformation without blocking the GUI."""
     
@@ -814,29 +844,39 @@ class MainWindow(QMainWindow):
         help_menu.addAction(credits_action)
     
     def create_workflow_area(self, parent_layout):
-        """Create the three-step workflow area."""
+        """Create the direction selector and workflow area."""
+        self.direction_tabs = QTabWidget()
+        self.direction_tabs.setTabPosition(QTabWidget.TabPosition.North)
+
+        # OWL → JSON Schema (existing workflow)
         self.workflow_tabs = QTabWidget()
         self.workflow_tabs.setTabPosition(QTabWidget.TabPosition.North)
-        
+
         # Step 1: T-box Transformation
         self.tbox_widget = self.create_tbox_step()
         self.workflow_tabs.addTab(self.tbox_widget, "1. T-box Transformation")
-        
+
         # Step 2: A-box Generation
         self.abox_widget = self.create_abox_step()
         self.workflow_tabs.addTab(self.abox_widget, "2. A-box Generation")
         self.workflow_tabs.setTabEnabled(1, False)
-        
+
         # Step 3: JSON Instance Generation
         self.json_widget = self.create_json_step()
         self.workflow_tabs.addTab(self.json_widget, "3. JSON Instance Generation")
         self.workflow_tabs.setTabEnabled(2, False)
-        
+
         # Step 4: Ontology Partitioning
         self.partitioning_widget = self.create_partitioning_step()
         self.workflow_tabs.addTab(self.partitioning_widget, "4. Ontology Partitioning")
-        
-        parent_layout.addWidget(self.workflow_tabs)
+
+        self.direction_tabs.addTab(self.workflow_tabs, "OWL → JSON Schema")
+
+        # JSON Schema → OWL
+        self.schema2owl_widget = self.create_schema2owl_step()
+        self.direction_tabs.addTab(self.schema2owl_widget, "JSON Schema → OWL")
+
+        parent_layout.addWidget(self.direction_tabs)
     
     def create_tbox_step(self):
         """Create the T-box transformation step widget."""
@@ -1109,7 +1149,115 @@ class MainWindow(QMainWindow):
         
         widget.setLayout(layout)
         return widget
-    
+
+    def create_schema2owl_step(self):
+        """Create the JSON Schema to OWL step widget."""
+        widget = QWidget()
+        layout = QVBoxLayout()
+
+        desc_label = QLabel("<b>JSON Schema → OWL</b><br>Transform a JSON Schema file into an OWL ontology (rule-based, deterministic).")
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("QLabel { background-color: #e8f5e9; padding: 10px; border-radius: 5px; }")
+        layout.addWidget(desc_label)
+
+        input_group = QGroupBox("JSON Schema Input")
+        input_layout = QVBoxLayout()
+        path_layout = QHBoxLayout()
+        self.schema2owl_path_edit = QLineEdit()
+        self.schema2owl_path_edit.setPlaceholderText("Path to JSON Schema file...")
+        path_layout.addWidget(self.schema2owl_path_edit)
+        browse_btn = QPushButton("Browse...")
+        browse_btn.clicked.connect(self._browse_schema2owl_file)
+        path_layout.addWidget(browse_btn)
+        input_layout.addLayout(path_layout)
+        input_group.setLayout(input_layout)
+        layout.addWidget(input_group)
+
+        options_group = QGroupBox("Options")
+        options_layout = QHBoxLayout()
+        options_layout.addWidget(QLabel("Base URI:"))
+        self.schema2owl_base_uri = QLineEdit("http://example.org/ns#")
+        options_layout.addWidget(self.schema2owl_base_uri)
+        options_layout.addWidget(QLabel("Format:"))
+        self.schema2owl_format = QComboBox()
+        self.schema2owl_format.addItems(["turtle", "xml", "n3", "nt"])
+        options_layout.addWidget(self.schema2owl_format)
+        options_layout.addStretch()
+        options_group.setLayout(options_layout)
+        layout.addWidget(options_group)
+
+        self.schema2owl_transform_btn = QPushButton("Transform to OWL")
+        self.schema2owl_transform_btn.clicked.connect(self._run_schema2owl)
+        self.schema2owl_transform_btn.setStyleSheet("QPushButton { background-color: #4CAF50; color: white; padding: 8px 15px; }")
+        layout.addWidget(self.schema2owl_transform_btn)
+
+        self.schema2owl_progress_label = QLabel("")
+        self.schema2owl_progress_label.setStyleSheet("color: #666;")
+        layout.addWidget(self.schema2owl_progress_label)
+
+        output_group = QGroupBox("OWL Output")
+        output_layout = QVBoxLayout()
+        self.schema2owl_output = QTextEdit()
+        self.schema2owl_output.setReadOnly(True)
+        self.schema2owl_output.setFont(QFont("Consolas, 'Courier New', monospace", 10))
+        output_layout.addWidget(self.schema2owl_output)
+        save_owl_btn = QPushButton("Save OWL to file...")
+        save_owl_btn.clicked.connect(self._save_schema2owl_output)
+        output_layout.addWidget(save_owl_btn)
+        output_group.setLayout(output_layout)
+        layout.addWidget(output_group)
+
+        self.schema2owl_last_result = None
+        widget.setLayout(layout)
+        return widget
+
+    def _browse_schema2owl_file(self):
+        path, _ = QFileDialog.getOpenFileName(self, "Select JSON Schema", "", "JSON Files (*.json);;All Files (*.*)")
+        if path:
+            self.schema2owl_path_edit.setText(path)
+
+    def _run_schema2owl(self):
+        path = self.schema2owl_path_edit.text().strip()
+        if not path:
+            QMessageBox.warning(self, "No input", "Please select a JSON Schema file.")
+            return
+        if not Path(path).exists():
+            QMessageBox.warning(self, "File not found", f"File not found: {path}")
+            return
+        self.schema2owl_transform_btn.setEnabled(False)
+        self.schema2owl_progress_label.setText("Transforming...")
+        base_uri = self.schema2owl_base_uri.text().strip() or "http://example.org/ns#"
+        output_format = self.schema2owl_format.currentText()
+        self._schema2owl_worker = Schema2OwlWorker(path, base_uri=base_uri, output_format=output_format)
+        self._schema2owl_worker.progress.connect(self.schema2owl_progress_label.setText)
+        self._schema2owl_worker.error.connect(self._on_schema2owl_error)
+        self._schema2owl_worker.finished.connect(self._on_schema2owl_finished)
+        self._schema2owl_worker.start()
+
+    def _on_schema2owl_error(self, message: str):
+        self.schema2owl_transform_btn.setEnabled(True)
+        self.schema2owl_progress_label.setText("")
+        QMessageBox.critical(self, "Transformation failed", message)
+
+    def _on_schema2owl_finished(self, rdf_content: str):
+        self.schema2owl_last_result = rdf_content
+        self.schema2owl_output.setPlainText(rdf_content)
+        self.schema2owl_progress_label.setText("Done.")
+        self.schema2owl_transform_btn.setEnabled(True)
+
+    def _save_schema2owl_output(self):
+        if not self.schema2owl_last_result:
+            QMessageBox.information(self, "No output", "Run a transformation first.")
+            return
+        ext = {"turtle": ".ttl", "xml": ".rdf", "n3": ".n3", "nt": ".nt"}.get(self.schema2owl_format.currentText(), ".ttl")
+        path, _ = QFileDialog.getSaveFileName(self, "Save OWL ontology", "ontology" + ext, f"RDF (*{ext});;All Files (*.*)")
+        if path:
+            try:
+                Path(path).write_text(self.schema2owl_last_result, encoding="utf-8")
+                QMessageBox.information(self, "Saved", f"Saved to {path}")
+            except Exception as e:
+                QMessageBox.critical(self, "Save error", str(e))
+
     def create_abox_step(self):
         """Create the A-box generation step widget."""
         widget = QWidget()

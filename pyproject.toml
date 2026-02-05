@@ -64,6 +64,7 @@ dev = [
 [project.scripts]
 owl2jsonschema = "owl2jsonschema.cli:main"
 owl2jsonschema-gui = "owl2jsonschema_gui.app:main"
+jsonschema2owl = "jsonschema2owl.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

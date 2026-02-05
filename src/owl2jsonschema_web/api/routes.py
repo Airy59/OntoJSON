@@ -19,6 +19,7 @@ def api_info():
         'endpoints': {
             'transform': '/api/transform',
             'transform_multiple': '/api/transform/multiple',
+            'transform_schema2owl': '/api/transform/schema2owl',
             'generate_abox': '/api/generate/abox',
             'convert_to_json': '/api/convert/json',
             'validate': '/api/validate',

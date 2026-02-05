@@ -353,6 +353,18 @@ The transformation engine can use different strategies for applying rules:
 
 The default strategy is Sequential, which allows each rule to focus on a specific aspect of the transformation without being affected by other rules.
 
+## Two Conversion Directions
+
+OntoJSON supports two conversion directions with **separate backends** (no cross-imports):
+
+| Direction | Backend package | CLI | Description |
+|-----------|-----------------|-----|-------------|
+| **OWL → JSON Schema** | `owl2jsonschema` | `owl2jsonschema` | Converts RDF/OWL ontologies to JSON Schema (visitor pattern, configurable rules). |
+| **JSON Schema → OWL** | `jsonschema2owl` | `jsonschema2owl` | Converts a JSON Schema to an OWL ontology (rule-based, deterministic). |
+
+- **Unified UI**: The same GUI and web app let the user choose the direction (e.g. tabs “OWL → JSON Schema” and “JSON Schema → OWL”). Each UI calls only the corresponding backend.
+- **JSON Schema → OWL** (`src/jsonschema2owl/`): Parser builds an in-memory schema model from JSON; a rule registry (e.g. ObjectToClassRule, PropertyToOwlPropertyRule, EnumToIndividualsRule) produces an RDF graph; output is serialized to Turtle, RDF/XML, N3, or N-Triples. Configurable base URI and optional rule set. CLI: `jsonschema2owl input_schema.json -o ontology.ttl --base-uri http://example.org/ns#`. Web API: `POST /api/transform/schema2owl` (body: `schema`, `base_uri`, `output_format`).
+
 ## Extension Points
 
 The architecture provides several extension points:
