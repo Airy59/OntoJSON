@@ -36,14 +36,12 @@ class TypeToPropertyRule(PropertyRule):
         """Create an OWL datatype property."""
         definition, prop = element
         
-        # Get property naming strategy from config
-        naming_strategy = self.config.get_property_naming_strategy() if self.config else "scoped"
-        
-        # Generate property URI with owner class scoping
+        # Always use reverse_scoped naming: propertyName_ClassName
+        # This groups properties by original name while keeping them distinct per domain
         prop_uri = builder.uri_generator.generate_property_uri(
             prop.name,
             owner_class=definition.name,
-            naming_strategy=naming_strategy
+            naming_strategy="reverse_scoped"  # propertyName_ClassName format
         )
         
         # Get domain class URI
@@ -57,11 +55,12 @@ class TypeToPropertyRule(PropertyRule):
         is_functional = not prop.is_array()
         
         # Create datatype property with explicit domain
+        # Label is original property name (for grouping), URI is scoped
         builder.add_datatype_property(
             property_uri=prop_uri,
             domain=domain_uri,
             range_=datatype,
-            label=prop.title or prop.name,
+            label=prop.title or prop.name,  # Original property name as label
             comment=prop.description,
             functional=is_functional
         )
@@ -70,7 +69,15 @@ class TypeToPropertyRule(PropertyRule):
         """Convert PropertyModel to dict for pattern recognizer."""
         result = {"type": prop.type}
         if prop.items:
-            result["items"] = prop.items
+            # Handle nested PropertyModel items (though parser stores as dict)
+            if isinstance(prop.items, PropertyModel):
+                result["items"] = {
+                    "type": prop.items.type,
+                    "items": prop.items.items if prop.items.items else None,
+                    "$ref": prop.items.ref if prop.items.ref else None
+                }
+            else:
+                result["items"] = prop.items
         if prop.one_of:
             result["oneOf"] = prop.one_of
         if prop.ref:
@@ -102,14 +109,12 @@ class ObjectRefToPropertyRule(PropertyRule):
         """Create an OWL object property."""
         definition, prop = element
         
-        # Get property naming strategy from config
-        naming_strategy = self.config.get_property_naming_strategy() if self.config else "scoped"
-        
-        # Generate property URI with owner class scoping
+        # Always use reverse_scoped naming: propertyName_ClassName
+        # This groups properties by original name while keeping them distinct per domain
         prop_uri = builder.uri_generator.generate_property_uri(
             prop.name,
             owner_class=definition.name,
-            naming_strategy=naming_strategy
+            naming_strategy="reverse_scoped"  # propertyName_ClassName format
         )
         
         # Get domain class URI
@@ -117,7 +122,7 @@ class ObjectRefToPropertyRule(PropertyRule):
         
         # Get range class
         prop_dict = self._property_to_dict(prop)
-        range_class_name = self.recognizer.extract_range_from_ref(prop_dict)
+        range_class_name = self.recognizer.extract_range_from_ref(prop_dict, property_name=prop.name)
         
         if not range_class_name:
             # No clear range, skip or warn
@@ -127,17 +132,30 @@ class ObjectRefToPropertyRule(PropertyRule):
             )
             return
         
-        range_uri = builder.uri_generator.generate_class_uri(range_class_name)
+        # If this is an inline object (generated class name), create the class
+        # Check if it's a generated name (ends with "Item")
+        if range_class_name.endswith("Item") and range_class_name not in context.uri_mapping:
+            # This is an inline object - create a class for it
+            range_uri = builder.uri_generator.generate_class_uri(range_class_name)
+            builder.add_class(
+                class_uri=range_uri,
+                label=range_class_name,
+                comment=f"Inline class for array items in property '{prop.name}'"
+            )
+            context.uri_mapping[range_class_name] = range_uri
+        else:
+            range_uri = builder.uri_generator.generate_class_uri(range_class_name)
         
         # Determine if functional (not an array)
         is_functional = not prop.is_array()
         
         # Create object property with explicit domain
+        # Label is original property name (for grouping), URI is scoped
         builder.add_object_property(
             property_uri=prop_uri,
             domain=domain_uri,
             range_=range_uri,
-            label=prop.title or prop.name,
+            label=prop.title or prop.name,  # Original property name as label
             comment=prop.description,
             functional=is_functional
         )
@@ -146,7 +164,15 @@ class ObjectRefToPropertyRule(PropertyRule):
         """Convert PropertyModel to dict for pattern recognizer."""
         result = {"type": prop.type}
         if prop.items:
-            result["items"] = prop.items
+            # Handle nested PropertyModel items (though parser stores as dict)
+            if isinstance(prop.items, PropertyModel):
+                result["items"] = {
+                    "type": prop.items.type,
+                    "items": prop.items.items if prop.items.items else None,
+                    "$ref": prop.items.ref if prop.items.ref else None
+                }
+            else:
+                result["items"] = prop.items
         if prop.one_of:
             result["oneOf"] = prop.one_of
         if prop.ref:
@@ -176,15 +202,12 @@ class RequiredToCardinalityRule(PropertyRule):
         """Add minimum cardinality of 1 for required properties."""
         definition, prop = element
         
-        # Get property naming strategy from config
-        naming_strategy = self.config.get_property_naming_strategy() if self.config else "scoped"
-        
-        # Get class and property URIs (must match the scoped URI)
+        # Always use reverse_scoped naming: propertyName_ClassName (matches property creation)
         class_uri = builder.uri_generator.generate_class_uri(definition.name)
         prop_uri = builder.uri_generator.generate_property_uri(
             prop.name,
             owner_class=definition.name,
-            naming_strategy=naming_strategy
+            naming_strategy="reverse_scoped"  # propertyName_ClassName format
         )
         
         # For non-array required properties, min=1, max=1 (functional)

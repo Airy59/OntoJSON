@@ -138,6 +138,83 @@ class ReverseTransformationConfig:
             "oneof_interpretation", "union"
         )
     
+    def get_property_domain_handling_config(self) -> Dict[str, Any]:
+        """Get property domain handling configuration."""
+        return self.config.get("property_domain_handling", {})
+    
+    def get_multiple_domain_strategy(self) -> str:
+        """
+        Get the strategy for handling properties with multiple domains.
+        
+        Returns:
+            Strategy: "union_of" (default) or "split_properties"
+        """
+        return self.get_property_domain_handling_config().get(
+            "multiple_domain_strategy", "union_of"
+        )
+    
+    def set_multiple_domain_strategy(self, strategy: str):
+        """
+        Set the strategy for handling properties with multiple domains.
+        
+        Args:
+            strategy: One of "union_of" or "split_properties"
+        """
+        valid_strategies = ["union_of", "split_properties"]
+        if strategy not in valid_strategies:
+            raise ValueError(
+                f"Invalid multiple domain strategy: {strategy}. "
+                f"Must be one of {valid_strategies}"
+            )
+        
+        if "property_domain_handling" not in self.config:
+            self.config["property_domain_handling"] = {}
+        self.config["property_domain_handling"]["multiple_domain_strategy"] = strategy
+    
+    def should_create_super_properties(self) -> bool:
+        """
+        Check if super-properties should be created for groups of scoped properties.
+        
+        Returns:
+            True if super-properties should be created
+        """
+        return self.get_property_domain_handling_config().get(
+            "create_super_properties", False
+        )
+    
+    def set_create_super_properties(self, enabled: bool):
+        """
+        Enable or disable creation of super-properties for property groups.
+        
+        Args:
+            enabled: True to create super-properties, False otherwise
+        """
+        if "property_domain_handling" not in self.config:
+            self.config["property_domain_handling"] = {}
+        self.config["property_domain_handling"]["create_super_properties"] = enabled
+    
+    def should_simplify_single_properties(self) -> bool:
+        """
+        Check if single properties should be simplified by removing _ClassName suffix.
+        
+        Returns:
+            True if single properties should be simplified
+        """
+        return self.get_property_domain_handling_config().get(
+            "simplify_single_properties", False
+        )
+    
+    def set_simplify_single_properties(self, enabled: bool):
+        """
+        Enable or disable simplification of single properties.
+        
+        Args:
+            enabled: True to simplify single properties, False otherwise
+        """
+        if "property_domain_handling" not in self.config:
+            self.config["property_domain_handling"] = {}
+        self.config["property_domain_handling"]["simplify_single_properties"] = enabled
+    
     def get_rule_config(self, rule_id: str) -> Dict[str, Any]:
         """
         Get configuration for a specific rule.
@@ -249,7 +326,7 @@ class ReverseTransformationConfig:
             "uri_generation": {
                 "class_pattern": "{base}{name}",
                 "property_pattern": "{base}{name}",
-                "individual_pattern": "{base}individual/{name}",
+                "individual_pattern": "{base}{name}",
                 # Property naming strategy to avoid URI collisions
                 # "scoped" (default): ClassName_propertyName
                 # "reverse_scoped": propertyName_ClassName
@@ -266,6 +343,24 @@ class ReverseTransformationConfig:
                 
                 # How to interpret oneOf: "union" or "disjoint_union"
                 "oneof_interpretation": "union"
+            },
+            
+            "property_domain_handling": {
+                # Properties with multiple domains are always split into separate properties
+                # Format: propertyName_ClassName (e.g., "requiredProcesses_TripAllocationConstraintDef")
+                # Label remains as original property name for grouping
+                "multiple_domain_strategy": "split_properties",
+                
+                # Option 1: Create super-properties for groups of scoped properties
+                # When multiple properties share the same base name, create a super-property
+                # with identifier = propertyName (e.g., "requiredProcesses")
+                "create_super_properties": False,
+                
+                # Option 2: Simplify single properties by removing _ClassName suffix
+                # When a property is the only one with its base name, remove the suffix
+                # (e.g., "someProperty_SomeClass" -> "someProperty")
+                # Warning: May cause future naming collisions if new properties are added
+                "simplify_single_properties": False
             },
             
             "rules": {
@@ -307,6 +402,10 @@ class ReverseTransformationConfig:
                 "enum_to_individuals": {
                     "enabled": True,
                     "priority": 60
+                },
+                "enum_to_restriction": {
+                    "enabled": True,
+                    "priority": 40
                 },
                 "const_to_hasvalue": {
                     "enabled": True,

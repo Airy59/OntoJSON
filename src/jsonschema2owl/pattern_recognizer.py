@@ -57,16 +57,34 @@ class PatternRecognizer:
                 if isinstance(option, dict) and "$ref" in option:
                     return True
         
-        # Array with object items
+        # Array with object items (including nested arrays)
         if property_schema.get("type") == "array" and "items" in property_schema:
             items = property_schema["items"]
             if isinstance(items, dict):
+                # Direct $ref in items
                 if "$ref" in items:
                     return True
+                # Inline object type in items (array of objects)
+                if items.get("type") == "object":
+                    return True
+                # oneOf with $ref in items
                 if "oneOf" in items:
                     for option in items["oneOf"]:
                         if isinstance(option, dict) and "$ref" in option:
                             return True
+                # Nested array: array of arrays with $ref or object
+                if items.get("type") == "array" and "items" in items:
+                    nested_items = items["items"]
+                    if isinstance(nested_items, dict):
+                        if "$ref" in nested_items:
+                            return True
+                        # Nested array of objects
+                        if nested_items.get("type") == "object":
+                            return True
+                        if "oneOf" in nested_items:
+                            for option in nested_items["oneOf"]:
+                                if isinstance(option, dict) and "$ref" in option:
+                                    return True
         
         return False
     
@@ -136,15 +154,16 @@ class PatternRecognizer:
         
         return None
     
-    def extract_range_from_ref(self, property_schema: Dict[str, Any]) -> Optional[str]:
+    def extract_range_from_ref(self, property_schema: Dict[str, Any], property_name: Optional[str] = None) -> Optional[str]:
         """
-        Extract the range class from a $ref reference.
+        Extract the range class from a $ref reference or inline object.
         
         Args:
             property_schema: Property schema dictionary
+            property_name: Optional property name for generating anonymous class names
         
         Returns:
-            Referenced class name or None
+            Referenced class name or generated class name for inline objects
         """
         # Direct $ref
         if "$ref" in property_schema:
@@ -156,18 +175,61 @@ class PatternRecognizer:
                 if isinstance(option, dict) and "$ref" in option:
                     return self._extract_definition_name(option["$ref"])
         
-        # Array items with $ref
+        # Array items with $ref or inline object (including nested arrays)
         if property_schema.get("type") == "array" and "items" in property_schema:
             items = property_schema["items"]
             if isinstance(items, dict):
+                # Direct $ref in items
                 if "$ref" in items:
                     return self._extract_definition_name(items["$ref"])
+                # Inline object type in items - generate class name
+                if items.get("type") == "object":
+                    if property_name:
+                        # Generate class name from property name (e.g., "requiredData" -> "RequiredDataItem")
+                        return self._generate_inline_class_name(property_name)
+                    return None
+                # oneOf with $ref in items
                 if "oneOf" in items:
                     for option in items["oneOf"]:
                         if isinstance(option, dict) and "$ref" in option:
                             return self._extract_definition_name(option["$ref"])
+                # Nested array: array of arrays with $ref or object
+                if items.get("type") == "array" and "items" in items:
+                    nested_items = items["items"]
+                    if isinstance(nested_items, dict):
+                        if "$ref" in nested_items:
+                            return self._extract_definition_name(nested_items["$ref"])
+                        # Nested array of objects
+                        if nested_items.get("type") == "object":
+                            if property_name:
+                                return self._generate_inline_class_name(property_name)
+                            return None
+                        if "oneOf" in nested_items:
+                            for option in nested_items["oneOf"]:
+                                if isinstance(option, dict) and "$ref" in option:
+                                    return self._extract_definition_name(option["$ref"])
         
         return None
+    
+    def _generate_inline_class_name(self, property_name: str) -> str:
+        """
+        Generate a class name for an inline object definition.
+        
+        Args:
+            property_name: Property name
+        
+        Returns:
+            Generated class name (e.g., "requiredData" -> "RequiredDataItem")
+        """
+        # Convert camelCase or snake_case to PascalCase
+        import re
+        # Split on camelCase boundaries or underscores
+        parts = re.split(r'([A-Z][a-z]+|[a-z]+)', property_name)
+        parts = [p for p in parts if p]
+        # Capitalize first letter of each part
+        pascal_parts = [p.capitalize() for p in parts if p]
+        # Join and add "Item" suffix
+        return ''.join(pascal_parts) + "Item"
     
     def _extract_definition_name(self, ref: str) -> Optional[str]:
         """Extract definition name from $ref string."""

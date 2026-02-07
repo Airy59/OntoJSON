@@ -109,11 +109,18 @@ def reverse_transform():
         
         # Create configuration
         if config_dict:
-            config = ReverseTransformationConfig()
-            # Apply config settings (simplified for now)
-            # In a full implementation, you'd iterate through config_dict
+            config = ReverseTransformationConfig(config_dict)
+            # Apply specific settings if provided
+            if 'property_domain_handling' in config_dict:
+                domain_handling = config_dict['property_domain_handling']
+                if 'multiple_domain_strategy' in domain_handling:
+                    config.set_multiple_domain_strategy(domain_handling['multiple_domain_strategy'])
+                if 'create_super_properties' in domain_handling:
+                    config.set_create_super_properties(domain_handling['create_super_properties'])
+                if 'simplify_single_properties' in domain_handling:
+                    config.set_simplify_single_properties(domain_handling['simplify_single_properties'])
         else:
-            config = None
+            config = ReverseTransformationConfig()  # Use default config
         
         # Perform transformation
         result = transformation_service.transform(

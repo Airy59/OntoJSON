@@ -1,0 +1,3340 @@
+@prefix : <http://osdm.org/osdm4#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://osdm.org/osdm4> a owl:Ontology ;
+    rdfs:label "OSDM Offline Fare Delivery" ;
+    :schemaVersion "https://json-schema.org/draft/2020-12/schema" ;
+    rdfs:comment "OSDM extract of offline fare delivery" ;
+    rdfs:seeAlso "http://uic.org//schemas/passenger/eticket/v4/offlineOSDM.json" .
+
+:TravelerTypeDef a owl:Class ;
+    rdfs:label "TravelerTypeDef" ;
+    rdfs:comment "Subset of the values from the traveler type code list IRS 90918-10 " .
+
+:accuracy a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "accuracy" ;
+    rdfs:comment "to be provided in degree." ;
+    rdfs:domain :GeoCoordinate ;
+    rdfs:range xsd:decimal .
+
+:addId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "addId" ;
+    rdfs:comment "sequential number of regional validities (leading positions in case the series is too short" ;
+    rdfs:domain :LegacyAccountingIdentifierDef ;
+    rdfs:range xsd:integer .
+
+:afterSalesRulesRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "afterSalesRulesRef" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:ageLimitForReservation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ageLimitForReservation" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range xsd:integer .
+
+:ageLimitToTravelAlone a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "ageLimitToTravelAlone" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range xsd:integer .
+
+:allowedChanges a owl:ObjectProperty ;
+    rdfs:label "allowedChanges" ;
+    rdfs:domain :PersonalDataConstraintDef ;
+    rdfs:range :AllowedChangesItem .
+
+:allowedClusters a owl:DatatypeProperty ;
+    rdfs:label "allowedClusters" ;
+    rdfs:comment "In case of CLUSTERING model: the other clusters that allow a combination" ;
+    rdfs:domain :FareCombinationModelDef ;
+    rdfs:range xsd:string .
+
+:applicationTime a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "applicationTime" ;
+    rdfs:domain :AfterSalesRuleDef ;
+    rdfs:range :RelativeTimeDef .
+
+:berthType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "berthType" ;
+    rdfs:domain :LegacyReservationParameterDef ;
+    rdfs:range xsd:string .
+
+:binaryLineId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "binaryLineId" ;
+    rdfs:comment "Id to support local traffic standards (e.g. VDV,...)." ;
+    rdfs:domain :LineDef ;
+    rdfs:range xsd:string .
+
+:binaryZoneId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "binaryZoneId" ;
+    rdfs:comment "Id to support local traffic standards (e.g. VDV,...)" ;
+    rdfs:domain :ZoneDef ;
+    rdfs:range xsd:string .
+
+:cardIdRequired a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "cardIdRequired" ;
+    rdfs:comment "the card id must be delivered in online sales " ;
+    rdfs:domain :ReductionCardDef ;
+    rdfs:range xsd:boolean .
+
+:cardValueType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "cardValueType" ;
+    rdfs:comment "code list for the cardValue provided" ;
+    rdfs:domain :ReductionCardReferenceDef ;
+    rdfs:range xsd:string .
+
+:carrierConstraintRef_FareDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "carrierConstraintRef" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :carrierConstraintRef .
+
+:carrierConstraintRef_ViaStationsDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "carrierConstraintRef" ;
+    rdfs:comment "restriction to a specific carriers" ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :carrierConstraintRef .
+
+:carrierConstraintText a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "carrierConstraintText" ;
+    rdfs:comment "carrier constraint description of the entire product, not including restrictions based on routes or trips." ;
+    rdfs:domain :Product ;
+    rdfs:range :TextDef .
+
+:carrier_ViaStationsDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "carrier" ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range :CompanyDef ;
+    rdfs:subPropertyOf :carrier .
+
+:city_LineDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "city" ;
+    rdfs:domain :LineDef ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :city .
+
+:city_ZoneDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "city" ;
+    rdfs:domain :ZoneDef ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :city .
+
+:coachTypeCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "coachTypeCode" ;
+    rdfs:domain :LegacyReservationParameterDef ;
+    rdfs:range xsd:string .
+
+:codeList a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "codeList" ;
+    rdfs:domain :StationDef ;
+    rdfs:range :StationCodeListDef .
+
+:code_StationNamesDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "code" ;
+    rdfs:comment "code " ;
+    rdfs:domain :StationNamesDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :code .
+
+:combinationConstraint a owl:ObjectProperty ;
+    rdfs:label "combinationConstraint" ;
+    rdfs:comment "constraints on accompanying passengers" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range :CombinationConstraintItem .
+
+:comfortClass a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "comfortClass" ;
+    rdfs:domain :ServiceClassDefinitionDef ;
+    rdfs:range :ComfortClassDef .
+
+:compartmentTypeCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "compartmentTypeCode" ;
+    rdfs:domain :LegacyReservationParameterDef ;
+    rdfs:range xsd:string .
+
+:connectionPointIds a owl:DatatypeProperty ;
+    rdfs:label "connectionPointIds" ;
+    rdfs:domain :StationResourceLocationDef ;
+    rdfs:range xsd:string .
+
+:country_StationNamesDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "country" ;
+    rdfs:comment "uic country code" ;
+    rdfs:domain :StationNamesDef ;
+    rdfs:range xsd:integer .
+
+:dates a owl:DatatypeProperty ;
+    rdfs:label "dates" ;
+    rdfs:comment "dates included in the calendar. In case no dates are provided the range is assumed to be valid" ;
+    rdfs:domain :CalendarDef ;
+    rdfs:range xsd:string .
+
+:defaultCarrierConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "defaultCarrierConstraintRef" ;
+    rdfs:comment "CarrierConstraint" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:defaultLuggageConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "defaultLuggageConstraintRef" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:defaultRegulatoryConditions a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "defaultRegulatoryConditions" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range :RegulatoryConditionsDef .
+
+:description_Product a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "description" ;
+    rdfs:comment "Detailed description of the product." ;
+    rdfs:domain :Product ;
+    rdfs:range :TextDef ;
+    rdfs:subPropertyOf :description .
+
+:distance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "distance" ;
+    rdfs:comment "distance in km for statistics " ;
+    rdfs:domain :RegionalConstraintDef ;
+    rdfs:range xsd:integer .
+
+:doesNotIncludeClassName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "doesNotIncludeClassName" ;
+    rdfs:comment "indicates that the class name is not included" ;
+    rdfs:domain :ServiceLevelDef ;
+    rdfs:range xsd:boolean .
+
+:durationUnit a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "durationUnit" ;
+    rdfs:comment "multiples of this duration can be allocated" ;
+    rdfs:domain :TripAllocationConstraintDef ;
+    rdfs:range xsd:string .
+
+:entryConnectionPoint a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "entryConnectionPoint" ;
+    rdfs:domain :RegionalConstraintDef ;
+    rdfs:range :ConnectionPointDef .
+
+:entryConnectionPointId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "entryConnectionPointId" ;
+    rdfs:comment "connection point connecting two fare regimes" ;
+    rdfs:domain :RegionalConstraintDef ;
+    rdfs:range xsd:string .
+
+:entryStation_LineDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "entryStation" ;
+    rdfs:domain :LineDef ;
+    rdfs:range :StationDef ;
+    rdfs:subPropertyOf :entryStation .
+
+:entryStation_ZoneDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "entryStation" ;
+    rdfs:domain :ZoneDef ;
+    rdfs:range :StationDef ;
+    rdfs:subPropertyOf :entryStation .
+
+:excludedTimeRange a owl:ObjectProperty ;
+    rdfs:label "excludedTimeRange" ;
+    rdfs:comment "time ranges excluded from the validity (e.g. off peak fulfillments)" ;
+    rdfs:domain :TravelValidityConstraintDef ;
+    rdfs:range :ExcludedTimeRangeItem .
+
+:exitConnectionPoint a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "exitConnectionPoint" ;
+    rdfs:domain :RegionalConstraintDef ;
+    rdfs:range :ConnectionPointDef .
+
+:exitConnectionPointId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "exitConnectionPointId" ;
+    rdfs:comment "connection point connecting two fare regimes" ;
+    rdfs:domain :RegionalConstraintDef ;
+    rdfs:range xsd:string .
+
+:fareDetailDescriptionRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "fareDetailDescriptionRef" ;
+    rdfs:comment "reference to a text with the details of the fare" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:fareResourceLocation a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "fareResourceLocation" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :FareResourceLocationDef .
+
+:feeRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "feeRef" ;
+    rdfs:comment "Reference to a price data item defining the fee; optional in case there is no fee but the  after sales transaction is allowed. Online services include fee directly in the fee tag." ;
+    rdfs:domain :AfterSalesRuleDef ;
+    rdfs:range xsd:string .
+
+:fromDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "fromDate" ;
+    rdfs:domain :CalendarDef ;
+    rdfs:range xsd:string .
+
+:fulfillmentConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "fulfillmentConstraintRef" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:geoCoordinate a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "geoCoordinate" ;
+    rdfs:domain :StationDef ;
+    rdfs:range :GeoCoordinate .
+
+:hoursAfterMidnight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "hoursAfterMidnight" ;
+    rdfs:comment "validity extended after midnight" ;
+    rdfs:domain :ValidityRange ;
+    rdfs:range xsd:decimal .
+
+:id_CalendarDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:comment "\\*** BULK-ONLY *** identification within the bulk data mandatory in bulk data exchange" ;
+    rdfs:domain :CalendarDef ;
+    rdfs:range xsd:string .
+
+:id_CarrierConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :CarrierConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_LuggageConstraint a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :LuggageConstraint ;
+    rdfs:range xsd:string .
+
+:id_PersonalDataConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :PersonalDataConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_PriceDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:comment "required for bulk data transfer" ;
+    rdfs:domain :PriceDef ;
+    rdfs:range xsd:string .
+
+:id_ReductionConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:comment "in bulk data only" ;
+    rdfs:domain :ReductionConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_RegionalConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :RegionalConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_TravelValidityConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:comment "mandatory in bulk data exchange" ;
+    rdfs:domain :TravelValidityConstraintDef ;
+    rdfs:range xsd:string .
+
+:includedFreePassenger a owl:ObjectProperty ;
+    rdfs:label "includedFreePassenger" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range :IncludedFreePassengerItem .
+
+:individualContracts_AfterSalesRuleDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "individualContracts" ;
+    rdfs:comment "indicates that the after sales of this fare can be treated independently per person." ;
+    rdfs:domain :AfterSalesRuleDef ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :individualContracts .
+
+:individualContracts_FareDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "individualContracts" ;
+    rdfs:comment "indicates that the fare can be treated independently per person although booked for more than one person." ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf :individualContracts .
+
+:individualTicketingPermitted a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "individualTicketingPermitted" ;
+    rdfs:comment "a separate fulfillment per traveler is permitted" ;
+    rdfs:domain :FulfillmentConstraintDef ;
+    rdfs:range xsd:boolean .
+
+:isAncillaryItem a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "isAncillaryItem" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range xsd:boolean .
+
+:isCarrierFee a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "isCarrierFee" ;
+    rdfs:comment "indicates that the fee belongs to the allocator" ;
+    rdfs:domain :AfterSalesRuleDef ;
+    rdfs:range xsd:boolean .
+
+:isExchangeableAfterValidity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "isExchangeableAfterValidity" ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:boolean .
+
+:isExchangeablebeforeValidity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "isExchangeablebeforeValidity" ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:boolean .
+
+:isRefundableAfterValidity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "isRefundableAfterValidity" ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:boolean .
+
+:isRefundableBeforeValidity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "isRefundableBeforeValidity" ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:boolean .
+
+:isReturnProduct a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "isReturnProduct" ;
+    rdfs:comment "the product includes a return journey" ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:boolean .
+
+:isTrainBound a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "isTrainBound" ;
+    rdfs:comment "the product is at least in some parts bound to specific trains" ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:boolean .
+
+:issuer_ReductionCardReferenceDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "issuer" ;
+    rdfs:comment "RICS company code or the upcoming compatible ERA company code. In case proprietary codes are used on a bilateral base the codes must have at least 5 positions and start with x." ;
+    rdfs:domain :ReductionCardReferenceDef ;
+    rdfs:range xsd:string .
+
+:legacyAccountingIdentifier a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "legacyAccountingIdentifier" ;
+    rdfs:domain :FareDef ;
+    rdfs:range :LegacyAccountingIdentifierDef .
+
+:legacyBorderPointCode_ConnectionPointDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "legacyBorderPointCode" ;
+    rdfs:domain :ConnectionPointDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :legacyBorderPointCode .
+
+:legacyBorderPointCode_StationNamesDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "legacyBorderPointCode" ;
+    rdfs:domain :StationNamesDef ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :legacyBorderPointCode .
+
+:legacyCode_ServiceConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "legacyCode" ;
+    rdfs:comment "id used in B.1 as fake local station code " ;
+    rdfs:domain :ServiceConstraintDef ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :legacyCode .
+
+:legacyConversion a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "legacyConversion" ;
+    rdfs:comment "options for legacy conversion to B.1: NO ( no conversion) YES (conversion allowed), ONLY (fare is provided only for conversion and should not be used otherwise " ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:lineId a owl:DatatypeProperty ;
+    rdfs:label "lineId" ;
+    rdfs:domain :LineDef ;
+    rdfs:range xsd:string .
+
+:localCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "localCode" ;
+    rdfs:comment "local code deprecated with version 1.4" ;
+    rdfs:domain :StationNamesDef ;
+    rdfs:range xsd:integer .
+
+:lowerAgeLimit a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "lowerAgeLimit" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range xsd:integer .
+
+:luggageConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "luggageConstraintRef" ;
+    rdfs:comment "constraints on luggage. Eigther free included luggage in a fare for persons of restrictions on the luggage itself on a fare for luggage" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:maxDuration a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "maxDuration" ;
+    rdfs:comment "maximum duration of one interruption" ;
+    rdfs:domain :TripInterruptionConstraintDef ;
+    rdfs:range xsd:string .
+
+:maxHandLuggage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "maxHandLuggage" ;
+    rdfs:comment "Standard hand luggage pieces" ;
+    rdfs:domain :LuggageConstraint ;
+    rdfs:range xsd:integer .
+
+:maxLargeLuggage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "maxLargeLuggage" ;
+    rdfs:comment "Standard non-hand luggage pieces" ;
+    rdfs:domain :LuggageConstraint ;
+    rdfs:range xsd:integer .
+
+:maxUnits a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "maxUnits" ;
+    rdfs:comment "maximum number of allowed units to be allocated" ;
+    rdfs:domain :TripAllocationConstraintDef ;
+    rdfs:range xsd:integer .
+
+:maxWeightedPassengers a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "maxWeightedPassengers" ;
+    rdfs:comment "The total weighted number of passengers on the offer is restricted to be equal or smaller than this maximum" ;
+    rdfs:domain :PassengerCombinationConstraintDef ;
+    rdfs:range xsd:decimal .
+
+:minWeightedPassengers a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "minWeightedPassengers" ;
+    rdfs:comment "The total weighted number of passengers on the offer is restricted to equal or larger than this minimum" ;
+    rdfs:domain :PassengerCombinationConstraintDef ;
+    rdfs:range xsd:decimal .
+
+:nameRef_FareDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nameRef" ;
+    rdfs:comment "reference to the fare name" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :nameRef .
+
+:nameUtf8_FareReferenceStationSetDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nameUtf8" ;
+    rdfs:domain :FareReferenceStationSetDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :nameUtf8 .
+
+:nameUtf8_StationNamesDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nameUtf8" ;
+    rdfs:comment "station name with upper and lower case letters in UTF8" ;
+    rdfs:domain :StationNamesDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :nameUtf8 .
+
+:nameUtf8_ZoneDefinitionDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nameUtf8" ;
+    rdfs:domain :ZoneDefinitionDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :nameUtf8 .
+
+:name_ConnectionPointDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "name" ;
+    rdfs:domain :ConnectionPointDef ;
+    rdfs:range xsd:string .
+
+:name_FareReferenceStationSetDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "name" ;
+    rdfs:comment "name to be used in route descriptions" ;
+    rdfs:domain :FareReferenceStationSetDef ;
+    rdfs:range xsd:string .
+
+:name_ReductionCardDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "name" ;
+    rdfs:domain :ReductionCardDef ;
+    rdfs:range :TextDef .
+
+:name_StationDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "name" ;
+    rdfs:domain :StationDef ;
+    rdfs:range :TextDef .
+
+:name_StationNamesDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "name" ;
+    rdfs:comment "station name with upper and lower case letters in ASCII" ;
+    rdfs:domain :StationNamesDef ;
+    rdfs:range xsd:string .
+
+:name_ZoneDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "name" ;
+    rdfs:comment "Name of the zone to be used in descriptions for the regional validity." ;
+    rdfs:domain :ZoneDef ;
+    rdfs:range xsd:string .
+
+:name_ZoneDefinitionDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "name" ;
+    rdfs:domain :ZoneDefinitionDef ;
+    rdfs:range xsd:string .
+
+:numberOfTravelDays a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "numberOfTravelDays" ;
+    rdfs:comment "number of allowed travel days (e.g. 3 travel days within 2 weeks)" ;
+    rdfs:domain :TravelValidityConstraintDef ;
+    rdfs:range xsd:integer .
+
+:nutsCode_LineDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nutsCode" ;
+    rdfs:comment """Nomenclature des units territoriales statistiques  
+ COMMISSION REGULATION (EU) No 31/2011""" ;
+    rdfs:domain :LineDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :nutsCode .
+
+:nutsCode_ZoneDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nutsCode" ;
+    rdfs:comment "Nomenclature des units territoriales statistiques COMMISSION REGULATION (EU) No 31/2011" ;
+    rdfs:domain :ZoneDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :nutsCode .
+
+:nutsCodes a owl:DatatypeProperty ;
+    rdfs:label "nutsCodes" ;
+    rdfs:domain :ZoneDefinitionDef ;
+    rdfs:range xsd:string .
+
+:offerType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "offerType" ;
+    rdfs:comment "The resource provides offers bases on trains or based on areas. Train based offers must start and end at a real station and are not split between a train run. Values TRAIN, AREA" ;
+    rdfs:domain :OnlineResourceDef ;
+    rdfs:range xsd:string .
+
+:onlyWhenCombined a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "onlyWhenCombined" ;
+    rdfs:comment "This combination model applies only in case the fare is combined with another carrier" ;
+    rdfs:domain :FareCombinationModelDef ;
+    rdfs:range xsd:boolean .
+
+:optionalDelivery a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "optionalDelivery" ;
+    rdfs:comment "this delivery is not mandatory to be downloaded. " ;
+    rdfs:domain :FareDeliveryDetailsDef ;
+    rdfs:range xsd:boolean .
+
+:passengerCombinationConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "passengerCombinationConstraintRef" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:passengerConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "passengerConstraintRef" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:passengerWeight a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "passengerWeight" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range xsd:decimal .
+
+:percentage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "percentage" ;
+    rdfs:domain :VatDetailDef ;
+    rdfs:range xsd:decimal .
+
+:personalDataConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "personalDataConstraintRef" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:polygon a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "polygon" ;
+    rdfs:domain :ZoneDefinitionDef ;
+    rdfs:range :PolygonDef .
+
+:previousDeliveryId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "previousDeliveryId" ;
+    rdfs:domain :FareDeliveryDetailsDef ;
+    rdfs:range xsd:string .
+
+:priceRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "priceRef" ;
+    rdfs:comment "reference to the price " ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:products_FareConstraintBundle a owl:DatatypeProperty ;
+    rdfs:label "products" ;
+    rdfs:comment "references to products that can include the fares" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:reductionConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "reductionConstraintRef" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:referenceCluster a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "referenceCluster" ;
+    rdfs:comment "In case of CLUSTERING model: the cluster to which the fare belongs" ;
+    rdfs:domain :FareCombinationModelDef ;
+    rdfs:range xsd:string .
+
+:regionalConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "regionalConstraintRef" ;
+    rdfs:comment "reference to the regional validity" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:regulatoryConditions a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "regulatoryConditions" ;
+    rdfs:domain :FareDef ;
+    rdfs:range :RegulatoryConditionsDef .
+
+:replacementDeliveryId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "replacementDeliveryId" ;
+    rdfs:comment "in case this delivery replaces an previous delivery" ;
+    rdfs:domain :FareDeliveryDetailsDef ;
+    rdfs:range xsd:string .
+
+:requiredSiS a owl:DatatypeProperty ;
+    rdfs:label "requiredSiS" ;
+    rdfs:comment "To guarantee security in system (SiS) of the fulfillment one of the listed interfaces is required." ;
+    rdfs:domain :FulfillmentConstraintDef ;
+    rdfs:range xsd:string .
+
+:reservationParameterId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "reservationParameterId" ;
+    rdfs:domain :ServiceLevelDef ;
+    rdfs:range xsd:string .
+
+:reservationParameterRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "reservationParameterRef" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:reservationParams918_1 a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "reservationParams918-1" ;
+    rdfs:domain :ReservationParameterDef ;
+    rdfs:range :LegacyReservationParameterDef .
+
+:reservationRequired a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "reservationRequired" ;
+    rdfs:domain :ReservationParameterDef ;
+    rdfs:range xsd:boolean .
+
+:reservationRequiredForBrand a owl:DatatypeProperty ;
+    rdfs:label "reservationRequiredForBrand" ;
+    rdfs:comment "service brand mode for which a reservation is mandatory" ;
+    rdfs:domain :ReservationParameterDef ;
+    rdfs:range xsd:integer .
+
+:reservationRequiredForMode a owl:DatatypeProperty ;
+    rdfs:label "reservationRequiredForMode" ;
+    rdfs:comment "service service mode for which a reservation is mandatory" ;
+    rdfs:domain :ReservationParameterDef ;
+    rdfs:range xsd:string .
+
+:routeId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "routeId" ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range xsd:integer .
+
+:scale_CurrencyPriceDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "scale" ;
+    rdfs:comment "scale of the amount - the number of positions after the comma" ;
+    rdfs:domain :CurrencyPriceDef ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :scale .
+
+:scale_VatDetailDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "scale" ;
+    rdfs:comment "scale of the amount - the number of positions after the comma" ;
+    rdfs:domain :VatDetailDef ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :scale .
+
+:scope a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "scope" ;
+    rdfs:domain :VatDetailDef ;
+    rdfs:range :VatScopeDef .
+
+:separateFulfillmentRequired a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "separateFulfillmentRequired" ;
+    rdfs:comment "a separate fulfillment for the regional constraint is required" ;
+    rdfs:domain :FulfillmentConstraintDef ;
+    rdfs:range xsd:boolean .
+
+:serialId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "serialId" ;
+    rdfs:comment "sequential number of regional validities" ;
+    rdfs:domain :LegacyAccountingIdentifierDef ;
+    rdfs:range xsd:integer .
+
+:seriesId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "seriesId" ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range xsd:integer .
+
+:serviceBrand a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "serviceBrand" ;
+    rdfs:comment "restriction to a specific service brand" ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range xsd:string .
+
+:serviceBrandCode a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "serviceBrandCode" ;
+    rdfs:domain :CarrierResourceLocationDef ;
+    rdfs:range :ServiceBrandCodeDef .
+
+:serviceClassRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "serviceClassRef" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:serviceConstraintRef_FareDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "serviceConstraintRef" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :serviceConstraintRef .
+
+:serviceConstraintRef_ViaStationsDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "serviceConstraintRef" ;
+    rdfs:comment "restriction to a specific service brands" ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :serviceConstraintRef .
+
+:serviceConstraintText a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "serviceConstraintText" ;
+    rdfs:comment "service restrictions of the entire product, not including restrictions based on routes or trips." ;
+    rdfs:domain :Product ;
+    rdfs:range :TextDef .
+
+:serviceLevelRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "serviceLevelRef" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:shortCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "shortCode" ;
+    rdfs:comment "reduction card code to be used in bar codes. The code is defined within the context of the issuer and is required to be very short (usually 1-4 positions). The code is used in ticket bar codes to indicate required checks of this reduction card during travel." ;
+    rdfs:domain :ReductionCardDef ;
+    rdfs:range xsd:string .
+
+:shortName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "shortName" ;
+    rdfs:comment "station name with upper and lower case letters in ASCII" ;
+    rdfs:domain :StationNamesDef ;
+    rdfs:range xsd:string .
+
+:shortNameUtf8 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "shortNameUtf8" ;
+    rdfs:comment "station name with upper and lower case letters in UTF8" ;
+    rdfs:domain :StationNamesDef ;
+    rdfs:range xsd:string .
+
+:shortTextUtf8_TextDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "shortTextUtf8" ;
+    rdfs:domain :TextDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :shortTextUtf8 .
+
+:shortTextUtf8_TranslationDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "shortTextUtf8" ;
+    rdfs:domain :TranslationDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :shortTextUtf8 .
+
+:shortText_TextDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "shortText" ;
+    rdfs:comment "text without special characters according to ICAO specification" ;
+    rdfs:domain :TextDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :shortText .
+
+:shortText_TranslationDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "shortText" ;
+    rdfs:comment "text without special characters according to ICAO specification" ;
+    rdfs:domain :TranslationDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :shortText .
+
+:station a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "station" ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range :StationDef .
+
+:stop a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "stop" ;
+    rdfs:comment "indicates that the station must be a real stop. In case a service passes the station but does not stop there the fare is not valid. Default is false. " ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range xsd:boolean .
+
+:supportedOnlineServices a owl:DatatypeProperty ;
+    rdfs:label "supportedOnlineServices" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range xsd:string .
+
+:system_OnlineResourceDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "system" ;
+    rdfs:comment "system where the offer can be found (e.r. for TAP-TSI-B5 the reservation system code)" ;
+    rdfs:domain :OnlineResourceDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :system .
+
+:tariff a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "tariff" ;
+    rdfs:domain :LegacyReservationParameterDef ;
+    rdfs:range xsd:string .
+
+:tariffId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "tariffId" ;
+    rdfs:comment "sequential number of the fares for one regional validity" ;
+    rdfs:domain :LegacyAccountingIdentifierDef ;
+    rdfs:range xsd:integer .
+
+:taxId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "taxId" ;
+    rdfs:domain :VatDetailDef ;
+    rdfs:range xsd:string .
+
+:technicalViaOnly a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "technicalViaOnly" ;
+    rdfs:comment "this via station is used to support the alignment with time tables but is not part of the contractual route provided to the passenger." ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range xsd:boolean .
+
+:terminalStation_LineDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "terminalStation" ;
+    rdfs:domain :LineDef ;
+    rdfs:range :StationDef ;
+    rdfs:subPropertyOf :terminalStation .
+
+:terminalStation_ZoneDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "terminalStation" ;
+    rdfs:domain :ZoneDef ;
+    rdfs:range :StationDef ;
+    rdfs:subPropertyOf :terminalStation .
+
+:textRef_ServiceClassDefinitionDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "textRef" ;
+    rdfs:comment "id of the text describing the class within the offline data text list" ;
+    rdfs:domain :ServiceClassDefinitionDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :textRef .
+
+:textRef_ServiceConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "textRef" ;
+    rdfs:comment "id of the text describing the service constraint for the traveler" ;
+    rdfs:domain :ServiceConstraintDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :textRef .
+
+:text_TranslationDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "text" ;
+    rdfs:comment "text without special characters according to ICAO specification" ;
+    rdfs:domain :TranslationDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :text .
+
+:totalMaxDuration a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "totalMaxDuration" ;
+    rdfs:comment "maximum duration of all interruptions on the route" ;
+    rdfs:domain :TripInterruptionConstraintDef ;
+    rdfs:range xsd:string .
+
+:travelClass_Product a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "travelClass" ;
+    rdfs:comment "Travel class in case the product is limited to a specific class." ;
+    rdfs:domain :Product ;
+    rdfs:range :TravelClassDef .
+
+:travelClass_ServiceClassDefinitionDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "travelClass" ;
+    rdfs:domain :ServiceClassDefinitionDef ;
+    rdfs:range :TravelClassDef .
+
+:tripAllocationConstraint a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "tripAllocationConstraint" ;
+    rdfs:domain :TravelValidityConstraintDef ;
+    rdfs:range :TripAllocationConstraintDef .
+
+:tripInterruptionConstraint a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "tripInterruptionConstraint" ;
+    rdfs:domain :TravelValidityConstraintDef ;
+    rdfs:range :TripInterruptionConstraintDef .
+
+:type_Product a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "type" ;
+    rdfs:domain :Product ;
+    rdfs:range :ProductType .
+
+:type_ReductionCardDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "type" ;
+    rdfs:comment "LOYALTY_CARD,REDUCTION_CARD,PASS" ;
+    rdfs:domain :ReductionCardDef ;
+    rdfs:range xsd:string .
+
+:untilDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "untilDate" ;
+    rdfs:domain :CalendarDef ;
+    rdfs:range xsd:string .
+
+:upperAgeLimit a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "upperAgeLimit" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range xsd:integer .
+
+:utcOffset a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "utcOffset" ;
+    rdfs:comment "offset to UTC in minutes (number of minutes to be added to get UTC dates)" ;
+    rdfs:domain :CalendarDef ;
+    rdfs:range xsd:integer .
+
+:validTravelDates a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "validTravelDates" ;
+    rdfs:domain :TravelValidityConstraintDef ;
+    rdfs:range :CalendarDef .
+
+:validityType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "validityType" ;
+    rdfs:comment "type of usage, eigther as single trip or multiple trips. Unrestricted fares might be combined into single trips when appropriate" ;
+    rdfs:domain :TravelValidityConstraintDef ;
+    rdfs:range xsd:string .
+
+:version_OnlineResourceDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "version" ;
+    rdfs:domain :OnlineResourceDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :version .
+
+:zoneIds a owl:DatatypeProperty ;
+    rdfs:label "zoneIds" ;
+    rdfs:comment "to be used in bar codes" ;
+    rdfs:domain :ZoneDef ;
+    rdfs:range xsd:integer .
+
+:ADMISSION a :FareTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "ADMISSION" .
+
+:ALLOCATOR_APP a :FulfillmentMediaTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "ALLOCATOR_APP" .
+
+:ANCILLARY a :FareTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "ANCILLARY" .
+
+:AllowedChangesItem a owl:Class ;
+    rdfs:label "AllowedChangesItem" ;
+    rdfs:comment "Inline class for array items in property 'allowedChanges'" .
+
+:BASIC a :ServiceClassIdDef,
+        owl:NamedIndividual ;
+    rdfs:label "BASIC" .
+
+:BEST a :ServiceClassIdDef,
+        owl:NamedIndividual ;
+    rdfs:label "BEST" .
+
+:CombinationConstraintItem a owl:Class ;
+    rdfs:label "CombinationConstraintItem" ;
+    rdfs:comment "Inline class for array items in property 'combinationConstraint'" .
+
+:ConditionType a owl:Class ;
+    rdfs:label "ConditionType" ;
+    :extensible-enum "['SALE', 'PLACE_CHANGE', 'FULFILLMENT', 'EXCHANGE', 'REFUND', 'TRAVEL']" .
+
+:CurrencyDef a owl:Class ;
+    rdfs:label "CurrencyDef" ;
+    rdfs:comment "ISO4217 currency codes" .
+
+:DAYS a :TimeUnitDef,
+        owl:NamedIndividual ;
+    rdfs:label "DAYS" .
+
+:ExcludedTimeRangeItem a owl:Class ;
+    rdfs:label "ExcludedTimeRangeItem" ;
+    rdfs:comment "Inline class for array items in property 'excludedTimeRange'" .
+
+:FCB a :BarCodeTypesDef,
+        owl:NamedIndividual ;
+    rdfs:label "FCB" .
+
+:HIGH a :ServiceClassIdDef,
+        owl:NamedIndividual ;
+    rdfs:label "HIGH" .
+
+:HOURS a :TimeUnitDef,
+        owl:NamedIndividual ;
+    rdfs:label "HOURS" .
+
+:INTEGRATED_RESERVATION a :FareTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "INTEGRATED_RESERVATION" .
+
+:INTERNATIONAL a :VatScopeDef,
+        owl:NamedIndividual ;
+    rdfs:label "INTERNATIONAL" .
+
+:IncludedFreePassengerItem a owl:Class ;
+    rdfs:label "IncludedFreePassengerItem" ;
+    rdfs:comment "Inline class for array items in property 'includedFreePassenger'" .
+
+:LONG_DISTANCE a :VatScopeDef,
+        owl:NamedIndividual ;
+    rdfs:label "LONG_DISTANCE" .
+
+:MINUTES a :TimeUnitDef,
+        owl:NamedIndividual ;
+    rdfs:label "MINUTES" .
+
+:MONTHS a :TimeUnitDef,
+        owl:NamedIndividual ;
+    rdfs:label "MONTHS" .
+
+:NATIONAL a :VatScopeDef,
+        owl:NamedIndividual ;
+    rdfs:label "NATIONAL" .
+
+:PDF_A4 a :FulfillmentMediaTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "PDF_A4" .
+
+:PKPASS a :FulfillmentMediaTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "PKPASS" .
+
+:ProductType a owl:Class ;
+    rdfs:label "ProductType" ;
+    :extensible-enum "['ADMISSION_PASS', 'ADMISSION_MULTI_RIDE', 'ADMISSION_POINT2POINT', 'UPGRADE_PASS', 'UPGRADE_MULTI_RIDE', 'UPGRADE_POINT2POINT', 'RESERVATION', 'ANCILLARY_SERVICE', 'ANCILLARY_ITEM', 'REDUCTION_CARD']" ;
+    rdfs:comment "General product types harmonized across fare providers. (More to be added, use null for types not listed yet.)" .
+
+:RCCST a :FulfillmentMediaTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "RCCST" .
+
+:RCT2 a :FulfillmentMediaTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "RCT2" .
+
+:RESERVATION a :FareTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "RESERVATION" .
+
+:RegionalValidityDef a owl:Class ;
+    rdfs:label "RegionalValidityDef" .
+
+:RequiredDataItem a owl:Class ;
+    rdfs:label "RequiredDataItem" ;
+    rdfs:comment "Inline class for array items in property 'requiredData'" .
+
+:SHORT_DISTANCE a :VatScopeDef,
+        owl:NamedIndividual ;
+    rdfs:label "SHORT_DISTANCE" .
+
+:SID a :ControlSecurityTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "SID" .
+
+:SIP a :ControlSecurityTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "SIP" .
+
+:SIS a :ControlSecurityTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "SIS" .
+
+:SOCIAL_MEDIA_ACCOUNTS a :FulfillmentMediaTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "SOCIAL_MEDIA_ACCOUNTS" .
+
+:SSB a :BarCodeTypesDef,
+        owl:NamedIndividual ;
+    rdfs:label "SSB" .
+
+:STANDARD a :ServiceClassIdDef,
+        owl:NamedIndividual ;
+    rdfs:label "STANDARD" .
+
+:SalesRestrictionsItem a owl:Class ;
+    rdfs:label "SalesRestrictionsItem" ;
+    rdfs:comment "Inline class for array items in property 'salesRestrictions'" .
+
+:ServiceLevelIdDef a owl:Class ;
+    rdfs:label "ServiceLevelIdDef" ;
+    rdfs:comment "Code of the service level, code-list in IRS 90918-1." .
+
+:StationCodeListDef a owl:Class ;
+    rdfs:label "StationCodeListDef" ;
+    rdfs:comment "Code list used for the station codes: UIC = UIC codes as used by merits (UIC country code + local code) = Default/ UIC-R = UIC codes for reservation (UIC country code + local code reservation) / ERA = future ERA station code" .
+
+:TICKETLESS a :FulfillmentMediaTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "TICKETLESS" .
+
+:TLB a :BarCodeTypesDef,
+        owl:NamedIndividual ;
+    rdfs:label "TLB" .
+
+:TripAllocationUnit a owl:Class ;
+    rdfs:label "TripAllocationUnit" ;
+    :extensible-enum "['NONE', 'TRIP', 'DAY', 'DURATION']" ;
+    rdfs:comment "NONE: Individual trips don't need to be allocated. TRIP: allocation per individual trip. DAY: The allocation is per travel day DURATION: the allocation is per duration" .
+
+:UIC_PDF a :FulfillmentMediaTypeDef,
+        owl:NamedIndividual ;
+    rdfs:label "UIC_PDF" .
+
+:acceptedBarCodes a owl:ObjectProperty ;
+    rdfs:label "acceptedBarCodes" ;
+    rdfs:comment "for SiD fulfillment one of the listed bar codes is required" ;
+    rdfs:domain :FulfillmentConstraintDef ;
+    rdfs:range :BarCodeTypesDef .
+
+:acceptedVersion a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "acceptedVersion" ;
+    rdfs:comment "minimal version required to use these data" ;
+    rdfs:domain :FareDeliveryDetailsDef ;
+    rdfs:range xsd:string .
+
+:affectedServiceBrands a owl:ObjectProperty ;
+    rdfs:label "affectedServiceBrands" ;
+    rdfs:domain :CrossBorderConditionDef ;
+    rdfs:range :ServiceBrandCodeDef .
+
+:afterSalesConditions a owl:ObjectProperty ;
+    rdfs:label "afterSalesConditions" ;
+    rdfs:comment "list of allowed after sales transactions and conditions" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :AfterSalesConditionDef .
+
+:allocationUnit a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "allocationUnit" ;
+    rdfs:domain :TripAllocationConstraintDef ;
+    rdfs:range :TripAllocationUnit .
+
+:allowedAllocators a owl:ObjectProperty ;
+    rdfs:label "allowedAllocators" ;
+    rdfs:comment "List of allowed allocators. If the list is empty all allocators with a sales contract are permitted." ;
+    rdfs:domain :FareCombinationModelDef ;
+    rdfs:range :CompanyDef .
+
+:allowedCommonContracts a owl:ObjectProperty ;
+    rdfs:label "allowedCommonContracts" ;
+    rdfs:comment "List of carriers where a common contract with separate fulfillments are allowed." ;
+    rdfs:domain :FareCombinationModelDef ;
+    rdfs:range :CompanyDef .
+
+:allowedDistributors a owl:ObjectProperty ;
+    rdfs:label "allowedDistributors" ;
+    rdfs:comment "List of allowed distrubutors. If the list is empty all distrubutors with a sales contract are allowed." ;
+    rdfs:domain :FareCombinationModelDef ;
+    rdfs:range :CompanyDef .
+
+:alternativeRoute a owl:ObjectProperty ;
+    rdfs:label "alternativeRoute" ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range :ViaStationsDef .
+
+:amount_CurrencyPriceDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "amount" ;
+    rdfs:comment "by default of the scale the amount in cents" ;
+    rdfs:domain :CurrencyPriceDef ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :amount .
+
+:amount_VatDetailDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "amount" ;
+    rdfs:comment "by default of the scale the amount in cents" ;
+    rdfs:domain :VatDetailDef ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :amount .
+
+:bundleRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "bundleRef" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:cardName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "cardName" ;
+    rdfs:comment "card name for printing on fulfillments" ;
+    rdfs:domain :ReductionCardReferenceDef ;
+    rdfs:range xsd:string .
+
+:cardValue a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "cardValue" ;
+    rdfs:comment "code of the card type according to code list" ;
+    rdfs:domain :ReductionCardReferenceDef ;
+    rdfs:range xsd:string .
+
+:carrierConstraints a owl:ObjectProperty ;
+    rdfs:label "carrierConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :CarrierConstraintDef .
+
+:carrierLocations a owl:ObjectProperty ;
+    rdfs:label "carrierLocations" ;
+    rdfs:comment "Locating the online resource via the carrier provided in the time table." ;
+    rdfs:domain :FareResourceLocationDef ;
+    rdfs:range :CarrierResourceLocationDef .
+
+:carrier_CarrierResourceLocationDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "carrier" ;
+    rdfs:domain :CarrierResourceLocationDef ;
+    rdfs:range :CompanyDef ;
+    rdfs:subPropertyOf :carrier .
+
+:carrier_LineDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "carrier" ;
+    rdfs:domain :LineDef ;
+    rdfs:range :CompanyDef ;
+    rdfs:subPropertyOf :carrier .
+
+:carrier_TrainResourceLocationDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "carrier" ;
+    rdfs:domain :TrainResourceLocationDef ;
+    rdfs:range :CompanyDef ;
+    rdfs:subPropertyOf :carrier .
+
+:carrier_ZoneDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "carrier" ;
+    rdfs:domain :ZoneDef ;
+    rdfs:range :CompanyDef ;
+    rdfs:subPropertyOf :carrier .
+
+:carrier_ZoneDefinitionDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "carrier" ;
+    rdfs:domain :ZoneDefinitionDef ;
+    rdfs:range :CompanyDef ;
+    rdfs:subPropertyOf :carrier .
+
+:code_FareReferenceStationSetDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "code" ;
+    rdfs:comment "code of the fare reference station set used in regional validity. Unique within the fare provider." ;
+    rdfs:domain :FareReferenceStationSetDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :code .
+
+:code_Product a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "code" ;
+    rdfs:comment "stable code for the product accross different versions" ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :code .
+
+:code_StationDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "code" ;
+    rdfs:comment "the code representing the station in the specified code-list" ;
+    rdfs:domain :StationDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :code .
+
+:combinableCarrier a owl:ObjectProperty ;
+    rdfs:label "combinableCarrier" ;
+    rdfs:comment "List of all carriers where the model can be applied, in case the list is empty all combinations are allowed." ;
+    rdfs:domain :FareCombinationModelDef ;
+    rdfs:range :CompanyDef .
+
+:combinationConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "combinationConstraintRef" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:combiningServiceClassIds a owl:ObjectProperty ;
+    rdfs:label "combiningServiceClassIds" ;
+    rdfs:comment "list of service class ids that can be combined with these service levels" ;
+    rdfs:domain :ServiceLevelDef ;
+    rdfs:range :ServiceClassIdDef .
+
+:conditions a owl:ObjectProperty ;
+    rdfs:label "conditions" ;
+    rdfs:comment "generic descriptions of the conditions." ;
+    rdfs:domain :Product ;
+    rdfs:range :ConditionText .
+
+:connectionPoints a owl:ObjectProperty ;
+    rdfs:label "connectionPoints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :ConnectionPointDef .
+
+:country_StationDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "country" ;
+    rdfs:domain :StationDef ;
+    rdfs:range :CountryDef .
+
+:country_VatDetailDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "country" ;
+    rdfs:comment "by default of the scale the amount in cents" ;
+    rdfs:domain :VatDetailDef ;
+    rdfs:range :CountryDef .
+
+:currency a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "currency" ;
+    rdfs:domain :CurrencyPriceDef ;
+    rdfs:range :CurrencyDef .
+
+:defaultFareType a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "defaultFareType" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range :FareTypeDef .
+
+:delivery a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "delivery" ;
+    rdfs:domain :FareDeliveryDef ;
+    rdfs:range :FareDeliveryDetailsDef .
+
+:deliveryId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "deliveryId" ;
+    rdfs:comment "unique id of this data delivery" ;
+    rdfs:domain :FareDeliveryDetailsDef ;
+    rdfs:range xsd:string .
+
+:description_ConditionText a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "description" ;
+    rdfs:domain :ConditionText ;
+    rdfs:range :TextDef ;
+    rdfs:subPropertyOf :description .
+
+:excludedCarrier a owl:ObjectProperty ;
+    rdfs:label "excludedCarrier" ;
+    rdfs:domain :CarrierConstraintDef ;
+    rdfs:range :CompanyDef .
+
+:excludedServiceBrands a owl:ObjectProperty ;
+    rdfs:label "excludedServiceBrands" ;
+    rdfs:domain :ServiceConstraintDef ;
+    rdfs:range :ServiceBrandCodeDef .
+
+:fareProvider_FareDeliveryDetailsDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "fareProvider" ;
+    rdfs:domain :FareDeliveryDetailsDef ;
+    rdfs:range :CompanyDef ;
+    rdfs:subPropertyOf :fareProvider .
+
+:fareProvider_FareReferenceStationSetDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "fareProvider" ;
+    rdfs:comment "ERA company code. In case proprietary codes are used on a bilateral base the  codes must have at least 5 positions and start with x" ;
+    rdfs:domain :FareReferenceStationSetDef ;
+    rdfs:range :CompanyDef ;
+    rdfs:subPropertyOf :fareProvider .
+
+:fareReferenceStationSetDefinitions a owl:ObjectProperty ;
+    rdfs:label "fareReferenceStationSetDefinitions" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :FareReferenceStationSetDef .
+
+:fareStructure a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "fareStructure" ;
+    rdfs:domain :FareDeliveryDef ;
+    rdfs:range :FareDataDef .
+
+:fareType a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "fareType" ;
+    rdfs:domain :FareDef ;
+    rdfs:range :FareTypeDef .
+
+:fromCountry a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "fromCountry" ;
+    rdfs:domain :CrossBorderConditionDef ;
+    rdfs:range :CountryDef .
+
+:fromStation a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "fromStation" ;
+    rdfs:domain :TrainLinkDef ;
+    rdfs:range :StationDef .
+
+:fulfillmentConstraints a owl:ObjectProperty ;
+    rdfs:label "fulfillmentConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :FulfillmentConstraintDef .
+
+:id_AfterSalesConditionDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :AfterSalesConditionDef ;
+    rdfs:range xsd:string .
+
+:id_ConnectionPointDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :ConnectionPointDef ;
+    rdfs:range xsd:string .
+
+:id_FareCombinationConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :FareCombinationConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_FareConstraintBundle a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:id_FareDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:comment "unique id of the fare item to be included in accounting" ;
+    rdfs:domain :FareDef ;
+    rdfs:range xsd:string .
+
+:id_FulfillmentConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :FulfillmentConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_PassengerCombinationConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :PassengerCombinationConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_PassengerConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_Product a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:comment "technical id of this product description" ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:string .
+
+:id_ReductionCardDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:comment "id of the card type within the issuer (= code in OSDM online)" ;
+    rdfs:domain :ReductionCardDef ;
+    rdfs:range xsd:string .
+
+:id_ReservationParameterDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :ReservationParameterDef ;
+    rdfs:range xsd:string .
+
+:id_SalesAvailabilityConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :SalesAvailabilityConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_ServiceClassDefinitionDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :ServiceClassDefinitionDef ;
+    rdfs:range :ServiceClassIdDef .
+
+:id_ServiceConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :ServiceConstraintDef ;
+    rdfs:range xsd:string .
+
+:id_ServiceLevelDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :ServiceLevelDef ;
+    rdfs:range :ServiceLevelIdDef .
+
+:id_TextDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "id" ;
+    rdfs:domain :TextDef ;
+    rdfs:range xsd:string .
+
+:includedCards a owl:ObjectProperty ;
+    rdfs:label "includedCards" ;
+    rdfs:comment "This card includes the listed cards" ;
+    rdfs:domain :ReductionCardDef ;
+    rdfs:range :ReductionCardReferenceDef .
+
+:includedCarrier a owl:ObjectProperty ;
+    rdfs:label "includedCarrier" ;
+    rdfs:domain :CarrierConstraintDef ;
+    rdfs:range :CompanyDef .
+
+:includedServiceBrands a owl:ObjectProperty ;
+    rdfs:label "includedServiceBrands" ;
+    rdfs:domain :ServiceConstraintDef ;
+    rdfs:range :ServiceBrandCodeDef .
+
+:interfaceType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "interfaceType" ;
+    rdfs:comment "see code list for interface type" ;
+    rdfs:domain :OnlineResourceDef ;
+    rdfs:range xsd:string .
+
+:involvedTCOs a owl:ObjectProperty ;
+    rdfs:label "involvedTCOs" ;
+    rdfs:comment "ticket controling organizations involved in the control. Used to provide TCOs access to the ticket in the contraol data (IRS 90918-4)" ;
+    rdfs:domain :FareDef ;
+    rdfs:range :CompanyDef .
+
+:issuer_ReductionCardDef a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "issuer" ;
+    rdfs:domain :ReductionCardDef ;
+    rdfs:range :CompanyDef .
+
+:language a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "language" ;
+    rdfs:domain :TranslationDef ;
+    rdfs:range xsd:string .
+
+:latitude a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "latitude" ;
+    rdfs:comment "Geographic coordinate that specifies the north-south position of a point on the earths surface" ;
+    rdfs:domain :GeoCoordinate ;
+    rdfs:range xsd:decimal .
+
+:legacyCode_FareReferenceStationSetDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "legacyCode" ;
+    rdfs:comment "id used in B.1 as local station code " ;
+    rdfs:domain :FareReferenceStationSetDef ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :legacyCode .
+
+:longitude a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "longitude" ;
+    rdfs:comment "Geographic coordinate that specifies the east-west position of a point on the earths surface.            " ;
+    rdfs:domain :GeoCoordinate ;
+    rdfs:range xsd:decimal .
+
+:luggageConstraints a owl:ObjectProperty ;
+    rdfs:label "luggageConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :LuggageConstraint .
+
+:luggageRules a owl:ObjectProperty ;
+    rdfs:label "luggageRules" ;
+    rdfs:domain :LuggageConstraint ;
+    rdfs:range :LuggageRestrictionRule .
+
+:maxInterruptions a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "maxInterruptions" ;
+    rdfs:comment "maximum number of interruptions" ;
+    rdfs:domain :TripInterruptionConstraintDef ;
+    rdfs:range xsd:integer .
+
+:media a owl:ObjectProperty ;
+    rdfs:label "media" ;
+    rdfs:domain :FulfillmentOption ;
+    rdfs:range :FulfillmentMediaTypeDef .
+
+:model a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "model" ;
+    rdfs:comment "Possible models are SEPARATE_CONTRACT, CLUSTERING, COMBINING.  The models need to be supported by the allocator." ;
+    rdfs:domain :FareCombinationModelDef ;
+    rdfs:range xsd:string .
+
+:nameRef_PassengerConstraintDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nameRef" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :nameRef .
+
+:nameRef_ReductionCardDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nameRef" ;
+    rdfs:comment "referenced text in bulk data" ;
+    rdfs:domain :ReductionCardDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :nameRef .
+
+:name_Product a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "name" ;
+    rdfs:comment "Name of the product." ;
+    rdfs:domain :Product ;
+    rdfs:range :TextDef .
+
+:numberOfItems a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "numberOfItems" ;
+    rdfs:comment "number of luggage  items allowed with this restriction" ;
+    rdfs:domain :LuggageRestriction ;
+    rdfs:range xsd:integer .
+
+:passengerCombinationConstraints a owl:ObjectProperty ;
+    rdfs:label "passengerCombinationConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :PassengerCombinationConstraintDef .
+
+:passengerConstraints a owl:ObjectProperty ;
+    rdfs:label "passengerConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :PassengerConstraintDef .
+
+:passengerType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "passengerType" ;
+    rdfs:comment "see code list travelerType" ;
+    rdfs:domain :PassengerConstraintDef ;
+    rdfs:range xsd:string .
+
+:personalDataConstraints a owl:ObjectProperty ;
+    rdfs:label "personalDataConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :PersonalDataConstraintDef .
+
+:preferenceGroup a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "preferenceGroup" ;
+    rdfs:domain :ReservationOptionGroupDef ;
+    rdfs:range xsd:string .
+
+:prices a owl:ObjectProperty ;
+    rdfs:label "prices" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :PriceDef .
+
+:products_FareDataDef a owl:ObjectProperty ;
+    rdfs:label "products" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :Product .
+
+:reductionCards a owl:ObjectProperty ;
+    rdfs:label "reductionCards" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :ReductionCardDef .
+
+:reductionConstraints a owl:ObjectProperty ;
+    rdfs:label "reductionConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :ReductionConstraintDef .
+
+:regionalValidity a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "regionalValidity" ;
+    rdfs:domain :RegionalConstraintDef ;
+    rdfs:range :RegionalValidityDef .
+
+:requiredBarCodes a owl:ObjectProperty ;
+    rdfs:label "requiredBarCodes" ;
+    rdfs:comment "One of the listed bar codes must be provided." ;
+    rdfs:domain :FulfillmentConstraintDef ;
+    rdfs:range :BarCodeTypesDef .
+
+:requiredData a owl:ObjectProperty ;
+    rdfs:label "requiredData" ;
+    rdfs:domain :PersonalDataConstraintDef ;
+    rdfs:range :RequiredDataItem .
+
+:reservationParameters a owl:ObjectProperty ;
+    rdfs:label "reservationParameters" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :ReservationParameterDef .
+
+:restrictedLuggageItems a owl:ObjectProperty ;
+    rdfs:label "restrictedLuggageItems" ;
+    rdfs:domain :LuggageConstraint ;
+    rdfs:range :LuggageRestriction .
+
+:route a owl:ObjectProperty ;
+    rdfs:label "route" ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range :ViaStationsDef .
+
+:salesAvailabilityConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "salesAvailabilityConstraintRef" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:serviceClasses a owl:ObjectProperty ;
+    rdfs:label "serviceClasses" ;
+    rdfs:comment "list of service classes in case this class is available for different classes" ;
+    rdfs:domain :ReductionCardDef ;
+    rdfs:range :ServiceClassIdDef .
+
+:serviceCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "serviceCode" ;
+    rdfs:comment "service code to be used in reservation" ;
+    rdfs:domain :LegacyReservationParameterDef ;
+    rdfs:range xsd:string .
+
+:serviceConstraints a owl:ObjectProperty ;
+    rdfs:label "serviceConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :ServiceConstraintDef .
+
+:serviceLevelCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "serviceLevelCode" ;
+    rdfs:comment "service level code defined in UIC 90918-1" ;
+    rdfs:domain :LegacyReservationParameterDef ;
+    rdfs:range xsd:string .
+
+:serviceLevelDefinitions a owl:ObjectProperty ;
+    rdfs:label "serviceLevelDefinitions" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :ServiceLevelDef .
+
+:stationList a owl:ObjectProperty ;
+    rdfs:label "stationList" ;
+    rdfs:domain :ZoneDefinitionDef ;
+    rdfs:range :StationDef .
+
+:stationLocations a owl:ObjectProperty ;
+    rdfs:label "stationLocations" ;
+    rdfs:comment "Locating the online resource via stations or connection points. The link is valid if start and end station (or connection points) provide the link." ;
+    rdfs:domain :FareResourceLocationDef ;
+    rdfs:range :StationResourceLocationDef .
+
+:stationNames a owl:ObjectProperty ;
+    rdfs:label "stationNames" ;
+    rdfs:comment "temporary option to include station details as long as MERITS can not provide them. Station codes must be those of merits" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :StationNamesDef .
+
+:stationSets a owl:ObjectProperty ;
+    rdfs:label "stationSets" ;
+    rdfs:domain :ConnectionPointDef ;
+    rdfs:range :StationDef .
+
+:stations_StationResourceLocationDef a owl:ObjectProperty ;
+    rdfs:label "stations" ;
+    rdfs:domain :StationResourceLocationDef ;
+    rdfs:range :StationDef ;
+    rdfs:subPropertyOf :stations .
+
+:summary a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "summary" ;
+    rdfs:comment "Summary of the product." ;
+    rdfs:domain :Product ;
+    rdfs:range :TextDef .
+
+:textRef_ServiceLevelDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "textRef" ;
+    rdfs:comment "id of the text describing the service level" ;
+    rdfs:domain :ServiceLevelDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :textRef .
+
+:textUtf8_TextDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "textUtf8" ;
+    rdfs:domain :TextDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :textUtf8 .
+
+:textUtf8_TranslationDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "textUtf8" ;
+    rdfs:domain :TranslationDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :textUtf8 .
+
+:text_TextDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "text" ;
+    rdfs:comment "text without special characters according to ICAO specification" ;
+    rdfs:domain :TextDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :text .
+
+:texts a owl:ObjectProperty ;
+    rdfs:label "texts" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :TextDef .
+
+:timeUnit_ValidityRange a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "timeUnit" ;
+    rdfs:domain :ValidityRange ;
+    rdfs:range :TimeUnitDef .
+
+:timeValue a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "timeValue" ;
+    rdfs:domain :RelativeTimeDef ;
+    rdfs:range xsd:integer .
+
+:toCountry a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "toCountry" ;
+    rdfs:domain :CrossBorderConditionDef ;
+    rdfs:range :CountryDef .
+
+:toStation a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "toStation" ;
+    rdfs:domain :TrainLinkDef ;
+    rdfs:range :StationDef .
+
+:train a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "train" ;
+    rdfs:domain :TrainLinkDef ;
+    rdfs:range xsd:string .
+
+:trainId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "trainId" ;
+    rdfs:comment "train number (without service brand abbreviation)" ;
+    rdfs:domain :TrainResourceLocationDef ;
+    rdfs:range xsd:string .
+
+:trainLocations a owl:ObjectProperty ;
+    rdfs:label "trainLocations" ;
+    rdfs:comment "Locating the online resource via the train from the time table." ;
+    rdfs:domain :FareResourceLocationDef ;
+    rdfs:range :TrainResourceLocationDef .
+
+:transactionType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "transactionType" ;
+    rdfs:comment "code list Reason for after sale" ;
+    rdfs:domain :AfterSalesRuleDef ;
+    rdfs:range xsd:string .
+
+:translations a owl:ObjectProperty ;
+    rdfs:label "translations" ;
+    rdfs:domain :TextDef ;
+    rdfs:range :TranslationDef .
+
+:travelClass_LegacyReservationParameterDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "travelClass" ;
+    rdfs:comment "90918-1 class code in reservation" ;
+    rdfs:domain :LegacyReservationParameterDef ;
+    rdfs:range xsd:string .
+
+:travelDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "travelDate" ;
+    rdfs:comment "date and time of the departure where the train link starts" ;
+    rdfs:domain :TrainLinkDef ;
+    rdfs:range xsd:string .
+
+:travelValidityConstraintRef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "travelValidityConstraintRef" ;
+    rdfs:domain :FareConstraintBundle ;
+    rdfs:range xsd:string .
+
+:travelValidityConstraints a owl:ObjectProperty ;
+    rdfs:label "travelValidityConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :TravelValidityConstraintDef .
+
+:type_ConditionText a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "type" ;
+    rdfs:domain :ConditionText ;
+    rdfs:range :ConditionType .
+
+:validityRange a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "validityRange" ;
+    rdfs:domain :TravelValidityConstraintDef ;
+    rdfs:range :ValidityRange .
+
+:value_LuggageDimension a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "value" ;
+    rdfs:domain :LuggageDimension ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :value .
+
+:value_ValidityRange a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "value" ;
+    rdfs:domain :ValidityRange ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf :value .
+
+:vatDetails a owl:ObjectProperty ;
+    rdfs:label "vatDetails" ;
+    rdfs:domain :CurrencyPriceDef ;
+    rdfs:range :VatDetailDef .
+
+:version_FareDeliveryDetailsDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "version" ;
+    rdfs:comment "version of the data schema" ;
+    rdfs:domain :FareDeliveryDetailsDef ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :version .
+
+:zoneDefinitions a owl:ObjectProperty ;
+    rdfs:label "zoneDefinitions" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :ZoneDefinitionDef .
+
+:zoneId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "zoneId" ;
+    rdfs:domain :ZoneDefinitionDef ;
+    rdfs:range xsd:string .
+
+:FIRST a :ComfortClassDef,
+        :TravelClassDef,
+        owl:NamedIndividual ;
+    rdfs:label "FIRST" .
+
+:FareDeliveryDef a owl:Class ;
+    rdfs:label "FareDeliveryDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :delivery ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :fareStructure ] .
+
+:FulfillmentOption a owl:Class ;
+    rdfs:label "FulfillmentOption" ;
+    rdfs:comment "CIT paper implies printing on value paper which is stock controlled." ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:unionOf ( [ a owl:Restriction ;
+                        owl:hasValue "ETICKET" ;
+                        owl:onProperty :fulfillmentType ] [ a owl:Restriction ;
+                        owl:hasValue "CIT_PAPER" ;
+                        owl:onProperty :fulfillmentType ] ) ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :FulfillmentMediaTypeDef ;
+            owl:onProperty :media ] .
+
+:LuggageRestrictionRule a owl:Class ;
+    rdfs:label "LuggageRestrictionRule" ;
+    :extensible-enum "['CAN_CARRY']" ;
+    rdfs:comment "named luggage restriction rule: CAN_CARRY = weight is ok if you can carry it yourself" .
+
+:PolygonDef a owl:Class ;
+    rdfs:label "PolygonDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :GeoCoordinate ;
+            owl:onProperty :edge ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :edge ] .
+
+:RegulatoryConditionsDef a owl:Class ;
+    rdfs:label "RegulatoryConditionsDef" ;
+    rdfs:comment "regulatory condition" .
+
+:ReservationOptionGroupDef a owl:Class ;
+    rdfs:label "ReservationOptionGroupDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :preferences ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :preferences ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :preferenceGroup ] .
+
+:SECOND a :ComfortClassDef,
+        :TravelClassDef,
+        owl:NamedIndividual ;
+    rdfs:label "SECOND" .
+
+:TripAllocationProcess a owl:Class ;
+    rdfs:label "TripAllocationProcess" ;
+    :extensible-enum "['NONE', 'MANUAL', 'ACTIVATION', 'FULFILLMENT']" ;
+    rdfs:comment "NONE: Individual trips don't need to be allocated. MANUAL: The passenger has to allocate a trip manually (This should not be used as it is by desiugn non-interoperable). ACTIVATION: Individual trips can be allocatted by activation of the ticket. FULFILLMENT A new fulfillment needs to be created to allocate a trip" .
+
+:TripInterruptionProcess a owl:Class ;
+    rdfs:label "TripInterruptionProcess" ;
+    :extensible-enum "['NONE', 'MANUAL', 'ACTIVATION']" ;
+    rdfs:comment "MANUAL: passenger needs manual confirmation of train or station staff to interrupt the trip. ACTIVATION: Passenger needs to deactivate the ticket during the interruption (via an app)." .
+
+:amount a owl:DatatypeProperty ;
+    rdfs:label "amount" .
+
+:calendars a owl:ObjectProperty ;
+    rdfs:label "calendars" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :CalendarDef .
+
+:carrierConstraintRef a owl:DatatypeProperty ;
+    rdfs:label "carrierConstraintRef" .
+
+:city a owl:DatatypeProperty ;
+    rdfs:label "city" .
+
+:combinationConstraints a owl:ObjectProperty ;
+    rdfs:label "combinationConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :FareCombinationConstraintDef .
+
+:description a owl:ObjectProperty ;
+    rdfs:label "description" .
+
+:edge a owl:ObjectProperty ;
+    rdfs:label "edge" ;
+    rdfs:domain :PolygonDef ;
+    rdfs:range :GeoCoordinate .
+
+:entryStation a owl:ObjectProperty ;
+    rdfs:label "entryStation" .
+
+:fareProvider a owl:ObjectProperty ;
+    rdfs:label "fareProvider" .
+
+:fulfillmentType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "fulfillmentType" ;
+    rdfs:domain :FulfillmentOption ;
+    rdfs:range xsd:string .
+
+:individualContracts a owl:DatatypeProperty ;
+    rdfs:label "individualContracts" .
+
+:legacyBorderPointCode a owl:DatatypeProperty ;
+    rdfs:label "legacyBorderPointCode" .
+
+:legacyCode a owl:DatatypeProperty ;
+    rdfs:label "legacyCode" .
+
+:nutsCode a owl:DatatypeProperty ;
+    rdfs:label "nutsCode" .
+
+:onlineResource_CarrierResourceLocationDef a owl:ObjectProperty ;
+    rdfs:label "onlineResource" ;
+    rdfs:domain :CarrierResourceLocationDef ;
+    rdfs:range :OnlineResourceDef ;
+    rdfs:subPropertyOf :onlineResource .
+
+:onlineResource_StationResourceLocationDef a owl:ObjectProperty ;
+    rdfs:label "onlineResource" ;
+    rdfs:domain :StationResourceLocationDef ;
+    rdfs:range :OnlineResourceDef ;
+    rdfs:subPropertyOf :onlineResource .
+
+:onlineResource_TrainResourceLocationDef a owl:ObjectProperty ;
+    rdfs:label "onlineResource" ;
+    rdfs:domain :TrainResourceLocationDef ;
+    rdfs:range :OnlineResourceDef ;
+    rdfs:subPropertyOf :onlineResource .
+
+:preferences a owl:DatatypeProperty ;
+    rdfs:label "preferences" ;
+    rdfs:domain :ReservationOptionGroupDef ;
+    rdfs:range xsd:string .
+
+:price a owl:ObjectProperty ;
+    rdfs:label "price" ;
+    rdfs:domain :PriceDef ;
+    rdfs:range :CurrencyPriceDef .
+
+:regionalConstraints a owl:ObjectProperty ;
+    rdfs:label "regionalConstraints" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :RegionalConstraintDef .
+
+:requiredCards a owl:ObjectProperty ;
+    rdfs:label "requiredCards" ;
+    rdfs:comment "One of the listed cards is required to be valid at the time of travel." ;
+    rdfs:domain :ReductionConstraintDef ;
+    rdfs:range :ReductionCardReferenceDef .
+
+:requiredProcesses a owl:ObjectProperty ;
+    rdfs:label "requiredProcesses" .
+
+:requiredProcesses_TripAllocationConstraintDef a owl:ObjectProperty ;
+    rdfs:label "requiredProcesses" ;
+    rdfs:comment "one of the listed processes is required for the allocation of a single trip." ;
+    rdfs:domain :TripAllocationConstraintDef ;
+    rdfs:range :TripAllocationProcess ;
+    rdfs:subPropertyOf :requiredProcesses .
+
+:requiredProcesses_TripInterruptionConstraintDef a owl:ObjectProperty ;
+    rdfs:label "requiredProcesses" ;
+    rdfs:comment "one of the listed processes is required for the interruption of the trip." ;
+    rdfs:domain :TripInterruptionConstraintDef ;
+    rdfs:range :TripInterruptionProcess ;
+    rdfs:subPropertyOf :requiredProcesses .
+
+:routeValidityType a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "routeValidityType" ;
+    rdfs:comment "Indiction of the type of validity for a route. In case of LINE validity (Default) the described lines are allowed for travel. In case of BUBBLE it is additionally allowed to travel on all routes inbetween the defined lines." ;
+    rdfs:domain :ViaStationsDef ;
+    rdfs:range xsd:string .
+
+:salesAvailabilityConstraint a owl:ObjectProperty ;
+    rdfs:label "salesAvailabilityConstraint" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :SalesAvailabilityConstraintDef .
+
+:salesRestrictions a owl:ObjectProperty ;
+    rdfs:label "salesRestrictions" ;
+    rdfs:domain :SalesAvailabilityConstraintDef ;
+    rdfs:range :SalesRestrictionsItem .
+
+:scale a owl:DatatypeProperty ;
+    rdfs:label "scale" .
+
+:serviceClassDefinitions a owl:ObjectProperty ;
+    rdfs:label "serviceClassDefinitions" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :ServiceClassDefinitionDef .
+
+:serviceConstraintRef a owl:DatatypeProperty ;
+    rdfs:label "serviceConstraintRef" .
+
+:shortText a owl:DatatypeProperty ;
+    rdfs:label "shortText" .
+
+:shortTextUtf8 a owl:DatatypeProperty ;
+    rdfs:label "shortTextUtf8" .
+
+:stations a owl:ObjectProperty ;
+    rdfs:label "stations" .
+
+:system a owl:DatatypeProperty ;
+    rdfs:label "system" .
+
+:system_GeoCoordinate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "system" ;
+    rdfs:comment """geo coordinate system indication: 
+ - WGS84 = WGS 84 standard system,
+ - GRS80 = (outdated) GRS 80 coordinate system""" ;
+    rdfs:domain :GeoCoordinate ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf :system .
+
+:terminalStation a owl:ObjectProperty ;
+    rdfs:label "terminalStation" .
+
+:text a owl:DatatypeProperty ;
+    rdfs:label "text" .
+
+:textUtf8 a owl:DatatypeProperty ;
+    rdfs:label "textUtf8" .
+
+:usage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "usage" ;
+    rdfs:domain :FareDeliveryDetailsDef ;
+    rdfs:range xsd:string .
+
+:value a owl:DatatypeProperty ;
+    rdfs:label "value" .
+
+:version a owl:DatatypeProperty ;
+    rdfs:label "version" .
+
+:ANY_CLASS a :ComfortClassDef,
+        :ServiceClassIdDef,
+        :TravelClassDef,
+        owl:NamedIndividual ;
+    rdfs:label "ANY_CLASS" .
+
+:CrossBorderConditionDef a owl:Class ;
+    rdfs:label "CrossBorderConditionDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :ServiceBrandCodeDef ;
+            owl:onProperty :affectedServiceBrands ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :fromCountry ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :toCountry ] .
+
+:acceptedControlSecurityTypes a owl:ObjectProperty ;
+    rdfs:label "acceptedControlSecurityTypes" ;
+    rdfs:domain :FulfillmentConstraintDef ;
+    rdfs:range :ControlSecurityTypeDef .
+
+:afterSalesRules a owl:ObjectProperty ;
+    rdfs:label "afterSalesRules" ;
+    rdfs:domain :AfterSalesConditionDef ;
+    rdfs:range :AfterSalesRuleDef .
+
+:combinationModels a owl:ObjectProperty ;
+    rdfs:label "combinationModels" ;
+    rdfs:domain :FareCombinationConstraintDef ;
+    rdfs:range :FareCombinationModelDef .
+
+:fareConstraintBundles a owl:ObjectProperty ;
+    rdfs:label "fareConstraintBundles" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :FareConstraintBundle .
+
+:fares a owl:ObjectProperty ;
+    rdfs:label "fares" ;
+    rdfs:domain :FareDataDef ;
+    rdfs:range :FareDef .
+
+:nameRef a owl:DatatypeProperty ;
+    rdfs:label "nameRef" .
+
+:nameUtf8 a owl:DatatypeProperty ;
+    rdfs:label "nameUtf8" .
+
+:onlineResource a owl:ObjectProperty ;
+    rdfs:label "onlineResource" .
+
+:restrictions a owl:ObjectProperty ;
+    rdfs:label "restrictions" ;
+    rdfs:comment "all listed dimensions apply to the luggage items as upper limits" ;
+    rdfs:domain :LuggageRestriction ;
+    rdfs:range :LuggageDimension .
+
+:stations_FareReferenceStationSetDef a owl:ObjectProperty ;
+    rdfs:label "stations" ;
+    rdfs:domain :FareReferenceStationSetDef ;
+    rdfs:range :StationDef ;
+    rdfs:subPropertyOf :stations .
+
+:textRef a owl:DatatypeProperty ;
+    rdfs:label "textRef" .
+
+:AfterSalesConditionDef a owl:Class ;
+    rdfs:label "AfterSalesConditionDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :AfterSalesRuleDef ;
+            owl:onProperty :afterSalesRules ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :afterSalesRules ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_AfterSalesConditionDef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :afterSalesRules ] .
+
+:ComfortClassDef a owl:Class ;
+    rdfs:label "ComfortClassDef" ;
+    rdfs:comment "Generic class classification, mostly used to harmonize choice and representation across multiple carriers" ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:oneOf ( :FIRST :SECOND :ANY_CLASS ) ] .
+
+:ConditionText a owl:Class ;
+    rdfs:label "ConditionText" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :description_ConditionText ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :type_ConditionText ] .
+
+:CountryDef a owl:Class ;
+    rdfs:label "CountryDef" ;
+    rdfs:comment "ISO 3166 2A codes" .
+
+:FareCombinationConstraintDef a owl:Class ;
+    rdfs:label "FareCombinationConstraintDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :combinationModels ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :FareCombinationModelDef ;
+            owl:onProperty :combinationModels ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :combinationModels ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_FareCombinationConstraintDef ] .
+
+:FareResourceLocationDef a owl:Class ;
+    rdfs:label "FareResourceLocationDef" ;
+    rdfs:comment "Locate the online services" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :TrainResourceLocationDef ;
+            owl:onProperty :trainLocations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CarrierResourceLocationDef ;
+            owl:onProperty :carrierLocations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :StationResourceLocationDef ;
+            owl:onProperty :stationLocations ] .
+
+:LegacyAccountingIdentifierDef a owl:Class ;
+    rdfs:label "LegacyAccountingIdentifierDef" ;
+    rdfs:comment "identifier of the fare in the current 301 accounting file" .
+
+:LuggageDimension a owl:Class ;
+    rdfs:label "LuggageDimension" ;
+    rdfs:comment "luggage dimension to be used in luggage restrictions" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :value_LuggageDimension ],
+        [ a owl:Class ;
+            owl:unionOf ( [ a owl:Restriction ;
+                        owl:hasValue "WIDTH" ;
+                        owl:onProperty :dimension ] [ a owl:Restriction ;
+                        owl:hasValue "HEIGHT" ;
+                        owl:onProperty :dimension ] [ a owl:Restriction ;
+                        owl:hasValue "LENGTH" ;
+                        owl:onProperty :dimension ] [ a owl:Restriction ;
+                        owl:hasValue "WIDTH_HEIGHT" ;
+                        owl:onProperty :dimension ] [ a owl:Restriction ;
+                        owl:hasValue "WIDTH_HEIGHT_LENGTH" ;
+                        owl:onProperty :dimension ] [ a owl:Restriction ;
+                        owl:hasValue "WEIGHT" ;
+                        owl:onProperty :dimension ] [ a owl:Restriction ;
+                        owl:hasValue "VOLUME" ;
+                        owl:onProperty :dimension ] ) ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :dimension ] .
+
+:LuggageRestriction a owl:Class ;
+    rdfs:label "LuggageRestriction" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :restrictions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :LuggageDimension ;
+            owl:onProperty :restrictions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :restrictions ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :numberOfItems ] .
+
+:PriceDef a owl:Class ;
+    rdfs:label "PriceDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :price ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CurrencyPriceDef ;
+            owl:onProperty :price ] .
+
+:ReductionConstraintDef a owl:Class ;
+    rdfs:label "ReductionConstraintDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :ReductionCardReferenceDef ;
+            owl:onProperty :requiredCards ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :requiredCards ] .
+
+:RelativeTimeDef a owl:Class ;
+    rdfs:label "RelativeTimeDef" ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:unionOf ( [ a owl:Restriction ;
+                        owl:hasValue "DAYS" ;
+                        owl:onProperty :timeUnit_RelativeTimeDef ] [ a owl:Restriction ;
+                        owl:hasValue "HOURS" ;
+                        owl:onProperty :timeUnit_RelativeTimeDef ] [ a owl:Restriction ;
+                        owl:hasValue "MINUTES" ;
+                        owl:onProperty :timeUnit_RelativeTimeDef ] ) ],
+        [ a owl:Class ;
+            owl:unionOf ( [ a owl:Restriction ;
+                        owl:hasValue "BEFORE_DEPARTURE" ;
+                        owl:onProperty :timeReference ] [ a owl:Restriction ;
+                        owl:hasValue "AFTER_DEPARTURE" ;
+                        owl:onProperty :timeReference ] [ a owl:Restriction ;
+                        owl:hasValue "AFTER_SALE" ;
+                        owl:onProperty :timeReference ] [ a owl:Restriction ;
+                        owl:hasValue "BEFORE_START_VALIDITY" ;
+                        owl:onProperty :timeReference ] [ a owl:Restriction ;
+                        owl:hasValue "AFTER_END_VALIDITY" ;
+                        owl:onProperty :timeReference ] ) ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :timeValue ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :timeUnit_RelativeTimeDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :timeReference ] .
+
+:SalesAvailabilityConstraintDef a owl:Class ;
+    rdfs:label "SalesAvailabilityConstraintDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_SalesAvailabilityConstraintDef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :salesRestrictions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :salesRestrictions ] .
+
+:TrainLinkDef a owl:Class ;
+    rdfs:label "TrainLinkDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :toStation ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :train ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :travelDate ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :fromStation ] .
+
+:ValidityRange a owl:Class ;
+    rdfs:label "ValidityRange" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :timeUnit_ValidityRange ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :value_ValidityRange ] .
+
+:code a owl:DatatypeProperty ;
+    rdfs:label "code" .
+
+:timeUnit_RelativeTimeDef a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "timeUnit" ;
+    rdfs:comment "Time unit in days, hours or minutes." ;
+    rdfs:domain :RelativeTimeDef ;
+    rdfs:range xsd:string .
+
+:CarrierConstraintDef a owl:Class ;
+    rdfs:label "CarrierConstraintDef" ;
+    rdfs:comment "Either excluded or included carriers can be set." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :CompanyDef ;
+            owl:onProperty :excludedCarrier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CompanyDef ;
+            owl:onProperty :includedCarrier ] .
+
+:CarrierResourceLocationDef a owl:Class ;
+    rdfs:label "CarrierResourceLocationDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :onlineResource_CarrierResourceLocationDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :OnlineResourceDef ;
+            owl:onProperty :onlineResource_CarrierResourceLocationDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :carrier_CarrierResourceLocationDef ] .
+
+:ControlSecurityTypeDef a owl:Class ;
+    rdfs:label "ControlSecurityTypeDef" ;
+    rdfs:comment "SIP: secure paper tickets; SID: security in data (signed bar code); SIS: security in system" ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:oneOf ( :SIP :SID :SIS ) ] .
+
+:PassengerCombinationConstraintDef a owl:Class ;
+    rdfs:label "PassengerCombinationConstraintDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_PassengerCombinationConstraintDef ] .
+
+:PersonalDataConstraintDef a owl:Class ;
+    rdfs:label "PersonalDataConstraintDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :requiredData ] .
+
+:StationResourceLocationDef a owl:Class ;
+    rdfs:label "StationResourceLocationDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :onlineResource_StationResourceLocationDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :OnlineResourceDef ;
+            owl:onProperty :onlineResource_StationResourceLocationDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :StationDef ;
+            owl:onProperty :stations_StationResourceLocationDef ] .
+
+:TimeUnitDef a owl:Class ;
+    rdfs:label "TimeUnitDef" ;
+    rdfs:comment "Time units" ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:oneOf ( :MONTHS :DAYS :HOURS :MINUTES ) ] .
+
+:TrainResourceLocationDef a owl:Class ;
+    rdfs:label "TrainResourceLocationDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :onlineResource_TrainResourceLocationDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :trainId ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :OnlineResourceDef ;
+            owl:onProperty :onlineResource_TrainResourceLocationDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :carrier_TrainResourceLocationDef ] .
+
+:TravelClassDef a owl:Class ;
+    rdfs:label "TravelClassDef" ;
+    rdfs:comment "Generic class classification, mostly used to harmonize choice and representation across multiple carriers" ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:oneOf ( :FIRST :SECOND :ANY_CLASS ) ] .
+
+:TripAllocationConstraintDef a owl:Class ;
+    rdfs:label "TripAllocationConstraintDef" ;
+    rdfs:comment "constraint on the use of a multiple trip ticket" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :allocationUnit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :TripAllocationProcess ;
+            owl:onProperty :requiredProcesses_TripAllocationConstraintDef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :requiredProcesses_TripAllocationConstraintDef ] .
+
+:TripInterruptionConstraintDef a owl:Class ;
+    rdfs:label "TripInterruptionConstraintDef" ;
+    rdfs:comment "rules on allowed trip interruptions. Interruptions due to a train change  indicated by a trip search must not be included here." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :TripInterruptionProcess ;
+            owl:onProperty :requiredProcesses_TripInterruptionConstraintDef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :requiredProcesses_TripInterruptionConstraintDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :maxInterruptions ] .
+
+:VatScopeDef a owl:Class ;
+    rdfs:label "VatScopeDef" ;
+    rdfs:comment "scope where the VAT applies" ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:oneOf ( :INTERNATIONAL :NATIONAL :SHORT_DISTANCE :LONG_DISTANCE ) ] .
+
+:CurrencyPriceDef a owl:Class ;
+    rdfs:label "CurrencyPriceDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :VatDetailDef ;
+            owl:onProperty :vatDetails ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :amount_CurrencyPriceDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :currency ] .
+
+:FareTypeDef a owl:Class ;
+    rdfs:label "FareTypeDef" ;
+    rdfs:comment "UIC fare types" ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:oneOf ( :ADMISSION :RESERVATION :INTEGRATED_RESERVATION :ANCILLARY ) ] .
+
+:ServiceClassDefinitionDef a owl:Class ;
+    rdfs:label "ServiceClassDefinitionDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_ServiceClassDefinitionDef ] .
+
+:carrier a owl:ObjectProperty ;
+    rdfs:label "carrier" .
+
+:timeReference a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "timeReference" ;
+    rdfs:comment "Time reference." ;
+    rdfs:domain :RelativeTimeDef ;
+    rdfs:range xsd:string .
+
+:AfterSalesRuleDef a owl:Class ;
+    rdfs:label "AfterSalesRuleDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :transactionType ] .
+
+:BarCodeTypesDef a owl:Class ;
+    rdfs:label "BarCodeTypesDef" ;
+    rdfs:comment "Item according to IRS 90918-9: FCB, TLB, SSB" ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:oneOf ( :FCB :TLB :SSB ) ] .
+
+:GeoCoordinate a owl:Class ;
+    rdfs:label "GeoCoordinate" ;
+    rdfs:comment "Used to provide any geo-encoded location, regardless of environment, using longitude and latitude coordinates." ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:unionOf ( [ a owl:Restriction ;
+                        owl:hasValue "WGS84" ;
+                        owl:onProperty :system_GeoCoordinate ] [ a owl:Restriction ;
+                        owl:hasValue "GRS80" ;
+                        owl:onProperty :system_GeoCoordinate ] ) ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :latitude ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :longitude ] .
+
+:LineDef a owl:Class ;
+    rdfs:label "LineDef" ;
+    rdfs:comment "terminalStation - in case the product requires a destination within the zone (e.g. local ticket  to go to the main rail station).  entryStation - Station to enter the zone in case the product requires to enter the zone via a  specific station (e.g. local zone ticket to start from the main rail station)." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :carrier_LineDef ] .
+
+:LuggageConstraint a owl:Class ;
+    rdfs:label "LuggageConstraint" ;
+    rdfs:comment "constraints on luggage" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :LuggageRestrictionRule ;
+            owl:onProperty :luggageRules ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :LuggageRestriction ;
+            owl:onProperty :restrictedLuggageItems ] .
+
+:ReservationParameterDef a owl:Class ;
+    rdfs:label "ReservationParameterDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_ReservationParameterDef ] .
+
+:ServiceBrandCodeDef a owl:Class ;
+    rdfs:label "ServiceBrandCodeDef" ;
+    rdfs:comment "Service brand codes allowed in response, code list can be found on  [https:/uic.org/passenger/passenger-services-group/article/service-brand-code-list] (https:/uic.org/passenger/passenger-services-group/article/service-brand-code-list)" .
+
+:ServiceConstraintDef a owl:Class ;
+    rdfs:label "ServiceConstraintDef" ;
+    rdfs:comment "Either excluded or included service brands can be set." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :ServiceBrandCodeDef ;
+            owl:onProperty :includedServiceBrands ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_ServiceConstraintDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ServiceBrandCodeDef ;
+            owl:onProperty :excludedServiceBrands ] .
+
+:ServiceLevelDef a owl:Class ;
+    rdfs:label "ServiceLevelDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_ServiceLevelDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ServiceClassIdDef ;
+            owl:onProperty :combiningServiceClassIds ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :textRef_ServiceLevelDef ] .
+
+:TranslationDef a owl:Class ;
+    rdfs:label "TranslationDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :textUtf8_TranslationDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :language ] .
+
+:CalendarDef a owl:Class ;
+    rdfs:label "CalendarDef" ;
+    rdfs:comment "calendar" .
+
+:ConnectionPointDef a owl:Class ;
+    rdfs:label "ConnectionPointDef" ;
+    rdfs:comment "connection point connecting two fare regimes. The connection is possible between stations of the two provided station sets." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_ConnectionPointDef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :stationSets ] .
+
+:FareReferenceStationSetDef a owl:Class ;
+    rdfs:label "FareReferenceStationSetDef" ;
+    rdfs:comment "set of stations used in the fare equivalently. E.g. Brussels-Region). The set is identified by the fare provider and a code unique within the fare provider." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :fareProvider_FareReferenceStationSetDef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :stations_FareReferenceStationSetDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :code_FareReferenceStationSetDef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :stations_FareReferenceStationSetDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :StationDef ;
+            owl:onProperty :stations_FareReferenceStationSetDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :legacyCode_FareReferenceStationSetDef ] .
+
+:LegacyReservationParameterDef a owl:Class ;
+    rdfs:label "LegacyReservationParameterDef" ;
+    rdfs:comment "reservation parameter to support the UIC 90918-1 interface for booking" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :travelClass_LegacyReservationParameterDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :serviceCode ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :serviceLevelCode ] .
+
+:ReductionCardReferenceDef a owl:Class ;
+    rdfs:label "ReductionCardReferenceDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :cardName ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :cardValue ] .
+
+:VatDetailDef a owl:Class ;
+    rdfs:label "VatDetailDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :country_VatDetailDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :amount_VatDetailDef ] .
+
+:ZoneDef a owl:Class ;
+    rdfs:label "ZoneDef" ;
+    rdfs:comment "carrier - carrier responsible for the transport. entryStation - Station to enter the zone in case the product requires to enter the zone via a specific station (e.g. local zone ticket to start from the main rail station). terminalStation - Terminal station in case the product requires a destination within the zone (e.g. local ticket to go to the main rail station)." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :carrier_ZoneDef ] .
+
+:dimension a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "dimension" ;
+    rdfs:comment "type of the restriction. weight in kg, length in cm, volume in liter. Combined sizes are the sum of the sizes  WIDTH_HEIGHT_LENGTH = sum of width, hight and length in cm (linear equivalent)." ;
+    rdfs:domain :LuggageDimension ;
+    rdfs:range xsd:string .
+
+:FareDeliveryDetailsDef a owl:Class ;
+    rdfs:label "FareDeliveryDetailsDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :version_FareDeliveryDetailsDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :fareProvider_FareDeliveryDetailsDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :acceptedVersion ],
+        [ a owl:Class ;
+            owl:unionOf ( [ a owl:Restriction ;
+                        owl:hasValue "PRODUCTION" ;
+                        owl:onProperty :usage ] [ a owl:Restriction ;
+                        owl:hasValue "TEST_ONLY" ;
+                        owl:onProperty :usage ] ) ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :deliveryId ] .
+
+:FulfillmentConstraintDef a owl:Class ;
+    rdfs:label "FulfillmentConstraintDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :BarCodeTypesDef ;
+            owl:onProperty :requiredBarCodes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :acceptedControlSecurityTypes ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ControlSecurityTypeDef ;
+            owl:onProperty :acceptedControlSecurityTypes ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_FulfillmentConstraintDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :BarCodeTypesDef ;
+            owl:onProperty :acceptedBarCodes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :acceptedControlSecurityTypes ] .
+
+:RegionalConstraintDef a owl:Class ;
+    rdfs:label "RegionalConstraintDef" ;
+    rdfs:comment "regional constraint of the fare-offline bulk data use the id of connection points whereas in an online environment the connection point is included" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :regionalValidity ] .
+
+:ZoneDefinitionDef a owl:Class ;
+    rdfs:label "ZoneDefinitionDef" ;
+    rdfs:comment "definition of a zone used to define regional validity. The area of the zone can be defined via a geo-polygon, a complete list of all contained stations or area codes from the NUTS code list. The carrier is either the carrier or transport authority responsible for the definition." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :carrier_ZoneDefinitionDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :zoneId ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :StationDef ;
+            owl:onProperty :stationList ] .
+
+:FareCombinationModelDef a owl:Class ;
+    rdfs:label "FareCombinationModelDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :model ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CompanyDef ;
+            owl:onProperty :allowedDistributors ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CompanyDef ;
+            owl:onProperty :allowedAllocators ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CompanyDef ;
+            owl:onProperty :allowedCommonContracts ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CompanyDef ;
+            owl:onProperty :combinableCarrier ] .
+
+:FulfillmentMediaTypeDef a owl:Class ;
+    rdfs:label "FulfillmentMediaTypeDef" ;
+    rdfs:comment "Fulfillment types. RCT2, RCCST and UIC-PDF are official UIC standards." ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:oneOf ( :RCT2 :RCCST :UIC_PDF :PDF_A4 :PKPASS :TICKETLESS :ALLOCATOR_APP :SOCIAL_MEDIA_ACCOUNTS ) ] .
+
+:OnlineResourceDef a owl:Class ;
+    rdfs:label "OnlineResourceDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :interfaceType ] .
+
+:ServiceClassIdDef a owl:Class ;
+    rdfs:label "ServiceClassIdDef" ;
+    rdfs:comment "Level of quality, finer grained than the comfort class." ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:oneOf ( :BEST :HIGH :STANDARD :BASIC :ANY_CLASS ) ] .
+
+:StationNamesDef a owl:Class ;
+    rdfs:label "StationNamesDef" ;
+    rdfs:comment "station names included temporarily until MERITS can provide the names" .
+
+:TravelValidityConstraintDef a owl:Class ;
+    rdfs:label "TravelValidityConstraintDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :validityRange ] .
+
+:ReductionCardDef a owl:Class ;
+    rdfs:label "ReductionCardDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :ReductionCardReferenceDef ;
+            owl:onProperty :includedCards ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :issuer_ReductionCardDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ServiceClassIdDef ;
+            owl:onProperty :serviceClasses ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_ReductionCardDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :nameRef_ReductionCardDef ] .
+
+:PassengerConstraintDef a owl:Class ;
+    rdfs:label "PassengerConstraintDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_PassengerConstraintDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :passengerType ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :nameRef_PassengerConstraintDef ] .
+
+:FareConstraintBundle a owl:Class ;
+    rdfs:label "FareConstraintBundle" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :combinationConstraintRef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :defaultFareType ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :salesAvailabilityConstraintRef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :travelValidityConstraintRef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_FareConstraintBundle ] .
+
+:TextDef a owl:Class ;
+    rdfs:label "TextDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :textUtf8_TextDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :text_TextDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :TranslationDef ;
+            owl:onProperty :translations ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_TextDef ] .
+
+:ViaStationsDef a owl:Class ;
+    rdfs:label "ViaStationsDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom :ViaStationsDef ;
+            owl:onProperty :route ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ViaStationsDef ;
+            owl:onProperty :alternativeRoute ],
+        [ a owl:Class ;
+            owl:unionOf ( [ a owl:Restriction ;
+                        owl:hasValue "LINE" ;
+                        owl:onProperty :routeValidityType ] [ a owl:Restriction ;
+                        owl:hasValue "BUBBLE" ;
+                        owl:onProperty :routeValidityType ] ) ] .
+
+:Product a owl:Class ;
+    rdfs:label "Product" ;
+    rdfs:comment "Basic product definition of products. A products covers multiple regional validities, passenger types or reductions. Fares might be included in Products of a distributor depending on the combination models and then loose their original product definition. " ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_Product ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :name_Product ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :code_Product ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ConditionText ;
+            owl:onProperty :conditions ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :summary ] .
+
+:StationDef a owl:Class ;
+    rdfs:label "StationDef" ;
+    rdfs:comment "Used to represent a station location. This is a location that can be used as origin and destination for a train journey" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :code_StationDef ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :country_StationDef ] .
+
+:CompanyDef a owl:Class ;
+    rdfs:label "CompanyDef" ;
+    rdfs:comment "RICS company code or the upcoming compatible ERA company code. In case proprietary codes are used on a bilateral base the  codes must have at least 5 positions and start with x" .
+
+:FareDef a owl:Class ;
+    rdfs:label "FareDef" ;
+    rdfs:comment "single fare within a blk fare data delivery" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :id_FareDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CompanyDef ;
+            owl:onProperty :involvedTCOs ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :fareType ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty :bundleRef ] .
+
+:FareDataDef a owl:Class ;
+    rdfs:label "FareDataDef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :fareConstraintBundles ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :calendars ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :RegionalConstraintDef ;
+            owl:onProperty :regionalConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :LuggageConstraint ;
+            owl:onProperty :luggageConstraints ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :regionalConstraints ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :fares ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ServiceConstraintDef ;
+            owl:onProperty :serviceConstraints ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :salesAvailabilityConstraint ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ServiceClassDefinitionDef ;
+            owl:onProperty :serviceClassDefinitions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ReservationParameterDef ;
+            owl:onProperty :reservationParameters ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :StationNamesDef ;
+            owl:onProperty :stationNames ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ConnectionPointDef ;
+            owl:onProperty :connectionPoints ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :serviceClassDefinitions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :fares ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :combinationConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :PassengerCombinationConstraintDef ;
+            owl:onProperty :passengerCombinationConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :AfterSalesConditionDef ;
+            owl:onProperty :afterSalesConditions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :FareDef ;
+            owl:onProperty :fares ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CarrierConstraintDef ;
+            owl:onProperty :carrierConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :CalendarDef ;
+            owl:onProperty :calendars ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :Product ;
+            owl:onProperty :products_FareDataDef ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :TextDef ;
+            owl:onProperty :texts ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :FareReferenceStationSetDef ;
+            owl:onProperty :fareReferenceStationSetDefinitions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :PersonalDataConstraintDef ;
+            owl:onProperty :personalDataConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ReductionCardDef ;
+            owl:onProperty :reductionCards ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ReductionConstraintDef ;
+            owl:onProperty :reductionConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :TravelValidityConstraintDef ;
+            owl:onProperty :travelValidityConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :SalesAvailabilityConstraintDef ;
+            owl:onProperty :salesAvailabilityConstraint ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :FareCombinationConstraintDef ;
+            owl:onProperty :combinationConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ZoneDefinitionDef ;
+            owl:onProperty :zoneDefinitions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :PriceDef ;
+            owl:onProperty :prices ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :FulfillmentConstraintDef ;
+            owl:onProperty :fulfillmentConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :PassengerConstraintDef ;
+            owl:onProperty :passengerConstraints ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :FareConstraintBundle ;
+            owl:onProperty :fareConstraintBundles ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom :ServiceLevelDef ;
+            owl:onProperty :serviceLevelDefinitions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty :fareConstraintBundles ] .
+

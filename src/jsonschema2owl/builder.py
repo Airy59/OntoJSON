@@ -7,6 +7,7 @@ This module builds RDF graphs representing OWL ontologies using RDFLib.
 from typing import Dict, Any, Optional, List, Union
 from rdflib import Graph, Namespace, URIRef, Literal, BNode
 from rdflib.namespace import RDF, RDFS, OWL, XSD
+from rdflib.collection import Collection
 from .uri_generator import URIGenerator
 
 
@@ -462,6 +463,38 @@ class OWLBuilder:
         # Create intersectionOf list
         intersection_list = self._create_rdf_list([URIRef(c) for c in intersection_classes])
         self.graph.add((class_ref, OWL.intersectionOf, intersection_list))
+    
+    def add_property_domain_union(self, property_uri: str, domain_uris: List[str]) -> None:
+        """
+        Add a unionOf domain to a property.
+        
+        Args:
+            property_uri: Property URI
+            domain_uris: List of domain class URIs to union
+        """
+        if not domain_uris:
+            return
+        
+        prop_ref = URIRef(property_uri)
+        
+        if len(domain_uris) == 1:
+            # Single domain - just add it directly
+            self.graph.add((prop_ref, RDFS.domain, URIRef(domain_uris[0])))
+        else:
+            # Multiple domains - create unionOf
+            union_class = BNode()
+            self.graph.add((union_class, RDF.type, OWL.Class))
+            
+            # Create RDF list of domain URIs
+            domain_refs = [URIRef(d) for d in domain_uris]
+            list_bnode = BNode()
+            Collection(self.graph, list_bnode, domain_refs)
+            
+            # Add unionOf
+            self.graph.add((union_class, OWL.unionOf, list_bnode))
+            
+            # Add domain as union class
+            self.graph.add((prop_ref, RDFS.domain, union_class))
     
     def _create_rdf_list(self, items: List[URIRef]) -> BNode:
         """

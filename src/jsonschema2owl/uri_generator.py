@@ -18,7 +18,7 @@ class URIGenerator:
         base_namespace: str = "https://cdm.ovh/examples/",
         class_pattern: str = "{base}{name}",
         property_pattern: str = "{base}{name}",
-        individual_pattern: str = "{base}individual/{name}",
+        individual_pattern: str = "{base}{name}",
         schema_name: Optional[str] = None
     ):
         """
@@ -209,8 +209,8 @@ class URIGenerator:
         """
         Generate a URI for an OWL named individual.
         
-        The URI format is: base_namespace + schema_name + "#individual/" + name
-        For example: "https://cdm.ovh/examples/offlineOSDM#individual/TicketType1"
+        The URI format is: base_namespace + schema_name + "#" + name
+        For example: "http://osdm.org/osdm4#BEST"
         
         Args:
             name: Individual name (e.g., enum value)

@@ -205,3 +205,21 @@ class TransformationContext:
     def is_processed(self, definition_name: str) -> bool:
         """Check if a definition has been processed."""
         return definition_name in self.processed_definitions
+    
+    def add_property_domain(self, property_uri: str, domain_uri: str):
+        """
+        Track a property domain for unionOf post-processing.
+        
+        Args:
+            property_uri: Property URI
+            domain_uri: Domain class URI
+        """
+        if not hasattr(self, 'property_domains'):
+            self.property_domains = {}
+        if property_uri not in self.property_domains:
+            self.property_domains[property_uri] = set()
+        self.property_domains[property_uri].add(domain_uri)
+    
+    def get_property_domains(self) -> dict:
+        """Get all tracked property domains."""
+        return getattr(self, 'property_domains', {})

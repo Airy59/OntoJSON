@@ -9,6 +9,7 @@ from . import PropertyRule, DefinitionRule
 from ..model import PropertyModel, DefinitionModel, TransformationContext
 from ..builder import OWLBuilder
 from ..config import ReverseTransformationConfig
+from rdflib.namespace import RDFS
 
 
 class ArrayToCardinalityRule(PropertyRule):
@@ -33,9 +34,13 @@ class ArrayToCardinalityRule(PropertyRule):
         """Add cardinality restrictions based on minItems/maxItems."""
         definition, prop = element
         
-        # Get URIs
+        # Always use reverse_scoped naming: propertyName_ClassName (matches property creation)
         class_uri = builder.uri_generator.generate_class_uri(definition.name)
-        prop_uri = builder.uri_generator.generate_property_uri(prop.name)
+        prop_uri = builder.uri_generator.generate_property_uri(
+            prop.name,
+            owner_class=definition.name,
+            naming_strategy="reverse_scoped"  # propertyName_ClassName format
+        )
         
         # Add cardinality restriction
         builder.add_cardinality_restriction(
@@ -74,9 +79,13 @@ class ItemsToRangeRule(PropertyRule):
         """Add allValuesFrom restriction for array items."""
         definition, prop = element
         
-        # Get URIs
+        # Always use reverse_scoped naming: propertyName_ClassName (matches property creation)
         class_uri = builder.uri_generator.generate_class_uri(definition.name)
-        prop_uri = builder.uri_generator.generate_property_uri(prop.name)
+        prop_uri = builder.uri_generator.generate_property_uri(
+            prop.name,
+            owner_class=definition.name,
+            naming_strategy="reverse_scoped"  # propertyName_ClassName format
+        )
         
         # Extract referenced class from items
         if isinstance(prop.items, dict) and "$ref" in prop.items:
@@ -140,6 +149,90 @@ class EnumToIndividualsRule(DefinitionRule):
         context.mark_processed(element.name)
 
 
+class EnumToRestrictionRule(PropertyRule):
+    """Transform enum constraints on properties to oneOf hasValue restrictions."""
+    
+    def __init__(self, config: ReverseTransformationConfig = None):
+        super().__init__("enum_to_restriction", config)
+    
+    def applies_to(self, element: Any, context: TransformationContext) -> bool:
+        """Applies to properties with enum constraints."""
+        if not isinstance(element, tuple) or len(element) != 2:
+            return False
+        
+        definition, prop = element
+        if not isinstance(definition, DefinitionModel) or not isinstance(prop, PropertyModel):
+            return False
+        
+        # Check if property has enum values (but not a standalone enum definition)
+        return prop.enum is not None and len(prop.enum) > 0
+    
+    def apply(self, element: Tuple[DefinitionModel, PropertyModel], builder: OWLBuilder, context: TransformationContext) -> None:
+        """Add allValuesFrom restriction with anonymous enumerated class."""
+        definition, prop = element
+        
+        # Always use reverse_scoped naming: propertyName_ClassName (matches property creation)
+        class_uri = builder.uri_generator.generate_class_uri(definition.name)
+        prop_uri = builder.uri_generator.generate_property_uri(
+            prop.name,
+            owner_class=definition.name,
+            naming_strategy="reverse_scoped"  # propertyName_ClassName format
+        )
+        
+        from rdflib import BNode, Literal, URIRef
+        from rdflib.namespace import RDF, OWL
+        from rdflib.collection import Collection
+        
+        class_ref = URIRef(class_uri)
+        prop_ref = URIRef(prop_uri)
+        
+        # Create individuals for each enum value
+        # These will be used in the oneOf enumeration
+        enum_individuals = []
+        for enum_value in prop.enum:
+            ind_uri = builder.uri_generator.generate_individual_uri(str(enum_value))
+            ind_ref = URIRef(ind_uri)
+            enum_individuals.append(ind_ref)
+            
+            # Create the individual if it doesn't exist yet
+            # Check if individual already exists to avoid duplicates
+            existing_types = list(builder.graph.triples((ind_ref, RDF.type, None)))
+            if not existing_types:
+                builder.add_individual(
+                    individual_uri=ind_uri,
+                    class_uri=builder.uri_generator.generate_class_uri("EnumValue"),  # Generic class for enum values
+                    label=str(enum_value)
+                )
+        
+        # Create anonymous enumerated class using oneOf
+        if len(enum_individuals) > 1:
+            # Create collection for oneOf
+            oneof_list = BNode()
+            Collection(builder.graph, oneof_list, enum_individuals)
+            
+            # Create anonymous enumerated class
+            enum_class = BNode()
+            builder.graph.add((enum_class, RDF.type, OWL.Class))
+            builder.graph.add((enum_class, OWL.oneOf, oneof_list))
+            
+            # Add allValuesFrom restriction: property must have a value from the enumerated class
+            restriction = BNode()
+            builder.graph.add((restriction, RDF.type, OWL.Restriction))
+            builder.graph.add((restriction, OWL.onProperty, prop_ref))
+            builder.graph.add((restriction, OWL.allValuesFrom, enum_class))
+            
+            # Add restriction as subclass
+            builder.graph.add((class_ref, RDFS.subClassOf, restriction))
+        elif len(enum_individuals) == 1:
+            # Single enum value - use hasValue restriction directly
+            builder.add_value_restriction(
+                class_uri=class_uri,
+                property_uri=prop_uri,
+                restriction_type="hasValue",
+                value=Literal(str(prop.enum[0]))
+            )
+
+
 class ConstToHasValueRule(PropertyRule):
     """Transform const properties to hasValue restrictions."""
     
@@ -161,9 +254,13 @@ class ConstToHasValueRule(PropertyRule):
         """Add hasValue restriction for const."""
         definition, prop = element
         
-        # Get URIs
+        # Always use reverse_scoped naming: propertyName_ClassName (matches property creation)
         class_uri = builder.uri_generator.generate_class_uri(definition.name)
-        prop_uri = builder.uri_generator.generate_property_uri(prop.name)
+        prop_uri = builder.uri_generator.generate_property_uri(
+            prop.name,
+            owner_class=definition.name,
+            naming_strategy="reverse_scoped"  # propertyName_ClassName format
+        )
         
         # Add hasValue restriction
         from rdflib import Literal
@@ -180,5 +277,6 @@ __all__ = [
     "ArrayToCardinalityRule",
     "ItemsToRangeRule",
     "EnumToIndividualsRule",
+    "EnumToRestrictionRule",
     "ConstToHasValueRule"
 ]

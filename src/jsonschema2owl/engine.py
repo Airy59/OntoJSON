@@ -32,6 +32,7 @@ from .rules.constraint_rules import (
     ArrayToCardinalityRule,
     ItemsToRangeRule,
     EnumToIndividualsRule,
+    EnumToRestrictionRule,
     ConstToHasValueRule
 )
 from .rules.composition_rules import (
@@ -88,6 +89,7 @@ class ReverseEngine:
         self.rule_registry.register(RequiredToCardinalityRule(self.config))
         self.rule_registry.register(ArrayToCardinalityRule(self.config))
         self.rule_registry.register(ItemsToRangeRule(self.config))
+        self.rule_registry.register(EnumToRestrictionRule(self.config))
         self.rule_registry.register(ConstToHasValueRule(self.config))
         
         # Composition rules (priority 50)
@@ -144,6 +146,10 @@ class ReverseEngine:
         
         # Apply property-level rules for each definition
         self._apply_property_rules(schema, builder, context)
+        
+        # Post-processing: Property simplification and super-property creation
+        if self.config.should_simplify_single_properties() or self.config.should_create_super_properties():
+            self._post_process_properties(builder, context)
         
         # Log any warnings
         if context.warnings:
@@ -315,6 +321,258 @@ class ReverseEngine:
         """
         graph = self.transform(schema)
         return self.serialize(graph, format)
+    
+    def _post_process_properties(self, builder: OWLBuilder, context: TransformationContext):
+        """
+        Post-process properties: simplify single properties and create super-properties.
+        
+        Args:
+            builder: OWL builder instance
+            context: Transformation context
+        """
+        from rdflib import URIRef, Literal
+        from rdflib.namespace import RDF, RDFS, OWL
+        
+        graph = builder.graph
+        
+        # Collect all properties and group by base name
+        properties_by_base_name = {}
+        property_info = {}  # Maps property URI to (base_name, domain, label, type)
+        
+        # Find all object and datatype properties
+        for prop_uri in list(graph.subjects(RDF.type, OWL.ObjectProperty)):
+            prop_uri_str = str(prop_uri)
+            base_name, domain = self._extract_property_info(prop_uri_str, graph)
+            if base_name:
+                if base_name not in properties_by_base_name:
+                    properties_by_base_name[base_name] = []
+                properties_by_base_name[base_name].append(prop_uri_str)
+                # Get label
+                labels = list(graph.objects(prop_uri, RDFS.label))
+                label = str(labels[0]) if labels else base_name
+                property_info[prop_uri_str] = (base_name, domain, label, "ObjectProperty")
+        
+        for prop_uri in list(graph.subjects(RDF.type, OWL.DatatypeProperty)):
+            prop_uri_str = str(prop_uri)
+            base_name, domain = self._extract_property_info(prop_uri_str, graph)
+            if base_name:
+                if base_name not in properties_by_base_name:
+                    properties_by_base_name[base_name] = []
+                properties_by_base_name[base_name].append(prop_uri_str)
+                # Get label
+                labels = list(graph.objects(prop_uri, RDFS.label))
+                label = str(labels[0]) if labels else base_name
+                property_info[prop_uri_str] = (base_name, domain, label, "DatatypeProperty")
+        
+        # Option 2: Simplify single properties (must be done first)
+        if self.config.should_simplify_single_properties():
+            self._simplify_single_properties(graph, properties_by_base_name, property_info, builder)
+            # Rebuild the grouping after simplification (simplified properties won't have underscore)
+            properties_by_base_name = {}
+            property_info = {}
+            for prop_uri in list(graph.subjects(RDF.type, OWL.ObjectProperty)):
+                prop_uri_str = str(prop_uri)
+                base_name, domain = self._extract_property_info(prop_uri_str, graph)
+                # If no underscore, use the full local name as base_name
+                if not base_name:
+                    if "#" in prop_uri_str:
+                        base_name = prop_uri_str.split("#")[-1]
+                    else:
+                        continue
+                if base_name not in properties_by_base_name:
+                    properties_by_base_name[base_name] = []
+                properties_by_base_name[base_name].append(prop_uri_str)
+                labels = list(graph.objects(URIRef(prop_uri_str), RDFS.label))
+                label = str(labels[0]) if labels else base_name
+                property_info[prop_uri_str] = (base_name, domain, label, "ObjectProperty")
+            for prop_uri in list(graph.subjects(RDF.type, OWL.DatatypeProperty)):
+                prop_uri_str = str(prop_uri)
+                base_name, domain = self._extract_property_info(prop_uri_str, graph)
+                # If no underscore, use the full local name as base_name
+                if not base_name:
+                    if "#" in prop_uri_str:
+                        base_name = prop_uri_str.split("#")[-1]
+                    else:
+                        continue
+                if base_name not in properties_by_base_name:
+                    properties_by_base_name[base_name] = []
+                properties_by_base_name[base_name].append(prop_uri_str)
+                labels = list(graph.objects(URIRef(prop_uri_str), RDFS.label))
+                label = str(labels[0]) if labels else base_name
+                property_info[prop_uri_str] = (base_name, domain, label, "DatatypeProperty")
+        
+        # Option 1: Create super-properties for groups (after simplification if enabled)
+        if self.config.should_create_super_properties():
+            self._create_super_properties(graph, properties_by_base_name, property_info, builder)
+    
+    def _extract_property_info(self, prop_uri_str: str, graph) -> tuple:
+        """
+        Extract base name and domain from a property URI.
+        
+        Args:
+            prop_uri_str: Property URI as string
+            graph: RDF graph
+        
+        Returns:
+            Tuple of (base_name, domain_uri) or (None, None) if not reverse_scoped format
+        """
+        # Extract the local name (part after #)
+        if "#" not in prop_uri_str:
+            return None, None
+        
+        local_name = prop_uri_str.split("#")[-1]
+        
+        # Check if it's reverse_scoped format: propertyName_ClassName
+        if "_" not in local_name:
+            return None, None
+        
+        # Split on last underscore (in case property name itself contains underscores)
+        parts = local_name.rsplit("_", 1)
+        if len(parts) != 2:
+            return None, None
+        
+        base_name, class_name = parts
+        
+        # Try to find the domain class URI
+        from rdflib import URIRef
+        from rdflib.namespace import RDFS
+        prop_ref = URIRef(prop_uri_str)
+        domains = list(graph.objects(prop_ref, RDFS.domain))
+        domain_uri = str(domains[0]) if domains else None
+        
+        return base_name, domain_uri
+    
+    def _simplify_single_properties(self, graph, properties_by_base_name: dict, property_info: dict, builder: OWLBuilder):
+        """
+        Simplify properties that are the only one with their base name.
+        
+        Args:
+            graph: RDF graph
+            properties_by_base_name: Dictionary mapping base names to property URI lists
+            property_info: Dictionary mapping property URIs to (base_name, domain, label, type)
+            builder: OWL builder instance
+        """
+        from rdflib import URIRef
+        from rdflib.namespace import RDF, RDFS, OWL
+        
+        # Find single properties (only one property with this base name)
+        single_properties = {
+            base_name: props[0] 
+            for base_name, props in properties_by_base_name.items() 
+            if len(props) == 1
+        }
+        
+        if not single_properties:
+            return
+        
+        logger.debug(f"Simplifying {len(single_properties)} single properties")
+        
+        for base_name, old_prop_uri in single_properties.items():
+            _, domain, label, prop_type = property_info[old_prop_uri]
+            
+            # Generate new simplified URI
+            old_uri_parts = old_prop_uri.split("#")
+            if len(old_uri_parts) != 2:
+                continue
+            
+            namespace = old_uri_parts[0] + "#"
+            new_prop_uri = namespace + base_name
+            
+            # Skip if new URI already exists
+            if (URIRef(new_prop_uri), RDF.type, OWL.ObjectProperty) in graph or \
+               (URIRef(new_prop_uri), RDF.type, OWL.DatatypeProperty) in graph:
+                continue
+            
+            old_prop_ref = URIRef(old_prop_uri)
+            new_prop_ref = URIRef(new_prop_uri)
+            
+            # Copy all triples from old property to new property
+            for s, p, o in graph.triples((old_prop_ref, None, None)):
+                graph.add((new_prop_ref, p, o))
+            
+            # Update all references to the old property
+            for s, p, o in list(graph.triples((None, old_prop_ref, None))):
+                graph.remove((s, p, o))
+                graph.add((s, p, new_prop_ref))
+            
+            for s, p, o in list(graph.triples((None, None, old_prop_ref))):
+                graph.remove((s, p, o))
+                graph.add((s, p, new_prop_ref))
+            
+            # Remove old property
+            for s, p, o in list(graph.triples((old_prop_ref, None, None))):
+                graph.remove((s, p, o))
+            
+            logger.debug(f"Simplified property: {old_prop_uri} -> {new_prop_uri}")
+    
+    def _create_super_properties(self, graph, properties_by_base_name: dict, property_info: dict, builder: OWLBuilder):
+        """
+        Create super-properties for groups of scoped properties.
+        
+        Args:
+            graph: RDF graph
+            properties_by_base_name: Dictionary mapping base names to property URI lists
+            property_info: Dictionary mapping property URIs to (base_name, domain, label, type)
+            builder: OWL builder instance
+        """
+        from rdflib import URIRef, Literal
+        from rdflib.namespace import RDF, RDFS, OWL
+        
+        # Find groups with more than one property
+        property_groups = {
+            base_name: props 
+            for base_name, props in properties_by_base_name.items() 
+            if len(props) > 1
+        }
+        
+        if not property_groups:
+            return
+        
+        logger.debug(f"Creating super-properties for {len(property_groups)} property groups")
+        
+        for base_name, prop_uris in property_groups.items():
+            # Determine property type (all should be the same type)
+            prop_types = set(property_info[uri][3] for uri in prop_uris)
+            if len(prop_types) != 1:
+                logger.warning(f"Mixed property types for {base_name}, skipping super-property creation")
+                continue
+            
+            prop_type = prop_types.pop()
+            
+            # Get label from first property (they should all have the same label)
+            label = property_info[prop_uris[0]][2]
+            
+            # Generate super-property URI
+            # Use namespace from first property
+            first_uri_parts = prop_uris[0].split("#")
+            if len(first_uri_parts) != 2:
+                continue
+            
+            namespace = first_uri_parts[0] + "#"
+            super_prop_uri = namespace + base_name
+            
+            # Check if super-property already exists
+            super_prop_ref = URIRef(super_prop_uri)
+            if (super_prop_ref, RDF.type, OWL.ObjectProperty) in graph or \
+               (super_prop_ref, RDF.type, OWL.DatatypeProperty) in graph:
+                # Super-property already exists, just add sub-property relationships
+                pass
+            else:
+                # Create super-property
+                if prop_type == "ObjectProperty":
+                    graph.add((super_prop_ref, RDF.type, OWL.ObjectProperty))
+                else:
+                    graph.add((super_prop_ref, RDF.type, OWL.DatatypeProperty))
+                
+                # Add label
+                graph.add((super_prop_ref, RDFS.label, Literal(label)))
+            
+            # Add sub-property relationships
+            for prop_uri in prop_uris:
+                prop_ref = URIRef(prop_uri)
+                graph.add((prop_ref, RDFS.subPropertyOf, super_prop_ref))
+            
+            logger.debug(f"Created super-property {super_prop_uri} for {len(prop_uris)} properties")
 
 
 # Export main class

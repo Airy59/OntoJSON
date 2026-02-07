@@ -138,6 +138,37 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Property Handling Options -->
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h6 class="mb-3">Property Handling Options</h6>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="createSuperProperties" value="true">
+                        <label class="form-check-label" for="createSuperProperties">
+                            <strong>Create Super-Properties</strong>
+                            <br>
+                            <small class="text-muted">
+                                For properties with multiple domains (e.g., requiredProcesses_TripAllocationConstraintDef, 
+                                requiredProcesses_TripInterruptionConstraintDef), create a super-property named 
+                                "requiredProcesses" that groups them via rdfs:subPropertyOf.
+                            </small>
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="simplifySingleProperties" value="true">
+                        <label class="form-check-label" for="simplifySingleProperties">
+                            <strong>Simplify Single Properties</strong>
+                            <br>
+                            <small class="text-muted">
+                                When a property is the only one with its base name, remove the _ClassName suffix 
+                                (e.g., "someProperty_SomeClass" → "someProperty"). 
+                                <strong>Warning:</strong> May cause future naming collisions if new properties are added.
+                            </small>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -411,6 +442,8 @@ async function performTransformation() {
         const baseNamespace = document.getElementById('baseNamespace').value;
         const language = document.getElementById('language').value;
         const format = document.getElementById('outputFormat').value;
+        const createSuperProperties = document.getElementById('createSuperProperties').checked;
+        const simplifySingleProperties = document.getElementById('simplifySingleProperties').checked;
         
         updateProgress(50, 'Transforming schema to OWL...');
         
@@ -421,7 +454,13 @@ async function performTransformation() {
                 schema: currentSchema,
                 base_namespace: baseNamespace,
                 language: language,
-                format: format
+                format: format,
+                config: {
+                    property_domain_handling: {
+                        create_super_properties: createSuperProperties,
+                        simplify_single_properties: simplifySingleProperties
+                    }
+                }
             })
         });
         
