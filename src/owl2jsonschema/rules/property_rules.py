@@ -295,7 +295,7 @@ class ObjectPropertyRule(TransformationRule):
                 domain_name = self._get_property_name(domain_uri)
                 # Check if domain is owl:Thing (universal domain)
                 if domain_uri == "http://www.w3.org/2002/07/owl#Thing" or domain_name == "Thing":
-                    # Property with domain owl:Thing applies to all classes
+                    # Property with explicit domain owl:Thing applies to all classes
                     # Add to all classes in the ontology
                     for owl_class in ontology.classes:
                         class_name = self._get_property_name(owl_class.uri)
@@ -316,19 +316,11 @@ class ObjectPropertyRule(TransformationRule):
                             "uri": property.uri  # Include OWL property URI
                         }
                     })
-        else:
-            # No domain specified - in OWL this means implicit domain owl:Thing
-            # Property applies to ALL classes in the ontology
-            for owl_class in ontology.classes:
-                class_name = self._get_property_name(owl_class.uri)
-                results.append({
-                    "class": class_name,
-                    "property": {
-                        "name": prop_name,
-                        "schema": schema,
-                        "uri": property.uri  # Include OWL property URI
-                    }
-                })
+        # If no domain specified, don't add the property
+        # This handles cases where:
+        # - Property is imported from another ontology and domain wasn't parsed
+        # - Property domain is declared elsewhere and not available in current context
+        # Only properties with explicit domains (including owl:Thing) are added
         
         return results
     
@@ -559,7 +551,7 @@ class DatatypePropertyRule(TransformationRule):
                 domain_name = self._get_property_name(domain_uri)
                 # Check if domain is owl:Thing (universal domain)
                 if domain_uri == "http://www.w3.org/2002/07/owl#Thing" or domain_name == "Thing":
-                    # Property with domain owl:Thing applies to all classes
+                    # Property with explicit domain owl:Thing applies to all classes
                     # Add to all classes in the ontology
                     for owl_class in ontology.classes:
                         class_name = self._get_property_name(owl_class.uri)
@@ -580,19 +572,11 @@ class DatatypePropertyRule(TransformationRule):
                             "uri": property.uri  # Include OWL property URI
                         }
                     })
-        else:
-            # No domain specified - in OWL this means implicit domain owl:Thing
-            # Property applies to ALL classes in the ontology
-            for owl_class in ontology.classes:
-                class_name = self._get_property_name(owl_class.uri)
-                results.append({
-                    "class": class_name,
-                    "property": {
-                        "name": prop_name,
-                        "schema": schema,
-                        "uri": property.uri  # Include OWL property URI
-                    }
-                })
+        # If no domain specified, don't add the property
+        # This handles cases where:
+        # - Property is imported from another ontology and domain wasn't parsed
+        # - Property domain is declared elsewhere and not available in current context
+        # Only properties with explicit domains (including owl:Thing) are added
         
         return results
     
