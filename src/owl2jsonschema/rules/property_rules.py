@@ -73,10 +73,12 @@ class ObjectPropertyRule(TransformationRule):
             else:
                 schema["description"] = clean_string(base_description)
         else:
-            # Generic object reference with oneOf pattern
+            # No range specified - in OWL this means owl:Thing (any object)
+            # In JSON Schema, use empty schema {} which accepts any value
+            # For object properties, we still provide the oneOf pattern for flexibility
             schema = {
                 "oneOf": [
-                    {"type": "object"},
+                    {},  # Empty schema accepts any value (equivalent to owl:Thing)
                     {
                         "type": "object",
                         "properties": {
@@ -234,10 +236,12 @@ class ObjectPropertyRule(TransformationRule):
                 ]
             }
         else:
-            # Generic object reference with oneOf pattern
+            # No range specified - in OWL this means owl:Thing (any object)
+            # In JSON Schema, use empty schema {} which accepts any value
+            # For object properties, we still provide the oneOf pattern for flexibility
             schema = {
                 "oneOf": [
-                    {"type": "object"},
+                    {},  # Empty schema accepts any value (equivalent to owl:Thing)
                     {
                         "type": "object",
                         "properties": {
@@ -289,19 +293,36 @@ class ObjectPropertyRule(TransformationRule):
         if domains:
             for domain_uri in domains:
                 domain_name = self._get_property_name(domain_uri)
-                results.append({
-                    "class": domain_name,
-                    "property": {
-                        "name": prop_name,
-                        "schema": schema,
-                        "uri": property.uri  # Include OWL property URI
-                    }
-                })
+                # Check if domain is owl:Thing (universal domain)
+                if domain_uri == "http://www.w3.org/2002/07/owl#Thing" or domain_name == "Thing":
+                    # Property with domain owl:Thing applies to all classes
+                    # Add to all classes in the ontology
+                    for owl_class in ontology.classes:
+                        class_name = self._get_property_name(owl_class.uri)
+                        results.append({
+                            "class": class_name,
+                            "property": {
+                                "name": prop_name,
+                                "schema": schema,
+                                "uri": property.uri
+                            }
+                        })
+                else:
+                    results.append({
+                        "class": domain_name,
+                        "property": {
+                            "name": prop_name,
+                            "schema": schema,
+                            "uri": property.uri  # Include OWL property URI
+                        }
+                    })
         else:
-            # If no domain specified or inferred, could be a global property
-            if self.get_option("include_global_properties", False):
+            # No domain specified - in OWL this means implicit domain owl:Thing
+            # Property applies to ALL classes in the ontology
+            for owl_class in ontology.classes:
+                class_name = self._get_property_name(owl_class.uri)
                 results.append({
-                    "class": "_global",
+                    "class": class_name,
                     "property": {
                         "name": prop_name,
                         "schema": schema,
@@ -536,19 +557,36 @@ class DatatypePropertyRule(TransformationRule):
         if domains:
             for domain_uri in domains:
                 domain_name = self._get_property_name(domain_uri)
-                results.append({
-                    "class": domain_name,
-                    "property": {
-                        "name": prop_name,
-                        "schema": schema,
-                        "uri": property.uri  # Include OWL property URI
-                    }
-                })
+                # Check if domain is owl:Thing (universal domain)
+                if domain_uri == "http://www.w3.org/2002/07/owl#Thing" or domain_name == "Thing":
+                    # Property with domain owl:Thing applies to all classes
+                    # Add to all classes in the ontology
+                    for owl_class in ontology.classes:
+                        class_name = self._get_property_name(owl_class.uri)
+                        results.append({
+                            "class": class_name,
+                            "property": {
+                                "name": prop_name,
+                                "schema": schema,
+                                "uri": property.uri
+                            }
+                        })
+                else:
+                    results.append({
+                        "class": domain_name,
+                        "property": {
+                            "name": prop_name,
+                            "schema": schema,
+                            "uri": property.uri  # Include OWL property URI
+                        }
+                    })
         else:
-            # If no domain specified, could be a global property
-            if self.get_option("include_global_properties", False):
+            # No domain specified - in OWL this means implicit domain owl:Thing
+            # Property applies to ALL classes in the ontology
+            for owl_class in ontology.classes:
+                class_name = self._get_property_name(owl_class.uri)
                 results.append({
-                    "class": "_global",
+                    "class": class_name,
                     "property": {
                         "name": prop_name,
                         "schema": schema,
@@ -561,7 +599,10 @@ class DatatypePropertyRule(TransformationRule):
     def _get_datatype_schema(self, datatype_uri: Optional[str]) -> Dict[str, Any]:
         """Get JSON Schema for an XSD datatype."""
         if not datatype_uri:
-            return {"type": "string"}  # Default to string
+            # No range specified - in OWL this means owl:Thing (for object properties)
+            # or any datatype (for datatype properties)
+            # In JSON Schema, use empty schema {} which accepts any value (equivalent to type: any)
+            return {}
         
         # Map XSD datatypes to JSON Schema types
         xsd_mapping = {
