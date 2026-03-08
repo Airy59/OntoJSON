@@ -66,6 +66,7 @@ class TransformationRule(OntologyVisitor):
         self.enabled = self.config.get("enabled", True)
         self.options = self.config.get("options", {})
         self.result = None
+        self.disambiguator = None  # Will be set by the engine
     
     def is_enabled(self) -> bool:
         """Check if the rule is enabled."""

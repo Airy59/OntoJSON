@@ -9,6 +9,7 @@ from .model import OntologyModel
 from .config import TransformationConfig
 from .visitor import TransformationRule, CompositeVisitor
 from .builder import SchemaBuilder
+from .class_name_disambiguator import ClassNameDisambiguator
 
 
 class TransformationEngine:
@@ -112,6 +113,103 @@ class TransformationEngine:
         output_config = self.config.get_output_config()
         schema_format = output_config.get("format", "json-schema-draft-07")
         self.schema_builder = SchemaBuilder(schema_format)
+        
+        # Initialize class name disambiguator if collision handling is enabled
+        class_naming_config = self.config.config.get("class_naming", {})
+        handle_collisions = class_naming_config.get("handle_collisions", True)
+        maximalist = class_naming_config.get("maximalist_suffixes", False)
+        
+        disambiguator = None
+        if handle_collisions:
+            # Collect all imported ontology URIs (including secondary imports)
+            # Start with explicit imports from ontology.imports (which now includes all imports
+            # from all ontologies thanks to the updated parser)
+            imported_uris = set(ontology.imports)
+            
+            # Also extract distinct namespace bases from class URIs to identify
+            # all ontologies that have classes in the merged graph
+            # This ensures we catch ontologies that are referenced but might not
+            # have explicit import statements
+            namespace_bases = set()
+            for owl_class in ontology.classes:
+                class_uri = owl_class.uri
+                # Extract namespace base from class URI
+                if '#' in class_uri:
+                    namespace_base = class_uri.rsplit('#', 1)[0] + '#'
+                elif '/' in class_uri:
+                    namespace_base = class_uri.rsplit('/', 1)[0] + '/'
+                else:
+                    continue
+                
+                # Add if it's different from main ontology and not already in imports
+                if namespace_base != ontology.uri:
+                    namespace_bases.add(namespace_base)
+            
+            # Combine explicit imports with namespace bases found in classes
+            # This ensures we have all ontologies that contribute classes
+            all_imported_uris = imported_uris | namespace_bases
+            
+            # Get primary imports (directly imported by main ontology)
+            # These might be file URIs (like file:///path/to/pop.ttl)
+            primary_import_file_uris = ontology.annotations.get("_primary_imports", ontology.imports)
+            
+            # Get all ontology namespace URIs from the graph (from owl:Ontology declarations)
+            all_ontology_namespace_uris = set(ontology.annotations.get("_all_ontology_namespace_uris", []))
+            
+            # Get secondary ontology namespace URIs (imported by other imported ontologies)
+            secondary_ontology_namespace_uris = set(ontology.annotations.get("_secondary_ontology_namespace_uris", []))
+            
+            # Get the mapping from import file URIs to ontology namespace URIs
+            # This was built during parsing when imports were resolved
+            import_file_to_ontology_uri = getattr(ontology, '_import_file_to_ontology_uri', {})
+            # Also try to get it from annotations if stored there
+            if not import_file_to_ontology_uri:
+                import_file_to_ontology_uri = ontology.annotations.get("_import_file_to_ontology_uri", {})
+            
+            # Build primary_imports list: include both file URIs and namespace URIs
+            # that correspond to primary imports (NOT secondary imports or references)
+            primary_imports_set = set(primary_import_file_uris)
+            
+            # Map primary import file URIs to their ontology namespace URIs
+            # This allows the disambiguator to match class URIs to primary imports
+            for primary_file_uri in primary_import_file_uris:
+                mapped_namespace_uri = import_file_to_ontology_uri.get(primary_file_uri)
+                if mapped_namespace_uri:
+                    primary_imports_set.add(mapped_namespace_uri)
+            
+            # Add namespace bases that correspond to primary imports
+            # Primary imports are ontology namespace URIs that are NOT secondary imports
+            # (secondary imports/references are detected by the parser and stored in
+            # secondary_ontology_namespace_uris)
+            for namespace_base in namespace_bases:
+                # Only include if it's an ontology namespace URI AND not a secondary import
+                if namespace_base in all_ontology_namespace_uris:
+                    if namespace_base not in secondary_ontology_namespace_uris:
+                        # This is a primary import namespace URI
+                        primary_imports_set.add(namespace_base)
+                        print(f"DEBUG: Added {namespace_base} to primary_imports (not in secondary)")
+                    else:
+                        print(f"DEBUG: Excluded {namespace_base} from primary_imports (is secondary)")
+                else:
+                    print(f"DEBUG: {namespace_base} is not an ontology namespace URI")
+            
+            primary_imports = list(primary_imports_set)
+            
+            disambiguator = ClassNameDisambiguator(
+                main_ontology_uri=ontology.uri,
+                imported_ontology_uris=list(all_imported_uris),
+                primary_imports=primary_imports,
+                maximalist=maximalist
+            )
+            
+            # Register all classes first to detect collisions
+            for owl_class in ontology.classes:
+                local_name = disambiguator.extract_local_name(owl_class.uri)
+                disambiguator.register_class(owl_class.uri, local_name)
+            
+            # Set disambiguator on all rules
+            for rule in self.rules:
+                rule.disambiguator = disambiguator
         
         # Check if ThingWithUriRule is enabled
         thing_rule = self.get_rule("thing_with_uri")

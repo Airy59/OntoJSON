@@ -5,6 +5,7 @@ This module implements the parser for loading OWL/RDF ontologies into the object
 """
 
 from typing import Optional, Dict, Any, List
+from collections import defaultdict
 from pathlib import Path
 from rdflib import Graph, Namespace, URIRef, Literal, BNode
 from rdflib.namespace import RDF, RDFS, OWL, XSD
@@ -31,6 +32,8 @@ class OntologyParser:
         self.graph = Graph()
         self.ontology = None
         self.namespaces = {}
+        # Track mapping from import file URIs to their ontology namespace URIs
+        self.import_file_to_ontology_uri: Dict[str, str] = {}
         
     def parse(self, file_path: str, format: Optional[str] = None, resolve_imports: bool = True) -> OntologyModel:
         """
@@ -586,9 +589,156 @@ class OntologyParser:
         for version in self.graph.objects(ontology_uri, OWL.versionInfo):
             self.ontology.annotations["versionInfo"] = str(version)
         
-        # Get imports
+        # Get PRIMARY imports from main ontology (directly imported)
+        primary_imports = []
         for imported in self.graph.objects(ontology_uri, OWL.imports):
-            self.ontology.imports.append(str(imported))
+            primary_imports.append(str(imported))
+        self.ontology.imports = primary_imports
+        
+        # Also extract imports from ALL ontologies in the merged graph (including secondary imports)
+        # This is important for collision detection when imported ontologies themselves import others
+        all_ontology_uris = set()
+        for s in self.graph.subjects(RDF.type, OWL.Ontology):
+            all_ontology_uris.add(str(s))
+        
+        # Collect all imports from all ontologies (for comprehensive tracking)
+        # These are file URIs from import statements
+        all_import_file_uris = set(primary_imports)  # Start with primary imports
+        for onto_uri in all_ontology_uris:
+            for imported in self.graph.objects(URIRef(onto_uri), OWL.imports):
+                all_import_file_uris.add(str(imported))
+        
+        # Also collect ontology namespace URIs (from owl:Ontology declarations)
+        # These are the actual namespace URIs, not file URIs
+        ontology_namespace_uris = set()
+        for onto_uri in all_ontology_uris:
+            ontology_namespace_uris.add(str(onto_uri))
+        
+        # Determine which ontology namespace URIs are secondary imports OR references
+        # Secondary = imported/referenced by other imported ontologies (not the main one)
+        secondary_ontology_namespace_uris = set()
+        main_onto_uri_str = str(ontology_uri) if ontology_uri else None
+        
+        # Step 1: Check explicit imports (owl:imports statements)
+        # Check each imported ontology (not main) to see what it imports
+        for onto_uri in all_ontology_uris:
+            onto_uri_str = str(onto_uri)
+            # Skip main ontology
+            if onto_uri_str == main_onto_uri_str:
+                continue
+            
+            # Check what this ontology imports (these are file URIs)
+            for imported in self.graph.objects(URIRef(onto_uri), OWL.imports):
+                imported_file_uri = str(imported)
+                
+                # Map the imported file URI to its ontology namespace URI
+                # using the mapping we built during import resolution
+                imported_ontology_namespace_uri = self.import_file_to_ontology_uri.get(imported_file_uri)
+                
+                if imported_ontology_namespace_uri:
+                    # This ontology namespace URI is imported by another imported ontology
+                    # (not the main one), so it's a secondary import
+                    secondary_ontology_namespace_uris.add(imported_ontology_namespace_uri)
+                    print(f"  Marked {imported_ontology_namespace_uri} as secondary (imported by {onto_uri_str})")
+                elif imported_file_uri in ontology_namespace_uris:
+                    # The import statement directly uses a namespace URI (not a file URI)
+                    secondary_ontology_namespace_uris.add(imported_file_uri)
+                    print(f"  Marked {imported_file_uri} as secondary (direct namespace URI import)")
+        
+        # Step 2: Detect referenced ontologies (not just explicit imports)
+        # 
+        # IMPORTANT: Ontologies can be referenced without explicit owl:imports statements.
+        # For example, POP might reference SOSA classes in property ranges or restrictions
+        # without explicitly importing SOSA. We need to detect these references to correctly
+        # identify secondary ontologies.
+        #
+        # Collect all namespace URIs that appear in class URIs, property ranges, and
+        # restrictions in the graph.
+        all_referenced_namespace_uris = set()
+        for s, p, o in self.graph.triples((None, RDF.type, OWL.Class)):
+            class_uri = str(s)
+            # Extract namespace base from class URI
+            if '#' in class_uri:
+                namespace_base = class_uri.rsplit('#', 1)[0] + '#'
+            elif '/' in class_uri:
+                namespace_base = class_uri.rsplit('/', 1)[0] + '/'
+            else:
+                continue
+            
+            # Skip main ontology namespace
+            if namespace_base == main_onto_uri_str:
+                continue
+            
+            # If this namespace is an ontology namespace URI, track it
+            if namespace_base in ontology_namespace_uris:
+                all_referenced_namespace_uris.add(namespace_base)
+        
+        # Also check for references in property ranges, restrictions, etc.
+        # Check object property ranges
+        for s, p, o in self.graph.triples((None, RDF.type, OWL.ObjectProperty)):
+            # Check range
+            for range_obj in self.graph.objects(s, RDFS.range):
+                if isinstance(range_obj, URIRef):
+                    range_uri = str(range_obj)
+                    if '#' in range_uri:
+                        namespace_base = range_uri.rsplit('#', 1)[0] + '#'
+                    elif '/' in range_uri:
+                        namespace_base = range_uri.rsplit('/', 1)[0] + '/'
+                    else:
+                        continue
+                    if namespace_base != main_onto_uri_str and namespace_base in ontology_namespace_uris:
+                        all_referenced_namespace_uris.add(namespace_base)
+        
+        # Check allValuesFrom restrictions
+        for s, p, o in self.graph.triples((None, OWL.allValuesFrom, None)):
+            if isinstance(o, URIRef):
+                range_uri = str(o)
+                if '#' in range_uri:
+                    namespace_base = range_uri.rsplit('#', 1)[0] + '#'
+                elif '/' in range_uri:
+                    namespace_base = range_uri.rsplit('/', 1)[0] + '/'
+                else:
+                    continue
+                if namespace_base != main_onto_uri_str and namespace_base in ontology_namespace_uris:
+                    all_referenced_namespace_uris.add(namespace_base)
+        
+        # Step 3: Identify primary import namespaces
+        # These are namespaces that correspond to primary import file URIs
+        primary_import_namespaces = set()
+        for primary_file_uri in primary_imports:
+            mapped_namespace = self.import_file_to_ontology_uri.get(primary_file_uri)
+            if mapped_namespace:
+                primary_import_namespaces.add(mapped_namespace)
+            elif primary_file_uri in ontology_namespace_uris:
+                # Primary import is already a namespace URI
+                primary_import_namespaces.add(primary_file_uri)
+        
+        # Step 4: Mark all referenced namespaces that are NOT primary as secondary
+        #
+        # A namespace is secondary if:
+        # - It appears in the graph (has classes/properties/references)
+        # - It is NOT the main ontology namespace
+        # - It is NOT a primary import namespace
+        #
+        # This correctly handles the case where an ontology (e.g., SOSA) is referenced
+        # by a primary import (e.g., POP) without explicit import statements.
+        for referenced_ns in all_referenced_namespace_uris:
+            if referenced_ns == main_onto_uri_str:
+                continue
+            if referenced_ns in primary_import_namespaces:
+                continue  # This is a primary import, not secondary
+            
+            # This namespace is referenced but not primary -> it's secondary
+            secondary_ontology_namespace_uris.add(referenced_ns)
+            print(f"  Marked {referenced_ns} as secondary (referenced in graph but not primary import)")
+        
+        # Store all imports (including secondary) in annotations for disambiguator use
+        self.ontology.annotations["_all_imports"] = list(all_import_file_uris)
+        self.ontology.annotations["_all_ontology_namespace_uris"] = list(ontology_namespace_uris)
+        self.ontology.annotations["_secondary_ontology_namespace_uris"] = list(secondary_ontology_namespace_uris)
+        self.ontology.annotations["_primary_imports"] = primary_imports
+        # Store the mapping for use in the engine
+        self.ontology.annotations["_import_file_to_ontology_uri"] = self.import_file_to_ontology_uri
         
         # Get other annotations
         annotations = self._get_annotations(ontology_uri)
@@ -770,9 +920,17 @@ class OntologyParser:
                 # If all else fails, continue without custom SSL configuration
                 pass
     
-    def _resolve_imports(self):
-        """Resolve and load imported ontologies into the graph."""
-        # Find all import statements
+    def _resolve_imports(self, processed_imports: Optional[set] = None):
+        """
+        Resolve and load imported ontologies into the graph.
+        
+        Args:
+            processed_imports: Set of already processed import URIs to avoid infinite loops
+        """
+        if processed_imports is None:
+            processed_imports = set()
+        
+        # Find all import statements in the current graph
         imports = list(self.graph.objects(None, OWL.imports))
         
         if not imports:
@@ -782,6 +940,12 @@ class OntologyParser:
         
         for import_uri in imports:
             import_str = str(import_uri)
+            
+            # Skip if already processed (avoid infinite loops)
+            if import_str in processed_imports:
+                continue
+            
+            processed_imports.add(import_str)
             print(f"Resolving import: {import_str}")
             
             try:
@@ -806,11 +970,33 @@ class OntologyParser:
                     # Try to parse as-is (HTTP, HTTPS, or local path)
                     temp_graph.parse(import_str)
                 
+                # Extract the ontology URI from the imported graph before merging
+                imported_ontology_uri = None
+                for s in temp_graph.subjects(RDF.type, OWL.Ontology):
+                    imported_ontology_uri = str(s)
+                    break
+                
+                # If we found an ontology URI, map the import file URI to it
+                if imported_ontology_uri:
+                    self.import_file_to_ontology_uri[import_str] = imported_ontology_uri
+                    print(f"  Mapped import file {import_str} to ontology URI {imported_ontology_uri}")
+                
                 # Merge the imported graph into our main graph
                 for triple in temp_graph:
                     self.graph.add(triple)
                 
                 print(f"  Successfully loaded {len(temp_graph)} triples from {import_str}")
+                
+                # Recursively resolve imports from the imported ontology
+                # Create a temporary parser to check for nested imports
+                nested_parser = OntologyParser()
+                nested_parser.graph = temp_graph
+                nested_parser.import_file_to_ontology_uri = self.import_file_to_ontology_uri
+                nested_parser._resolve_imports(processed_imports)
+                # Merge any additional imports found
+                for triple in nested_parser.graph:
+                    if triple not in self.graph:
+                        self.graph.add(triple)
                 
             except Exception as e:
                 print(f"  ERROR: Could not resolve import {import_str}: {e}")

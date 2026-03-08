@@ -269,6 +269,11 @@ class TransformationConfig:
                 "include_metadata": True,
                 "include_definitions": True,
                 "namespace_handling": "preserve"
+            },
+            
+            "class_naming": {
+                "handle_collisions": True,
+                "maximalist_suffixes": False  # If True, add suffixes to ALL classes. If False, only to imported classes.
             }
         }
     

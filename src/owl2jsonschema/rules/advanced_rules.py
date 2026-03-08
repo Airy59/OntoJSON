@@ -65,12 +65,21 @@ class EnumerationToEnumRule(TransformationRule):
         return schema
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
 
 
 class UnionToAnyOfRule(TransformationRule):
@@ -99,12 +108,21 @@ class UnionToAnyOfRule(TransformationRule):
         return None
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
 
 
 class IntersectionToAllOfRule(TransformationRule):
@@ -133,12 +151,21 @@ class IntersectionToAllOfRule(TransformationRule):
         return None
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
 
 
 class ComplementToNotRule(TransformationRule):
@@ -162,12 +189,21 @@ class ComplementToNotRule(TransformationRule):
         return None
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
 
 
 class EquivalentClassesRule(TransformationRule):
@@ -217,12 +253,21 @@ class EquivalentClassesRule(TransformationRule):
         return None
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
 
 
 class DisjointClassesRule(TransformationRule):
@@ -326,9 +371,18 @@ class DisjointClassesRule(TransformationRule):
         return None
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name

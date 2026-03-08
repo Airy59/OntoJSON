@@ -44,7 +44,7 @@ class ObjectPropertyRule(TransformationRule):
         # Object properties reference other objects
         if property.range:
             # If there's a specific range, reference it
-            range_class = self._get_property_name(property.range[0])
+            range_class = self._get_class_name(property.range[0])
         
         # Create oneOf pattern: either a full object reference or an @id reference
         if range_class:
@@ -160,7 +160,7 @@ class ObjectPropertyRule(TransformationRule):
                 range_schema = self._create_range_schema(range_uri)
             else:
                 # Simple URI range
-                range_class = self._get_property_name(range_uri)
+                range_class = self._get_class_name(range_uri)
                 
                 # Special handling for owl:Thing - map to _Thing
                 if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
@@ -191,7 +191,7 @@ class ObjectPropertyRule(TransformationRule):
                             if isinstance(range_uri, dict):
                                 range_schema = self._create_range_schema(range_uri)
                             else:
-                                range_class = self._get_property_name(range_uri)
+                                range_class = self._get_class_name(range_uri)
                                 
                                 # Special handling for owl:Thing - map to _Thing
                                 if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
@@ -207,7 +207,7 @@ class ObjectPropertyRule(TransformationRule):
                         if isinstance(range_uri, dict):
                             range_schema = self._create_range_schema(range_uri)
                         else:
-                            range_class = self._get_property_name(range_uri)
+                            range_class = self._get_class_name(range_uri)
                             
                             # Special handling for owl:Thing - map to _Thing
                             if range_uri == "http://www.w3.org/2002/07/owl#Thing" or range_class == "Thing":
@@ -298,7 +298,7 @@ class ObjectPropertyRule(TransformationRule):
                     # Property with explicit domain owl:Thing applies to all classes
                     # Add to all classes in the ontology
                     for owl_class in ontology.classes:
-                        class_name = self._get_property_name(owl_class.uri)
+                        class_name = self._get_class_name(owl_class.uri)
                         results.append({
                             "class": class_name,
                             "property": {
@@ -360,6 +360,23 @@ class ObjectPropertyRule(TransformationRule):
             return uri.split('/')[-1]
         return uri
     
+    def _get_class_name(self, uri: str) -> str:
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
+        if '#' in uri:
+            local_name = uri.split('#')[-1]
+        elif '/' in uri:
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
+    
     def _create_range_schema(self, range_expr: Any) -> Dict[str, Any]:
         """
         Create JSON Schema for a complex range expression (unionOf, intersectionOf).
@@ -380,7 +397,7 @@ class ObjectPropertyRule(TransformationRule):
                     if isinstance(class_uri, dict):
                         union_schemas.append(self._create_range_schema(class_uri))
                     else:
-                        class_name = self._get_property_name(class_uri)
+                        class_name = self._get_class_name(class_uri)
                         # Special handling for owl:Thing
                         if class_uri == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
                             class_name = "_Thing"
@@ -413,7 +430,7 @@ class ObjectPropertyRule(TransformationRule):
                     if isinstance(class_uri, dict):
                         intersection_schemas.append(self._create_range_schema(class_uri))
                     else:
-                        class_name = self._get_property_name(class_uri)
+                        class_name = self._get_class_name(class_uri)
                         # Special handling for owl:Thing
                         if class_uri == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
                             class_name = "_Thing"
@@ -423,7 +440,7 @@ class ObjectPropertyRule(TransformationRule):
                 return {"allOf": intersection_schemas}
         
         # If it's a simple URI string, create basic reference
-        class_name = self._get_property_name(str(range_expr))
+        class_name = self._get_class_name(str(range_expr))
         if str(range_expr) == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
             class_name = "_Thing"
         
@@ -554,7 +571,7 @@ class DatatypePropertyRule(TransformationRule):
                     # Property with explicit domain owl:Thing applies to all classes
                     # Add to all classes in the ontology
                     for owl_class in ontology.classes:
-                        class_name = self._get_property_name(owl_class.uri)
+                        class_name = self._get_class_name(owl_class.uri)
                         results.append({
                             "class": class_name,
                             "property": {
@@ -801,6 +818,23 @@ class PropertyRestrictionsRule(TransformationRule):
             return uri.split('/')[-1]
         return uri
     
+    def _get_class_name(self, uri: str) -> str:
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
+        if '#' in uri:
+            local_name = uri.split('#')[-1]
+        elif '/' in uri:
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
+    
     def _create_type_reference(self, type_uri: Any) -> Dict[str, Any]:
         """
         Create a type reference for a class or datatype.
@@ -845,7 +879,7 @@ class PropertyRestrictionsRule(TransformationRule):
         
         # Otherwise, it's a reference to another class
         # Use oneOf pattern for object references
-        class_name = self._get_property_name(type_str)
+        class_name = self._get_class_name(type_str)
         
         # Special handling for owl:Thing - map to _Thing
         if type_str == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":

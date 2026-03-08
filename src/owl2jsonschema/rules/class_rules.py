@@ -62,12 +62,21 @@ class ClassToObjectRule(TransformationRule):
         return schema
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
 
 
 class ClassHierarchyRule(TransformationRule):
@@ -131,12 +140,21 @@ class ClassHierarchyRule(TransformationRule):
         return None
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
 
 
 class ClassRestrictionsRule(TransformationRule):
@@ -294,12 +312,21 @@ class ClassRestrictionsRule(TransformationRule):
         return result
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
     
     def _get_property_name(self, uri: str) -> str:
         """Extract property name from URI."""
@@ -351,7 +378,7 @@ class ClassRestrictionsRule(TransformationRule):
         
         # Otherwise, it's a reference to another class
         # Use oneOf pattern: either a full object reference or an @id reference
-        class_name = self._get_property_name(type_str)
+        class_name = self._get_class_name(type_str)
         
         # Special handling for owl:Thing - map to _Thing
         if type_str == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
@@ -501,12 +528,21 @@ class IndividualsToEnumRule(TransformationRule):
         return {"uri": uri_metadata}
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
 
 
 class IndividualsToLabelEnumRule(TransformationRule):
@@ -580,9 +616,18 @@ class IndividualsToLabelEnumRule(TransformationRule):
         return constraint
     
     def _get_class_name(self, uri: str) -> str:
-        """Extract class name from URI."""
+        """Extract class name from URI, with disambiguation if enabled."""
+        # Extract local name
         if '#' in uri:
-            return uri.split('#')[-1]
+            local_name = uri.split('#')[-1]
         elif '/' in uri:
-            return uri.split('/')[-1]
-        return uri
+            local_name = uri.split('/')[-1]
+        else:
+            local_name = uri
+        
+        # Use disambiguator if available
+        if self.disambiguator:
+            # Disambiguator already has the maximalist setting
+            return self.disambiguator.get_disambiguated_name(uri, local_name)
+        
+        return local_name
