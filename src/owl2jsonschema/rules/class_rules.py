@@ -291,7 +291,7 @@ class ClassRestrictionsRule(TransformationRule):
                 schema["type"] = "array"
                 schema["items"] = filler_ref
                 # Clean any potential tabs in the generated description
-                schema["description"] = clean_string(f"Array of {self._get_property_name(restriction.filler)} or @id references")
+                schema["description"] = clean_string(f"Array of {self._get_property_name(restriction.filler)} or uri references")
             
             elif restriction.restriction_type == "someValuesFrom":
                 # At least one value must be from the specified class/type
@@ -377,7 +377,7 @@ class ClassRestrictionsRule(TransformationRule):
             return xsd_types[type_str]
         
         # Otherwise, it's a reference to another class
-        # Use oneOf pattern: either a full object reference or an @id reference
+        # Use oneOf pattern: either a full object reference or a uri reference
         class_name = self._get_class_name(type_str)
         
         # Special handling for owl:Thing - map to _Thing
@@ -390,12 +390,12 @@ class ClassRestrictionsRule(TransformationRule):
                 {
                     "type": "object",
                     "properties": {
-                        "@id": {
+                        "uri": {
                             "type": "string",
                             "format": "uri"
                         }
                     },
-                    "required": ["@id"],
+                    "required": ["uri"],
                     "additionalProperties": False
                 }
             ]

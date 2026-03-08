@@ -46,7 +46,7 @@ class ObjectPropertyRule(TransformationRule):
             # If there's a specific range, reference it
             range_class = self._get_class_name(property.range[0])
         
-        # Create oneOf pattern: either a full object reference or an @id reference
+        # Create oneOf pattern: either a full object reference or a uri reference
         if range_class:
             schema = {
                 "oneOf": [
@@ -54,18 +54,18 @@ class ObjectPropertyRule(TransformationRule):
                     {
                         "type": "object",
                         "properties": {
-                            "@id": {
+                            "uri": {
                                 "type": "string",
                                 "format": "uri"
                             }
                         },
-                        "required": ["@id"],
+                        "required": ["uri"],
                         "additionalProperties": False
                     }
                 ]
             }
             # Add description that clarifies the target type
-            base_description = f"Reference to {range_class} or @id"
+            base_description = f"Reference to {range_class} or uri"
             if property.comment:
                 comment = property.get_comment(self.get_option("language", "en"))
                 # Clean the comment to remove tab sequences
@@ -82,12 +82,12 @@ class ObjectPropertyRule(TransformationRule):
                     {
                         "type": "object",
                         "properties": {
-                            "@id": {
+                            "uri": {
                                 "type": "string",
                                 "format": "uri"
                             }
                         },
-                        "required": ["@id"],
+                        "required": ["uri"],
                         "additionalProperties": False
                     }
                 ]
@@ -225,12 +225,12 @@ class ObjectPropertyRule(TransformationRule):
                     {
                         "type": "object",
                         "properties": {
-                            "@id": {
+                            "uri": {
                                 "type": "string",
                                 "format": "uri"
                             }
                         },
-                        "required": ["@id"],
+                        "required": ["uri"],
                         "additionalProperties": False
                     }
                 ]
@@ -245,12 +245,12 @@ class ObjectPropertyRule(TransformationRule):
                     {
                         "type": "object",
                         "properties": {
-                            "@id": {
+                            "uri": {
                                 "type": "string",
                                 "format": "uri"
                             }
                         },
-                        "required": ["@id"],
+                        "required": ["uri"],
                         "additionalProperties": False
                     }
                 ]
@@ -402,19 +402,19 @@ class ObjectPropertyRule(TransformationRule):
                         if class_uri == "http://www.w3.org/2002/07/owl#Thing" or class_name == "Thing":
                             class_name = "_Thing"
                         
-                        # Add both full object and @id reference for each class
+                        # Add both full object and uri reference for each class
                         union_schemas.append({
                             "oneOf": [
                                 {"$ref": f"#/definitions/{class_name}"},
                                 {
                                     "type": "object",
                                     "properties": {
-                                        "@id": {
+                                        "uri": {
                                             "type": "string",
                                             "format": "uri"
                                         }
                                     },
-                                    "required": ["@id"],
+                                    "required": ["uri"],
                                     "additionalProperties": False
                                 }
                             ]
@@ -450,12 +450,12 @@ class ObjectPropertyRule(TransformationRule):
                 {
                     "type": "object",
                     "properties": {
-                        "@id": {
+                        "uri": {
                             "type": "string",
                             "format": "uri"
                         }
                     },
-                    "required": ["@id"],
+                    "required": ["uri"],
                     "additionalProperties": False
                 }
             ]
@@ -891,12 +891,12 @@ class PropertyRestrictionsRule(TransformationRule):
                 {
                     "type": "object",
                     "properties": {
-                        "@id": {
+                        "uri": {
                             "type": "string",
                             "format": "uri"
                         }
                     },
-                    "required": ["@id"],
+                    "required": ["uri"],
                     "additionalProperties": False
                 }
             ]

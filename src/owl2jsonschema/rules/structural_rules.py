@@ -123,9 +123,9 @@ class IndividualsToExamplesRule(TransformationRule):
             prop_name = self._get_property_name(prop_uri)
             example[prop_name] = value
         
-        # Add URI as @id if configured
+        # Add URI if configured (using 'uri' to match _Thing property)
         if self.get_option("include_id", False):
-            example["@id"] = individual.uri
+            example["uri"] = individual.uri
         
         return example if example else None
     

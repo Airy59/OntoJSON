@@ -409,7 +409,7 @@ class ConfigurationService:
             },
             "thing_with_uri": {
                 "enabled": True,  # MUST be enabled for _Thing definition
-                "uri_property": "@id"
+                "uri_property": "uri"
             }
         }
         
