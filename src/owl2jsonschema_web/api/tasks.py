@@ -251,8 +251,13 @@ def _process_task_sync(task_id, params):
         # Process sources
         sources = params['sources']
         resolved_sources = []
+        original_sources = []  # Keep original HTTP URIs for comment generation
         
         for source in sources:
+            # Keep original HTTP/HTTPS URIs
+            if str(source).startswith(('http://', 'https://')):
+                original_sources.append(str(source))
+            
             # Check if source is an uploaded file (starts with UUID pattern)
             if '/' not in source and '_' in source:
                 # This looks like an uploaded file, prepend upload directory
@@ -272,6 +277,10 @@ def _process_task_sync(task_id, params):
         # Get configuration
         config_dict = params.get('config')
         config = config_service.create_config_from_dict(config_dict)
+        
+        # Pass original HTTP sources to config for comment generation
+        if original_sources:
+            config.set_rule_option("ontology_to_document", "original_sources", original_sources)
         
         transformation_service.update_task_progress(task_id, 50, 'Performing transformation')
         

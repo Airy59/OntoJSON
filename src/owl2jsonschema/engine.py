@@ -38,10 +38,11 @@ class TransformationEngine:
         from .rules.property_rules import ObjectPropertyRule, DatatypePropertyRule, PropertyCardinalityRule
         from .rules.annotation_rules import LabelsToTitlesRule, CommentsToDescriptionsRule
         from .rules.advanced_rules import EnumerationToEnumRule, UnionToAnyOfRule, IntersectionToAllOfRule, DisjointClassesRule
-        from .rules.structural_rules import OntologyMetadataRule, ThingWithUriRule
+        from .rules.structural_rules import OntologyToDocumentRule, OntologyMetadataRule, ThingWithUriRule
         
         # Map rule IDs to rule classes
         rule_classes = {
+            "ontology_to_document": OntologyToDocumentRule,
             "class_to_object": ClassToObjectRule,
             "class_hierarchy": ClassHierarchyRule,
             "class_restrictions": ClassRestrictionsRule,
@@ -357,6 +358,14 @@ class TransformationEngine:
                 for class_name, enum_schema in result["individuals_label_constraints"].items():
                     # Replace the class definition with the label-based enum
                     self.schema_builder.add_definition(class_name, enum_schema)
+        
+        elif rule_id == "ontology_to_document":
+            # Document-level properties ($id, title, $comment, $schema) go to root schema
+            if isinstance(result, dict):
+                # Process all properties from ontology_to_document
+                # (comment already includes version, URIs, and timestamp from the rule)
+                for key, value in result.items():
+                    self.schema_builder.add_to_root(key, value)
         
         elif rule_id == "ontology_metadata":
             # Metadata goes into the root schema

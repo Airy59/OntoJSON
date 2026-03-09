@@ -267,6 +267,16 @@ class TransformationService:
                 composite_path = temp_file.name
             
             # Transform the composite ontology
+            # Store original sources (HTTP URIs) in config so they can be used in comments
+            # Only set if not already set (e.g., by task endpoint which has the original HTTP URIs)
+            existing_original_sources = config.get_rule_config("ontology_to_document").get("options", {}).get("original_sources", [])
+            if not existing_original_sources:
+                # Filter to only HTTP/HTTPS URIs (not file paths)
+                original_http_sources = [str(s) for s in sources if str(s).startswith(('http://', 'https://'))]
+                if original_http_sources and config:
+                    # Store in config so it can be accessed by rules
+                    config.set_rule_option("ontology_to_document", "original_sources", original_http_sources)
+            
             result = self.transform_single(
                 composite_path,
                 config=config,
